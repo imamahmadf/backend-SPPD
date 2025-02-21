@@ -8,14 +8,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.perjalanan);
+      // define association here
+      this.belongsTo(models.perjalanan);
+      this.belongsTo(models.jenisTempat);
     }
   }
   tempat.init(
     {
-      nama: DataTypes.STRING,
-      uangTrasnport: DataTypes.INTEGER,
-      jenis: DataTypes.INTEGER,
+      perjalananId: DataTypes.INTEGER,
+      tempat: DataTypes.STRING,
+      jenisId: DataTypes.INTEGER,
+      tanggalBerangkat: DataTypes.DATE,
+      tanggalPulang: DataTypes.DATE,
     },
     {
       sequelize,
