@@ -2,24 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("personils", {
+    await queryInterface.createTable("rincianBPDs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      pegawaiId: {
+      personilId: {
         type: Sequelize.INTEGER,
       },
-      perjalananId: {
-        type: Sequelize.INTEGER,
-      },
-      total: {
-        type: Sequelize.INTEGER,
-      },
-      nomorSPD: {
+      nama: {
         type: Sequelize.STRING,
+      },
+      jumlah: {
+        type: Sequelize.INTEGER,
+      },
+      harga: {
+        type: Sequelize.INTEGER,
+      },
+      jenisId: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("personils");
+    await queryInterface.dropTable("rincianBPDs");
   },
 };
