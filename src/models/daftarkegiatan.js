@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   daftarKegiatan.init(
     {
-      kedeRekening: DataTypes.STRING,
+      kodeRekening: DataTypes.STRING,
       kegiatan: DataTypes.STRING,
       subKegiatanId: DataTypes.INTEGER,
       PPTKId: DataTypes.INTEGER,
