@@ -15,9 +15,10 @@ module.exports = {
       kegiatan: {
         type: Sequelize.STRING,
       },
-      subKegiatanId: {
-        type: Sequelize.INTEGER,
+      sumber: {
+        type: Sequelize.STRING,
       },
+
       PPTKId: {
         type: Sequelize.INTEGER,
       },

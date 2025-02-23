@@ -2,15 +2,13 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class daftarKegiatan extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      this.belongsTo(models.daftarSubKegiatan);
-      this.belongsTo(models.PPTK);
+      this.hasMany(models.daftarSubKegiatan, {
+        foreignKey: "kegiatanId",
+        as: "subKegiatan",
+      });
+
+      this.belongsTo(models.PPTK, { foreignKey: "PPTKId" });
       this.hasMany(models.perjalanan);
     }
   }
@@ -18,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       kodeRekening: DataTypes.STRING,
       kegiatan: DataTypes.STRING,
-      subKegiatanId: DataTypes.INTEGER,
-      PPTKId: DataTypes.INTEGER,
+      sumber: DataTypes.STRING,
+      PPTKId: DataTypes.INTEGER, // Hapus subKegiatanId
     },
     {
       sequelize,

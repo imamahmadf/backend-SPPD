@@ -1,10 +1,14 @@
 const {
   perjalanan,
-  nomorSurat,
   kodeRekening,
   pegawai,
-  ttdNotDis,
-  ttdSurTug,
+  daftarKegiatan,
+  daftarSubKegiatan,
+  PPTK,
+  ttdSuratTugas,
+  daftarNomorSurat,
+  jenisSurat,
+  jenisTempat,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -12,41 +16,34 @@ const path = require("path");
 const Docxtemplater = require("docxtemplater");
 
 module.exports = {
-  postPerjalanan: async (req, res) => {
+  postNotaDinas: async (req, res) => {
     try {
       // Ambil data dari request body
       const {
         pegawai,
-        tanggalBerangkat,
-        tanggalPulang,
-        tujuan,
+        tanggalPengajuan,
         kodeRekeningFE,
         noSurat,
-        dataTtdNotDis,
+        untuk,
         dataTtdSurTug,
+        ttdNotDis,
+        asal,
       } = req.body;
 
+      console.log(req.body);
+
       const dbPerjalanan = await perjalanan.create({
-        pegawaiId1: pegawai[0].value.id,
-        pegawaiId2: pegawai[1].value.id,
-        pegawaiId3: pegawai[2].value.id,
-        pegawaiId4: pegawai[3].value.id,
-        ttdSurTugId: dataTtdSurTug.id,
-        ttdNotDisId: dataTtdNotDis.id,
-        noSurTug: noSurat[0].nomor,
-        noNotDis: noSurat[1].nomor,
-        noSpd1: noSurat[2].nomor,
-        noSpd2: noSurat[2].nomor,
-        noSpd3: noSurat[2].nomor,
-        noSpd4: noSurat[2].nomor,
-        tanggalBerangkat,
-        tanggalPulang,
-        tujuan,
-        kodeRekeningId: kodeRekeningFE.value.id,
+        untuk,
+        noNotDis: "1",
+        asal,
+        tanggalPengajuan,
       });
 
       // Path file template
-      const templatePath = path.join(__dirname, "../public/template/SPPD.docx");
+      const templatePath = path.join(
+        __dirname,
+        "../public/template/notaDinas.docx"
+      );
 
       // Baca file template
       const content = fs.readFileSync(templatePath, "binary");
@@ -62,44 +59,14 @@ module.exports = {
 
       // Masukkan data ke dalam template
       doc.render({
-        pegawai1Nama: pegawai[0].value.nama,
-        pegawai1Pangkat: pegawai[0].value.pangkat.nama,
-        pegawai1Nip: pegawai[0].value.nip,
-        pegawai1Jabatan: pegawai[0].value.jabatan,
-
-        pegawai2Nama: pegawai[1].value.nama,
-        pegawai2Pangkat: pegawai[1].value.pangkat.nama,
-        pegawai2Nip: pegawai[1].value.nip,
-        pegawai2Jabatan: pegawai[1].value.jabatan,
-
-        pegawai3Nama: pegawai[2].value.nama,
-        pegawai3Pangkat: pegawai[2].value.pangkat.nama,
-        pegawai3Nip: pegawai[2].value.nip,
-        pegawai3Jabatan: pegawai[2].value.jabatan,
-
-        pegawai4Nama: pegawai[3].value.nama,
-        pegawai4Pangkat: pegawai[3].value.pangkat.nama,
-        pegawai4Nip: pegawai[3].value.nip,
-        pegawai4Jabatan: pegawai[3].value.jabatan,
-
-        tanggalBerangkat,
-        tanggalPulang,
-        tujuan,
-        kode: kodeRekeningFE.value.kode,
-        sumber: kodeRekeningFE.value.sumber,
-        noSurTug: noSurat[0].nomor,
-        noNotDis: noSurat[1].nomor,
-        noSpd1: noSurat[2].nomor,
-
-        ttdSurTugJabatan: dataTtdSurTug.jabatan,
-        ttdSurTugNama: dataTtdSurTug.nama,
-        ttdSurTugNip: dataTtdSurTug.nip,
-
-        ttdNotDisJabatan: dataTtdNotDis.jabatan,
-        ttdNotDisNama: dataTtdNotDis.nama,
-        ttdNotDisNip: dataTtdNotDis.nip,
-        // tanggal_berangkat,
-        // tanggal_kembali,
+        tanggalPengajuan,
+        untuk,
+        kode: kodeRekeningFE,
+        noNotDis: noSurat[1].nomorSurat,
+        ttdSurtTugJabatan: dataTtdSurTug.value.jabatan,
+        ttdNotDinNama: ttdNotDis.nama,
+        ttdNotDinJabatan: ttdNotDis.jabatan,
+        ttdNotDinNip: `NIP. ${ttdNotDis.nip}`,
       });
 
       // Simpan hasil dokumen ke buffer
@@ -132,15 +99,27 @@ module.exports = {
   },
   getSeedPerjalanan: async (req, res) => {
     try {
-      const resultNomorSurat = await nomorSurat.findAll({});
-      const resultKodeRekening = await kodeRekening.findAll();
-      const resultTtdSurTug = await ttdSurTug.findAll();
-      const resultTtdNotDis = await ttdNotDis.findAll();
+      const resultDaftarKegiatan = await daftarKegiatan.findAll({
+        include: [
+          {
+            model: daftarSubKegiatan,
+            as: "subKegiatan", // Sesuai dengan alias di model
+          },
+          { model: PPTK },
+        ],
+      });
+
+      const resultTtdSuratTugas = await ttdSuratTugas.findAll();
+      const resultDaftarNomorSurat = await daftarNomorSurat.findAll({
+        include: [{ model: jenisSurat, as: "jenisSurat" }],
+      });
+      const resultJenisTempat = await jenisTempat.findAll();
+
       return res.status(200).json({
-        resultNomorSurat,
-        resultKodeRekening,
-        resultTtdNotDis,
-        resultTtdSurTug,
+        resultDaftarKegiatan,
+        resultTtdSuratTugas,
+        resultDaftarNomorSurat,
+        resultJenisTempat,
       });
     } catch (err) {
       console.error("Error:", err);
