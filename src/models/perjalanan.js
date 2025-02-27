@@ -9,8 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.tempat);
-      this.belongsTo(models.daftarKegiatan);
-      this.belongsTo(models.ttdSuratTugas);
+      this.belongsTo(models.daftarSubKegiatan, {
+        foreignKey: "subKegiatanId",
+      });
+      this.belongsTo(models.ttdSuratTugas, {
+        foreignKey: "ttdSuratTugasId",
+      });
+      this.belongsTo(models.jenisPerjalanan, {
+        foreignKey: "jenisId",
+      });
       this.hasMany(models.personil);
     }
   }
@@ -22,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       noSuratTugas: DataTypes.STRING,
       tanggalPengajuan: DataTypes.DATE,
       ttdSuratTugasId: DataTypes.INTEGER,
-      kegiatanId: DataTypes.INTEGER,
+      jenisId: DataTypes.INTEGER,
+      subKegiatanId: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsTo(models.PPTK, { foreignKey: "PPTKId" });
-      this.hasMany(models.perjalanan);
     }
   }
   daftarKegiatan.init(
