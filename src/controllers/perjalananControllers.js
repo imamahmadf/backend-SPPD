@@ -213,7 +213,6 @@ module.exports = {
     const offset = limit * page;
     try {
       const result = await perjalanan.findAll({
-        logging: console.log,
         offset: offset,
         limit: limit,
         attributes: [
@@ -475,6 +474,63 @@ module.exports = {
     } catch (err) {
       await transaction.rollback();
       console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  getDetailPerjalanan: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await perjalanan.findOne({
+        where: { id },
+        attributes: [
+          "id",
+          "untuk",
+          "asal",
+          "noNotaDinas",
+          "tanggalPengajuan",
+          "noSuratTugas",
+        ],
+        include: [
+          {
+            model: personil,
+            include: [
+              {
+                model: pegawai,
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                ],
+              },
+            ],
+          },
+          {
+            model: tempat,
+            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+          },
+
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "kodeRekening", "subKegiatan"],
+            include: [
+              {
+                model: daftarKegiatan,
+                attributes: ["id", "kodeRekening", "kegiatan"],
+                as: "kegiatan",
+                include: [{ model: PPTK }],
+              },
+            ],
+          },
+          {
+            model: ttdSuratTugas,
+            attributes: ["nama", "id", "nip", "jabatan"],
+          },
+        ],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
       return res.status(500).json({
         message: err.toString(),
         code: 500,
