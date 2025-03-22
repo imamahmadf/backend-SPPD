@@ -18,6 +18,12 @@ const jenisRincianBPDs = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+  {
+    id: 4,
+    jenis: "Rill",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */

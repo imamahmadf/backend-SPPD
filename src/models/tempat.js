@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.perjalanan);
+      this.belongsTo(models.dalamKota, {
+        foreignKey: "dalamKotaId",
+        as: "dalamKota",
+      });
       this.belongsTo(models.jenisTempat);
     }
   }
@@ -18,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       perjalananId: DataTypes.INTEGER,
       tempat: DataTypes.STRING,
       jenisId: DataTypes.INTEGER,
+      dalamKotaId: DataTypes.INTEGER,
       tanggalBerangkat: DataTypes.DATE,
       tanggalPulang: DataTypes.DATE,
     },

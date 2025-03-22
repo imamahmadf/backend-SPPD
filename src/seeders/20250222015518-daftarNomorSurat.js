@@ -2,7 +2,7 @@ const currentDate = new Date();
 const daftarNomorSurats = [
   {
     id: 1,
-    nomorSurat: "000.1.2.3/NOMOR/DINKES/2025",
+    nomorSurat: "800.1.11.1/NOMOR/BULAN/2025",
     nomorLoket: 0,
     jenisId: 1,
     createdAt: currentDate,
@@ -10,7 +10,7 @@ const daftarNomorSurats = [
   },
   {
     id: 2,
-    nomorSurat: "2222.1.2.3/NOMOR/DINKES/2025",
+    nomorSurat: "800.1.11.1/NOMOR/BULAN/2025",
     nomorLoket: 0,
     jenisId: 2,
     createdAt: currentDate,
@@ -18,7 +18,7 @@ const daftarNomorSurats = [
   },
   {
     id: 3,
-    nomorSurat: "33333.1.2.3/NOMOR/DINKES/2025",
+    nomorSurat: "000.1.2.3/NOMOR/DINKES/2025",
     nomorLoket: 0,
     jenisId: 3,
     createdAt: currentDate,

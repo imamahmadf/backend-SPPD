@@ -10,10 +10,12 @@
   "author": "imam ahmad fahrurazi",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "docxtemplater": "^3.60.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.12.0",
     "pizzip": "^3.1.8",
     "sequelize": "^6.37.5",

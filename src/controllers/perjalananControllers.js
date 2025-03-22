@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   perjalanan,
   kodeRekening,
@@ -15,6 +16,8 @@ const {
   jenisPerjalanan,
   daftarGolongan,
   daftarPangkat,
+  dalamKota,
+  daftarTingkatan,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -37,10 +40,87 @@ module.exports = {
         perjalananKota,
         subKegiatanId,
         jenis,
+        dalamKota,
       } = req.body;
 
-      console.log(req.body.pegawai);
+      console.log(perjalananKota, dalamKota);
+      const calculateDaysDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+        const difference = Math.abs(end - start);
+        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
+      };
+      function terbilang(angka) {
+        const satuan = [
+          "",
+          "Satu",
+          "Dua",
+          "Tiga",
+          "Empat",
+          "Lima",
+          "Enam",
+          "Tujuh",
+          "Delapan",
+          "Sembilan",
+          "Sepuluh",
+          "Sebelas",
+        ];
 
+        if (angka < 12) {
+          return satuan[angka];
+        } else if (angka < 20) {
+          return terbilang(angka - 10) + " Belas";
+        } else if (angka < 100) {
+          return (
+            terbilang(Math.floor(angka / 10)) +
+            " Puluh " +
+            terbilang(angka % 10)
+          );
+        } else if (angka < 200) {
+          return "Seratus " + terbilang(angka - 100);
+        }
+      }
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      const tanggalBerangkatFE = dalamKota ? dalamKota[0].tanggalBerangkat : "";
+      const tanggalPulangFE = dalamKota
+        ? dalamKota[dalamKota.length - 1].tanggalBerangkat
+        : "";
+      const daysDifference = calculateDaysDifference(
+        tanggalBerangkatFE,
+        tanggalPulangFE
+      );
+      const formattedTanggalBerangkat = new Date(
+        tanggalBerangkatFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tanggalPulangFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
       // Ambil satu data nomor surat berdasarkan id = 2
       const dbNoSurat = await daftarNomorSurat.findOne({
         where: { id: 2 },
@@ -56,16 +136,24 @@ module.exports = {
       const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
 
       // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
-      const nomorBaru = dbNoSurat.nomorSurat.replace(
-        "NOMOR",
-        nomorLoket.toString()
-      );
+      const nomorBaru = dbNoSurat.nomorSurat
+        .replace("NOMOR", nomorLoket.toString())
+        .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
       // Update nomor loket ke database
       await daftarNomorSurat.update(
         { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
         { where: { id: 2 }, transaction }
       );
+
+      // Ubah format tanggalPengajuan
+      const formattedTanggalPengajuan = new Date(
+        tanggalPengajuan
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
 
       // Simpan data perjalanan
       const dbPerjalanan = await perjalanan.create(
@@ -97,17 +185,35 @@ module.exports = {
       }));
 
       await personil.bulkCreate(dataPersonil, { transaction });
+      let dataKota = []; // Inisialisasi dataKota sebagai array kosong
+      let dataDalamKota = [];
+      if (jenis.id === 1) {
+        // Buat data kota tujuan
+        dataKota = perjalananKota.map((item) => ({
+          perjalananId: dbPerjalanan.id,
+          tempat: item.kota,
+          tanggalBerangkat: item.tanggalBerangkat,
+          tanggalPulang: item.tanggalPulang,
+          dalamKotaId: 1,
+        }));
 
-      // Buat data kota tujuan
-      const dataKota = perjalananKota.map((item) => ({
-        perjalananId: dbPerjalanan.id,
-        tempat: item.kota,
-        tanggalBerangkat: item.tanggalBerangkat,
-        tanggalPulang: item.tanggalPulang,
-      }));
-
-      await tempat.bulkCreate(dataKota, { transaction });
-
+        await tempat.bulkCreate(dataKota, { transaction });
+      } else if (jenis.id === 2) {
+        dataDalamKota = dalamKota.map(
+          (item) => (
+            console.log(item),
+            {
+              perjalananId: dbPerjalanan.id,
+              tempat: "dalam kota",
+              dalamKotaId: item.dataDalamKota.id,
+              tanggalBerangkat: item.tanggalBerangkat,
+              tanggalPulang: item.tanggalPulang,
+            }
+          )
+        );
+        await tempat.bulkCreate(dataDalamKota, { transaction });
+      }
+      console.log(dataDalamKota);
       // Path file template
       const templatePath = path.join(
         __dirname,
@@ -126,19 +232,32 @@ module.exports = {
         linebreaks: true,
       });
 
-      // Masukkan data ke dalam template
       doc.render({
         dataPegawai,
-        tanggalPengajuan,
+        tanggalPengajuan: formattedTanggalPengajuan,
         untuk,
+        tempat1:
+          jenis.id === 1
+            ? dataKota[0]?.tempat
+            : dalamKota[0].dataDalamKota.nama,
+        // tempat2:
+        //   jenis.id === 1
+        //     ? dataKota[1]?.tempat
+        //     : dalamKota[1].dataDalamKota.nama || "",
+        // tempat3: dataKota[2]?.tempat || "",
         kode: kodeRekeningFE,
         noNotDis: nomorBaru,
         ttdSurtTugJabatan: dataTtdSurTug.value.jabatan,
         ttdNotDinNama: ttdNotDis.nama,
+        ttdNotDinPangkat: ttdNotDis.pangkat,
+        ttdNotDinGolongan: ttdNotDis.golongan,
         ttdNotDinJabatan: ttdNotDis.jabatan,
         ttdNotDinNip: `NIP. ${ttdNotDis.nip}`,
         sumber,
         jenis: jenis.jenis,
+        tanggalBerangkat: formattedTanggalBerangkat,
+        tanggalPulang: formattedTanggalPulang,
+        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
       });
 
       // Simpan hasil dokumen ke buffer
@@ -189,6 +308,13 @@ module.exports = {
         include: [{ model: jenisSurat, as: "jenisSurat" }],
       });
       const resultJenisTempat = await jenisTempat.findAll();
+      const resultDalamKota = await dalamKota.findAll({
+        where: {
+          id: {
+            [Op.not]: 1, // Ambil semua data kecuali id = 1
+          },
+        },
+      });
 
       return res.status(200).json({
         resultDaftarKegiatan,
@@ -196,6 +322,7 @@ module.exports = {
         resultDaftarNomorSurat,
         resultJenisTempat,
         resultJenisPerjalanan,
+        resultDalamKota,
       });
     } catch (err) {
       console.error("Error:", err);
@@ -232,6 +359,7 @@ module.exports = {
                 include: [
                   { model: daftarPangkat, as: "daftarPangkat" },
                   { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
                 ],
               },
             ],
@@ -239,6 +367,7 @@ module.exports = {
           {
             model: tempat,
             attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            include: [{ model: dalamKota, as: "dalamKota" }],
           },
 
           {
@@ -255,8 +384,9 @@ module.exports = {
           },
           {
             model: ttdSuratTugas,
-            attributes: ["nama", "id", "nip", "jabatan"],
+            attributes: ["nama", "id", "nip", "jabatan", "pangkat", "golongan"],
           },
+          { model: jenisPerjalanan },
         ],
       });
 
@@ -289,11 +419,107 @@ module.exports = {
         ttdSurTugJabatan,
         ttdSurTugNama,
         ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
         noNotaDinas,
         noSuratTugas,
+        jenis,
       } = req.body;
-      console.log(personilFE);
+      console.log(tempat);
+      const totalDurasi = tempat.reduce(
+        (total, temp) => total + temp.dalamKota.durasi,
+        0
+      );
 
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      function terbilang(angka) {
+        const satuan = [
+          "",
+          "Satu",
+          "Dua",
+          "Tiga",
+          "Empat",
+          "Lima",
+          "Enam",
+          "Tujuh",
+          "Delapan",
+          "Sembilan",
+          "Sepuluh",
+          "Sebelas",
+        ];
+
+        if (angka < 12) {
+          return satuan[angka];
+        } else if (angka < 20) {
+          return terbilang(angka - 10) + " Belas";
+        } else if (angka < 100) {
+          return (
+            terbilang(Math.floor(angka / 10)) +
+            " Puluh " +
+            terbilang(angka % 10)
+          );
+        } else if (angka < 200) {
+          return "Seratus " + terbilang(angka - 100);
+        }
+      }
+      const calculateDaysDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+        const difference = Math.abs(end - start);
+        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
+      };
+
+      const daysDifference = calculateDaysDifference(
+        tempat[0].tanggalBerangkat,
+        tempat[tempat.length - 1].tanggalPulang
+      );
+
+      const formatTanggal = (tanggal) => {
+        return new Date(tanggal).toLocaleDateString("id-ID", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        });
+      };
+      const formattedTanggalBerangkat = new Date(
+        tempat[0].tanggalBerangkat
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tempat[tempat.length - 1].tanggalPulang
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      const formattedTanggalPengajuan = new Date(
+        tanggalPengajuan
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
       // Path file template
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
@@ -310,10 +536,9 @@ module.exports = {
 
         const nomorLoket = parseInt(dbNoSurat[0].nomorLoket) + 1;
 
-        nomorBaru = dbNoSurat[0].nomorSurat.replace(
-          "NOMOR",
-          nomorLoket.toString()
-        );
+        nomorBaru = dbNoSurat[0].nomorSurat
+          .replace("NOMOR", nomorLoket.toString())
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
         // Update nomor loket ke database
         await daftarNomorSurat.update(
@@ -330,7 +555,7 @@ module.exports = {
         let nomorAwalSPD = parseInt(dbNoSurat[2].nomorLoket);
 
         noSpd = personilFE.map((item, index) => ({
-          nomorSPD: dbNoSurat[0].nomorSurat.replace(
+          nomorSPD: dbNoSurat[2].nomorSurat.replace(
             "NOMOR",
             (nomorAwalSPD + index + 1).toString()
           ),
@@ -341,7 +566,7 @@ module.exports = {
           { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
           { where: { id: 3 }, transaction }
         );
-
+        /////////////////////////////////////////////////////
         for (const [index, item] of personilFE.entries()) {
           await personil.update(
             {
@@ -355,6 +580,7 @@ module.exports = {
             }
           );
         }
+        /////////////////////////////////////////
       } else {
         noSpd = personilFE.map((item, index) => ({
           nomorSPD: item.nomorSPD,
@@ -376,7 +602,9 @@ module.exports = {
 
       const templatePath = path.join(
         __dirname,
-        "../public/template/suratTugas.docx"
+        tempat.reduce((total, temp) => total + temp.dalamKota.durasi, 0) > 7
+          ? "../public/template/suratTugas.docx"
+          : "../public/template/suratTugasTanpaSPD.docx"
       );
 
       // Baca file template
@@ -393,24 +621,155 @@ module.exports = {
       console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
+        // tempat1: jenis.id === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        // tempat2: tempat[1]?.tempat || "",
+        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempatSpd2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempatSpd3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempat2: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempat3: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+
+        tempat4:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "Tana Paser",
+
+        tempat5:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "",
+
+        tempat6:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "",
+
+        tempat7:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : tempat.length === 2 && jenis === 1
+            ? "Tana Paser"
+            : tempat.length === 2 && jenis !== 1
+            ? ""
+            : "Tana Paser",
+
+        tempat8:
+          tempat.length === 1 || tempat.length === 2
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Default value if none of the conditions match
+
+        tempat9:
+          tempat.length === 1 || tempat.length === 2
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Default value if none of the conditions match
+
+        tempat10: tempat.length === 3 ? "Tana Paser" : "",
+
+        tanggal1: formatTanggal(tempat[0]?.tanggalBerangkat),
+        tanggal2: formatTanggal(tempat[0]?.tanggalBerangkat),
+        tanggal3:
+          tempat.length === 1
+            ? formatTanggal(tempat[0]?.tanggalPulang)
+            : formatTanggal(tempat[1]?.tanggalBerangkat),
+        tanggal4:
+          tempat.length === 1 ? "" : formatTanggal(tempat[1]?.tanggalBerangkat),
+
+        tanggal5:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? formatTanggal(tempat[1]?.tanggalPulang)
+            : formatTanggal(tempat[2]?.tanggalBerangkat),
+
+        tanggal6:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? ""
+            : formatTanggal(tempat[2]?.tanggalBerangkat),
+
+        tanggal7:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? ""
+            : formatTanggal(tempat[2]?.tanggalPulang),
+
+        tanggalBerangkat: formattedTanggalBerangkat,
+        tanggalPulang: formattedTanggalPulang,
+        tanggalBerangkat1: tempat[0]?.tanggalBerangkat,
+        tanggalPulang1: tempat[0]?.tanggalPulang,
         asal,
         kode,
         noNotaDinas,
         noSuratTugas: nomorBaru,
         ttdSurTug,
         id,
-        tanggalPengajuan,
+        tanggalPengajuan: formattedTanggalPengajuan,
         tempat,
         untuk,
         ttdSurTugJabatan,
         ttdSurTugNama,
         ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
         dataPegawai,
         pegawai1Nama: personilFE[0]?.pegawai?.nama,
         pegawai2Nama: personilFE[1]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
         pegawai3Nama: personilFE[2]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
         pegawai4Nama: personilFE[3]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
         pegawai5Nama: personilFE[4]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
+
+        pegawai1Tingkatan: personilFE[0]?.pegawai?.daftarTingkatan.tingkatan,
+        pegawai2Tingkatan:
+          personilFE[1]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai3Tingkatan:
+          personilFE[2]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai4Tingkatan:
+          personilFE[3]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai5Tingkatan:
+          personilFE[4]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+
         noSpd1: noSpd[0]?.nomorSPD || "TIDAK ADA NOMOR",
 
         noSpd2: noSpd[1]?.nomorSPD || "TIDAK ADA NOMOR",

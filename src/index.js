@@ -8,6 +8,9 @@ const {
   perjalananRouter,
   pegawaiRouter,
   kwitansiRouter,
+  dalamKotaRouter,
+  rillRouter,
+  userRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -35,6 +38,9 @@ app.use("/api", express.static(`${__dirname}/public`));
 app.use("/api/perjalanan", perjalananRouter);
 app.use("/api/pegawai", pegawaiRouter);
 app.use("/api/kwitansi", kwitansiRouter);
+app.use("/api/dalam-kota", dalamKotaRouter);
+app.use("/api/rill", rillRouter);
+app.use("/api/user", userRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);

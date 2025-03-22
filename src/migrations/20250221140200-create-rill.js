@@ -1,40 +1,37 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rills', {
+    await queryInterface.createTable("rills", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       rincianBPDId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      nama: {
-        type: Sequelize.STRING
+      item: {
+        type: Sequelize.STRING,
       },
-      jumlah: {
-        type: Sequelize.INTEGER
-      },
-      harga: {
-        type: Sequelize.INTEGER
+      nilai: {
+        type: Sequelize.INTEGER,
       },
       jenisId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rills');
-  }
+    await queryInterface.dropTable("rills");
+  },
 };

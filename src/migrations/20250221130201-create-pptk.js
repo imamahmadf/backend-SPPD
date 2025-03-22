@@ -18,6 +18,12 @@ module.exports = {
       jabatan: {
         type: Sequelize.STRING,
       },
+      pangkat: {
+        type: Sequelize.STRING,
+      },
+      golongan: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -18,9 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   rincianBPD.init(
     {
       personilId: DataTypes.INTEGER,
-      nama: DataTypes.STRING,
-      jumlah: DataTypes.INTEGER,
-      harga: DataTypes.INTEGER,
+      item: DataTypes.STRING,
+      satuan: DataTypes.STRING,
+      qty: DataTypes.INTEGER,
+      nilai: DataTypes.INTEGER,
       jenisId: DataTypes.INTEGER,
     },
     {
