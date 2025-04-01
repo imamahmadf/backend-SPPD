@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   jenisSurat.init(
     {
       jenis: DataTypes.STRING,
+      nomorSurat: DataTypes.STRING,
     },
     {
       sequelize,

@@ -20,6 +20,10 @@ const {
   dalamKota,
   jenisPerjalanan,
   sequelize,
+  user,
+  userRole,
+  role,
+  profile,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -68,6 +72,31 @@ module.exports = {
       return res.status(500).json({
         message: err,
       });
+    }
+  },
+  tes: async (req, res) => {
+    try {
+      const resultUser = await user.findOne({
+        where: { email: "tes@mail.com" },
+        include: [
+          { model: userRole, include: [{ model: role, attributes: ["nama"] }] },
+          {
+            model: profile,
+            attributes: ["id", "nama", "profilePic"],
+            include: [
+              {
+                model: daftarUnitKerja,
+                attributes: ["id"],
+                as: "unitKerja-profile",
+              },
+            ],
+          },
+        ],
+      });
+      return res.status(200).json({ resultUser });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
     }
   },
 };

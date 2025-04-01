@@ -87,7 +87,19 @@ module.exports = {
               {
                 model: tempat,
                 attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
-                include: [{ model: dalamKota, as: "dalamKota" }],
+                include: [
+                  {
+                    model: dalamKota,
+                    as: "dalamKota",
+                    attributes: [
+                      "id",
+                      "uangTransport",
+                      "nama",
+                      "durasi",
+                      "unitKerjaId",
+                    ],
+                  },
+                ],
               },
               {
                 model: jenisPerjalanan,
@@ -100,13 +112,30 @@ module.exports = {
                     model: daftarKegiatan,
                     attributes: ["id", "kodeRekening", "kegiatan"],
                     as: "kegiatan",
-                    include: [{ model: PPTK }],
                   },
                 ],
               },
               {
                 model: ttdSuratTugas,
-                attributes: ["nama", "id", "nip", "jabatan"],
+                attributes: ["id", "jabatan"],
+                include: [
+                  {
+                    model: pegawai,
+                    attributes: ["id", "nama", "nip", "jabatan"],
+                    as: "pegawai",
+                  },
+                ],
+              },
+              {
+                model: PPTK,
+                attributes: ["id", "jabatan"],
+                include: [
+                  {
+                    model: pegawai,
+                    attributes: ["id", "nama", "nip", "jabatan"],
+                    as: "pegawai_PPTK",
+                  },
+                ],
               },
             ],
           },
@@ -125,7 +154,7 @@ module.exports = {
     }
   },
   cetakKwitansi: async (req, res) => {
-    console.log(req.body);
+    console.log(req.body, "DRI DEPAN");
     const {
       id,
       nomorSPD,
@@ -218,6 +247,7 @@ module.exports = {
     const BPD = rincianBPD.map((item, index) => ({
       no: index + 1,
       jenis: item.jenisRincianBPD.jenis,
+      satuan: item.satuan,
       item: item.item,
       qty: item.qty,
       harga: formatRupiah(item.nilai || 0),
@@ -228,8 +258,6 @@ module.exports = {
       .filter((item) => item.jenisId === 4) // Filter berdasarkan jenisId
       .flatMap((item) => item.rills) // Langsung flatten tanpa map().flat()
       .map((item, index) => ({ ...item, no: index + 1 })); // Tambahkan nomor urut
-
-    console.log(daftarRill, "ini daftar rill");
 
     const total = formatRupiah(
       rincianBPD.reduce((sum, item) => sum + (item.qty * item.nilai || 0), 0)
@@ -349,7 +377,7 @@ module.exports = {
       tempatNama,
       asal,
     } = req.body;
-    console.log(req.body);
+    console.log(req.body, "AAAAAA");
 
     try {
       const rillBPD = await rincianBPD.create(

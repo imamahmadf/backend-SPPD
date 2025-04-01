@@ -3,18 +3,21 @@ const jenisSurats = [
   {
     id: 1,
     jenis: "Surat Tugas",
+    nomorSurat: "800.1.11.1/NOMOR/BULAN/2025",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
     jenis: "Nota Dinas",
+    nomorSurat: "800.1.11.1/NOMOR/BULAN/2025",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 3,
     jenis: "SPD",
+    nomorSurat: "000.1.2.3/NOMOR/KODE/2025",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

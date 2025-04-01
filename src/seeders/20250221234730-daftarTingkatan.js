@@ -18,6 +18,12 @@ const daftarTingkatans = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+  {
+    id: 4,
+    tingkatan: "Tingkat 4",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */

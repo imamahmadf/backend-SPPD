@@ -22,7 +22,7 @@ module.exports = {
           },
           { model: daftarGolongan, as: "daftarGolongan" },
           { model: daftarPangkat, as: "daftarPangkat" },
-          { model: daftarUnitKerja, as: "daftarUnitKerja" },
+          { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
         ],
       });
       return res.status(200).json({ result });

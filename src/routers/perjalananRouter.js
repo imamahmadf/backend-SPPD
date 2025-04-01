@@ -5,7 +5,7 @@ const routers = express.Router();
 
 routers.post("/post/nota-dinas", perjalananControllers.postNotaDinas);
 routers.post("/post/surat-tugas", perjalananControllers.postSuratTugas);
-routers.get("/get/seed", perjalananControllers.getSeedPerjalanan);
+routers.get("/get/seed/:id", perjalananControllers.getSeedPerjalanan);
 routers.get("/get/all-perjalanan", perjalananControllers.getAllPerjalanan);
 routers.get(
   "/get/detail-perjalanan/:id",

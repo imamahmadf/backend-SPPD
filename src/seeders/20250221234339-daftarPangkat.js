@@ -2,19 +2,19 @@ const currentDate = new Date();
 const daftarPangkats = [
   {
     id: 1,
-    pangkat: "Penata Muda",
+    pangkat: "Pembina Tingkat I",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
-    pangkat: "Penata",
+    pangkat: "Pembina",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 3,
-    pangkat: "Pembina",
+    pangkat: "Penata Tingkat I",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

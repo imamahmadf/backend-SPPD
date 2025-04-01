@@ -15,6 +15,21 @@ module.exports = {
       kode: {
         type: Sequelize.STRING,
       },
+      asal: {
+        type: Sequelize.STRING,
+      },
+      templateSuratTugas: {
+        type: Sequelize.STRING,
+      },
+      templateNotaDinas: {
+        type: Sequelize.STRING,
+      },
+      templateSPD: {
+        type: Sequelize.STRING,
+      },
+      tempalteKuitansi: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -2,31 +2,37 @@ const currentDate = new Date();
 const PPTKs = [
   {
     id: 1,
-    nama: "Dian",
-    nip: "111222333",
-    pangkat: "pembina",
-    golongan: "IVa",
-    jabatan: "Kepala bidang Sumber Daya Kesehatan",
+    jabatan: "pejabat pelaksana teknis",
+    unitKerjaId: 1,
+    pegawaiId: 6,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
-    nama: "Dr. Ainun",
-    nip: "111222444",
-    pangkat: "pembina",
-    golongan: "IVb",
-    jabatan: "Kepala bidang Pencegahan penyakit",
+    jabatan: "pejabat pelaksana teknis",
+    unitKerjaId: 1,
+    pegawaiId: 2,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 3,
-    nama: "Dr. Adis",
-    nip: "111222555",
-    pangkat: "pembina",
-    golongan: "IVc",
-    jabatan: "Kepala bidang kesehatan Masyarakat",
+    jabatan: "pejabat pelaksana teknis",
+    unitKerjaId: 1,
+    pegawaiId: 1,
+
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 4,
+    jabatan: "pejabat pelaksana teknis",
+    unitKerjaId: 2,
+    pegawaiId: 3,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },

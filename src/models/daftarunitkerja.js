@@ -13,12 +13,32 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
         as: "daftarUnitKerja",
       });
+      this.belongsTo(models.dalamKota);
+      this.belongsTo(models.ttdSuratTugas, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerja-ttdSuratTugas",
+      });
+      this.belongsTo(models.ttdNotaDinas);
+      this.belongsTo(models.PPTK);
+      this.belongsTo(models.profile, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerja_profile",
+      });
+      this.belongsTo(models.daftarNomorSurat, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerja-nomorSurat",
+      });
     }
   }
   daftarUnitKerja.init(
     {
       unitKerja: DataTypes.STRING,
       kode: DataTypes.STRING,
+      asal: DataTypes.STRING,
+      templateSuratTugas: DataTypes.STRING,
+      templateNotaDinas: DataTypes.STRING,
+      templateSPD: DataTypes.STRING,
+      tempalteKuitansi: DataTypes.STRING,
     },
     {
       sequelize,

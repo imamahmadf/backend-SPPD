@@ -2,23 +2,37 @@ const currentDate = new Date();
 const ttdSuratTugas = [
   {
     id: 1,
-    nama: "Amri",
-    nip: "111222333",
     jabatan: "kepala Dinas Kesehatan",
     unitKerjaId: 1,
-    pangkat: "Pembina",
-    golongan: "IVB",
+    pegawaiId: 6,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
-    nama: "Dr. Dewa",
-    nip: "111222333 009",
-    jabatan: "kepala Dinas Kesehatan 2022",
-    unitKerjaId: 2,
-    pangkat: "Pembina",
-    golongan: "IVA",
+    jabatan: "Plh. kepala Dinas Kesehatan",
+    unitKerjaId: 1,
+    pegawaiId: 2,
+
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 3,
+    jabatan: "Plh. kepala Dinas Kesehatan",
+    unitKerjaId: 1,
+    pegawaiId: 1,
+
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 4,
+    jabatan: "Plh. kepala Dinas Kesehatan",
+    unitKerjaId: 1,
+    pegawaiId: 3,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },

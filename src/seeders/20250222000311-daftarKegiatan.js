@@ -5,7 +5,7 @@ const daftarKegiatans = [
     kegiatan: "Kegiatan 1",
     kodeRekening: "4435.05.001",
     sumber: "DPA Dinas Kesehatan 2025",
-    PPTKId: 1,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -14,7 +14,7 @@ const daftarKegiatans = [
     kegiatan: "Kegiatan 2",
     kodeRekening: "4435.05.002",
     sumber: "DPA Dinas Kesehatan 2025",
-    PPTKId: 2,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -23,7 +23,7 @@ const daftarKegiatans = [
     kegiatan: "kegiatan 3",
     kodeRekening: "4435.05.003",
     sumber: "DPA Dinas Kesehatan 2025",
-    PPTKId: 1,
+
     createdAt: currentDate,
     updatedAt: currentDate,
   },

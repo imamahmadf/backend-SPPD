@@ -1,4 +1,11 @@
-const { user } = require("../models");
+const {
+  user,
+  profile,
+  userRole,
+  sequelize,
+  role,
+  daftarUnitKerja,
+} = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authenticateUser = require("../lib/auth");
@@ -6,8 +13,9 @@ const blacklistedTokens = new Set(); // Simpan token yang di-blacklist
 
 module.exports = {
   register: async (req, res) => {
+    const transaction = await sequelize.transaction();
     try {
-      const { name, email, password, role } = req.body;
+      const { nama, email, password, role } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const existingUser = await user.findOne({ where: { email } });
@@ -15,15 +23,37 @@ module.exports = {
         return res.status(400).json({ message: "Email sudah digunakan" });
       }
 
-      const newUser = await user.create({
-        name,
-        email,
-        password: hashedPassword,
-        role,
-      });
+      const newUser = await user.create(
+        {
+          nama,
+          email,
+          password: hashedPassword,
+          role,
+        },
+        { transaction }
+      );
 
-      res.status(201).json({ message: "Registrasi berhasil", user: newUser });
+      const newProfile = await profile.create(
+        {
+          nama,
+          userId: newUser.id,
+
+          unitKerjaId: 1,
+        },
+        { transaction }
+      );
+      const newUserRole = await userRole.create(
+        {
+          userId: newUser.id,
+          roleId: 1,
+        },
+        { transaction }
+      );
+      await transaction.commit();
+      res.status(201).json({ message: "Registrasi berhasil" });
     } catch (err) {
+      await transaction.rollback();
+      console.log(err);
       res.status(400).json({ error: err.message });
     }
   },
@@ -31,7 +61,23 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const resultUser = await user.findOne({ where: { email } });
+      const resultUser = await user.findOne({
+        where: { email },
+        include: [
+          { model: userRole, include: [{ model: role, attributes: ["nama"] }] },
+          {
+            model: profile,
+            attributes: ["id", "nama", "profilePic"],
+            include: [
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja", "kode", "asal"],
+                as: "unitKerja_profile",
+              },
+            ],
+          },
+        ],
+      });
 
       if (!resultUser) {
         return res.status(401).json({ message: "Invalid credentials" });
@@ -51,8 +97,13 @@ module.exports = {
         { expiresIn: "1h" }
       );
 
-      res.json({ token, user: resultUser });
+      res.json({
+        token,
+        user: resultUser.profiles,
+        role: resultUser.userRoles,
+      });
     } catch (err) {
+      console.log(err);
       res.status(500).json({ error: err.message });
     }
   },

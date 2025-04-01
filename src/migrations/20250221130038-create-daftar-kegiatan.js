@@ -19,9 +19,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
 
-      PPTKId: {
-        type: Sequelize.INTEGER,
-      },
+      // PPTKId: {
+      //   type: Sequelize.INTEGER,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

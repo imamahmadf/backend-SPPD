@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "subKegiatan",
       });
 
-      this.belongsTo(models.PPTK, { foreignKey: "PPTKId" });
+      // this.belongsTo(models.PPTK, { foreignKey: "PPTKId" });
     }
   }
   daftarKegiatan.init(
@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       kodeRekening: DataTypes.STRING,
       kegiatan: DataTypes.STRING,
       sumber: DataTypes.STRING,
-      PPTKId: DataTypes.INTEGER, // Hapus subKegiatanId
     },
     {
       sequelize,

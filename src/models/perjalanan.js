@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.ttdSuratTugas, {
         foreignKey: "ttdSuratTugasId",
       });
+      this.belongsTo(models.ttdNotaDinas, {
+        foreignKey: "ttdNotaDinasId",
+      });
+      this.belongsTo(models.PPTK, {
+        foreignKey: "PPTKId",
+      });
       this.belongsTo(models.jenisPerjalanan, {
         foreignKey: "jenisId",
       });
@@ -26,9 +32,12 @@ module.exports = (sequelize, DataTypes) => {
       untuk: DataTypes.STRING,
       asal: DataTypes.STRING,
       noNotaDinas: DataTypes.STRING,
+      dasar: DataTypes.STRING,
       noSuratTugas: DataTypes.STRING,
       tanggalPengajuan: DataTypes.DATE,
       ttdSuratTugasId: DataTypes.INTEGER,
+      ttdNotaDinasId: DataTypes.INTEGER,
+      PPTKId: DataTypes.INTEGER,
       jenisId: DataTypes.INTEGER,
       subKegiatanId: DataTypes.INTEGER,
     },

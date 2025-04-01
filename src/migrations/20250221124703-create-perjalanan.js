@@ -15,6 +15,9 @@ module.exports = {
       asal: {
         type: Sequelize.STRING,
       },
+      dasar: {
+        type: Sequelize.STRING,
+      },
       noNotaDinas: {
         type: Sequelize.STRING,
       },
@@ -27,6 +30,15 @@ module.exports = {
       ttdSuratTugasId: {
         type: Sequelize.INTEGER,
       },
+      PPTKId: {
+        type: Sequelize.INTEGER,
+      },
+      ttdNotaDinasId: {
+        type: Sequelize.INTEGER,
+      },
+      // ttdPPTKId: {
+      //   type: Sequelize.INTEGER,
+      // },
       subKegiatanId: {
         type: Sequelize.INTEGER,
       },

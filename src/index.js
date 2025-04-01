@@ -11,6 +11,7 @@ const {
   dalamKotaRouter,
   rillRouter,
   userRouter,
+  templateRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -41,6 +42,7 @@ app.use("/api/kwitansi", kwitansiRouter);
 app.use("/api/dalam-kota", dalamKotaRouter);
 app.use("/api/rill", rillRouter);
 app.use("/api/user", userRouter);
+app.use("/api/template", templateRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);

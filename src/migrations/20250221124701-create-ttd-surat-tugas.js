@@ -9,20 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nama: {
-        type: Sequelize.STRING,
-      },
+      // nama: {
+      //   type: Sequelize.STRING,
+      // },
       jabatan: {
         type: Sequelize.STRING,
       },
-      pangkat: {
-        type: Sequelize.STRING,
-      },
-      golongan: {
-        type: Sequelize.STRING,
-      },
-      nip: {
-        type: Sequelize.STRING,
+      // pangkat: {
+      //   type: Sequelize.STRING,
+      // },
+      // golongan: {
+      //   type: Sequelize.STRING,
+      // },
+      // nip: {
+      //   type: Sequelize.STRING,
+      // },
+      pegawaiId: {
+        type: Sequelize.INTEGER,
       },
       unitKerjaId: {
         type: Sequelize.INTEGER,

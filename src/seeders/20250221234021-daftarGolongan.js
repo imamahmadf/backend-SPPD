@@ -2,19 +2,19 @@ const currentDate = new Date();
 const daftarGOlongans = [
   {
     id: 1,
-    golongan: "IIA",
+    golongan: "IV b",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
-    golongan: "IIB",
+    golongan: "IV a",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 3,
-    golongan: "IIC",
+    golongan: "III d",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

@@ -1,16 +1,16 @@
 "use strict";
 
-const constraintName = "fk-PPTK-daftarKegiatan";
+const constraintName = "fk-ttdNotaDinas-pegawai";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addConstraint("daftarKegiatans", {
-      fields: ["PPTKId"],
+    await queryInterface.addConstraint("ttdNotaDinas", {
+      fields: ["pegawaiId"],
       type: "foreign key",
       name: constraintName,
       references: {
         //Required field
-        table: "PPTKs",
+        table: "pegawais",
         field: "id",
       },
       onDelete: "cascade",
@@ -19,6 +19,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeConstraint("daftarKegiatans", constraintName);
+    await queryInterface.removeConstraint("ttdNotaDinas", constraintName);
   },
 };

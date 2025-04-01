@@ -10,16 +10,25 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.perjalanan);
+      this.belongsTo(models.daftarUnitKerja, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerja-ttdSuratTugas",
+      });
+      this.belongsTo(models.pegawai, {
+        foreignKey: "pegawaiId",
+        as: "pegawai",
+      });
     }
   }
   ttdSuratTugas.init(
     {
-      nama: DataTypes.STRING,
+      // nama: DataTypes.STRING,
       jabatan: DataTypes.STRING,
-      nip: DataTypes.STRING,
+      pegawaiId: DataTypes.INTEGER,
       unitKerjaId: DataTypes.INTEGER,
-      pangkat: DataTypes.STRING,
-      golongan: DataTypes.STRING,
+      // pangkat: DataTypes.STRING,
+      // golongan: DataTypes.STRING,
+      // nip: DataTypes.STRING,
     },
     {
       sequelize,

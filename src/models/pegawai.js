@@ -26,6 +26,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
         as: "daftarUnitKerja",
       });
+      this.hasMany(models.ttdSuratTugas, {
+        foreignKey: "pegawaiId",
+        as: "pegawai",
+      });
+      this.hasMany(models.ttdNotaDinas, {
+        foreignKey: "pegawaiId",
+        as: "pegawai_notaDinas",
+      });
+      this.hasMany(models.PPTK, {
+        foreignKey: "pegawaiId",
+        as: "pegawai_PPTK",
+      });
     }
   }
   pegawai.init(
