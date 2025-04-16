@@ -38,6 +38,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "pegawaiId",
         as: "pegawai_PPTK",
       });
+      this.hasMany(models.KPA, {
+        foreignKey: "pegawaiId",
+        as: "pegawai_KPA",
+      });
+      this.hasMany(models.bendahara, {
+        foreignKey: "pegawaiId",
+        as: "pegawai_bendahara",
+      });
     }
   }
   pegawai.init(

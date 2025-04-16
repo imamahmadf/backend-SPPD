@@ -12,6 +12,9 @@ module.exports = {
       pegawaiId: {
         type: Sequelize.INTEGER,
       },
+      statusId: {
+        type: Sequelize.INTEGER,
+      },
       perjalananId: {
         type: Sequelize.INTEGER,
       },
@@ -19,6 +22,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       nomorSPD: {
+        type: Sequelize.STRING,
+      },
+      catatan: {
         type: Sequelize.STRING,
       },
       createdAt: {

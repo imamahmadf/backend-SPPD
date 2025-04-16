@@ -24,7 +24,7 @@ module.exports = {
       templateNotaDinas: {
         type: Sequelize.STRING,
       },
-      templateSPD: {
+      templateSuratTugasSingkat: {
         type: Sequelize.STRING,
       },
       tempalteKuitansi: {

@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   jenisPerjalanan.init(
     {
       jenis: DataTypes.STRING,
+      kodeRekening: DataTypes.STRING,
     },
     {
       sequelize,

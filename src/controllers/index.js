@@ -5,6 +5,7 @@ const dalamKotaControllers = require("./dalamKotaControllers");
 const rillControllers = require("./rillControllers");
 const userControllers = require("./userControllers");
 const templateControllers = require("./templateControllers");
+const adminControllers = require("./adminControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -13,4 +14,5 @@ module.exports = {
   rillControllers,
   userControllers,
   templateControllers,
+  adminControllers,
 };

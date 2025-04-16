@@ -16,10 +16,15 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.dalamKota);
       this.belongsTo(models.ttdSuratTugas, {
         foreignKey: "unitKerjaId",
-        as: "unitKerja-ttdSuratTugas",
+        as: "unitKerja_ttdSuratTugas",
       });
-      this.belongsTo(models.ttdNotaDinas);
+      this.belongsTo(models.ttdNotaDinas, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerja_notaDinas",
+      });
       this.belongsTo(models.PPTK);
+      this.belongsTo(models.KPA);
+      this.belongsTo(models.bendahara);
       this.belongsTo(models.profile, {
         foreignKey: "unitKerjaId",
         as: "unitKerja_profile",
@@ -36,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       kode: DataTypes.STRING,
       asal: DataTypes.STRING,
       templateSuratTugas: DataTypes.STRING,
+      templateSuratTugasSingkat: DataTypes.STRING,
       templateNotaDinas: DataTypes.STRING,
       templateSPD: DataTypes.STRING,
       tempalteKuitansi: DataTypes.STRING,

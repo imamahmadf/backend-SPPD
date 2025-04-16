@@ -33,6 +33,12 @@ module.exports = {
       PPTKId: {
         type: Sequelize.INTEGER,
       },
+      bendaharaId: {
+        type: Sequelize.INTEGER,
+      },
+      KPAId: {
+        type: Sequelize.INTEGER,
+      },
       ttdNotaDinasId: {
         type: Sequelize.INTEGER,
       },

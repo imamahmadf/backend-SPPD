@@ -49,16 +49,7 @@ module.exports = {
 
       const filePath = `/template/${req.file.filename}`;
 
-      if (kode == 1) {
-        await daftarUnitKerja.update(
-          {
-            templateNotaDinas: filePath, // Nama asli
-          },
-          {
-            where: { id },
-          }
-        );
-      } else if (kode == 2) {
+      if (jenis == 1) {
         await daftarUnitKerja.update(
           {
             templateSuratTugas: filePath, // Nama asli
@@ -67,10 +58,19 @@ module.exports = {
             where: { id },
           }
         );
-      } else if (kode == 3) {
+      } else if (jenis == 2) {
         await daftarUnitKerja.update(
           {
-            templateSPD: filePath, // Nama asli
+            templateNotaDinas: filePath, // Nama asli
+          },
+          {
+            where: { id },
+          }
+        );
+      } else if (jenis == 3) {
+        await daftarUnitKerja.update(
+          {
+            templateSuratTugasSingkat: filePath, // Nama asli
           },
           {
             where: { id },

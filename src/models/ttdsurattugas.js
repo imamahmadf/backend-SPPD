@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.perjalanan);
       this.belongsTo(models.daftarUnitKerja, {
         foreignKey: "unitKerjaId",
-        as: "unitKerja-ttdSuratTugas",
+        as: "unitKerja_ttdSuratTugas",
       });
       this.belongsTo(models.pegawai, {
         foreignKey: "pegawaiId",

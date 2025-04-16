@@ -19,6 +19,9 @@ const {
   ttdSuratTugas,
   dalamKota,
   jenisPerjalanan,
+  KPA,
+  bendahara,
+  status,
   sequelize,
 } = require("../models");
 
@@ -31,8 +34,15 @@ const Docxtemplater = require("docxtemplater");
 module.exports = {
   postRampung: async (req, res) => {
     const { personilId, item, qty, nilai, satuan, jenisId } = req.body;
-    console.log(req.body);
+    // console.log(req.file.filename);
     try {
+      const filePath = "bukti";
+      let bukti = null;
+      if (req.file) {
+        // console.log("GGGGGGGGGGGGGGGGGGGGGGGGGG");
+        const { filename } = req.file;
+        bukti = `/${filePath}/${filename}`;
+      }
       const result = await rincianBPD.create({
         personilId,
         item,
@@ -40,6 +50,7 @@ module.exports = {
         jenisId,
         qty,
         satuan,
+        bukti,
       });
 
       return res.status(200).json({ result });
@@ -52,6 +63,8 @@ module.exports = {
   },
   getRampung: async (req, res) => {
     const id = req.params.id;
+    const unitKerjaId = req.body.unitKerjaId || 1;
+    console.log(req.body);
     try {
       const daftarRill = await rill.findAll({
         include: [
@@ -59,6 +72,18 @@ module.exports = {
             model: rincianBPD,
             required: true,
             include: [{ model: personil, where: { id }, required: true }],
+          },
+        ],
+      });
+
+      const dataBendahara = await bendahara.findAll({
+        where: { unitKerjaId },
+        attributes: ["id", "jabatan"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip"],
+            as: "pegawai_bendahara",
           },
         ],
       });
@@ -74,7 +99,15 @@ module.exports = {
           },
           {
             model: rincianBPD,
-            attributes: ["id", "item", "nilai", "qty", "jenisId", "satuan"],
+            attributes: [
+              "id",
+              "item",
+              "nilai",
+              "qty",
+              "jenisId",
+              "satuan",
+              "bukti",
+            ],
             include: [
               { model: jenisRincianBPD, attributes: ["jenis"] },
               { model: rill },
@@ -132,19 +165,47 @@ module.exports = {
                 include: [
                   {
                     model: pegawai,
-                    attributes: ["id", "nama", "nip", "jabatan"],
+                    attributes: ["id", "nama", "nip"],
                     as: "pegawai_PPTK",
                   },
                 ],
               },
+              {
+                model: KPA,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: pegawai,
+                    attributes: ["id", "nama", "nip"],
+                    as: "pegawai_KPA",
+                  },
+                ],
+              },
+              {
+                model: bendahara,
+                attributes: ["id", "jabatan"],
+                include: [
+                  {
+                    model: pegawai,
+                    attributes: ["id", "nama", "nip"],
+                    as: "pegawai_bendahara",
+                  },
+                ],
+              },
             ],
+          },
+          {
+            model: status,
+            attributes: ["id", "statusKuitansi"],
           },
         ],
       });
 
       const jenisRampung = await jenisRincianBPD.findAll();
 
-      return res.status(200).json({ result, jenisRampung, daftarRill });
+      return res
+        .status(200)
+        .json({ result, jenisRampung, daftarRill, dataBendahara });
     } catch (err) {
       console.error("Error fetching data:", err);
       return res.status(500).json({
@@ -162,6 +223,8 @@ module.exports = {
       pegawaiNip,
       pegawaiJabatan,
       PPTKNama,
+      KPANama,
+      KPANip,
       PPTKNip,
       untuk,
       rincianBPD,
@@ -254,7 +317,7 @@ module.exports = {
       jumlah: formatRupiah(item.qty * item.nilai || 0),
     }));
 
-    const daftarRill = rincianBPD
+    const Rill = rincianBPD
       .filter((item) => item.jenisId === 4) // Filter berdasarkan jenisId
       .flatMap((item) => item.rills) // Langsung flatten tanpa map().flat()
       .map((item, index) => ({ ...item, no: index + 1 })); // Tambahkan nomor urut
@@ -304,8 +367,8 @@ module.exports = {
         pegawaiNama,
         pegawaiNip,
         pegawaiJabatan,
-        pejabatNama: "",
-        pejabatNip: "",
+        KPANama,
+        KPANip,
         tanggalPengajuan: formatTanggal(tanggalPengajuan),
         PPTKNama,
         PPTKNip,
@@ -316,7 +379,7 @@ module.exports = {
         BPD,
         subKegiatan,
         jenisPerjalanan,
-        daftarRill,
+        Rill,
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
           tempat.length === 1
@@ -471,4 +534,80 @@ module.exports = {
       });
     }
   },
+  terimaVerifikasi: async (req, res) => {
+    const personilId = req.body.personilId;
+    try {
+      const result = await personil.update(
+        {
+          statusId: 3,
+        },
+        { where: { id: personilId } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  tolakVerifikasi: async (req, res) => {
+    const personilId = req.body.personilId;
+    const catatan = req.body.catatan;
+
+    try {
+      const result = await personil.update(
+        {
+          statusId: 4,
+          catatan,
+        },
+        { where: { id: personilId } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  pengajuan: async (req, res) => {
+    const id = parseInt(req.params.id);
+    const dataBendahara = req.body.dataBendahara;
+    const perjalananId = req.body.perjalananId;
+    console.log(id, "INI ID UNUTK PENGAJUAN KUITANSI");
+    console.log(dataBendahara);
+    const transaction = await sequelize.transaction();
+    try {
+      const result = await personil.update(
+        {
+          statusId: 2,
+        },
+        { where: { id } },
+        transaction
+      );
+      const resultBendahara = await perjalanan.update(
+        {
+          bendaharaId: dataBendahara.id,
+        },
+        { where: { id: perjalananId } },
+        transaction
+      );
+      await transaction.commit();
+      return res.status(200).json({ result });
+    } catch (err) {
+      await transaction.rollback();
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
 };
+// status == 0 blm disetujui perjadinnya
+// status == 1 blm dibuat kwitansinya
+// status == 2 sdh dibuat tapi blm diverifikasi (menunggu verifikasi)
+// status == 3 sdh diferifikasi dan bisa di cetak
+// status == 4 ada kesalahan SPJ harus diperbaiki

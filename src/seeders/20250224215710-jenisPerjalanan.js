@@ -3,12 +3,14 @@ const jenisPerjalanans = [
   {
     id: 1,
     jenis: "Perjalanan Dinas Biasa",
+    kodeRekening: "0001",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 2,
     jenis: "Perjalanan dinas Dalam Kota",
+    kodeRekening: "0003",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

@@ -12,6 +12,9 @@ module.exports = {
       personilId: {
         type: Sequelize.INTEGER,
       },
+      bukti: {
+        type: Sequelize.STRING,
+      },
       item: {
         type: Sequelize.STRING,
       },

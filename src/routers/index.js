@@ -5,6 +5,8 @@ const dalamKotaRouter = require("./dalamKotaRouter");
 const rillRouter = require("./rillRouter");
 const userRouter = require("./userRouter");
 const templateRouter = require("./tempalteRouter");
+const adminRouter = require("./adminROuter");
+
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -13,4 +15,5 @@ module.exports = {
   rillRouter,
   templateRouter,
   userRouter,
+  adminRouter,
 };

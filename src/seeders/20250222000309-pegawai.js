@@ -78,6 +78,47 @@ const pegawais = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+
+  {
+    id: 7,
+    nama: "Kristina, SE",
+    nip: "19841006 201001 2 024",
+    jabatan: "bendahara",
+    unitKerjaId: 1,
+    tingkatanId: 3,
+    pangkatId: 1,
+    golonganId: 1,
+    nomorRekening: "0332628584",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+
+  {
+    id: 8,
+    nama: "Ismail, SKM",
+    nip: "-",
+    jabatan: "bendahara",
+    unitKerjaId: 1,
+    tingkatanId: 3,
+    pangkatId: 1,
+    golonganId: 1,
+    nomorRekening: "0332628584",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 9,
+    nama: "Junaidi, A.Md.Kg",
+    nip: "'19941216 201903 1 011",
+    jabatan: "bendahara",
+    unitKerjaId: 2,
+    tingkatanId: 3,
+    pangkatId: 1,
+    golonganId: 1,
+    nomorRekening: "0332628584",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */

@@ -18,6 +18,7 @@ const {
   daftarPangkat,
   dalamKota,
   daftarTingkatan,
+  KPA,
   ttdNotaDinas,
   daftarUnitKerja,
 } = require("../models");
@@ -46,9 +47,10 @@ module.exports = {
         dalamKota,
         unitKerja,
         PPTKId,
+        KPAId,
       } = req.body;
 
-      console.log(req.body);
+      console.log(req.body.dataTtdSurTug);
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -173,6 +175,7 @@ module.exports = {
           ttdNotaDinasId: dataTtdNotaDinas.value.id,
           ttdSuratTugasId: dataTtdSurTug.value.id,
           jenisId: jenis.id,
+          KPAId,
           PPTKId,
         },
         { transaction }
@@ -191,6 +194,7 @@ module.exports = {
       const dataPersonil = pegawai.map((item) => ({
         perjalananId: dbPerjalanan.id,
         pegawaiId: parseInt(item.value.id),
+        status: 1,
       }));
 
       await personil.bulkCreate(dataPersonil, { transaction });
@@ -225,15 +229,18 @@ module.exports = {
       console.log(dataDalamKota);
       // Path file template
 
-      const templateNotaDinas = await daftarUnitKerja.findOne({
-        where: { id: unitKerja.id },
-        attributes: ["id", "templateNotaDinas"],
-      });
+      const template = await daftarUnitKerja.findOne(
+        {
+          where: { id: unitKerja.id },
+          attributes: ["id", "templateNotaDinas"],
+        },
+        { transaction }
+      );
 
       const templatePath = path.join(
         __dirname,
         "../public",
-        templateNotaDinas.templateNotaDinas
+        template.templateNotaDinas
       );
 
       // Baca file template
@@ -325,16 +332,26 @@ module.exports = {
       });
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
       const resultTtdSuratTugas = await ttdSuratTugas.findAll({
-        where: { unitKerjaId: id },
-        attributes: ["id", "jabatan"],
+        where: {
+          [Op.or]: [{ unitKerjaId: id }, { unitKerjaId: 1 }],
+        },
+        order: [["unitKerjaId", "DESC"]],
+        attributes: ["id", "jabatan", "unitKerjaId"],
         include: [
           {
             model: pegawai,
             attributes: ["id", "nama", "nip", "jabatan"],
             as: "pegawai",
           },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "kode", "unitKerja"],
+            as: "unitKerja_ttdSuratTugas",
+          },
         ],
       });
+
+      console.log("Data yang diambil:", resultTtdSuratTugas);
 
       const resultTtdNotaDinas = await ttdNotaDinas.findAll({
         where: { unitKerjaId: id },
@@ -385,6 +402,17 @@ module.exports = {
           unitKerjaId: id,
         },
       });
+      const resultKPA = await KPA.findAll({
+        where: { unitKerjaId: id },
+        attributes: ["id"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_KPA",
+          },
+        ],
+      });
 
       return res.status(200).json({
         resultDaftarKegiatan,
@@ -395,6 +423,7 @@ module.exports = {
         resultDalamKota,
         resultTtdNotaDinas,
         resultPPTK,
+        resultKPA,
       });
     } catch (err) {
       console.error("Error:", err);
@@ -407,10 +436,22 @@ module.exports = {
   getAllPerjalanan: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
-
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
     const time = req.query.time || "ASC";
     const offset = limit * page;
     try {
+      // const seedUnitKerja = await daftarUnitKerja.findAll({
+      //   attributes: ["id"],
+      //   include: [
+      //     {
+      //       model: ttdSuratTugas,
+      //       as: "unitKerja-ttdSuratTugas",
+      //       attributes: ["id"],
+      //       include: [{ model: pegawai, as: "pegawai", attributes: ["id"] }],
+      //     },
+      //   ],
+      // });
+
       const result = await perjalanan.findAll({
         offset: offset,
         limit: limit,
@@ -461,7 +502,7 @@ module.exports = {
           },
           {
             model: ttdSuratTugas,
-            attributes: ["id", "jabatan"],
+            attributes: ["id", "jabatan", "unitKerjaId"],
             include: [
               {
                 model: pegawai,
@@ -472,6 +513,52 @@ module.exports = {
                   { model: daftarGolongan, as: "daftarGolongan" },
                   { model: daftarTingkatan, as: "daftarTingkatan" },
                 ],
+              },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "kode"],
+                as: "unitKerja_ttdSuratTugas",
+              },
+            ],
+          },
+          {
+            model: KPA,
+            attributes: ["id"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_KPA",
+
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+            ],
+          },
+          {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId", "pegawaiId"],
+
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_notaDinas",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id"],
+                as: "unitKerja_notaDinas",
+                where: { id: unitKerjaId },
+                required: true,
               },
             ],
           },
@@ -510,6 +597,11 @@ module.exports = {
         ttdSurTugNip,
         ttdSurTugPangkat,
         ttdSurTugGolongan,
+        ttdSurTugUnitKerja,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
         noNotaDinas,
         noSuratTugas,
         jenis,
@@ -616,7 +708,7 @@ module.exports = {
       let noSpd;
       if (!noSuratTugas) {
         const dbNoSurat = await daftarNomorSurat.findOne({
-          where: { unitKerjaId: unitKerja.id },
+          where: { unitKerjaId: ttdSurTugUnitKerja },
           include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 1 } }],
 
           transaction, // Letakkan dalam objek konfigurasi yang sama
@@ -669,10 +761,10 @@ module.exports = {
         for (const [index, item] of personilFE.entries()) {
           await personil.update(
             {
-              nomorSPD: dbNoSPD.jenisSurat.nomorSurat.replace(
-                "NOMOR",
-                (nomorAwalSPD + index + 1).toString()
-              ),
+              nomorSPD: dbNoSPD.jenisSurat.nomorSurat
+                .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+                .replace("KODE", unitKerja.kode),
+              statusId: 1,
             },
             {
               where: { id: item.id }, // Pastikan ada kriteria unik
@@ -699,11 +791,20 @@ module.exports = {
       dataPegawai[0].kepada = "kepada";
       dataPegawai[0].a = ":";
 
+      const template = await daftarUnitKerja.findOne(
+        {
+          where: { id: unitKerja.id },
+          attributes: ["id", "templateSuratTugas", "templateSuratTugasSingkat"],
+        },
+        { transaction }
+      );
+
       const templatePath = path.join(
         __dirname,
+        "../public",
         tempat.reduce((total, temp) => total + temp.dalamKota.durasi, 0) > 7
-          ? "../public/template/suratTugas.docx"
-          : "../public/template/suratTugasTanpaSPD.docx"
+          ? template.templateSuratTugas
+          : template.templateSuratTugasSingkat
       );
 
       // Baca file template
@@ -848,6 +949,10 @@ module.exports = {
         ttdSurTugNip,
         ttdSurTugPangkat,
         ttdSurTugGolongan,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
         dataPegawai,
         pegawai1Nama: personilFE[0]?.pegawai?.nama,
         pegawai2Nama: personilFE[1]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
