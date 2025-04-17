@@ -14,11 +14,7 @@ const {
   PPTK,
   rill,
   daftarUnitKerja,
-  daftarSubKegiatan,
-  daftarKegiatan,
-  ttdSuratTugas,
-  dalamKota,
-  jenisPerjalanan,
+  indukUnitKerja,
   sequelize,
   user,
   userRole,
@@ -50,7 +46,7 @@ module.exports = {
       const filePath = `/template/${req.file.filename}`;
 
       if (jenis == 1) {
-        await daftarUnitKerja.update(
+        await indukUnitKerja.update(
           {
             templateSuratTugas: filePath, // Nama asli
           },
@@ -59,7 +55,7 @@ module.exports = {
           }
         );
       } else if (jenis == 2) {
-        await daftarUnitKerja.update(
+        await indukUnitKerja.update(
           {
             templateNotaDinas: filePath, // Nama asli
           },
@@ -68,7 +64,7 @@ module.exports = {
           }
         );
       } else if (jenis == 3) {
-        await daftarUnitKerja.update(
+        await indukUnitKerja.update(
           {
             templateSuratTugasSingkat: filePath, // Nama asli
           },
@@ -94,15 +90,7 @@ module.exports = {
     try {
       const result = await daftarUnitKerja.findOne(
         {
-          attributes: [
-            "id",
-            "unitKerja",
-            "kode",
-            "asal",
-            "templateSuratTugas",
-            "templateNotaDinas",
-            "templateSPD",
-          ],
+          attributes: ["id", "unitKerja", "kode", "asal"],
         },
         { where: { id } }
       );

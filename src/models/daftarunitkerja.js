@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
         as: "unitKerja-nomorSurat",
       });
+      this.belongsTo(models.indukUnitKerja, {
+        foreignKey: "indukUnitKerjaId",
+      });
     }
   }
   daftarUnitKerja.init(
@@ -40,11 +43,11 @@ module.exports = (sequelize, DataTypes) => {
       unitKerja: DataTypes.STRING,
       kode: DataTypes.STRING,
       asal: DataTypes.STRING,
-      templateSuratTugas: DataTypes.STRING,
-      templateSuratTugasSingkat: DataTypes.STRING,
-      templateNotaDinas: DataTypes.STRING,
-      templateSPD: DataTypes.STRING,
-      tempalteKuitansi: DataTypes.STRING,
+      // templateSuratTugas: DataTypes.STRING,
+      // templateSuratTugasSingkat: DataTypes.STRING,
+      // templateNotaDinas: DataTypes.STRING,
+      // templateSPD: DataTypes.STRING,
+      // tempalteKuitansi: DataTypes.STRING,
     },
     {
       sequelize,

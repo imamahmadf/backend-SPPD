@@ -12,24 +12,27 @@ module.exports = {
       unitKerja: {
         type: Sequelize.STRING,
       },
+      indukUnitKerjaId: {
+        type: Sequelize.INTEGER,
+      },
       kode: {
         type: Sequelize.STRING,
       },
       asal: {
         type: Sequelize.STRING,
       },
-      templateSuratTugas: {
-        type: Sequelize.STRING,
-      },
-      templateNotaDinas: {
-        type: Sequelize.STRING,
-      },
-      templateSuratTugasSingkat: {
-        type: Sequelize.STRING,
-      },
-      tempalteKuitansi: {
-        type: Sequelize.STRING,
-      },
+      // templateSuratTugas: {
+      //   type: Sequelize.STRING,
+      // },
+      // templateNotaDinas: {
+      //   type: Sequelize.STRING,
+      // },
+      // templateSuratTugasSingkat: {
+      //   type: Sequelize.STRING,
+      // },
+      // tempalteKuitansi: {
+      //   type: Sequelize.STRING,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

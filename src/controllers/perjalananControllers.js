@@ -21,6 +21,7 @@ const {
   KPA,
   ttdNotaDinas,
   daftarUnitKerja,
+  indukUnitKerja,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -45,7 +46,7 @@ module.exports = {
         subKegiatanId,
         jenis,
         dalamKota,
-        unitKerja,
+        indukUnitKerjaFE,
         PPTKId,
         KPAId,
       } = req.body;
@@ -130,7 +131,7 @@ module.exports = {
       });
       // Ambil satu data nomor surat berdasarkan id = 2
       const dbNoSurat = await daftarNomorSurat.findOne({
-        where: { unitKerjaId: unitKerja.id },
+        where: { unitKerjaId: indukUnitKerja.id },
         include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
 
         transaction, // Letakkan dalam objek konfigurasi yang sama
@@ -229,9 +230,9 @@ module.exports = {
       console.log(dataDalamKota);
       // Path file template
 
-      const template = await daftarUnitKerja.findOne(
+      const template = await indukUnitKerja.findOne(
         {
-          where: { id: unitKerja.id },
+          where: { id: indukUnitKerjaFE.id },
           attributes: ["id", "templateNotaDinas"],
         },
         { transaction }
@@ -319,7 +320,7 @@ module.exports = {
   getSeedPerjalanan: async (req, res) => {
     const id = req.params.id;
     console.log(id, "INI ID UNIT KERJA");
-    const unitKerjaId = 1;
+
     try {
       const resultDaftarKegiatan = await daftarKegiatan.findAll({
         attributes: ["id", "kegiatan", "kodeRekening", "sumber"],

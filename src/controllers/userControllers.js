@@ -4,6 +4,7 @@ const {
   userRole,
   sequelize,
   role,
+  indukUnitKerja,
   daftarUnitKerja,
 } = require("../models");
 const bcrypt = require("bcryptjs");
@@ -73,6 +74,9 @@ module.exports = {
                 model: daftarUnitKerja,
                 attributes: ["id", "unitKerja", "kode", "asal"],
                 as: "unitKerja_profile",
+                include: [
+                  { model: indukUnitKerja, attributes: ["id", "kodeInduk"] },
+                ],
               },
             ],
           },
