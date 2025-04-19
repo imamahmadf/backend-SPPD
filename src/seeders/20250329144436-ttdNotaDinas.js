@@ -30,7 +30,7 @@ const ttdNotaDinas = [
   {
     id: 4,
     jabatan: "Plh. kabid 3",
-    unitKerjaId: 2,
+    unitKerjaId: 4,
     pegawaiId: 3,
 
     createdAt: currentDate,

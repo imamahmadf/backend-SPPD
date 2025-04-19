@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "daftarUnitKerja",
       });
       this.belongsTo(models.dalamKota);
-      this.belongsTo(models.ttdSuratTugas, {
-        foreignKey: "unitKerjaId",
-        as: "unitKerja_ttdSuratTugas",
-      });
+      // this.belongsTo(models.ttdSuratTugas, {
+      //   foreignKey: "unitKerjaId",
+      //   as: "unitKerja_ttdSuratTugas",
+      // });
       this.belongsTo(models.ttdNotaDinas, {
         foreignKey: "unitKerjaId",
         as: "unitKerja_notaDinas",
@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
         as: "unitKerja_profile",
       });
-      this.belongsTo(models.daftarNomorSurat, {
-        foreignKey: "unitKerjaId",
-        as: "unitKerja-nomorSurat",
-      });
+      // this.belongsTo(models.daftarNomorSurat, {
+      //   foreignKey: "unitKerjaId",
+      //   as: "unitKerja-nomorSurat",
+      // });
       this.belongsTo(models.indukUnitKerja, {
         foreignKey: "indukUnitKerjaId",
       });
@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       unitKerja: DataTypes.STRING,
       kode: DataTypes.STRING,
       asal: DataTypes.STRING,
+      indukUnitKerjaId: DataTypes.INTEGER,
       // templateSuratTugas: DataTypes.STRING,
       // templateSuratTugasSingkat: DataTypes.STRING,
       // templateNotaDinas: DataTypes.STRING,

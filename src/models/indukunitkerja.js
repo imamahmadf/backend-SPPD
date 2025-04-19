@@ -12,13 +12,18 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.daftarUnitKerja, {
         foreignKey: "indukUnitKerjaId",
       });
+
+      this.belongsTo(models.daftarNomorSurat, {
+        foreignKey: "indukUnitKerjaId",
+        as: "indukUnitKerja-nomorSurat",
+      });
     }
   }
   indukUnitKerja.init(
     {
       kodeInduk: DataTypes.STRING,
       indukUnitKerja: DataTypes.STRING,
-      tempalteSuratTugas: DataTypes.STRING,
+      templateSuratTugas: DataTypes.STRING,
       templateNotaDinas: DataTypes.STRING,
       templateSuratTugasSingkat: DataTypes.STRING,
     },

@@ -51,7 +51,7 @@ module.exports = {
         KPAId,
       } = req.body;
 
-      console.log(req.body.dataTtdSurTug);
+      console.log(req.body.indukUnitKerjaFE);
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -131,7 +131,7 @@ module.exports = {
       });
       // Ambil satu data nomor surat berdasarkan id = 2
       const dbNoSurat = await daftarNomorSurat.findOne({
-        where: { unitKerjaId: indukUnitKerja.id },
+        where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
         include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
 
         transaction, // Letakkan dalam objek konfigurasi yang sama
@@ -148,6 +148,12 @@ module.exports = {
       // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
       const nomorBaru = dbNoSurat.jenisSurat.nomorSurat
         .replace("NOMOR", nomorLoket.toString())
+        .replace(
+          "KODE",
+          indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+            "/" +
+            indukUnitKerjaFE.kode
+        )
         .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
       // Update nomor loket ke database
@@ -232,7 +238,7 @@ module.exports = {
 
       const template = await indukUnitKerja.findOne(
         {
-          where: { id: indukUnitKerjaFE.id },
+          where: { id: indukUnitKerjaFE.indukUnitKerja.id },
           attributes: ["id", "templateNotaDinas"],
         },
         { transaction }
@@ -318,8 +324,8 @@ module.exports = {
     }
   },
   getSeedPerjalanan: async (req, res) => {
-    const id = req.params.id;
-    console.log(id, "INI ID UNIT KERJA");
+    const { indukUnitKerjaId, unitKerjaId } = req.query;
+    console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
 
     try {
       const resultDaftarKegiatan = await daftarKegiatan.findAll({
@@ -334,10 +340,10 @@ module.exports = {
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
       const resultTtdSuratTugas = await ttdSuratTugas.findAll({
         where: {
-          [Op.or]: [{ unitKerjaId: id }, { unitKerjaId: 1 }],
+          [Op.or]: [{ indukUnitKerjaId }, { indukUnitKerjaId: 1 }],
         },
-        order: [["unitKerjaId", "DESC"]],
-        attributes: ["id", "jabatan", "unitKerjaId"],
+        order: [["indukUnitKerjaId", "DESC"]],
+        attributes: ["id", "jabatan", "indukUnitKerjaId"],
         include: [
           {
             model: pegawai,
@@ -345,9 +351,9 @@ module.exports = {
             as: "pegawai",
           },
           {
-            model: daftarUnitKerja,
-            attributes: ["id", "kode", "unitKerja"],
-            as: "unitKerja_ttdSuratTugas",
+            model: indukUnitKerja,
+            attributes: ["id", "kodeInduk", "indukUnitKerja"],
+            as: "indukUnitKerja_ttdSuratTugas",
           },
         ],
       });
@@ -355,7 +361,7 @@ module.exports = {
       console.log("Data yang diambil:", resultTtdSuratTugas);
 
       const resultTtdNotaDinas = await ttdNotaDinas.findAll({
-        where: { unitKerjaId: id },
+        where: { unitKerjaId },
         attributes: ["id", "jabatan"],
         include: [
           {
@@ -380,7 +386,7 @@ module.exports = {
       });
 
       const resultPPTK = await PPTK.findAll({
-        where: { unitKerjaId: id },
+        where: { unitKerjaId },
         attributes: ["id", "jabatan"],
         include: [
           {
@@ -392,7 +398,7 @@ module.exports = {
       });
       const resultDaftarNomorSurat = await daftarNomorSurat.findAll({
         include: [{ model: jenisSurat, as: "jenisSurat" }],
-        where: { unitKerjaId: id },
+        where: { indukUnitKerjaId },
       });
       const resultJenisTempat = await jenisTempat.findAll({
         attributes: ["id", "jenis", "koderekening"],
@@ -400,11 +406,11 @@ module.exports = {
       const resultDalamKota = await dalamKota.findAll({
         attributes: ["id", "nama", "durasi"],
         where: {
-          unitKerjaId: id,
+          unitKerjaId,
         },
       });
       const resultKPA = await KPA.findAll({
-        where: { unitKerjaId: id },
+        where: { unitKerjaId },
         attributes: ["id"],
         include: [
           {
@@ -438,24 +444,14 @@ module.exports = {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
     const unitKerjaId = parseInt(req.query.unitKerjaId);
-    const time = req.query.time || "ASC";
+    const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
+    console.log(unitKerjaId, "INI UNIT KERJA");
     try {
-      // const seedUnitKerja = await daftarUnitKerja.findAll({
-      //   attributes: ["id"],
-      //   include: [
-      //     {
-      //       model: ttdSuratTugas,
-      //       as: "unitKerja-ttdSuratTugas",
-      //       attributes: ["id"],
-      //       include: [{ model: pegawai, as: "pegawai", attributes: ["id"] }],
-      //     },
-      //   ],
-      // });
-
       const result = await perjalanan.findAll({
-        offset: offset,
-        limit: limit,
+        offset,
+        limit,
+        order: [["tanggalPengajuan", time]],
         attributes: [
           "id",
           "untuk",
@@ -489,7 +485,6 @@ module.exports = {
               },
             ],
           },
-
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
@@ -503,7 +498,7 @@ module.exports = {
           },
           {
             model: ttdSuratTugas,
-            attributes: ["id", "jabatan", "unitKerjaId"],
+            attributes: ["id", "jabatan", "indukUnitKerjaId"],
             include: [
               {
                 model: pegawai,
@@ -516,9 +511,15 @@ module.exports = {
                 ],
               },
               {
-                model: daftarUnitKerja,
-                attributes: ["id", "kode"],
-                as: "unitKerja_ttdSuratTugas",
+                model: indukUnitKerja,
+                attributes: ["id", "kodeInduk"],
+                as: "indukUnitKerja_ttdSuratTugas",
+                include: [
+                  {
+                    model: daftarUnitKerja,
+                    attributes: ["id", "kode"],
+                  },
+                ],
               },
             ],
           },
@@ -530,7 +531,6 @@ module.exports = {
                 model: pegawai,
                 attributes: ["id", "nama", "nip", "jabatan"],
                 as: "pegawai_KPA",
-
                 include: [
                   { model: daftarPangkat, as: "daftarPangkat" },
                   { model: daftarGolongan, as: "daftarGolongan" },
@@ -542,7 +542,8 @@ module.exports = {
           {
             model: ttdNotaDinas,
             attributes: ["id", "unitKerjaId", "pegawaiId"],
-
+            where: { unitKerjaId }, // ✅ Filter data berdasarkan unit kerja yang diminta
+            required: true, // ✅ Pastikan hanya ambil yang punya relasi
             include: [
               {
                 model: pegawai,
@@ -556,10 +557,14 @@ module.exports = {
               },
               {
                 model: daftarUnitKerja,
-                attributes: ["id"],
+                attributes: ["id", "indukUnitKerjaId"],
                 as: "unitKerja_notaDinas",
-                where: { id: unitKerjaId },
-                required: true,
+                include: [
+                  {
+                    model: indukUnitKerja,
+                    attributes: ["id", "kodeInduk"],
+                  },
+                ],
               },
             ],
           },
@@ -567,12 +572,25 @@ module.exports = {
         ],
       });
 
-      const totalRows = await perjalanan.count();
+      const totalRows = await perjalanan.count({
+        include: [
+          {
+            model: ttdNotaDinas,
+            where: { unitKerjaId },
+            required: true,
+          },
+        ],
+      });
+
       const totalPage = Math.ceil(totalRows / limit);
 
-      return res
-        .status(200)
-        .json({ result, page, limit, totalRows, totalPage });
+      return res.status(200).json({
+        result,
+        page,
+        limit,
+        totalRows,
+        totalPage,
+      });
     } catch (err) {
       console.error("Error:", err);
       return res.status(500).json({
@@ -607,8 +625,9 @@ module.exports = {
         noSuratTugas,
         jenis,
         unitKerja,
+        indukUnitKerjaFE,
       } = req.body;
-
+      console.log(ttdSurTugUnitKerja);
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -709,14 +728,14 @@ module.exports = {
       let noSpd;
       if (!noSuratTugas) {
         const dbNoSurat = await daftarNomorSurat.findOne({
-          where: { unitKerjaId: ttdSurTugUnitKerja },
+          where: { indukUnitKerjaId: ttdSurTugUnitKerja },
           include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 1 } }],
 
           transaction, // Letakkan dalam objek konfigurasi yang sama
         });
 
         const dbNoSPD = await daftarNomorSurat.findOne({
-          where: { unitKerjaId: unitKerja.id },
+          where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
           include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 3 } }],
         });
 
@@ -729,7 +748,13 @@ module.exports = {
 
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
           .replace("NOMOR", nomorLoket.toString())
-          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
+          .replace(
+            "KODE",
+            indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+              "/" +
+              indukUnitKerjaFE.kode
+          );
         console.log(dbNoSurat.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
@@ -750,7 +775,13 @@ module.exports = {
         noSpd = personilFE.map((item, index) => ({
           nomorSPD: dbNoSPD.jenisSurat.nomorSurat
             .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
-            .replace("KODE", unitKerja.kode),
+            .replace(
+              "KODE",
+              indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+                "/" +
+                indukUnitKerjaFE.kode
+            )
+            .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
         }));
 
         // Update nomor loket ke database
@@ -764,6 +795,12 @@ module.exports = {
             {
               nomorSPD: dbNoSPD.jenisSurat.nomorSurat
                 .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+                .replace(
+                  "KODE",
+                  indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+                    "/" +
+                    indukUnitKerjaFE.kode
+                )
                 .replace("KODE", unitKerja.kode),
               statusId: 1,
             },
@@ -792,9 +829,9 @@ module.exports = {
       dataPegawai[0].kepada = "kepada";
       dataPegawai[0].a = ":";
 
-      const template = await daftarUnitKerja.findOne(
+      const template = await indukUnitKerja.findOne(
         {
-          where: { id: unitKerja.id },
+          where: { id: indukUnitKerjaFE.indukUnitKerja.id },
           attributes: ["id", "templateSuratTugas", "templateSuratTugasSingkat"],
         },
         { transaction }

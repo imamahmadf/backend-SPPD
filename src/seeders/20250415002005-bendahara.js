@@ -18,7 +18,7 @@ const bendaharas = [
   },
   {
     id: 3,
-    unitKerjaId: 2,
+    unitKerjaId: 4,
     pegawaiId: 9,
     jabatan: "Bendahara Pengeluaran Pembantu",
     createdAt: currentDate,

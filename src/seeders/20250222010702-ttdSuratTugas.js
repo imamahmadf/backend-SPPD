@@ -3,7 +3,7 @@ const ttdSuratTugas = [
   {
     id: 1,
     jabatan: "kepala Dinas Kesehatan",
-    unitKerjaId: 1,
+    indukUnitKerjaId: 1,
     pegawaiId: 6,
 
     createdAt: currentDate,
@@ -12,7 +12,7 @@ const ttdSuratTugas = [
   {
     id: 2,
     jabatan: "Plh. kepala Dinas Kesehatan",
-    unitKerjaId: 1,
+    indukUnitKerjaId: 1,
     pegawaiId: 2,
 
     createdAt: currentDate,
@@ -21,7 +21,7 @@ const ttdSuratTugas = [
   {
     id: 3,
     jabatan: "Plh. kepala Dinas Kesehatan",
-    unitKerjaId: 1,
+    indukUnitKerjaId: 1,
     pegawaiId: 1,
 
     createdAt: currentDate,
@@ -30,7 +30,7 @@ const ttdSuratTugas = [
   {
     id: 4,
     jabatan: "Plh. kepala Dinas Kesehatan",
-    unitKerjaId: 1,
+    indukUnitKerjaId: 2,
     pegawaiId: 3,
 
     createdAt: currentDate,

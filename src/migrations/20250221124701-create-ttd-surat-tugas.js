@@ -27,7 +27,7 @@ module.exports = {
       pegawaiId: {
         type: Sequelize.INTEGER,
       },
-      unitKerjaId: {
+      indukUnitKerjaId: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

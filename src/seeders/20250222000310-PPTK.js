@@ -30,7 +30,7 @@ const PPTKs = [
   {
     id: 4,
     jabatan: "pejabat pelaksana teknis",
-    unitKerjaId: 2,
+    unitKerjaId: 4,
     pegawaiId: 3,
 
     createdAt: currentDate,
