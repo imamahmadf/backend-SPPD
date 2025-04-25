@@ -21,6 +21,9 @@ module.exports = {
       noNotaDinas: {
         type: Sequelize.STRING,
       },
+      nomorSuratKeluarId: {
+        type: Sequelize.INTEGER,
+      },
       noSuratTugas: {
         type: Sequelize.STRING,
       },

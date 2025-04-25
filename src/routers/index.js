@@ -6,6 +6,8 @@ const rillRouter = require("./rillRouter");
 const userRouter = require("./userRouter");
 const templateRouter = require("./tempalteRouter");
 const adminRouter = require("./adminROuter");
+const klasifikasiRouter = require("./klasifikasiRouter");
+const tujuanRouter = require("./tujuanRouter");
 
 module.exports = {
   perjalananRouter,
@@ -16,4 +18,6 @@ module.exports = {
   templateRouter,
   userRouter,
   adminRouter,
+  klasifikasiRouter,
+  tujuanRouter,
 };

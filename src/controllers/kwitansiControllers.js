@@ -23,6 +23,7 @@ const {
   bendahara,
   status,
   sequelize,
+  sumberDana,
 } = require("../models");
 
 const { Op, where } = require("sequelize");
@@ -76,17 +77,17 @@ module.exports = {
         ],
       });
 
-      const dataBendahara = await bendahara.findAll({
-        where: { unitKerjaId },
-        attributes: ["id", "jabatan"],
-        include: [
-          {
-            model: pegawai,
-            attributes: ["id", "nama", "nip"],
-            as: "pegawai_bendahara",
-          },
-        ],
-      });
+      // const dataBendahara = await bendahara.findAll({
+      //   where: { unitKerjaId },
+      //   attributes: ["id", "jabatan"],
+      //   include: [
+      //     {
+      //       model: pegawai,
+      //       attributes: ["id", "nama", "nip"],
+      //       as: "pegawai_bendahara",
+      //     },
+      //   ],
+      // });
       const result = await personil.findOne({
         where: { id },
         include: [
@@ -138,6 +139,21 @@ module.exports = {
                 model: jenisPerjalanan,
               },
               {
+                model: bendahara,
+                attributes: ["id", "jabatan"],
+                include: [
+                  {
+                    model: pegawai,
+                    attributes: ["id", "nama", "nip"],
+                    as: "pegawai_bendahara",
+                  },
+                  {
+                    model: sumberDana,
+                    attributes: ["id", "sumber", "untukPembayaran"],
+                  },
+                ],
+              },
+              {
                 model: daftarSubKegiatan,
                 attributes: ["id", "kodeRekening", "subKegiatan"],
                 include: [
@@ -172,7 +188,7 @@ module.exports = {
               },
               {
                 model: KPA,
-                attributes: ["id"],
+                attributes: ["id", "jabatan"],
                 include: [
                   {
                     model: pegawai,
@@ -203,9 +219,7 @@ module.exports = {
 
       const jenisRampung = await jenisRincianBPD.findAll();
 
-      return res
-        .status(200)
-        .json({ result, jenisRampung, daftarRill, dataBendahara });
+      return res.status(200).json({ result, jenisRampung, daftarRill });
     } catch (err) {
       console.error("Error fetching data:", err);
       return res.status(500).json({
@@ -234,9 +248,15 @@ module.exports = {
       tempat,
       jenis,
       jenisPerjalanan,
+      dataBendahara,
       subKegiatan,
+      KPAJabatan,
+      tahun,
     } = req.body;
-
+    console.log(
+      dataBendahara.pegawai_bendahara,
+      "INI DATA DARI DEPAN UNUTK PEGAWAI BENDAHARA"
+    );
     const formatTanggal = (tanggal) => {
       return new Date(tanggal).toLocaleDateString("id-ID", {
         day: "2-digit",
@@ -250,6 +270,7 @@ module.exports = {
         currency: "IDR",
         minimumFractionDigits: 0,
       }).format(angka);
+
     function formatTerbilang(angka) {
       const satuan = [
         "",
@@ -320,7 +341,21 @@ module.exports = {
     const Rill = rincianBPD
       .filter((item) => item.jenisId === 4) // Filter berdasarkan jenisId
       .flatMap((item) => item.rills) // Langsung flatten tanpa map().flat()
-      .map((item, index) => ({ ...item, no: index + 1 })); // Tambahkan nomor urut
+      .map((item, index) => ({
+        ...item,
+        nilai: formatRupiah(item.nilai),
+        no: index + 1,
+      })); // Tambahkan nomor urut
+
+    // Hitung totalRill dari nilai Rill
+    const totalRill = formatRupiah(
+      Rill.reduce(
+        (sum, item) =>
+          sum +
+          parseFloat(item.nilai.replace(/[^0-9,-]+/g, "").replace(",", ".")),
+        0
+      )
+    );
 
     const total = formatRupiah(
       rincianBPD.reduce((sum, item) => sum + (item.qty * item.nilai || 0), 0)
@@ -352,6 +387,11 @@ module.exports = {
 
       // Masukkan data ke dalam template
       doc.render({
+        bendaharaNama: dataBendahara.pegawai_bendahara.nama,
+        bendaharaNip: dataBendahara.pegawai_bendahara.nip,
+        bendaharaJabatan: dataBendahara.jabatan,
+        untukPembayaran: dataBendahara.sumberDana.untukPembayaran,
+        KPAJabatan,
         nomorSurat: nomorSPD,
         surat: totalDurasi > 7 ? "SPD" : "ND",
         berdasarkan:
@@ -362,8 +402,7 @@ module.exports = {
         tanggalBerangkat: "",
         tujuan: "",
         jumlah: "",
-        bendaharaNama: "",
-        bendaharaNip: "",
+        totalRill,
         pegawaiNama,
         pegawaiNip,
         pegawaiJabatan,
@@ -372,7 +411,7 @@ module.exports = {
         tanggalPengajuan: formatTanggal(tanggalPengajuan),
         PPTKNama,
         PPTKNip,
-        tahun: "",
+
         kodeRekening,
         total,
         terbilang,
@@ -380,6 +419,7 @@ module.exports = {
         subKegiatan,
         jenisPerjalanan,
         Rill,
+        tahun,
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
           tempat.length === 1
@@ -588,13 +628,7 @@ module.exports = {
         { where: { id } },
         transaction
       );
-      const resultBendahara = await perjalanan.update(
-        {
-          bendaharaId: dataBendahara.id,
-        },
-        { where: { id: perjalananId } },
-        transaction
-      );
+
       await transaction.commit();
       return res.status(200).json({ result });
     } catch (err) {

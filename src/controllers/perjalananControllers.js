@@ -22,6 +22,10 @@ const {
   ttdNotaDinas,
   daftarUnitKerja,
   indukUnitKerja,
+  klasifikasi,
+  suratKeluar,
+  sumberDana,
+  bendahara,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -49,9 +53,11 @@ module.exports = {
         indukUnitKerjaFE,
         PPTKId,
         KPAId,
+        kodeKlasifikasi,
+        dataBendaharaId,
       } = req.body;
 
-      console.log(req.body.indukUnitKerjaFE);
+      console.log(req.body.kodeKlasifikasi, "KODE KLASIFIKASI");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -148,6 +154,7 @@ module.exports = {
       // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
       const nomorBaru = dbNoSurat.jenisSurat.nomorSurat
         .replace("NOMOR", nomorLoket.toString())
+        .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
         .replace(
           "KODE",
           indukUnitKerjaFE.indukUnitKerja.kodeInduk +
@@ -155,6 +162,11 @@ module.exports = {
             indukUnitKerjaFE.kode
         )
         .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
+
+      const resultSuratKeluar = await suratKeluar.create({
+        nomor: nomorBaru,
+        indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
+      });
 
       // Update nomor loket ke database
       await daftarNomorSurat.update(
@@ -171,13 +183,16 @@ module.exports = {
         year: "numeric",
       });
 
+      console.log(resultSuratKeluar.id, "CEKDISINI");
       // Simpan data perjalanan
       const dbPerjalanan = await perjalanan.create(
         {
           untuk,
           noNotaDinas: nomorBaru,
+          nomorSuratKeluarId: resultSuratKeluar.id,
           asal,
           tanggalPengajuan,
+          bendaharaId: dataBendaharaId,
           subKegiatanId,
           ttdNotaDinasId: dataTtdNotaDinas.value.id,
           ttdSuratTugasId: dataTtdSurTug.value.id,
@@ -219,21 +234,19 @@ module.exports = {
 
         await tempat.bulkCreate(dataKota, { transaction });
       } else if (jenis.id === 2) {
-        dataDalamKota = dalamKota.map(
-          (item) => (
-            console.log(item),
-            {
-              perjalananId: dbPerjalanan.id,
-              tempat: "dalam kota",
-              dalamKotaId: item.dataDalamKota.id,
-              tanggalBerangkat: item.tanggalBerangkat,
-              tanggalPulang: item.tanggalPulang,
-            }
-          )
+        dataDalamKota = dalamKota.map((item) =>
+          // console.log(item),
+          ({
+            perjalananId: dbPerjalanan.id,
+            tempat: "dalam kota",
+            dalamKotaId: item.dataDalamKota.id,
+            tanggalBerangkat: item.tanggalBerangkat,
+            tanggalPulang: item.tanggalPulang,
+          })
         );
         await tempat.bulkCreate(dataDalamKota, { transaction });
       }
-      console.log(dataDalamKota);
+      // console.log(dataDalamKota);
       // Path file template
 
       const template = await indukUnitKerja.findOne(
@@ -328,6 +341,24 @@ module.exports = {
     console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
 
     try {
+      const resultSumberDana = await sumberDana.findAll({
+        attributes: ["id", "sumber"],
+        include: [
+          {
+            model: bendahara,
+            required: true,
+            attributes: ["id", "jabatan"],
+            where: { indukUnitKerjaId },
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama"],
+                as: "pegawai_bendahara",
+              },
+            ],
+          },
+        ],
+      });
       const resultDaftarKegiatan = await daftarKegiatan.findAll({
         attributes: ["id", "kegiatan", "kodeRekening", "sumber"],
         include: [
@@ -420,7 +451,9 @@ module.exports = {
           },
         ],
       });
-
+      const resultKlasifikasi = await klasifikasi.findAll({
+        attributes: ["id", "namaKlasifikasi", "kode"],
+      });
       return res.status(200).json({
         resultDaftarKegiatan,
         resultTtdSuratTugas,
@@ -431,6 +464,8 @@ module.exports = {
         resultTtdNotaDinas,
         resultPPTK,
         resultKPA,
+        resultKlasifikasi,
+        resultSumberDana,
       });
     } catch (err) {
       console.error("Error:", err);
@@ -484,6 +519,10 @@ module.exports = {
                 attributes: ["id", "nama", "durasi"],
               },
             ],
+          },
+          {
+            model: suratKeluar,
+            attributes: ["id", "nomor"],
           },
           {
             model: daftarSubKegiatan,

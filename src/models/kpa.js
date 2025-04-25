@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       pegawaiId: DataTypes.INTEGER,
       unitKerjaId: DataTypes.INTEGER,
+      jabatan: DataTypes.STRING,
     },
     {
       sequelize,

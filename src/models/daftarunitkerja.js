@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.belongsTo(models.PPTK);
       this.belongsTo(models.KPA);
-      this.belongsTo(models.bendahara);
+
       this.belongsTo(models.profile, {
         foreignKey: "unitKerjaId",
         as: "unitKerja_profile",

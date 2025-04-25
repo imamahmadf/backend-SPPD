@@ -6,6 +6,8 @@ const rillControllers = require("./rillControllers");
 const userControllers = require("./userControllers");
 const templateControllers = require("./templateControllers");
 const adminControllers = require("./adminControllers");
+const klasifikasiControllers = require("./klasifikasiControllers");
+const tujuanControllers = require("./tujuanControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -15,4 +17,6 @@ module.exports = {
   userControllers,
   templateControllers,
   adminControllers,
+  klasifikasiControllers,
+  tujuanControllers,
 };

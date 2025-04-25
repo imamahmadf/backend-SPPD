@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.KPA, {
         foreignKey: "KPAId",
       });
+      this.belongsTo(models.suratKeluar, {
+        foreignKey: "nomorSuratKeluarId",
+      });
       this.belongsTo(models.bendahara, {
         foreignKey: "bendaharaId",
       });
@@ -37,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       untuk: DataTypes.STRING,
       asal: DataTypes.STRING,
+      nomorSuratKeluarId: DataTypes.INTEGER,
       noNotaDinas: DataTypes.STRING,
       dasar: DataTypes.STRING,
       noSuratTugas: DataTypes.STRING,
@@ -45,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       ttdNotaDinasId: DataTypes.INTEGER,
       bendaharaId: DataTypes.INTEGER,
       PPTKId: DataTypes.INTEGER,
+      nomorSuratKeluarId: DataTypes.INTEGER,
       KPAId: DataTypes.INTEGER,
       jenisId: DataTypes.INTEGER,
       subKegiatanId: DataTypes.INTEGER,

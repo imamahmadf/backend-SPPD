@@ -13,6 +13,8 @@ const {
   userRouter,
   templateRouter,
   adminRouter,
+  klasifikasiRouter,
+  tujuanRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -45,6 +47,8 @@ app.use("/api/rill", rillRouter);
 app.use("/api/user", userRouter);
 app.use("/api/template", templateRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/klasifikasi", klasifikasiRouter);
+app.use("/api/tujuan", tujuanRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
