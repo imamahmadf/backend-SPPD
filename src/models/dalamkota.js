@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "dalamKotaId",
         as: "dalamKota",
       });
-      this.belongsTo(models.daftarUnitKerja);
+      this.belongsTo(models.indukUnitKerja);
     }
   }
   dalamKota.init(
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       nama: DataTypes.STRING,
       uangTransport: DataTypes.INTEGER,
       durasi: DataTypes.INTEGER,
-      unitKerjaId: DataTypes.INTEGER,
+      indukUnitKerjaId: DataTypes.INTEGER,
     },
     {
       sequelize,

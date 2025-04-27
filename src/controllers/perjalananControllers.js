@@ -437,7 +437,7 @@ module.exports = {
       const resultDalamKota = await dalamKota.findAll({
         attributes: ["id", "nama", "durasi"],
         where: {
-          unitKerjaId,
+          indukUnitKerjaId,
         },
       });
       const resultKPA = await KPA.findAll({

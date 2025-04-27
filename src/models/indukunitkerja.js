@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.daftarUnitKerja, {
         foreignKey: "indukUnitKerjaId",
       });
-
+      this.belongsTo(models.dalamKota);
       this.belongsTo(models.daftarNomorSurat, {
         foreignKey: "indukUnitKerjaId",
         as: "indukUnitKerja-nomorSurat",

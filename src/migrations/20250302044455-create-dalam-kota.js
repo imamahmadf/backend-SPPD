@@ -18,7 +18,7 @@ module.exports = {
       durasi: {
         type: Sequelize.INTEGER,
       },
-      unitKerjaId: {
+      indukUnitKerjaId: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

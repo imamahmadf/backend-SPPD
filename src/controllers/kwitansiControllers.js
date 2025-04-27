@@ -130,7 +130,7 @@ module.exports = {
                       "uangTransport",
                       "nama",
                       "durasi",
-                      "unitKerjaId",
+                      "indukUnitKerjaId",
                     ],
                   },
                 ],

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
         as: "daftarUnitKerja",
       });
-      this.belongsTo(models.dalamKota);
+      // this.belongsTo(models.dalamKota);
       // this.belongsTo(models.ttdSuratTugas, {
       //   foreignKey: "unitKerjaId",
       //   as: "unitKerja_ttdSuratTugas",

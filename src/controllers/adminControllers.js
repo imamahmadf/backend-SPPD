@@ -21,6 +21,7 @@ const {
   sumberDana,
   bendahara,
   jenisSurat,
+  indukUnitKerja,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -99,7 +100,7 @@ module.exports = {
                   "uangTransport",
                   "nama",
                   "durasi",
-                  "unitKerjaId",
+                  "indukUnitKerjaId",
                 ],
               },
             ],
@@ -240,6 +241,23 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  getIndukUnitKerja: async (req, res) => {
+    try {
+      const result = await indukUnitKerja.findAll({
+        attributes: ["id", "kodeInduk", "indukUnitKerja"],
+        include: [
+          { model: daftarUnitKerja, attributes: ["id", "kode", "asal"] },
+        ],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };
