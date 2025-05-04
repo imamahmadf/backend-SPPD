@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.BLUD);
       this.belongsTo(models.bendahara, {
         foreignKey: "indukUnitKerjaId",
       });
@@ -20,12 +21,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "indukUnitKerjaId",
         as: "indukUnitKerja-nomorSurat",
       });
+      this.hasMany(models.indukUKSumberDana);
+      this.hasMany(models.ttdSuratTugas, {
+        foreignKey: "indukUnitKerjaId",
+        as: "indukUnitKerja_ttdSuratTugas",
+      });
     }
   }
   indukUnitKerja.init(
     {
       kodeInduk: DataTypes.STRING,
       indukUnitKerja: DataTypes.STRING,
+      BLUDId: DataTypes.INTEGER,
       templateSuratTugas: DataTypes.STRING,
       templateNotaDinas: DataTypes.STRING,
       templateSuratTugasSingkat: DataTypes.STRING,

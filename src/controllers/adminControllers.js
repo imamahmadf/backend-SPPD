@@ -22,6 +22,8 @@ const {
   bendahara,
   jenisSurat,
   indukUnitKerja,
+  ttdSuratTugas,
+  ttdNotaDinas,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -111,13 +113,6 @@ module.exports = {
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
-            include: [
-              {
-                model: daftarKegiatan,
-                attributes: ["id", "kodeRekening", "kegiatan"],
-                as: "kegiatan",
-              },
-            ],
           },
           // {
           //   model: ttdSuratTugas,
@@ -134,7 +129,8 @@ module.exports = {
     }
   },
   getSuratKeluar: async (req, res) => {
-    const indukUnitKerjaId = req.query.indukUnitKerjaId || 1;
+    const indukUnitKerjaId = req.query.indukUnitKerjaId;
+    console.log(indukUnitKerjaId, "INDUK UNIT KERJA");
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
 
@@ -179,8 +175,14 @@ module.exports = {
     }
   },
   postSuratKeluar: async (req, res) => {
-    const { unitKerja, dataKodeKlasifikasi, tujuan, perihal, tanggalSurat } =
-      req.body;
+    const {
+      unitKerja,
+      dataKodeKlasifikasi,
+      tujuan,
+      perihal,
+      tanggalSurat,
+      indukUnitKerja,
+    } = req.body;
     console.log(req.body);
 
     const transaction = await sequelize.transaction();
@@ -203,20 +205,20 @@ module.exports = {
         return months[date.getMonth()];
       };
       const dbNoSurat = await daftarNomorSurat.findOne({
-        where: { indukUnitKerjaId: unitKerja.indukUnitKerja.id },
+        where: { indukUnitKerjaId: indukUnitKerja.id },
         include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
         transaction,
       });
       const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
-
+      const kode =
+        indukUnitKerja.kodeInduk === unitKerja.kode
+          ? indukUnitKerja.kodeInduk
+          : indukUnitKerja.kodeInduk + "/" + unitKerja.kode;
       console.log("NOMOR LOKET", nomorLoket);
       const nomor = dbNoSurat.jenisSurat.nomorSurat
         .replace("NOMOR", nomorLoket.toString())
         .replace("KLASIFIKASI", dataKodeKlasifikasi)
-        .replace(
-          "KODE",
-          unitKerja.indukUnitKerja.kodeInduk + "/" + unitKerja.kode
-        )
+        .replace("KODE", kode)
         .replace("BULAN", getRomanMonth(new Date(tanggalSurat)));
       await daftarNomorSurat.update(
         { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
@@ -226,7 +228,7 @@ module.exports = {
       const result = await suratKeluar.create(
         {
           nomor,
-          indukUnitKerjaId: unitKerja.indukUnitKerja.id,
+          indukUnitKerjaId: indukUnitKerja.id,
           tujuan,
           perihal,
           tanggalSurat,
@@ -254,6 +256,118 @@ module.exports = {
 
       return res.status(200).json({ result });
     } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  getAllPerjalananKeuangan: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 15;
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const offset = limit * page;
+    console.log(unitKerjaId, "INI UNIT KERJA");
+    try {
+      const result = await perjalanan.findAll({
+        offset,
+        limit,
+        order: [["tanggalPengajuan", time]],
+        attributes: [
+          "id",
+          "untuk",
+          "asal",
+          "noNotaDinas",
+          "tanggalPengajuan",
+          "noSuratTugas",
+        ],
+        include: [
+          {
+            model: personil,
+            include: [
+              {
+                model: pegawai,
+              },
+            ],
+          },
+          {
+            model: tempat,
+            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            include: [
+              {
+                model: dalamKota,
+                as: "dalamKota",
+                attributes: ["id", "nama", "durasi"],
+              },
+            ],
+          },
+          {
+            model: suratKeluar,
+            attributes: ["id", "nomor"],
+          },
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "kodeRekening", "subKegiatan"],
+          },
+          {
+            model: ttdSuratTugas,
+            attributes: ["id", "jabatan", "indukUnitKerjaId"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai",
+              },
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "kodeInduk"],
+                as: "indukUnitKerja_ttdSuratTugas",
+                include: [
+                  {
+                    model: daftarUnitKerja,
+                    attributes: ["id", "kode"],
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId", "pegawaiId"],
+
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_notaDinas",
+              },
+            ],
+          },
+          { model: jenisPerjalanan },
+        ],
+      });
+
+      const totalRows = await perjalanan.count({
+        include: [
+          {
+            model: ttdNotaDinas,
+          },
+        ],
+      });
+
+      const totalPage = Math.ceil(totalRows / limit);
+
+      return res.status(200).json({
+        result,
+        page,
+        limit,
+        totalRows,
+        totalPage,
+      });
+    } catch (err) {
+      console.error("Error:", err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,

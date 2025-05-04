@@ -1,14 +1,26 @@
 const express = require("express");
 const { userControllers } = require("../controllers");
-const { authenticateUser } = require("../lib/auth"); // Middleware auth
+const { authenticateUser, authorizeRole } = require("../lib/auth");
 
-const routers = express.Router();
+const router = express.Router();
 
-routers.post("/register", userControllers.register);
-routers.post("/login", userControllers.login);
-routers.post("/logout", authenticateUser, userControllers.logout); // Logout pakai middleware
-routers.get("/check-auth", authenticateUser, (req, res) => {
+// Public routes (tidak butuh login)
+router.post("/register", userControllers.register);
+router.post("/login", userControllers.login);
+
+// Protected routes (harus login)
+router.post("/logout", authenticateUser, userControllers.logout);
+router.get("/check-auth", authenticateUser, (req, res) => {
   res.json({ isAuthenticated: true, user: req.user });
 });
+router.get("/profile", authenticateUser, userControllers.getProfile);
 
-module.exports = routers;
+// Admin-only routes (harus login DAN role admin)
+router.get(
+  "/admin-dashboard",
+  authenticateUser,
+  authorizeRole(["admin"]),
+  userControllers.adminDashboard
+);
+
+module.exports = router;

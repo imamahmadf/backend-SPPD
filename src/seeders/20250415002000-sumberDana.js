@@ -16,8 +16,16 @@ const sumberDanas = [
   },
   {
     id: 3,
-    sumber: "BPJS",
-    untukPembayaran: "untuk pembayaran BPJS",
+    sumber: "BOK-PKM",
+    untukPembayaran: "untuk pembayaran BOK-PKM",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+
+  {
+    id: 4,
+    sumber: "BOK",
+    untukPembayaran: "untuk pembayaran BOK",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

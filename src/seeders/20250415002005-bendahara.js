@@ -27,6 +27,34 @@ const bendaharas = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+
+  {
+    id: 4,
+    indukUnitKerjaId: 3,
+    sumberDanaId: 1,
+    pegawaiId: 10,
+    jabatan: "Bendahara Pengeluaran Pembantu",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 5,
+    indukUnitKerjaId: 2,
+    sumberDanaId: 2,
+    pegawaiId: 11,
+    jabatan: "Bendahara Pengeluaran Pembantu",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 6,
+    indukUnitKerjaId: 3,
+    sumberDanaId: 3,
+    pegawaiId: 12,
+    jabatan: "Bendahara Pengeluaran Pembantu",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */

@@ -11,5 +11,9 @@ routers.get(
   "/get/detail-perjalanan/:id",
   perjalananControllers.getDetailPerjalanan
 );
+routers.get(
+  "/get/jenis-perjalanan/:id",
+  perjalananControllers.getJenisPerjalanan
+);
 
 module.exports = routers;

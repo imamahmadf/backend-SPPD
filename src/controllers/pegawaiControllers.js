@@ -165,6 +165,7 @@ module.exports = {
     const limit = parseInt(req.query.limit) || 50;
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
+    console.log("TES FRONT END11");
     try {
       const result = await pegawai.findAll({
         include: [
@@ -177,6 +178,7 @@ module.exports = {
               {
                 model: perjalanan,
                 attributes: ["id"],
+
                 include: [
                   {
                     model: jenisPerjalanan,

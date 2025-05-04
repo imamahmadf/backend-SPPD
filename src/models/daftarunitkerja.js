@@ -18,12 +18,16 @@ module.exports = (sequelize, DataTypes) => {
       //   foreignKey: "unitKerjaId",
       //   as: "unitKerja_ttdSuratTugas",
       // });
-      this.belongsTo(models.ttdNotaDinas, {
+      this.hasMany(models.ttdNotaDinas, {
         foreignKey: "unitKerjaId",
         as: "unitKerja_notaDinas",
       });
-      this.belongsTo(models.PPTK);
-      this.belongsTo(models.KPA);
+      this.hasMany(models.PPTK, {
+        foreignKey: "unitKerjaId",
+      });
+      this.hasMany(models.KPA, {
+        foreignKey: "unitKerjaId",
+      });
 
       this.belongsTo(models.profile, {
         foreignKey: "unitKerjaId",

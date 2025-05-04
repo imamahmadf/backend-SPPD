@@ -26,6 +26,9 @@ const {
   suratKeluar,
   sumberDana,
   bendahara,
+  tipePerjalanan,
+  pelayananKesehatan,
+  sumberDanaJenisPerjalanan,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -56,8 +59,8 @@ module.exports = {
         kodeKlasifikasi,
         dataBendaharaId,
       } = req.body;
-
-      console.log(req.body.kodeKlasifikasi, "KODE KLASIFIKASI");
+      const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
+      console.log(req.body.pelayananKesehatanId, "KODE KLASIFIKASI");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -151,16 +154,18 @@ module.exports = {
       // Update nomor loket
       const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
 
+      const kode =
+        indukUnitKerjaFE.indukUnitKerja.kodeInduk === indukUnitKerjaFE.kode
+          ? indukUnitKerjaFE.kode
+          : indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+            "/" +
+            indukUnitKerjaFE.kode;
+
       // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
       const nomorBaru = dbNoSurat.jenisSurat.nomorSurat
         .replace("NOMOR", nomorLoket.toString())
         .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
-        .replace(
-          "KODE",
-          indukUnitKerjaFE.indukUnitKerja.kodeInduk +
-            "/" +
-            indukUnitKerjaFE.kode
-        )
+        .replace("KODE", kode)
         .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
       const resultSuratKeluar = await suratKeluar.create({
@@ -199,6 +204,7 @@ module.exports = {
           jenisId: jenis.id,
           KPAId,
           PPTKId,
+          pelayananKesehatanId,
         },
         { transaction }
       );
@@ -222,7 +228,7 @@ module.exports = {
       await personil.bulkCreate(dataPersonil, { transaction });
       let dataKota = []; // Inisialisasi dataKota sebagai array kosong
       let dataDalamKota = [];
-      if (jenis.id === 1) {
+      if (jenis.tipePerjalananId === 2) {
         // Buat data kota tujuan
         dataKota = perjalananKota.map((item) => ({
           perjalananId: dbPerjalanan.id,
@@ -233,7 +239,7 @@ module.exports = {
         }));
 
         await tempat.bulkCreate(dataKota, { transaction });
-      } else if (jenis.id === 2) {
+      } else if (jenis.tipePerjalananId === 1) {
         dataDalamKota = dalamKota.map((item) =>
           // console.log(item),
           ({
@@ -359,16 +365,12 @@ module.exports = {
           },
         ],
       });
-      const resultDaftarKegiatan = await daftarKegiatan.findAll({
-        attributes: ["id", "kegiatan", "kodeRekening", "sumber"],
-        include: [
-          {
-            model: daftarSubKegiatan,
-            as: "subKegiatan", // Sesuai dengan alias di model
-          },
-        ],
+      const resultDaftarSubKegiatan = await daftarSubKegiatan.findAll({
+        attributes: ["id", "subKegiatan", "kodeRekening"],
       });
-      const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
+      const resultJenisPerjalanan = await jenisPerjalanan.findAll({
+        include: [{ model: tipePerjalanan }],
+      });
       const resultTtdSuratTugas = await ttdSuratTugas.findAll({
         where: {
           [Op.or]: [{ indukUnitKerjaId }, { indukUnitKerjaId: 1 }],
@@ -390,6 +392,8 @@ module.exports = {
       });
 
       console.log("Data yang diambil:", resultTtdSuratTugas);
+
+      const resultPelayananKesehatan = await pelayananKesehatan.findAll({});
 
       const resultTtdNotaDinas = await ttdNotaDinas.findAll({
         where: { unitKerjaId },
@@ -455,7 +459,7 @@ module.exports = {
         attributes: ["id", "namaKlasifikasi", "kode"],
       });
       return res.status(200).json({
-        resultDaftarKegiatan,
+        resultDaftarSubKegiatan,
         resultTtdSuratTugas,
         resultDaftarNomorSurat,
         resultJenisTempat,
@@ -466,6 +470,7 @@ module.exports = {
         resultKPA,
         resultKlasifikasi,
         resultSumberDana,
+        resultPelayananKesehatan,
       });
     } catch (err) {
       console.error("Error:", err);
@@ -527,13 +532,6 @@ module.exports = {
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
-            include: [
-              {
-                model: daftarKegiatan,
-                attributes: ["id", "kodeRekening", "kegiatan"],
-                as: "kegiatan",
-              },
-            ],
           },
           {
             model: ttdSuratTugas,
@@ -564,7 +562,7 @@ module.exports = {
           },
           {
             model: KPA,
-            attributes: ["id"],
+            attributes: ["id", "jabatan"],
             include: [
               {
                 model: pegawai,
@@ -660,6 +658,7 @@ module.exports = {
         KPANip,
         KPAPangkat,
         KPAGolongan,
+        KPAJabatan,
         noNotaDinas,
         noSuratTugas,
         jenis,
@@ -1030,6 +1029,7 @@ module.exports = {
         KPANip,
         KPAPangkat,
         KPAGolongan,
+        KPAJabatan,
         dataPegawai,
         pegawai1Nama: personilFE[0]?.pegawai?.nama,
         pegawai2Nama: personilFE[1]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
@@ -1154,13 +1154,6 @@ module.exports = {
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
-            include: [
-              {
-                model: daftarKegiatan,
-                attributes: ["id", "kodeRekening", "kegiatan"],
-                as: "kegiatan",
-              },
-            ],
           },
           // {
           //   model: ttdSuratTugas,
@@ -1174,6 +1167,22 @@ module.exports = {
         message: err.toString(),
         code: 500,
       });
+    }
+  },
+
+  getJenisPerjalanan: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const result = await jenisPerjalanan.findAll({
+        include: {
+          model: sumberDanaJenisPerjalanan,
+          where: { sumberDanaId: id },
+        },
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
     }
   },
 };

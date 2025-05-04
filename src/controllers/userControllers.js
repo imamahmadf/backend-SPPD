@@ -9,17 +9,16 @@ const {
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const authenticateUser = require("../lib/auth");
-const blacklistedTokens = new Set(); // Simpan token yang di-blacklist
+const { blacklistedTokens } = require("../lib/auth");
 
 module.exports = {
   register: async (req, res) => {
     const transaction = await sequelize.transaction();
     try {
-      const { nama, email, password, role } = req.body;
+      const { nama, namaPengguna, password, role } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const existingUser = await user.findOne({ where: { email } });
+      const existingUser = await user.findOne({ where: { namaPengguna } });
       if (existingUser) {
         return res.status(400).json({ message: "Email sudah digunakan" });
       }
@@ -27,7 +26,7 @@ module.exports = {
       const newUser = await user.create(
         {
           nama,
-          email,
+          namaPengguna,
           password: hashedPassword,
           role,
         },
@@ -38,11 +37,11 @@ module.exports = {
         {
           nama,
           userId: newUser.id,
-
           unitKerjaId: 1,
         },
         { transaction }
       );
+
       const newUserRole = await userRole.create(
         {
           userId: newUser.id,
@@ -50,20 +49,21 @@ module.exports = {
         },
         { transaction }
       );
+
       await transaction.commit();
       res.status(201).json({ message: "Registrasi berhasil" });
     } catch (err) {
       await transaction.rollback();
       console.log(err);
-      res.status(400).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
   },
 
   login: async (req, res) => {
     try {
-      const { email, password } = req.body;
+      const { namaPengguna, password } = req.body;
       const resultUser = await user.findOne({
-        where: { email },
+        where: { namaPengguna },
         include: [
           { model: userRole, include: [{ model: role, attributes: ["nama"] }] },
           {
@@ -84,7 +84,7 @@ module.exports = {
       });
 
       if (!resultUser) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).json({ message: "Email atau password salah" });
       }
 
       const isPasswordValid = await bcrypt.compare(
@@ -92,7 +92,7 @@ module.exports = {
         resultUser.password
       );
       if (!isPasswordValid) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).json({ message: "Email atau password salah" });
       }
 
       const token = jwt.sign(
@@ -115,11 +115,34 @@ module.exports = {
   logout: async (req, res) => {
     try {
       const token = req.header("Authorization")?.split(" ")[1];
-      if (!token) return res.status(400).json({ message: "No token provided" });
+      if (!token) {
+        return res.status(400).json({ message: "No token provided" });
+      }
 
-      blacklistedTokens.add(token); // Tambahkan token ke daftar blacklist
+      // Tambahkan token ke blacklist
+      blacklistedTokens.add(token);
 
-      res.json({ message: "Logout successful" });
+      res.json({ message: "Logout berhasil" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  // Contoh endpoint yang dilindungi
+  getProfile: async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const userProfile = await profile.findOne({ where: { userId } });
+      res.json(userProfile);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  // Contoh endpoint khusus admin
+  adminDashboard: async (req, res) => {
+    try {
+      res.json({ message: "Ini adalah dashboard admin" });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

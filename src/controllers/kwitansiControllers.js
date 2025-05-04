@@ -23,6 +23,7 @@ const {
   bendahara,
   status,
   sequelize,
+  pelayananKesehatan,
   sumberDana,
 } = require("../models");
 
@@ -139,6 +140,9 @@ module.exports = {
                 model: jenisPerjalanan,
               },
               {
+                model: pelayananKesehatan,
+              },
+              {
                 model: bendahara,
                 attributes: ["id", "jabatan"],
                 include: [
@@ -156,13 +160,6 @@ module.exports = {
               {
                 model: daftarSubKegiatan,
                 attributes: ["id", "kodeRekening", "subKegiatan"],
-                include: [
-                  {
-                    model: daftarKegiatan,
-                    attributes: ["id", "kodeRekening", "kegiatan"],
-                    as: "kegiatan",
-                  },
-                ],
               },
               {
                 model: ttdSuratTugas,
@@ -479,15 +476,19 @@ module.exports = {
       uangTransport,
       tempatNama,
       asal,
+      pelayananKesehatan,
     } = req.body;
     console.log(req.body, "AAAAAA");
-
+    const BEUangtransport =
+      pelayananKesehatan.id === 1
+        ? uangTransport
+        : pelayananKesehatan.uangTransport;
     try {
       const rillBPD = await rincianBPD.create(
         {
           personilId,
           item: "Pengeluaran Rill",
-          nilai: uangTransport,
+          nilai: BEUangtransport,
           jenisId: 4,
           qty: 1,
           satuan: "-",
@@ -495,16 +496,28 @@ module.exports = {
         { transaction }
       );
       console.log(rillBPD.id);
-      const rillTransport = await rill.create(
-        {
-          rincianBPDId: rillBPD.id,
-          item: `transport ${asal} ke ${tempatNama} (PP)`,
-          nilai: uangTransport,
-        },
-        { transaction }
-      );
 
-      if (totalDurasi > 7) {
+      if (pelayananKesehatan.id === 1) {
+        const rillTransport = await rill.create(
+          {
+            rincianBPDId: rillBPD.id,
+            item: `transport ${asal} ke ${tempatNama} (PP)`,
+            nilai: BEUangtransport,
+          },
+          { transaction }
+        );
+      } else {
+        const rillTransport = await rill.create(
+          {
+            rincianBPDId: rillBPD.id,
+            item: `transport pelayanan kesehatan (PP)`,
+            nilai: BEUangtransport,
+          },
+          { transaction }
+        );
+      }
+
+      if (totalDurasi > 7 && pelayananKesehatan.id === 0) {
         const uangHarianBPD = await rincianBPD.create(
           {
             personilId,
@@ -520,7 +533,7 @@ module.exports = {
 
       const updatePersonil = await personil.update(
         {
-          total: uangHarian + uangTransport,
+          total: uangHarian + BEUangtransport,
         },
         {
           where: { id: personilId },

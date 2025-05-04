@@ -12,12 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.bendahara, {
         foreignKey: "sumberDanaId",
       });
+      this.hasMany(models.indukUKSumberDana);
+      this.hasMany(models.sumberDanaJenisPerjalanan);
     }
   }
   sumberDana.init(
     {
       sumber: DataTypes.STRING,
       untukPembayaran: DataTypes.STRING,
+      BLUDId: DataTypes.INTEGER,
     },
     {
       sequelize,

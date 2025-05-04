@@ -24,6 +24,9 @@ module.exports = {
       nomorSuratKeluarId: {
         type: Sequelize.INTEGER,
       },
+      pelayananKesehatanId: {
+        type: Sequelize.INTEGER,
+      },
       noSuratTugas: {
         type: Sequelize.STRING,
       },

@@ -24,6 +24,9 @@ module.exports = {
       templateSuratTugasSingkat: {
         type: Sequelize.STRING,
       },
+      BLUDId: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

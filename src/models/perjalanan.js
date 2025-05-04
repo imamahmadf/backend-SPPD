@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.jenisPerjalanan, {
         foreignKey: "jenisId",
       });
+      this.belongsTo(models.pelayananKesehatan, {
+        foreignKey: "pelayananKesehatanId",
+      });
       this.hasMany(models.personil);
     }
   }
@@ -46,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       noSuratTugas: DataTypes.STRING,
       tanggalPengajuan: DataTypes.DATE,
       ttdSuratTugasId: DataTypes.INTEGER,
+      pelayananKesehatanId: DataTypes.INTEGER,
       ttdNotaDinasId: DataTypes.INTEGER,
       bendaharaId: DataTypes.INTEGER,
       PPTKId: DataTypes.INTEGER,

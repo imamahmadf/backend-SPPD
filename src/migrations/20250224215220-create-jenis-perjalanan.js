@@ -12,6 +12,9 @@ module.exports = {
       jenis: {
         type: Sequelize.STRING,
       },
+      tipePerjalananId: {
+        type: Sequelize.INTEGER,
+      },
       kodeRekening: {
         type: Sequelize.STRING,
       },

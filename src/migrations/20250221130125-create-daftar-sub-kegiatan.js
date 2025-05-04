@@ -15,9 +15,7 @@ module.exports = {
       subKegiatan: {
         type: Sequelize.STRING,
       },
-      kegiatanId: {
-        type: Sequelize.INTEGER,
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

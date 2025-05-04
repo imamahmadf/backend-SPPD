@@ -8,6 +8,7 @@ const templateControllers = require("./templateControllers");
 const adminControllers = require("./adminControllers");
 const klasifikasiControllers = require("./klasifikasiControllers");
 const tujuanControllers = require("./tujuanControllers");
+const indukUnitKerjaControllers = require("./indukUnitKerjaControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -19,4 +20,5 @@ module.exports = {
   adminControllers,
   klasifikasiControllers,
   tujuanControllers,
+  indukUnitKerjaControllers,
 };

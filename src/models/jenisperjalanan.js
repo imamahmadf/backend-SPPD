@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.perjalanan);
+      this.belongsTo(models.tipePerjalanan);
+      // this.hasMany(models.jenisTipePerjalanan);
+      this.hasMany(models.sumberDanaJenisPerjalanan);
     }
   }
   jenisPerjalanan.init(

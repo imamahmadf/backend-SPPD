@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.perjalanan);
-      this.belongsTo(models.daftarUnitKerja);
+      this.belongsTo(models.daftarUnitKerja, {
+        foreignKey: "unitKerjaId",
+      });
       this.belongsTo(models.pegawai, {
         foreignKey: "pegawaiId",
         as: "pegawai_PPTK",

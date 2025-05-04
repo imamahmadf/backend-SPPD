@@ -15,6 +15,7 @@ const {
   adminRouter,
   klasifikasiRouter,
   tujuanRouter,
+  indukUnitKerjaRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -49,6 +50,7 @@ app.use("/api/template", templateRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/klasifikasi", klasifikasiRouter);
 app.use("/api/tujuan", tujuanRouter);
+app.use("/api/induk-unit-kerja", indukUnitKerjaRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
