@@ -9,6 +9,8 @@ const adminRouter = require("./adminROuter");
 const klasifikasiRouter = require("./klasifikasiRouter");
 const tujuanRouter = require("./tujuanRouter");
 const indukUnitKerjaRouter = require("./indukUnitKerjaRouter");
+const pajakRouter = require("./pajakRouter");
+const keuanganRouter = require("./keuanganRouter");
 
 module.exports = {
   perjalananRouter,
@@ -21,5 +23,7 @@ module.exports = {
   adminRouter,
   klasifikasiRouter,
   tujuanRouter,
+  pajakRouter,
   indukUnitKerjaRouter,
+  keuanganRouter,
 };

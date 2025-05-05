@@ -21,6 +21,7 @@ const {
   jenisPerjalanan,
   sequelize,
   user,
+  bendahara,
   userRole,
   role,
   profile,
@@ -105,8 +106,38 @@ module.exports = {
           },
           {
             model: indukUKSumberDana,
-            include: [{ model: sumberDana }],
+            include: [
+              {
+                model: sumberDana,
+                include: [
+                  {
+                    model: bendahara,
+                    attributes: ["id", "jabatan"],
+                    where: { indukUnitKerjaId: id },
+                    include: [
+                      {
+                        model: pegawai,
+                        foreignKey: "pegawaiId",
+                        as: "pegawai_bendahara",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
+          // {
+          //   model: bendahara,
+          //   attributes: ["id", "jabatan"],
+          //   include: [
+          //     {
+          //       model: pegawai,
+          //       foreignKey: "pegawaiId",
+          //       as: "pegawai_bendahara",
+          //     },
+          //     { model: sumberDana },
+          //   ],
+          // },
         ],
       });
       return res.status(200).json({ result, resultSumberDana });
@@ -256,9 +287,52 @@ module.exports = {
   },
   getDaftarIndukUnitKerja: async (req, res) => {
     try {
-      const result = await indukUnitKerja.findAll({});
+      const result = await indukUnitKerja.findAll({
+        attributes: ["id", "kodeInduk", "indukUnitKerja"],
+        include: [
+          { model: indukUKSumberDana, include: [{ model: sumberDana }] },
+        ],
+      });
+
+      const resultSumberDana = await sumberDana.findAll({});
+      return res.status(200).json({ result, resultSumberDana });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  postIndukUnitKerja: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    console.log(req.body);
+    const { kodeInduk, FEIndukUnitKerja, asal, sumberDanaId } = req.body;
+    try {
+      const result = await indukUnitKerja.create(
+        {
+          kodeInduk,
+          indukUnitKerja: FEIndukUnitKerja,
+        },
+        { transaction }
+      );
+
+      const sumberDanaItems = sumberDanaId.map((item) => ({
+        sumberDanaId: item,
+        indukUnitKerjaId: result.id,
+      }));
+      console.log(sumberDanaItems, "CEK SUMBER DANA");
+      await indukUKSumberDana.bulkCreate(sumberDanaItems, { transaction });
+
+      const resultUnitKerja = await daftarUnitKerja.create(
+        {
+          unitKerja: FEIndukUnitKerja,
+          kode: kodeInduk,
+          indukUnitKerjaId: result.id,
+        },
+        { transaction }
+      );
+      await transaction.commit();
       return res.status(200).json({ result });
     } catch (err) {
+      await transaction.rollback();
       console.log(err);
       res.status(500).json({ error: err.message });
     }

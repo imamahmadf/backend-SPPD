@@ -31,6 +31,6 @@ routers.post(
   indukUnitKerjaControllers.postTtdSuratTugas
 );
 
-routers.get("/get/daftar", indukUnitKerjaControllers.getDaftarIndukUnitKerja);
-
+routers.get("/get", indukUnitKerjaControllers.getDaftarIndukUnitKerja);
+routers.post("/post", indukUnitKerjaControllers.postIndukUnitKerja);
 module.exports = routers;
