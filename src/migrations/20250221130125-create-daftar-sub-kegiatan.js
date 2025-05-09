@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       unitKerjaId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       subKegiatan: {
         type: Sequelize.STRING,

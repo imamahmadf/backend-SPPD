@@ -1,7 +1,7 @@
 "use strict";
 
 const currentDate = new Date();
-const userroles = [
+const userRoles = [
   {
     id: 1,
     userId: 1,
@@ -21,10 +21,10 @@ const userroles = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("userroles", userroles, {});
+    await queryInterface.bulkInsert("userRoles", userRoles, {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("userroles", null, {});
+    await queryInterface.bulkDelete("userRoles", null, {});
   },
 };
