@@ -11,6 +11,8 @@ const tujuanRouter = require("./tujuanRouter");
 const indukUnitKerjaRouter = require("./indukUnitKerjaRouter");
 const pajakRouter = require("./pajakRouter");
 const keuanganRouter = require("./keuanganRouter");
+const nomorSuratRouter = require("./nomorSuratRouter");
+const subKegiatanRouter = require("./subKegitanRouter");
 
 module.exports = {
   perjalananRouter,
@@ -26,4 +28,6 @@ module.exports = {
   pajakRouter,
   indukUnitKerjaRouter,
   keuanganRouter,
+  nomorSuratRouter,
+  subKegiatanRouter,
 };

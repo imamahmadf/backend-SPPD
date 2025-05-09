@@ -517,7 +517,7 @@ module.exports = {
         );
       }
 
-      if (totalDurasi > 7 && pelayananKesehatan.id === 0) {
+      if (totalDurasi > 7 && pelayananKesehatan.id === 1) {
         const uangHarianBPD = await rincianBPD.create(
           {
             personilId,

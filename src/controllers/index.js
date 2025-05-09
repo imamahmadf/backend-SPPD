@@ -11,6 +11,9 @@ const tujuanControllers = require("./tujuanControllers");
 const indukUnitKerjaControllers = require("./indukUnitKerjaControllers");
 const pajakControllers = require("./pajakControllers");
 const keuanganControllers = require("./keuanganControllers");
+const nomorSuratControllers = require("./nomorSuratControllers");
+const subKegiatanControllers = require("./subKegiatanControllers");
+
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -25,4 +28,6 @@ module.exports = {
   indukUnitKerjaControllers,
   pajakControllers,
   keuanganControllers,
+  nomorSuratControllers,
+  subKegiatanControllers,
 };

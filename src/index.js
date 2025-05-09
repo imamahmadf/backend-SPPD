@@ -18,6 +18,8 @@ const {
   indukUnitKerjaRouter,
   pajakRouter,
   keuanganRouter,
+  nomorSuratRouter,
+  subKegiatanRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -55,7 +57,8 @@ app.use("/api/tujuan", tujuanRouter);
 app.use("/api/induk-unit-kerja", indukUnitKerjaRouter);
 app.use("/api/pajak", pajakRouter);
 app.use("/api/keuangan", keuanganRouter);
-
+app.use("/api/nomor-surat", nomorSuratRouter);
+app.use("/api/sub-kegiatan", subKegiatanRouter);
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });
