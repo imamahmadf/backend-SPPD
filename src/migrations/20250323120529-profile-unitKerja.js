@@ -10,7 +10,7 @@ module.exports = {
       name: constraintName,
       references: {
         //Required field
-        table: "daftarunitkerjas",
+        table: "daftarUnitKerjas",
         field: "id",
       },
       onDelete: "cascade",

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       kodeRekening: DataTypes.STRING,
       subKegiatan: DataTypes.STRING,
+      unitKerjaId: DataTypes.STRING,
     },
     {
       sequelize,

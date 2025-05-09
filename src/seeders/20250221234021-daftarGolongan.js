@@ -1,5 +1,5 @@
 const currentDate = new Date();
-const daftarGOlongans = [
+const daftarGolongans = [
   {
     id: 1,
     golongan: "-",
@@ -74,10 +74,10 @@ const daftarGOlongans = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("daftarGOlongans", daftarGOlongans, {});
+    await queryInterface.bulkInsert("daftarGolongans", daftarGolongans, {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("daftarGOlongans", null, {});
+    await queryInterface.bulkDelete("daftarGolongans", null, {});
   },
 };

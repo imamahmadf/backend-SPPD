@@ -6,4 +6,5 @@ routers.get("/get/:id", subKegiatanControllers.getSubKegiatan);
 routers.post("/delete/:id", subKegiatanControllers.deleteSubKegiatan);
 routers.post("/edit", subKegiatanControllers.editSubKegiatan);
 routers.post("/post", subKegiatanControllers.postSubKegiatan);
+
 module.exports = routers;

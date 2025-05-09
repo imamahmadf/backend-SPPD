@@ -4,7 +4,7 @@ const daftarSubKegiatans = [
     id: 1,
     subKegiatan: "Penyusunan Dokumen Perencanaan Perangkat Daerah",
     kodeRekening: "1.02.01.2.01.01",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -12,7 +12,7 @@ const daftarSubKegiatans = [
     id: 2,
     subKegiatan: "Koordinasi dan Penyusunan DPA-SKPD",
     kodeRekening: "1.02.01.2.01.04",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -20,7 +20,7 @@ const daftarSubKegiatans = [
     id: 3,
     subKegiatan: "Evaluasi Kinerja Perangkat Daerah",
     kodeRekening: "1.02.01.2.01.07",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -28,7 +28,7 @@ const daftarSubKegiatans = [
     id: 4,
     subKegiatan: "Penyediaan Gaji dan Tunjangan ASN",
     kodeRekening: "1.02.01.2.02.01",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     createdAt: currentDate,
     updatedAt: currentDate,
   },
@@ -37,7 +37,7 @@ const daftarSubKegiatans = [
     id: 5,
     subKegiatan:
       "Pelaksanaan Penatausahaan dan Pengujian/Verifikasi Keuangan SKPD",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.02.03",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -45,7 +45,7 @@ const daftarSubKegiatans = [
   {
     id: 6,
     subKegiatan: "Koordinasi dan Penyusunan Laporan Keuangan Akhir Tahun SKPD",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.02.05",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -53,7 +53,7 @@ const daftarSubKegiatans = [
   {
     id: 7,
     subKegiatan: "Monitoring, Evaluasi, dan Penilaian Kinerja Pegawai",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.05.05",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -62,7 +62,7 @@ const daftarSubKegiatans = [
     id: 8,
     subKegiatan:
       "Penyediaan Komponen Instalasi Listrik/Penerangan Bangunan Kantor",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -70,7 +70,7 @@ const daftarSubKegiatans = [
   {
     id: 9,
     subKegiatan: "Penyediaan Peralatan dan Perlengkapan Kantor",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.02",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -78,7 +78,7 @@ const daftarSubKegiatans = [
   {
     id: 10,
     subKegiatan: "Penyediaan Peralatan Rumah Tangga",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.03",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -86,7 +86,7 @@ const daftarSubKegiatans = [
   {
     id: 11,
     subKegiatan: "Penyediaan Bahan Logistik Kantor",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.04",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -94,7 +94,7 @@ const daftarSubKegiatans = [
   {
     id: 12,
     subKegiatan: "Penyediaan Barang Cetakan dan Penggandaan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.05",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -102,7 +102,7 @@ const daftarSubKegiatans = [
   {
     id: 13,
     subKegiatan: "Penyediaan Bahan Bacaan dan Peraturan Perundang-undangan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.06",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -110,7 +110,7 @@ const daftarSubKegiatans = [
   {
     id: 14,
     subKegiatan: "Penyelenggaraan Rapat Koordinasi dan Konsultasi SKPD",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.06.09",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -118,7 +118,7 @@ const daftarSubKegiatans = [
   {
     id: 15,
     subKegiatan: "Pengadaan Mebel",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.07.05",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -126,7 +126,7 @@ const daftarSubKegiatans = [
   {
     id: 16,
     subKegiatan: "Pengadaan Peralatan dan Mesin Lainnya",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.07.06",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -134,7 +134,7 @@ const daftarSubKegiatans = [
   {
     id: 17,
     subKegiatan: "Penyediaan Jasa Surat Menyurat",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.08.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -142,7 +142,7 @@ const daftarSubKegiatans = [
   {
     id: 18,
     subKegiatan: "Penyediaan Jasa Pelayanan Umum Kantor",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.08.04",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -151,7 +151,7 @@ const daftarSubKegiatans = [
     id: 19,
     subKegiatan:
       "Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan, dan Pajak Kendaraan Perorangan Dinas atau Kendaraan Dinas Jabatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.09.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -160,7 +160,7 @@ const daftarSubKegiatans = [
     id: 20,
     subKegiatan:
       "Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan, Pajak dan Perizinan Kendaraan Dinas Operasional atau Lapangan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.09.02",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -168,7 +168,7 @@ const daftarSubKegiatans = [
   {
     id: 21,
     subKegiatan: "Pemeliharaan Peralatan dan Mesin Lainnya",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.01.2.09.06",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -176,7 +176,7 @@ const daftarSubKegiatans = [
   {
     id: 22,
     subKegiatan: "Rehabilitasi dan Pemeliharaan Puskesmas",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.09",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -184,7 +184,7 @@ const daftarSubKegiatans = [
   {
     id: 23,
     subKegiatan: "Rehabilitasi dan Pemeliharaan Fasilitas Kesehatan Lainnya",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.10",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -192,7 +192,7 @@ const daftarSubKegiatans = [
   {
     id: 24,
     subKegiatan: "Rehabilitasi dan Pemeliharaan Rumah Dinas Tenaga Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.11",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -201,7 +201,7 @@ const daftarSubKegiatans = [
     id: 25,
     subKegiatan:
       "Pengadaan Prasarana dan Pendukung Fasilitas Pelayanan Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.13",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -210,7 +210,7 @@ const daftarSubKegiatans = [
     id: 26,
     subKegiatan:
       "Pengadaan Alat Kesehatan/Alat Penunjang Medik Fasilitas Pelayanan Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.14",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -218,7 +218,7 @@ const daftarSubKegiatans = [
   {
     id: 27,
     subKegiatan: "Pengadaan Obat, Vaksin",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.16",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -226,7 +226,7 @@ const daftarSubKegiatans = [
   {
     id: 28,
     subKegiatan: "Pengadaan Bahan Habis Pakai",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.17",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -235,7 +235,7 @@ const daftarSubKegiatans = [
     id: 29,
     subKegiatan:
       "Pemeliharaan Rutin dan Berkala Alat Kesehatan/Alat Penunjang Medik Fasilitas Pelayanan Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.01.20",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -243,7 +243,7 @@ const daftarSubKegiatans = [
   {
     id: 30,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Ibu Hamil",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -251,7 +251,7 @@ const daftarSubKegiatans = [
   {
     id: 31,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Ibu Bersalin",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.02",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -259,7 +259,7 @@ const daftarSubKegiatans = [
   {
     id: 32,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Bayi Baru Lahir",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.03",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -267,7 +267,7 @@ const daftarSubKegiatans = [
   {
     id: 33,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Balita",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.04",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -275,7 +275,7 @@ const daftarSubKegiatans = [
   {
     id: 34,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan pada Usia Pendidikan Dasar",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.05",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -283,7 +283,7 @@ const daftarSubKegiatans = [
   {
     id: 35,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan pada Usia Lanjut",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.07",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -291,7 +291,7 @@ const daftarSubKegiatans = [
   {
     id: 36,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Penderita Diabetes Melitus",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.09",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -299,7 +299,7 @@ const daftarSubKegiatans = [
   {
     id: 37,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Orang Terduga Tuberkulosis",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.11",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -308,7 +308,7 @@ const daftarSubKegiatans = [
     id: 38,
     subKegiatan:
       "Pengelolaan Pelayanan Kesehatan Orang dengan Risiko Terinfeksi HIV",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.12",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -317,7 +317,7 @@ const daftarSubKegiatans = [
     id: 39,
     subKegiatan:
       "Pengelolaan Pelayanan Kesehatan bagi Penduduk pada Kondisi Kejadian Luar Biasa (KLB)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.13",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -325,7 +325,7 @@ const daftarSubKegiatans = [
   {
     id: 40,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Gizi Masyarakat",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.15",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -333,7 +333,7 @@ const daftarSubKegiatans = [
   {
     id: 41,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Kerja dan Olahraga",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.16",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -341,7 +341,7 @@ const daftarSubKegiatans = [
   {
     id: 42,
     subKegiatan: "Pengelolaan Pelayanan Kesehatan Lingkungan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.17",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -349,7 +349,7 @@ const daftarSubKegiatans = [
   {
     id: 43,
     subKegiatan: "Pengelolaan Pelayanan Promosi Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.18",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -358,7 +358,7 @@ const daftarSubKegiatans = [
     id: 44,
     subKegiatan:
       "Pengelolaan Pelayanan Kesehatan Tradisional, Akupuntur, Asuhan Mandiri, dan Tradisional Lainnya",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.19",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -366,7 +366,7 @@ const daftarSubKegiatans = [
   {
     id: 45,
     subKegiatan: "Pengelolaan Surveilans Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.20",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -375,7 +375,7 @@ const daftarSubKegiatans = [
     id: 46,
     subKegiatan:
       "Pengelolaan Pelayanan Kesehatan Orang dengan Masalah Kesehatan Jiwa (ODMK)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.21",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -383,7 +383,7 @@ const daftarSubKegiatans = [
   {
     id: 47,
     subKegiatan: "Pengelolaan Upaya Kesehatan Khusus",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.23",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -391,7 +391,7 @@ const daftarSubKegiatans = [
   {
     id: 48,
     subKegiatan: "Pelayanan Kesehatan Penyakit Menular dan Tidak Menular",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.25",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -399,7 +399,7 @@ const daftarSubKegiatans = [
   {
     id: 49,
     subKegiatan: "Pengelolaan Jaminan Kesehatan Masyarakat",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.26",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -407,7 +407,7 @@ const daftarSubKegiatans = [
   {
     id: 50,
     subKegiatan: "Penyediaan Telemedicine di Fasilitas Pelayanan Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.30",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -415,7 +415,7 @@ const daftarSubKegiatans = [
   {
     id: 51,
     subKegiatan: "Pengelolaan Penelitian Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.31",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -423,7 +423,7 @@ const daftarSubKegiatans = [
   {
     id: 52,
     subKegiatan: "Operasional Pelayanan Puskesmas",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.33",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -431,7 +431,7 @@ const daftarSubKegiatans = [
   {
     id: 53,
     subKegiatan: "Pelaksanaan Akreditasi Fasilitas Kesehatan di Kabupaten/Kota",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.35",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -440,7 +440,7 @@ const daftarSubKegiatans = [
     id: 54,
     subKegiatan:
       "Investigasi Awal Kejadian Tidak Diharapkan (Kejadian Ikutan Pasca Imunisasi dan Pemberian Obat Massal)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.36",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -448,7 +448,7 @@ const daftarSubKegiatans = [
   {
     id: 55,
     subKegiatan: "Pelaksanaan Kewaspadaan Dini dan Respon Wabah",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.37",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -457,7 +457,7 @@ const daftarSubKegiatans = [
     id: 56,
     subKegiatan:
       "Penyediaan dan Pengelolaan Sistem Penanganan Gawat Darurat Terpadu (SPGDT)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.38",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -466,7 +466,7 @@ const daftarSubKegiatans = [
     id: 57,
     subKegiatan:
       "Pengelolaan Pelayanan Kesehatan Dasar Melalui Pendekatan Keluarga",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.39",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -474,7 +474,7 @@ const daftarSubKegiatans = [
   {
     id: 58,
     subKegiatan: "Pengelolaan pelayanan kesehatan Malaria",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.02.42",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -482,7 +482,7 @@ const daftarSubKegiatans = [
   {
     id: 59,
     subKegiatan: "Pengelolaan Data dan Informasi Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.03.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -490,7 +490,7 @@ const daftarSubKegiatans = [
   {
     id: 60,
     subKegiatan: "Pengelolaan Sistem Informasi Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.03.02",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -499,7 +499,7 @@ const daftarSubKegiatans = [
     id: 61,
     subKegiatan:
       "Pengendalian dan Pengawasan serta Tindak Lanjut Pengawasan Perizinan Rumah Sakit Kelas C, D dan Fasilitas Pelayanan Kesehatan Lainnya",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.04.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -507,7 +507,7 @@ const daftarSubKegiatans = [
   {
     id: 62,
     subKegiatan: "Peningkatan Mutu Pelayanan Fasilitas Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.04.03",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -516,7 +516,7 @@ const daftarSubKegiatans = [
     id: 63,
     subKegiatan:
       "Penyiapan Perumusan dan Pelaksanaan Pelayanan Kesehatan Rujukan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.02.2.04.04",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -525,7 +525,7 @@ const daftarSubKegiatans = [
     id: 64,
     subKegiatan:
       "Pemenuhan Kebutuhan Sumber Daya Manusia Kesehatan Sesuai Standar",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.03.2.02.02",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -533,7 +533,7 @@ const daftarSubKegiatans = [
   {
     id: 65,
     subKegiatan: "Pembinaan dan Pengawasan Sumber Daya Manusia Kesehatan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.03.2.02.03",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -542,7 +542,7 @@ const daftarSubKegiatans = [
     id: 66,
     subKegiatan:
       "Pengembangan Mutu dan Peningkatan Kompetensi Teknis Sumber Daya Manusia Kesehatan Tingkat Daerah Kabupaten/Kota",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.03.2.03.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -551,7 +551,7 @@ const daftarSubKegiatans = [
     id: 67,
     subKegiatan:
       "Pengendalian dan Pengawasan serta Tindak Lanjut Pengawasan Perizinan Apotek, Toko Obat, Toko Alat Kesehatan, dan Optikal, Usaha Mikro Obat Tradisional (UMOT)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.04.2.01.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -560,7 +560,7 @@ const daftarSubKegiatans = [
     id: 68,
     subKegiatan:
       "Pengendalian dan Pengawasan serta Tindak Lanjut Pengawasan Sertifikat Produksi Pangan Industri Rumah Tangga dan Nomor P-IRT sebagai Izin Produksi, untuk Produk Makanan Minuman Tertentu yang Dapat Diproduksi oleh Industri Rumah Tangga",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.04.2.03.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -569,7 +569,7 @@ const daftarSubKegiatans = [
     id: 69,
     subKegiatan:
       "Pengendalian dan Pengawasan serta Tindak Lanjut Pengawasan Penerbitan Sertifikat Laik Higiene Sanitasi Tempat Pengelolaan Makanan (TPM) antara lain Jasa Boga, Rumah Makan/Restoran dan Depot Air Minum (DAM)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.04.2.04.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -578,7 +578,7 @@ const daftarSubKegiatans = [
     id: 70,
     subKegiatan:
       "Pengendalian dan Pengawasan serta Tindak Lanjut Penerbitan Stiker Pembinaan pada Makanan Jajanan dan Sentra Makanan Jajanan",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.04.2.05.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -587,7 +587,7 @@ const daftarSubKegiatans = [
     id: 71,
     subKegiatan:
       "Peningkatan Upaya Promosi Kesehatan, Advokasi, Kemitraan dan Pemberdayaan Masyarakat",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.05.2.01.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -596,7 +596,7 @@ const daftarSubKegiatans = [
     id: 72,
     subKegiatan:
       "Penyelenggaraan Promosi Kesehatan dan Gerakan Hidup Bersih dan Sehat",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.05.2.02.01",
     createdAt: currentDate,
     updatedAt: currentDate,
@@ -605,7 +605,7 @@ const daftarSubKegiatans = [
     id: 73,
     subKegiatan:
       "Bimbingan Teknis dan Supervisi Pengembangan dan Pelaksanaan Upaya Kesehatan Bersumber Daya Masyarakat (UKBM)",
-    indukUnitKerjaId: 1,
+    unitKerjaId: 1,
     kodeRekening: "1.02.05.2.03.01",
     createdAt: currentDate,
     updatedAt: currentDate,

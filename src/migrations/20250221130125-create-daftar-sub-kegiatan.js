@@ -12,6 +12,9 @@ module.exports = {
       kodeRekening: {
         type: Sequelize.STRING,
       },
+      unitKerjaId: {
+        type: Sequelize.STRING,
+      },
       subKegiatan: {
         type: Sequelize.STRING,
       },
