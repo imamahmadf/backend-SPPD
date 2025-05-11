@@ -16,6 +16,27 @@ const userRoles = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+  {
+    id: 3,
+    userId: 1,
+    roleId: 2,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 4,
+    userId: 1,
+    roleId: 3,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 5,
+    userId: 1,
+    roleId: 4,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */
