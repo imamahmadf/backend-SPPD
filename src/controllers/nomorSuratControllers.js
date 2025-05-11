@@ -22,4 +22,28 @@ module.exports = {
       });
     }
   },
+  editNomorSurat: async (req, res) => {
+    console.log(req.body);
+    const { nomorLoket, nomorSurat } = req.body;
+    const id = req.params.id;
+    console.log(id);
+    try {
+      const result = await daftarNomorSurat.update(
+        {
+          nomorLoket,
+          nomorSurat,
+        },
+        {
+          where: { id },
+        }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
 };

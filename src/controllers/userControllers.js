@@ -15,7 +15,7 @@ module.exports = {
   register: async (req, res) => {
     const transaction = await sequelize.transaction();
     try {
-      const { nama, namaPengguna, password, role } = req.body;
+      const { nama, namaPengguna, password, role, unitKerjaId } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const existingUser = await user.findOne({ where: { namaPengguna } });
@@ -28,7 +28,6 @@ module.exports = {
           nama,
           namaPengguna,
           password: hashedPassword,
-          role,
         },
         { transaction }
       );
@@ -37,7 +36,7 @@ module.exports = {
         {
           nama,
           userId: newUser.id,
-          unitKerjaId: 1,
+          unitKerjaId,
         },
         { transaction }
       );
@@ -45,7 +44,7 @@ module.exports = {
       const newUserRole = await userRole.create(
         {
           userId: newUser.id,
-          roleId: 1,
+          roleId: role,
         },
         { transaction }
       );
@@ -145,6 +144,91 @@ module.exports = {
       res.json({ message: "Ini adalah dashboard admin" });
     } catch (err) {
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getRole: async (req, res) => {
+    try {
+      const result = await role.findAll({ attributes: ["id", "nama"] });
+      const resultUnitKerja = await daftarUnitKerja.findAll({
+        attributes: ["id", "unitKerja"],
+      });
+      return res.status(200).json({ result, resultUnitKerja });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  getAllUser: async (req, res) => {
+    try {
+      const result = await user.findAll({
+        attributes: ["id", "nama", "namaPengguna"],
+        include: [
+          {
+            model: userRole,
+            include: [{ model: role, attributes: ["id", "nama"] }],
+          },
+          {
+            model: profile,
+            attributes: ["id", "nama"],
+            include: [
+              {
+                model: daftarUnitKerja,
+                as: "unitKerja_profile",
+                attributes: ["id", "unitKerja"],
+              },
+            ],
+          },
+        ],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  addRole: async (req, res) => {
+    console.log(req.query, "CEK TAMBA USER ROLE");
+
+    try {
+      const { userId, roleId } = req.query;
+
+      const result = await userRole.create({
+        userId,
+        roleId,
+      });
+
+      return res.status(200).json({
+        result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  deleteRole: async (req, res) => {
+    // console.log(req.query);
+    try {
+      const { userId, id } = req.query;
+
+      const result = await userRole.destroy({
+        where: { userId, id },
+      });
+
+      return res.status(200).json({
+        result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

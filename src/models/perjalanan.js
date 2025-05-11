@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       nomorSuratKeluarId: DataTypes.INTEGER,
       noNotaDinas: DataTypes.STRING,
       dasar: DataTypes.STRING,
+      pic: DataTypes.STRING,
       noSuratTugas: DataTypes.STRING,
       tanggalPengajuan: DataTypes.DATE,
       ttdSuratTugasId: DataTypes.INTEGER,
@@ -57,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       KPAId: DataTypes.INTEGER,
       jenisId: DataTypes.INTEGER,
       subKegiatanId: DataTypes.INTEGER,
+      tipeSrikandi: DataTypes.INTEGER,
     },
     {
       sequelize,

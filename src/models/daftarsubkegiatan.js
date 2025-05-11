@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   daftarSubKegiatan.init(
     {
       kodeRekening: DataTypes.STRING,
+      anggaran: DataTypes.INTEGER,
       subKegiatan: DataTypes.STRING,
       unitKerjaId: DataTypes.STRING,
     },

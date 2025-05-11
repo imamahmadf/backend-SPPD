@@ -63,6 +63,33 @@ module.exports = {
       });
     }
   },
+  postBuktiKegiatan: async (req, res) => {
+    const id = parseInt(req.body.id);
+    console.log(req.body);
+    console.log(id, "ECEKKKKKKK");
+    try {
+      const filePath = "bukti";
+      let pic = null;
+      if (req.file) {
+        // console.log("GGGGGGGGGGGGGGGGGGGGGGGGGG");
+        const { filename } = req.file;
+        pic = `/${filePath}/${filename}`;
+      }
+      const result = await perjalanan.update(
+        {
+          pic,
+        },
+        { where: { id } }
+      );
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
   getRampung: async (req, res) => {
     const id = req.params.id;
     const unitKerjaId = req.body.unitKerjaId || 1;
@@ -117,7 +144,7 @@ module.exports = {
           },
           {
             model: perjalanan,
-            attributes: ["id", "asal", "tanggalPengajuan", "untuk"],
+            attributes: ["id", "asal", "tanggalPengajuan", "untuk", "pic"],
             include: [
               {
                 model: tempat,

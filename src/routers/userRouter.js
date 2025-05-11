@@ -5,9 +5,12 @@ const { authenticateUser, authorizeRole } = require("../lib/auth");
 const router = express.Router();
 
 // Public routes (tidak butuh login)
+router.post("/post/user-role", userControllers.addRole);
+router.post("/delete/user-role", userControllers.deleteRole);
 router.post("/register", userControllers.register);
 router.post("/login", userControllers.login);
-
+router.get("/get-role", userControllers.getRole);
+router.get("/get/user", userControllers.getAllUser);
 // Protected routes (harus login)
 router.post("/logout", authenticateUser, userControllers.logout);
 router.get("/check-auth", authenticateUser, (req, res) => {

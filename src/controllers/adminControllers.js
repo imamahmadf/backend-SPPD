@@ -41,6 +41,8 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
+          "pic",
+          "dasar",
         ],
         include: [
           {
@@ -56,6 +58,12 @@ module.exports = {
               {
                 model: status,
                 attributes: ["id", "statusKuitansi"],
+                required: true,
+                where: {
+                  id: {
+                    [Op.ne]: 1, // tidak sama dengan 1
+                  },
+                },
               },
               {
                 model: rincianBPD,

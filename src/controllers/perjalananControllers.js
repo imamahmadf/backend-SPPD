@@ -56,11 +56,13 @@ module.exports = {
         indukUnitKerjaFE,
         PPTKId,
         KPAId,
+        dasar,
         kodeKlasifikasi,
+        isSrikandi,
         dataBendaharaId,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
-      console.log(req.body.pelayananKesehatanId, "KODE KLASIFIKASI");
+      console.log(req.body.isSrikandi, "KODE KLASIFIKASI");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -188,7 +190,7 @@ module.exports = {
         year: "numeric",
       });
 
-      console.log(resultSuratKeluar.id, "CEKDISINI");
+      // console.log(resultSuratKeluar.id, "CEKDISINI");
       // Simpan data perjalanan
       const dbPerjalanan = await perjalanan.create(
         {
@@ -203,8 +205,10 @@ module.exports = {
           ttdSuratTugasId: dataTtdSurTug.value.id,
           jenisId: jenis.id,
           KPAId,
+          dasar,
           PPTKId,
           pelayananKesehatanId,
+          tipeSrikandi: isSrikandi,
         },
         { transaction }
       );
@@ -285,6 +289,7 @@ module.exports = {
         dataPegawai,
         tanggalPengajuan: formattedTanggalPengajuan,
         untuk,
+        ttd: isSrikandi ? "${ttd_pengirim}" : "",
         tempat1:
           jenis.id === 1
             ? dataKota[0]?.tempat
@@ -496,6 +501,7 @@ module.exports = {
           "id",
           "untuk",
           "asal",
+          "dasar",
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
@@ -605,7 +611,11 @@ module.exports = {
               },
             ],
           },
-          { model: jenisPerjalanan },
+          {
+            model: jenisPerjalanan,
+            attributes: ["id", "jenis"],
+            include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
+          },
         ],
       });
 
@@ -663,6 +673,7 @@ module.exports = {
         noSuratTugas,
         jenis,
         unitKerja,
+        dasar,
         indukUnitKerjaFE,
       } = req.body;
       console.log(ttdSurTugUnitKerja);
@@ -1013,7 +1024,7 @@ module.exports = {
         tanggalPulang1: tempat[0]?.tanggalPulang,
         asal,
         kode,
-        noNotaDinas,
+        dasar: dasar ? dasar : noNotaDinas,
         noSuratTugas: nomorBaru,
         ttdSurTug,
         id,

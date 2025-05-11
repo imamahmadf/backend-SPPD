@@ -43,13 +43,23 @@ module.exports = {
   getDaftarPegawai: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
-
+    const search = req.query.search_query || "";
+    const alfabet = req.query.alfabet || "ASC";
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
+
+    const whereCondition = {
+      nama: { [Op.like]: "%" + search + "%" },
+    };
     try {
       const result = await pegawai.findAll({
+        where: whereCondition,
         offset,
         limit,
+        order: [
+          // ["updatedAt", `${time}`],
+          ["nama", `${alfabet}`],
+        ],
         attributes: ["id", "nama", "nip", "jabatan"],
         include: [
           {
@@ -61,7 +71,15 @@ module.exports = {
           { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
         ],
       });
-      const totalRows = await pegawai.count({});
+      const totalRows = await pegawai.count({
+        where: whereCondition,
+        offset,
+        limit,
+        order: [
+          // ["updatedAt", `${time}`],
+          ["nama", `${alfabet}`],
+        ],
+      });
       const totalPage = Math.ceil(totalRows / limit);
 
       return res

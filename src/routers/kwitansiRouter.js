@@ -12,6 +12,16 @@ routers.post(
   }).single("pic"),
   kwitansiControllers.postRampung
 );
+
+routers.post(
+  "/post/bukti-perjalanan",
+  fileUploader({
+    destinationFolder: "bukti",
+    fileType: "image",
+    prefix: "BUKTI-PERJALANAN",
+  }).single("pic"),
+  kwitansiControllers.postBuktiKegiatan
+);
 routers.get("/get/rampung/:id", kwitansiControllers.getRampung);
 routers.post("/post/cetak-kwitansi", kwitansiControllers.cetakKwitansi);
 routers.post(

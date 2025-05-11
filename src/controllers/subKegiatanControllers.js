@@ -8,7 +8,7 @@ const { Op } = require("sequelize");
 
 module.exports = {
   getSubKegiatan: async (req, res) => {
-    const unitKerjaId = req.params.unitKerjaId;
+    const unitKerjaId = req.params.id;
     try {
       const result = await daftarSubKegiatan.findAll({
         where: { unitKerjaId },
@@ -33,14 +33,20 @@ module.exports = {
     }
   },
   editSubKegiatan: async (req, res) => {
-    const { id, subKegiatan, kodeRekening, anggaran } = req.body;
+    const { subKegiatan, kodeRekening, anggaran } = req.body;
+    const id = req.params.id;
+    console.log(req.body);
     try {
-      const result = await daftarSubKegiatan.update({
-        where: { id },
-        subKegiatan,
-        kodeRekening,
-        anggaran,
-      });
+      const result = await daftarSubKegiatan.update(
+        {
+          subKegiatan,
+          kodeRekening,
+          anggaran,
+        },
+        {
+          where: { id },
+        }
+      );
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);
@@ -48,12 +54,14 @@ module.exports = {
     }
   },
   postSubKegiatan: async (req, res) => {
-    const { subKegiatan, kodeRekening, anggaran } = req.body;
+    console.log(req.body);
+    const { subKegiatan, kodeRekening, anggaran, unitKerjaId } = req.body;
     try {
       const result = await daftarSubKegiatan.create({
         subKegiatan,
         kodeRekening,
         anggaran,
+        unitKerjaId,
       });
       return res.status(200).json({ result });
     } catch (err) {
