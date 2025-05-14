@@ -16,6 +16,7 @@ const {
   daftarUnitKerja,
   indukUnitKerja,
   sequelize,
+  templateKeuangan,
   user,
   userRole,
   role,
@@ -23,6 +24,40 @@ const {
 } = require("../models");
 const fs = require("fs");
 module.exports = {
+  getTemplateKeuangan: async (req, res) => {
+    try {
+      const result = await templateKeuangan.findAll({
+        attributes: ["id", "nama", "template"],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  addTemplateKeuangan: async (req, res) => {
+    const { nama } = req.body;
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filePath = `/template-keuangan/${req.file.filename}`;
+      await templateKeuangan.create({
+        template: filePath,
+        nama,
+      });
+      return res.status(200).json({ message: "template berhasil diupload" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
   uploadTemplate: async (req, res) => {
     const { id, jenis, kode } = req.body;
     console.log(req.body);

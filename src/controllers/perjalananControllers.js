@@ -557,12 +557,12 @@ module.exports = {
                 model: indukUnitKerja,
                 attributes: ["id", "kodeInduk"],
                 as: "indukUnitKerja_ttdSuratTugas",
-                include: [
-                  {
-                    model: daftarUnitKerja,
-                    attributes: ["id", "kode"],
-                  },
-                ],
+                // include: [
+                //   {
+                //     model: daftarUnitKerja,
+                //     attributes: ["id", "kode"],
+                //   },
+                // ],
               },
             ],
           },
@@ -675,8 +675,9 @@ module.exports = {
         unitKerja,
         dasar,
         indukUnitKerjaFE,
+        ttdSurtTugKode,
       } = req.body;
-      console.log(ttdSurTugUnitKerja);
+      console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -798,12 +799,7 @@ module.exports = {
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
           .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
-          .replace(
-            "KODE",
-            indukUnitKerjaFE.indukUnitKerja.kodeInduk +
-              "/" +
-              indukUnitKerjaFE.kode
-          );
+          .replace("KODE", ttdSurtTugKode + "/" + indukUnitKerjaFE.kode);
         console.log(dbNoSurat.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
@@ -821,15 +817,15 @@ module.exports = {
 
         console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
 
+        const codeNoSPD =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
         noSpd = personilFE.map((item, index) => ({
           nomorSPD: dbNoSPD.jenisSurat.nomorSurat
             .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
-            .replace(
-              "KODE",
-              indukUnitKerjaFE.indukUnitKerja.kodeInduk +
-                "/" +
-                indukUnitKerjaFE.kode
-            )
+            .replace("KODE", codeNoSPD)
             .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
         }));
 
@@ -839,17 +835,31 @@ module.exports = {
           { where: { id: dbNoSPD.id }, transaction }
         );
         /////////////////////////////////////////////////////
+        // const codeSurTug
+        // let codeSurTug = "";
+        // if (ttdSurTugUnitKerja == indukUnitKerjaFE.id) {
+        //   if (ttdSurtTugKode === indukUnitKerjaFE.kode) {
+        //     codeSurTug = ttdSurtTugKode;
+        //     console.log("tes1");
+        //   } else {
+        //     ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+        //     console.log("tes2");
+        //   }
+        // } else {
+        //   codeSurTug = ttdSurtTugKode;
+        //   console.log("tes3");
+        // }
+        const codeSurTug =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
         for (const [index, item] of personilFE.entries()) {
           await personil.update(
             {
               nomorSPD: dbNoSPD.jenisSurat.nomorSurat
                 .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
-                .replace(
-                  "KODE",
-                  indukUnitKerjaFE.indukUnitKerja.kodeInduk +
-                    "/" +
-                    indukUnitKerjaFE.kode
-                )
+                .replace("KODE", codeSurTug)
                 .replace("KODE", unitKerja.kode),
               statusId: 1,
             },

@@ -68,7 +68,11 @@ module.exports = {
           },
           { model: daftarGolongan, as: "daftarGolongan" },
           { model: daftarPangkat, as: "daftarPangkat" },
-          { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["id", "unitKerja"],
+          },
         ],
       });
       const totalRows = await pegawai.count({
