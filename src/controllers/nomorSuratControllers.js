@@ -36,6 +36,7 @@ module.exports = {
       });
     }
   },
+
   editNomorLoket: async (req, res) => {
     console.log(req.body);
     const { nomorLoket, nomorSurat } = req.body;

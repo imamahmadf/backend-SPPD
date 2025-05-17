@@ -8,18 +8,24 @@ const jenisRincianBPDs = [
   },
   {
     id: 2,
-    jenis: "Akomodasi",
+    jenis: "Representatif",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 3,
-    jenis: "Transportasi",
+    jenis: "Akomodasi",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 4,
+    jenis: "Transportasi",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 5,
     jenis: "Rill",
     createdAt: currentDate,
     updatedAt: currentDate,

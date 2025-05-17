@@ -372,6 +372,9 @@ module.exports = {
       });
       const resultDaftarSubKegiatan = await daftarSubKegiatan.findAll({
         attributes: ["id", "subKegiatan", "kodeRekening"],
+        where: {
+          unitKerjaId,
+        },
       });
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({
         include: [{ model: tipePerjalanan }],
@@ -496,7 +499,10 @@ module.exports = {
       const result = await perjalanan.findAll({
         offset,
         limit,
-        order: [["tanggalPengajuan", time]],
+        order: [
+          ["tanggalPengajuan", time],
+          [{ model: personil }, "id", "ASC"],
+        ],
         attributes: [
           "id",
           "untuk",
@@ -613,7 +619,7 @@ module.exports = {
           },
           {
             model: jenisPerjalanan,
-            attributes: ["id", "jenis"],
+            attributes: ["id", "jenis", "kodeRekening"],
             include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
           },
         ],
@@ -880,6 +886,7 @@ module.exports = {
         nip: item.pegawai.nip,
         jabatan: item.pegawai.jabatan,
         golongan: item.pegawai.daftarGolongan.golongan,
+        pangkat: item.pegawai.daftarPangkat.pangkat,
         no: index + 1,
         kepada: "",
         a: "",
@@ -1070,6 +1077,20 @@ module.exports = {
           "TIDAK ADA PEGAWAI !",
         pegawai5Tingkatan:
           personilFE[4]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+
+        pegawai1Pangkat: personilFE[0]?.pegawai?.daftarPangkat.pangkat,
+        pegawai2Pangkat:
+          personilFE[1]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai3Pangkat:
+          personilFE[2]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai4Pangkat:
+          personilFE[3]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai5Pangkat:
+          personilFE[4]?.pegawai?.daftarPangkat.pangkat ||
           "TIDAK ADA PEGAWAI !",
 
         noSpd1: noSpd[0]?.nomorSPD || "TIDAK ADA NOMOR",

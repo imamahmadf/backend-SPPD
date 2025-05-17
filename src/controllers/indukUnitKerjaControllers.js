@@ -337,4 +337,60 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+  getDetailIndukUnitKerja: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const result = await indukUnitKerja.findOne({
+        attributes: ["id", "kodeInduk", "indukUnitKerja"],
+        include: [
+          { model: indukUKSumberDana, include: [{ model: sumberDana }] },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja", "kode", "asal"],
+          },
+        ],
+        where: { id },
+      });
+
+      const resultSumberDana = await sumberDana.findAll({});
+      return res.status(200).json({ result, resultSumberDana });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  editUnitKerja: async (req, res) => {
+    const id = req.params.id;
+    const { unitKerja, kode, asal } = req.body;
+    console.log(req.body);
+    try {
+      const result = await daftarUnitKerja.update(
+        { unitKerja, kode, asal },
+        { where: { id } }
+      );
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editIndukUnitKerja: async (req, res) => {
+    const id = req.params.id;
+    const { kodeInduk } = req.body;
+    const indukUnitKerjaFE = req.body.indukUnitKerja;
+    console.log(req.body);
+    try {
+      const result = await indukUnitKerja.update(
+        { indukUnitKerja: indukUnitKerjaFE, kodeInduk },
+        { where: { id } }
+      );
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
 };

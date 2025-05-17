@@ -137,4 +137,48 @@ module.exports = {
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
+  downloadTemplateKeuangan: async (req, res) => {
+    try {
+      const { fileName } = req.query; // ← Ganti dari req.body ke req.query
+      const filePath = `${__dirname}/../public/${fileName}`;
+
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ message: "File tidak ditemukan" });
+      }
+
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      );
+      res.setHeader("Content-Disposition", `attachment; filename=${fileName}`);
+
+      return res.download(filePath);
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunduh file" });
+    }
+  },
+  deleteTempateKeuangan: async (req, res) => {
+    const id = req.params.id;
+    const filename = req.body.fileName;
+    try {
+      const result = await templateKeuangan.destroy({ where: { id } });
+
+      const path = `${__dirname}/../public${filename}`;
+      fs.unlink(path, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
 };

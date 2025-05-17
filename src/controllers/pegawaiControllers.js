@@ -13,9 +13,10 @@ const {
   rill,
   tempat,
   dalamKota,
+  statusPegawai,
 } = require("../models");
 
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 module.exports = {
   getPegawai: async (req, res) => {
@@ -60,13 +61,14 @@ module.exports = {
           // ["updatedAt", `${time}`],
           ["nama", `${alfabet}`],
         ],
-        attributes: ["id", "nama", "nip", "jabatan"],
+        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
         include: [
           {
             model: daftarTingkatan,
             as: "daftarTingkatan",
           },
           { model: daftarGolongan, as: "daftarGolongan" },
+          { model: statusPegawai, as: "statusPegawai" },
           { model: daftarPangkat, as: "daftarPangkat" },
           {
             model: daftarUnitKerja,
@@ -90,6 +92,7 @@ module.exports = {
         .status(200)
         .json({ result, page, limit, totalRows, totalPage });
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,
@@ -268,6 +271,26 @@ module.exports = {
         message: err.toString(),
         code: 500,
       });
+    }
+  },
+  searchPegawai: async (req, res) => {
+    try {
+      const { q } = req.query;
+
+      const result = await pegawai.findAll({
+        where: {
+          nama: {
+            [Op.like]: `%${q}%`, // Import Op dari Sequelize
+          },
+        },
+        attributes: ["id", "nama", "nip"],
+        limit: 10,
+        order: [["nama", "ASC"]],
+      });
+
+      res.status(200).json({ result });
+    } catch (err) {
+      res.status(500).json({ message: err.toString(), code: 500 });
     }
   },
 };

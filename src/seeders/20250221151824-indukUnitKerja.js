@@ -176,6 +176,14 @@ const indukUnitKerjas = [
     createdAt: currentDate,
     updatedAt: currentDate,
   },
+  {
+    id: 23,
+    indukUnitKerja: "RSUD Kerang",
+    kodeInduk: "RSUD-K",
+    BLUDId: 1,
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
 ];
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

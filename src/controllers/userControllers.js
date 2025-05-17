@@ -14,6 +14,7 @@ const { blacklistedTokens } = require("../lib/auth");
 module.exports = {
   register: async (req, res) => {
     const transaction = await sequelize.transaction();
+    console.log(req.body);
     try {
       const { nama, namaPengguna, password, role, unitKerjaId } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);

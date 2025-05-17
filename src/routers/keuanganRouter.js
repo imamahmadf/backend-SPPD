@@ -7,5 +7,7 @@ routers.get("/get/bendahara/:id", keuanganControllers.getBendahara);
 routers.post("/post/bendahara", keuanganControllers.postBendahara);
 routers.get("/get/sumber-dana/:id", keuanganControllers.getSumberDana);
 routers.post("/delete/bendahara/:id", keuanganControllers.deleteBendahara);
+routers.get("/get/all-sumber-dana", keuanganControllers.getAllSumberDana);
+routers.post("/edit/sumber-dana/:id", keuanganControllers.editSumberDana);
 
 module.exports = routers;

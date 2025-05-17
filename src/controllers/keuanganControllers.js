@@ -9,6 +9,7 @@ const {
   sumberDana,
   indukUKSumberDana,
   indukUnitKerja,
+  jenisPerjalanan,
   bendahara,
 } = require("../models");
 
@@ -84,6 +85,34 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await bendahara.destroy({ where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  getAllSumberDana: async (req, res) => {
+    try {
+      const result = await sumberDana.findAll({});
+      const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
+      return res.status(200).json({ result, resultJenisPerjalanan });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  editSumberDana: async (req, res) => {
+    const { id } = req.params;
+    const { untukPembayaran, kalimat1, kalimat2 } = req.body;
+    try {
+      const result = await sumberDana.update(
+        {
+          untukPembayaran,
+          kalimat1,
+          kalimat2,
+        },
+        { where: { id } }
+      );
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);

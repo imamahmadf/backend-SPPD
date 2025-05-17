@@ -4,6 +4,10 @@ const { indukUnitKerjaControllers } = require("../controllers");
 const routers = express.Router();
 
 routers.get("/get/:id", indukUnitKerjaControllers.getIndukUnitKerja);
+routers.get(
+  "/get/detail/:id",
+  indukUnitKerjaControllers.getDetailIndukUnitKerja
+);
 routers.post(
   "/delete/ttd-surat-tugas/:id",
   indukUnitKerjaControllers.deleteTtdSuratTugas
@@ -17,7 +21,8 @@ routers.post(
   "/update/ttd-surat-tugas",
   indukUnitKerjaControllers.updateTtdSuratTugas
 );
-
+routers.post("/edit/unit-kerja/:id", indukUnitKerjaControllers.editUnitKerja);
+routers.post("/edit/:id", indukUnitKerjaControllers.editIndukUnitKerja);
 routers.post(
   "/update/tanda-tangan",
   indukUnitKerjaControllers.updateTandaTangan

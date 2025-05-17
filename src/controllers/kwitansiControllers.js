@@ -11,6 +11,7 @@ const {
   jenisRincianBPD,
   tempat,
   jenisTempat,
+  templateKeuangan,
   PPTK,
   rill,
   daftarUnitKerja,
@@ -24,6 +25,7 @@ const {
   status,
   sequelize,
   pelayananKesehatan,
+
   sumberDana,
 } = require("../models");
 
@@ -180,7 +182,13 @@ module.exports = {
                   },
                   {
                     model: sumberDana,
-                    attributes: ["id", "sumber", "untukPembayaran"],
+                    attributes: [
+                      "id",
+                      "sumber",
+                      "untukPembayaran",
+                      "kalimat1",
+                      "kalimat2",
+                    ],
                   },
                 ],
               },
@@ -242,8 +250,13 @@ module.exports = {
       });
 
       const jenisRampung = await jenisRincianBPD.findAll();
+      const template = await templateKeuangan.findAll({
+        attributes: ["id", "nama"],
+      });
 
-      return res.status(200).json({ result, jenisRampung, daftarRill });
+      return res
+        .status(200)
+        .json({ result, jenisRampung, daftarRill, template });
     } catch (err) {
       console.error("Error fetching data:", err);
       return res.status(500).json({
@@ -276,6 +289,7 @@ module.exports = {
       subKegiatan,
       KPAJabatan,
       tahun,
+      templateId,
     } = req.body;
     console.log(
       dataBendahara.pegawai_bendahara,
@@ -391,10 +405,15 @@ module.exports = {
       ) + "Rupiah";
 
     try {
+      const resultTemplate = await templateKeuangan.findOne({
+        where: { id: templateId },
+        attributes: ["id", "template"],
+      });
       // Path file template
       const templatePath = path.join(
         __dirname,
-        "../public/template/kuitansi.docx"
+        "../public",
+        resultTemplate.template
       );
 
       // Baca file template
@@ -414,7 +433,9 @@ module.exports = {
         bendaharaNama: dataBendahara.pegawai_bendahara.nama,
         bendaharaNip: dataBendahara.pegawai_bendahara.nip,
         bendaharaJabatan: dataBendahara.jabatan,
-        untukPembayaran: dataBendahara.sumberDana.untukPembayaran,
+        untukPembayaran: dataBendahara.sumberDana.untukPembayaran || "",
+        kalimat1: dataBendahara.sumberDana.kalimat1 || "",
+        kalimat2: dataBendahara.sumberDana.kalimat2 || "",
         KPAJabatan,
         nomorSurat: nomorSPD,
         surat: totalDurasi > 7 ? "SPD" : "ND",

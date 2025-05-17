@@ -14,5 +14,6 @@ routers.get("/get/seed", pegawaiControllers.getSeedPegawai);
 routers.post("/edit", pegawaiControllers.editPegawai);
 routers.post("/post", pegawaiControllers.addPegawai);
 routers.get("/get/detail-pegawai/:id", pegawaiControllers.getDetailPegawai);
+routers.get("/search", pegawaiControllers.searchPegawai);
 
 module.exports = routers;

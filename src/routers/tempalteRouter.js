@@ -26,5 +26,9 @@ router.post(
 
 router.get("/get", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
-
+router.get("/download-keuangan", templateControllers.downloadTemplateKeuangan);
+router.post(
+  "/delete/template-keuangan/:id",
+  templateControllers.deleteTempateKeuangan
+);
 module.exports = router;

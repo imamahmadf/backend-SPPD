@@ -94,7 +94,13 @@ module.exports = {
               },
               {
                 model: sumberDana,
-                attributes: ["id", "sumber", "untukPembayaran"],
+                attributes: [
+                  "id",
+                  "sumber",
+                  "untukPembayaran",
+                  "kalimat1",
+                  "kalimat2",
+                ],
               },
             ],
           },
@@ -281,7 +287,10 @@ module.exports = {
       const result = await perjalanan.findAll({
         offset,
         limit,
-        order: [["tanggalPengajuan", time]],
+        order: [
+          ["tanggalPengajuan", time],
+          [{ model: personil }, "id", "ASC"],
+        ],
         attributes: [
           "id",
           "untuk",

@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sumber: DataTypes.STRING,
       untukPembayaran: DataTypes.STRING,
+      kalimat1: DataTypes.STRING,
+      kalimat2: DataTypes.STRING,
       BLUDId: DataTypes.INTEGER,
     },
     {
