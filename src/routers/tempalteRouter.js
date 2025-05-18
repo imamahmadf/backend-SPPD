@@ -24,7 +24,7 @@ router.post(
   templateControllers.uploadTemplate
 );
 
-router.get("/get", templateControllers.getTemplate);
+router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
 router.get("/download-keuangan", templateControllers.downloadTemplateKeuangan);
 router.post(

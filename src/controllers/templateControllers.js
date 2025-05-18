@@ -121,11 +121,18 @@ module.exports = {
     }
   },
   getTemplate: async (req, res) => {
-    const id = req.query.id;
+    const id = req.params.id;
     try {
-      const result = await daftarUnitKerja.findOne(
+      const result = await indukUnitKerja.findOne(
         {
-          attributes: ["id", "unitKerja", "kode", "asal"],
+          attributes: [
+            "id",
+            "indukUnitKerja",
+
+            "templateSuratTugas",
+            "templateNotaDinas",
+            "templateSuratTugasSingkat",
+          ],
         },
         { where: { id } }
       );

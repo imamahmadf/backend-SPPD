@@ -13,6 +13,7 @@ const {
   rill,
   tempat,
   dalamKota,
+  profesi,
   statusPegawai,
 } = require("../models");
 
@@ -35,6 +36,7 @@ module.exports = {
       });
       return res.status(200).json({ result });
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,
@@ -44,14 +46,47 @@ module.exports = {
   getDaftarPegawai: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const statusPegawaiId = parseInt(req.query.statusPegawaiId);
+    const profesiId = parseInt(req.query.profesiId);
+    const golonganId = parseInt(req.query.golonganId);
+    const tingkatanId = parseInt(req.query.tingkatanId);
+    const pangkatId = parseInt(req.query.pangkatId);
     const search = req.query.search_query || "";
+    const filterPendidikan = req.query.filterPendidikan || "";
+    const filterNip = req.query.filterNip || "";
+    const filterJabatan = req.query.filterJabatan || "";
     const alfabet = req.query.alfabet || "ASC";
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
-
+    console.log(req.query);
     const whereCondition = {
       nama: { [Op.like]: "%" + search + "%" },
+      nip: { [Op.like]: "%" + filterNip + "%" },
+      jabatan: { [Op.like]: "%" + filterJabatan + "%" },
+      pendidikan: { [Op.like]: "%" + filterPendidikan + "%" },
     };
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+
+    if (profesiId) {
+      whereCondition.profesiId = profesiId;
+    }
+
+    if (statusPegawaiId) {
+      whereCondition.statusPegawaiId = statusPegawaiId;
+    }
+    if (pangkatId) {
+      whereCondition.pangkatId = pangkatId;
+    }
+    if (golonganId) {
+      whereCondition.golonganId = golonganId;
+    }
+    if (tingkatanId) {
+      whereCondition.tingkatanId = tingkatanId;
+    }
     try {
       const result = await pegawai.findAll({
         where: whereCondition,
@@ -70,6 +105,7 @@ module.exports = {
           { model: daftarGolongan, as: "daftarGolongan" },
           { model: statusPegawai, as: "statusPegawai" },
           { model: daftarPangkat, as: "daftarPangkat" },
+          { model: profesi, as: "profesi" },
           {
             model: daftarUnitKerja,
             as: "daftarUnitKerja",
@@ -128,10 +164,20 @@ module.exports = {
       const resultGolongan = await daftarGolongan.findAll({});
       const resultPangkat = await daftarPangkat.findAll({});
       const resultTingkatan = await daftarTingkatan.findAll({});
+      const resultStatusPegawai = await statusPegawai.findAll({});
+      const resultUnitKerja = await daftarUnitKerja.findAll({
+        attributes: ["id", "unitKerja"],
+      });
+      const resultProfesi = await profesi.findAll({});
 
-      return res
-        .status(200)
-        .json({ resultGolongan, resultPangkat, resultTingkatan });
+      return res.status(200).json({
+        resultGolongan,
+        resultPangkat,
+        resultTingkatan,
+        resultStatusPegawai,
+        resultUnitKerja,
+        resultProfesi,
+      });
     } catch (err) {
       return res.status(500).json({
         message: err.toString(),
@@ -164,7 +210,18 @@ module.exports = {
     }
   },
   addPegawai: async (req, res) => {
-    const { nama, nip, jabatan, pangkatId, golonganId, tingkatanId } = req.body;
+    const {
+      nama,
+      nip,
+      jabatan,
+      pangkatId,
+      golonganId,
+      tingkatanId,
+      unitKerjaId,
+      statusPegawaiId,
+      profesiId,
+      pendidikan,
+    } = req.body;
     console.log(req.body);
     try {
       const result = await pegawai.create({
@@ -174,6 +231,10 @@ module.exports = {
         golonganId,
         tingkatanId,
         pangkatId,
+        unitKerjaId,
+        statusPegawaiId,
+        profesiId,
+        pendidikan,
       });
 
       return res.status(200).json({ result });

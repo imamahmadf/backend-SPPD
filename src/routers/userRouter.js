@@ -16,7 +16,7 @@ router.post("/logout", authenticateUser, userControllers.logout);
 router.get("/check-auth", authenticateUser, (req, res) => {
   res.json({ isAuthenticated: true, user: req.user });
 });
-router.get("/profile", authenticateUser, userControllers.getProfile);
+router.get("/profile/:id", userControllers.getProfile);
 
 // Admin-only routes (harus login DAN role admin)
 router.get(

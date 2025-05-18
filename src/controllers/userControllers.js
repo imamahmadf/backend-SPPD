@@ -98,7 +98,7 @@ module.exports = {
       const token = jwt.sign(
         { id: resultUser.id, role: resultUser.role },
         process.env.JWT_SECRET || "SECRET_KEY",
-        { expiresIn: "1h" }
+        { expiresIn: "12h" }
       );
 
       res.json({
@@ -130,11 +130,41 @@ module.exports = {
 
   // Contoh endpoint yang dilindungi
   getProfile: async (req, res) => {
+    const userId = req.params.id;
     try {
-      const userId = req.user.id;
-      const userProfile = await profile.findOne({ where: { userId } });
-      res.json(userProfile);
+      const result = await profile.findOne({
+        attributes: ["id", "nama"],
+        where: { userId },
+        include: [
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitkerja", "kode"],
+            as: "unitKerja_profile",
+            include: [
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "indukUnitKerja", "kodeInduk"],
+              },
+            ],
+          },
+          {
+            model: user,
+            attributes: ["id", "namaPengguna"],
+            include: [
+              {
+                model: userRole,
+                attributes: ["id"],
+                include: [{ model: role, attributes: ["nama"] }],
+              },
+            ],
+          },
+        ],
+      });
+      return res
+        .status(200)
+        .json({ result, message: "Data profile berhasil diambil" });
     } catch (err) {
+      console.error(err);
       res.status(500).json({ error: err.message });
     }
   },
