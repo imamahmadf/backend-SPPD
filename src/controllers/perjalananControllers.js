@@ -294,11 +294,24 @@ module.exports = {
           jenis.id === 1
             ? dataKota[0]?.tempat
             : dalamKota[0].dataDalamKota.nama,
-        // tempat2:
-        //   jenis.id === 1
-        //     ? dataKota[1]?.tempat
-        //     : dalamKota[1].dataDalamKota.nama || "",
-        // tempat3: dataKota[2]?.tempat || "",
+        tempat2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempat3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
         kode: kodeRekeningFE,
         noNotDis: nomorBaru,
         ttdSurtTugJabatan: dataTtdSurTug.value.jabatan,
