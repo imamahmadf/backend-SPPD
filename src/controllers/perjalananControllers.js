@@ -24,6 +24,7 @@ const {
   indukUnitKerja,
   klasifikasi,
   suratKeluar,
+  status,
   sumberDana,
   bendahara,
   tipePerjalanan,
@@ -170,10 +171,13 @@ module.exports = {
         .replace("KODE", kode)
         .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
-      const resultSuratKeluar = await suratKeluar.create({
-        nomor: nomorBaru,
-        indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
-      });
+      const resultSuratKeluar = await suratKeluar.create(
+        {
+          nomor: nomorBaru,
+          indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
+        },
+        transaction
+      );
 
       // Update nomor loket ke database
       await daftarNomorSurat.update(
@@ -537,6 +541,7 @@ module.exports = {
                   { model: daftarTingkatan, as: "daftarTingkatan" },
                 ],
               },
+              { model: status },
             ],
           },
           {
@@ -749,6 +754,7 @@ module.exports = {
           return "Seratus " + terbilang(angka - 100);
         }
       }
+      // ////////////////////TERBILANG///////////////////////
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -795,13 +801,16 @@ module.exports = {
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
       let noSpd;
+
       if (!noSuratTugas) {
-        const dbNoSurat = await daftarNomorSurat.findOne({
+        // MENGABIL NOMOR SURAT TUGAS /////////////
+        const dbNoSurTug = await daftarNomorSurat.findOne({
           where: { indukUnitKerjaId: ttdSurTugUnitKerja },
           include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 1 } }],
 
-          transaction, // Letakkan dalam objek konfigurasi yang sama
+          transaction,
         });
+        //MENGAMBIL NOMOR SPD ///////////
 
         const dbNoSPD = await daftarNomorSurat.findOne({
           where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
@@ -809,21 +818,21 @@ module.exports = {
         });
 
         // Pastikan dbNoSurat ditemukan sebelum digunakan
-        if (!dbNoSurat) {
+        if (!dbNoSurTug) {
           throw new Error("Data nomor surat tidak ditemukan.");
         }
 
-        const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
+        const nomorLoket = parseInt(dbNoSurTug.nomorLoket) + 1;
 
-        nomorBaru = dbNoSurat.jenisSurat.nomorSurat
+        nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
           .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", ttdSurtTugKode + "/" + indukUnitKerjaFE.kode);
-        console.log(dbNoSurat.id, "NOMOR SURAT");
+        console.log(dbNoSurTug.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurat.id }, transaction }
+          { where: { id: dbNoSurTug.id }, transaction }
         );
 
         // Update data perjalanan
@@ -876,10 +885,7 @@ module.exports = {
         for (const [index, item] of personilFE.entries()) {
           await personil.update(
             {
-              nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-                .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
-                .replace("KODE", codeSurTug)
-                .replace("KODE", unitKerja.kode),
+              nomorSPD: noSpd[index].nomorSPD,
               statusId: 1,
             },
             {
