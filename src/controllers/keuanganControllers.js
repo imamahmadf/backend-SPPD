@@ -119,4 +119,22 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+
+  editJenisPerjalanan: async (req, res) => {
+    const { id } = req.params;
+    const { jenis, kodeRekening } = req.body;
+    try {
+      const result = await jenisPerjalanan.update(
+        {
+          jenis,
+          kodeRekening,
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
 };

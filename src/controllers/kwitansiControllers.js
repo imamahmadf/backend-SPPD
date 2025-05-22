@@ -165,12 +165,8 @@ module.exports = {
                   },
                 ],
               },
-              {
-                model: jenisPerjalanan,
-              },
-              {
-                model: pelayananKesehatan,
-              },
+              { model: jenisPerjalanan },
+              { model: pelayananKesehatan },
               {
                 model: bendahara,
                 attributes: ["id", "jabatan"],
@@ -247,6 +243,7 @@ module.exports = {
             attributes: ["id", "statusKuitansi"],
           },
         ],
+        order: [[rincianBPD, "jenisId", "ASC"]],
       });
 
       const jenisRampung = await jenisRincianBPD.findAll();

@@ -21,6 +21,7 @@ const {
   sumberDana,
   bendahara,
   jenisSurat,
+  tipePerjalanan,
   indukUnitKerja,
   ttdSuratTugas,
   ttdNotaDinas,
@@ -276,13 +277,33 @@ module.exports = {
       });
     }
   },
+  getUnitKerja: async (req, res) => {
+    try {
+      const result = await daftarUnitKerja.findAll({
+        attributes: ["id", "unitKerja"],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
   getAllPerjalananKeuangan: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
-    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const unitKerjaId = parseInt(req.query.unitKerjaId) || null;
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
+
+    const whereCondition = {};
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+
     try {
       const result = await perjalanan.findAll({
         offset,
@@ -301,11 +322,18 @@ module.exports = {
         ],
         include: [
           {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId", "pegawaiId"],
+            where: whereCondition, // ✅ Filter data berdasarkan unit kerja yang diminta
+            required: true, // ✅ Pastikan hanya ambil yang punya relasi
+          },
+          {
             model: personil,
             include: [
               {
                 model: pegawai,
               },
+              { model: status },
             ],
           },
           {
@@ -362,7 +390,11 @@ module.exports = {
               },
             ],
           },
-          { model: jenisPerjalanan },
+          {
+            model: jenisPerjalanan,
+            attributes: ["id", "jenis", "kodeRekening"],
+            include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
+          },
         ],
       });
 

@@ -16,10 +16,23 @@ module.exports = {
   getDalamKota: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
+    const { uangTransport, nama, durasi } = req.query;
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId);
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
+
+    const whereCondition = {
+      uangTransport: { [Op.like]: "%" + uangTransport + "%" },
+      nama: { [Op.like]: "%" + nama + "%" },
+      durasi: { [Op.like]: "%" + durasi + "%" },
+    };
+
+    if (indukUnitKerjaId) {
+      whereCondition.indukUnitKerjaId = indukUnitKerjaId;
+    }
     try {
       const result = await dalamKota.findAll({
+        where: whereCondition,
         offset,
         limit,
         attributes: ["id", "nama", "durasi", "uangTransport"],
@@ -27,7 +40,11 @@ module.exports = {
           { model: indukUnitKerja, attributes: ["id", "indukUnitkerja"] },
         ],
       });
-      const totalRows = await dalamKota.count({});
+      const totalRows = await dalamKota.count({
+        where: whereCondition,
+        offset,
+        limit,
+      });
       const totalPage = Math.ceil(totalRows / limit);
       return res
         .status(200)

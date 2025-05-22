@@ -17,9 +17,87 @@ const {
   statusPegawai,
 } = require("../models");
 
-const { Op } = require("sequelize");
+const { Op, Sequelize: sequelize } = require("sequelize");
 
 module.exports = {
+  getPegawaiUnitKerja: async (req, res) => {
+    try {
+      const result = await pegawai.findAll({
+        attributes: [
+          "unitKerjaId",
+          "profesiId",
+          "statusPegawaiId",
+          [sequelize.fn("COUNT", sequelize.col("pegawai.id")), "jumlah"],
+        ],
+        group: ["unitKerjaId", "profesiId", "statusPegawaiId"],
+        include: [
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["unitKerja"],
+          },
+          {
+            model: profesi,
+            as: "profesi",
+            attributes: ["nama"],
+          },
+          {
+            model: statusPegawai,
+            as: "statusPegawai",
+            attributes: ["status"],
+          },
+        ],
+      });
+
+      // Mengelompokkan data berdasarkan unitKerjaId
+      const groupedData = result.reduce((acc, curr) => {
+        const unitKerjaId = curr.unitKerjaId;
+        if (!acc[unitKerjaId]) {
+          acc[unitKerjaId] = {
+            unitKerjaId,
+            namaUnitKerja: curr.daftarUnitKerja.unitKerja,
+            totalPegawai: 0,
+            statusPegawai: {},
+            profesi: {},
+          };
+        }
+
+        // Menambah total pegawai
+        acc[unitKerjaId].totalPegawai += parseInt(curr.getDataValue("jumlah"));
+
+        // Menambah jumlah per status pegawai
+        const statusPegawai = curr.statusPegawai.status;
+        if (!acc[unitKerjaId].statusPegawai[statusPegawai]) {
+          acc[unitKerjaId].statusPegawai[statusPegawai] = 0;
+        }
+        acc[unitKerjaId].statusPegawai[statusPegawai] += parseInt(
+          curr.getDataValue("jumlah")
+        );
+
+        // Menambah jumlah per profesi
+        const profesiId = curr.profesiId;
+        if (!acc[unitKerjaId].profesi[profesiId]) {
+          acc[unitKerjaId].profesi[profesiId] = {
+            namaProfesi: curr.profesi.nama,
+            jumlah: {},
+          };
+        }
+
+        acc[unitKerjaId].profesi[profesiId].jumlah[statusPegawai] =
+          curr.getDataValue("jumlah");
+
+        return acc;
+      }, {});
+
+      return res.status(200).json({ result: Object.values(groupedData) });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
   getPegawai: async (req, res) => {
     try {
       const result = await pegawai.findAll({

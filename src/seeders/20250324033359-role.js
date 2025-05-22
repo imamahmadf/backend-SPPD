@@ -2,23 +2,29 @@
 
 const currentDate = new Date();
 const roles = [
-  { id: 1, nama: "user", createdAt: currentDate, updatedAt: currentDate },
+  { id: 1, nama: "User", createdAt: currentDate, updatedAt: currentDate },
   {
     id: 2,
-    nama: "admin unit kerja",
+    nama: "Admin Unit Kerja",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   { id: 3, nama: "keuangan", createdAt: currentDate, updatedAt: currentDate },
   {
     id: 4,
-    nama: "pencatat surat",
+    nama: "Pencatat Surat",
     createdAt: currentDate,
     updatedAt: currentDate,
   },
   {
     id: 5,
-    nama: "super admin",
+    nama: "Super Admin",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 6,
+    nama: "Admin Kepala Dinas",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

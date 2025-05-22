@@ -15,5 +15,6 @@ routers.post("/edit", pegawaiControllers.editPegawai);
 routers.post("/post", pegawaiControllers.addPegawai);
 routers.get("/get/detail-pegawai/:id", pegawaiControllers.getDetailPegawai);
 routers.get("/search", pegawaiControllers.searchPegawai);
+routers.get("/get/unit-kerja-pegawai", pegawaiControllers.getPegawaiUnitKerja);
 
 module.exports = routers;

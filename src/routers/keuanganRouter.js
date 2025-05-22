@@ -9,5 +9,9 @@ routers.get("/get/sumber-dana/:id", keuanganControllers.getSumberDana);
 routers.post("/delete/bendahara/:id", keuanganControllers.deleteBendahara);
 routers.get("/get/all-sumber-dana", keuanganControllers.getAllSumberDana);
 routers.post("/edit/sumber-dana/:id", keuanganControllers.editSumberDana);
+routers.post(
+  "/edit/jenis-perjalanan/:id",
+  keuanganControllers.editJenisPerjalanan
+);
 
 module.exports = routers;
