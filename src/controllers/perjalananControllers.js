@@ -1,4 +1,4 @@
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const {
   perjalanan,
   kodeRekening,
@@ -26,8 +26,10 @@ const {
   suratKeluar,
   status,
   sumberDana,
+  kadis,
   bendahara,
   tipePerjalanan,
+  profesi,
   pelayananKesehatan,
   sumberDanaJenisPerjalanan,
 } = require("../models");
@@ -288,7 +290,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-
+      console.log(dataKota, dalamKota, jenis);
       doc.render({
         dataPegawai,
         tanggalPengajuan: formattedTanggalPengajuan,
@@ -299,22 +301,21 @@ module.exports = {
             ? dataKota[0]?.tempat
             : dalamKota[0].dataDalamKota.nama,
         tempat2:
-          tempat.length === 1
+          jenis.id === 2
+            ? dalamKota.length === 1
+              ? ""
+              : dalamKota[1]?.dataDalamKota.nama
+            : dataKota.length === 1
             ? ""
-            : tempat.length > 1 && jenis === 1
-            ? tempat[1]?.tempat
-            : tempat.length > 1 && jenis !== 1
-            ? tempat[1]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
-
+            : dataKota[1]?.tempat,
         tempat3:
-          tempat.length === 1
+          jenis.id === 2
+            ? dalamKota.length === 1
+              ? ""
+              : dalamKota[2]?.dataDalamKota.nama
+            : dataKota.length === 1
             ? ""
-            : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+            : dataKota[2]?.tempat,
 
         kode: kodeRekeningFE,
         noNotDis: nomorBaru,
@@ -539,6 +540,7 @@ module.exports = {
                   { model: daftarPangkat, as: "daftarPangkat" },
                   { model: daftarGolongan, as: "daftarGolongan" },
                   { model: daftarTingkatan, as: "daftarTingkatan" },
+                  { model: profesi, as: "profesi" },
                 ],
               },
               { model: status },
@@ -643,24 +645,22 @@ module.exports = {
         ],
       });
 
-      const totalRows = await perjalanan.count({
-        include: [
-          {
-            model: ttdNotaDinas,
-            where: { unitKerjaId },
-            required: true,
-          },
-        ],
+      const filteredResult = result.filter((item) => {
+        const hasProfesiId1 = item.personils.some(
+          (p) => p.pegawai?.profesi?.id === 1
+        );
+        const isJenisPerjalananId1 = item.jenisPerjalanan?.id === 1;
+
+        // Buang jika dua-duanya true
+        return !(hasProfesiId1 && isJenisPerjalananId1);
       });
 
-      const totalPage = Math.ceil(totalRows / limit);
-
       return res.status(200).json({
-        result,
+        result: filteredResult,
         page,
         limit,
-        totalRows,
-        totalPage,
+        totalRows: filteredResult.length,
+        totalPage: Math.ceil(filteredResult.length / limit),
       });
     } catch (err) {
       console.error("Error:", err);
@@ -1244,6 +1244,637 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+  getPerjalananKaDis: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 15;
+
+    const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const offset = limit * page;
+    try {
+      const result = await perjalanan.findAll({
+        subQuery: false, // ✅ ini akan menghindari subquery wrapping
+        offset,
+        limit,
+        order: [
+          ["tanggalPengajuan", time],
+          [{ model: personil }, "id", "ASC"],
+        ],
+        attributes: [
+          "id",
+          "untuk",
+          "asal",
+          "dasar",
+          "noNotaDinas",
+          "tanggalPengajuan",
+          "noSuratTugas",
+        ],
+        include: [
+          {
+            model: personil,
+
+            required: true,
+            include: [
+              {
+                model: pegawai,
+                required: true,
+                include: [
+                  {
+                    model: profesi,
+                    as: "profesi",
+                    attributes: ["id"],
+                    where: { id: 1 },
+                    required: true,
+                  },
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              { model: status },
+            ],
+          },
+          {
+            model: tempat,
+            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            include: [
+              {
+                model: dalamKota,
+                as: "dalamKota",
+                attributes: ["id", "nama", "durasi"],
+              },
+            ],
+          },
+          {
+            model: suratKeluar,
+            attributes: ["id", "nomor"],
+          },
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "kodeRekening", "subKegiatan"],
+          },
+          {
+            model: ttdSuratTugas,
+            attributes: ["id", "jabatan", "indukUnitKerjaId"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "kodeInduk"],
+                as: "indukUnitKerja_ttdSuratTugas",
+                // include: [
+                //   {
+                //     model: daftarUnitKerja,
+                //     attributes: ["id", "kode"],
+                //   },
+                // ],
+              },
+            ],
+          },
+          {
+            model: KPA,
+            attributes: ["id", "jabatan"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_KPA",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+            ],
+          },
+          {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId", "pegawaiId"],
+
+            required: true, // ✅ Pastikan hanya ambil yang punya relasi
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_notaDinas",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "indukUnitKerjaId"],
+                as: "unitKerja_notaDinas",
+                include: [
+                  {
+                    model: indukUnitKerja,
+                    attributes: ["id", "kodeInduk"],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            model: jenisPerjalanan,
+            where: { id: 1 },
+            required: true,
+            attributes: ["id", "jenis", "kodeRekening"],
+            include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
+          },
+        ],
+      });
+      return res.status(200).json({
+        result,
+        page,
+        limit,
+        totalRows: result.length,
+        totalPage: Math.ceil(result.length / limit),
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postSuratTugasKadis: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        asal,
+        kode,
+        nama,
+        pangkat,
+        golongan,
+        nip,
+        jabatan,
+        ttdSurTug,
+        id,
+        tanggalPengajuan,
+        tempat,
+        untuk,
+        ttdSurTugJabatan,
+        ttdSurTugNama,
+        ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
+        ttdSurTugUnitKerja,
+        personilFE,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
+        KPAJabatan,
+        noNotaDinas,
+        noSuratTugas,
+        jenis,
+        unitKerja,
+        dasar,
+        indukUnitKerjaFE,
+        ttdSurtTugKode,
+      } = req.body;
+      console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
+
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      function terbilang(angka) {
+        const satuan = [
+          "",
+          "Satu",
+          "Dua",
+          "Tiga",
+          "Empat",
+          "Lima",
+          "Enam",
+          "Tujuh",
+          "Delapan",
+          "Sembilan",
+          "Sepuluh",
+          "Sebelas",
+        ];
+
+        if (angka < 12) {
+          return satuan[angka];
+        } else if (angka < 20) {
+          return terbilang(angka - 10) + " Belas";
+        } else if (angka < 100) {
+          return (
+            terbilang(Math.floor(angka / 10)) +
+            " Puluh " +
+            terbilang(angka % 10)
+          );
+        } else if (angka < 200) {
+          return "Seratus " + terbilang(angka - 100);
+        }
+      }
+      // ////////////////////TERBILANG///////////////////////
+      const calculateDaysDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+        const difference = Math.abs(end - start);
+        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
+      };
+
+      const daysDifference = calculateDaysDifference(
+        tempat[0].tanggalBerangkat,
+        tempat[tempat.length - 1].tanggalPulang
+      );
+
+      const formatTanggal = (tanggal) => {
+        return new Date(tanggal).toLocaleDateString("id-ID", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        });
+      };
+      const formattedTanggalBerangkat = new Date(
+        tempat[0].tanggalBerangkat
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tempat[tempat.length - 1].tanggalPulang
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      const formattedTanggalPengajuan = new Date(
+        tanggalPengajuan
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      // Path file template
+      // Ambil satu data nomor surat berdasarkan id = 1
+      var nomorBaru = noSuratTugas;
+      let noSpd;
+      // MENGABIL NOMOR SURAT TUGAS /////////////
+      const dbNoSurTug = await kadis.findOne({
+        transaction,
+      });
+      if (!noSuratTugas) {
+        //MENGAMBIL NOMOR SPD ///////////
+
+        const dbNoSPD = await daftarNomorSurat.findOne({
+          where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 3 } }],
+        });
+
+        // Pastikan dbNoSurat ditemukan sebelum digunakan
+        if (!dbNoSurTug) {
+          throw new Error("Data nomor surat tidak ditemukan.");
+        }
+
+        const nomorLoket = parseInt(dbNoSurTug.nomorLoket) + 1;
+
+        nomorBaru = dbNoSurTug.nomorSurat.replace(
+          "BULAN",
+          getRomanMonth(new Date(tanggalPengajuan))
+        );
+
+        // Update data perjalanan
+        await perjalanan.update(
+          { noSuratTugas: nomorBaru },
+          { where: { id }, transaction }
+        );
+
+        let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
+
+        console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+
+        const codeNoSPD =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+        noSpd = personilFE.map((item, index) => ({
+          nomorSPD: dbNoSPD.jenisSurat.nomorSurat
+            .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+            .replace("KODE", codeNoSPD)
+            .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
+        }));
+
+        // Update nomor loket ke database
+        await daftarNomorSurat.update(
+          { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
+          { where: { id: dbNoSPD.id }, transaction }
+        );
+        /////////////////////////////////////////////////////
+
+        const codeSurTug =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+        for (const [index, item] of personilFE.entries()) {
+          await personil.update(
+            {
+              nomorSPD: noSpd[index].nomorSPD,
+              statusId: 1,
+            },
+            {
+              where: { id: item.id }, // Pastikan ada kriteria unik
+            }
+          );
+        }
+        /////////////////////////////////////////
+      } else {
+        noSpd = personilFE.map((item, index) => ({
+          nomorSPD: item.nomorSPD,
+        }));
+      }
+
+      const templatePath = path.join(
+        __dirname,
+        "../public",
+        dbNoSurTug.template
+      );
+
+      // Baca file template
+      const content = fs.readFileSync(templatePath, "binary");
+
+      // Load file ke PizZip
+      const zip = new PizZip(content);
+
+      // Inisialisasi Docxtemplater dengan opsi terbaru
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+      console.log(nomorBaru);
+      // Masukkan data ke dalam template
+      doc.render({
+        // tempat1: jenis.id === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        // tempat2: tempat[1]?.tempat || "",
+        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempatSpd2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempatSpd3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempat2: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempat3: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+
+        tempat4:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "Tana Paser",
+
+        tempat5:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "",
+
+        tempat6:
+          tempat.length > 1
+            ? jenis === 1
+              ? tempat[1]?.tempat
+              : tempat[1]?.dalamKota.nama
+            : "",
+
+        tempat7:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : tempat.length === 2 && jenis === 1
+            ? "Tana Paser"
+            : tempat.length === 2 && jenis !== 1
+            ? ""
+            : "Tana Paser",
+
+        tempat8:
+          tempat.length === 1 || tempat.length === 2
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Default value if none of the conditions match
+
+        tempat9:
+          tempat.length === 1 || tempat.length === 2
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Default value if none of the conditions match
+
+        tempat10: tempat.length === 3 ? "Tana Paser" : "",
+
+        tanggal1: formatTanggal(tempat[0]?.tanggalBerangkat),
+        tanggal2: formatTanggal(tempat[0]?.tanggalBerangkat),
+        tanggal3:
+          tempat.length === 1
+            ? formatTanggal(tempat[0]?.tanggalPulang)
+            : formatTanggal(tempat[1]?.tanggalBerangkat),
+        tanggal4:
+          tempat.length === 1 ? "" : formatTanggal(tempat[1]?.tanggalBerangkat),
+
+        tanggal5:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? formatTanggal(tempat[1]?.tanggalPulang)
+            : formatTanggal(tempat[2]?.tanggalBerangkat),
+
+        tanggal6:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? ""
+            : formatTanggal(tempat[2]?.tanggalBerangkat),
+
+        tanggal7:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 2
+            ? ""
+            : formatTanggal(tempat[2]?.tanggalPulang),
+
+        tanggalBerangkat: formattedTanggalBerangkat,
+        tanggalPulang: formattedTanggalPulang,
+        tanggalBerangkat1: tempat[0]?.tanggalBerangkat,
+        tanggalPulang1: tempat[0]?.tanggalPulang,
+        asal,
+        kode,
+        dasar: dasar ? dasar : noNotaDinas,
+        noSurTug: nomorBaru,
+        ttdSurTug,
+        id,
+        tanggalPengajuan: formattedTanggalPengajuan,
+        tempat,
+        untuk,
+        ttdSurTugJabatan,
+        ttdSurTugNama,
+        ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
+        KPAJabatan,
+        nama,
+        pangkat,
+        golongan,
+        nip,
+        jabatan,
+        pegawai1Nama: personilFE[0]?.pegawai?.nama,
+        pegawai2Nama: personilFE[1]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
+        pegawai3Nama: personilFE[2]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
+        pegawai4Nama: personilFE[3]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
+        pegawai5Nama: personilFE[4]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
+
+        pegawai1Tingkatan: personilFE[0]?.pegawai?.daftarTingkatan.tingkatan,
+        pegawai2Tingkatan:
+          personilFE[1]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai3Tingkatan:
+          personilFE[2]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai4Tingkatan:
+          personilFE[3]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai5Tingkatan:
+          personilFE[4]?.pegawai?.daftarTingkatan.tingkatan ||
+          "TIDAK ADA PEGAWAI !",
+
+        pegawai1Pangkat: personilFE[0]?.pegawai?.daftarPangkat.pangkat,
+        pegawai2Pangkat:
+          personilFE[1]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai3Pangkat:
+          personilFE[2]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai4Pangkat:
+          personilFE[3]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+        pegawai5Pangkat:
+          personilFE[4]?.pegawai?.daftarPangkat.pangkat ||
+          "TIDAK ADA PEGAWAI !",
+
+        noSpd1: noSpd[0]?.nomorSPD || "TIDAK ADA NOMOR",
+
+        noSpd2: noSpd[1]?.nomorSPD || "TIDAK ADA NOMOR",
+
+        noSpd3: noSpd[2]?.nomorSPD || "TIDAK ADA NOMOR",
+
+        noSpd4: noSpd[3]?.nomorSPD || "TIDAK ADA NOMOR",
+
+        noSpd5: noSpd[4]?.nomorSPD || "TIDAK ADA NOMOR",
+        pegawai1Golongan:
+          personilFE[0]?.pegawai?.daftarGolongan.golongan ||
+          "TIDAK ADA GOLONGAN !!",
+        pegawai2Golongan:
+          personilFE[1]?.pegawai?.daftarGolongan.golongan ||
+          "TIDAK ADA GOLONGAN !!",
+        pegawai3Golongan:
+          personilFE[2]?.pegawai?.daftarGolongan.golongan ||
+          "TIDAK ADA GOLONGAN !!",
+        pegawai4Golongan:
+          personilFE[3]?.pegawai?.daftarGolongan.golongan ||
+          "TIDAK ADA GOLONGAN !!",
+        pegawai5Golongan:
+          personilFE[4]?.pegawai?.daftarGolongan.golongan ||
+          "TIDAK ADA GOLONGAN !!",
+        pegawai1Jabatan:
+          personilFE[0]?.pegawai?.jabatan || "TIDAK ADA JABATAN !",
+        pegawai2Jabatan:
+          personilFE[1]?.pegawai?.jabatan || "TIDAK ADA JABATAN !",
+        pegawai3Jabatan:
+          personilFE[2]?.pegawai?.jabatan || "TIDAK ADA JABATAN !",
+        pegawai4Jabatan:
+          personilFE[3]?.pegawai?.jabatan || "TIDAK ADA JABATAN !",
+        pegawai5Jabatan:
+          personilFE[4]?.pegawai?.jabatan || "TIDAK ADA JABATAN !",
+      });
+
+      // Simpan hasil dokumen ke buffer
+      const buffer = doc.getZip().generate({ type: "nodebuffer" });
+
+      // Buat path untuk menyimpan file hasil
+      const outputFileName = `SPPD_${Date.now()}.docx`;
+      const outputPath = path.join(
+        __dirname,
+        "../public/output",
+        outputFileName
+      );
+
+      // Simpan file hasil ke server
+      fs.writeFileSync(outputPath, buffer);
+
+      // Kirim file sebagai respons
+      res.download(outputPath, outputFileName, (err) => {
+        if (err) {
+          console.error("Error sending file:", err);
+          res.status(500).send("Error generating file");
+        }
+        // Hapus file setelah dikirim
+        fs.unlinkSync(outputPath);
+      });
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

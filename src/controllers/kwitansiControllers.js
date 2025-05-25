@@ -374,7 +374,7 @@ module.exports = {
     }));
 
     const Rill = rincianBPD
-      .filter((item) => item.jenisId === 4) // Filter berdasarkan jenisId
+      .filter((item) => item.jenisId === 5) // Filter berdasarkan jenisId
       .flatMap((item) => item.rills) // Langsung flatten tanpa map().flat()
       .map((item, index) => ({
         ...item,
@@ -534,7 +534,7 @@ module.exports = {
           personilId,
           item: "Pengeluaran Rill",
           nilai: BEUangtransport,
-          jenisId: 4,
+          jenisId: 5,
           qty: 1,
           satuan: "-",
         },

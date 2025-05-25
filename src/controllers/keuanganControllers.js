@@ -9,6 +9,7 @@ const {
   sumberDana,
   indukUKSumberDana,
   indukUnitKerja,
+  pelayananKesehatan,
   jenisPerjalanan,
   bendahara,
 } = require("../models");
@@ -95,7 +96,16 @@ module.exports = {
     try {
       const result = await sumberDana.findAll({});
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
-      return res.status(200).json({ result, resultJenisPerjalanan });
+      const resultPelayanan = await pelayananKesehatan.findAll({
+        where: {
+          id: {
+            [Op.gt]: 1,
+          },
+        },
+      });
+      return res
+        .status(200)
+        .json({ result, resultJenisPerjalanan, resultPelayanan });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
@@ -121,6 +131,24 @@ module.exports = {
   },
 
   editJenisPerjalanan: async (req, res) => {
+    const { id } = req.params;
+    const { jenis, kodeRekening } = req.body;
+    try {
+      const result = await jenisPerjalanan.update(
+        {
+          jenis,
+          kodeRekening,
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editPelayananKesehatan: async (req, res) => {
     const { id } = req.params;
     const { jenis, kodeRekening } = req.body;
     try {

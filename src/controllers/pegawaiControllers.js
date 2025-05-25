@@ -393,6 +393,11 @@ module.exports = {
               : personil.perjalanan.tempats.map(
                   (tempat) => tempat.dalamKota.nama
                 ),
+          tanggalBerangkat:
+            personil.perjalanan.tempats[0]?.tanggalBerangkat || null,
+          tanggalPulang:
+            personil.perjalanan.tempats[personil.perjalanan.tempats.length - 1]
+              ?.tanggalPulang || null,
           totaluang: personil.rincianBPDs
             ? personil.rincianBPDs.reduce(
                 (total, rincian) => total + rincian.nilai,

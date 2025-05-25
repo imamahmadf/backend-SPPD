@@ -24,8 +24,20 @@ router.post(
   templateControllers.uploadTemplate
 );
 
+router.post(
+  "/upload-kadis",
+  fileUploader({
+    destinationFolder: "template",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-KADIS",
+  }).single("file"),
+  templateControllers.uploadTemplateKadis
+);
+
 router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
+router.get("/get-kadis", templateControllers.getTemplateKadis);
 router.get("/download-keuangan", templateControllers.downloadTemplateKeuangan);
 router.post(
   "/delete/template-keuangan/:id",

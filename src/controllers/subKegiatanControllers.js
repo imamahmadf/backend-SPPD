@@ -1,7 +1,9 @@
 const {
   daftarSubKegiatan,
-
+  perjalanan,
   profile,
+  personil,
+  rincianBPD,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -12,8 +14,47 @@ module.exports = {
     try {
       const result = await daftarSubKegiatan.findAll({
         where: { unitKerjaId },
+        attributes: ["id", "kodeRekening", "subKegiatan", "anggaran"],
+        include: [
+          {
+            model: perjalanan,
+            attributes: ["id"],
+            include: [
+              {
+                model: personil,
+                include: [
+                  {
+                    model: rincianBPD,
+                    attributes: ["nilai"],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       });
-      return res.status(200).json({ result });
+
+      // Menghitung total untuk setiap subKegiatan
+      const formattedResult = result.map((item) => {
+        let total = 0;
+        item.perjalanans.forEach((perjalanan) => {
+          perjalanan.personils.forEach((personil) => {
+            personil.rincianBPDs.forEach((rincian) => {
+              total += rincian.nilai || 0;
+            });
+          });
+        });
+
+        return {
+          kodeRekening: item.kodeRekening,
+          subKegiatan: item.subKegiatan,
+          anggaran: item.anggaran,
+          total: total,
+          id: item.id,
+        };
+      });
+
+      return res.status(200).json({ result: formattedResult });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });

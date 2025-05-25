@@ -1,20 +1,6 @@
 const {
-  pegawai,
-  golongan,
-  pangkat,
-  daftarTingkatan,
-  daftarGolongan,
-  daftarPangkat,
-  rincianBPD,
-  perjalanan,
-  personil,
-  jenisRincianBPD,
-  tempat,
-  jenisTempat,
-  PPTK,
-  rill,
-  daftarUnitKerja,
   indukUnitKerja,
+  kadis,
   sequelize,
   templateKeuangan,
   user,
@@ -29,6 +15,17 @@ module.exports = {
       const result = await templateKeuangan.findAll({
         attributes: ["id", "nama", "template"],
       });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  getTemplateKadis: async (req, res) => {
+    try {
+      const result = await kadis.findAll({});
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
@@ -112,6 +109,53 @@ module.exports = {
       return res.status(200).json({
         message: "File template berhasil diunggah",
         filePath,
+      });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  uploadTemplateKadis: async (req, res) => {
+    const { id, nomorSurat } = req.body;
+    console.log(req.body);
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filename = req.body.oldFile;
+      if (filename) {
+        const path = `${__dirname}/../public${filename}`;
+        fs.unlink(path, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+
+        const filePath = `/template/${req.file.filename}`;
+
+        await kadis.update(
+          {
+            template: filePath, // Nama asli
+            nomorSurat,
+          },
+          {
+            where: { id },
+          }
+        );
+      } else {
+        await kadis.create({
+          template: `/template/${req.file.filename}`, // Nama asli
+          nomorSurat,
+        });
+      }
+
+      return res.status(200).json({
+        message: "File template berhasil diunggah",
       });
     } catch (error) {
       console.error(error);
