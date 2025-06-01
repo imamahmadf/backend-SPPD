@@ -18,9 +18,9 @@ const {
 } = require("../models");
 
 const { Op, Sequelize: sequelize } = require("sequelize");
-
+const ExcelJS = require("exceljs");
 module.exports = {
-  getPegawaiUnitKerja: async (req, res) => {
+  getPegawaiStatistik: async (req, res) => {
     try {
       const result = await pegawai.findAll({
         attributes: [
@@ -90,6 +90,51 @@ module.exports = {
       }, {});
 
       return res.status(200).json({ result: Object.values(groupedData) });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  getPegawaiUnitKerja: async (req, res) => {
+    const unitKerjaId = req.params.id;
+
+    const whereCondition = {};
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+
+    try {
+      const result = await pegawai.findAll({
+        where: whereCondition,
+
+        order: [
+          // ["updatedAt", `${time}`],
+          ["nama", `ASC`],
+        ],
+        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
+        include: [
+          {
+            model: daftarTingkatan,
+            as: "daftarTingkatan",
+          },
+          { model: daftarGolongan, as: "daftarGolongan" },
+          { model: daftarPangkat, as: "daftarPangkat" },
+          { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
+          { model: profesi, as: "profesi" },
+          { model: statusPegawai, as: "statusPegawai" },
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["id", "unitKerja"],
+          },
+        ],
+      });
+      return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
       return res.status(500).json({
@@ -218,7 +263,7 @@ module.exports = {
     try {
       const result = await pegawai.findOne({
         where: { id },
-        attributes: ["id", "nama", "nip", "jabatan"],
+        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
         include: [
           {
             model: daftarTingkatan,
@@ -226,11 +271,22 @@ module.exports = {
           },
           { model: daftarGolongan, as: "daftarGolongan" },
           { model: daftarPangkat, as: "daftarPangkat" },
+          {
+            model: profesi,
+            as: "profesi",
+            attributes: ["nama", "id"],
+          },
+          {
+            model: statusPegawai,
+            as: "statusPegawai",
+            attributes: ["status", "id"],
+          },
         ],
       });
 
       return res.status(200).json({ result });
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,
@@ -435,6 +491,123 @@ module.exports = {
       res.status(200).json({ result });
     } catch (err) {
       res.status(500).json({ message: err.toString(), code: 500 });
+    }
+  },
+
+  getDownloadPegawai: async (req, res) => {
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
+
+    console.log(req.query);
+    const whereCondition = {};
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+
+    try {
+      const result = await pegawai.findAll({
+        where: whereCondition,
+
+        order: [
+          // ["updatedAt", `${time}`],
+          ["nama", `ASC`],
+        ],
+        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
+        include: [
+          {
+            model: daftarTingkatan,
+            as: "daftarTingkatan",
+          },
+          { model: daftarGolongan, as: "daftarGolongan" },
+          { model: statusPegawai, as: "statusPegawai" },
+          { model: daftarPangkat, as: "daftarPangkat" },
+          { model: profesi, as: "profesi" },
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["id", "unitKerja"],
+          },
+        ],
+      });
+
+      // Generate Excel
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("Data Pegawai");
+
+      // Header
+      worksheet.columns = [
+        { header: "No", key: "no", width: 5 },
+        { header: "Nama", key: "nama", width: 30 },
+        { header: "NIP", key: "nip", width: 20 },
+        { header: "Jabatan", key: "jabatan", width: 25 },
+        { header: "Pangkat", key: "pangkat", width: 25 },
+        { header: "Golongan", key: "golongan", width: 25 },
+        { header: "Profesi", key: "profesi", width: 25 },
+        { header: "Pendidikan", key: "pendidikan", width: 20 },
+        { header: "Status pegawai", key: "status", width: 20 },
+        { header: "Unit Kerja", key: "unitKerja", width: 25 },
+      ];
+
+      // Data rows
+      result.forEach((item, index) => {
+        worksheet.addRow({
+          no: index + 1,
+          nama: item.nama,
+          nip: item.nip,
+          jabatan: item.jabatan,
+          pangkat: item.daftarPangkat?.pangkat || "-",
+          golongan: item.daftarGolongan?.golongan || "-",
+          status: item.statusPegawai?.status || "-",
+          profesi: item.profesi.nama || "-",
+          pendidikan: item.pendidikan,
+          unitKerja: item.daftarUnitKerja?.unitKerja || "-",
+        });
+      });
+
+      // Set response headers
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=data-pegawai.xlsx"
+      );
+
+      // Send Excel file
+      await workbook.xlsx.write(res);
+      res.end();
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  getPegawaiBatch: async (req, res) => {
+    try {
+      const { ids } = req.body; // array of pegawaiId
+      const result = await pegawai.findAll({
+        where: { id: ids },
+        attributes: ["id", "nama", "nip", "jabatan"],
+        include: [
+          { model: daftarGolongan, as: "daftarGolongan" },
+          { model: daftarPangkat, as: "daftarPangkat" },
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["id", "unitKerja"],
+          },
+        ],
+      });
+      return res.status(200).json({ success: true, data: result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: err.toString(),
+      });
     }
   },
 };

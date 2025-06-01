@@ -25,10 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       unitKerjaId: DataTypes.INTEGER,
       jabatan: DataTypes.STRING,
     },
-    {
-      sequelize,
-      modelName: "KPA",
-    }
+    { paranoid: true, sequelize, modelName: "KPA" }
   );
   return KPA;
 };

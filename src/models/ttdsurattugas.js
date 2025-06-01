@@ -30,10 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       // golongan: DataTypes.STRING,
       // nip: DataTypes.STRING,
     },
-    {
-      sequelize,
-      modelName: "ttdSuratTugas",
-    }
+    { paranoid: true, sequelize, modelName: "ttdSuratTugas" }
   );
   return ttdSuratTugas;
 };

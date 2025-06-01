@@ -12,6 +12,7 @@ const {
   pelayananKesehatan,
   jenisPerjalanan,
   bendahara,
+  uangHarian,
 } = require("../models");
 
 const { Op, where } = require("sequelize");
@@ -96,6 +97,7 @@ module.exports = {
     try {
       const result = await sumberDana.findAll({});
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
+      const resultUangHarian = await uangHarian.findAll({});
       const resultPelayanan = await pelayananKesehatan.findAll({
         where: {
           id: {
@@ -103,9 +105,12 @@ module.exports = {
           },
         },
       });
-      return res
-        .status(200)
-        .json({ result, resultJenisPerjalanan, resultPelayanan });
+      return res.status(200).json({
+        result,
+        resultJenisPerjalanan,
+        resultPelayanan,
+        resultUangHarian,
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
@@ -156,6 +161,22 @@ module.exports = {
         {
           jenis,
           kodeRekening,
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  editUangHarian: async (req, res) => {
+    const { id } = req.params;
+    const { nilai } = req.body;
+    try {
+      const result = await uangHarian.update(
+        {
+          nilai,
         },
         { where: { id } }
       );

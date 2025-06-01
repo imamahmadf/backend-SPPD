@@ -2,7 +2,7 @@ const currentDate = new Date();
 const pegawais = [
   {
     id: 1,
-    nip: "198407262002121001",
+    nip: "19840726 200212 1 001",
     nama: "Amri Yulihardi, S.Stp, M.Si",
     pangkatId: 15,
     golonganId: 10,
@@ -18,7 +18,7 @@ const pegawais = [
   },
   {
     id: 2,
-    nip: "197104171997032001",
+    nip: "19710417 199703 2 001",
     nama: "Alfrienti Linggi Kalalembang, Skm, M.Kes",
     pangkatId: 13,
     golonganId: 8,
@@ -33,7 +33,7 @@ const pegawais = [
   },
   {
     id: 3,
-    nip: "197512122002122004",
+    nip: "19751212 200212 2 004",
     nama: "Dr. Ainun Jariyah",
     pangkatId: 13,
     golonganId: 8,
@@ -48,7 +48,7 @@ const pegawais = [
   },
   {
     id: 4,
-    nip: "197604102005022001",
+    nip: "19760410 200502 2 001",
     nama: "Sulistiyo Rini, S.Si.Apt",
     pangkatId: 13,
     golonganId: 8,
@@ -63,7 +63,7 @@ const pegawais = [
   },
   {
     id: 5,
-    nip: "197210151993031009",
+    nip: "19721015 199303 1 009",
     nama: "Anang Jarkani, Skm",
     pangkatId: 13,
     golonganId: 8,
@@ -78,7 +78,7 @@ const pegawais = [
   },
   {
     id: 6,
-    nip: "198309292005022002",
+    nip: "19830929 200502 2 002",
     nama: "Siti Thoibah, S.Gz, M.Kes.",
     pangkatId: 13,
     golonganId: 8,
@@ -93,7 +93,7 @@ const pegawais = [
   },
   {
     id: 7,
-    nip: "198112012003122005",
+    nip: "19811201 200312 2 005",
     nama: "Marliana, S.St.,M.Kes",
     pangkatId: 13,
     golonganId: 8,
@@ -108,7 +108,7 @@ const pegawais = [
   },
   {
     id: 8,
-    nip: "198503312014031003",
+    nip: "19850331 201403 1 003",
     nama: "Dr. Adhisetya Dwi Saputra",
     pangkatId: 13,
     golonganId: 8,
@@ -123,7 +123,7 @@ const pegawais = [
   },
   {
     id: 9,
-    nip: "197109181991021001",
+    nip: "19710918 199102 1 001",
     nama: "Muhammad Subhan, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -138,7 +138,7 @@ const pegawais = [
   },
   {
     id: 10,
-    nip: "197108181992032008",
+    nip: "19710818 199203 2 008",
     nama: "Bdn. Juminah, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -153,7 +153,7 @@ const pegawais = [
   },
   {
     id: 11,
-    nip: "196906081991021004",
+    nip: "19690608 199102 1 004",
     nama: "Suparno, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -168,7 +168,7 @@ const pegawais = [
   },
   {
     id: 12,
-    nip: "197207051993031010",
+    nip: "19720705 199303 1 010",
     nama: "Jumain, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -183,7 +183,7 @@ const pegawais = [
   },
   {
     id: 13,
-    nip: "197403191994031004",
+    nip: "19740319 199403 1 004",
     nama: "Sujarwo, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -198,7 +198,7 @@ const pegawais = [
   },
   {
     id: 14,
-    nip: "196911091994022001",
+    nip: "19691109 199402 2 001",
     nama: "Budi Pratiwi, S.Sos.",
     pangkatId: 12,
     golonganId: 7,
@@ -213,7 +213,7 @@ const pegawais = [
   },
   {
     id: 15,
-    nip: "197011131992032005",
+    nip: "19701113 199203 2 005",
     nama: "Yanti Hartati, A.Md.Gizi",
     pangkatId: 12,
     golonganId: 7,
@@ -228,7 +228,7 @@ const pegawais = [
   },
   {
     id: 16,
-    nip: "196905051995032006",
+    nip: "19690505 199503 2 006",
     nama: "I'timariah, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -243,7 +243,7 @@ const pegawais = [
   },
   {
     id: 17,
-    nip: "197506122000121004",
+    nip: "19750612 200012 1 004",
     nama: "M. Hasanudin, S.Sos",
     pangkatId: 12,
     golonganId: 7,
@@ -258,7 +258,7 @@ const pegawais = [
   },
   {
     id: 18,
-    nip: "198303092009031006",
+    nip: "19830309 200903 1 006",
     nama: "Indra Darmawan, S.Far.A.Pt",
     pangkatId: 12,
     golonganId: 7,
@@ -273,7 +273,7 @@ const pegawais = [
   },
   {
     id: 19,
-    nip: "197602242000121001",
+    nip: "19760224 200012 1 001",
     nama: "Hendrik Latif, Skm,M.A.P",
     pangkatId: 12,
     golonganId: 7,
@@ -288,7 +288,7 @@ const pegawais = [
   },
   {
     id: 20,
-    nip: "197307221994021003",
+    nip: "19730722 199402 1 003",
     nama: "Dian Mahanata, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -303,7 +303,7 @@ const pegawais = [
   },
   {
     id: 21,
-    nip: "197610072005022002",
+    nip: "19761007 200502 2 002",
     nama: "Esti Muflichah, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -318,7 +318,7 @@ const pegawais = [
   },
   {
     id: 22,
-    nip: "197406011997032005",
+    nip: "19740601 199703 2 005",
     nama: "Juniarsih, S.K.M.",
     pangkatId: 12,
     golonganId: 7,
@@ -333,7 +333,7 @@ const pegawais = [
   },
   {
     id: 23,
-    nip: "198311152009032006",
+    nip: "19831115 200903 2 006",
     nama: "Putri Novita Sari, S.Farm., A.Pt",
     pangkatId: 12,
     golonganId: 7,
@@ -348,7 +348,7 @@ const pegawais = [
   },
   {
     id: 24,
-    nip: "197911032006042028",
+    nip: "19791103 200604 2 028",
     nama: "Nurhidayah, A. Md. Gizi., S.K.M.",
     pangkatId: 12,
     golonganId: 7,
@@ -363,7 +363,7 @@ const pegawais = [
   },
   {
     id: 25,
-    nip: "197407251996031004",
+    nip: "19740725 199603 1 004",
     nama: "Slamet Ariyanto, S.Tr.Kep., Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -378,7 +378,7 @@ const pegawais = [
   },
   {
     id: 26,
-    nip: "198508122009032008",
+    nip: "19850812 200903 2 008",
     nama: "Himmatul Ulya, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -393,7 +393,7 @@ const pegawais = [
   },
   {
     id: 27,
-    nip: "197911142005022006",
+    nip: "19791114 200502 2 006",
     nama: "Yusita Indrayanti, S.K.M",
     pangkatId: 12,
     golonganId: 7,
@@ -408,7 +408,7 @@ const pegawais = [
   },
   {
     id: 28,
-    nip: "198107012005021003",
+    nip: "19810701 200502 1 003",
     nama: "Karnadi, S.K.M.",
     pangkatId: 12,
     golonganId: 7,
@@ -423,7 +423,7 @@ const pegawais = [
   },
   {
     id: 29,
-    nip: "197905062006042025",
+    nip: "19790506 200604 2 025",
     nama: "Fitriani Astuti, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -438,7 +438,7 @@ const pegawais = [
   },
   {
     id: 30,
-    nip: "198707262009032001",
+    nip: "19870726 200903 2 001",
     nama: "Lia Nuraini, S.Tr.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -453,7 +453,7 @@ const pegawais = [
   },
   {
     id: 31,
-    nip: "198809152010012012",
+    nip: "19880915 201001 2 012",
     nama: "Bdn. EMILIA SURIANTI, SST",
     pangkatId: 11,
     golonganId: 6,
@@ -468,7 +468,7 @@ const pegawais = [
   },
   {
     id: 32,
-    nip: "199306162019032022",
+    nip: "19930616 201903 2 022",
     nama: "Apt. Mey Mey Sangianti, S.Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -483,7 +483,7 @@ const pegawais = [
   },
   {
     id: 33,
-    nip: "198512302008041001",
+    nip: "19851230 200804 1 001",
     nama: "Wujang Bayu Pratugas, S.Kep.Ners",
     pangkatId: 11,
     golonganId: 6,
@@ -498,7 +498,7 @@ const pegawais = [
   },
   {
     id: 34,
-    nip: "198007112009032009",
+    nip: "19800711 200903 2 009",
     nama: "Ni Made Yuliawati, S.K.M.",
     pangkatId: 11,
     golonganId: 6,
@@ -513,7 +513,7 @@ const pegawais = [
   },
   {
     id: 35,
-    nip: "198908282011012004",
+    nip: "19890828 201101 2 004",
     nama: "Nor Halimah, Amg",
     pangkatId: 11,
     golonganId: 6,
@@ -528,7 +528,7 @@ const pegawais = [
   },
   {
     id: 36,
-    nip: "198909102011012004",
+    nip: "19890910 201101 2 004",
     nama: "Endang Saraswati, Amg",
     pangkatId: 11,
     golonganId: 6,
@@ -543,7 +543,7 @@ const pegawais = [
   },
   {
     id: 37,
-    nip: "198811292010012011",
+    nip: "19881129 201001 2 011",
     nama: "Nurul Fa`Ikah, A.Md.Ak",
     pangkatId: 11,
     golonganId: 6,
@@ -558,7 +558,7 @@ const pegawais = [
   },
   {
     id: 38,
-    nip: "198802112010012011",
+    nip: "19880211 201001 2 011",
     nama: "Rika Pebriani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -573,7 +573,7 @@ const pegawais = [
   },
   {
     id: 39,
-    nip: "198811052011012004",
+    nip: "19881105 201101 2 004",
     nama: "Ananda Unaizah, Am.Kg",
     pangkatId: 11,
     golonganId: 6,
@@ -588,7 +588,7 @@ const pegawais = [
   },
   {
     id: 40,
-    nip: "198910112011012005",
+    nip: "19891011 201101 2 005",
     nama: "Rabiatul Adawiyah, Amkl",
     pangkatId: 11,
     golonganId: 6,
@@ -603,7 +603,7 @@ const pegawais = [
   },
   {
     id: 41,
-    nip: "198306022010012026",
+    nip: "19830602 201001 2 026",
     nama: "Juita Melda, S.Kep, Ns",
     pangkatId: 11,
     golonganId: 6,
@@ -618,7 +618,7 @@ const pegawais = [
   },
   {
     id: 42,
-    nip: "198804132010012010",
+    nip: "19880413 201001 2 010",
     nama: "Heriani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -633,7 +633,7 @@ const pegawais = [
   },
   {
     id: 43,
-    nip: "198511112009032008",
+    nip: "19851111 200903 2 008",
     nama: "Tri Yuliyatin, S.Km",
     pangkatId: 11,
     golonganId: 6,
@@ -648,7 +648,7 @@ const pegawais = [
   },
   {
     id: 44,
-    nip: "197101012002121017",
+    nip: "19710101 200212 1 017",
     nama: "Arifin",
     pangkatId: 10,
     golonganId: 5,
@@ -663,7 +663,7 @@ const pegawais = [
   },
   {
     id: 45,
-    nip: "198707172009032006",
+    nip: "19870717 200903 2 006",
     nama: "Halimatussa'diyah, A.Md.Far",
     pangkatId: 10,
     golonganId: 5,
@@ -678,7 +678,7 @@ const pegawais = [
   },
   {
     id: 46,
-    nip: "199206172019032016",
+    nip: "19920617 201903 2 016",
     nama: "Najemawati, S.E.",
     pangkatId: 10,
     golonganId: 5,
@@ -693,7 +693,7 @@ const pegawais = [
   },
   {
     id: 47,
-    nip: "199008162019031011",
+    nip: "19900816 201903 1 011",
     nama: "Tiyanpri Bayu Laksmono, Skm",
     pangkatId: 10,
     golonganId: 5,
@@ -708,7 +708,7 @@ const pegawais = [
   },
   {
     id: 48,
-    nip: "198907172019031017",
+    nip: "19890717 201903 1 017",
     nama: "Fauzan Saleh, Skm",
     pangkatId: 10,
     golonganId: 5,
@@ -723,7 +723,7 @@ const pegawais = [
   },
   {
     id: 49,
-    nip: "199103082022032004",
+    nip: "19910308 202203 2 004",
     nama: "Evi Sulfiana, S.K.M",
     pangkatId: 9,
     golonganId: 4,
@@ -738,7 +738,7 @@ const pegawais = [
   },
   {
     id: 50,
-    nip: "199811142022032011",
+    nip: "19981114 202203 2 011",
     nama: "Sofiya Maulida, S.Farm",
     pangkatId: 9,
     golonganId: 4,
@@ -753,7 +753,7 @@ const pegawais = [
   },
   {
     id: 51,
-    nip: "197905122007011011",
+    nip: "19790512 200701 1 011",
     nama: "Darmansyah",
     pangkatId: 9,
     golonganId: 4,
@@ -768,7 +768,7 @@ const pegawais = [
   },
   {
     id: 52,
-    nip: "197005172009062002",
+    nip: "19700517 200906 2 002",
     nama: "Harini",
     pangkatId: 8,
     golonganId: 3,
@@ -783,7 +783,7 @@ const pegawais = [
   },
   {
     id: 53,
-    nip: "199209112019031008",
+    nip: "19920911 201903 1 008",
     nama: "Muhammad Taftian, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -798,7 +798,7 @@ const pegawais = [
   },
   {
     id: 54,
-    nip: "198704182019031010",
+    nip: "19870418 201903 1 010",
     nama: "Misbachul Irpany, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -813,7 +813,7 @@ const pegawais = [
   },
   {
     id: 55,
-    nip: "199412162019031011",
+    nip: "19941216 201903 1 011",
     nama: "Junaidi, A.Md.Kg.",
     pangkatId: 8,
     golonganId: 3,
@@ -828,7 +828,7 @@ const pegawais = [
   },
   {
     id: 56,
-    nip: "197005032006041010",
+    nip: "19700503 200604 1 010",
     nama: "Ardiansyah",
     pangkatId: 8,
     golonganId: 3,
@@ -843,7 +843,7 @@ const pegawais = [
   },
   {
     id: 57,
-    nip: "197908012012122003",
+    nip: "19790801 201212 2 003",
     nama: "Farida",
     pangkatId: 8,
     golonganId: 3,
@@ -858,7 +858,7 @@ const pegawais = [
   },
   {
     id: 58,
-    nip: "199404012022032006",
+    nip: "19940401 202203 2 006",
     nama: "Setya Nor Rahmi, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -873,7 +873,7 @@ const pegawais = [
   },
   {
     id: 59,
-    nip: "199808082022031011",
+    nip: "19980808 202203 1 011",
     nama: "Fahrurrasyuf Rizky Al Fitroch, A.Md",
     pangkatId: 7,
     golonganId: 2,
@@ -888,7 +888,7 @@ const pegawais = [
   },
   {
     id: 60,
-    nip: "199203042025212008",
+    nip: "19920304 202521 2 008",
     nama: "Coriana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -903,7 +903,7 @@ const pegawais = [
   },
   {
     id: 61,
-    nip: "199311252025212022",
+    nip: "19931125 202521 2 022",
     nama: "Siti Fatimah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -918,7 +918,7 @@ const pegawais = [
   },
   {
     id: 62,
-    nip: "198209152025212024",
+    nip: "19820915 202521 2 024",
     nama: "Eka Srirahayu",
     pangkatId: 18,
     golonganId: 11,
@@ -933,7 +933,7 @@ const pegawais = [
   },
   {
     id: 63,
-    nip: "199511092025212041",
+    nip: "19951109 202521 2 041",
     nama: "Ade Riska Setyawati",
     pangkatId: 18,
     golonganId: 11,
@@ -948,7 +948,7 @@ const pegawais = [
   },
   {
     id: 64,
-    nip: "199610192025212011",
+    nip: "19961019 202521 2 011",
     nama: "Yuyun Nora Normania",
     pangkatId: 18,
     golonganId: 11,
@@ -963,7 +963,7 @@ const pegawais = [
   },
   {
     id: 65,
-    nip: "199701052025211003",
+    nip: "19970105 202521 1 003",
     nama: "Harbiansyah",
     pangkatId: 18,
     golonganId: 11,
@@ -978,7 +978,7 @@ const pegawais = [
   },
   {
     id: 66,
-    nip: "200008072025211002",
+    nip: "20000807 202521 1 002",
     nama: "Muhammad Rizaldy Soeardi",
     pangkatId: 18,
     golonganId: 11,
@@ -993,7 +993,7 @@ const pegawais = [
   },
   {
     id: 67,
-    nip: "198806292025212011",
+    nip: "19880629 202521 2 011",
     nama: "Mini Harti, Se",
     pangkatId: 18,
     golonganId: 15,
@@ -1008,7 +1008,7 @@ const pegawais = [
   },
   {
     id: 68,
-    nip: "198007222025211014",
+    nip: "19800722 202521 1 014",
     nama: "Budi Andriani, S.Pi",
     pangkatId: 18,
     golonganId: 15,
@@ -1023,7 +1023,7 @@ const pegawais = [
   },
   {
     id: 69,
-    nip: "198611122025211026",
+    nip: "19861112 202521 1 026",
     nama: "Ismail, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -1038,7 +1038,7 @@ const pegawais = [
   },
   {
     id: 70,
-    nip: "198802112025212020",
+    nip: "19880211 202521 2 020",
     nama: "Lenny Suhartini Erman, Se",
     pangkatId: 18,
     golonganId: 15,
@@ -1053,7 +1053,7 @@ const pegawais = [
   },
   {
     id: 71,
-    nip: "198911032025212017",
+    nip: "19891103 202521 2 017",
     nama: "Norhalimah, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -1068,7 +1068,7 @@ const pegawais = [
   },
   {
     id: 72,
-    nip: "199207142025212021",
+    nip: "19920714 202521 2 021",
     nama: "Masdalena, S. Pd",
     pangkatId: 18,
     golonganId: 15,
@@ -1083,7 +1083,7 @@ const pegawais = [
   },
   {
     id: 73,
-    nip: "198804142025212016",
+    nip: "19880414 202521 2 016",
     nama: "Risna Aprianti, S.Kep., Ners",
     pangkatId: 18,
     golonganId: 15,
@@ -1098,7 +1098,7 @@ const pegawais = [
   },
   {
     id: 74,
-    nip: "198406012025211026",
+    nip: "19840601 202521 1 026",
     nama: "Adi Suriya Winnata, S.P.",
     pangkatId: 18,
     golonganId: 15,
@@ -1113,7 +1113,7 @@ const pegawais = [
   },
   {
     id: 75,
-    nip: "199311022025212028",
+    nip: "19931102 202521 2 028",
     nama: "Rizky Widyanti, S.Si.T",
     pangkatId: 18,
     golonganId: 15,
@@ -1473,7 +1473,7 @@ const pegawais = [
   },
   {
     id: 99,
-    nip: "198004052009031006",
+    nip: "19800405 200903 1 006",
     nama: "Dr. Surya Taufik Rakhman",
     pangkatId: 13,
     golonganId: 8,
@@ -1488,7 +1488,7 @@ const pegawais = [
   },
   {
     id: 100,
-    nip: "196707251990022001",
+    nip: "19670725 199002 2 001",
     nama: "Elva Rosa, Se",
     pangkatId: 12,
     golonganId: 7,
@@ -1503,7 +1503,7 @@ const pegawais = [
   },
   {
     id: 101,
-    nip: "198202242010012021",
+    nip: "19820224 201001 2 021",
     nama: "Sukarti, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -1518,7 +1518,7 @@ const pegawais = [
   },
   {
     id: 102,
-    nip: "198410062010012024",
+    nip: "19841006 201001 2 024",
     nama: "Kristina, Se.",
     pangkatId: 11,
     golonganId: 6,
@@ -1533,7 +1533,7 @@ const pegawais = [
   },
   {
     id: 103,
-    nip: "198201132010011016",
+    nip: "19820113 201001 1 016",
     nama: "Taufik Dhana Wiratna, S.K.M.",
     pangkatId: 11,
     golonganId: 6,
@@ -1548,7 +1548,7 @@ const pegawais = [
   },
   {
     id: 104,
-    nip: "198307142010011028",
+    nip: "19830714 201001 1 028",
     nama: "Suripto, A.Md.Ak.",
     pangkatId: 11,
     golonganId: 6,
@@ -1563,7 +1563,7 @@ const pegawais = [
   },
   {
     id: 105,
-    nip: "198705142011012006",
+    nip: "19870514 201101 2 006",
     nama: "Nurul Mutmainnah, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -1578,7 +1578,7 @@ const pegawais = [
   },
   {
     id: 106,
-    nip: "198512232010011010",
+    nip: "19851223 201001 1 010",
     nama: "Tri Asbudian Nur Adi Setiawan, A.Md",
     pangkatId: 9,
     golonganId: 4,
@@ -1593,7 +1593,7 @@ const pegawais = [
   },
   {
     id: 107,
-    nip: "197803182010011020",
+    nip: "19780318 201001 1 020",
     nama: "Hermawan, A.Md.Kep",
     pangkatId: 9,
     golonganId: 4,
@@ -1608,7 +1608,7 @@ const pegawais = [
   },
   {
     id: 108,
-    nip: "197704112007012019",
+    nip: "19770411 200701 2 019",
     nama: "Herlina",
     pangkatId: 9,
     golonganId: 4,
@@ -1623,7 +1623,7 @@ const pegawais = [
   },
   {
     id: 109,
-    nip: "198905302019031008",
+    nip: "19890530 201903 1 008",
     nama: "Indra Permana, A.Md.",
     pangkatId: 8,
     golonganId: 3,
@@ -1638,7 +1638,7 @@ const pegawais = [
   },
   {
     id: 110,
-    nip: "199405012025212037",
+    nip: "19940501 202521 2 037",
     nama: "Rina Rizka Meyliana, Amd. Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -1653,7 +1653,7 @@ const pegawais = [
   },
   {
     id: 111,
-    nip: "199305242025212038",
+    nip: "19930524 202521 2 038",
     nama: "Neri Yanti Noviani, A.Md.Kes",
     pangkatId: 18,
     golonganId: 13,
@@ -1668,7 +1668,7 @@ const pegawais = [
   },
   {
     id: 112,
-    nip: "199212022025211015",
+    nip: "19921202 202521 1 015",
     nama: "Dimas Apriansyah",
     pangkatId: 18,
     golonganId: 11,
@@ -1683,7 +1683,7 @@ const pegawais = [
   },
   {
     id: 113,
-    nip: "199701162025211005",
+    nip: "19970116 202521 1 005",
     nama: "Ahmad Taufiq",
     pangkatId: 18,
     golonganId: 11,
@@ -1698,7 +1698,7 @@ const pegawais = [
   },
   {
     id: 114,
-    nip: "199505202024212044",
+    nip: "19950520 202421 2 044",
     nama: "Nur Rizqi Amaliah, S.Tr.Ak",
     pangkatId: 18,
     golonganId: 15,
@@ -1713,7 +1713,7 @@ const pegawais = [
   },
   {
     id: 115,
-    nip: "198808302025212015",
+    nip: "19880830 202521 2 015",
     nama: "Sartika Ibrahim, S.Si",
     pangkatId: 18,
     golonganId: 15,
@@ -2163,7 +2163,7 @@ const pegawais = [
   },
   {
     id: 145,
-    nip: "197807032005022006",
+    nip: "19780703 200502 2 006",
     nama: "Yayillatul Rochmah, S.Si, Apt",
     pangkatId: 13,
     golonganId: 8,
@@ -2178,7 +2178,7 @@ const pegawais = [
   },
   {
     id: 146,
-    nip: "198008302002122009",
+    nip: "19800830 200212 2 009",
     nama: "Agustina Rahmawati, S.A.P.",
     pangkatId: 12,
     golonganId: 7,
@@ -2193,7 +2193,7 @@ const pegawais = [
   },
   {
     id: 147,
-    nip: "197307232002122006",
+    nip: "19730723 200212 2 006",
     nama: "Dewi Indah Sari, S.Sos",
     pangkatId: 12,
     golonganId: 7,
@@ -2208,7 +2208,7 @@ const pegawais = [
   },
   {
     id: 148,
-    nip: "198207172009032012",
+    nip: "19820717 200903 2 012",
     nama: "Asmiyah, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -2223,7 +2223,7 @@ const pegawais = [
   },
   {
     id: 149,
-    nip: "198711162010011007",
+    nip: "19871116 201001 1 007",
     nama: "M. Nasaruddin, Amf",
     pangkatId: 11,
     golonganId: 6,
@@ -2238,7 +2238,7 @@ const pegawais = [
   },
   {
     id: 150,
-    nip: "196902221991022002",
+    nip: "19690222 199102 2 002",
     nama: "Minarni Cahyani",
     pangkatId: 10,
     golonganId: 5,
@@ -2253,7 +2253,7 @@ const pegawais = [
   },
   {
     id: 151,
-    nip: "197104261993032003",
+    nip: "19710426 199303 2 003",
     nama: "Menuk Mulyati",
     pangkatId: 10,
     golonganId: 5,
@@ -2268,7 +2268,7 @@ const pegawais = [
   },
   {
     id: 152,
-    nip: "198612262009031002",
+    nip: "19861226 200903 1 002",
     nama: "Muhammad Farhan Noor, A.Md.Kep",
     pangkatId: 9,
     golonganId: 4,
@@ -2283,7 +2283,7 @@ const pegawais = [
   },
   {
     id: 153,
-    nip: "197609132007011010",
+    nip: "19760913 200701 1 010",
     nama: "Ahmad Zainudin",
     pangkatId: 9,
     golonganId: 4,
@@ -2298,7 +2298,7 @@ const pegawais = [
   },
   {
     id: 154,
-    nip: "197802052007012011",
+    nip: "19780205 200701 2 011",
     nama: "Nor Hayani, Se",
     pangkatId: 9,
     golonganId: 4,
@@ -2313,7 +2313,7 @@ const pegawais = [
   },
   {
     id: 155,
-    nip: "199008302019032014",
+    nip: "19900830 201903 2 014",
     nama: "Anditha Risamigina, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -2328,7 +2328,7 @@ const pegawais = [
   },
   {
     id: 156,
-    nip: "199603302019032011",
+    nip: "19960330 201903 2 011",
     nama: "Yulida Rahmi, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -2343,7 +2343,7 @@ const pegawais = [
   },
   {
     id: 157,
-    nip: "199406122024212047",
+    nip: "19940612 202421 2 047",
     nama: "Apt. Tiara Laksmitha Purwandini, S.Farm",
     pangkatId: 18,
     golonganId: 16,
@@ -2358,7 +2358,7 @@ const pegawais = [
   },
   {
     id: 158,
-    nip: "199507042025212016",
+    nip: "19950704 202521 2 016",
     nama: "Putri Sari Astuti, S.Farm., Apt.",
     pangkatId: 18,
     golonganId: 16,
@@ -2373,7 +2373,7 @@ const pegawais = [
   },
   {
     id: 159,
-    nip: "198203202024212008",
+    nip: "19820320 202421 2 008",
     nama: "Evi Hadiah, A.Md.Farm",
     pangkatId: 18,
     golonganId: 13,
@@ -2388,7 +2388,7 @@ const pegawais = [
   },
   {
     id: 160,
-    nip: "199510012025211016",
+    nip: "19951001 202521 1 016",
     nama: "Nasran",
     pangkatId: 18,
     golonganId: 11,
@@ -2403,7 +2403,7 @@ const pegawais = [
   },
   {
     id: 161,
-    nip: "199006092025212011",
+    nip: "19900609 202521 2 011",
     nama: "Isna Silviana, S.P.",
     pangkatId: 18,
     golonganId: 15,
@@ -2418,7 +2418,7 @@ const pegawais = [
   },
   {
     id: 162,
-    nip: "199411212025212014",
+    nip: "19941121 202521 2 014",
     nama: "Nurlita Adillah, S,Farm",
     pangkatId: 18,
     golonganId: 15,
@@ -2553,7 +2553,7 @@ const pegawais = [
   },
   {
     id: 171,
-    nip: "197605122006042017",
+    nip: "19760512 200604 2 017",
     nama: "Drg. Mahira",
     pangkatId: 15,
     golonganId: 10,
@@ -2568,7 +2568,7 @@ const pegawais = [
   },
   {
     id: 172,
-    nip: "198005012010012021",
+    nip: "19800501 201001 2 021",
     nama: "Kusrini, S.Far.Apt",
     pangkatId: 13,
     golonganId: 8,
@@ -2583,7 +2583,7 @@ const pegawais = [
   },
   {
     id: 173,
-    nip: "198401312014112001",
+    nip: "19840131 201411 2 001",
     nama: "Dr. Rini Savitri Wulandari",
     pangkatId: 13,
     golonganId: 8,
@@ -2598,7 +2598,7 @@ const pegawais = [
   },
   {
     id: 174,
-    nip: "196909021989122001",
+    nip: "19690902 198912 2 001",
     nama: "Nurhidayah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2613,7 +2613,7 @@ const pegawais = [
   },
   {
     id: 175,
-    nip: "196908061991022003",
+    nip: "19690806 199102 2 003",
     nama: "Rachmaningsih Soekrino, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -2628,7 +2628,7 @@ const pegawais = [
   },
   {
     id: 176,
-    nip: "197006261991032010",
+    nip: "19700626 199103 2 010",
     nama: "Euis Farida, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2643,7 +2643,7 @@ const pegawais = [
   },
   {
     id: 177,
-    nip: "197305191996032003",
+    nip: "19730519 199603 2 003",
     nama: "Purwanti, A.Md.Kes.",
     pangkatId: 12,
     golonganId: 7,
@@ -2658,7 +2658,7 @@ const pegawais = [
   },
   {
     id: 178,
-    nip: "198408052014032002",
+    nip: "19840805 201403 2 002",
     nama: "Dr. Dwi Ratnawati",
     pangkatId: 12,
     golonganId: 7,
@@ -2673,7 +2673,7 @@ const pegawais = [
   },
   {
     id: 179,
-    nip: "198006022005022004",
+    nip: "19800602 200502 2 004",
     nama: "Tri Wulandari, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2688,7 +2688,7 @@ const pegawais = [
   },
   {
     id: 180,
-    nip: "198212252005022011",
+    nip: "19821225 200502 2 011",
     nama: "Aspihani, A.Md.Kep, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -2703,7 +2703,7 @@ const pegawais = [
   },
   {
     id: 181,
-    nip: "198209202006042029",
+    nip: "19820920 200604 2 029",
     nama: "Julfah Nur Hikmah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2718,7 +2718,7 @@ const pegawais = [
   },
   {
     id: 182,
-    nip: "198310082006042013",
+    nip: "19831008 200604 2 013",
     nama: "Octa Rinawaty, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -2733,7 +2733,7 @@ const pegawais = [
   },
   {
     id: 183,
-    nip: "198207112006042011",
+    nip: "19820711 200604 2 011",
     nama: "Yuli Hartanti, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2748,7 +2748,7 @@ const pegawais = [
   },
   {
     id: 184,
-    nip: "197901222006042006",
+    nip: "19790122 200604 2 006",
     nama: "Surianti, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -2763,7 +2763,7 @@ const pegawais = [
   },
   {
     id: 185,
-    nip: "198410272009032008",
+    nip: "19841027 200903 2 008",
     nama: "Seruni Manggarani, A.Md",
     pangkatId: 12,
     golonganId: 7,
@@ -2778,7 +2778,7 @@ const pegawais = [
   },
   {
     id: 186,
-    nip: "198612292009032007",
+    nip: "19861229 200903 2 007",
     nama: "Ns. Azdaniah, S.Tr.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -2793,7 +2793,7 @@ const pegawais = [
   },
   {
     id: 187,
-    nip: "197410102002122012",
+    nip: "19741010 200212 2 012",
     nama: "Adawiyah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2808,7 +2808,7 @@ const pegawais = [
   },
   {
     id: 188,
-    nip: "197708122003122006",
+    nip: "19770812 200312 2 006",
     nama: "Rachel Dua Lembang, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -2823,7 +2823,7 @@ const pegawais = [
   },
   {
     id: 189,
-    nip: "198601192008042002",
+    nip: "19860119 200804 2 002",
     nama: "Ina Anria Jayanti, A.Md.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -2838,7 +2838,7 @@ const pegawais = [
   },
   {
     id: 190,
-    nip: "197406012003122009",
+    nip: "19740601 200312 2 009",
     nama: "Bdn. Rinelda Bandhaso, S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -2853,7 +2853,7 @@ const pegawais = [
   },
   {
     id: 191,
-    nip: "198611152010011009",
+    nip: "19861115 201001 1 009",
     nama: "Hendra Lesmana Prawiranegara, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -2868,7 +2868,7 @@ const pegawais = [
   },
   {
     id: 192,
-    nip: "198610292010012012",
+    nip: "19861029 201001 2 012",
     nama: "Amelia Safitri, A.Md.Kep.",
     pangkatId: 11,
     golonganId: 6,
@@ -2883,7 +2883,7 @@ const pegawais = [
   },
   {
     id: 193,
-    nip: "198312292011012002",
+    nip: "19831229 201101 2 002",
     nama: "Herlida Nurul M, A.Md.Kl",
     pangkatId: 11,
     golonganId: 6,
@@ -2898,7 +2898,7 @@ const pegawais = [
   },
   {
     id: 194,
-    nip: "198401172011012003",
+    nip: "19840117 201101 2 003",
     nama: "Dwi Erlinawaty, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -2913,7 +2913,7 @@ const pegawais = [
   },
   {
     id: 195,
-    nip: "198703042010012024",
+    nip: "19870304 201001 2 024",
     nama: "Nurul Laila, A.Md. Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -2928,7 +2928,7 @@ const pegawais = [
   },
   {
     id: 196,
-    nip: "198805252010012013",
+    nip: "19880525 201001 2 013",
     nama: "Dewi Handayani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -2943,7 +2943,7 @@ const pegawais = [
   },
   {
     id: 197,
-    nip: "197706122006042026",
+    nip: "19770612 200604 2 026",
     nama: "Bdn., . Sri Dharmayanti, , S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -2958,7 +2958,7 @@ const pegawais = [
   },
   {
     id: 198,
-    nip: "198701072008042001",
+    nip: "19870107 200804 2 001",
     nama: "Bdn. Nidi Elis Safitri, S.S.T.",
     pangkatId: 11,
     golonganId: 6,
@@ -2973,7 +2973,7 @@ const pegawais = [
   },
   {
     id: 199,
-    nip: "198702202010012021",
+    nip: "19870220 201001 2 021",
     nama: "Siti Hanisah, A.Md.Keb.",
     pangkatId: 10,
     golonganId: 5,
@@ -2988,7 +2988,7 @@ const pegawais = [
   },
   {
     id: 200,
-    nip: "199011222022032008",
+    nip: "19901122 202203 2 008",
     nama: "Dr. Nurul Hawiyyah",
     pangkatId: 10,
     golonganId: 5,
@@ -3003,7 +3003,7 @@ const pegawais = [
   },
   {
     id: 201,
-    nip: "199410212019032013",
+    nip: "19941021 201903 2 013",
     nama: "Adelisa Marlinda Saputri, S.Ftr.",
     pangkatId: 10,
     golonganId: 5,
@@ -3018,7 +3018,7 @@ const pegawais = [
   },
   {
     id: 202,
-    nip: "199206102014031002",
+    nip: "19920610 201403 1 002",
     nama: "Gt. Muhammad Azlansyah, S.Tr.Kes",
     pangkatId: 10,
     golonganId: 5,
@@ -3033,7 +3033,7 @@ const pegawais = [
   },
   {
     id: 203,
-    nip: "198905082014032005",
+    nip: "19890508 201403 2 005",
     nama: "Isnaniah, A.Md.Kl",
     pangkatId: 10,
     golonganId: 5,
@@ -3048,7 +3048,7 @@ const pegawais = [
   },
   {
     id: 204,
-    nip: "198807182014032002",
+    nip: "19880718 201403 2 002",
     nama: "Yana Yulianti, A.Md.Ak",
     pangkatId: 10,
     golonganId: 5,
@@ -3063,7 +3063,7 @@ const pegawais = [
   },
   {
     id: 205,
-    nip: "199009142019032014",
+    nip: "19900914 201903 2 014",
     nama: "Nutia  Cahayani, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -3078,7 +3078,7 @@ const pegawais = [
   },
   {
     id: 206,
-    nip: "199210212019032011",
+    nip: "19921021 201903 2 011",
     nama: "Tari Kemuning Sari, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -3093,7 +3093,7 @@ const pegawais = [
   },
   {
     id: 207,
-    nip: "199407132019032026",
+    nip: "19940713 201903 2 026",
     nama: "Anita Yulia Rachman, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -3108,7 +3108,7 @@ const pegawais = [
   },
   {
     id: 208,
-    nip: "199005192019032014",
+    nip: "19900519 201903 2 014",
     nama: "Dwi Mei Firmawati, A.Md.",
     pangkatId: 8,
     golonganId: 3,
@@ -3123,7 +3123,7 @@ const pegawais = [
   },
   {
     id: 209,
-    nip: "199010092019031011",
+    nip: "19901009 201903 1 011",
     nama: "Muhammad Adli Rosadi, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -3138,7 +3138,7 @@ const pegawais = [
   },
   {
     id: 210,
-    nip: "199104062020122020",
+    nip: "19910406 202012 2 020",
     nama: "Erni Ramadhaniati, A.Md.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -3153,7 +3153,7 @@ const pegawais = [
   },
   {
     id: 211,
-    nip: "199204232022032006",
+    nip: "19920423 202203 2 006",
     nama: "Khusnul Khatimah, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -3168,7 +3168,7 @@ const pegawais = [
   },
   {
     id: 212,
-    nip: "199509022022032009",
+    nip: "19950902 202203 2 009",
     nama: "Nikmatul Ulfah, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -3183,7 +3183,7 @@ const pegawais = [
   },
   {
     id: 213,
-    nip: "199510112022032012",
+    nip: "19951011 202203 2 012",
     nama: "Elly Gunawiarsih, A.Md.Gz",
     pangkatId: 7,
     golonganId: 2,
@@ -3198,7 +3198,7 @@ const pegawais = [
   },
   {
     id: 214,
-    nip: "198305092024211007",
+    nip: "19830509 202421 1 007",
     nama: "Drg. Rachmat Shaleh",
     pangkatId: 18,
     golonganId: 16,
@@ -3213,7 +3213,7 @@ const pegawais = [
   },
   {
     id: 215,
-    nip: "199401012025212047",
+    nip: "19940101 202521 2 047",
     nama: "Ns. Siti Norjannah, S.Kep",
     pangkatId: 18,
     golonganId: 16,
@@ -3228,7 +3228,7 @@ const pegawais = [
   },
   {
     id: 216,
-    nip: "199406242025211022",
+    nip: "19940624 202521 1 022",
     nama: "Ns. Ali Husni, S.Tr.Kep",
     pangkatId: 18,
     golonganId: 16,
@@ -3243,7 +3243,7 @@ const pegawais = [
   },
   {
     id: 217,
-    nip: "199103222023212005",
+    nip: "19910322 202321 2 005",
     nama: "Shella Bunga Ramadhani",
     pangkatId: 18,
     golonganId: 13,
@@ -3258,7 +3258,7 @@ const pegawais = [
   },
   {
     id: 218,
-    nip: "198805312023212002",
+    nip: "19880531 202321 2 002",
     nama: "Suhaida, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -3273,7 +3273,7 @@ const pegawais = [
   },
   {
     id: 219,
-    nip: "198905232024212033",
+    nip: "19890523 202421 2 033",
     nama: "Andi Satriani, Amk",
     pangkatId: 18,
     golonganId: 13,
@@ -3288,7 +3288,7 @@ const pegawais = [
   },
   {
     id: 220,
-    nip: "198706092024212017",
+    nip: "19870609 202421 2 017",
     nama: "Asmawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3303,7 +3303,7 @@ const pegawais = [
   },
   {
     id: 221,
-    nip: "199201232024212032",
+    nip: "19920123 202421 2 032",
     nama: "Fitri Sri Wahyuni, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3318,7 +3318,7 @@ const pegawais = [
   },
   {
     id: 222,
-    nip: "199008282024212052",
+    nip: "19900828 202421 2 052",
     nama: "Siti Nurainah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -3333,7 +3333,7 @@ const pegawais = [
   },
   {
     id: 223,
-    nip: "199202262024211019",
+    nip: "19920226 202421 1 019",
     nama: "M. Rizki Rahmadani, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -3348,7 +3348,7 @@ const pegawais = [
   },
   {
     id: 224,
-    nip: "199509282024211008",
+    nip: "19950928 202421 1 008",
     nama: "Adi Nugroho Septianto, A.Md.Farm",
     pangkatId: 18,
     golonganId: 13,
@@ -3363,7 +3363,7 @@ const pegawais = [
   },
   {
     id: 225,
-    nip: "199503282024212040",
+    nip: "19950328 202421 2 040",
     nama: "Kristikurniawan, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3378,7 +3378,7 @@ const pegawais = [
   },
   {
     id: 226,
-    nip: "198902152025212025",
+    nip: "19890215 202521 2 025",
     nama: "Siti Hadijah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3393,7 +3393,7 @@ const pegawais = [
   },
   {
     id: 227,
-    nip: "199006242025212015",
+    nip: "19900624 202521 2 015",
     nama: "Mariam Sulpah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3408,7 +3408,7 @@ const pegawais = [
   },
   {
     id: 228,
-    nip: "199007072025212035",
+    nip: "19900707 202521 2 035",
     nama: "Ayu Fauziah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3423,7 +3423,7 @@ const pegawais = [
   },
   {
     id: 229,
-    nip: "199009032025212018",
+    nip: "19900903 202521 2 018",
     nama: "Mariza Septriawaty, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3438,7 +3438,7 @@ const pegawais = [
   },
   {
     id: 230,
-    nip: "199309272025212025",
+    nip: "19930927 202521 2 025",
     nama: "Suci Nurul Hidayani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3453,7 +3453,7 @@ const pegawais = [
   },
   {
     id: 231,
-    nip: "199302242025212020",
+    nip: "19930224 202521 2 020",
     nama: "Noer Renita Riany Rahmawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3468,7 +3468,7 @@ const pegawais = [
   },
   {
     id: 232,
-    nip: "199403232025212029",
+    nip: "19940323 202521 2 029",
     nama: "Mariana Saputri, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3483,7 +3483,7 @@ const pegawais = [
   },
   {
     id: 233,
-    nip: "199408082025212025",
+    nip: "19940808 202521 2 025",
     nama: "Nur Ainah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -3498,7 +3498,7 @@ const pegawais = [
   },
   {
     id: 234,
-    nip: "197905112025212011",
+    nip: "19790511 202521 2 011",
     nama: "Heny Hendrawati.B",
     pangkatId: 18,
     golonganId: 11,
@@ -3513,7 +3513,7 @@ const pegawais = [
   },
   {
     id: 235,
-    nip: "200008152025211003",
+    nip: "20000815 202521 1 003",
     nama: "Muhammad Nabillah",
     pangkatId: 18,
     golonganId: 11,
@@ -3528,7 +3528,7 @@ const pegawais = [
   },
   {
     id: 236,
-    nip: "198305192024211004",
+    nip: "19830519 202421 1 004",
     nama: "Hamdi, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -3543,7 +3543,7 @@ const pegawais = [
   },
   {
     id: 237,
-    nip: "199210312025212023",
+    nip: "19921031 202521 2 023",
     nama: "Amilda Purnama Sari, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -3559,7 +3559,7 @@ const pegawais = [
   },
   {
     id: 238,
-    nip: "198911052025211029",
+    nip: "19891105 202521 1 029",
     nama: "Ikra, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -3799,7 +3799,7 @@ const pegawais = [
   },
   {
     id: 254,
-    nip: "198303152014112001",
+    nip: "19830315 201411 2 001",
     nama: "Dr. Riska Ulfah",
     pangkatId: 13,
     golonganId: 8,
@@ -3814,7 +3814,7 @@ const pegawais = [
   },
   {
     id: 255,
-    nip: "197703022003122009",
+    nip: "19770302 200312 2 009",
     nama: "Faulina Hartati, S.Tr.Kep.Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -3829,7 +3829,7 @@ const pegawais = [
   },
   {
     id: 256,
-    nip: "197912042006042009",
+    nip: "19791204 200604 2 009",
     nama: "Nurhaeba, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -3844,7 +3844,7 @@ const pegawais = [
   },
   {
     id: 257,
-    nip: "198503042009032011",
+    nip: "19850304 200903 2 011",
     nama: "Rachmayana, S.Farm.Apt",
     pangkatId: 12,
     golonganId: 7,
@@ -3859,7 +3859,7 @@ const pegawais = [
   },
   {
     id: 258,
-    nip: "197903242006042021",
+    nip: "19790324 200604 2 021",
     nama: "Hariani D, S.Tr.Kep.Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -3874,7 +3874,7 @@ const pegawais = [
   },
   {
     id: 259,
-    nip: "198304272006042011",
+    nip: "19830427 200604 2 011",
     nama: "Bdn., . Apridiana Rahmawati, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -3889,7 +3889,7 @@ const pegawais = [
   },
   {
     id: 260,
-    nip: "198609182008042001",
+    nip: "19860918 200804 2 001",
     nama: "Bdn. Riskawati, S.Tr.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -3904,7 +3904,7 @@ const pegawais = [
   },
   {
     id: 261,
-    nip: "197502222005012009",
+    nip: "19750222 200501 2 009",
     nama: "Fatimah, S.Si.T",
     pangkatId: 12,
     golonganId: 7,
@@ -3919,7 +3919,7 @@ const pegawais = [
   },
   {
     id: 262,
-    nip: "198203082006042014",
+    nip: "19820308 200604 2 014",
     nama: "Ina Prihatina Widiyasworo, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -3934,7 +3934,7 @@ const pegawais = [
   },
   {
     id: 263,
-    nip: "198307302006042015",
+    nip: "19830730 200604 2 015",
     nama: "Andi Rosnani, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -3949,7 +3949,7 @@ const pegawais = [
   },
   {
     id: 264,
-    nip: "198508172008042003",
+    nip: "19850817 200804 2 003",
     nama: "Novi Amri Gusman, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -3964,7 +3964,7 @@ const pegawais = [
   },
   {
     id: 265,
-    nip: "198307202005022001",
+    nip: "19830720 200502 2 001",
     nama: "Bdn. Bayu Fitria Maharani, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -3979,7 +3979,7 @@ const pegawais = [
   },
   {
     id: 266,
-    nip: "198307072006042016",
+    nip: "19830707 200604 2 016",
     nama: "Bdn. Salmawati, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -3994,7 +3994,7 @@ const pegawais = [
   },
   {
     id: 267,
-    nip: "197405142002122008",
+    nip: "19740514 200212 2 008",
     nama: "Nina Yuzak, A.Md.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -4009,7 +4009,7 @@ const pegawais = [
   },
   {
     id: 268,
-    nip: "198802152009031002",
+    nip: "19880215 200903 1 002",
     nama: "Ns. Aidi Rahman, S.Tr.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -4024,7 +4024,7 @@ const pegawais = [
   },
   {
     id: 269,
-    nip: "198806102010012016",
+    nip: "19880610 201001 2 016",
     nama: "Norida Hasanah, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -4039,7 +4039,7 @@ const pegawais = [
   },
   {
     id: 270,
-    nip: "199606032019032013",
+    nip: "19960603 201903 2 013",
     nama: "Apt. Shientiya Nur Rosyidah, S. Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -4054,7 +4054,7 @@ const pegawais = [
   },
   {
     id: 271,
-    nip: "198901142019032008",
+    nip: "19890114 201903 2 008",
     nama: "Dr. Renny Mardayati",
     pangkatId: 11,
     golonganId: 6,
@@ -4069,7 +4069,7 @@ const pegawais = [
   },
   {
     id: 272,
-    nip: "198807192010012011",
+    nip: "19880719 201001 2 011",
     nama: "Bdn. Erlyanti, S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -4084,7 +4084,7 @@ const pegawais = [
   },
   {
     id: 273,
-    nip: "198811012010012012",
+    nip: "19881101 201001 2 012",
     nama: "Besse Marwah, A.Md.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -4099,7 +4099,7 @@ const pegawais = [
   },
   {
     id: 274,
-    nip: "198602012010012024",
+    nip: "19860201 201001 2 024",
     nama: "Marlena, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -4114,7 +4114,7 @@ const pegawais = [
   },
   {
     id: 275,
-    nip: "198801162010012015",
+    nip: "19880116 201001 2 015",
     nama: "Hasvita Januarisna, S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -4129,7 +4129,7 @@ const pegawais = [
   },
   {
     id: 276,
-    nip: "198608082010012025",
+    nip: "19860808 201001 2 025",
     nama: "Siti Halmiah, A.Md.Ak.",
     pangkatId: 11,
     golonganId: 6,
@@ -4144,7 +4144,7 @@ const pegawais = [
   },
   {
     id: 277,
-    nip: "197911192009032003",
+    nip: "19791119 200903 2 003",
     nama: "Ernawaty Damanik, A.Md.Keb,Skm",
     pangkatId: 11,
     golonganId: 6,
@@ -4159,7 +4159,7 @@ const pegawais = [
   },
   {
     id: 278,
-    nip: "197906172006042013",
+    nip: "19790617 200604 2 013",
     nama: "Siti Patimah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -4174,7 +4174,7 @@ const pegawais = [
   },
   {
     id: 279,
-    nip: "198007282005022005",
+    nip: "19800728 200502 2 005",
     nama: "Suratmini, A.Md.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -4189,7 +4189,7 @@ const pegawais = [
   },
   {
     id: 280,
-    nip: "197805122006041033",
+    nip: "19780512 200604 1 033",
     nama: "Asriadi, Ns., S.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -4204,7 +4204,7 @@ const pegawais = [
   },
   {
     id: 281,
-    nip: "197710252005021004",
+    nip: "19771025 200502 1 004",
     nama: "Abdul Malik, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -4219,7 +4219,7 @@ const pegawais = [
   },
   {
     id: 282,
-    nip: "198807052011012008",
+    nip: "19880705 201101 2 008",
     nama: "Elita Fajar Rini, A.Md.Kes",
     pangkatId: 10,
     golonganId: 5,
@@ -4234,7 +4234,7 @@ const pegawais = [
   },
   {
     id: 283,
-    nip: "199604162019032010",
+    nip: "19960416 201903 2 010",
     nama: "Erliza Rahmina, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -4249,7 +4249,7 @@ const pegawais = [
   },
   {
     id: 284,
-    nip: "199709062019032006",
+    nip: "19970906 201903 2 006",
     nama: "Sylvania Heni Puspa Lestari, A.Md.Rmik",
     pangkatId: 8,
     golonganId: 3,
@@ -4264,7 +4264,7 @@ const pegawais = [
   },
   {
     id: 285,
-    nip: "198606252019031010",
+    nip: "19860625 201903 1 010",
     nama: "Budiyono, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -4279,7 +4279,7 @@ const pegawais = [
   },
   {
     id: 286,
-    nip: "199110122019032023",
+    nip: "19911012 201903 2 023",
     nama: "Ratih Noer Eliza, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -4294,7 +4294,7 @@ const pegawais = [
   },
   {
     id: 287,
-    nip: "199407172019032024",
+    nip: "19940717 201903 2 024",
     nama: "Miftakhul Khasanah, A.Md.Kl.",
     pangkatId: 8,
     golonganId: 3,
@@ -4309,7 +4309,7 @@ const pegawais = [
   },
   {
     id: 288,
-    nip: "199605252019031011",
+    nip: "19960525 201903 1 011",
     nama: "Mei Dedy Purwanto, A.Md.Gz",
     pangkatId: 8,
     golonganId: 3,
@@ -4324,7 +4324,7 @@ const pegawais = [
   },
   {
     id: 289,
-    nip: "199304122019032013",
+    nip: "19930412 201903 2 013",
     nama: "Rahmi Pratiwi, A.Md.Kg.",
     pangkatId: 7,
     golonganId: 2,
@@ -4339,7 +4339,7 @@ const pegawais = [
   },
   {
     id: 290,
-    nip: "197711052010011015",
+    nip: "19771105 201001 1 015",
     nama: "Mariyansyah",
     pangkatId: 7,
     golonganId: 2,
@@ -4354,7 +4354,7 @@ const pegawais = [
   },
   {
     id: 291,
-    nip: "198609112025212011",
+    nip: "19860911 202521 2 011",
     nama: "Fausiah Usman, S.Farm ,Apt.",
     pangkatId: 18,
     golonganId: 16,
@@ -4369,7 +4369,7 @@ const pegawais = [
   },
   {
     id: 292,
-    nip: "199403082024212028",
+    nip: "19940308 202421 2 028",
     nama: "Dwi Ratna Sari, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4384,7 +4384,7 @@ const pegawais = [
   },
   {
     id: 293,
-    nip: "198910152024212034",
+    nip: "19891015 202421 2 034",
     nama: "Elly Hidayati, Amd. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4399,7 +4399,7 @@ const pegawais = [
   },
   {
     id: 294,
-    nip: "199002092024212021",
+    nip: "19900209 202421 2 021",
     nama: "Sri Mastuti, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4414,7 +4414,7 @@ const pegawais = [
   },
   {
     id: 295,
-    nip: "199007222024211013",
+    nip: "19900722 202421 1 013",
     nama: "Muhammad Yamin Syam, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4429,7 +4429,7 @@ const pegawais = [
   },
   {
     id: 296,
-    nip: "199208292024212030",
+    nip: "19920829 202421 2 030",
     nama: "Miftahur Rahmah, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4444,7 +4444,7 @@ const pegawais = [
   },
   {
     id: 297,
-    nip: "199202042024212044",
+    nip: "19920204 202421 2 044",
     nama: "Riska Ramdaniyah, A.Md.Far",
     pangkatId: 18,
     golonganId: 13,
@@ -4459,7 +4459,7 @@ const pegawais = [
   },
   {
     id: 298,
-    nip: "199510152024212027",
+    nip: "19951015 202421 2 027",
     nama: "Fenny Rahman, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4474,7 +4474,7 @@ const pegawais = [
   },
   {
     id: 299,
-    nip: "199510042024212034",
+    nip: "19951004 202421 2 034",
     nama: "Nora Silvia, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4489,7 +4489,7 @@ const pegawais = [
   },
   {
     id: 300,
-    nip: "199603262024212025",
+    nip: "19960326 202421 2 025",
     nama: "Nuraisyah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4504,7 +4504,7 @@ const pegawais = [
   },
   {
     id: 301,
-    nip: "198904252025212022",
+    nip: "19890425 202521 2 022",
     nama: "Apriyanti Ningrum, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4519,7 +4519,7 @@ const pegawais = [
   },
   {
     id: 302,
-    nip: "199101162025212019",
+    nip: "19910116 202521 2 019",
     nama: "Asmaul Husnah, A.Md Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4534,7 +4534,7 @@ const pegawais = [
   },
   {
     id: 303,
-    nip: "198904042025212032",
+    nip: "19890404 202521 2 032",
     nama: "Sweetty Anggraini S, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4549,7 +4549,7 @@ const pegawais = [
   },
   {
     id: 304,
-    nip: "198911012025212018",
+    nip: "19891101 202521 2 018",
     nama: "Hedi Ihdini, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4564,7 +4564,7 @@ const pegawais = [
   },
   {
     id: 305,
-    nip: "199004052025212025",
+    nip: "19900405 202521 2 025",
     nama: "Tika Anggraini, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4579,7 +4579,7 @@ const pegawais = [
   },
   {
     id: 306,
-    nip: "199205112025212026",
+    nip: "19920511 202521 2 026",
     nama: "Siti Mahbubah, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4594,7 +4594,7 @@ const pegawais = [
   },
   {
     id: 307,
-    nip: "199108292025212016",
+    nip: "19910829 202521 2 016",
     nama: "Istiqomah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4609,7 +4609,7 @@ const pegawais = [
   },
   {
     id: 308,
-    nip: "199207312025212025",
+    nip: "19920731 202521 2 025",
     nama: "Rara Putri Manti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4624,7 +4624,7 @@ const pegawais = [
   },
   {
     id: 309,
-    nip: "199405162025212015",
+    nip: "19940516 202521 2 015",
     nama: "Nor Hanimah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4639,7 +4639,7 @@ const pegawais = [
   },
   {
     id: 310,
-    nip: "199411302025212027",
+    nip: "19941130 202521 2 027",
     nama: "Rani Chairunnisa, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -4654,7 +4654,7 @@ const pegawais = [
   },
   {
     id: 311,
-    nip: "199508192025212021",
+    nip: "19950819 202521 2 021",
     nama: "Sitti Hajar, A,Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -4669,7 +4669,7 @@ const pegawais = [
   },
   {
     id: 312,
-    nip: "199701312023212003",
+    nip: "19970131 202321 2 003",
     nama: "Dina Afdalia, S.Tr.A.K",
     pangkatId: 18,
     golonganId: 15,
@@ -4684,7 +4684,7 @@ const pegawais = [
   },
   {
     id: 313,
-    nip: "198807032025212006",
+    nip: "19880703 202521 2 006",
     nama: "Isnaniah, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -4699,7 +4699,7 @@ const pegawais = [
   },
   {
     id: 314,
-    nip: "198912252025211017",
+    nip: "19891225 202521 1 017",
     nama: "Muhamad Patrayansyah, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -5149,7 +5149,7 @@ const pegawais = [
   },
   {
     id: 344,
-    nip: "197802272006042023",
+    nip: "19780227 200604 2 023",
     nama: "Dr. Nely Verawati",
     pangkatId: 14,
     golonganId: 9,
@@ -5164,7 +5164,7 @@ const pegawais = [
   },
   {
     id: 345,
-    nip: "196801041989022002",
+    nip: "19680104 198902 2 002",
     nama: "Sri Puji Astuti",
     pangkatId: 12,
     golonganId: 7,
@@ -5179,7 +5179,7 @@ const pegawais = [
   },
   {
     id: 346,
-    nip: "196806121995032004",
+    nip: "19680612 199503 2 004",
     nama: "Mursidah, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -5194,7 +5194,7 @@ const pegawais = [
   },
   {
     id: 347,
-    nip: "198101222014032002",
+    nip: "19810122 201403 2 002",
     nama: "Drg. Anugerahwati Azis",
     pangkatId: 12,
     golonganId: 7,
@@ -5209,7 +5209,7 @@ const pegawais = [
   },
   {
     id: 348,
-    nip: "197712302005021006",
+    nip: "19771230 200502 1 006",
     nama: "Supriyanto, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -5224,7 +5224,7 @@ const pegawais = [
   },
   {
     id: 349,
-    nip: "197811152005022003",
+    nip: "19781115 200502 2 003",
     nama: "Rasmi Bolong, S.St",
     pangkatId: 12,
     golonganId: 7,
@@ -5239,7 +5239,7 @@ const pegawais = [
   },
   {
     id: 350,
-    nip: "198503122009032017",
+    nip: "19850312 200903 2 017",
     nama: "Ismarwanti, A.Md",
     pangkatId: 12,
     golonganId: 7,
@@ -5254,7 +5254,7 @@ const pegawais = [
   },
   {
     id: 351,
-    nip: "198108202005021004",
+    nip: "19810820 200502 1 004",
     nama: "Akhmad Riduan, S.Tr.Kes",
     pangkatId: 12,
     golonganId: 7,
@@ -5269,7 +5269,7 @@ const pegawais = [
   },
   {
     id: 352,
-    nip: "198404252006042010",
+    nip: "19840425 200604 2 010",
     nama: "Bd. Dewi Kasanah, S.St",
     pangkatId: 12,
     golonganId: 7,
@@ -5284,7 +5284,7 @@ const pegawais = [
   },
   {
     id: 353,
-    nip: "197108151996031002",
+    nip: "19710815 199603 1 002",
     nama: "Agus Supianda",
     pangkatId: 11,
     golonganId: 6,
@@ -5299,7 +5299,7 @@ const pegawais = [
   },
   {
     id: 354,
-    nip: "197407282002122005",
+    nip: "19740728 200212 2 005",
     nama: "Yuli Rusdianingsih, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -5314,7 +5314,7 @@ const pegawais = [
   },
   {
     id: 355,
-    nip: "199103182019032018",
+    nip: "19910318 201903 2 018",
     nama: "Dr. Dewi Ayu Puspitasari",
     pangkatId: 11,
     golonganId: 6,
@@ -5329,7 +5329,7 @@ const pegawais = [
   },
   {
     id: 356,
-    nip: "198907162011012005",
+    nip: "19890716 201101 2 005",
     nama: "Sarwanti, Amg",
     pangkatId: 11,
     golonganId: 6,
@@ -5344,7 +5344,7 @@ const pegawais = [
   },
   {
     id: 357,
-    nip: "199202292019032019",
+    nip: "19920229 201903 2 019",
     nama: "Nur Laila Musdayanti, S. Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -5359,7 +5359,7 @@ const pegawais = [
   },
   {
     id: 358,
-    nip: "199105242019031010",
+    nip: "19910524 201903 1 010",
     nama: "Drg. Taufik  Eko Prabowo",
     pangkatId: 11,
     golonganId: 6,
@@ -5374,7 +5374,7 @@ const pegawais = [
   },
   {
     id: 359,
-    nip: "196903041994032010",
+    nip: "19690304 199403 2 010",
     nama: "Netty Rawati Saragih, A.Md.Gz",
     pangkatId: 11,
     golonganId: 6,
@@ -5389,7 +5389,7 @@ const pegawais = [
   },
   {
     id: 360,
-    nip: "199308252022031013",
+    nip: "19930825 202203 1 013",
     nama: "Dr. Fahmi Azhari Saharuddin",
     pangkatId: 10,
     golonganId: 5,
@@ -5404,7 +5404,7 @@ const pegawais = [
   },
   {
     id: 361,
-    nip: "197407062007011021",
+    nip: "19740706 200701 1 021",
     nama: "Heron Anwar",
     pangkatId: 9,
     golonganId: 4,
@@ -5419,7 +5419,7 @@ const pegawais = [
   },
   {
     id: 362,
-    nip: "199001062017052001",
+    nip: "19900106 201705 2 001",
     nama: "Lisca Winny Susriani, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -5434,7 +5434,7 @@ const pegawais = [
   },
   {
     id: 363,
-    nip: "199006222017052001",
+    nip: "19900622 201705 2 001",
     nama: "Marlina Yuni Hidayah, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -5449,7 +5449,7 @@ const pegawais = [
   },
   {
     id: 364,
-    nip: "199201232019032021",
+    nip: "19920123 201903 2 021",
     nama: "Yeni Wanda Sari, A.Md.Kep.",
     pangkatId: 9,
     golonganId: 4,
@@ -5464,7 +5464,7 @@ const pegawais = [
   },
   {
     id: 365,
-    nip: "199302082019032013",
+    nip: "19930208 201903 2 013",
     nama: "Enny Eryana Dewi, A.Md. Far.",
     pangkatId: 8,
     golonganId: 3,
@@ -5479,7 +5479,7 @@ const pegawais = [
   },
   {
     id: 366,
-    nip: "199010122019032013",
+    nip: "19901012 201903 2 013",
     nama: "Aisiyah Tri Annisa Putri, A.Md",
     pangkatId: 8,
     golonganId: 3,
@@ -5494,7 +5494,7 @@ const pegawais = [
   },
   {
     id: 367,
-    nip: "198602172020122008",
+    nip: "19860217 202012 2 008",
     nama: "Susylarty, A.Md.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -5509,7 +5509,7 @@ const pegawais = [
   },
   {
     id: 368,
-    nip: "199308212023212008",
+    nip: "19930821 202321 2 008",
     nama: "Dr. Siti Salamah",
     pangkatId: 18,
     golonganId: 16,
@@ -5524,7 +5524,7 @@ const pegawais = [
   },
   {
     id: 369,
-    nip: "199110042023212007",
+    nip: "19911004 202321 2 007",
     nama: "Ulpa Puspita, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -5539,7 +5539,7 @@ const pegawais = [
   },
   {
     id: 370,
-    nip: "198903012024211008",
+    nip: "19890301 202421 1 008",
     nama: "Wantri Jonny Purba",
     pangkatId: 18,
     golonganId: 13,
@@ -5554,7 +5554,7 @@ const pegawais = [
   },
   {
     id: 371,
-    nip: "199011172024212028",
+    nip: "19901117 202421 2 028",
     nama: "Muhlisa Alpiani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5569,7 +5569,7 @@ const pegawais = [
   },
   {
     id: 372,
-    nip: "199101042024212045",
+    nip: "19910104 202421 2 045",
     nama: "Natalia Putri Wulandari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5584,7 +5584,7 @@ const pegawais = [
   },
   {
     id: 373,
-    nip: "198807132024211018",
+    nip: "19880713 202421 1 018",
     nama: "Marzawan, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -5599,7 +5599,7 @@ const pegawais = [
   },
   {
     id: 374,
-    nip: "199010232024211019",
+    nip: "19901023 202421 1 019",
     nama: "Aksad, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -5614,7 +5614,7 @@ const pegawais = [
   },
   {
     id: 375,
-    nip: "199210092024212034",
+    nip: "19921009 202421 2 034",
     nama: "Jumrawati, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -5629,7 +5629,7 @@ const pegawais = [
   },
   {
     id: 376,
-    nip: "199311092024212041",
+    nip: "19931109 202421 2 041",
     nama: "Berlita Arianti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5644,7 +5644,7 @@ const pegawais = [
   },
   {
     id: 377,
-    nip: "198904092025212025",
+    nip: "19890409 202521 2 025",
     nama: "Apnila Ramadaniar, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5659,7 +5659,7 @@ const pegawais = [
   },
   {
     id: 378,
-    nip: "198905192025212023",
+    nip: "19890519 202521 2 023",
     nama: "Sri Patnawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5674,7 +5674,7 @@ const pegawais = [
   },
   {
     id: 379,
-    nip: "199001302025212016",
+    nip: "19900130 202521 2 016",
     nama: "Herlinawati Amir, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5689,7 +5689,7 @@ const pegawais = [
   },
   {
     id: 380,
-    nip: "199002112025212022",
+    nip: "19900211 202521 2 022",
     nama: "Nengsih Pantasari Boru Manalu, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5704,7 +5704,7 @@ const pegawais = [
   },
   {
     id: 381,
-    nip: "199102102025211027",
+    nip: "19910210 202521 1 027",
     nama: "Aditya Yogi Perdana, A.Md,Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -5719,7 +5719,7 @@ const pegawais = [
   },
   {
     id: 382,
-    nip: "199412062025212031",
+    nip: "19941206 202521 2 031",
     nama: "Desintya Eka Putri, A.Md,Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5734,7 +5734,7 @@ const pegawais = [
   },
   {
     id: 383,
-    nip: "199611162025212016",
+    nip: "19961116 202521 2 016",
     nama: "Reni Nur Hidayati, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -5749,7 +5749,7 @@ const pegawais = [
   },
   {
     id: 384,
-    nip: "198806142025212013",
+    nip: "19880614 202521 2 013",
     nama: "Puji Dyahastuti",
     pangkatId: 18,
     golonganId: 11,
@@ -5764,7 +5764,7 @@ const pegawais = [
   },
   {
     id: 385,
-    nip: "199205102025211021",
+    nip: "19920510 202521 1 021",
     nama: "Misbahul Hasan",
     pangkatId: 18,
     golonganId: 11,
@@ -6034,7 +6034,7 @@ const pegawais = [
   },
   {
     id: 403,
-    nip: "197504252006041018",
+    nip: "19750425 200604 1 018",
     nama: "Drg. Vieel Sidhatut Thoharoni Syaltout, M.A.P.",
     pangkatId: 15,
     golonganId: 10,
@@ -6049,7 +6049,7 @@ const pegawais = [
   },
   {
     id: 404,
-    nip: "197510132010011009",
+    nip: "19751013 201001 1 009",
     nama: "Dr. Andi Adnan",
     pangkatId: 14,
     golonganId: 9,
@@ -6064,7 +6064,7 @@ const pegawais = [
   },
   {
     id: 405,
-    nip: "197405141993032002",
+    nip: "19740514 199303 2 002",
     nama: "Bdn. Sri Hastuti, , S.St",
     pangkatId: 14,
     golonganId: 9,
@@ -6079,7 +6079,7 @@ const pegawais = [
   },
   {
     id: 406,
-    nip: "196810271989112003",
+    nip: "19681027 198911 2 003",
     nama: "Bdn. Shally Kurniati, , S.Tr.Keb",
     pangkatId: 13,
     golonganId: 8,
@@ -6094,7 +6094,7 @@ const pegawais = [
   },
   {
     id: 407,
-    nip: "196902281988031001",
+    nip: "19690228 198803 1 001",
     nama: "Achmad, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -6109,7 +6109,7 @@ const pegawais = [
   },
   {
     id: 408,
-    nip: "197306261995032003",
+    nip: "19730626 199503 2 003",
     nama: "Sri Mulyani, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -6124,7 +6124,7 @@ const pegawais = [
   },
   {
     id: 409,
-    nip: "197109271991022002",
+    nip: "19710927 199102 2 002",
     nama: "Ida Nursanti, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -6139,7 +6139,7 @@ const pegawais = [
   },
   {
     id: 410,
-    nip: "197211161993031005",
+    nip: "19721116 199303 1 005",
     nama: "Purnomo, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -6154,7 +6154,7 @@ const pegawais = [
   },
   {
     id: 411,
-    nip: "197201081994031003",
+    nip: "19720108 199403 1 003",
     nama: "Nor Ifansyah, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -6169,7 +6169,7 @@ const pegawais = [
   },
   {
     id: 412,
-    nip: "197408051994032003",
+    nip: "19740805 199403 2 003",
     nama: "Wiwin Suciati",
     pangkatId: 12,
     golonganId: 7,
@@ -6184,7 +6184,7 @@ const pegawais = [
   },
   {
     id: 413,
-    nip: "196902121990032009",
+    nip: "19690212 199003 2 009",
     nama: "Erny Evriaty, A.Md.Gizi, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -6199,7 +6199,7 @@ const pegawais = [
   },
   {
     id: 414,
-    nip: "197507011995032001",
+    nip: "19750701 199503 2 001",
     nama: "Eko Yuliati, A.Md.Kg",
     pangkatId: 12,
     golonganId: 7,
@@ -6214,7 +6214,7 @@ const pegawais = [
   },
   {
     id: 415,
-    nip: "198101272006042021",
+    nip: "19810127 200604 2 021",
     nama: "Ratih Cahyani, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -6229,7 +6229,7 @@ const pegawais = [
   },
   {
     id: 416,
-    nip: "197308031995031002",
+    nip: "19730803 199503 1 002",
     nama: "Augus Indra Sakti,  A.Md.Kes., Se",
     pangkatId: 12,
     golonganId: 7,
@@ -6244,7 +6244,7 @@ const pegawais = [
   },
   {
     id: 417,
-    nip: "198402222009031004",
+    nip: "19840222 200903 1 004",
     nama: "Udin Archam, S.Farm, Apt",
     pangkatId: 12,
     golonganId: 7,
@@ -6259,7 +6259,7 @@ const pegawais = [
   },
   {
     id: 418,
-    nip: "197802102006042032",
+    nip: "19780210 200604 2 032",
     nama: "Hasni Basri, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -6274,7 +6274,7 @@ const pegawais = [
   },
   {
     id: 419,
-    nip: "197704052008042001",
+    nip: "19770405 200804 2 001",
     nama: "Tutut Siswanti, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -6289,7 +6289,7 @@ const pegawais = [
   },
   {
     id: 420,
-    nip: "197508172003122009",
+    nip: "19750817 200312 2 009",
     nama: "Arbiana, S.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -6304,7 +6304,7 @@ const pegawais = [
   },
   {
     id: 421,
-    nip: "197409102003122007",
+    nip: "19740910 200312 2 007",
     nama: "Syahmirat, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -6319,7 +6319,7 @@ const pegawais = [
   },
   {
     id: 422,
-    nip: "198608252009032006",
+    nip: "19860825 200903 2 006",
     nama: "Rusmiati, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -6334,7 +6334,7 @@ const pegawais = [
   },
   {
     id: 423,
-    nip: "198801062010012017",
+    nip: "19880106 201001 2 017",
     nama: "Nur Efa Izin, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -6349,7 +6349,7 @@ const pegawais = [
   },
   {
     id: 424,
-    nip: "198111302003122004",
+    nip: "19811130 200312 2 004",
     nama: "Marwah, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -6364,7 +6364,7 @@ const pegawais = [
   },
   {
     id: 425,
-    nip: "198201252009032006",
+    nip: "19820125 200903 2 006",
     nama: "Heni Puspitasari, Am.Kg",
     pangkatId: 11,
     golonganId: 6,
@@ -6379,7 +6379,7 @@ const pegawais = [
   },
   {
     id: 426,
-    nip: "198311212010012023",
+    nip: "19831121 201001 2 023",
     nama: "Muslimiyah, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -6394,7 +6394,7 @@ const pegawais = [
   },
   {
     id: 427,
-    nip: "198701022010012022",
+    nip: "19870102 201001 2 022",
     nama: "Isbiyati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -6409,7 +6409,7 @@ const pegawais = [
   },
   {
     id: 428,
-    nip: "198810042010012011",
+    nip: "19881004 201001 2 011",
     nama: "Milkawati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -6424,7 +6424,7 @@ const pegawais = [
   },
   {
     id: 429,
-    nip: "198608182010012033",
+    nip: "19860818 201001 2 033",
     nama: "Khusnul Khotimah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -6439,7 +6439,7 @@ const pegawais = [
   },
   {
     id: 430,
-    nip: "197804092003122011",
+    nip: "19780409 200312 2 011",
     nama: "Armanisah, S.Tr.Keb, Bd.",
     pangkatId: 11,
     golonganId: 6,
@@ -6454,7 +6454,7 @@ const pegawais = [
   },
   {
     id: 431,
-    nip: "199009142019032013",
+    nip: "19900914 201903 2 013",
     nama: "Dr. Jofan Viradella Santoso Putri",
     pangkatId: 11,
     golonganId: 6,
@@ -6469,7 +6469,7 @@ const pegawais = [
   },
   {
     id: 432,
-    nip: "198008042006042027",
+    nip: "19800804 200604 2 027",
     nama: "Bdn,, . Syamsiah, , S.Tr.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -6484,7 +6484,7 @@ const pegawais = [
   },
   {
     id: 433,
-    nip: "199602182019032013",
+    nip: "19960218 201903 2 013",
     nama: "Nurul Intan Syafitri Arifin, S.Tr.Ft.",
     pangkatId: 10,
     golonganId: 5,
@@ -6499,7 +6499,7 @@ const pegawais = [
   },
   {
     id: 434,
-    nip: "199004052019031011",
+    nip: "19900405 201903 1 011",
     nama: "Rizka Cahya Purnama, S.Kep., Ns.",
     pangkatId: 9,
     golonganId: 4,
@@ -6514,7 +6514,7 @@ const pegawais = [
   },
   {
     id: 435,
-    nip: "198007112007012010",
+    nip: "19800711 200701 2 010",
     nama: "Dewi Marlina",
     pangkatId: 9,
     golonganId: 4,
@@ -6529,7 +6529,7 @@ const pegawais = [
   },
   {
     id: 436,
-    nip: "199210152017052001",
+    nip: "19921015 201705 2 001",
     nama: "Bdn. Siti Nurkhasanah, S.Tr.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -6544,7 +6544,7 @@ const pegawais = [
   },
   {
     id: 437,
-    nip: "199112202017052001",
+    nip: "19911220 201705 2 001",
     nama: "Bdn. Entika Yuliani, S.Tr.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -6559,7 +6559,7 @@ const pegawais = [
   },
   {
     id: 438,
-    nip: "199206252019032014",
+    nip: "19920625 201903 2 014",
     nama: "Mutia Rismi, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -6574,7 +6574,7 @@ const pegawais = [
   },
   {
     id: 439,
-    nip: "199604302019032017",
+    nip: "19960430 201903 2 017",
     nama: "Ella Triyani, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -6589,7 +6589,7 @@ const pegawais = [
   },
   {
     id: 440,
-    nip: "199011212019032010",
+    nip: "19901121 201903 2 010",
     nama: "Lia Mulyani, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -6604,7 +6604,7 @@ const pegawais = [
   },
   {
     id: 441,
-    nip: "199408212019032022",
+    nip: "19940821 201903 2 022",
     nama: "Deasy Debora Lumbangaol, A.Md.Rmik.",
     pangkatId: 8,
     golonganId: 3,
@@ -6619,7 +6619,7 @@ const pegawais = [
   },
   {
     id: 442,
-    nip: "199309232022032015",
+    nip: "19930923 202203 2 015",
     nama: "Mulia Ulfah Hafsari, A.Md.Farm",
     pangkatId: 7,
     golonganId: 2,
@@ -6634,7 +6634,7 @@ const pegawais = [
   },
   {
     id: 443,
-    nip: "199303132025211024",
+    nip: "19930313 202521 1 024",
     nama: "Hendra Rumba Setya. As, S.Farm, Apt",
     pangkatId: 18,
     golonganId: 16,
@@ -6649,7 +6649,7 @@ const pegawais = [
   },
   {
     id: 444,
-    nip: "198411012023212004",
+    nip: "19841101 202321 2 004",
     nama: "Rina Fitriawati, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -6664,7 +6664,7 @@ const pegawais = [
   },
   {
     id: 445,
-    nip: "198910012024212037",
+    nip: "19891001 202421 2 037",
     nama: "Tansis Mawari Oksatica, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -6679,7 +6679,7 @@ const pegawais = [
   },
   {
     id: 446,
-    nip: "199012132024212031",
+    nip: "19901213 202421 2 031",
     nama: "Marfuatus Solikhah, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6694,7 +6694,7 @@ const pegawais = [
   },
   {
     id: 447,
-    nip: "199002122024212045",
+    nip: "19900212 202421 2 045",
     nama: "Luluk Nita Sari, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6709,7 +6709,7 @@ const pegawais = [
   },
   {
     id: 448,
-    nip: "199009042024212036",
+    nip: "19900904 202421 2 036",
     nama: "Ayu Wulandari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6724,7 +6724,7 @@ const pegawais = [
   },
   {
     id: 449,
-    nip: "199009112024212025",
+    nip: "19900911 202421 2 025",
     nama: "Hernasari Simamora, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6739,7 +6739,7 @@ const pegawais = [
   },
   {
     id: 450,
-    nip: "198910192024212030",
+    nip: "19891019 202421 2 030",
     nama: "Christiani Toding Bua, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6754,7 +6754,7 @@ const pegawais = [
   },
   {
     id: 451,
-    nip: "199501122024212042",
+    nip: "19950112 202421 2 042",
     nama: "Chrisanti Papulung, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -6769,7 +6769,7 @@ const pegawais = [
   },
   {
     id: 452,
-    nip: "199110152025212021",
+    nip: "19911015 202521 2 021",
     nama: "Yunita Rusfiani, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6784,7 +6784,7 @@ const pegawais = [
   },
   {
     id: 453,
-    nip: "198905232025211019",
+    nip: "19890523 202521 1 019",
     nama: "Amir Rimba Wanto, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -6799,7 +6799,7 @@ const pegawais = [
   },
   {
     id: 454,
-    nip: "199103232025212021",
+    nip: "19910323 202521 2 021",
     nama: "Ratna Wijayanti, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -6814,7 +6814,7 @@ const pegawais = [
   },
   {
     id: 455,
-    nip: "199304242025212030",
+    nip: "19930424 202521 2 030",
     nama: "Widya Miyarti, Amd.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -6829,7 +6829,7 @@ const pegawais = [
   },
   {
     id: 456,
-    nip: "199006092025212025",
+    nip: "19900609 202521 2 025",
     nama: "Triana, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -6844,7 +6844,7 @@ const pegawais = [
   },
   {
     id: 457,
-    nip: "199504102025212021",
+    nip: "19950410 202521 2 021",
     nama: "Salehana",
     pangkatId: 18,
     golonganId: 11,
@@ -6859,7 +6859,7 @@ const pegawais = [
   },
   {
     id: 458,
-    nip: "199604132025212019",
+    nip: "19960413 202521 2 019",
     nama: "Rahmawati, S.Tr.Gz",
     pangkatId: 18,
     golonganId: 15,
@@ -6874,7 +6874,7 @@ const pegawais = [
   },
   {
     id: 459,
-    nip: "199208232025212010",
+    nip: "19920823 202521 2 010",
     nama: "Nur Annisah, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -7069,7 +7069,7 @@ const pegawais = [
   },
   {
     id: 472,
-    nip: "196701162010011003",
+    nip: "19670116 201001 1 003",
     nama: "Dr. Fauzi Karni",
     pangkatId: 14,
     golonganId: 9,
@@ -7084,7 +7084,7 @@ const pegawais = [
   },
   {
     id: 473,
-    nip: "196808071989022002",
+    nip: "19680807 198902 2 002",
     nama: "Herlina Ak., A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -7099,7 +7099,7 @@ const pegawais = [
   },
   {
     id: 474,
-    nip: "197611122006042023",
+    nip: "19761112 200604 2 023",
     nama: "Ramla, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -7114,7 +7114,7 @@ const pegawais = [
   },
   {
     id: 475,
-    nip: "198306112009032013",
+    nip: "19830611 200903 2 013",
     nama: "Sri Suharti, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -7129,7 +7129,7 @@ const pegawais = [
   },
   {
     id: 476,
-    nip: "198410192009032007",
+    nip: "19841019 200903 2 007",
     nama: "Heni Janilah, A.Md.Gizi",
     pangkatId: 11,
     golonganId: 6,
@@ -7144,7 +7144,7 @@ const pegawais = [
   },
   {
     id: 477,
-    nip: "198610012009032013",
+    nip: "19861001 200903 2 013",
     nama: "Eka Norhidayati, A.Md.Gizi",
     pangkatId: 11,
     golonganId: 6,
@@ -7159,7 +7159,7 @@ const pegawais = [
   },
   {
     id: 478,
-    nip: "198912292019031009",
+    nip: "19891229 201903 1 009",
     nama: "Apt. Sujud Abdillah, S. Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -7174,7 +7174,7 @@ const pegawais = [
   },
   {
     id: 479,
-    nip: "198406162010012028",
+    nip: "19840616 201001 2 028",
     nama: "Norvia Dian Nita, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -7189,7 +7189,7 @@ const pegawais = [
   },
   {
     id: 480,
-    nip: "197601062006041018",
+    nip: "19760106 200604 1 018",
     nama: "Setiyono, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -7204,7 +7204,7 @@ const pegawais = [
   },
   {
     id: 481,
-    nip: "197803202006042034",
+    nip: "19780320 200604 2 034",
     nama: "Hayatunnisa, A.Md.Kep.",
     pangkatId: 11,
     golonganId: 6,
@@ -7219,7 +7219,7 @@ const pegawais = [
   },
   {
     id: 482,
-    nip: "199407272022032012",
+    nip: "19940727 202203 2 012",
     nama: "Drg. Rinda Dyah Puspita",
     pangkatId: 10,
     golonganId: 5,
@@ -7234,7 +7234,7 @@ const pegawais = [
   },
   {
     id: 483,
-    nip: "198807042017052004",
+    nip: "19880704 201705 2 004",
     nama: "Sitti Alang, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -7249,7 +7249,7 @@ const pegawais = [
   },
   {
     id: 484,
-    nip: "199012112017052001",
+    nip: "19901211 201705 2 001",
     nama: "Dessy Ariyani, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -7264,7 +7264,7 @@ const pegawais = [
   },
   {
     id: 485,
-    nip: "199409112019032022",
+    nip: "19940911 201903 2 022",
     nama: "Intan Khalidaziah, S.Tr.Kes",
     pangkatId: 9,
     golonganId: 4,
@@ -7279,7 +7279,7 @@ const pegawais = [
   },
   {
     id: 486,
-    nip: "198609252019032008",
+    nip: "19860925 201903 2 008",
     nama: "Chintya Laily Alfiani, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -7294,7 +7294,7 @@ const pegawais = [
   },
   {
     id: 487,
-    nip: "199312162025211016",
+    nip: "19931216 202521 1 016",
     nama: "Muhammad Syaifurrahman, S.Kep.,Ns",
     pangkatId: 18,
     golonganId: 16,
@@ -7309,7 +7309,7 @@ const pegawais = [
   },
   {
     id: 488,
-    nip: "199108122023212007",
+    nip: "19910812 202321 2 007",
     nama: "Dini Agus Arianti, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -7324,7 +7324,7 @@ const pegawais = [
   },
   {
     id: 489,
-    nip: "198908152024212027",
+    nip: "19890815 202421 2 027",
     nama: "Arinah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -7339,7 +7339,7 @@ const pegawais = [
   },
   {
     id: 490,
-    nip: "199010152024212035",
+    nip: "19901015 202421 2 035",
     nama: "Miftahul Jannah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -7354,7 +7354,7 @@ const pegawais = [
   },
   {
     id: 491,
-    nip: "199103212024212028",
+    nip: "19910321 202421 2 028",
     nama: "Risti Marliani, A.Md.Keb.",
     pangkatId: 18,
     golonganId: 13,
@@ -7369,7 +7369,7 @@ const pegawais = [
   },
   {
     id: 492,
-    nip: "199105032024212040",
+    nip: "19910503 202421 2 040",
     nama: "Siska Wulandari, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -7384,7 +7384,7 @@ const pegawais = [
   },
   {
     id: 493,
-    nip: "199504272024212038",
+    nip: "19950427 202421 2 038",
     nama: "Wana Apriana Satta, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -7399,7 +7399,7 @@ const pegawais = [
   },
   {
     id: 494,
-    nip: "199605052024212053",
+    nip: "19960505 202421 2 053",
     nama: "Duwi Nuryanti, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -7414,7 +7414,7 @@ const pegawais = [
   },
   {
     id: 495,
-    nip: "199910092024212017",
+    nip: "19991009 202421 2 017",
     nama: "Ikka Suzhan Dryati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -7429,7 +7429,7 @@ const pegawais = [
   },
   {
     id: 496,
-    nip: "198808042025211030",
+    nip: "19880804 202521 1 030",
     nama: "Rahman, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -7444,7 +7444,7 @@ const pegawais = [
   },
   {
     id: 497,
-    nip: "199004022025212020",
+    nip: "19900402 202521 2 020",
     nama: "Hamsina, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -7459,7 +7459,7 @@ const pegawais = [
   },
   {
     id: 498,
-    nip: "199106062025212035",
+    nip: "19910606 202521 2 035",
     nama: "Titin Indriany, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -7474,7 +7474,7 @@ const pegawais = [
   },
   {
     id: 499,
-    nip: "198911062025212021",
+    nip: "19891106 202521 2 021",
     nama: "Nur Hayani",
     pangkatId: 18,
     golonganId: 11,
@@ -7489,7 +7489,7 @@ const pegawais = [
   },
   {
     id: 500,
-    nip: "198911262025211005",
+    nip: "19891126 202521 1 005",
     nama: "Abdul Rasid",
     pangkatId: 18,
     golonganId: 11,
@@ -7504,7 +7504,7 @@ const pegawais = [
   },
   {
     id: 501,
-    nip: "199403032025211025",
+    nip: "19940303 202521 1 025",
     nama: "Saprudin",
     pangkatId: 18,
     golonganId: 11,
@@ -7519,7 +7519,7 @@ const pegawais = [
   },
   {
     id: 502,
-    nip: "199704222025211005",
+    nip: "19970422 202521 1 005",
     nama: "Akbar Pratama",
     pangkatId: 18,
     golonganId: 11,
@@ -7534,7 +7534,7 @@ const pegawais = [
   },
   {
     id: 503,
-    nip: "199403162025212029",
+    nip: "19940316 202521 2 029",
     nama: "Cinthya Ayu Mutiara, S.Tr.Keb",
     pangkatId: 18,
     golonganId: 15,
@@ -7549,7 +7549,7 @@ const pegawais = [
   },
   {
     id: 504,
-    nip: "199603282025212020",
+    nip: "19960328 202521 2 020",
     nama: "Yayuk Retno Purwaningsih, S.Tr.Keb",
     pangkatId: 18,
     golonganId: 15,
@@ -7774,7 +7774,7 @@ const pegawais = [
   },
   {
     id: 519,
-    nip: "198009062008042003",
+    nip: "19800906 200804 2 003",
     nama: "Drg. Yuyun Pancasatria Syaputri",
     pangkatId: 14,
     golonganId: 9,
@@ -7789,7 +7789,7 @@ const pegawais = [
   },
   {
     id: 520,
-    nip: "196802241991021001",
+    nip: "19680224 199102 1 001",
     nama: "Samsul Bahri, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -7804,7 +7804,7 @@ const pegawais = [
   },
   {
     id: 521,
-    nip: "197107231991022001",
+    nip: "19710723 199102 2 001",
     nama: "Noor Ida Harriyani, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -7819,7 +7819,7 @@ const pegawais = [
   },
   {
     id: 522,
-    nip: "197307311993022005",
+    nip: "19730731 199302 2 005",
     nama: "Ermayani Arfisa, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -7834,7 +7834,7 @@ const pegawais = [
   },
   {
     id: 523,
-    nip: "197807022005022003",
+    nip: "19780702 200502 2 003",
     nama: "Yayuk Susanti, A.Md Gizi, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -7849,7 +7849,7 @@ const pegawais = [
   },
   {
     id: 524,
-    nip: "197802042006042008",
+    nip: "19780204 200604 2 008",
     nama: "Rossanasari Wijayanti, A.Md.",
     pangkatId: 12,
     golonganId: 7,
@@ -7864,7 +7864,7 @@ const pegawais = [
   },
   {
     id: 525,
-    nip: "197505021999032008",
+    nip: "19750502 199903 2 008",
     nama: "Bdn. Jumariah, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -7879,7 +7879,7 @@ const pegawais = [
   },
   {
     id: 526,
-    nip: "197711061997032004",
+    nip: "19771106 199703 2 004",
     nama: "Nunuk Winarni, A.Md.Kg",
     pangkatId: 12,
     golonganId: 7,
@@ -7894,7 +7894,7 @@ const pegawais = [
   },
   {
     id: 527,
-    nip: "197811222014121001",
+    nip: "19781122 201412 1 001",
     nama: "Dr. Raden Ahmad Yusuf",
     pangkatId: 12,
     golonganId: 7,
@@ -7909,7 +7909,7 @@ const pegawais = [
   },
   {
     id: 528,
-    nip: "198002132006042014",
+    nip: "19800213 200604 2 014",
     nama: "Titi Suwarti, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -7924,7 +7924,7 @@ const pegawais = [
   },
   {
     id: 529,
-    nip: "197601252002122004",
+    nip: "19760125 200212 2 004",
     nama: "Bdn. Nurhasanah, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -7939,7 +7939,7 @@ const pegawais = [
   },
   {
     id: 530,
-    nip: "197409032000122001",
+    nip: "19740903 200012 2 001",
     nama: "Bdn. Sri Wulan, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -7954,7 +7954,7 @@ const pegawais = [
   },
   {
     id: 531,
-    nip: "197608162003122009",
+    nip: "19760816 200312 2 009",
     nama: "Bdn., . Agustina Enang, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -7969,7 +7969,7 @@ const pegawais = [
   },
   {
     id: 532,
-    nip: "198712012009032002",
+    nip: "19871201 200903 2 002",
     nama: "Elida Zahara, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -7984,7 +7984,7 @@ const pegawais = [
   },
   {
     id: 533,
-    nip: "198710062009032002",
+    nip: "19871006 200903 2 002",
     nama: "Bdn., . Fadhul Azmi, , S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -7999,7 +7999,7 @@ const pegawais = [
   },
   {
     id: 534,
-    nip: "198205252009032009",
+    nip: "19820525 200903 2 009",
     nama: "Meiti Arianti, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -8014,7 +8014,7 @@ const pegawais = [
   },
   {
     id: 535,
-    nip: "198509102009032011",
+    nip: "19850910 200903 2 011",
     nama: "Mardiana, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -8029,7 +8029,7 @@ const pegawais = [
   },
   {
     id: 536,
-    nip: "198512052009032009",
+    nip: "19851205 200903 2 009",
     nama: "Dwi Mugi Rahayu, A.Md.Kep.",
     pangkatId: 11,
     golonganId: 6,
@@ -8044,7 +8044,7 @@ const pegawais = [
   },
   {
     id: 537,
-    nip: "199104212019031017",
+    nip: "19910421 201903 1 017",
     nama: "Apt. Ivan Satria Kambuna Panjaitan, S. Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -8059,7 +8059,7 @@ const pegawais = [
   },
   {
     id: 538,
-    nip: "198901292010012001",
+    nip: "19890129 201001 2 001",
     nama: "Bdn. Ruliyah Emi Sari Dewi, A.Md.Keb., S.St.",
     pangkatId: 11,
     golonganId: 6,
@@ -8074,7 +8074,7 @@ const pegawais = [
   },
   {
     id: 539,
-    nip: "196709151987032006",
+    nip: "19670915 198703 2 006",
     nama: "Mariana",
     pangkatId: 10,
     golonganId: 5,
@@ -8089,7 +8089,7 @@ const pegawais = [
   },
   {
     id: 540,
-    nip: "199509012022032014",
+    nip: "19950901 202203 2 014",
     nama: "Dr. Corina Primanda Rahman",
     pangkatId: 10,
     golonganId: 5,
@@ -8104,7 +8104,7 @@ const pegawais = [
   },
   {
     id: 541,
-    nip: "199005122011012001",
+    nip: "19900512 201101 2 001",
     nama: "Onny Ken Fadhila, Amf",
     pangkatId: 10,
     golonganId: 5,
@@ -8119,7 +8119,7 @@ const pegawais = [
   },
   {
     id: 542,
-    nip: "198006092006042023",
+    nip: "19800609 200604 2 023",
     nama: "Maisyarah, A.Md.Kep",
     pangkatId: 10,
     golonganId: 5,
@@ -8134,7 +8134,7 @@ const pegawais = [
   },
   {
     id: 543,
-    nip: "197001032007012024",
+    nip: "19700103 200701 2 024",
     nama: "Siti Halimah",
     pangkatId: 9,
     golonganId: 4,
@@ -8149,7 +8149,7 @@ const pegawais = [
   },
   {
     id: 544,
-    nip: "198908012019032008",
+    nip: "19890801 201903 2 008",
     nama: "Sali Agustina, A.Md. Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -8164,7 +8164,7 @@ const pegawais = [
   },
   {
     id: 545,
-    nip: "199305282019032020",
+    nip: "19930528 201903 2 020",
     nama: "Sri Achyani Islamiah, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -8179,7 +8179,7 @@ const pegawais = [
   },
   {
     id: 546,
-    nip: "199107242019031008",
+    nip: "19910724 201903 1 008",
     nama: "Rizal Fahmi Sayekti, A.Md.Kl.",
     pangkatId: 8,
     golonganId: 3,
@@ -8194,7 +8194,7 @@ const pegawais = [
   },
   {
     id: 547,
-    nip: "199001162022032004",
+    nip: "19900116 202203 2 004",
     nama: "Linda Eka Wijayanti, Amk",
     pangkatId: 7,
     golonganId: 2,
@@ -8209,7 +8209,7 @@ const pegawais = [
   },
   {
     id: 548,
-    nip: "199012162023212004",
+    nip: "19901216 202321 2 004",
     nama: "Risnawati, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -8224,7 +8224,7 @@ const pegawais = [
   },
   {
     id: 549,
-    nip: "199112082023212009",
+    nip: "19911208 202321 2 009",
     nama: "Rina Restiana, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -8239,7 +8239,7 @@ const pegawais = [
   },
   {
     id: 550,
-    nip: "199102192024212019",
+    nip: "19910219 202421 2 019",
     nama: "Indah Wisudawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8254,7 +8254,7 @@ const pegawais = [
   },
   {
     id: 551,
-    nip: "199103132024212034",
+    nip: "19910313 202421 2 034",
     nama: "Umiatul Chasanah, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8269,7 +8269,7 @@ const pegawais = [
   },
   {
     id: 552,
-    nip: "198710022024212019",
+    nip: "19871002 202421 2 019",
     nama: "Jamilah, A.Md, Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8284,7 +8284,7 @@ const pegawais = [
   },
   {
     id: 553,
-    nip: "199005042024211013",
+    nip: "19900504 202421 1 013",
     nama: "Jumahir, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -8299,7 +8299,7 @@ const pegawais = [
   },
   {
     id: 554,
-    nip: "199412222024211014",
+    nip: "19941222 202421 1 014",
     nama: "Muhamad Yazid Fahmi, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -8314,7 +8314,7 @@ const pegawais = [
   },
   {
     id: 555,
-    nip: "199405202024212052",
+    nip: "19940520 202421 2 052",
     nama: "Muti'ah Firdausi, A.Md.Far",
     pangkatId: 18,
     golonganId: 13,
@@ -8329,7 +8329,7 @@ const pegawais = [
   },
   {
     id: 556,
-    nip: "199605262024212028",
+    nip: "19960526 202421 2 028",
     nama: "Nia Kurnia, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8344,7 +8344,7 @@ const pegawais = [
   },
   {
     id: 557,
-    nip: "198406252024212012",
+    nip: "19840625 202421 2 012",
     nama: "Verawati, Amd.Kl",
     pangkatId: 18,
     golonganId: 13,
@@ -8359,7 +8359,7 @@ const pegawais = [
   },
   {
     id: 558,
-    nip: "199008192025212017",
+    nip: "19900819 202521 2 017",
     nama: "Sari Wulandari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8374,7 +8374,7 @@ const pegawais = [
   },
   {
     id: 559,
-    nip: "198912082025212013",
+    nip: "19891208 202521 2 013",
     nama: "Masniah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8389,7 +8389,7 @@ const pegawais = [
   },
   {
     id: 560,
-    nip: "199002272025212025",
+    nip: "19900227 202521 2 025",
     nama: "Winda Kurniawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8404,7 +8404,7 @@ const pegawais = [
   },
   {
     id: 561,
-    nip: "199206042025212016",
+    nip: "19920604 202521 2 016",
     nama: "Nita Anisa, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8419,7 +8419,7 @@ const pegawais = [
   },
   {
     id: 562,
-    nip: "199307052025212015",
+    nip: "19930705 202521 2 015",
     nama: "Hujaimah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8434,7 +8434,7 @@ const pegawais = [
   },
   {
     id: 563,
-    nip: "199309052025212027",
+    nip: "19930905 202521 2 027",
     nama: "Mimin Rantika Sefriyana, A,Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8449,7 +8449,7 @@ const pegawais = [
   },
   {
     id: 564,
-    nip: "199407112025212027",
+    nip: "19940711 202521 2 027",
     nama: "Rita Widia Ningsih, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8464,7 +8464,7 @@ const pegawais = [
   },
   {
     id: 565,
-    nip: "199504182025212017",
+    nip: "19950418 202521 2 017",
     nama: "Suprapti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -8479,7 +8479,7 @@ const pegawais = [
   },
   {
     id: 566,
-    nip: "198002112025212005",
+    nip: "19800211 202521 2 005",
     nama: "Masnah",
     pangkatId: 18,
     golonganId: 11,
@@ -8494,7 +8494,7 @@ const pegawais = [
   },
   {
     id: 567,
-    nip: "198110092025211011",
+    nip: "19811009 202521 1 011",
     nama: "Robiyansyah.S",
     pangkatId: 18,
     golonganId: 11,
@@ -8509,7 +8509,7 @@ const pegawais = [
   },
   {
     id: 568,
-    nip: "199110112025212010",
+    nip: "19911011 202521 2 010",
     nama: "Jannatin Aliyah",
     pangkatId: 18,
     golonganId: 11,
@@ -8524,7 +8524,7 @@ const pegawais = [
   },
   {
     id: 569,
-    nip: "199508022024212033",
+    nip: "19950802 202421 2 033",
     nama: "Indah Permata Sari, S.K.M.",
     pangkatId: 18,
     golonganId: 15,
@@ -8839,7 +8839,7 @@ const pegawais = [
   },
   {
     id: 590,
-    nip: "196710141987032005",
+    nip: "19671014 198703 2 005",
     nama: "Sudarlina, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -8854,7 +8854,7 @@ const pegawais = [
   },
   {
     id: 591,
-    nip: "197808112003122011",
+    nip: "19780811 200312 2 011",
     nama: "Jarwanti, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -8869,7 +8869,7 @@ const pegawais = [
   },
   {
     id: 592,
-    nip: "198410242010011014",
+    nip: "19841024 201001 1 014",
     nama: "Dr. Asnurathab Chairiri",
     pangkatId: 12,
     golonganId: 7,
@@ -8884,7 +8884,7 @@ const pegawais = [
   },
   {
     id: 593,
-    nip: "198308182006042013",
+    nip: "19830818 200604 2 013",
     nama: "Agustina, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -8899,7 +8899,7 @@ const pegawais = [
   },
   {
     id: 594,
-    nip: "198504122009032012",
+    nip: "19850412 200903 2 012",
     nama: "Apria Ningsih, A.Md.K.G.",
     pangkatId: 12,
     golonganId: 7,
@@ -8914,7 +8914,7 @@ const pegawais = [
   },
   {
     id: 595,
-    nip: "198305282008041002",
+    nip: "19830528 200804 1 002",
     nama: "Wahyu Saputra, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -8929,7 +8929,7 @@ const pegawais = [
   },
   {
     id: 596,
-    nip: "197907082005021006",
+    nip: "19790708 200502 1 006",
     nama: "Priyo Setiaji, A.Md.Kep.",
     pangkatId: 11,
     golonganId: 6,
@@ -8944,7 +8944,7 @@ const pegawais = [
   },
   {
     id: 597,
-    nip: "198701042011012003",
+    nip: "19870104 201101 2 003",
     nama: "Arabiatul, Amg",
     pangkatId: 11,
     golonganId: 6,
@@ -8959,7 +8959,7 @@ const pegawais = [
   },
   {
     id: 598,
-    nip: "199104262019032010",
+    nip: "19910426 201903 2 010",
     nama: "Drg. Rachmalia Putri Pertiwi",
     pangkatId: 11,
     golonganId: 6,
@@ -8974,7 +8974,7 @@ const pegawais = [
   },
   {
     id: 599,
-    nip: "199111032019032017",
+    nip: "19911103 201903 2 017",
     nama: "Mardiatul Ulfah, S. Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -8989,7 +8989,7 @@ const pegawais = [
   },
   {
     id: 600,
-    nip: "198303142010012009",
+    nip: "19830314 201001 2 009",
     nama: "Surtinah, Se.",
     pangkatId: 11,
     golonganId: 6,
@@ -9004,7 +9004,7 @@ const pegawais = [
   },
   {
     id: 601,
-    nip: "197512042002122003",
+    nip: "19751204 200212 2 003",
     nama: "Ernawaty, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -9019,7 +9019,7 @@ const pegawais = [
   },
   {
     id: 602,
-    nip: "198611102010012033",
+    nip: "19861110 201001 2 033",
     nama: "Lili Nursanti, S.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -9034,7 +9034,7 @@ const pegawais = [
   },
   {
     id: 603,
-    nip: "198807232010012017",
+    nip: "19880723 201001 2 017",
     nama: "Badi Aturrohmah, S.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -9049,7 +9049,7 @@ const pegawais = [
   },
   {
     id: 604,
-    nip: "198711102010012036",
+    nip: "19871110 201001 2 036",
     nama: "Bdn. Dinar Rahayu, S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -9064,7 +9064,7 @@ const pegawais = [
   },
   {
     id: 605,
-    nip: "198709142011012003",
+    nip: "19870914 201101 2 003",
     nama: "Harniah, Amkl",
     pangkatId: 11,
     golonganId: 6,
@@ -9079,7 +9079,7 @@ const pegawais = [
   },
   {
     id: 606,
-    nip: "198004142005022003",
+    nip: "19800414 200502 2 003",
     nama: "Tina Royani, A.Md.Kep",
     pangkatId: 10,
     golonganId: 5,
@@ -9094,7 +9094,7 @@ const pegawais = [
   },
   {
     id: 607,
-    nip: "199009032022032003",
+    nip: "19900903 202203 2 003",
     nama: "Siti Ainun Jariah, S.Kep.Ns",
     pangkatId: 10,
     golonganId: 5,
@@ -9109,7 +9109,7 @@ const pegawais = [
   },
   {
     id: 608,
-    nip: "197903062007012011",
+    nip: "19790306 200701 2 011",
     nama: "Sri Suliati",
     pangkatId: 9,
     golonganId: 4,
@@ -9124,7 +9124,7 @@ const pegawais = [
   },
   {
     id: 609,
-    nip: "197706152007012022",
+    nip: "19770615 200701 2 022",
     nama: "Rasem",
     pangkatId: 9,
     golonganId: 4,
@@ -9139,7 +9139,7 @@ const pegawais = [
   },
   {
     id: 610,
-    nip: "199009142014031002",
+    nip: "19900914 201403 1 002",
     nama: "Rusma Saddam Husen, A.Md.Kg",
     pangkatId: 8,
     golonganId: 3,
@@ -9154,7 +9154,7 @@ const pegawais = [
   },
   {
     id: 611,
-    nip: "199304172019032027",
+    nip: "19930417 201903 2 027",
     nama: "Leni Wulandari , A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -9169,7 +9169,7 @@ const pegawais = [
   },
   {
     id: 612,
-    nip: "199211062019031015",
+    nip: "19921106 201903 1 015",
     nama: "Novari Setiawan, A.Md.Rmik.",
     pangkatId: 8,
     golonganId: 3,
@@ -9184,7 +9184,7 @@ const pegawais = [
   },
   {
     id: 613,
-    nip: "197002202009061002",
+    nip: "19700220 200906 1 002",
     nama: "Baidillah",
     pangkatId: 8,
     golonganId: 3,
@@ -9199,7 +9199,7 @@ const pegawais = [
   },
   {
     id: 614,
-    nip: "199611212020122028",
+    nip: "19961121 202012 2 028",
     nama: "Dwi Setianingsih, A.Md.Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -9214,7 +9214,7 @@ const pegawais = [
   },
   {
     id: 615,
-    nip: "199307222022032006",
+    nip: "19930722 202203 2 006",
     nama: "Marina Diah Savitri, A.Md.Ak",
     pangkatId: 7,
     golonganId: 2,
@@ -9229,7 +9229,7 @@ const pegawais = [
   },
   {
     id: 616,
-    nip: "198202262023211001",
+    nip: "19820226 202321 1 001",
     nama: "Supriyatna, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9244,7 +9244,7 @@ const pegawais = [
   },
   {
     id: 617,
-    nip: "198404112023212004",
+    nip: "19840411 202321 2 004",
     nama: "Rojiah, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9259,7 +9259,7 @@ const pegawais = [
   },
   {
     id: 618,
-    nip: "199002102024212031",
+    nip: "19900210 202421 2 031",
     nama: "Wahyuni, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9274,7 +9274,7 @@ const pegawais = [
   },
   {
     id: 619,
-    nip: "198808202024212017",
+    nip: "19880820 202421 2 017",
     nama: "Susi Nur Khasanah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9289,7 +9289,7 @@ const pegawais = [
   },
   {
     id: 620,
-    nip: "199208242024212029",
+    nip: "19920824 202421 2 029",
     nama: "Raudatul Jannah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9304,7 +9304,7 @@ const pegawais = [
   },
   {
     id: 621,
-    nip: "199203042024212025",
+    nip: "19920304 202421 2 025",
     nama: "Reni Duwi Maya Sari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9319,7 +9319,7 @@ const pegawais = [
   },
   {
     id: 622,
-    nip: "199305162024212039",
+    nip: "19930516 202421 2 039",
     nama: "Maria Indriani Sajing, Amd.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -9334,7 +9334,7 @@ const pegawais = [
   },
   {
     id: 623,
-    nip: "199302172024212019",
+    nip: "19930217 202421 2 019",
     nama: "Mega, A.Md.Far",
     pangkatId: 18,
     golonganId: 13,
@@ -9349,7 +9349,7 @@ const pegawais = [
   },
   {
     id: 624,
-    nip: "199409232024212034",
+    nip: "19940923 202421 2 034",
     nama: "Yulita Sari, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9364,7 +9364,7 @@ const pegawais = [
   },
   {
     id: 625,
-    nip: "199502242024212038",
+    nip: "19950224 202421 2 038",
     nama: "Partini, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9379,7 +9379,7 @@ const pegawais = [
   },
   {
     id: 626,
-    nip: "199508142024212045",
+    nip: "19950814 202421 2 045",
     nama: "Zikra, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9394,7 +9394,7 @@ const pegawais = [
   },
   {
     id: 627,
-    nip: "199510102024212052",
+    nip: "19951010 202421 2 052",
     nama: "Heni Oktavia, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9409,7 +9409,7 @@ const pegawais = [
   },
   {
     id: 628,
-    nip: "198811162025212022",
+    nip: "19881116 202521 2 022",
     nama: "Noviana Eka Santi, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9424,7 +9424,7 @@ const pegawais = [
   },
   {
     id: 629,
-    nip: "198912122025212022",
+    nip: "19891212 202521 2 022",
     nama: "Dita Purnama, A.Md. Kep.",
     pangkatId: 18,
     golonganId: 13,
@@ -9439,7 +9439,7 @@ const pegawais = [
   },
   {
     id: 630,
-    nip: "199004292025212015",
+    nip: "19900429 202521 2 015",
     nama: "Lely Wulandari, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9454,7 +9454,7 @@ const pegawais = [
   },
   {
     id: 631,
-    nip: "199104042025212025",
+    nip: "19910404 202521 2 025",
     nama: "Tika Miftahus Solihah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9469,7 +9469,7 @@ const pegawais = [
   },
   {
     id: 632,
-    nip: "198511072025211020",
+    nip: "19851107 202521 1 020",
     nama: "Hanapi, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9484,7 +9484,7 @@ const pegawais = [
   },
   {
     id: 633,
-    nip: "198609152025212027",
+    nip: "19860915 202521 2 027",
     nama: "Nurjannah, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9499,7 +9499,7 @@ const pegawais = [
   },
   {
     id: 634,
-    nip: "198808282025212020",
+    nip: "19880828 202521 2 020",
     nama: "Ngatiningseh, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9514,7 +9514,7 @@ const pegawais = [
   },
   {
     id: 635,
-    nip: "198904102025212022",
+    nip: "19890410 202521 2 022",
     nama: "Itsna Aryani, A.Md,Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -9529,7 +9529,7 @@ const pegawais = [
   },
   {
     id: 636,
-    nip: "199101222025211009",
+    nip: "19910122 202521 1 009",
     nama: "Ahmad Hariyadi, A.Md, Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9544,7 +9544,7 @@ const pegawais = [
   },
   {
     id: 637,
-    nip: "199505142025211017",
+    nip: "19950514 202521 1 017",
     nama: "Indra Maulana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9559,7 +9559,7 @@ const pegawais = [
   },
   {
     id: 638,
-    nip: "199604222025212011",
+    nip: "19960422 202521 2 011",
     nama: "Pransiska Aprilia, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -9574,7 +9574,7 @@ const pegawais = [
   },
   {
     id: 639,
-    nip: "198710052024212032",
+    nip: "19871005 202421 2 032",
     nama: "Yulia Oktavia, S.K.M.",
     pangkatId: 18,
     golonganId: 15,
@@ -9829,7 +9829,7 @@ const pegawais = [
   },
   {
     id: 656,
-    nip: "197207302009092001",
+    nip: "19720730 200909 2 001",
     nama: "Drg. Yulianti Setyorini",
     pangkatId: 13,
     golonganId: 8,
@@ -9844,7 +9844,7 @@ const pegawais = [
   },
   {
     id: 657,
-    nip: "198407022014032002",
+    nip: "19840702 201403 2 002",
     nama: "Dr. Farida Fitriyah",
     pangkatId: 13,
     golonganId: 8,
@@ -9859,7 +9859,7 @@ const pegawais = [
   },
   {
     id: 658,
-    nip: "196911181993032007",
+    nip: "19691118 199303 2 007",
     nama: "Neltje Flora Mowilos, A.Md.Kes",
     pangkatId: 12,
     golonganId: 7,
@@ -9874,7 +9874,7 @@ const pegawais = [
   },
   {
     id: 659,
-    nip: "196906201989112001",
+    nip: "19690620 198911 2 001",
     nama: "Hj. Rosda Hasanah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -9889,7 +9889,7 @@ const pegawais = [
   },
   {
     id: 660,
-    nip: "199306102019032019",
+    nip: "19930610 201903 2 019",
     nama: "Riska Damayanti, S. Farm., Apt",
     pangkatId: 11,
     golonganId: 6,
@@ -9904,7 +9904,7 @@ const pegawais = [
   },
   {
     id: 661,
-    nip: "197707022003122012",
+    nip: "19770702 200312 2 012",
     nama: "Siti Nurhayati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -9919,7 +9919,7 @@ const pegawais = [
   },
   {
     id: 662,
-    nip: "197612202003122005",
+    nip: "19761220 200312 2 005",
     nama: "Isna Arnani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -9934,7 +9934,7 @@ const pegawais = [
   },
   {
     id: 663,
-    nip: "197911062006042027",
+    nip: "19791106 200604 2 027",
     nama: "Rina Sanopatmawati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -9949,7 +9949,7 @@ const pegawais = [
   },
   {
     id: 664,
-    nip: "198703192011011003",
+    nip: "19870319 201101 1 003",
     nama: "Sri Mulyono, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -9964,7 +9964,7 @@ const pegawais = [
   },
   {
     id: 665,
-    nip: "197803252010011009",
+    nip: "19780325 201001 1 009",
     nama: "Hery Suprianto, A.Md",
     pangkatId: 9,
     golonganId: 4,
@@ -9979,7 +9979,7 @@ const pegawais = [
   },
   {
     id: 666,
-    nip: "199109062019032016",
+    nip: "19910906 201903 2 016",
     nama: "Siti Nurhafiah, A.Md.Kep.",
     pangkatId: 9,
     golonganId: 4,
@@ -9994,7 +9994,7 @@ const pegawais = [
   },
   {
     id: 667,
-    nip: "199205232019032017",
+    nip: "19920523 201903 2 017",
     nama: "Nur Fauziah, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -10009,7 +10009,7 @@ const pegawais = [
   },
   {
     id: 668,
-    nip: "199309252019032020",
+    nip: "19930925 201903 2 020",
     nama: "Mursidah Irawati, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -10024,7 +10024,7 @@ const pegawais = [
   },
   {
     id: 669,
-    nip: "198611252020122009",
+    nip: "19861125 202012 2 009",
     nama: "Eka Susanti, A.Md.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -10039,7 +10039,7 @@ const pegawais = [
   },
   {
     id: 670,
-    nip: "199203212022032013",
+    nip: "19920321 202203 2 013",
     nama: "Retno Mandasari, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -10054,7 +10054,7 @@ const pegawais = [
   },
   {
     id: 671,
-    nip: "198606162023212002",
+    nip: "19860616 202321 2 002",
     nama: "Tuti Pragawati, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10069,7 +10069,7 @@ const pegawais = [
   },
   {
     id: 672,
-    nip: "199002182024212030",
+    nip: "19900218 202421 2 030",
     nama: "Erlianti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10084,7 +10084,7 @@ const pegawais = [
   },
   {
     id: 673,
-    nip: "199110162024212020",
+    nip: "19911016 202421 2 020",
     nama: "Juliwati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10099,7 +10099,7 @@ const pegawais = [
   },
   {
     id: 674,
-    nip: "199110082024212030",
+    nip: "19911008 202421 2 030",
     nama: "Eka Purwanti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10114,7 +10114,7 @@ const pegawais = [
   },
   {
     id: 675,
-    nip: "199212052024211013",
+    nip: "19921205 202421 1 013",
     nama: "Buldaini, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10129,7 +10129,7 @@ const pegawais = [
   },
   {
     id: 676,
-    nip: "199508232024212021",
+    nip: "19950823 202421 2 021",
     nama: "Ayu Lestari. R, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10144,7 +10144,7 @@ const pegawais = [
   },
   {
     id: 677,
-    nip: "199612212024212030",
+    nip: "19961221 202421 2 030",
     nama: "Zakiah Ratno Bestary, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10159,7 +10159,7 @@ const pegawais = [
   },
   {
     id: 678,
-    nip: "198911142025212026",
+    nip: "19891114 202521 2 026",
     nama: "Wana Yutiawati, A. Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10174,7 +10174,7 @@ const pegawais = [
   },
   {
     id: 679,
-    nip: "199005052025212041",
+    nip: "19900505 202521 2 041",
     nama: "Pita Suci Syah Putri, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10189,7 +10189,7 @@ const pegawais = [
   },
   {
     id: 680,
-    nip: "198711292025212016",
+    nip: "19871129 202521 2 016",
     nama: "Faridah, Amd,Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10204,7 +10204,7 @@ const pegawais = [
   },
   {
     id: 681,
-    nip: "199212252025212030",
+    nip: "19921225 202521 2 030",
     nama: "Sri Maryati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10219,7 +10219,7 @@ const pegawais = [
   },
   {
     id: 682,
-    nip: "199306182025211027",
+    nip: "19930618 202521 1 027",
     nama: "Adi Winarto, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10234,7 +10234,7 @@ const pegawais = [
   },
   {
     id: 683,
-    nip: "199603042024212032",
+    nip: "19960304 202421 2 032",
     nama: "Ainun Basirah, S.K.M.",
     pangkatId: 18,
     golonganId: 15,
@@ -10249,7 +10249,7 @@ const pegawais = [
   },
   {
     id: 684,
-    nip: "199612212025212021",
+    nip: "19961221 202521 2 021",
     nama: "Puji Ayu Arifah Wulandari, S. Tr. Keb",
     pangkatId: 18,
     golonganId: 15,
@@ -10264,7 +10264,7 @@ const pegawais = [
   },
   {
     id: 685,
-    nip: "198805042025212026",
+    nip: "19880504 202521 2 026",
     nama: "Maryanti, S.Si.",
     pangkatId: 18,
     golonganId: 15,
@@ -10279,7 +10279,7 @@ const pegawais = [
   },
   {
     id: 686,
-    nip: "199203222025211019",
+    nip: "19920322 202521 1 019",
     nama: "Indra Kurniawan, S.Kep",
     pangkatId: 18,
     golonganId: 15,
@@ -10564,7 +10564,7 @@ const pegawais = [
   },
   {
     id: 705,
-    nip: "196903201991021001",
+    nip: "19690320 199102 1 001",
     nama: "Hamid, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -10579,7 +10579,7 @@ const pegawais = [
   },
   {
     id: 706,
-    nip: "197412151994031004",
+    nip: "19741215 199403 1 004",
     nama: "Hairuddin, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -10594,7 +10594,7 @@ const pegawais = [
   },
   {
     id: 707,
-    nip: "196808021989111001",
+    nip: "19680802 198911 1 001",
     nama: "Asmari, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -10609,7 +10609,7 @@ const pegawais = [
   },
   {
     id: 708,
-    nip: "197908292006042015",
+    nip: "19790829 200604 2 015",
     nama: "Fitriyawati, A.Md.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -10624,7 +10624,7 @@ const pegawais = [
   },
   {
     id: 709,
-    nip: "197311142002122001",
+    nip: "19731114 200212 2 001",
     nama: "Noor Miati, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -10639,7 +10639,7 @@ const pegawais = [
   },
   {
     id: 710,
-    nip: "197404122002122004",
+    nip: "19740412 200212 2 004",
     nama: "Ida Bubun Tasik, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -10654,7 +10654,7 @@ const pegawais = [
   },
   {
     id: 711,
-    nip: "198606112011011005",
+    nip: "19860611 201101 1 005",
     nama: "Hasbi Maulana, S.Gz.",
     pangkatId: 11,
     golonganId: 6,
@@ -10669,7 +10669,7 @@ const pegawais = [
   },
   {
     id: 712,
-    nip: "199412232019032022",
+    nip: "19941223 201903 2 022",
     nama: "Syarifah Mifthahul Hayati, S.Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -10684,7 +10684,7 @@ const pegawais = [
   },
   {
     id: 713,
-    nip: "198805222010012024",
+    nip: "19880522 201001 2 024",
     nama: "Ika Afriastika, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -10699,7 +10699,7 @@ const pegawais = [
   },
   {
     id: 714,
-    nip: "198707122010012022",
+    nip: "19870712 201001 2 022",
     nama: "Fatmawati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -10714,7 +10714,7 @@ const pegawais = [
   },
   {
     id: 715,
-    nip: "198206262009031005",
+    nip: "19820626 200903 1 005",
     nama: "Danang Nur Cahyo, A.Mk.G",
     pangkatId: 11,
     golonganId: 6,
@@ -10729,7 +10729,7 @@ const pegawais = [
   },
   {
     id: 716,
-    nip: "198111282007012008",
+    nip: "19811128 200701 2 008",
     nama: "Pudjiati, Se.",
     pangkatId: 11,
     golonganId: 6,
@@ -10744,7 +10744,7 @@ const pegawais = [
   },
   {
     id: 717,
-    nip: "197701122006041015",
+    nip: "19770112 200604 1 015",
     nama: "Ns. Maserur, S.Tr.Kep.",
     pangkatId: 10,
     golonganId: 5,
@@ -10759,7 +10759,7 @@ const pegawais = [
   },
   {
     id: 718,
-    nip: "199308012022031010",
+    nip: "19930801 202203 1 010",
     nama: "Dr. Muh. Azrul Azhari Djafar",
     pangkatId: 10,
     golonganId: 5,
@@ -10774,7 +10774,7 @@ const pegawais = [
   },
   {
     id: 719,
-    nip: "197605112006042016",
+    nip: "19760511 200604 2 016",
     nama: "Maslianti, S.Keb.",
     pangkatId: 10,
     golonganId: 5,
@@ -10789,7 +10789,7 @@ const pegawais = [
   },
   {
     id: 720,
-    nip: "198507192009032018",
+    nip: "19850719 200903 2 018",
     nama: "Irawati, A.Md",
     pangkatId: 9,
     golonganId: 4,
@@ -10804,7 +10804,7 @@ const pegawais = [
   },
   {
     id: 721,
-    nip: "198808262017052001",
+    nip: "19880826 201705 2 001",
     nama: "Sumartila, S. Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -10819,7 +10819,7 @@ const pegawais = [
   },
   {
     id: 722,
-    nip: "199008152017052001",
+    nip: "19900815 201705 2 001",
     nama: "Nurlinda, S.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -10834,7 +10834,7 @@ const pegawais = [
   },
   {
     id: 723,
-    nip: "199001182019032008",
+    nip: "19900118 201903 2 008",
     nama: "Eka Januarti, A.Md. Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -10849,7 +10849,7 @@ const pegawais = [
   },
   {
     id: 724,
-    nip: "199609242019032005",
+    nip: "19960924 201903 2 005",
     nama: "Puji Widiastuti, A.Md.Kep.",
     pangkatId: 9,
     golonganId: 4,
@@ -10864,7 +10864,7 @@ const pegawais = [
   },
   {
     id: 725,
-    nip: "198707202019032012",
+    nip: "19870720 201903 2 012",
     nama: "Erni, A.Md.Kl.",
     pangkatId: 8,
     golonganId: 3,
@@ -10879,7 +10879,7 @@ const pegawais = [
   },
   {
     id: 726,
-    nip: "199903232020122002",
+    nip: "19990323 202012 2 002",
     nama: "Nada Arafah Sari, Amd.Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -10894,7 +10894,7 @@ const pegawais = [
   },
   {
     id: 727,
-    nip: "198602022023212001",
+    nip: "19860202 202321 2 001",
     nama: "Endang Dwi Reknani, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10909,7 +10909,7 @@ const pegawais = [
   },
   {
     id: 728,
-    nip: "198811212023212006",
+    nip: "19881121 202321 2 006",
     nama: "Lisbet. Bt Suardi , A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10924,7 +10924,7 @@ const pegawais = [
   },
   {
     id: 729,
-    nip: "198909132024212025",
+    nip: "19890913 202421 2 025",
     nama: "Sapta Rianti, Amd. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10939,7 +10939,7 @@ const pegawais = [
   },
   {
     id: 730,
-    nip: "199010052024212042",
+    nip: "19901005 202421 2 042",
     nama: "Siti Wahdaniyati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10954,7 +10954,7 @@ const pegawais = [
   },
   {
     id: 731,
-    nip: "199301032024212038",
+    nip: "19930103 202421 2 038",
     nama: "Devi Novita Parerungan, A.M.K",
     pangkatId: 18,
     golonganId: 13,
@@ -10969,7 +10969,7 @@ const pegawais = [
   },
   {
     id: 732,
-    nip: "199107162024211021",
+    nip: "19910716 202421 1 021",
     nama: "Dian Dwi Saputra, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -10984,7 +10984,7 @@ const pegawais = [
   },
   {
     id: 733,
-    nip: "199706092024212031",
+    nip: "19970609 202421 2 031",
     nama: "Widiyastuti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -10999,7 +10999,7 @@ const pegawais = [
   },
   {
     id: 734,
-    nip: "198905112025211017",
+    nip: "19890511 202521 1 017",
     nama: "Ahmad Ilmi, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11014,7 +11014,7 @@ const pegawais = [
   },
   {
     id: 735,
-    nip: "199008162025212027",
+    nip: "19900816 202521 2 027",
     nama: "Siti Hafsyah Mubarokah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11029,7 +11029,7 @@ const pegawais = [
   },
   {
     id: 736,
-    nip: "199009092025212034",
+    nip: "19900909 202521 2 034",
     nama: "Syafari Yunita, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11044,7 +11044,7 @@ const pegawais = [
   },
   {
     id: 737,
-    nip: "199011192025212019",
+    nip: "19901119 202521 2 019",
     nama: "Delvina Nor Dahlia, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11059,7 +11059,7 @@ const pegawais = [
   },
   {
     id: 738,
-    nip: "199112052025211025",
+    nip: "19911205 202521 1 025",
     nama: "Ade Hermawan, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -11074,7 +11074,7 @@ const pegawais = [
   },
   {
     id: 739,
-    nip: "199011122025211020",
+    nip: "19901112 202521 1 020",
     nama: "M.Saripandi, A.Md,Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11089,7 +11089,7 @@ const pegawais = [
   },
   {
     id: 740,
-    nip: "199107102025211016",
+    nip: "19910710 202521 1 016",
     nama: "Indra Wahyudi, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11104,7 +11104,7 @@ const pegawais = [
   },
   {
     id: 741,
-    nip: "199404262025212013",
+    nip: "19940426 202521 2 013",
     nama: "Siti Jumiati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11119,7 +11119,7 @@ const pegawais = [
   },
   {
     id: 742,
-    nip: "198911222025212007",
+    nip: "19891122 202521 2 007",
     nama: "Anita Setyawati",
     pangkatId: 18,
     golonganId: 11,
@@ -11134,7 +11134,7 @@ const pegawais = [
   },
   {
     id: 743,
-    nip: "199511082025211005",
+    nip: "19951108 202521 1 005",
     nama: "Muhammad Faruk",
     pangkatId: 18,
     golonganId: 11,
@@ -11149,7 +11149,7 @@ const pegawais = [
   },
   {
     id: 744,
-    nip: "199612142025212011",
+    nip: "19961214 202521 2 011",
     nama: "Wahidatun Khasanah",
     pangkatId: 18,
     golonganId: 11,
@@ -11164,7 +11164,7 @@ const pegawais = [
   },
   {
     id: 745,
-    nip: "199407042024211017",
+    nip: "19940704 202421 1 017",
     nama: "Akhmad Fahriza, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -11419,7 +11419,7 @@ const pegawais = [
   },
   {
     id: 762,
-    nip: "198712222009032002",
+    nip: "19871222 200903 2 002",
     nama: "Siti Marwah, S.Kep.Ners",
     pangkatId: 12,
     golonganId: 7,
@@ -11434,7 +11434,7 @@ const pegawais = [
   },
   {
     id: 763,
-    nip: "198808162010012011",
+    nip: "19880816 201001 2 011",
     nama: "Bdn. Siti Nur Ainun Jariah, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -11449,7 +11449,7 @@ const pegawais = [
   },
   {
     id: 764,
-    nip: "198608072009032012",
+    nip: "19860807 200903 2 012",
     nama: "Andi Nikmawati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -11464,7 +11464,7 @@ const pegawais = [
   },
   {
     id: 765,
-    nip: "198612172019031005",
+    nip: "19861217 201903 1 005",
     nama: "Dr. Fitrah Hidayat Guntur",
     pangkatId: 11,
     golonganId: 6,
@@ -11479,7 +11479,7 @@ const pegawais = [
   },
   {
     id: 766,
-    nip: "199610242022032015",
+    nip: "19961024 202203 2 015",
     nama: "Drg. Raudatul Amaliah",
     pangkatId: 10,
     golonganId: 5,
@@ -11494,7 +11494,7 @@ const pegawais = [
   },
   {
     id: 767,
-    nip: "196809172007012018",
+    nip: "19680917 200701 2 018",
     nama: "Suryani",
     pangkatId: 9,
     golonganId: 4,
@@ -11509,7 +11509,7 @@ const pegawais = [
   },
   {
     id: 768,
-    nip: "199007192017052003",
+    nip: "19900719 201705 2 003",
     nama: "Nur Aini Nurdin, S.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -11524,7 +11524,7 @@ const pegawais = [
   },
   {
     id: 769,
-    nip: "199208172017052003",
+    nip: "19920817 201705 2 003",
     nama: "Muthmainnah, A.Md.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -11539,7 +11539,7 @@ const pegawais = [
   },
   {
     id: 770,
-    nip: "199207302017052001",
+    nip: "19920730 201705 2 001",
     nama: "Andi Nur Ainun, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -11554,7 +11554,7 @@ const pegawais = [
   },
   {
     id: 771,
-    nip: "198407092019032008",
+    nip: "19840709 201903 2 008",
     nama: "Siswoyowati, A.Md.Kl",
     pangkatId: 8,
     golonganId: 3,
@@ -11569,7 +11569,7 @@ const pegawais = [
   },
   {
     id: 772,
-    nip: "199108302020122019",
+    nip: "19910830 202012 2 019",
     nama: "Iriana Sananta, Amd.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -11584,7 +11584,7 @@ const pegawais = [
   },
   {
     id: 773,
-    nip: "199306052020122024",
+    nip: "19930605 202012 2 024",
     nama: "Noor Alfian Khumairoh, A.Md.Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -11599,7 +11599,7 @@ const pegawais = [
   },
   {
     id: 774,
-    nip: "198005102006041018",
+    nip: "19800510 200604 1 018",
     nama: "Andi Yassir Arafat,  A.Md.Kep.",
     pangkatId: 7,
     golonganId: 2,
@@ -11614,7 +11614,7 @@ const pegawais = [
   },
   {
     id: 775,
-    nip: "199302102022032008",
+    nip: "19930210 202203 2 008",
     nama: "Nur Ainun Jariah, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -11629,7 +11629,7 @@ const pegawais = [
   },
   {
     id: 776,
-    nip: "198008152007012009",
+    nip: "19800815 200701 2 009",
     nama: "Kamriah",
     pangkatId: 7,
     golonganId: 2,
@@ -11644,7 +11644,7 @@ const pegawais = [
   },
   {
     id: 777,
-    nip: "199105312023212004",
+    nip: "19910531 202321 2 004",
     nama: "Dr. Nur Raisah Ulfah",
     pangkatId: 18,
     golonganId: 16,
@@ -11659,7 +11659,7 @@ const pegawais = [
   },
   {
     id: 778,
-    nip: "198501222023212001",
+    nip: "19850122 202321 2 001",
     nama: "Nur Hasanah, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11674,7 +11674,7 @@ const pegawais = [
   },
   {
     id: 779,
-    nip: "198702012023211002",
+    nip: "19870201 202321 1 002",
     nama: "Sukardi, A.Md, Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11689,7 +11689,7 @@ const pegawais = [
   },
   {
     id: 780,
-    nip: "198710132024212012",
+    nip: "19871013 202421 2 012",
     nama: "Andi Ainun Jariah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11704,7 +11704,7 @@ const pegawais = [
   },
   {
     id: 781,
-    nip: "198802242024212027",
+    nip: "19880224 202421 2 027",
     nama: "Wasliah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11719,7 +11719,7 @@ const pegawais = [
   },
   {
     id: 782,
-    nip: "198903232024212037",
+    nip: "19890323 202421 2 037",
     nama: "Hajeria, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11734,7 +11734,7 @@ const pegawais = [
   },
   {
     id: 783,
-    nip: "198810282024211012",
+    nip: "19881028 202421 1 012",
     nama: "Ahmad Rizal Efendi, A. Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11749,7 +11749,7 @@ const pegawais = [
   },
   {
     id: 784,
-    nip: "199006172024212025",
+    nip: "19900617 202421 2 025",
     nama: "Halipah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11764,7 +11764,7 @@ const pegawais = [
   },
   {
     id: 785,
-    nip: "199104202024211018",
+    nip: "19910420 202421 1 018",
     nama: "Ahmad Syahruddin, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11779,7 +11779,7 @@ const pegawais = [
   },
   {
     id: 786,
-    nip: "199403132024212038",
+    nip: "19940313 202421 2 038",
     nama: "Eka Darma Sapitri, Amd.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -11794,7 +11794,7 @@ const pegawais = [
   },
   {
     id: 787,
-    nip: "199403212024212035",
+    nip: "19940321 202421 2 035",
     nama: "Maria Anjani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11809,7 +11809,7 @@ const pegawais = [
   },
   {
     id: 788,
-    nip: "199512132024212025",
+    nip: "19951213 202421 2 025",
     nama: "Nurjannah Ali Akbar, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11824,7 +11824,7 @@ const pegawais = [
   },
   {
     id: 789,
-    nip: "199005022025212039",
+    nip: "19900502 202521 2 039",
     nama: "Irawati Anwar, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11839,7 +11839,7 @@ const pegawais = [
   },
   {
     id: 790,
-    nip: "198810152025212014",
+    nip: "19881015 202521 2 014",
     nama: "Bulkis, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11854,7 +11854,7 @@ const pegawais = [
   },
   {
     id: 791,
-    nip: "199112232025211020",
+    nip: "19911223 202521 1 020",
     nama: "Muhammad Wahyu Wardana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11869,7 +11869,7 @@ const pegawais = [
   },
   {
     id: 792,
-    nip: "199311102025212025",
+    nip: "19931110 202521 2 025",
     nama: "Lilis Mulianti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11884,7 +11884,7 @@ const pegawais = [
   },
   {
     id: 793,
-    nip: "199312062025212027",
+    nip: "19931206 202521 2 027",
     nama: "Muldiah, A.Md,Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -11899,7 +11899,7 @@ const pegawais = [
   },
   {
     id: 794,
-    nip: "199703272025211008",
+    nip: "19970327 202521 1 008",
     nama: "Rudiansyah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -11914,7 +11914,7 @@ const pegawais = [
   },
   {
     id: 795,
-    nip: "197312122025211009",
+    nip: "19731212 202521 1 009",
     nama: "Arbain",
     pangkatId: 18,
     golonganId: 11,
@@ -11929,7 +11929,7 @@ const pegawais = [
   },
   {
     id: 796,
-    nip: "199204052025212014",
+    nip: "19920405 202521 2 014",
     nama: "Jumiati",
     pangkatId: 18,
     golonganId: 11,
@@ -11944,7 +11944,7 @@ const pegawais = [
   },
   {
     id: 797,
-    nip: "199612232025211010",
+    nip: "19961223 202521 1 010",
     nama: "Abdul Aziz",
     pangkatId: 18,
     golonganId: 11,
@@ -11959,7 +11959,7 @@ const pegawais = [
   },
   {
     id: 798,
-    nip: "199804212024212031",
+    nip: "19980421 202421 2 031",
     nama: "Nur Ainun Jariah, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -11974,7 +11974,7 @@ const pegawais = [
   },
   {
     id: 799,
-    nip: "198304022025212020",
+    nip: "19830402 202521 2 020",
     nama: "Siti Jumrah, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -11990,7 +11990,7 @@ const pegawais = [
   },
   {
     id: 800,
-    nip: "199307122025212025",
+    nip: "19930712 202521 2 025",
     nama: "Sri Rapita, S.Tr.Keb",
     pangkatId: 18,
     golonganId: 15,
@@ -12005,7 +12005,7 @@ const pegawais = [
   },
   {
     id: 801,
-    nip: "197809112025211016",
+    nip: "19780911 202521 1 016",
     nama: "Deki, Se",
     pangkatId: 18,
     golonganId: 15,
@@ -12380,7 +12380,7 @@ const pegawais = [
   },
   {
     id: 826,
-    nip: "198701052014122002",
+    nip: "19870105 201412 2 002",
     nama: "Dr. Sri Handaryati",
     pangkatId: 12,
     golonganId: 7,
@@ -12395,7 +12395,7 @@ const pegawais = [
   },
   {
     id: 827,
-    nip: "199101042019031015",
+    nip: "19910104 201903 1 015",
     nama: "Apt. Rio Saputra, S. Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -12410,7 +12410,7 @@ const pegawais = [
   },
   {
     id: 828,
-    nip: "198504022011011003",
+    nip: "19850402 201101 1 003",
     nama: "Muh. Hero Dhananjaya, Amg",
     pangkatId: 11,
     golonganId: 6,
@@ -12425,7 +12425,7 @@ const pegawais = [
   },
   {
     id: 829,
-    nip: "198607272010012034",
+    nip: "19860727 201001 2 034",
     nama: "Sitti Marwah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -12440,7 +12440,7 @@ const pegawais = [
   },
   {
     id: 830,
-    nip: "198804052010012014",
+    nip: "19880405 201001 2 014",
     nama: "Rita Risnawati, A.Md.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -12455,7 +12455,7 @@ const pegawais = [
   },
   {
     id: 831,
-    nip: "198001292003122006",
+    nip: "19800129 200312 2 006",
     nama: "Bdn., . Sri Mulyani, , S.Tr.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -12470,7 +12470,7 @@ const pegawais = [
   },
   {
     id: 832,
-    nip: "199312142022032015",
+    nip: "19931214 202203 2 015",
     nama: "Dr. Nety Nur Rahmiah Puspitasari, S.Ked",
     pangkatId: 10,
     golonganId: 5,
@@ -12485,7 +12485,7 @@ const pegawais = [
   },
   {
     id: 833,
-    nip: "199502182022032011",
+    nip: "19950218 202203 2 011",
     nama: "Drg. Rini Rositah",
     pangkatId: 10,
     golonganId: 5,
@@ -12500,7 +12500,7 @@ const pegawais = [
   },
   {
     id: 834,
-    nip: "198804232014032001",
+    nip: "19880423 201403 2 001",
     nama: "Norjannah, Amkg",
     pangkatId: 9,
     golonganId: 4,
@@ -12515,7 +12515,7 @@ const pegawais = [
   },
   {
     id: 835,
-    nip: "199011012017052002",
+    nip: "19901101 201705 2 002",
     nama: "Ika Haryanti, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -12530,7 +12530,7 @@ const pegawais = [
   },
   {
     id: 836,
-    nip: "199009122017052001",
+    nip: "19900912 201705 2 001",
     nama: "Septiani Tri Astuti, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -12545,7 +12545,7 @@ const pegawais = [
   },
   {
     id: 837,
-    nip: "199309082019032016",
+    nip: "19930908 201903 2 016",
     nama: "Indah Kurnia Widiningsih, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -12560,7 +12560,7 @@ const pegawais = [
   },
   {
     id: 838,
-    nip: "199411102019031011",
+    nip: "19941110 201903 1 011",
     nama: "Akhmad Badali, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -12575,7 +12575,7 @@ const pegawais = [
   },
   {
     id: 839,
-    nip: "199009142019032015",
+    nip: "19900914 201903 2 015",
     nama: "Nur'aini Jamil , A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -12590,7 +12590,7 @@ const pegawais = [
   },
   {
     id: 840,
-    nip: "199205262020122019",
+    nip: "19920526 202012 2 019",
     nama: "Dwi Astuti, Amd.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -12605,7 +12605,7 @@ const pegawais = [
   },
   {
     id: 841,
-    nip: "199307052020122027",
+    nip: "19930705 202012 2 027",
     nama: "Suminten, A.Md.Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -12620,7 +12620,7 @@ const pegawais = [
   },
   {
     id: 842,
-    nip: "199305212022032012",
+    nip: "19930521 202203 2 012",
     nama: "Saidatun Nazriah, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -12635,7 +12635,7 @@ const pegawais = [
   },
   {
     id: 843,
-    nip: "199305082022032008",
+    nip: "19930508 202203 2 008",
     nama: "Siti Zulaiha, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -12650,7 +12650,7 @@ const pegawais = [
   },
   {
     id: 844,
-    nip: "199202032025212028",
+    nip: "19920203 202521 2 028",
     nama: "Ns. Saniati Ayu Purnamasari, S.Kep",
     pangkatId: 18,
     golonganId: 16,
@@ -12665,7 +12665,7 @@ const pegawais = [
   },
   {
     id: 845,
-    nip: "198306132024212009",
+    nip: "19830613 202421 2 009",
     nama: "Siti Sarah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12680,7 +12680,7 @@ const pegawais = [
   },
   {
     id: 846,
-    nip: "199012292024212027",
+    nip: "19901229 202421 2 027",
     nama: "Fitria Ulandari, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -12695,7 +12695,7 @@ const pegawais = [
   },
   {
     id: 847,
-    nip: "199104112024212031",
+    nip: "19910411 202421 2 031",
     nama: "Widya Rahmadayanti, A. Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12710,7 +12710,7 @@ const pegawais = [
   },
   {
     id: 848,
-    nip: "199106142024211019",
+    nip: "19910614 202421 1 019",
     nama: "Dedi Sofyan Nur, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12725,7 +12725,7 @@ const pegawais = [
   },
   {
     id: 849,
-    nip: "199408112024212022",
+    nip: "19940811 202421 2 022",
     nama: "Dina Maulidah Rahmi, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -12740,7 +12740,7 @@ const pegawais = [
   },
   {
     id: 850,
-    nip: "199408102024212039",
+    nip: "19940810 202421 2 039",
     nama: "Atika Agustina, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -12755,7 +12755,7 @@ const pegawais = [
   },
   {
     id: 851,
-    nip: "199606152024212037",
+    nip: "19960615 202421 2 037",
     nama: "Yuni Audya, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -12770,7 +12770,7 @@ const pegawais = [
   },
   {
     id: 852,
-    nip: "199609162024212023",
+    nip: "19960916 202421 2 023",
     nama: "Rosiana Kewa, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12785,7 +12785,7 @@ const pegawais = [
   },
   {
     id: 853,
-    nip: "199408272025212025",
+    nip: "19940827 202521 2 025",
     nama: "Fitriati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12800,7 +12800,7 @@ const pegawais = [
   },
   {
     id: 854,
-    nip: "198212062025212014",
+    nip: "19821206 202521 2 014",
     nama: "Yuliana, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12815,7 +12815,7 @@ const pegawais = [
   },
   {
     id: 855,
-    nip: "198404012025212019",
+    nip: "19840401 202521 2 019",
     nama: "Aan Kuswati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12830,7 +12830,7 @@ const pegawais = [
   },
   {
     id: 856,
-    nip: "199010292025211013",
+    nip: "19901029 202521 1 013",
     nama: "Azis, A. Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -12845,7 +12845,7 @@ const pegawais = [
   },
   {
     id: 857,
-    nip: "199410102025212022",
+    nip: "19941010 202521 2 022",
     nama: "Jannatul Aulia, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13115,7 +13115,7 @@ const pegawais = [
   },
   {
     id: 875,
-    nip: "197310071993032003",
+    nip: "19731007 199303 2 003",
     nama: "Bd. Norkaya, S.St",
     pangkatId: 14,
     golonganId: 9,
@@ -13130,7 +13130,7 @@ const pegawais = [
   },
   {
     id: 876,
-    nip: "196510211987112002",
+    nip: "19651021 198711 2 002",
     nama: "Lise Anita, Skm",
     pangkatId: 13,
     golonganId: 8,
@@ -13145,7 +13145,7 @@ const pegawais = [
   },
   {
     id: 877,
-    nip: "197507042006041007",
+    nip: "19750704 200604 1 007",
     nama: ", Dr. Putra Jaya Kusuma, M.K.M.",
     pangkatId: 13,
     golonganId: 8,
@@ -13160,7 +13160,7 @@ const pegawais = [
   },
   {
     id: 878,
-    nip: "197208241991022001",
+    nip: "19720824 199102 2 001",
     nama: "Salasiah, A.Md.Keb A.Md",
     pangkatId: 12,
     golonganId: 7,
@@ -13175,7 +13175,7 @@ const pegawais = [
   },
   {
     id: 879,
-    nip: "197207071994031009",
+    nip: "19720707 199403 1 009",
     nama: "Fahrudin Rahman, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -13190,7 +13190,7 @@ const pegawais = [
   },
   {
     id: 880,
-    nip: "197910012011012004",
+    nip: "19791001 201101 2 004",
     nama: "Dr. Asridar",
     pangkatId: 12,
     golonganId: 7,
@@ -13205,7 +13205,7 @@ const pegawais = [
   },
   {
     id: 881,
-    nip: "196904191992031003",
+    nip: "19690419 199203 1 003",
     nama: "Sofianur, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -13220,7 +13220,7 @@ const pegawais = [
   },
   {
     id: 882,
-    nip: "198707232008042001",
+    nip: "19870723 200804 2 001",
     nama: "Bdn. Ema Suliyusti Pratiwi, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -13235,7 +13235,7 @@ const pegawais = [
   },
   {
     id: 883,
-    nip: "198401112006041005",
+    nip: "19840111 200604 1 005",
     nama: "Chandra Irawan, S.Tr.Kep., Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -13250,7 +13250,7 @@ const pegawais = [
   },
   {
     id: 884,
-    nip: "199401202019032014",
+    nip: "19940120 201903 2 014",
     nama: "Kartika Damasanti Mamonto, S. Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -13265,7 +13265,7 @@ const pegawais = [
   },
   {
     id: 885,
-    nip: "197111241994032005",
+    nip: "19711124 199403 2 005",
     nama: "Rinelsi Purba, A.Md.Gz",
     pangkatId: 11,
     golonganId: 6,
@@ -13280,7 +13280,7 @@ const pegawais = [
   },
   {
     id: 886,
-    nip: "198508072010012026",
+    nip: "19850807 201001 2 026",
     nama: "Norbaiyah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -13295,7 +13295,7 @@ const pegawais = [
   },
   {
     id: 887,
-    nip: "198812222010012004",
+    nip: "19881222 201001 2 004",
     nama: "Bdn., . Dasmy Anasiswaty, , S.Tr.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -13310,7 +13310,7 @@ const pegawais = [
   },
   {
     id: 888,
-    nip: "197711272011012001",
+    nip: "19771127 201101 2 001",
     nama: "Ribka Tonglo, Amkl",
     pangkatId: 11,
     golonganId: 6,
@@ -13325,7 +13325,7 @@ const pegawais = [
   },
   {
     id: 889,
-    nip: "197708082003122006",
+    nip: "19770808 200312 2 006",
     nama: "Ika Adiyanti, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -13340,7 +13340,7 @@ const pegawais = [
   },
   {
     id: 890,
-    nip: "198102172010012014",
+    nip: "19810217 201001 2 014",
     nama: "Nanik Widyaningsih, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -13355,7 +13355,7 @@ const pegawais = [
   },
   {
     id: 891,
-    nip: "198706072010012029",
+    nip: "19870607 201001 2 029",
     nama: "Yunia Tenmar Susanti, A.Md.Far.",
     pangkatId: 11,
     golonganId: 6,
@@ -13370,7 +13370,7 @@ const pegawais = [
   },
   {
     id: 892,
-    nip: "197907072007012017",
+    nip: "19790707 200701 2 017",
     nama: "Fitriani, A.Md.Kep.",
     pangkatId: 10,
     golonganId: 5,
@@ -13385,7 +13385,7 @@ const pegawais = [
   },
   {
     id: 893,
-    nip: "199504162022031004",
+    nip: "19950416 202203 1 004",
     nama: "Dr. Andrew Rozaan Fadlurrahman",
     pangkatId: 10,
     golonganId: 5,
@@ -13400,7 +13400,7 @@ const pegawais = [
   },
   {
     id: 894,
-    nip: "197908232006042020",
+    nip: "19790823 200604 2 020",
     nama: "Bdn., . Dewi Fitriyani, , S.Tr.Keb.",
     pangkatId: 10,
     golonganId: 5,
@@ -13415,7 +13415,7 @@ const pegawais = [
   },
   {
     id: 895,
-    nip: "197603202006041006",
+    nip: "19760320 200604 1 006",
     nama: "Riduan Hadi, A.Md.Kg",
     pangkatId: 9,
     golonganId: 4,
@@ -13430,7 +13430,7 @@ const pegawais = [
   },
   {
     id: 896,
-    nip: "198803212014032004",
+    nip: "19880321 201403 2 004",
     nama: "Ika Sri Haryati, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -13445,7 +13445,7 @@ const pegawais = [
   },
   {
     id: 897,
-    nip: "198402282005022001",
+    nip: "19840228 200502 2 001",
     nama: "Maisarah,  A.Md.Kes",
     pangkatId: 9,
     golonganId: 4,
@@ -13460,7 +13460,7 @@ const pegawais = [
   },
   {
     id: 898,
-    nip: "199001222017052001",
+    nip: "19900122 201705 2 001",
     nama: "Susi Susanti, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -13475,7 +13475,7 @@ const pegawais = [
   },
   {
     id: 899,
-    nip: "199005132017052002",
+    nip: "19900513 201705 2 002",
     nama: "Eka Laksana Wulandari, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -13490,7 +13490,7 @@ const pegawais = [
   },
   {
     id: 900,
-    nip: "199105192017052001",
+    nip: "19910519 201705 2 001",
     nama: "Tati Ramelan, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -13505,7 +13505,7 @@ const pegawais = [
   },
   {
     id: 901,
-    nip: "199002012019032019",
+    nip: "19900201 201903 2 019",
     nama: "Febriyani, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -13520,7 +13520,7 @@ const pegawais = [
   },
   {
     id: 902,
-    nip: "199306182019032013",
+    nip: "19930618 201903 2 013",
     nama: "Sri Khairiah Hafsah, A.Md.Kg.",
     pangkatId: 7,
     golonganId: 2,
@@ -13535,7 +13535,7 @@ const pegawais = [
   },
   {
     id: 903,
-    nip: "199209292022032009",
+    nip: "19920929 202203 2 009",
     nama: "Dwi Sella Purnamasari, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -13550,7 +13550,7 @@ const pegawais = [
   },
   {
     id: 904,
-    nip: "199511052023212005",
+    nip: "19951105 202321 2 005",
     nama: "Nurul Ika Fitriani, A.Md.Gz",
     pangkatId: 18,
     golonganId: 13,
@@ -13565,7 +13565,7 @@ const pegawais = [
   },
   {
     id: 905,
-    nip: "198712202024212029",
+    nip: "19871220 202421 2 029",
     nama: "Eka Ferawati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13580,7 +13580,7 @@ const pegawais = [
   },
   {
     id: 906,
-    nip: "199009032024212020",
+    nip: "19900903 202421 2 020",
     nama: "Sri Hayati, Amd.Kep.",
     pangkatId: 18,
     golonganId: 13,
@@ -13595,7 +13595,7 @@ const pegawais = [
   },
   {
     id: 907,
-    nip: "199010252024212021",
+    nip: "19901025 202421 2 021",
     nama: "Musdalipah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13610,7 +13610,7 @@ const pegawais = [
   },
   {
     id: 908,
-    nip: "199102012024212025",
+    nip: "19910201 202421 2 025",
     nama: "Ika Putri Cahyani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13625,7 +13625,7 @@ const pegawais = [
   },
   {
     id: 909,
-    nip: "198804192024212026",
+    nip: "19880419 202421 2 026",
     nama: "Norviana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13640,7 +13640,7 @@ const pegawais = [
   },
   {
     id: 910,
-    nip: "199111302024212027",
+    nip: "19911130 202421 2 027",
     nama: "Anggun Sulastri Dewi, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13655,7 +13655,7 @@ const pegawais = [
   },
   {
     id: 911,
-    nip: "199311162024212036",
+    nip: "19931116 202421 2 036",
     nama: "Silia Novita Ardianti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13670,7 +13670,7 @@ const pegawais = [
   },
   {
     id: 912,
-    nip: "199511022024212024",
+    nip: "19951102 202421 2 024",
     nama: "Rima Melati Hartoyo, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13685,7 +13685,7 @@ const pegawais = [
   },
   {
     id: 913,
-    nip: "199706112024211014",
+    nip: "19970611 202421 1 014",
     nama: "Alfenorrahman, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -13700,7 +13700,7 @@ const pegawais = [
   },
   {
     id: 914,
-    nip: "199803142024212024",
+    nip: "19980314 202421 2 024",
     nama: "Luthfia Ulfah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13715,7 +13715,7 @@ const pegawais = [
   },
   {
     id: 915,
-    nip: "198007172025212017",
+    nip: "19800717 202521 2 017",
     nama: "Bertha Kondo, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13730,7 +13730,7 @@ const pegawais = [
   },
   {
     id: 916,
-    nip: "198309072025212016",
+    nip: "19830907 202521 2 016",
     nama: "Sri Astuti, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13745,7 +13745,7 @@ const pegawais = [
   },
   {
     id: 917,
-    nip: "199103012025212024",
+    nip: "19910301 202521 2 024",
     nama: "Fitrohtin Hidayati, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -13760,7 +13760,7 @@ const pegawais = [
   },
   {
     id: 918,
-    nip: "198511252025212020",
+    nip: "19851125 202521 2 020",
     nama: "Munirah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13775,7 +13775,7 @@ const pegawais = [
   },
   {
     id: 919,
-    nip: "198601182025212007",
+    nip: "19860118 202521 2 007",
     nama: "Ida Royani, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13790,7 +13790,7 @@ const pegawais = [
   },
   {
     id: 920,
-    nip: "198902252025212021",
+    nip: "19890225 202521 2 021",
     nama: "Mariani, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13805,7 +13805,7 @@ const pegawais = [
   },
   {
     id: 921,
-    nip: "199307152025212031",
+    nip: "19930715 202521 2 031",
     nama: "Magfirah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13820,7 +13820,7 @@ const pegawais = [
   },
   {
     id: 922,
-    nip: "199409062025212031",
+    nip: "19940906 202521 2 031",
     nama: "Estorina Endang, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -13835,7 +13835,7 @@ const pegawais = [
   },
   {
     id: 923,
-    nip: "199611082025211011",
+    nip: "19961108 202521 1 011",
     nama: "Muhammad Irfan Ali, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -13850,7 +13850,7 @@ const pegawais = [
   },
   {
     id: 924,
-    nip: "198612282024212019",
+    nip: "19861228 202421 2 019",
     nama: "Devi Mulya Ningrum, S.K.M",
     pangkatId: 18,
     golonganId: 15,
@@ -13865,7 +13865,7 @@ const pegawais = [
   },
   {
     id: 925,
-    nip: "199310102025212037",
+    nip: "19931010 202521 2 037",
     nama: "Erliana, S.Si.T",
     pangkatId: 18,
     golonganId: 15,
@@ -13880,7 +13880,7 @@ const pegawais = [
   },
   {
     id: 926,
-    nip: "199605262025211016",
+    nip: "19960526 202521 1 016",
     nama: "Rusdi Sahresa Al. Muhamad, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -14090,7 +14090,7 @@ const pegawais = [
   },
   {
     id: 940,
-    nip: "197408241994031004",
+    nip: "19740824 199403 1 004",
     nama: "Syarifudin,  A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -14105,7 +14105,7 @@ const pegawais = [
   },
   {
     id: 941,
-    nip: "196909301991022002",
+    nip: "19690930 199102 2 002",
     nama: "Bdn., . Rusmaleny, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -14120,7 +14120,7 @@ const pegawais = [
   },
   {
     id: 942,
-    nip: "197402101996032002",
+    nip: "19740210 199603 2 002",
     nama: "Yusfaridah, A.Md.Gizi, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -14135,7 +14135,7 @@ const pegawais = [
   },
   {
     id: 943,
-    nip: "197008151994031011",
+    nip: "19700815 199403 1 011",
     nama: "Ansyari Saleh, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -14150,7 +14150,7 @@ const pegawais = [
   },
   {
     id: 944,
-    nip: "198003012014032003",
+    nip: "19800301 201403 2 003",
     nama: "Drg. Erni Rahmawati",
     pangkatId: 12,
     golonganId: 7,
@@ -14165,7 +14165,7 @@ const pegawais = [
   },
   {
     id: 945,
-    nip: "197907142005021002",
+    nip: "19790714 200502 1 002",
     nama: "Tedi Setiana, S.St",
     pangkatId: 12,
     golonganId: 7,
@@ -14180,7 +14180,7 @@ const pegawais = [
   },
   {
     id: 946,
-    nip: "197712092006042017",
+    nip: "19771209 200604 2 017",
     nama: "Naharia, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -14195,7 +14195,7 @@ const pegawais = [
   },
   {
     id: 947,
-    nip: "197708052008042002",
+    nip: "19770805 200804 2 002",
     nama: "Mazdalina, S.St",
     pangkatId: 12,
     golonganId: 7,
@@ -14210,7 +14210,7 @@ const pegawais = [
   },
   {
     id: 948,
-    nip: "198002202009032004",
+    nip: "19800220 200903 2 004",
     nama: "Aneta, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -14225,7 +14225,7 @@ const pegawais = [
   },
   {
     id: 949,
-    nip: "197712242008012012",
+    nip: "19771224 200801 2 012",
     nama: "Miradiana, A.Md",
     pangkatId: 11,
     golonganId: 6,
@@ -14240,7 +14240,7 @@ const pegawais = [
   },
   {
     id: 950,
-    nip: "199208262019032020",
+    nip: "19920826 201903 2 020",
     nama: "Sarastina Megawati, S. Farm., Apt",
     pangkatId: 11,
     golonganId: 6,
@@ -14255,7 +14255,7 @@ const pegawais = [
   },
   {
     id: 951,
-    nip: "196809241991031009",
+    nip: "19680924 199103 1 009",
     nama: "Ahmad Fauzi",
     pangkatId: 10,
     golonganId: 5,
@@ -14270,7 +14270,7 @@ const pegawais = [
   },
   {
     id: 952,
-    nip: "199601082022032008",
+    nip: "19960108 202203 2 008",
     nama: "Dr. Vivi Cahyani, S.Ked",
     pangkatId: 10,
     golonganId: 5,
@@ -14285,7 +14285,7 @@ const pegawais = [
   },
   {
     id: 953,
-    nip: "198212282006042028",
+    nip: "19821228 200604 2 028",
     nama: "Sapriani, A.Md.Kep.",
     pangkatId: 10,
     golonganId: 5,
@@ -14300,7 +14300,7 @@ const pegawais = [
   },
   {
     id: 954,
-    nip: "197211292006041012",
+    nip: "19721129 200604 1 012",
     nama: "Rudyansyah, A.Md.Kep.",
     pangkatId: 9,
     golonganId: 4,
@@ -14315,7 +14315,7 @@ const pegawais = [
   },
   {
     id: 955,
-    nip: "198606182009042006",
+    nip: "19860618 200904 2 006",
     nama: "Ita Feteriah, A.Md., Farm",
     pangkatId: 9,
     golonganId: 4,
@@ -14330,7 +14330,7 @@ const pegawais = [
   },
   {
     id: 956,
-    nip: "198901022017052002",
+    nip: "19890102 201705 2 002",
     nama: "Bdn., . Lindawati, , S.Tr.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -14345,7 +14345,7 @@ const pegawais = [
   },
   {
     id: 957,
-    nip: "197510292019052002",
+    nip: "19751029 201905 2 002",
     nama: "Suriani, A.Md.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -14360,7 +14360,7 @@ const pegawais = [
   },
   {
     id: 958,
-    nip: "199107152017052002",
+    nip: "19910715 201705 2 002",
     nama: "Lili Kurnia Ningsih, A.Md.Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -14375,7 +14375,7 @@ const pegawais = [
   },
   {
     id: 959,
-    nip: "199408112019032014",
+    nip: "19940811 201903 2 014",
     nama: "Noor Eka Safitri, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -14390,7 +14390,7 @@ const pegawais = [
   },
   {
     id: 960,
-    nip: "199608152019031003",
+    nip: "19960815 201903 1 003",
     nama: "Muhammad Nawawi, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -14405,7 +14405,7 @@ const pegawais = [
   },
   {
     id: 961,
-    nip: "199108262020122018",
+    nip: "19910826 202012 2 018",
     nama: "Maulida Rahmah, A.Md.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -14420,7 +14420,7 @@ const pegawais = [
   },
   {
     id: 962,
-    nip: "199805252022032011",
+    nip: "19980525 202203 2 011",
     nama: "Relita Medy Sukma, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -14435,7 +14435,7 @@ const pegawais = [
   },
   {
     id: 963,
-    nip: "199102192022031007",
+    nip: "19910219 202203 1 007",
     nama: "Sarifudin, A.Md.Kg",
     pangkatId: 7,
     golonganId: 2,
@@ -14450,7 +14450,7 @@ const pegawais = [
   },
   {
     id: 964,
-    nip: "199212272025212023",
+    nip: "19921227 202521 2 023",
     nama: "Mayang, S.Kep.,Ns",
     pangkatId: 18,
     golonganId: 16,
@@ -14465,7 +14465,7 @@ const pegawais = [
   },
   {
     id: 965,
-    nip: "198902102023211001",
+    nip: "19890210 202321 1 001",
     nama: "M. Zainal Arifin Siregar, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14480,7 +14480,7 @@ const pegawais = [
   },
   {
     id: 966,
-    nip: "199112062023212005",
+    nip: "19911206 202321 2 005",
     nama: "Rusmilawati, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14495,7 +14495,7 @@ const pegawais = [
   },
   {
     id: 967,
-    nip: "199508212023212006",
+    nip: "19950821 202321 2 006",
     nama: "Meri Andani, A.Md. Gz",
     pangkatId: 18,
     golonganId: 13,
@@ -14510,7 +14510,7 @@ const pegawais = [
   },
   {
     id: 968,
-    nip: "199010052024212046",
+    nip: "19901005 202421 2 046",
     nama: "Siti Nurhasanah, A.Md.Keb.",
     pangkatId: 18,
     golonganId: 13,
@@ -14525,7 +14525,7 @@ const pegawais = [
   },
   {
     id: 969,
-    nip: "199107172024212042",
+    nip: "19910717 202421 2 042",
     nama: "Aan Yulianawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14540,7 +14540,7 @@ const pegawais = [
   },
   {
     id: 970,
-    nip: "199104092024212040",
+    nip: "19910409 202421 2 040",
     nama: "Meri Faradila Sari, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14555,7 +14555,7 @@ const pegawais = [
   },
   {
     id: 971,
-    nip: "199210112024211026",
+    nip: "19921011 202421 1 026",
     nama: "Azharianor, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14570,7 +14570,7 @@ const pegawais = [
   },
   {
     id: 972,
-    nip: "199210102024212051",
+    nip: "19921010 202421 2 051",
     nama: "Nuraina Syaifaturahmi, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14585,7 +14585,7 @@ const pegawais = [
   },
   {
     id: 973,
-    nip: "199312122024211014",
+    nip: "19931212 202421 1 014",
     nama: "Desi Tri Ariawan, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14600,7 +14600,7 @@ const pegawais = [
   },
   {
     id: 974,
-    nip: "199509152024212040",
+    nip: "19950915 202421 2 040",
     nama: "Agustina Mursidah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14615,7 +14615,7 @@ const pegawais = [
   },
   {
     id: 975,
-    nip: "199804062024212021",
+    nip: "19980406 202421 2 021",
     nama: "Novita Sandra Pratama, A.Md,Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14630,7 +14630,7 @@ const pegawais = [
   },
   {
     id: 976,
-    nip: "198906152025212035",
+    nip: "19890615 202521 2 035",
     nama: "Fatimatu Jahra, Am.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14645,7 +14645,7 @@ const pegawais = [
   },
   {
     id: 977,
-    nip: "199106302025211017",
+    nip: "19910630 202521 1 017",
     nama: "Muslim Hidayat, A.Md Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -14660,7 +14660,7 @@ const pegawais = [
   },
   {
     id: 978,
-    nip: "199201282025212019",
+    nip: "19920128 202521 2 019",
     nama: "Fatmawati, Am. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14675,7 +14675,7 @@ const pegawais = [
   },
   {
     id: 979,
-    nip: "199208302025212021",
+    nip: "19920830 202521 2 021",
     nama: "Lailatannoor, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14690,7 +14690,7 @@ const pegawais = [
   },
   {
     id: 980,
-    nip: "199001052025212029",
+    nip: "19900105 202521 2 029",
     nama: "Sri Yulianti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14705,7 +14705,7 @@ const pegawais = [
   },
   {
     id: 981,
-    nip: "199202162025212036",
+    nip: "19920216 202521 2 036",
     nama: "Lisnawati Dewi, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14720,7 +14720,7 @@ const pegawais = [
   },
   {
     id: 982,
-    nip: "199206062025212040",
+    nip: "19920606 202521 2 040",
     nama: "Meta Sari, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14735,7 +14735,7 @@ const pegawais = [
   },
   {
     id: 983,
-    nip: "199306032025212031",
+    nip: "19930603 202521 2 031",
     nama: "Siti Thohari Munti'ah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -14750,7 +14750,7 @@ const pegawais = [
   },
   {
     id: 984,
-    nip: "199602232025212013",
+    nip: "19960223 202521 2 013",
     nama: "Fety Dwi Fitriana",
     pangkatId: 18,
     golonganId: 11,
@@ -14765,7 +14765,7 @@ const pegawais = [
   },
   {
     id: 985,
-    nip: "199208162024212039",
+    nip: "19920816 202421 2 039",
     nama: "Resti Agustina Rahayu, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -14780,7 +14780,7 @@ const pegawais = [
   },
   {
     id: 986,
-    nip: "199508152025211023",
+    nip: "19950815 202521 1 023",
     nama: "Edi Irwanto, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -15185,7 +15185,7 @@ const pegawais = [
   },
   {
     id: 1013,
-    nip: "197805112005022003",
+    nip: "19780511 200502 2 003",
     nama: "Drg. Suharirin",
     pangkatId: 14,
     golonganId: 9,
@@ -15200,7 +15200,7 @@ const pegawais = [
   },
   {
     id: 1014,
-    nip: "198603252014031001",
+    nip: "19860325 201403 1 001",
     nama: "Dr. Ferry Sumanto",
     pangkatId: 13,
     golonganId: 8,
@@ -15215,7 +15215,7 @@ const pegawais = [
   },
   {
     id: 1015,
-    nip: "196904241989112001",
+    nip: "19690424 198911 2 001",
     nama: "Aprillia Endardjanti, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -15230,7 +15230,7 @@ const pegawais = [
   },
   {
     id: 1016,
-    nip: "198109052005022001",
+    nip: "19810905 200502 2 001",
     nama: "Bdn., . Septi Kurniawati, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -15245,7 +15245,7 @@ const pegawais = [
   },
   {
     id: 1017,
-    nip: "198008122006042031",
+    nip: "19800812 200604 2 031",
     nama: "Bdn. Rima Fitriani, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -15260,7 +15260,7 @@ const pegawais = [
   },
   {
     id: 1018,
-    nip: "197703122006042026",
+    nip: "19770312 200604 2 026",
     nama: "Endang Wiji Lestari, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -15275,7 +15275,7 @@ const pegawais = [
   },
   {
     id: 1019,
-    nip: "198611042015032001",
+    nip: "19861104 201503 2 001",
     nama: "Dr. Diana Astuti",
     pangkatId: 12,
     golonganId: 7,
@@ -15290,7 +15290,7 @@ const pegawais = [
   },
   {
     id: 1020,
-    nip: "198502162009032007",
+    nip: "19850216 200903 2 007",
     nama: "Hasriani Basri, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -15305,7 +15305,7 @@ const pegawais = [
   },
   {
     id: 1021,
-    nip: "197907172003122008",
+    nip: "19790717 200312 2 008",
     nama: "Bdn. Suryanti, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -15320,7 +15320,7 @@ const pegawais = [
   },
   {
     id: 1022,
-    nip: "197611232003122004",
+    nip: "19761123 200312 2 004",
     nama: "Bdn., . Selina, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -15335,7 +15335,7 @@ const pegawais = [
   },
   {
     id: 1023,
-    nip: "198111102006041019",
+    nip: "19811110 200604 1 019",
     nama: "Said Sarifudin As, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -15350,7 +15350,7 @@ const pegawais = [
   },
   {
     id: 1024,
-    nip: "197909222009032006",
+    nip: "19790922 200903 2 006",
     nama: "Dedeh Juhariyah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -15365,7 +15365,7 @@ const pegawais = [
   },
   {
     id: 1025,
-    nip: "197212081995032003",
+    nip: "19721208 199503 2 003",
     nama: "Maria Ekasari Tamangendar, A.Md.Kes",
     pangkatId: 11,
     golonganId: 6,
@@ -15380,7 +15380,7 @@ const pegawais = [
   },
   {
     id: 1026,
-    nip: "198105212006042032",
+    nip: "19810521 200604 2 032",
     nama: "Ani Ruswanti, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -15395,7 +15395,7 @@ const pegawais = [
   },
   {
     id: 1027,
-    nip: "198209292008042005",
+    nip: "19820929 200804 2 005",
     nama: "Ratnawati, S.St",
     pangkatId: 11,
     golonganId: 6,
@@ -15410,7 +15410,7 @@ const pegawais = [
   },
   {
     id: 1028,
-    nip: "198506082010012028",
+    nip: "19850608 201001 2 028",
     nama: "Fitriani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -15425,7 +15425,7 @@ const pegawais = [
   },
   {
     id: 1029,
-    nip: "198708312010012018",
+    nip: "19870831 201001 2 018",
     nama: "Raudatul Jannah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -15440,7 +15440,7 @@ const pegawais = [
   },
   {
     id: 1030,
-    nip: "197205292003122006",
+    nip: "19720529 200312 2 006",
     nama: "Bd. Suparmi, S.Tr.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -15455,7 +15455,7 @@ const pegawais = [
   },
   {
     id: 1031,
-    nip: "198605092010012024",
+    nip: "19860509 201001 2 024",
     nama: "Rahmaniah, A.Md.Ak.",
     pangkatId: 11,
     golonganId: 6,
@@ -15470,7 +15470,7 @@ const pegawais = [
   },
   {
     id: 1032,
-    nip: "197604252006042018",
+    nip: "19760425 200604 2 018",
     nama: "Kristini, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -15485,7 +15485,7 @@ const pegawais = [
   },
   {
     id: 1033,
-    nip: "198908252010012003",
+    nip: "19890825 201001 2 003",
     nama: "Nurul Astianingsih, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -15500,7 +15500,7 @@ const pegawais = [
   },
   {
     id: 1034,
-    nip: "198802012010012018",
+    nip: "19880201 201001 2 018",
     nama: "Rina Eka Santoso, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -15515,7 +15515,7 @@ const pegawais = [
   },
   {
     id: 1035,
-    nip: "198910262011012003",
+    nip: "19891026 201101 2 003",
     nama: "Oriana Arisandi, Am.Kg",
     pangkatId: 11,
     golonganId: 6,
@@ -15530,7 +15530,7 @@ const pegawais = [
   },
   {
     id: 1036,
-    nip: "197709282003122009",
+    nip: "19770928 200312 2 009",
     nama: "Nur Awaliyah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -15545,7 +15545,7 @@ const pegawais = [
   },
   {
     id: 1037,
-    nip: "197707132006042030",
+    nip: "19770713 200604 2 030",
     nama: "Eti Rannu, A.Md",
     pangkatId: 11,
     golonganId: 6,
@@ -15560,7 +15560,7 @@ const pegawais = [
   },
   {
     id: 1038,
-    nip: "199002042019031009",
+    nip: "19900204 201903 1 009",
     nama: "Achmad Heriyanto, S. Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -15575,7 +15575,7 @@ const pegawais = [
   },
   {
     id: 1039,
-    nip: "197706202003122006",
+    nip: "19770620 200312 2 006",
     nama: "Eriwati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -15590,7 +15590,7 @@ const pegawais = [
   },
   {
     id: 1040,
-    nip: "199306172022031006",
+    nip: "19930617 202203 1 006",
     nama: "Dr. Suhartono",
     pangkatId: 10,
     golonganId: 5,
@@ -15605,7 +15605,7 @@ const pegawais = [
   },
   {
     id: 1041,
-    nip: "198005252006042030",
+    nip: "19800525 200604 2 030",
     nama: "Hasniar, A.Md.Kep",
     pangkatId: 10,
     golonganId: 5,
@@ -15620,7 +15620,7 @@ const pegawais = [
   },
   {
     id: 1042,
-    nip: "198904302011011002",
+    nip: "19890430 201101 1 002",
     nama: "Chusnul Ramdhani, A.Md.Kes",
     pangkatId: 8,
     golonganId: 3,
@@ -15635,7 +15635,7 @@ const pegawais = [
   },
   {
     id: 1043,
-    nip: "198502202019032016",
+    nip: "19850220 201903 2 016",
     nama: "Winarti, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -15650,7 +15650,7 @@ const pegawais = [
   },
   {
     id: 1044,
-    nip: "199412022019032021",
+    nip: "19941202 201903 2 021",
     nama: "Tiara Moulita, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -15665,7 +15665,7 @@ const pegawais = [
   },
   {
     id: 1045,
-    nip: "199406092019032014",
+    nip: "19940609 201903 2 014",
     nama: "Triska Juwita, A.Md.Rmik.",
     pangkatId: 8,
     golonganId: 3,
@@ -15680,7 +15680,7 @@ const pegawais = [
   },
   {
     id: 1046,
-    nip: "198011102007011006",
+    nip: "19801110 200701 1 006",
     nama: "Syahrani",
     pangkatId: 8,
     golonganId: 3,
@@ -15695,7 +15695,7 @@ const pegawais = [
   },
   {
     id: 1047,
-    nip: "199908022022032008",
+    nip: "19990802 202203 2 008",
     nama: "Asmi Akhiriah, A.Md.Gz",
     pangkatId: 7,
     golonganId: 2,
@@ -15710,7 +15710,7 @@ const pegawais = [
   },
   {
     id: 1048,
-    nip: "198709202023212005",
+    nip: "19870920 202321 2 005",
     nama: "Harie Pitya Anggraeny, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15725,7 +15725,7 @@ const pegawais = [
   },
   {
     id: 1049,
-    nip: "199405092024212044",
+    nip: "19940509 202421 2 044",
     nama: "Nurul Meilani Putri, Amd.Kep.",
     pangkatId: 18,
     golonganId: 13,
@@ -15740,7 +15740,7 @@ const pegawais = [
   },
   {
     id: 1050,
-    nip: "198902192024212018",
+    nip: "19890219 202421 2 018",
     nama: "Anis Hidayati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15755,7 +15755,7 @@ const pegawais = [
   },
   {
     id: 1051,
-    nip: "199007212024212028",
+    nip: "19900721 202421 2 028",
     nama: "Marliana Yuliarta, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15770,7 +15770,7 @@ const pegawais = [
   },
   {
     id: 1052,
-    nip: "198711112024212025",
+    nip: "19871111 202421 2 025",
     nama: "Jawil 'Asyabiah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15785,7 +15785,7 @@ const pegawais = [
   },
   {
     id: 1053,
-    nip: "199011162024211012",
+    nip: "19901116 202421 1 012",
     nama: "Risal, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15800,7 +15800,7 @@ const pegawais = [
   },
   {
     id: 1054,
-    nip: "199104062024212037",
+    nip: "19910406 202421 2 037",
     nama: "Aprilia Pery Wardana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15815,7 +15815,7 @@ const pegawais = [
   },
   {
     id: 1055,
-    nip: "199412262024212025",
+    nip: "19941226 202421 2 025",
     nama: "Misniawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15830,7 +15830,7 @@ const pegawais = [
   },
   {
     id: 1056,
-    nip: "199602042024212036",
+    nip: "19960204 202421 2 036",
     nama: "Maria Magdalena Rua, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -15845,7 +15845,7 @@ const pegawais = [
   },
   {
     id: 1057,
-    nip: "198201062025212016",
+    nip: "19820106 202521 2 016",
     nama: "Sulastri, A.Md Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15860,7 +15860,7 @@ const pegawais = [
   },
   {
     id: 1058,
-    nip: "198010032025211018",
+    nip: "19801003 202521 1 018",
     nama: "Agusalim, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15875,7 +15875,7 @@ const pegawais = [
   },
   {
     id: 1059,
-    nip: "198710182025212014",
+    nip: "19871018 202521 2 014",
     nama: "Sorta Sarah Susanti Hutagaol, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15890,7 +15890,7 @@ const pegawais = [
   },
   {
     id: 1060,
-    nip: "198609192025212016",
+    nip: "19860919 202521 2 016",
     nama: "Upiati, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15905,7 +15905,7 @@ const pegawais = [
   },
   {
     id: 1061,
-    nip: "198808282025212021",
+    nip: "19880828 202521 2 021",
     nama: "Lena Mastikasari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15920,7 +15920,7 @@ const pegawais = [
   },
   {
     id: 1062,
-    nip: "198809042025212024",
+    nip: "19880904 202521 2 024",
     nama: "Sonya Londreta Kasauly, A.Md,Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15935,7 +15935,7 @@ const pegawais = [
   },
   {
     id: 1063,
-    nip: "198904042025212030",
+    nip: "19890404 202521 2 030",
     nama: "Devi Nurirawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15950,7 +15950,7 @@ const pegawais = [
   },
   {
     id: 1064,
-    nip: "199001162025212020",
+    nip: "19900116 202521 2 020",
     nama: "Ayu Ashari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15965,7 +15965,7 @@ const pegawais = [
   },
   {
     id: 1065,
-    nip: "199003102025212031",
+    nip: "19900310 202521 2 031",
     nama: "Asti Widia Astuti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -15980,7 +15980,7 @@ const pegawais = [
   },
   {
     id: 1066,
-    nip: "199010302025211016",
+    nip: "19901030 202521 1 016",
     nama: "Aliansyah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -15995,7 +15995,7 @@ const pegawais = [
   },
   {
     id: 1067,
-    nip: "199101212025211027",
+    nip: "19910121 202521 1 027",
     nama: "Ahmad Tarsih, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16010,7 +16010,7 @@ const pegawais = [
   },
   {
     id: 1068,
-    nip: "198908202025211031",
+    nip: "19890820 202521 1 031",
     nama: "Muhammad Fajrin, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16025,7 +16025,7 @@ const pegawais = [
   },
   {
     id: 1069,
-    nip: "199112252025212036",
+    nip: "19911225 202521 2 036",
     nama: "Baiq Desy Erna Kencana, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16040,7 +16040,7 @@ const pegawais = [
   },
   {
     id: 1070,
-    nip: "199312052025212015",
+    nip: "19931205 202521 2 015",
     nama: "Islami Rantika Sari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -16055,7 +16055,7 @@ const pegawais = [
   },
   {
     id: 1071,
-    nip: "199312102025212026",
+    nip: "19931210 202521 2 026",
     nama: "Fitri Astuti, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -16070,7 +16070,7 @@ const pegawais = [
   },
   {
     id: 1072,
-    nip: "199507062025212019",
+    nip: "19950706 202521 2 019",
     nama: "Diyah Retno Dwi Yani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -16085,7 +16085,7 @@ const pegawais = [
   },
   {
     id: 1073,
-    nip: "198401142025212011",
+    nip: "19840114 202521 2 011",
     nama: "Herlinda",
     pangkatId: 18,
     golonganId: 11,
@@ -16100,7 +16100,7 @@ const pegawais = [
   },
   {
     id: 1074,
-    nip: "198808012025211018",
+    nip: "19880801 202521 1 018",
     nama: "Suriansyah",
     pangkatId: 18,
     golonganId: 11,
@@ -16115,7 +16115,7 @@ const pegawais = [
   },
   {
     id: 1075,
-    nip: "199801022025212009",
+    nip: "19980102 202521 2 009",
     nama: "Nur Aslam",
     pangkatId: 18,
     golonganId: 11,
@@ -16130,7 +16130,7 @@ const pegawais = [
   },
   {
     id: 1076,
-    nip: "199110052025211024",
+    nip: "19911005 202521 1 024",
     nama: "Dima Okta Abriyanto, S.Km",
     pangkatId: 18,
     golonganId: 15,
@@ -16145,7 +16145,7 @@ const pegawais = [
   },
   {
     id: 1077,
-    nip: "199407042025212024",
+    nip: "19940704 202521 2 024",
     nama: "Salmiah, S.Sit",
     pangkatId: 18,
     golonganId: 15,
@@ -16160,7 +16160,7 @@ const pegawais = [
   },
   {
     id: 1078,
-    nip: "197602272025212004",
+    nip: "19760227 202521 2 004",
     nama: "Debby Febri Ardanti, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -16175,7 +16175,7 @@ const pegawais = [
   },
   {
     id: 1079,
-    nip: "198702152025212009",
+    nip: "19870215 202521 2 009",
     nama: "Safrina Samosir, S.Pd",
     pangkatId: 18,
     golonganId: 15,
@@ -16595,7 +16595,7 @@ const pegawais = [
   },
   {
     id: 1107,
-    nip: "198107102010012018",
+    nip: "19810710 201001 2 018",
     nama: "Dr. Fransiska Santi Murni",
     pangkatId: 13,
     golonganId: 8,
@@ -16610,7 +16610,7 @@ const pegawais = [
   },
   {
     id: 1108,
-    nip: "197306131993032005",
+    nip: "19730613 199303 2 005",
     nama: "Bdn. Suhartini Y, S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -16625,7 +16625,7 @@ const pegawais = [
   },
   {
     id: 1109,
-    nip: "197302071993031005",
+    nip: "19730207 199303 1 005",
     nama: "Hasanuddin, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -16640,7 +16640,7 @@ const pegawais = [
   },
   {
     id: 1110,
-    nip: "197712282005021004",
+    nip: "19771228 200502 1 004",
     nama: "Eko Purwanto, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -16655,7 +16655,7 @@ const pegawais = [
   },
   {
     id: 1111,
-    nip: "197508251995021002",
+    nip: "19750825 199502 1 002",
     nama: "Hartoyo, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -16670,7 +16670,7 @@ const pegawais = [
   },
   {
     id: 1112,
-    nip: "198201012006042048",
+    nip: "19820101 200604 2 048",
     nama: "Theresia Anu, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -16685,7 +16685,7 @@ const pegawais = [
   },
   {
     id: 1113,
-    nip: "198712092009032003",
+    nip: "19871209 200903 2 003",
     nama: "Delphy Embarsari, S.Tr.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -16700,7 +16700,7 @@ const pegawais = [
   },
   {
     id: 1114,
-    nip: "197701172009032001",
+    nip: "19770117 200903 2 001",
     nama: "Sri Indah Handayani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -16715,7 +16715,7 @@ const pegawais = [
   },
   {
     id: 1115,
-    nip: "199107102019031013",
+    nip: "19910710 201903 1 013",
     nama: "Dr. Ivan Dominicus Sitohang",
     pangkatId: 11,
     golonganId: 6,
@@ -16730,7 +16730,7 @@ const pegawais = [
   },
   {
     id: 1116,
-    nip: "199309232019032029",
+    nip: "19930923 201903 2 029",
     nama: "Fakhriana, S. Farm., Apt.",
     pangkatId: 11,
     golonganId: 6,
@@ -16745,7 +16745,7 @@ const pegawais = [
   },
   {
     id: 1117,
-    nip: "199206162019032026",
+    nip: "19920616 201903 2 026",
     nama: "Drg. Keke Adelia",
     pangkatId: 11,
     golonganId: 6,
@@ -16760,7 +16760,7 @@ const pegawais = [
   },
   {
     id: 1118,
-    nip: "197804042006041015",
+    nip: "19780404 200604 1 015",
     nama: "Iswanto, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -16775,7 +16775,7 @@ const pegawais = [
   },
   {
     id: 1119,
-    nip: "199006242017052001",
+    nip: "19900624 201705 2 001",
     nama: "Bdn., . Dewi Ariyanti, , S.Tr.Keb.",
     pangkatId: 9,
     golonganId: 4,
@@ -16790,7 +16790,7 @@ const pegawais = [
   },
   {
     id: 1120,
-    nip: "199206112019032014",
+    nip: "19920611 201903 2 014",
     nama: "Anna Rahayu, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -16805,7 +16805,7 @@ const pegawais = [
   },
   {
     id: 1121,
-    nip: "198902152019032012",
+    nip: "19890215 201903 2 012",
     nama: "Dwi Lestariani, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -16820,7 +16820,7 @@ const pegawais = [
   },
   {
     id: 1122,
-    nip: "199401242019031005",
+    nip: "19940124 201903 1 005",
     nama: "Muhammad Al Fajar, A.Md.Kl.",
     pangkatId: 8,
     golonganId: 3,
@@ -16835,7 +16835,7 @@ const pegawais = [
   },
   {
     id: 1123,
-    nip: "197801202011032001",
+    nip: "19780120 201103 2 001",
     nama: "Marhamah, A.Md.Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -16850,7 +16850,7 @@ const pegawais = [
   },
   {
     id: 1124,
-    nip: "199501292022032009",
+    nip: "19950129 202203 2 009",
     nama: "Muhibatul Awaliyah, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -16865,7 +16865,7 @@ const pegawais = [
   },
   {
     id: 1125,
-    nip: "199911112022032004",
+    nip: "19991111 202203 2 004",
     nama: "Rani Aulia Wahyu Ningtia, A.Md.Kes",
     pangkatId: 7,
     golonganId: 2,
@@ -16880,7 +16880,7 @@ const pegawais = [
   },
   {
     id: 1126,
-    nip: "198803072022032001",
+    nip: "19880307 202203 2 001",
     nama: "Sanisah, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -16895,7 +16895,7 @@ const pegawais = [
   },
   {
     id: 1127,
-    nip: "199401282025211014",
+    nip: "19940128 202521 1 014",
     nama: "Ns. Nur Ikhsan, S.Kep.",
     pangkatId: 18,
     golonganId: 16,
@@ -16910,7 +16910,7 @@ const pegawais = [
   },
   {
     id: 1128,
-    nip: "198711052023212008",
+    nip: "19871105 202321 2 008",
     nama: "Arumyani Widya Sari, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16925,7 +16925,7 @@ const pegawais = [
   },
   {
     id: 1129,
-    nip: "198910092024212031",
+    nip: "19891009 202421 2 031",
     nama: "Suriyani, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -16940,7 +16940,7 @@ const pegawais = [
   },
   {
     id: 1130,
-    nip: "199001302024211010",
+    nip: "19900130 202421 1 010",
     nama: "Ahmad Chuodelfa Hamid, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16955,7 +16955,7 @@ const pegawais = [
   },
   {
     id: 1131,
-    nip: "198803082024211012",
+    nip: "19880308 202421 1 012",
     nama: "Amrullah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -16970,7 +16970,7 @@ const pegawais = [
   },
   {
     id: 1132,
-    nip: "199309162024212025",
+    nip: "19930916 202421 2 025",
     nama: "Helda Aeni Septiara Sari, A.Md Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -16985,7 +16985,7 @@ const pegawais = [
   },
   {
     id: 1133,
-    nip: "199411282024212037",
+    nip: "19941128 202421 2 037",
     nama: "Laila Auliyah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17000,7 +17000,7 @@ const pegawais = [
   },
   {
     id: 1134,
-    nip: "199410232024211013",
+    nip: "19941023 202421 1 013",
     nama: "Muhammad Hairil Nasir, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -17015,7 +17015,7 @@ const pegawais = [
   },
   {
     id: 1135,
-    nip: "199602252024211013",
+    nip: "19960225 202421 1 013",
     nama: "Kamarul Ahda, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -17030,7 +17030,7 @@ const pegawais = [
   },
   {
     id: 1136,
-    nip: "199703132024212038",
+    nip: "19970313 202421 2 038",
     nama: "Ana Mariana, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17045,7 +17045,7 @@ const pegawais = [
   },
   {
     id: 1137,
-    nip: "199511122024212034",
+    nip: "19951112 202421 2 034",
     nama: "Sariyanti, Amd.Kl",
     pangkatId: 18,
     golonganId: 13,
@@ -17060,7 +17060,7 @@ const pegawais = [
   },
   {
     id: 1138,
-    nip: "199012242025212029",
+    nip: "19901224 202521 2 029",
     nama: "Siti Astuti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17075,7 +17075,7 @@ const pegawais = [
   },
   {
     id: 1139,
-    nip: "199106302025212017",
+    nip: "19910630 202521 2 017",
     nama: "Aisyah, A.Md Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17090,7 +17090,7 @@ const pegawais = [
   },
   {
     id: 1140,
-    nip: "199110122025212022",
+    nip: "19911012 202521 2 022",
     nama: "Ika Ratna Sari, A.Md, Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17105,7 +17105,7 @@ const pegawais = [
   },
   {
     id: 1141,
-    nip: "197806102025211005",
+    nip: "19780610 202521 1 005",
     nama: "Tego Utomo",
     pangkatId: 18,
     golonganId: 11,
@@ -17120,7 +17120,7 @@ const pegawais = [
   },
   {
     id: 1142,
-    nip: "198304182025211018",
+    nip: "19830418 202521 1 018",
     nama: "Priyono",
     pangkatId: 18,
     golonganId: 11,
@@ -17135,7 +17135,7 @@ const pegawais = [
   },
   {
     id: 1143,
-    nip: "199209292025212014",
+    nip: "19920929 202521 2 014",
     nama: "Sarbinih Retoy",
     pangkatId: 18,
     golonganId: 11,
@@ -17150,7 +17150,7 @@ const pegawais = [
   },
   {
     id: 1144,
-    nip: "199309242025212017",
+    nip: "19930924 202521 2 017",
     nama: "Siti Fatimah Rahayu, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -17360,7 +17360,7 @@ const pegawais = [
   },
   {
     id: 1158,
-    nip: "196710151989022005",
+    nip: "19671015 198902 2 005",
     nama: "Bdn., , . Anjar Muhajaroh, , S.Tr.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -17375,7 +17375,7 @@ const pegawais = [
   },
   {
     id: 1159,
-    nip: "197201221992032006",
+    nip: "19720122 199203 2 006",
     nama: "Janiwati, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -17390,7 +17390,7 @@ const pegawais = [
   },
   {
     id: 1160,
-    nip: "197403141993032002",
+    nip: "19740314 199303 2 002",
     nama: "Siti Rabiah, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -17405,7 +17405,7 @@ const pegawais = [
   },
   {
     id: 1161,
-    nip: "197406301994031005",
+    nip: "19740630 199403 1 005",
     nama: "Herniawan, Skm",
     pangkatId: 12,
     golonganId: 7,
@@ -17420,7 +17420,7 @@ const pegawais = [
   },
   {
     id: 1162,
-    nip: "198601072014032001",
+    nip: "19860107 201403 2 001",
     nama: "Dr. Sabrina Batubara",
     pangkatId: 12,
     golonganId: 7,
@@ -17435,7 +17435,7 @@ const pegawais = [
   },
   {
     id: 1163,
-    nip: "198309122014031002",
+    nip: "19830912 201403 1 002",
     nama: "Drg. Harun Zen",
     pangkatId: 11,
     golonganId: 6,
@@ -17450,7 +17450,7 @@ const pegawais = [
   },
   {
     id: 1164,
-    nip: "198505122009032016",
+    nip: "19850512 200903 2 016",
     nama: "Risnawati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -17465,7 +17465,7 @@ const pegawais = [
   },
   {
     id: 1165,
-    nip: "197707122003122013",
+    nip: "19770712 200312 2 013",
     nama: "Hadiyanah, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -17480,7 +17480,7 @@ const pegawais = [
   },
   {
     id: 1166,
-    nip: "198806182010011004",
+    nip: "19880618 201001 1 004",
     nama: "Alhen Firnandez, A.Md.Far",
     pangkatId: 11,
     golonganId: 6,
@@ -17495,7 +17495,7 @@ const pegawais = [
   },
   {
     id: 1167,
-    nip: "198812262011012006",
+    nip: "19881226 201101 2 006",
     nama: "Dewi Kartika, Am.Kg",
     pangkatId: 11,
     golonganId: 6,
@@ -17510,7 +17510,7 @@ const pegawais = [
   },
   {
     id: 1168,
-    nip: "199311012022032011",
+    nip: "19931101 202203 2 011",
     nama: "Drg. Rizki Noviyanti",
     pangkatId: 10,
     golonganId: 5,
@@ -17525,7 +17525,7 @@ const pegawais = [
   },
   {
     id: 1169,
-    nip: "199110022014032004",
+    nip: "19911002 201403 2 004",
     nama: "Lia Anifah Sa'adah, A.Md.Ak",
     pangkatId: 10,
     golonganId: 5,
@@ -17540,7 +17540,7 @@ const pegawais = [
   },
   {
     id: 1170,
-    nip: "197902102009031007",
+    nip: "19790210 200903 1 007",
     nama: "Mulyono, A.Md.Kep",
     pangkatId: 9,
     golonganId: 4,
@@ -17555,7 +17555,7 @@ const pegawais = [
   },
   {
     id: 1171,
-    nip: "198910172019031008",
+    nip: "19891017 201903 1 008",
     nama: "Said Jalaludin, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -17570,7 +17570,7 @@ const pegawais = [
   },
   {
     id: 1172,
-    nip: "199305072019032011",
+    nip: "19930507 201903 2 011",
     nama: "Ima Nurul Khotimah, A.Md.Gz",
     pangkatId: 8,
     golonganId: 3,
@@ -17585,7 +17585,7 @@ const pegawais = [
   },
   {
     id: 1173,
-    nip: "199402232019032010",
+    nip: "19940223 201903 2 010",
     nama: "Elisabeth Dua Nurak, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -17600,7 +17600,7 @@ const pegawais = [
   },
   {
     id: 1174,
-    nip: "199512312019032013",
+    nip: "19951231 201903 2 013",
     nama: "Nurul Annajmi, A.Md.Ak",
     pangkatId: 8,
     golonganId: 3,
@@ -17615,7 +17615,7 @@ const pegawais = [
   },
   {
     id: 1175,
-    nip: "196912312009061052",
+    nip: "19691231 200906 1 052",
     nama: "Sahabuddin",
     pangkatId: 8,
     golonganId: 3,
@@ -17630,7 +17630,7 @@ const pegawais = [
   },
   {
     id: 1176,
-    nip: "198611042019032008",
+    nip: "19861104 201903 2 008",
     nama: "Arbayah, A.Md.Kl",
     pangkatId: 8,
     golonganId: 3,
@@ -17645,7 +17645,7 @@ const pegawais = [
   },
   {
     id: 1177,
-    nip: "198002162007012012",
+    nip: "19800216 200701 2 012",
     nama: "Petrosa Dewi Pratiwi Skolastika",
     pangkatId: 7,
     golonganId: 2,
@@ -17660,7 +17660,7 @@ const pegawais = [
   },
   {
     id: 1178,
-    nip: "198511162023212004",
+    nip: "19851116 202321 2 004",
     nama: "Theresia Nostrianty, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -17675,7 +17675,7 @@ const pegawais = [
   },
   {
     id: 1179,
-    nip: "198806132024211008",
+    nip: "19880613 202421 1 008",
     nama: "Wawan Suryawan, A.Md",
     pangkatId: 18,
     golonganId: 13,
@@ -17690,7 +17690,7 @@ const pegawais = [
   },
   {
     id: 1180,
-    nip: "199105152024212046",
+    nip: "19910515 202421 2 046",
     nama: "Sarifah Maya Sarah, Amd. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -17705,7 +17705,7 @@ const pegawais = [
   },
   {
     id: 1181,
-    nip: "199104012024211014",
+    nip: "19910401 202421 1 014",
     nama: "Taufik Widayat, Amd.Kep.",
     pangkatId: 18,
     golonganId: 13,
@@ -17720,7 +17720,7 @@ const pegawais = [
   },
   {
     id: 1182,
-    nip: "199510262024212043",
+    nip: "19951026 202421 2 043",
     nama: "Lusia Oktaviani Gelu Witin, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17735,7 +17735,7 @@ const pegawais = [
   },
   {
     id: 1183,
-    nip: "199609052024212032",
+    nip: "19960905 202421 2 032",
     nama: "Yuventa Nona Ita, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17750,7 +17750,7 @@ const pegawais = [
   },
   {
     id: 1184,
-    nip: "199710212024212015",
+    nip: "19971021 202421 2 015",
     nama: "Gemellia Vivia Yose Sari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -17765,7 +17765,7 @@ const pegawais = [
   },
   {
     id: 1185,
-    nip: "198907162025212027",
+    nip: "19890716 202521 2 027",
     nama: "Sarifah Nursiang, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -17780,7 +17780,7 @@ const pegawais = [
   },
   {
     id: 1186,
-    nip: "199011282025212006",
+    nip: "19901128 202521 2 006",
     nama: "Ruri Handayani, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -17795,7 +17795,7 @@ const pegawais = [
   },
   {
     id: 1187,
-    nip: "199203052025211009",
+    nip: "19920305 202521 1 009",
     nama: "Rizal Abda'u El Has",
     pangkatId: 18,
     golonganId: 11,
@@ -17810,7 +17810,7 @@ const pegawais = [
   },
   {
     id: 1188,
-    nip: "199508112024212038",
+    nip: "19950811 202421 2 038",
     nama: "Sriani Ema Wati, S.K.M.",
     pangkatId: 18,
     golonganId: 15,
@@ -18110,7 +18110,7 @@ const pegawais = [
   },
   {
     id: 1208,
-    nip: "196807131991021001",
+    nip: "19680713 199102 1 001",
     nama: "Abdul Malik, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -18125,7 +18125,7 @@ const pegawais = [
   },
   {
     id: 1209,
-    nip: "197212301998032006",
+    nip: "19721230 199803 2 006",
     nama: "Muryati, S.Keb.",
     pangkatId: 12,
     golonganId: 7,
@@ -18140,7 +18140,7 @@ const pegawais = [
   },
   {
     id: 1210,
-    nip: "197208052000121002",
+    nip: "19720805 200012 1 002",
     nama: "Hamdani, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -18155,7 +18155,7 @@ const pegawais = [
   },
   {
     id: 1211,
-    nip: "198701122014122001",
+    nip: "19870112 201412 2 001",
     nama: "Dr. Nur Najmi Hidayati",
     pangkatId: 12,
     golonganId: 7,
@@ -18170,7 +18170,7 @@ const pegawais = [
   },
   {
     id: 1212,
-    nip: "197412281995032001",
+    nip: "19741228 199503 2 001",
     nama: "Puji Hariani, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -18185,7 +18185,7 @@ const pegawais = [
   },
   {
     id: 1213,
-    nip: "198007181999032003",
+    nip: "19800718 199903 2 003",
     nama: "Rubbi Susana, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -18200,7 +18200,7 @@ const pegawais = [
   },
   {
     id: 1214,
-    nip: "197207051998032010",
+    nip: "19720705 199803 2 010",
     nama: "Siti Masja, A.Md.Kg",
     pangkatId: 11,
     golonganId: 6,
@@ -18215,7 +18215,7 @@ const pegawais = [
   },
   {
     id: 1215,
-    nip: "197306242002122004",
+    nip: "19730624 200212 2 004",
     nama: "Kasmirah, S.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -18230,7 +18230,7 @@ const pegawais = [
   },
   {
     id: 1216,
-    nip: "198606152010012032",
+    nip: "19860615 201001 2 032",
     nama: "Bdn. Rahmayanti, , S.St.",
     pangkatId: 11,
     golonganId: 6,
@@ -18245,7 +18245,7 @@ const pegawais = [
   },
   {
     id: 1217,
-    nip: "198812242011012001",
+    nip: "19881224 201101 2 001",
     nama: "Herlindawati, S.Gz.",
     pangkatId: 11,
     golonganId: 6,
@@ -18260,7 +18260,7 @@ const pegawais = [
   },
   {
     id: 1218,
-    nip: "198610102010012040",
+    nip: "19861010 201001 2 040",
     nama: "Kurniawati, S.Keb.",
     pangkatId: 11,
     golonganId: 6,
@@ -18275,7 +18275,7 @@ const pegawais = [
   },
   {
     id: 1219,
-    nip: "199012112022032009",
+    nip: "19901211 202203 2 009",
     nama: "Gina Vinrensia, S.Farm., Apt.",
     pangkatId: 10,
     golonganId: 5,
@@ -18290,7 +18290,7 @@ const pegawais = [
   },
   {
     id: 1220,
-    nip: "199302222022031009",
+    nip: "19930222 202203 1 009",
     nama: "Drg. Tri Sulistiono",
     pangkatId: 10,
     golonganId: 5,
@@ -18305,7 +18305,7 @@ const pegawais = [
   },
   {
     id: 1221,
-    nip: "198805122019032013",
+    nip: "19880512 201903 2 013",
     nama: "Juraisah, Skm",
     pangkatId: 10,
     golonganId: 5,
@@ -18320,7 +18320,7 @@ const pegawais = [
   },
   {
     id: 1222,
-    nip: "198204222006042013",
+    nip: "19820422 200604 2 013",
     nama: "Ners. Ery Murnisiah, S.Kep",
     pangkatId: 10,
     golonganId: 5,
@@ -18335,7 +18335,7 @@ const pegawais = [
   },
   {
     id: 1223,
-    nip: "199201282017052001",
+    nip: "19920128 201705 2 001",
     nama: "Jumiyati, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -18350,7 +18350,7 @@ const pegawais = [
   },
   {
     id: 1224,
-    nip: "199111032019032016",
+    nip: "19911103 201903 2 016",
     nama: "Nurul Isnaeni , A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -18365,7 +18365,7 @@ const pegawais = [
   },
   {
     id: 1225,
-    nip: "199405282019032018",
+    nip: "19940528 201903 2 018",
     nama: "Andriani, A.Md.Rmik.",
     pangkatId: 8,
     golonganId: 3,
@@ -18380,7 +18380,7 @@ const pegawais = [
   },
   {
     id: 1226,
-    nip: "198711142019032012",
+    nip: "19871114 201903 2 012",
     nama: "Lidya Ikhviana Putri, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -18395,7 +18395,7 @@ const pegawais = [
   },
   {
     id: 1227,
-    nip: "199204172020122020",
+    nip: "19920417 202012 2 020",
     nama: "Sri Rahayu Ningsih, A.Md.Kep",
     pangkatId: 8,
     golonganId: 3,
@@ -18410,7 +18410,7 @@ const pegawais = [
   },
   {
     id: 1228,
-    nip: "199603062019032009",
+    nip: "19960306 201903 2 009",
     nama: "Siti Jubaidah, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -18425,7 +18425,7 @@ const pegawais = [
   },
   {
     id: 1229,
-    nip: "199908202020121003",
+    nip: "19990820 202012 1 003",
     nama: "Fadella Zulfa Rachmani, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -18440,7 +18440,7 @@ const pegawais = [
   },
   {
     id: 1230,
-    nip: "199002072022031002",
+    nip: "19900207 202203 1 002",
     nama: "Rahman Fahruddin, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -18455,7 +18455,7 @@ const pegawais = [
   },
   {
     id: 1231,
-    nip: "199112162025212020",
+    nip: "19911216 202521 2 020",
     nama: "Aulia Sanjaya, S.Farm.,Apt",
     pangkatId: 18,
     golonganId: 16,
@@ -18470,7 +18470,7 @@ const pegawais = [
   },
   {
     id: 1232,
-    nip: "198610152023212005",
+    nip: "19861015 202321 2 005",
     nama: "Rohani, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -18485,7 +18485,7 @@ const pegawais = [
   },
   {
     id: 1233,
-    nip: "198804062024212026",
+    nip: "19880406 202421 2 026",
     nama: "Noor Maidah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18500,7 +18500,7 @@ const pegawais = [
   },
   {
     id: 1234,
-    nip: "198909172024212028",
+    nip: "19890917 202421 2 028",
     nama: "Nur Hasanah S, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18515,7 +18515,7 @@ const pegawais = [
   },
   {
     id: 1235,
-    nip: "199105312024212027",
+    nip: "19910531 202421 2 027",
     nama: "Mariyati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18530,7 +18530,7 @@ const pegawais = [
   },
   {
     id: 1236,
-    nip: "199111102024212038",
+    nip: "19911110 202421 2 038",
     nama: "Nur Halimah, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -18545,7 +18545,7 @@ const pegawais = [
   },
   {
     id: 1237,
-    nip: "199111222024212023",
+    nip: "19911122 202421 2 023",
     nama: "Syaripah, A.Md Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -18560,7 +18560,7 @@ const pegawais = [
   },
   {
     id: 1238,
-    nip: "199703262024212016",
+    nip: "19970326 202421 2 016",
     nama: "Nurul Wahdah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -18575,7 +18575,7 @@ const pegawais = [
   },
   {
     id: 1239,
-    nip: "199710212024212011",
+    nip: "19971021 202421 2 011",
     nama: "Gemellia Vivia Yose Rini, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18590,7 +18590,7 @@ const pegawais = [
   },
   {
     id: 1240,
-    nip: "198707082025211019",
+    nip: "19870708 202521 1 019",
     nama: "Saprul, A.Md.Far",
     pangkatId: 18,
     golonganId: 13,
@@ -18605,7 +18605,7 @@ const pegawais = [
   },
   {
     id: 1241,
-    nip: "199010052025212025",
+    nip: "19901005 202521 2 025",
     nama: "Hari Abri Patpullim, A.Md.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -18620,7 +18620,7 @@ const pegawais = [
   },
   {
     id: 1242,
-    nip: "198803202025211018",
+    nip: "19880320 202521 1 018",
     nama: "M Firman Aidy, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -18635,7 +18635,7 @@ const pegawais = [
   },
   {
     id: 1243,
-    nip: "198901102025212022",
+    nip: "19890110 202521 2 022",
     nama: "Selvi Meliyanti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18650,7 +18650,7 @@ const pegawais = [
   },
   {
     id: 1244,
-    nip: "199003032025212030",
+    nip: "19900303 202521 2 030",
     nama: "Nurmiah, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18665,7 +18665,7 @@ const pegawais = [
   },
   {
     id: 1245,
-    nip: "199005122025212027",
+    nip: "19900512 202521 2 027",
     nama: "Dwi Sukma Pryhandini, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -18680,7 +18680,7 @@ const pegawais = [
   },
   {
     id: 1246,
-    nip: "198904122024212025",
+    nip: "19890412 202421 2 025",
     nama: "Yati, S.K.M",
     pangkatId: 18,
     golonganId: 15,
@@ -18695,7 +18695,7 @@ const pegawais = [
   },
   {
     id: 1247,
-    nip: "199003212025211021",
+    nip: "19900321 202521 1 021",
     nama: "Farid, Skm",
     pangkatId: 18,
     golonganId: 15,
@@ -19101,7 +19101,7 @@ const pegawais = [
   },
   {
     id: 1274,
-    nip: "196912251991022001",
+    nip: "19691225 199102 2 001",
     nama: "Ida Norsanti, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -19116,7 +19116,7 @@ const pegawais = [
   },
   {
     id: 1275,
-    nip: "197503291994031001",
+    nip: "19750329 199403 1 001",
     nama: "Mulyadi Safitri, A.Md, Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -19131,7 +19131,7 @@ const pegawais = [
   },
   {
     id: 1276,
-    nip: "196811011988011001",
+    nip: "19681101 198801 1 001",
     nama: "Hairil Meladi, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -19146,7 +19146,7 @@ const pegawais = [
   },
   {
     id: 1277,
-    nip: "197303071996031002",
+    nip: "19730307 199603 1 002",
     nama: "Supardiyono, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -19161,7 +19161,7 @@ const pegawais = [
   },
   {
     id: 1278,
-    nip: "198010312006042016",
+    nip: "19801031 200604 2 016",
     nama: "Surianti, S.Tr.Kep., Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -19176,7 +19176,7 @@ const pegawais = [
   },
   {
     id: 1279,
-    nip: "197906082006042008",
+    nip: "19790608 200604 2 008",
     nama: "Nunung Yuniarsih, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -19191,7 +19191,7 @@ const pegawais = [
   },
   {
     id: 1280,
-    nip: "198411072006042007",
+    nip: "19841107 200604 2 007",
     nama: "Jumiyati, A.Md.Gizi",
     pangkatId: 12,
     golonganId: 7,
@@ -19206,7 +19206,7 @@ const pegawais = [
   },
   {
     id: 1281,
-    nip: "198410082009032012",
+    nip: "19841008 200903 2 012",
     nama: "Agustiani Manurung, A.Md.Keb",
     pangkatId: 12,
     golonganId: 7,
@@ -19221,7 +19221,7 @@ const pegawais = [
   },
   {
     id: 1282,
-    nip: "198106012009032008",
+    nip: "19810601 200903 2 008",
     nama: "Nor Hasanah, Amd. Kg",
     pangkatId: 12,
     golonganId: 7,
@@ -19236,7 +19236,7 @@ const pegawais = [
   },
   {
     id: 1283,
-    nip: "198203022011011003",
+    nip: "19820302 201101 1 003",
     nama: "Alam Syahrani, S.Gz.",
     pangkatId: 11,
     golonganId: 6,
@@ -19251,7 +19251,7 @@ const pegawais = [
   },
   {
     id: 1284,
-    nip: "198507122010012032",
+    nip: "19850712 201001 2 032",
     nama: "Rina Ardiyana, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -19266,7 +19266,7 @@ const pegawais = [
   },
   {
     id: 1285,
-    nip: "198807272010012015",
+    nip: "19880727 201001 2 015",
     nama: "Ida Fitriani, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -19281,7 +19281,7 @@ const pegawais = [
   },
   {
     id: 1286,
-    nip: "197611052002122004",
+    nip: "19761105 200212 2 004",
     nama: "Habibah, S.Tr.Keb.Bdn.",
     pangkatId: 11,
     golonganId: 6,
@@ -19296,7 +19296,7 @@ const pegawais = [
   },
   {
     id: 1287,
-    nip: "197611112003122005",
+    nip: "19761111 200312 2 005",
     nama: "Jumiati, A.Md.Keb",
     pangkatId: 11,
     golonganId: 6,
@@ -19311,7 +19311,7 @@ const pegawais = [
   },
   {
     id: 1288,
-    nip: "198104172006042020",
+    nip: "19810417 200604 2 020",
     nama: "Leni Juariah, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -19326,7 +19326,7 @@ const pegawais = [
   },
   {
     id: 1289,
-    nip: "198506102010012038",
+    nip: "19850610 201001 2 038",
     nama: "Ratna Wati, A.Md.Kep",
     pangkatId: 11,
     golonganId: 6,
@@ -19341,7 +19341,7 @@ const pegawais = [
   },
   {
     id: 1290,
-    nip: "199506152022031008",
+    nip: "19950615 202203 1 008",
     nama: "Drg. Muhammad Anugrah Pratama, S.Kg",
     pangkatId: 10,
     golonganId: 5,
@@ -19356,7 +19356,7 @@ const pegawais = [
   },
   {
     id: 1291,
-    nip: "198304302011011010",
+    nip: "19830430 201101 1 010",
     nama: "Ns. Zaenal Abidin, S.Kep.",
     pangkatId: 10,
     golonganId: 5,
@@ -19371,7 +19371,7 @@ const pegawais = [
   },
   {
     id: 1292,
-    nip: "198910102011012013",
+    nip: "19891010 201101 2 013",
     nama: "Wiwin Nurhasanah, S.Kep.",
     pangkatId: 10,
     golonganId: 5,
@@ -19386,7 +19386,7 @@ const pegawais = [
   },
   {
     id: 1293,
-    nip: "199109112017052001",
+    nip: "19910911 201705 2 001",
     nama: "Rusmawati, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -19401,7 +19401,7 @@ const pegawais = [
   },
   {
     id: 1294,
-    nip: "199603112019032012",
+    nip: "19960311 201903 2 012",
     nama: "Uswatun Nisa, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -19416,7 +19416,7 @@ const pegawais = [
   },
   {
     id: 1295,
-    nip: "199508172019032018",
+    nip: "19950817 201903 2 018",
     nama: "Rina Wahyuni, A.Md., Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -19431,7 +19431,7 @@ const pegawais = [
   },
   {
     id: 1296,
-    nip: "199104192020122018",
+    nip: "19910419 202012 2 018",
     nama: "Veronica Elvaria Zebua, A.Md",
     pangkatId: 8,
     golonganId: 3,
@@ -19446,7 +19446,7 @@ const pegawais = [
   },
   {
     id: 1297,
-    nip: "199009122022032008",
+    nip: "19900912 202203 2 008",
     nama: "Reni Anggraeni, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -19461,7 +19461,7 @@ const pegawais = [
   },
   {
     id: 1298,
-    nip: "199005082022032008",
+    nip: "19900508 202203 2 008",
     nama: "Emiliani Riska, A.Md.Keb",
     pangkatId: 7,
     golonganId: 2,
@@ -19476,7 +19476,7 @@ const pegawais = [
   },
   {
     id: 1299,
-    nip: "198504212024211013",
+    nip: "19850421 202421 1 013",
     nama: "Abdur Rahman, Amk",
     pangkatId: 18,
     golonganId: 13,
@@ -19491,7 +19491,7 @@ const pegawais = [
   },
   {
     id: 1300,
-    nip: "199107172024212028",
+    nip: "19910717 202421 2 028",
     nama: "Sri Kundari, A. Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19506,7 +19506,7 @@ const pegawais = [
   },
   {
     id: 1301,
-    nip: "199104192024212033",
+    nip: "19910419 202421 2 033",
     nama: "Sulastri, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19521,7 +19521,7 @@ const pegawais = [
   },
   {
     id: 1302,
-    nip: "198712312024212030",
+    nip: "19871231 202421 2 030",
     nama: "Mariani, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19536,7 +19536,7 @@ const pegawais = [
   },
   {
     id: 1303,
-    nip: "199106282024212020",
+    nip: "19910628 202421 2 020",
     nama: "Eny Sadariah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19551,7 +19551,7 @@ const pegawais = [
   },
   {
     id: 1304,
-    nip: "199610052024212034",
+    nip: "19961005 202421 2 034",
     nama: "Marionisya Nur Ri'dho Mahdin, A.Md.Keb.",
     pangkatId: 18,
     golonganId: 13,
@@ -19566,7 +19566,7 @@ const pegawais = [
   },
   {
     id: 1305,
-    nip: "199607142024211008",
+    nip: "19960714 202421 1 008",
     nama: "Nur Aupah Ta'jul Abrar, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19581,7 +19581,7 @@ const pegawais = [
   },
   {
     id: 1306,
-    nip: "199707272024212038",
+    nip: "19970727 202421 2 038",
     nama: "Puji Astuti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19596,7 +19596,7 @@ const pegawais = [
   },
   {
     id: 1307,
-    nip: "198811262025212024",
+    nip: "19881126 202521 2 024",
     nama: "Nurdiana Anton. S, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19611,7 +19611,7 @@ const pegawais = [
   },
   {
     id: 1308,
-    nip: "198809082025212018",
+    nip: "19880908 202521 2 018",
     nama: "Dewi Fatimah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19626,7 +19626,7 @@ const pegawais = [
   },
   {
     id: 1309,
-    nip: "198811012025212018",
+    nip: "19881101 202521 2 018",
     nama: "Susanti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19641,7 +19641,7 @@ const pegawais = [
   },
   {
     id: 1310,
-    nip: "198907232025212022",
+    nip: "19890723 202521 2 022",
     nama: "Tutik Zulfana, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19656,7 +19656,7 @@ const pegawais = [
   },
   {
     id: 1311,
-    nip: "199111122025211013",
+    nip: "19911112 202521 1 013",
     nama: "M. Sirajudin, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19671,7 +19671,7 @@ const pegawais = [
   },
   {
     id: 1312,
-    nip: "199207262025212028",
+    nip: "19920726 202521 2 028",
     nama: "Gustinarus Fransiska Hale, Amd. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19686,7 +19686,7 @@ const pegawais = [
   },
   {
     id: 1313,
-    nip: "199306162025212025",
+    nip: "19930616 202521 2 025",
     nama: "Yuricke Lestari, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -19701,7 +19701,7 @@ const pegawais = [
   },
   {
     id: 1314,
-    nip: "199705092025211012",
+    nip: "19970509 202521 1 012",
     nama: "Andi Muhammad, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -19716,7 +19716,7 @@ const pegawais = [
   },
   {
     id: 1315,
-    nip: "198804022024212033",
+    nip: "19880402 202421 2 033",
     nama: "Mardiana, S.K.M",
     pangkatId: 18,
     golonganId: 15,
@@ -19731,7 +19731,7 @@ const pegawais = [
   },
   {
     id: 1316,
-    nip: "199101242025212014",
+    nip: "19910124 202521 2 014",
     nama: "Wilda Adriana Sagala, S.E",
     pangkatId: 18,
     golonganId: 15,
@@ -20091,7 +20091,7 @@ const pegawais = [
   },
   {
     id: 1340,
-    nip: "198202032015032001",
+    nip: "19820203 201503 2 001",
     nama: "Dr. Andi Emmy Marlina",
     pangkatId: 13,
     golonganId: 8,
@@ -20106,7 +20106,7 @@ const pegawais = [
   },
   {
     id: 1341,
-    nip: "197306081994031003",
+    nip: "19730608 199403 1 003",
     nama: "Matnur, A.Md.Kep.",
     pangkatId: 12,
     golonganId: 7,
@@ -20121,7 +20121,7 @@ const pegawais = [
   },
   {
     id: 1342,
-    nip: "198208142005022009",
+    nip: "19820814 200502 2 009",
     nama: "Tasniah, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -20136,7 +20136,7 @@ const pegawais = [
   },
   {
     id: 1343,
-    nip: "198201052005022002",
+    nip: "19820105 200502 2 002",
     nama: "Sri Supatmi Ningsih, A.Md.Kep.",
     pangkatId: 11,
     golonganId: 6,
@@ -20151,7 +20151,7 @@ const pegawais = [
   },
   {
     id: 1344,
-    nip: "199011042019032014",
+    nip: "19901104 201903 2 014",
     nama: "Apt. Novita Sonda, S. Farm",
     pangkatId: 11,
     golonganId: 6,
@@ -20166,7 +20166,7 @@ const pegawais = [
   },
   {
     id: 1345,
-    nip: "199009162019032023",
+    nip: "19900916 201903 2 023",
     nama: "Drg. Rizki Rahmita Amalia",
     pangkatId: 11,
     golonganId: 6,
@@ -20181,7 +20181,7 @@ const pegawais = [
   },
   {
     id: 1346,
-    nip: "198711202011011002",
+    nip: "19871120 201101 1 002",
     nama: "Sugianto, Am.Kl",
     pangkatId: 11,
     golonganId: 6,
@@ -20196,7 +20196,7 @@ const pegawais = [
   },
   {
     id: 1347,
-    nip: "197109181994032005",
+    nip: "19710918 199403 2 005",
     nama: "Masjita Abas, A.Md.Kes",
     pangkatId: 11,
     golonganId: 6,
@@ -20211,7 +20211,7 @@ const pegawais = [
   },
   {
     id: 1348,
-    nip: "198303212006042017",
+    nip: "19830321 200604 2 017",
     nama: "Marchella G. Pesik, A.Md.Kes",
     pangkatId: 10,
     golonganId: 5,
@@ -20226,7 +20226,7 @@ const pegawais = [
   },
   {
     id: 1349,
-    nip: "197608132003122009",
+    nip: "19760813 200312 2 009",
     nama: "Bd. Dwi Agustina, S.Tr.Keb",
     pangkatId: 10,
     golonganId: 5,
@@ -20241,7 +20241,7 @@ const pegawais = [
   },
   {
     id: 1350,
-    nip: "199305282017052001",
+    nip: "19930528 201705 2 001",
     nama: "Bdn. Jumidsa Anshari, S.Tr.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -20256,7 +20256,7 @@ const pegawais = [
   },
   {
     id: 1351,
-    nip: "199012162017052001",
+    nip: "19901216 201705 2 001",
     nama: "Nurul Khaefa, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -20271,7 +20271,7 @@ const pegawais = [
   },
   {
     id: 1352,
-    nip: "199402152019032019",
+    nip: "19940215 201903 2 019",
     nama: "Idzni Shabrina Maharani, A.Md.Ak.",
     pangkatId: 9,
     golonganId: 4,
@@ -20286,7 +20286,7 @@ const pegawais = [
   },
   {
     id: 1353,
-    nip: "198911302019032013",
+    nip: "19891130 201903 2 013",
     nama: "Radiana, S.Tr.Kes",
     pangkatId: 9,
     golonganId: 4,
@@ -20301,7 +20301,7 @@ const pegawais = [
   },
   {
     id: 1354,
-    nip: "199207222019031008",
+    nip: "19920722 201903 1 008",
     nama: "Muh Mukhsin L, A.Md.Rmik",
     pangkatId: 8,
     golonganId: 3,
@@ -20316,7 +20316,7 @@ const pegawais = [
   },
   {
     id: 1355,
-    nip: "199504072019031003",
+    nip: "19950407 201903 1 003",
     nama: "Appriza Dwi Fahlevi Arman, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -20331,7 +20331,7 @@ const pegawais = [
   },
   {
     id: 1356,
-    nip: "199512112019032018",
+    nip: "19951211 201903 2 018",
     nama: "Nurul Firdausyah, A.Md.Gz",
     pangkatId: 8,
     golonganId: 3,
@@ -20346,7 +20346,7 @@ const pegawais = [
   },
   {
     id: 1357,
-    nip: "199806222022032013",
+    nip: "19980622 202203 2 013",
     nama: "Sri Devi Permata Sari, A.Md.Kep",
     pangkatId: 7,
     golonganId: 2,
@@ -20361,7 +20361,7 @@ const pegawais = [
   },
   {
     id: 1358,
-    nip: "199109102023211002",
+    nip: "19910910 202321 1 002",
     nama: "Welly Alfian, A.Md. Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20376,7 +20376,7 @@ const pegawais = [
   },
   {
     id: 1359,
-    nip: "199604192023212002",
+    nip: "19960419 202321 2 002",
     nama: "Nurul Hidayah, A.Md. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -20391,7 +20391,7 @@ const pegawais = [
   },
   {
     id: 1360,
-    nip: "198810072024212018",
+    nip: "19881007 202421 2 018",
     nama: "Anita, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -20406,7 +20406,7 @@ const pegawais = [
   },
   {
     id: 1361,
-    nip: "199005122024212030",
+    nip: "19900512 202421 2 030",
     nama: "Sarifah Hasmawati, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20421,7 +20421,7 @@ const pegawais = [
   },
   {
     id: 1362,
-    nip: "199008172024212040",
+    nip: "19900817 202421 2 040",
     nama: "Eka Agustin Sinar Lina, A.Md. Keb.",
     pangkatId: 18,
     golonganId: 13,
@@ -20436,7 +20436,7 @@ const pegawais = [
   },
   {
     id: 1363,
-    nip: "198904082024212026",
+    nip: "19890408 202421 2 026",
     nama: "Nurul Hidayah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20451,7 +20451,7 @@ const pegawais = [
   },
   {
     id: 1364,
-    nip: "199303122024212047",
+    nip: "19930312 202421 2 047",
     nama: "Mariah Ulpah, Amd.Ak",
     pangkatId: 18,
     golonganId: 13,
@@ -20466,7 +20466,7 @@ const pegawais = [
   },
   {
     id: 1365,
-    nip: "199210042024211015",
+    nip: "19921004 202421 1 015",
     nama: "Faiz Junaidi Sasmito, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20481,7 +20481,7 @@ const pegawais = [
   },
   {
     id: 1366,
-    nip: "199408052024212049",
+    nip: "19940805 202421 2 049",
     nama: "Agustina Aryani, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20496,7 +20496,7 @@ const pegawais = [
   },
   {
     id: 1367,
-    nip: "199302022024212038",
+    nip: "19930202 202421 2 038",
     nama: "Pebri Satni Lestari, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -20511,7 +20511,7 @@ const pegawais = [
   },
   {
     id: 1368,
-    nip: "199709082024212041",
+    nip: "19970908 202421 2 041",
     nama: "Gina Audina, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -20526,7 +20526,7 @@ const pegawais = [
   },
   {
     id: 1369,
-    nip: "198412212025211013",
+    nip: "19841221 202521 1 013",
     nama: "Mahyudin, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20541,7 +20541,7 @@ const pegawais = [
   },
   {
     id: 1370,
-    nip: "198908152025212019",
+    nip: "19890815 202521 2 019",
     nama: "Agustina, Amd. Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -20556,7 +20556,7 @@ const pegawais = [
   },
   {
     id: 1371,
-    nip: "199004102025212033",
+    nip: "19900410 202521 2 033",
     nama: "Susi Susanti, Amd.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20571,7 +20571,7 @@ const pegawais = [
   },
   {
     id: 1372,
-    nip: "198603192025211012",
+    nip: "19860319 202521 1 012",
     nama: "Muddakir, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -20586,7 +20586,7 @@ const pegawais = [
   },
   {
     id: 1373,
-    nip: "199111142024211016",
+    nip: "19911114 202421 1 016",
     nama: "Dian Saputra, S.K.M.",
     pangkatId: 18,
     golonganId: 15,
@@ -20826,7 +20826,7 @@ const pegawais = [
   },
   {
     id: 1389,
-    nip: "197207042006042003",
+    nip: "19720704 200604 2 003",
     nama: "Dr. Eva Yulia Yani",
     pangkatId: 13,
     golonganId: 8,
@@ -20841,7 +20841,7 @@ const pegawais = [
   },
   {
     id: 1390,
-    nip: "196705291988011002",
+    nip: "19670529 198801 1 002",
     nama: "Saudana, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -20856,7 +20856,7 @@ const pegawais = [
   },
   {
     id: 1391,
-    nip: "197906072006042026",
+    nip: "19790607 200604 2 026",
     nama: "Tohiroh, S.Tr.Kep, Ns.",
     pangkatId: 12,
     golonganId: 7,
@@ -20871,7 +20871,7 @@ const pegawais = [
   },
   {
     id: 1392,
-    nip: "198111122006042023",
+    nip: "19811112 200604 2 023",
     nama: "Nurapni, A.Md.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -20886,7 +20886,7 @@ const pegawais = [
   },
   {
     id: 1393,
-    nip: "198207152006041013",
+    nip: "19820715 200604 1 013",
     nama: "Surya Jaya Atmaja, S.Kep",
     pangkatId: 12,
     golonganId: 7,
@@ -20901,7 +20901,7 @@ const pegawais = [
   },
   {
     id: 1394,
-    nip: "198503212010012031",
+    nip: "19850321 201001 2 031",
     nama: "Dr. Dewi Eka Satriani, Sp.Og",
     pangkatId: 12,
     golonganId: 7,
@@ -20916,7 +20916,7 @@ const pegawais = [
   },
   {
     id: 1395,
-    nip: "199101312019032020",
+    nip: "19910131 201903 2 020",
     nama: "Dr. Prince Sianturi",
     pangkatId: 11,
     golonganId: 6,
@@ -20931,7 +20931,7 @@ const pegawais = [
   },
   {
     id: 1396,
-    nip: "198904172019032016",
+    nip: "19890417 201903 2 016",
     nama: "Dr. Suci Pramadiani",
     pangkatId: 11,
     golonganId: 6,
@@ -20946,7 +20946,7 @@ const pegawais = [
   },
   {
     id: 1397,
-    nip: "198003222007011006",
+    nip: "19800322 200701 1 006",
     nama: "Dadi Ari Kurniawan, A.Md",
     pangkatId: 11,
     golonganId: 6,
@@ -20961,7 +20961,7 @@ const pegawais = [
   },
   {
     id: 1398,
-    nip: "197312092005021001",
+    nip: "19731209 200502 1 001",
     nama: "Bagong Suprianto, S.Tr.Kep., Ns.",
     pangkatId: 10,
     golonganId: 5,
@@ -20976,7 +20976,7 @@ const pegawais = [
   },
   {
     id: 1399,
-    nip: "198806222017052001",
+    nip: "19880622 201705 2 001",
     nama: "Nora Yuni Intasari, A.Md.Keb",
     pangkatId: 9,
     golonganId: 4,
@@ -20991,7 +20991,7 @@ const pegawais = [
   },
   {
     id: 1400,
-    nip: "199005272019032014",
+    nip: "19900527 201903 2 014",
     nama: "Umi Nasihah, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -21006,7 +21006,7 @@ const pegawais = [
   },
   {
     id: 1401,
-    nip: "199109152019031014",
+    nip: "19910915 201903 1 014",
     nama: "Mauluddin, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -21021,7 +21021,7 @@ const pegawais = [
   },
   {
     id: 1402,
-    nip: "198601122019031006",
+    nip: "19860112 201903 1 006",
     nama: "Theodoroes Lembang Allo, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -21036,7 +21036,7 @@ const pegawais = [
   },
   {
     id: 1403,
-    nip: "198610092019032011",
+    nip: "19861009 201903 2 011",
     nama: "Risnawati, A.Md. Farm.",
     pangkatId: 8,
     golonganId: 3,
@@ -21051,7 +21051,7 @@ const pegawais = [
   },
   {
     id: 1404,
-    nip: "199110292019032012",
+    nip: "19911029 201903 2 012",
     nama: "Ria Hasriana, A.Md.Kep.",
     pangkatId: 8,
     golonganId: 3,
@@ -21066,7 +21066,7 @@ const pegawais = [
   },
   {
     id: 1405,
-    nip: "199211222019032019",
+    nip: "19921122 201903 2 019",
     nama: "Novita Kusumawati H Djama, A.Md.Gz.",
     pangkatId: 8,
     golonganId: 3,
@@ -21081,7 +21081,7 @@ const pegawais = [
   },
   {
     id: 1406,
-    nip: "199305262019032020",
+    nip: "19930526 201903 2 020",
     nama: "Fatmawati, A.Md. Far",
     pangkatId: 8,
     golonganId: 3,
@@ -21096,7 +21096,7 @@ const pegawais = [
   },
   {
     id: 1407,
-    nip: "199404042019032020",
+    nip: "19940404 201903 2 020",
     nama: "Mifta Ananda Prabandari, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -21111,7 +21111,7 @@ const pegawais = [
   },
   {
     id: 1408,
-    nip: "199508242019032016",
+    nip: "19950824 201903 2 016",
     nama: "Iness Irmayanty Br. Saragih, A.Md. Keb",
     pangkatId: 8,
     golonganId: 3,
@@ -21126,7 +21126,7 @@ const pegawais = [
   },
   {
     id: 1409,
-    nip: "199612282019032005",
+    nip: "19961228 201903 2 005",
     nama: "Intan Setyoningrum, A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -21141,7 +21141,7 @@ const pegawais = [
   },
   {
     id: 1410,
-    nip: "199210162019032013",
+    nip: "19921016 201903 2 013",
     nama: "Sri Rahayu, A.Md. Keb.",
     pangkatId: 8,
     golonganId: 3,
@@ -21156,7 +21156,7 @@ const pegawais = [
   },
   {
     id: 1411,
-    nip: "199306042019032027",
+    nip: "19930604 201903 2 027",
     nama: "Irnawati , A.Md.Ak.",
     pangkatId: 8,
     golonganId: 3,
@@ -21171,7 +21171,7 @@ const pegawais = [
   },
   {
     id: 1412,
-    nip: "199105032019031008",
+    nip: "19910503 201903 1 008",
     nama: "Supriyono, A.Md.Rmik.",
     pangkatId: 7,
     golonganId: 2,
@@ -21186,7 +21186,7 @@ const pegawais = [
   },
   {
     id: 1413,
-    nip: "199210032019031011",
+    nip: "19921003 201903 1 011",
     nama: "Leovardus, A.Md.Kl.",
     pangkatId: 7,
     golonganId: 2,
@@ -21201,7 +21201,7 @@ const pegawais = [
   },
   {
     id: 1414,
-    nip: "199303182023212011",
+    nip: "19930318 202321 2 011",
     nama: "Winda Restiani, S.Farm., Apt.",
     pangkatId: 18,
     golonganId: 16,
@@ -21216,7 +21216,7 @@ const pegawais = [
   },
   {
     id: 1415,
-    nip: "198808082023211006",
+    nip: "19880808 202321 1 006",
     nama: "Ns. Ferry Fadly, S.Kep",
     pangkatId: 18,
     golonganId: 16,
@@ -21231,7 +21231,7 @@ const pegawais = [
   },
   {
     id: 1416,
-    nip: "198310222023212001",
+    nip: "19831022 202321 2 001",
     nama: "Santi Widyartati, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21246,7 +21246,7 @@ const pegawais = [
   },
   {
     id: 1417,
-    nip: "199105192023211005",
+    nip: "19910519 202321 1 005",
     nama: "Aldy Ari Minanjar, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21261,7 +21261,7 @@ const pegawais = [
   },
   {
     id: 1418,
-    nip: "199303172023212010",
+    nip: "19930317 202321 2 010",
     nama: "Rizki Tatriana, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21276,7 +21276,7 @@ const pegawais = [
   },
   {
     id: 1419,
-    nip: "199411042023212012",
+    nip: "19941104 202321 2 012",
     nama: "Novi Putri Ardila, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21291,7 +21291,7 @@ const pegawais = [
   },
   {
     id: 1420,
-    nip: "198812262024212009",
+    nip: "19881226 202421 2 009",
     nama: "Winarni, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21306,7 +21306,7 @@ const pegawais = [
   },
   {
     id: 1421,
-    nip: "199211242024212024",
+    nip: "19921124 202421 2 024",
     nama: "Aulia Retno Wulandari, Amd.Kep.",
     pangkatId: 18,
     golonganId: 13,
@@ -21321,7 +21321,7 @@ const pegawais = [
   },
   {
     id: 1422,
-    nip: "199408302024212026",
+    nip: "19940830 202421 2 026",
     nama: "Miftahul Rahmah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21336,7 +21336,7 @@ const pegawais = [
   },
   {
     id: 1423,
-    nip: "199403022024212036",
+    nip: "19940302 202421 2 036",
     nama: "Nopi Badiah, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21351,7 +21351,7 @@ const pegawais = [
   },
   {
     id: 1424,
-    nip: "199403122024212036",
+    nip: "19940312 202421 2 036",
     nama: "Maria Ulfah, A.Md.Kep",
     pangkatId: 18,
     golonganId: 13,
@@ -21366,7 +21366,7 @@ const pegawais = [
   },
   {
     id: 1425,
-    nip: "199308232024212031",
+    nip: "19930823 202421 2 031",
     nama: "Rosadalima Aportha Batu Nge, Amd.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21381,7 +21381,7 @@ const pegawais = [
   },
   {
     id: 1426,
-    nip: "199707062024212026",
+    nip: "19970706 202421 2 026",
     nama: "Vita Indriani Utami Dewi, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21396,7 +21396,7 @@ const pegawais = [
   },
   {
     id: 1427,
-    nip: "198802122025212022",
+    nip: "19880212 202521 2 022",
     nama: "Asmawati, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21411,7 +21411,7 @@ const pegawais = [
   },
   {
     id: 1428,
-    nip: "198910302025212021",
+    nip: "19891030 202521 2 021",
     nama: "Yenny Susanty, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21426,7 +21426,7 @@ const pegawais = [
   },
   {
     id: 1429,
-    nip: "199002122025212023",
+    nip: "19900212 202521 2 023",
     nama: "Siti Mutiah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21441,7 +21441,7 @@ const pegawais = [
   },
   {
     id: 1430,
-    nip: "199005172025212023",
+    nip: "19900517 202521 2 023",
     nama: "Sri Wahyuni Astuti, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21456,7 +21456,7 @@ const pegawais = [
   },
   {
     id: 1431,
-    nip: "199108082025212037",
+    nip: "19910808 202521 2 037",
     nama: "Ayu Retnani Latifah, A.Md.Keb",
     pangkatId: 18,
     golonganId: 13,
@@ -21471,7 +21471,7 @@ const pegawais = [
   },
   {
     id: 1432,
-    nip: "199210102023211006",
+    nip: "19921010 202321 1 006",
     nama: "Ichsanuddin, S.Tr.Ft",
     pangkatId: 18,
     golonganId: 15,
@@ -21486,7 +21486,7 @@ const pegawais = [
   },
   {
     id: 1433,
-    nip: "199412232025212027",
+    nip: "19941223 202521 2 027",
     nama: "Desy Ulandari, S.E",
     pangkatId: 18,
     golonganId: 15,

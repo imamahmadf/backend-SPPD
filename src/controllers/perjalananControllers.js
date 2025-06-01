@@ -120,29 +120,8 @@ module.exports = {
         ];
         return months[date.getMonth()];
       };
-      const tanggalBerangkatFE = dalamKota ? dalamKota[0].tanggalBerangkat : "";
-      const tanggalPulangFE = dalamKota
-        ? dalamKota[dalamKota.length - 1].tanggalBerangkat
-        : "";
-      const daysDifference = calculateDaysDifference(
-        tanggalBerangkatFE,
-        tanggalPulangFE
-      );
-      const formattedTanggalBerangkat = new Date(
-        tanggalBerangkatFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      console.log(dalamKota, perjalananKota);
 
-      const formattedTanggalPulang = new Date(
-        tanggalPulangFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
       // Ambil satu data nomor surat berdasarkan id = 2
       const dbNoSurat = await daftarNomorSurat.findOne({
         where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
@@ -272,6 +251,33 @@ module.exports = {
         },
         { transaction }
       );
+
+      const tanggalBerangkatFE = dalamKota[0].tanggalBerangkat
+        ? dalamKota[0].tanggalBerangkat
+        : dataKota[0].tanggalBerangkat;
+      const tanggalPulangFE = dalamKota[dalamKota.length - 1].tanggalPulang
+        ? dalamKota[dalamKota.length - 1].tanggalPulang
+        : dataKota[dataKota.length - 1].tanggalPulang;
+
+      const daysDifference = calculateDaysDifference(
+        tanggalBerangkatFE,
+        tanggalPulangFE
+      );
+      const formattedTanggalBerangkat = new Date(
+        tanggalBerangkatFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tanggalPulangFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
 
       const templatePath = path.join(
         __dirname,
@@ -595,6 +601,7 @@ module.exports = {
           {
             model: KPA,
             attributes: ["id", "jabatan"],
+            paranoid: false,
             include: [
               {
                 model: pegawai,
@@ -649,10 +656,9 @@ module.exports = {
         const hasProfesiId1 = item.personils.some(
           (p) => p.pegawai?.profesi?.id === 1
         );
-        const isJenisPerjalananId1 = item.jenisPerjalanan?.id === 1;
 
-        // Buang jika dua-duanya true
-        return !(hasProfesiId1 && isJenisPerjalananId1);
+        // Kembalikan true jika TIDAK memiliki profesi.id == 1
+        return !hasProfesiId1;
       });
 
       return res.status(200).json({
@@ -1388,8 +1394,7 @@ module.exports = {
           },
           {
             model: jenisPerjalanan,
-            where: { id: 1 },
-            required: true,
+
             attributes: ["id", "jenis", "kodeRekening"],
             include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
           },

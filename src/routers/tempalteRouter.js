@@ -38,7 +38,8 @@ router.post(
 router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
 router.get("/get-kadis", templateControllers.getTemplateKadis);
-router.get("/download-keuangan", templateControllers.downloadTemplateKeuangan);
+router.get("/download", templateControllers.downloadTemplateKeuangan);
+
 router.post(
   "/delete/template-keuangan/:id",
   templateControllers.deleteTempateKeuangan

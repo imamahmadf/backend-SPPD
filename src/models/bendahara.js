@@ -29,10 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       sumberDanaId: DataTypes.INTEGER,
       jabatan: DataTypes.STRING,
     },
-    {
-      sequelize,
-      modelName: "bendahara",
-    }
+    { paranoid: true, sequelize, modelName: "bendahara" }
   );
   return bendahara;
 };

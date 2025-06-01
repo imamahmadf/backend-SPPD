@@ -25,10 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       pegawaiId: DataTypes.INTEGER,
       unitKerjaId: DataTypes.INTEGER,
     },
-    {
-      sequelize,
-      modelName: "ttdNotaDinas",
-    }
+    { paranoid: true, sequelize, modelName: "ttdNotaDinas" }
   );
   return ttdNotaDinas;
 };

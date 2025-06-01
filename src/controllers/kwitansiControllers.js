@@ -25,6 +25,7 @@ const {
   status,
   sequelize,
   pelayananKesehatan,
+  uangHarian,
 
   sumberDana,
 } = require("../models");
@@ -247,13 +248,14 @@ module.exports = {
       });
 
       const jenisRampung = await jenisRincianBPD.findAll();
+      const resultUangHarian = await uangHarian.findAll();
       const template = await templateKeuangan.findAll({
         attributes: ["id", "nama"],
       });
 
       return res
         .status(200)
-        .json({ result, jenisRampung, daftarRill, template });
+        .json({ result, jenisRampung, daftarRill, template, resultUangHarian });
     } catch (err) {
       console.error("Error fetching data:", err);
       return res.status(500).json({
