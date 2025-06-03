@@ -829,11 +829,14 @@ module.exports = {
         }
 
         const nomorLoket = parseInt(dbNoSurTug.nomorLoket) + 1;
-
+        const codeNoST =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
           .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
-          .replace("KODE", ttdSurtTugKode + "/" + indukUnitKerjaFE.kode);
+          .replace("KODE", codeNoST);
         console.log(dbNoSurTug.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
