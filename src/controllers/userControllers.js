@@ -75,7 +75,10 @@ module.exports = {
                 attributes: ["id", "unitKerja", "kode", "asal"],
                 as: "unitKerja_profile",
                 include: [
-                  { model: indukUnitKerja, attributes: ["id", "kodeInduk"] },
+                  {
+                    model: indukUnitKerja,
+                    attributes: ["id", "kodeInduk", "indukUnitKerja"],
+                  },
                 ],
               },
             ],

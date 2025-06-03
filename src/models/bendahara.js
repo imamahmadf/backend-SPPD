@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       indukUnitKerjaId: DataTypes.INTEGER,
       sumberDanaId: DataTypes.INTEGER,
       jabatan: DataTypes.STRING,
+      deletedAt: DataTypes.DATE,
     },
     { paranoid: true, sequelize, modelName: "bendahara" }
   );

@@ -12,12 +12,20 @@ routers.get(
 routers.get("/get/one-pegawai/:id", pegawaiControllers.getOnePegawai);
 routers.get("/get/seed", pegawaiControllers.getSeedPegawai);
 routers.post("/edit", pegawaiControllers.editPegawai);
-routers.post("/post", pegawaiControllers.addPegawai);
+routers.post("/post", authenticateUser, pegawaiControllers.addPegawai);
 routers.get("/get/detail-pegawai/:id", pegawaiControllers.getDetailPegawai);
 routers.get("/search", pegawaiControllers.searchPegawai);
 routers.get("/get/unit-kerja-pegawai", pegawaiControllers.getPegawaiStatistik);
 
-routers.get("/get/download", pegawaiControllers.getDownloadPegawai);
-routers.get("/get/unit-kerja/:id", pegawaiControllers.getPegawaiUnitKerja);
+routers.get(
+  "/get/download",
+  authenticateUser,
+  pegawaiControllers.getDownloadPegawai
+);
+routers.get(
+  "/get/unit-kerja/:id",
+  authenticateUser,
+  pegawaiControllers.getPegawaiUnitKerja
+);
 routers.post("/post/batch", pegawaiControllers.getPegawaiBatch);
 module.exports = routers;

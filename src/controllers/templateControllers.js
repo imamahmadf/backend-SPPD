@@ -165,21 +165,19 @@ module.exports = {
     }
   },
   getTemplate: async (req, res) => {
+    console.log(req.params.id, "template");
     const id = req.params.id;
     try {
-      const result = await indukUnitKerja.findOne(
-        {
-          attributes: [
-            "id",
-            "indukUnitKerja",
-
-            "templateSuratTugas",
-            "templateNotaDinas",
-            "templateSuratTugasSingkat",
-          ],
-        },
-        { where: { id } }
-      );
+      const result = await indukUnitKerja.findOne({
+        attributes: [
+          "id",
+          "indukUnitKerja",
+          "templateSuratTugas",
+          "templateNotaDinas",
+          "templateSuratTugasSingkat",
+        ],
+        where: { id },
+      });
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);

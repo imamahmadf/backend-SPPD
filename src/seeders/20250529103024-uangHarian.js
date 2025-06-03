@@ -4,7 +4,7 @@ const currentDate = new Date();
 const uangHarians = [
   {
     id: 1,
-    nulai: 170000,
+    nilai: 170000,
 
     createdAt: currentDate,
     updatedAt: currentDate,
