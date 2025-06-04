@@ -11,6 +11,7 @@ const {
   indukUnitKerja,
   pelayananKesehatan,
   jenisPerjalanan,
+  personil,
   bendahara,
   uangHarian,
 } = require("../models");
@@ -87,6 +88,18 @@ module.exports = {
     const id = req.params.id;
     try {
       const result = await bendahara.destroy({ where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  deletePersonil: async (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log(id, "ini IDDD");
+    try {
+      const result = await personil.destroy({ where: { id } });
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);

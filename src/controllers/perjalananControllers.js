@@ -816,12 +816,6 @@ module.exports = {
 
           transaction,
         });
-        //MENGAMBIL NOMOR SPD ///////////
-
-        const dbNoSPD = await daftarNomorSurat.findOne({
-          where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
-          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 3 } }],
-        });
 
         // Pastikan dbNoSurat ditemukan sebelum digunakan
         if (!dbNoSurTug) {
@@ -849,28 +843,49 @@ module.exports = {
           { noSuratTugas: nomorBaru },
           { where: { id }, transaction }
         );
+        //MENGAMBIL NOMOR SPD ///////////
 
-        let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
+        if (totalDurasi > 8) {
+          const dbNoSPD = await daftarNomorSurat.findOne({
+            where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+            include: [
+              { model: jenisSurat, as: "jenisSurat", where: { id: 3 } },
+            ],
+          });
+          let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
 
-        console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+          console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
 
-        const codeNoSPD =
-          ttdSurtTugKode === indukUnitKerjaFE.kode
-            ? ttdSurtTugKode
-            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+          const codeNoSPD =
+            ttdSurtTugKode === indukUnitKerjaFE.kode
+              ? ttdSurtTugKode
+              : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
 
-        noSpd = personilFE.map((item, index) => ({
-          nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-            .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
-            .replace("KODE", codeNoSPD)
-            .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
-        }));
+          noSpd = personilFE.map((item, index) => ({
+            nomorSPD: dbNoSPD.jenisSurat.nomorSurat
+              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+              .replace("KODE", codeNoSPD)
+              .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
+          }));
+          await daftarNomorSurat.update(
+            { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
+            { where: { id: dbNoSPD.id }, transaction }
+          );
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: noSpd[index].nomorSPD,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
+        }
 
         // Update nomor loket ke database
-        await daftarNomorSurat.update(
-          { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSPD.id }, transaction }
-        );
+
         /////////////////////////////////////////////////////
         // const codeSurTug
         // let codeSurTug = "";
@@ -891,17 +906,6 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
 
-        for (const [index, item] of personilFE.entries()) {
-          await personil.update(
-            {
-              nomorSPD: noSpd[index].nomorSPD,
-              statusId: 1,
-            },
-            {
-              where: { id: item.id }, // Pastikan ada kriteria unik
-            }
-          );
-        }
         /////////////////////////////////////////
       } else {
         noSpd = personilFE.map((item, index) => ({
@@ -1120,16 +1124,27 @@ module.exports = {
         pegawai5Pangkat:
           personilFE[4]?.pegawai?.daftarPangkat.pangkat ||
           "TIDAK ADA PEGAWAI !",
+        noSpd1:
+          Array.isArray(noSpd) && noSpd[0]
+            ? noSpd[0].nomorSPD
+            : "TIDAK ADA NOMOR",
+        noSpd2:
+          Array.isArray(noSpd) && noSpd[1]
+            ? noSpd[1].nomorSPD
+            : "TIDAK ADA NOMOR",
+        noSpd3:
+          Array.isArray(noSpd) && noSpd[2]
+            ? noSpd[2].nomorSPD
+            : "TIDAK ADA NOMOR",
+        noSpd4:
+          Array.isArray(noSpd) && noSpd[3]
+            ? noSpd[3].nomorSPD
+            : "TIDAK ADA NOMOR",
+        noSpd5:
+          Array.isArray(noSpd) && noSpd[4]
+            ? noSpd[4].nomorSPD
+            : "TIDAK ADA NOMOR",
 
-        noSpd1: noSpd[0]?.nomorSPD || "TIDAK ADA NOMOR",
-
-        noSpd2: noSpd[1]?.nomorSPD || "TIDAK ADA NOMOR",
-
-        noSpd3: noSpd[2]?.nomorSPD || "TIDAK ADA NOMOR",
-
-        noSpd4: noSpd[3]?.nomorSPD || "TIDAK ADA NOMOR",
-
-        noSpd5: noSpd[4]?.nomorSPD || "TIDAK ADA NOMOR",
         pegawai1Golongan:
           personilFE[0]?.pegawai?.daftarGolongan.golongan ||
           "TIDAK ADA GOLONGAN !!",

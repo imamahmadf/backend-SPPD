@@ -13,4 +13,5 @@ routers.get(
   "/get/keuangan/daftar-perjalanan",
   adminControllers.getAllPerjalananKeuangan
 );
+routers.post("/delete/surat-keluar/:id", adminControllers.deleteSuratKeluar);
 module.exports = routers;

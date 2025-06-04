@@ -441,6 +441,7 @@ module.exports = {
         nip: pegawai.nip,
         jabatan: pegawai.jabatan,
         personils: pegawai.personils.map((personil) => ({
+          id: personil.id,
           nomorSPD: personil.nomorSPD,
           tujuan:
             personil.perjalanan.jenisPerjalanan.jenis ===
@@ -454,12 +455,13 @@ module.exports = {
           tanggalPulang:
             personil.perjalanan.tempats[personil.perjalanan.tempats.length - 1]
               ?.tanggalPulang || null,
-          totaluang: personil.rincianBPDs
-            ? personil.rincianBPDs.reduce(
-                (total, rincian) => total + rincian.nilai,
-                0
-              )
-            : 0,
+          totaluang:
+            personil.statusId === 3 && personil.rincianBPDs
+              ? personil.rincianBPDs.reduce(
+                  (total, rincian) => total + rincian.nilai,
+                  0
+                )
+              : 0,
         })),
       }));
 
