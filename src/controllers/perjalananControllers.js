@@ -882,6 +882,18 @@ module.exports = {
               }
             );
           }
+        } else {
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: null,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
         }
 
         // Update nomor loket ke database
