@@ -171,6 +171,7 @@ module.exports = {
               {
                 model: bendahara,
                 attributes: ["id", "jabatan"],
+                paranoid: false, // ✅ tambahkan ini
                 include: [
                   {
                     model: pegawai,
@@ -196,6 +197,7 @@ module.exports = {
               {
                 model: ttdSuratTugas,
                 attributes: ["id", "jabatan"],
+                paranoid: false, // ✅ tambahkan ini
                 include: [
                   {
                     model: pegawai,
@@ -207,6 +209,7 @@ module.exports = {
               {
                 model: PPTK,
                 attributes: ["id", "jabatan"],
+                paranoid: false, // ✅ tambahkan ini
                 include: [
                   {
                     model: pegawai,
@@ -218,6 +221,7 @@ module.exports = {
               {
                 model: KPA,
                 attributes: ["id", "jabatan"],
+                paranoid: false, // ✅ tambahkan ini
                 include: [
                   {
                     model: pegawai,
@@ -229,6 +233,7 @@ module.exports = {
               {
                 model: bendahara,
                 attributes: ["id", "jabatan"],
+                paranoid: false, // ✅ tambahkan ini
                 include: [
                   {
                     model: pegawai,

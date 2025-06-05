@@ -574,6 +574,7 @@ module.exports = {
           {
             model: ttdSuratTugas,
             attributes: ["id", "jabatan", "indukUnitKerjaId"],
+            paranoid: false, // ✅ tambahkan ini
             include: [
               {
                 model: pegawai,
@@ -620,6 +621,7 @@ module.exports = {
             attributes: ["id", "unitKerjaId", "pegawaiId"],
             where: { unitKerjaId }, // ✅ Filter data berdasarkan unit kerja yang diminta
             required: true, // ✅ Pastikan hanya ambil yang punya relasi
+            paranoid: false, // ✅ tambahkan ini
             include: [
               {
                 model: pegawai,
