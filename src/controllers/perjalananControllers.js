@@ -847,7 +847,7 @@ module.exports = {
         );
         //MENGAMBIL NOMOR SPD ///////////
 
-        if (totalDurasi > 8) {
+        if (totalDurasi > 7) {
           const dbNoSPD = await daftarNomorSurat.findOne({
             where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
             include: [
