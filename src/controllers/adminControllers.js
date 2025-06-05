@@ -358,6 +358,7 @@ module.exports = {
           {
             model: ttdSuratTugas,
             attributes: ["id", "jabatan", "indukUnitKerjaId"],
+            paranoid: false, // ✅ tambahkan ini
             include: [
               {
                 model: pegawai,
@@ -381,6 +382,7 @@ module.exports = {
           {
             model: ttdNotaDinas,
             attributes: ["id", "unitKerjaId", "pegawaiId"],
+            paranoid: false, // ✅ tambahkan ini
 
             include: [
               {
