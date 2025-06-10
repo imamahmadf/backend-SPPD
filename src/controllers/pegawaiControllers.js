@@ -146,7 +146,7 @@ module.exports = {
   getPegawai: async (req, res) => {
     try {
       const result = await pegawai.findAll({
-        attributes: ["id", "nama", "nip", "jabatan"],
+        attributes: ["id", "nama", "nip", "jabatan", "profesiId"],
         include: [
           {
             model: daftarTingkatan,
@@ -156,6 +156,30 @@ module.exports = {
           { model: daftarPangkat, as: "daftarPangkat" },
           { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
         ],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  getPegawaiKadis: async (req, res) => {
+    try {
+      const result = await pegawai.findAll({
+        attributes: ["id", "nama", "nip", "jabatan", "profesiId"],
+        include: [
+          {
+            model: daftarTingkatan,
+            as: "daftarTingkatan",
+          },
+          { model: daftarGolongan, as: "daftarGolongan" },
+          { model: daftarPangkat, as: "daftarPangkat" },
+          { model: daftarUnitKerja, as: "daftarUnitKerja", attributes: ["id"] },
+        ],
+        where: { profesiId: 1 },
       });
       return res.status(200).json({ result });
     } catch (err) {

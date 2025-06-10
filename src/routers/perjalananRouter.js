@@ -20,5 +20,6 @@ routers.get(
   perjalananControllers.getJenisPerjalanan
 );
 routers.get("/get/kadis", perjalananControllers.getPerjalananKaDis);
+routers.post("/delete/:id", perjalananControllers.deletePerjalanan);
 
 module.exports = routers;
