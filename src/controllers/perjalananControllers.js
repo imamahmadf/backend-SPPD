@@ -244,13 +244,14 @@ module.exports = {
       // console.log(dataDalamKota);
       // Path file template
 
-      const template = await indukUnitKerja.findOne(
-        {
-          where: { id: indukUnitKerjaFE.indukUnitKerja.id },
-          attributes: ["id", "templateNotaDinas"],
-        },
-        { transaction }
-      );
+      const template = await indukUnitKerja.findOne({
+        where: { id: indukUnitKerjaFE.indukUnitKerja.id },
+        attributes: ["id", "templateNotaDinas"],
+        transaction, // ✅ Letakkan di dalam objek config
+      });
+      if (!dalamKota.length && !dataKota.length) {
+        throw new Error("Data tanggal berangkat dan pulang tidak tersedia.");
+      }
 
       const tanggalBerangkatFE = dalamKota[0].tanggalBerangkat
         ? dalamKota[0].tanggalBerangkat
@@ -350,21 +351,21 @@ module.exports = {
         "../public/output",
         outputFileName
       );
-
+      await transaction.commit();
       // Simpan file hasil ke server
       fs.writeFileSync(outputPath, buffer);
 
       // Kirim file sebagai respons
-      res.download(outputPath, outputFileName, (err) => {
-        if (err) {
-          console.error("Error sending file:", err);
-          res.status(500).send("Error generating file");
-        }
-        // Hapus file setelah dikirim
-        fs.unlinkSync(outputPath);
-      });
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename=${outputFileName}`
+      );
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      );
 
-      await transaction.commit();
+      res.send(buffer);
     } catch (error) {
       await transaction.rollback();
       console.error("Error generating SPPD:", error);
@@ -516,7 +517,8 @@ module.exports = {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
     const unitKerjaId = parseInt(req.query.unitKerjaId);
-    const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    // const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const time = "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
     try {
@@ -524,7 +526,7 @@ module.exports = {
         offset,
         limit,
         order: [
-          ["tanggalPengajuan", time],
+          ["id", "DESC"],
           [{ model: personil }, "id", "ASC"],
         ],
         attributes: [
@@ -618,7 +620,7 @@ module.exports = {
           },
           {
             model: ttdNotaDinas,
-            attributes: ["id", "unitKerjaId", "pegawaiId"],
+            attributes: ["id", "unitKerjaId", "pegawaiId", "jabatan"],
             where: { unitKerjaId }, // ✅ Filter data berdasarkan unit kerja yang diminta
             required: true, // ✅ Pastikan hanya ambil yang punya relasi
             paranoid: false, // ✅ tambahkan ini
@@ -709,7 +711,7 @@ module.exports = {
         indukUnitKerjaFE,
         ttdSurtTugKode,
       } = req.body;
-      console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
+      console.log(personilFE, "TTD SURAT TUGASSS");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -1922,6 +1924,267 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+  cetakNotaDinas: async (req, res) => {
+    console.log(req.body);
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        pegawai,
+        tanggalPengajuan,
+        kodeRekeningFE,
+        sumber,
+        untuk,
+        dataTtdSurTug,
+        dataTtdNotaDinas,
+        ttdNotDis,
+
+        perjalananKota,
+
+        jenis,
+        dalamKota,
+
+        isSrikandi,
+        jenisPerjalanan,
+        indukUnitKerjaId,
+        tempat,
+        noNotDis,
+      } = req.body;
+      const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
+
+      const calculateDaysDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+        const difference = Math.abs(end - start);
+        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
+      };
+      function terbilang(angka) {
+        const satuan = [
+          "",
+          "Satu",
+          "Dua",
+          "Tiga",
+          "Empat",
+          "Lima",
+          "Enam",
+          "Tujuh",
+          "Delapan",
+          "Sembilan",
+          "Sepuluh",
+          "Sebelas",
+        ];
+
+        if (angka < 12) {
+          return satuan[angka];
+        } else if (angka < 20) {
+          return terbilang(angka - 10) + " Belas";
+        } else if (angka < 100) {
+          return (
+            terbilang(Math.floor(angka / 10)) +
+            " Puluh " +
+            terbilang(angka % 10)
+          );
+        } else if (angka < 200) {
+          return "Seratus " + terbilang(angka - 100);
+        }
+      }
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      console.log(dalamKota, perjalananKota);
+
+      // Ambil satu data nomor surat berdasarkan id = 2
+      const dbNoSurat = await daftarNomorSurat.findOne({
+        where: { indukUnitKerjaId },
+        include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
+
+        transaction, // Letakkan dalam objek konfigurasi yang sama
+      });
+
+      // Pastikan dbNoSurat ditemukan sebelum digunakan
+      if (!dbNoSurat) {
+        throw new Error("Data nomor surat tidak ditemukan.");
+      }
+
+      // Ubah format tanggalPengajuan
+      const formattedTanggalPengajuan = new Date(
+        tanggalPengajuan
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      // console.log(resultSuratKeluar.id, "CEKDISINI");
+
+      var dataPegawai = pegawai.map((item, index) => ({
+        nama: item.pegawai.nama,
+        nip: item.pegawai.nip,
+        jumlahPersonil: "",
+        index: index + 1,
+      }));
+
+      dataPegawai[0].jumlahPersonil = "Jumlah Personil";
+
+      let dataKota = []; // Inisialisasi dataKota sebagai array kosong
+      let dataDalamKota = [];
+      if (jenis.tipePerjalananId === 2) {
+        // Buat data kota tujuan
+        dataKota = perjalananKota.map((item) => ({
+          tempat: item.kota,
+          tanggalBerangkat: item.tanggalBerangkat,
+          tanggalPulang: item.tanggalPulang,
+          dalamKotaId: 1,
+        }));
+      } else if (jenis.tipePerjalananId === 1) {
+        dataDalamKota = dalamKota.map((item) =>
+          // console.log(item),
+          ({
+            tempat: "dalam kota",
+            dalamKotaId: item.dataDalamKota.id,
+            tanggalBerangkat: item.tanggalBerangkat,
+            tanggalPulang: item.tanggalPulang,
+          })
+        );
+      }
+      // console.log(dataDalamKota);
+      // Path file template
+
+      const template = await indukUnitKerja.findOne(
+        {
+          where: { id: indukUnitKerjaId },
+          attributes: ["id", "templateNotaDinas"],
+        },
+        { transaction }
+      );
+
+      const tanggalBerangkatFE = tempat[0].tanggalBerangkat;
+
+      const tanggalPulangFE = tempat[tempat.length - 1].tanggalPulang;
+
+      const daysDifference = calculateDaysDifference(
+        tanggalBerangkatFE,
+        tanggalPulangFE
+      );
+      const formattedTanggalBerangkat = new Date(
+        tanggalBerangkatFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tanggalPulangFE
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const templatePath = path.join(
+        __dirname,
+        "../public",
+        template.templateNotaDinas
+      );
+
+      // Baca file template
+      const content = fs.readFileSync(templatePath, "binary");
+
+      // Load file ke PizZip
+      const zip = new PizZip(content);
+
+      // Inisialisasi Docxtemplater
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+      console.log(dataKota, dalamKota, jenis);
+      doc.render({
+        dataPegawai,
+        tanggalPengajuan: formattedTanggalPengajuan,
+        untuk,
+        ttd: isSrikandi ? "${ttd_pengirim}" : "",
+        tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0].dalamKota.nama,
+        tempat2:
+          jenis === 2
+            ? tempat.length === 1
+              ? ""
+              : tempat[1]?.dalamKota.nama
+            : tempat.length === 1
+            ? ""
+            : tempat[1]?.tempat,
+        tempat3:
+          jenis === 2
+            ? tempat.length === 1
+              ? ""
+              : tempat[2]?.dalamKota.nama
+            : tempat.length === 1
+            ? ""
+            : tempat[2]?.tempat,
+
+        kode: kodeRekeningFE,
+        noNotDis,
+        ttdSurtTugJabatan: dataTtdSurTug.jabatan,
+        ttdNotDinNama: dataTtdNotaDinas.pegawai_notaDinas.nama,
+        ttdNotDinPangkat:
+          dataTtdNotaDinas.pegawai_notaDinas.daftarPangkat.pangkat,
+        ttdNotDinGolongan:
+          dataTtdNotaDinas.pegawai_notaDinas.daftarGolongan.golongan,
+        ttdNotDinJabatan: dataTtdNotaDinas.jabatan,
+        ttdNotDinNip: `NIP. ${dataTtdNotaDinas.pegawai_notaDinas.nip}`,
+        sumber,
+        jenis: jenisPerjalanan,
+        tanggalBerangkat: formattedTanggalBerangkat,
+        tanggalPulang: formattedTanggalPulang,
+        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+      });
+
+      // Simpan hasil dokumen ke buffer
+      const buffer = doc.getZip().generate({ type: "nodebuffer" });
+
+      // Buat path untuk menyimpan file hasil
+      const outputFileName = `SPPD_${Date.now()}.docx`;
+      const outputPath = path.join(
+        __dirname,
+        "../public/output",
+        outputFileName
+      );
+
+      // Simpan file hasil ke server
+      fs.writeFileSync(outputPath, buffer);
+
+      // Kirim file sebagai respons
+      res.download(outputPath, outputFileName, (err) => {
+        if (err) {
+          console.error("Error sending file:", err);
+          res.status(500).send("Error generating file");
+        }
+        // Hapus file setelah dikirim
+        fs.unlinkSync(outputPath);
+      });
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+      console.error("Error generating SPPD:", error);
+      res.status(500).send("Terjadi kesalahan dalam pembuatan dokumen");
     }
   },
 };
