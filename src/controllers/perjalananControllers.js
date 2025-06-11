@@ -522,7 +522,7 @@ module.exports = {
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
     try {
-      const result = await perjalanan.findAll({
+      const { count, rows } = await perjalanan.findAndCountAll({
         offset,
         limit,
         order: [
@@ -656,7 +656,7 @@ module.exports = {
         ],
       });
 
-      const filteredResult = result.filter((item) => {
+      const filteredResult = rows.filter((item) => {
         const hasProfesiId1 = item.personils.some(
           (p) => p.pegawai?.profesi?.id === 1
         );
@@ -669,8 +669,8 @@ module.exports = {
         result: filteredResult,
         page,
         limit,
-        totalRows: filteredResult.length,
-        totalPage: Math.ceil(filteredResult.length / limit),
+        totalRows: count,
+        totalPage: Math.ceil(count / limit),
       });
     } catch (err) {
       console.error("Error:", err);
