@@ -366,6 +366,8 @@ module.exports = {
       );
 
       res.send(buffer);
+      // Hapus file setelah dikirim
+      fs.unlinkSync(outputPath);
     } catch (error) {
       await transaction.rollback();
       console.error("Error generating SPPD:", error);
