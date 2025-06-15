@@ -20,6 +20,7 @@ const {
   keuanganRouter,
   nomorSuratRouter,
   subKegiatanRouter,
+  rekapRouter,
   sijakaRouter,
 } = require("./routers");
 
@@ -61,6 +62,7 @@ app.use("/api/keuangan", keuanganRouter);
 app.use("/api/nomor-surat", nomorSuratRouter);
 app.use("/api/sub-kegiatan", subKegiatanRouter);
 app.use("/api/sijaka", sijakaRouter);
+app.use("/api/rekap", rekapRouter);
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });

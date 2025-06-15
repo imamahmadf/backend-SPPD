@@ -15,6 +15,20 @@ module.exports = {
       const result = await daftarSubKegiatan.findAll({
         where: { unitKerjaId },
         attributes: ["id", "kodeRekening", "subKegiatan", "anggaran"],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  getSubKegiatanLaporan: async (req, res) => {
+    const unitKerjaId = req.params.id;
+    try {
+      const result = await daftarSubKegiatan.findAll({
+        where: { unitKerjaId },
+        attributes: ["id", "kodeRekening", "subKegiatan", "anggaran"],
         include: [
           {
             model: perjalanan,

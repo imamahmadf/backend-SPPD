@@ -100,18 +100,16 @@ module.exports = {
   },
 
   getPegawaiUnitKerja: async (req, res) => {
-    const unitKerjaId = req.params.id;
+    const indukUnitKerjaId = req.params.id;
 
     const whereCondition = {};
 
-    if (unitKerjaId) {
-      whereCondition.unitKerjaId = unitKerjaId;
+    if (indukUnitKerjaId) {
+      whereCondition.indukUnitKerjaId = indukUnitKerjaId;
     }
 
     try {
       const result = await pegawai.findAll({
-        where: whereCondition,
-
         order: [
           // ["updatedAt", `${time}`],
           ["nama", `ASC`],
@@ -130,7 +128,8 @@ module.exports = {
           {
             model: daftarUnitKerja,
             as: "daftarUnitKerja",
-            attributes: ["id", "unitKerja"],
+            attributes: ["id", "unitKerja", "indukUnitKerjaId"],
+            where: whereCondition,
           },
         ],
       });

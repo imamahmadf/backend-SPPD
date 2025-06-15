@@ -14,7 +14,7 @@ const keuanganRouter = require("./keuanganRouter");
 const nomorSuratRouter = require("./nomorSuratRouter");
 const subKegiatanRouter = require("./subKegitanRouter");
 const sijakaRouter = require("./sijakaRouter");
-
+const rekapRouter = require("./rekapRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -23,6 +23,7 @@ module.exports = {
   rillRouter,
   templateRouter,
   userRouter,
+  rekapRouter,
   adminRouter,
   klasifikasiRouter,
   tujuanRouter,
