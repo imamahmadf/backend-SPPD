@@ -104,6 +104,15 @@ module.exports = {
             where: { id },
           }
         );
+      } else if (jenis == 4) {
+        await indukUnitKerja.update(
+          {
+            telaahan: filePath, // Nama asli
+          },
+          {
+            where: { id },
+          }
+        );
       }
 
       return res.status(200).json({
@@ -175,6 +184,7 @@ module.exports = {
           "templateSuratTugas",
           "templateNotaDinas",
           "templateSuratTugasSingkat",
+          "telaahan",
         ],
         where: { id },
       });

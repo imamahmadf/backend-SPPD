@@ -25,5 +25,6 @@ router.get(
   authorizeRole(["admin"]),
   userControllers.adminDashboard
 );
+router.post("/delete/:id", userControllers.deleteUser);
 
 module.exports = router;

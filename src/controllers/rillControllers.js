@@ -41,7 +41,7 @@ module.exports = {
             personilId,
             item: "Pengeluaran rill",
             nilai,
-            jenisId: 4,
+            jenisId: 5,
             qty: 1,
             satuan: "-",
           },
@@ -97,6 +97,57 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+  editRill: async (req, res) => {
+    console.log(req.body);
+    const { item, nilai, id } = req.body;
+    try {
+      const result = await rill.update(
+        {
+          item,
+          nilai,
+        },
+        {
+          where: { id },
+        }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  deleteRill: async (req, res) => {
+    try {
+      const { id, nilai } = req.body;
+      const rincianBPDFE = req.body.rincianBPD;
+      console.log(rincianBPDFE, nilai, "CEKK");
+      if (nilai === rincianBPDFE.nilai) {
+        await rincianBPD.destroy({ where: { id: rincianBPDFE.id } });
+      } else {
+        await rincianBPD.update(
+          {
+            nilai: rincianBPDFE.nilai - nilai,
+          },
+          {
+            where: { id: rincianBPDFE.id },
+          }
+        );
+      }
+      const result = await rill.destroy({
+        where: { id },
+      });
+
+      return res.status(200).json({
+        result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

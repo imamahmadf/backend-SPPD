@@ -42,6 +42,7 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
+          "isNotaDinas",
           "pic",
           "dasar",
         ],
@@ -148,7 +149,8 @@ module.exports = {
     console.log(indukUnitKerjaId, "INDUK UNIT KERJA");
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
-
+    const tanggalBerangkat = req.query.tanggalBerangkat;
+    const tanggalPulang = req.query.tanggalPulang;
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
     try {
@@ -166,7 +168,12 @@ module.exports = {
           [sequelize.fn("COUNT", sequelize.col("suratKeluar.id")), "count"],
         ],
         where: { indukUnitKerjaId },
-        include: [{ model: perjalanan, attributes: ["id"] }],
+        include: [
+          {
+            model: perjalanan,
+            attributes: ["id", "isNotaDinas", "tanggalPengajuan"],
+          },
+        ],
         group: ["suratKeluar.id"],
       });
 
@@ -295,13 +302,17 @@ module.exports = {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
     const unitKerjaId = parseInt(req.query.unitKerjaId) || null;
+    const pegawaiId = parseInt(req.query.pegawaiId);
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
-
+    const whereConditionPegawai = {};
     const whereCondition = {};
     if (unitKerjaId) {
       whereCondition.unitKerjaId = unitKerjaId;
+    }
+    if (pegawaiId) {
+      whereConditionPegawai.pegawaiId = pegawaiId;
     }
 
     try {
@@ -329,6 +340,7 @@ module.exports = {
           },
           {
             model: personil,
+            where: whereConditionPegawai,
             include: [
               {
                 model: pegawai,

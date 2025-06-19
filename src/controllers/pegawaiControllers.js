@@ -15,6 +15,7 @@ const {
   dalamKota,
   profesi,
   statusPegawai,
+  indukUnitKerja,
 } = require("../models");
 
 const { Op, Sequelize: sequelize } = require("sequelize");
@@ -520,19 +521,17 @@ module.exports = {
   },
 
   getDownloadPegawai: async (req, res) => {
-    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId);
 
     console.log(req.query);
     const whereCondition = {};
 
-    if (unitKerjaId) {
-      whereCondition.unitKerjaId = unitKerjaId;
+    if (indukUnitKerjaId) {
+      whereCondition.indukUnitKerjaId = indukUnitKerjaId;
     }
 
     try {
       const result = await pegawai.findAll({
-        where: whereCondition,
-
         order: [
           // ["updatedAt", `${time}`],
           ["nama", `ASC`],
@@ -551,6 +550,7 @@ module.exports = {
             model: daftarUnitKerja,
             as: "daftarUnitKerja",
             attributes: ["id", "unitKerja"],
+            where: whereCondition,
           },
         ],
       });

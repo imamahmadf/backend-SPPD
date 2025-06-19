@@ -59,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       jenisId: DataTypes.INTEGER,
       subKegiatanId: DataTypes.INTEGER,
       tipeSrikandi: DataTypes.INTEGER,
+      isNotaDinas: DataTypes.INTEGER,
     },
     {
       sequelize,

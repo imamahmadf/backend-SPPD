@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       templateSuratTugas: DataTypes.STRING,
       templateNotaDinas: DataTypes.STRING,
       templateSuratTugasSingkat: DataTypes.STRING,
+      telaahan: DataTypes.STRING,
     },
     {
       sequelize,

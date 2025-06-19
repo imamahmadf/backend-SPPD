@@ -31,6 +31,9 @@ const {
   tipePerjalanan,
   profesi,
   pelayananKesehatan,
+  jenisRincianBPD,
+  rill,
+  rincianBPD,
   sumberDanaJenisPerjalanan,
 } = require("../models");
 const PizZip = require("pizzip");
@@ -62,7 +65,9 @@ module.exports = {
         dasar,
         kodeKlasifikasi,
         isSrikandi,
+        isNotaDinas,
         dataBendaharaId,
+        subKegiatan,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isSrikandi, "KODE KLASIFIKASI");
@@ -194,6 +199,7 @@ module.exports = {
           PPTKId,
           pelayananKesehatanId,
           tipeSrikandi: isSrikandi,
+          isNotaDinas,
         },
         { transaction }
       );
@@ -246,7 +252,7 @@ module.exports = {
 
       const template = await indukUnitKerja.findOne({
         where: { id: indukUnitKerjaFE.indukUnitKerja.id },
-        attributes: ["id", "templateNotaDinas"],
+        attributes: ["id", "templateNotaDinas", "telaahan"],
         transaction, // ✅ Letakkan di dalam objek config
       });
       if (!dalamKota.length && !dataKota.length) {
@@ -283,7 +289,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        template.templateNotaDinas
+        isNotaDinas ? template.templateNotaDinas : template.telaahan
       );
 
       // Baca file template
@@ -325,6 +331,7 @@ module.exports = {
             : dataKota[2]?.tempat,
 
         kode: kodeRekeningFE,
+        subKegiatan,
         noNotDis: nomorBaru,
         ttdSurtTugJabatan: dataTtdSurTug.value.jabatan,
         ttdNotDinNama: ttdNotDis.value.pegawai_notaDinas.nama,
@@ -519,10 +526,25 @@ module.exports = {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
     const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const tanggalBerangkat = req.query.tanggalBerangkat;
+    const tanggalPulang = req.query.tanggalPulang;
     // const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const time = "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
+    const whereConditionTempat = {};
+
+    if (tanggalBerangkat) {
+      whereConditionTempat.tanggalBerangkat = {
+        [Op.gte]: new Date(tanggalBerangkat),
+      };
+    }
+
+    if (tanggalPulang) {
+      whereConditionTempat.tanggalPulang = {
+        [Op.lte]: new Date(tanggalPulang),
+      };
+    }
     try {
       const { count, rows } = await perjalanan.findAndCountAll({
         offset,
@@ -539,6 +561,7 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
+          "isNotaDinas",
         ],
         include: [
           {
@@ -558,6 +581,7 @@ module.exports = {
           },
           {
             model: tempat,
+            where: whereConditionTempat,
             attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
             include: [
               {
@@ -1247,13 +1271,48 @@ module.exports = {
                   { model: daftarGolongan, as: "daftarGolongan" },
                 ],
               },
+              {
+                model: status,
+                attributes: ["id", "statusKuitansi"],
+              },
+              {
+                model: rincianBPD,
+                attributes: [
+                  "id",
+                  "item",
+                  "nilai",
+                  "qty",
+                  "jenisId",
+                  "satuan",
+                  "bukti",
+                ],
+                include: [
+                  { model: jenisRincianBPD, attributes: ["jenis"] },
+                  { model: rill },
+                ],
+              },
             ],
           },
           {
             model: tempat,
             attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            include: [
+              {
+                model: dalamKota,
+                as: "dalamKota",
+                attributes: [
+                  "id",
+                  "uangTransport",
+                  "nama",
+                  "durasi",
+                  "indukUnitKerjaId",
+                ],
+              },
+            ],
           },
-
+          {
+            model: jenisPerjalanan,
+          },
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
@@ -1266,6 +1325,7 @@ module.exports = {
       });
       return res.status(200).json({ result });
     } catch (err) {
+      console.log(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,
