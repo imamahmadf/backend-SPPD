@@ -37,15 +37,7 @@ app.use(
 
 app.use(express.json());
 app.use("/api", express.static(`${__dirname}/public`));
-// app.use("/obat", express.static(`${__dirname}/public/obat`));
 
-//#region API ROUTES
-
-// ===========================
-// NOTE : Add your routes here
-// sequelize.sync({ alter: true });
-
-// app.use("/api/specialprice", specialPriceRouters);
 app.use("/api/perjalanan", perjalananRouter);
 app.use("/api/pegawai", pegawaiRouter);
 app.use("/api/kwitansi", kwitansiRouter);

@@ -70,7 +70,7 @@ module.exports = {
         subKegiatan,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
-      console.log(req.body.isSrikandi, "KODE KLASIFIKASI");
+      console.log(req.body, "KODE KLASIFIKASI");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -1259,6 +1259,7 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
+          "undangan",
         ],
         include: [
           {

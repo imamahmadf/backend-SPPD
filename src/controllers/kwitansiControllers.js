@@ -147,7 +147,14 @@ module.exports = {
           },
           {
             model: perjalanan,
-            attributes: ["id", "asal", "tanggalPengajuan", "untuk", "pic"],
+            attributes: [
+              "id",
+              "asal",
+              "tanggalPengajuan",
+              "untuk",
+              "pic",
+              "noSuratTugas",
+            ],
             include: [
               {
                 model: tempat,
@@ -274,6 +281,7 @@ module.exports = {
     const {
       id,
       nomorSPD,
+      nomorST,
       pegawaiNama,
       pegawaiNip,
       pegawaiJabatan,
@@ -284,6 +292,7 @@ module.exports = {
       untuk,
       rincianBPD,
       kodeRekening,
+      indukUnitKerja,
       tanggalPengajuan,
       totalDurasi,
       tempat,
@@ -438,9 +447,10 @@ module.exports = {
         kalimat1: dataBendahara.sumberDana.kalimat1 || "",
         kalimat2: dataBendahara.sumberDana.kalimat2 || "",
         KPAJabatan,
-        nomorSurat: nomorSPD,
+        indukUnitKerja,
+        nomorSurat: totalDurasi > 7 ? nomorSPD : nomorST,
         surat: totalDurasi > 7 ? "SPD" : "ND",
-        berdasarkan:
+        suratRill:
           totalDurasi > 7
             ? "Surat Perjalanan Dinas (SPD) "
             : "Surat Nota Dinas (ND)",

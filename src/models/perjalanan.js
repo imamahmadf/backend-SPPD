@@ -60,6 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       subKegiatanId: DataTypes.INTEGER,
       tipeSrikandi: DataTypes.INTEGER,
       isNotaDinas: DataTypes.INTEGER,
+      undangan: DataTypes.STRING,
     },
     {
       sequelize,
