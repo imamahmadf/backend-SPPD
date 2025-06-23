@@ -154,6 +154,7 @@ module.exports = {
               "untuk",
               "pic",
               "noSuratTugas",
+              "undangan",
             ],
             include: [
               {

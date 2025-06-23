@@ -34,11 +34,21 @@ router.post(
   }).single("file"),
   templateControllers.uploadTemplateKadis
 );
+router.post(
+  "/upload-undangan",
+  fileUploader({
+    destinationFolder: "bukti",
+    fileType: "application/pdf",
+    prefix: "UNDANGAN",
+  }).single("file"),
+  templateControllers.uploadUndangan
+);
 
 router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
 router.get("/get-kadis", templateControllers.getTemplateKadis);
 router.get("/download", templateControllers.downloadTemplateKeuangan);
+router.get("/download-undangan", templateControllers.downloadUndangan);
 
 router.post(
   "/delete/template-keuangan/:id",

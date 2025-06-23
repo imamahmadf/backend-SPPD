@@ -5,6 +5,7 @@ const {
   templateKeuangan,
   user,
   userRole,
+  perjalanan,
   role,
   profile,
 } = require("../models");
@@ -219,6 +220,27 @@ module.exports = {
         .json({ message: "Terjadi kesalahan saat mengunduh file" });
     }
   },
+
+  downloadUndangan: async (req, res) => {
+    try {
+      const { fileName } = req.query; // ← Ganti dari req.body ke req.query
+      const filePath = `${__dirname}/../public/${fileName}`;
+
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ message: "File tidak ditemukan" });
+      }
+
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename=${fileName}`);
+
+      return res.download(filePath);
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunduh file" });
+    }
+  },
   deleteTempateKeuangan: async (req, res) => {
     const id = req.params.id;
     const filename = req.body.fileName;
@@ -235,6 +257,48 @@ module.exports = {
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  uploadUndangan: async (req, res) => {
+    const id = parseInt(req.body.id);
+    console.log(req.body);
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filename = req.body.oldFile;
+      if (filename) {
+        const path = `${__dirname}/../public${filename}`;
+        fs.unlink(path, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+      }
+
+      const filePath = `/bukti/${req.file.filename}`;
+
+      await perjalanan.update(
+        {
+          undangan: filePath, // Nama asli
+        },
+        {
+          where: { id },
+        }
+      );
+
+      return res.status(200).json({
+        message: "File template berhasil diunggah",
+        filePath,
+      });
+    } catch (error) {
+      console.error(error);
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });

@@ -45,6 +45,7 @@ module.exports = {
           "isNotaDinas",
           "pic",
           "dasar",
+          "undangan",
         ],
         include: [
           {
@@ -284,6 +285,18 @@ module.exports = {
       });
     }
   },
+  getSumberDana: async (req, res) => {
+    try {
+      const result = await sumberDana.findAll({});
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
   getUnitKerja: async (req, res) => {
     try {
       const result = await daftarUnitKerja.findAll({
@@ -302,25 +315,31 @@ module.exports = {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
     const unitKerjaId = parseInt(req.query.unitKerjaId) || null;
+    const sumberDanaId = parseInt(req.query.sumberDanaId) || null;
     const pegawaiId = parseInt(req.query.pegawaiId);
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
-    const whereConditionPegawai = {};
+    const whereConditionPegawai = { statusId: [2, 3, 4] };
     const whereCondition = {};
+    const whereSumberDana = {};
     if (unitKerjaId) {
       whereCondition.unitKerjaId = unitKerjaId;
     }
     if (pegawaiId) {
       whereConditionPegawai.pegawaiId = pegawaiId;
     }
+    if (sumberDanaId) {
+      whereSumberDana.sumberDanaId = sumberDanaId;
+    }
 
     try {
       const result = await perjalanan.findAll({
         offset,
+
         limit,
         order: [
-          ["tanggalPengajuan", time],
+          [{ model: tempat }, "tanggalBerangkat", "DESC"],
           [{ model: personil }, "id", "ASC"],
         ],
         attributes: [
@@ -345,7 +364,9 @@ module.exports = {
               {
                 model: pegawai,
               },
-              { model: status },
+              {
+                model: status,
+              },
             ],
           },
           {
@@ -409,6 +430,11 @@ module.exports = {
             attributes: ["id", "jenis", "kodeRekening"],
             include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
           },
+          {
+            model: bendahara,
+            attributes: ["id"],
+            where: whereSumberDana,
+          },
         ],
       });
 
@@ -416,6 +442,16 @@ module.exports = {
         include: [
           {
             model: ttdNotaDinas,
+            where: whereCondition, // ✅ Filter data berdasarkan unit kerja yang diminta
+          },
+          {
+            model: personil,
+            where: whereConditionPegawai,
+          },
+          {
+            model: bendahara,
+
+            where: whereSumberDana,
           },
         ],
       });

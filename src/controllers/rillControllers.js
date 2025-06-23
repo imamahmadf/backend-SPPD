@@ -1,24 +1,7 @@
 const {
-  pegawai,
-  golongan,
-  pangkat,
-  daftarTingkatan,
-  daftarGolongan,
-  daftarPangkat,
   rincianBPD,
-  perjalanan,
-  personil,
-  jenisRincianBPD,
-  tempat,
-  jenisTempat,
-  PPTK,
   rill,
   daftarUnitKerja,
-  daftarSubKegiatan,
-  daftarKegiatan,
-  ttdSuratTugas,
-  dalamKota,
-  jenisPerjalanan,
   sequelize,
   user,
   userRole,
@@ -48,7 +31,7 @@ module.exports = {
           { transaction }
         );
       }
-      const rillTransport = await rill.create(
+      await rill.create(
         {
           rincianBPDId: !status ? rillBPD.id : rincianBPDId,
           item,
@@ -57,7 +40,7 @@ module.exports = {
         { transaction }
       );
 
-      const updateBPD = await rincianBPD.update(
+      await rincianBPD.update(
         { nilai: parseInt(nilai) + nilaiBPD },
         { where: { id: !status ? rillBPD.id : rincianBPDId }, transaction }
       );
@@ -101,7 +84,7 @@ module.exports = {
   },
   editRill: async (req, res) => {
     console.log(req.body);
-    const { item, nilai, id } = req.body;
+    const { nilai, id, item, oldNilai, rincianBPDId, nilaiBPD } = req.body;
     try {
       const result = await rill.update(
         {
@@ -110,6 +93,15 @@ module.exports = {
         },
         {
           where: { id },
+        }
+      );
+
+      await rincianBPD.update(
+        {
+          nilai: nilai - oldNilai + nilaiBPD,
+        },
+        {
+          where: { id: rincianBPDId },
         }
       );
       return res.status(200).json({ result });

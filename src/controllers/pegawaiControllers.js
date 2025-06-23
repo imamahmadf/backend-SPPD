@@ -417,7 +417,8 @@ module.exports = {
             offset,
             limit,
             model: personil,
-            attributes: ["id", "nomorSPD"],
+            attributes: ["id", "nomorSPD", "statusId"],
+            where: { statusId: 3 },
             include: [
               {
                 model: perjalanan,
