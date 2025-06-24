@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // this.hasMany(models.jenisTipePerjalanan);
       this.hasMany(models.jenisPerjalanan);
+      this.hasMany(models.anggaran);
     }
   }
   tipePerjalanan.init(

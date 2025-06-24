@@ -7,5 +7,6 @@ routers.get("/get-filter/:id", subKegiatanControllers.getSubKegiatan);
 routers.post("/delete/:id", subKegiatanControllers.deleteSubKegiatan);
 routers.post("/edit/:id", subKegiatanControllers.editSubKegiatan);
 routers.post("/post", subKegiatanControllers.postSubKegiatan);
+routers.post("/post/anggaran", subKegiatanControllers.postAnggaran);
 
 module.exports = routers;
