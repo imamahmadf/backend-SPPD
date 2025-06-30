@@ -341,6 +341,7 @@ module.exports = {
           "tgl_pkb",
           "tg_stnk",
           "total",
+          "foto",
         ],
       });
       return res.status(200).json({ result });
