@@ -34,6 +34,18 @@ router.post(
   }).single("file"),
   templateControllers.uploadTemplateKadis
 );
+
+router.post(
+  "/upload-aset",
+  fileUploader({
+    destinationFolder: "template",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-ASET",
+  }).single("file"),
+  templateControllers.uploadTemplateAset
+);
+
 router.post(
   "/upload-undangan",
   fileUploader({
@@ -47,6 +59,7 @@ router.post(
 router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
 router.get("/get-kadis", templateControllers.getTemplateKadis);
+router.get("/get-aset", templateControllers.getTemplateAset);
 router.get("/download", templateControllers.downloadTemplateKeuangan);
 router.get("/download-undangan", templateControllers.downloadUndangan);
 

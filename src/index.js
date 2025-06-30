@@ -25,6 +25,7 @@ const {
   rekapRouter,
   sijakaRouter,
   notifikasiRouter,
+  kendaraanRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -94,6 +95,7 @@ app.use("/api/sub-kegiatan", subKegiatanRouter);
 app.use("/api/sijaka", sijakaRouter);
 app.use("/api/rekap", rekapRouter);
 app.use("/api/notifikasi", notifikasiRouter);
+app.use("/api/kendaraan", kendaraanRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);

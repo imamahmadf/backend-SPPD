@@ -160,6 +160,9 @@ module.exports = {
       const resultSuratKeluar = await suratKeluar.create(
         {
           nomor: nomorBaru,
+          Perihal: jenis.jenis,
+          tanggalSurat: tanggalPengajuan,
+          tujuan: dataTtdSurTug.value.jabatan,
           indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
         },
         transaction

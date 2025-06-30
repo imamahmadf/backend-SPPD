@@ -3,6 +3,7 @@ const {
   kadis,
   sequelize,
   templateKeuangan,
+  templateAset,
   user,
   userRole,
   perjalanan,
@@ -27,6 +28,17 @@ module.exports = {
   getTemplateKadis: async (req, res) => {
     try {
       const result = await kadis.findAll({});
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  getTemplateAset: async (req, res) => {
+    try {
+      const result = await templateAset.findAll({});
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
@@ -160,6 +172,54 @@ module.exports = {
       } else {
         await kadis.create({
           template: `/template/${req.file.filename}`, // Nama asli
+          nomorSurat,
+        });
+      }
+
+      return res.status(200).json({
+        message: "File template berhasil diunggah",
+      });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  uploadTemplateAset: async (req, res) => {
+    const { id, nomorSurat } = req.body;
+    console.log(req.body);
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filename = req.body.oldFile;
+      if (filename) {
+        const path = `${__dirname}/../public${filename}`;
+        fs.unlink(path, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+
+        const filePath = `/template/${req.file.filename}`;
+
+        await templateAset.update(
+          {
+            dokumen: filePath, // Nama asli
+            nomorSurat,
+          },
+          {
+            where: { id },
+          }
+        );
+      } else {
+        await templateAset.create({
+          dokumen: `/template/${req.file.filename}`, // Nama asli
           nomorSurat,
         });
       }

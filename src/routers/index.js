@@ -16,6 +16,7 @@ const subKegiatanRouter = require("./subKegitanRouter");
 const sijakaRouter = require("./sijakaRouter");
 const rekapRouter = require("./rekapRouter");
 const notifikasiRouter = require("./notifikasiRouter");
+const kendaraanRouter = require("./kendaraanRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -35,4 +36,5 @@ module.exports = {
   subKegiatanRouter,
   sijakaRouter,
   notifikasiRouter,
+  kendaraanRouter,
 };

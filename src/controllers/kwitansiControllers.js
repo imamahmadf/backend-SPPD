@@ -74,7 +74,6 @@ module.exports = {
       const filePath = "bukti";
       let pic = null;
       if (req.file) {
-        // console.log("GGGGGGGGGGGGGGGGGGGGGGGGGG");
         const { filename } = req.file;
         pic = `/${filePath}/${filename}`;
       }
