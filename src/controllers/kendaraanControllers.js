@@ -13,6 +13,8 @@ const {
   jenisSurat,
   suratPengantar,
   suratKeluar,
+  mutasiKendaraan,
+  user,
 } = require("../models");
 const { scrapeData } = require("../services/scraper");
 const { sendMessage } = require("../services/waServices");
@@ -120,7 +122,30 @@ module.exports = {
             foreignKey: "unitKerjaId",
             as: "kendaraanUK",
           },
-          { model: suratPengantar },
+          { model: suratPengantar, include: [{ model: user }] },
+          {
+            model: mutasiKendaraan,
+            include: [
+              {
+                model: pegawai,
+                as: "pegawaiTujuan",
+              },
+              {
+                model: pegawai,
+                as: "pegawaiAsal",
+              },
+              {
+                model: daftarUnitKerja,
+                as: "unitKerjaTujuan",
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: daftarUnitKerja,
+                as: "unitKerjaAsal",
+                attributes: ["id", "unitKerja"],
+              },
+            ],
+          },
         ],
       });
       const resultTemplate = await templateAset.findAll({});
@@ -384,7 +409,9 @@ module.exports = {
       tanggal,
       kendaraanId,
       jenisKendaraan,
+      userId,
     } = req.body;
+
     try {
       transaction = await sequelize.transaction();
 
@@ -409,20 +436,28 @@ module.exports = {
         {
           noLoket,
           kendaraanId,
+          userId,
         },
         transaction
       );
 
-      const resultSuratKeluar = await suratKeluar.create(
-        {
-          nomor: nomorSurat,
-          Perihal: "Surat Pengantar Kendaraan Bermotor plat" + plat,
-          // tanggalSurat: tanggalPengajuan,
-          tujuan: "Kantor Samsat",
-          indukUnitKerjaId: 1,
-        },
-        transaction
-      );
+      // Perbaiki tanggal - gunakan tanggal hari ini jika tanggal tidak valid
+      let tanggalSuratDB = new Date();
+      if (tanggal && !isNaN(new Date(tanggal).getTime())) {
+        tanggalSuratDB = new Date(tanggal);
+      }
+
+      const dataSuratKeluar = {
+        nomor: nomorSurat,
+        perihal: "Surat Pengantar Kendaraan Bermotor plat " + plat,
+        tanggalSurat: tanggalSuratDB,
+        tujuan: "Kantor Samsat",
+        indukUnitKerjaId: 1,
+      };
+
+      const resultSuratKeluar = await suratKeluar.create(dataSuratKeluar, {
+        transaction,
+      });
 
       const templatePath = path.join(
         __dirname,
@@ -443,7 +478,7 @@ module.exports = {
       });
 
       // Buat tanggal surat dalam format Indonesia
-      const tanggalSurat = formatTanggalIndonesia(new Date(tanggal));
+      const tanggalSurat = formatTanggalIndonesia(tanggalSuratDB);
 
       doc.render({
         nomorSurat,
@@ -547,6 +582,48 @@ module.exports = {
       return res.status(200).json({ result });
     } catch (err) {
       console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  mutasi: async (req, res) => {
+    const {
+      keterangan,
+      unitKerjaId,
+      pegawaiId,
+      kendaraanId,
+      asalUnitKerjaId,
+      asalPegawaiId,
+      tanggal,
+    } = req.body;
+
+    console.log(req.body);
+    try {
+      transaction = await sequelize.transaction();
+
+      const result = await mutasiKendaraan.create(
+        {
+          keterangan,
+          unitKerjaId,
+          pegawaiId,
+          kendaraanId,
+          asalUnitKerjaId,
+          asalPegawaiId,
+          tanggal,
+        },
+        transaction
+      );
+      await kendaraan.update(
+        { unitKerjaId, pegawaiId },
+        { where: { id: parseInt(kendaraanId) } }
+      );
+      await transaction.commit();
+      return res.status(200).json({ result });
+    } catch (err) {
+      if (transaction) await transaction.rollback();
       return res.status(500).json({
         message: err.toString(),
         code: 500,

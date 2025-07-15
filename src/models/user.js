@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.userRole); // define association here
       this.hasMany(models.profile);
+      this.hasMany(models.suratPengantar);
     }
   }
   user.init(
@@ -22,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "user",
+      paranoid: true,
     }
   );
   return user;

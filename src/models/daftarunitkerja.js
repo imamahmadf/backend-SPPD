@@ -46,6 +46,15 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.indukUnitKerja, {
         foreignKey: "indukUnitKerjaId",
       });
+      this.hasMany(models.mutasiKendaraan, {
+        foreignKey: "unitKerjaId",
+        as: "unitKerjaTujuan",
+      });
+
+      this.hasMany(models.mutasiKendaraan, {
+        foreignKey: "asalUnitKerjaId",
+        as: "unitKerjaAsal",
+      });
     }
   }
   daftarUnitKerja.init(

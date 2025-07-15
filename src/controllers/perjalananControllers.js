@@ -740,7 +740,7 @@ module.exports = {
         indukUnitKerjaFE,
         ttdSurtTugKode,
       } = req.body;
-      console.log(personilFE, "TTD SURAT TUGASSS");
+      console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -861,7 +861,12 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace("NOMOR", nomorLoket.toString())
+          .replace(
+            "NOMOR",
+            indukUnitKerjaFE.indukUnitKerja.id == 1
+              ? "         "
+              : nomorLoket.toString()
+          )
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         console.log(dbNoSurTug.id, "NOMOR SURAT");
@@ -896,7 +901,13 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+              .replace(
+                "NOMOR",
+                (indukUnitKerjaFE.indukUnitKerja.id == 1
+                  ? "         "
+                  : nomorAwalSPD + index + 1
+                ).toString()
+              )
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
@@ -1320,6 +1331,11 @@ module.exports = {
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
+          },
+          {
+            model: bendahara,
+            attributes: ["id"],
+            include: [{ model: sumberDana }],
           },
           // {
           //   model: ttdSuratTugas,
@@ -2251,6 +2267,29 @@ module.exports = {
       await transaction.rollback();
       console.error("Error generating SPPD:", error);
       res.status(500).send("Terjadi kesalahan dalam pembuatan dokumen");
+    }
+  },
+
+  editPerjalanan: async (req, res) => {
+    try {
+      const { untuk, subKegiatanId } = req.body;
+      const id = req.params.id;
+      console.log(req.body);
+      const result = await perjalanan.update(
+        {
+          untuk,
+          subKegiatanId,
+        },
+        { where: { id } }
+      );
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

@@ -28,4 +28,6 @@ routers.get(
   pegawaiControllers.getPegawaiUnitKerja
 );
 routers.post("/post/batch", pegawaiControllers.getPegawaiBatch);
+routers.post("/personil/edit-pegawai", pegawaiControllers.editPersonil);
+routers.post("/personil/hapus/:id", pegawaiControllers.hapusPersonil);
 module.exports = routers;

@@ -23,5 +23,6 @@ routers.get(
 routers.get("/get/kadis", perjalananControllers.getPerjalananKaDis);
 routers.post("/delete/:id", perjalananControllers.deletePerjalanan);
 routers.post("/post/daftar/nota-dinas", perjalananControllers.cetakNotaDinas);
+routers.post("/edit/:id", perjalananControllers.editPerjalanan);
 
 module.exports = routers;

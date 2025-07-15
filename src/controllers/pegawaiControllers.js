@@ -305,6 +305,11 @@ module.exports = {
             as: "statusPegawai",
             attributes: ["status", "id"],
           },
+          {
+            model: daftarUnitKerja,
+            as: "daftarUnitKerja",
+            attributes: ["id", "unitKerja"],
+          },
         ],
       });
 
@@ -355,6 +360,7 @@ module.exports = {
           golonganId: dataPegawai.daftarGolongan.id,
           tingkatanId: dataPegawai.daftarTingkatan.id,
           pangkatId: dataPegawai.daftarPangkat.id,
+          unitKerjaId: dataPegawai.daftarUnitKerja.id,
         },
         { where: { id } }
       );
@@ -627,6 +633,36 @@ module.exports = {
           },
         ],
       });
+      return res.status(200).json({ success: true, data: result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: err.toString(),
+      });
+    }
+  },
+  editPersonil: async (req, res) => {
+    try {
+      const { personilId, pegawaiBaruId, pegawaiLamaId } = req.body;
+      const result = await personil.update(
+        { pegawaiId: pegawaiBaruId },
+        { where: { id: personilId } }
+      );
+      return res.status(200).json({ success: true, data: result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: err.toString(),
+      });
+    }
+  },
+
+  hapusPersonil: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const result = await personil.destroy({ where: { id } });
       return res.status(200).json({ success: true, data: result });
     } catch (err) {
       console.error(err);
