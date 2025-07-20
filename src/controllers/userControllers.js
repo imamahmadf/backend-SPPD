@@ -4,8 +4,16 @@ const {
   userRole,
   sequelize,
   role,
+  pegawai,
   indukUnitKerja,
   daftarUnitKerja,
+  daftarGolongan,
+  daftarPangkat,
+  daftarTingkatan,
+  profesi,
+  statusPegawai,
+  rincianBPD,
+  personil,
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -68,7 +76,7 @@ module.exports = {
           { model: userRole, include: [{ model: role, attributes: ["nama"] }] },
           {
             model: profile,
-            attributes: ["id", "nama", "profilePic"],
+            attributes: ["id", "nama", "profilePic", "pegawaiId"],
             include: [
               {
                 model: daftarUnitKerja,
@@ -158,6 +166,45 @@ module.exports = {
                 model: userRole,
                 attributes: ["id"],
                 include: [{ model: role, attributes: ["nama"] }],
+              },
+            ],
+          },
+          {
+            model: pegawai,
+            attributes: [
+              "id",
+              "nama",
+              "pendidikan",
+              "nip",
+              "jabatan",
+              "tanggalTMT",
+            ],
+            include: [
+              {
+                model: daftarTingkatan,
+                as: "daftarTingkatan",
+              },
+              { model: daftarGolongan, as: "daftarGolongan" },
+              { model: daftarPangkat, as: "daftarPangkat" },
+              {
+                model: profesi,
+                as: "profesi",
+                attributes: ["nama", "id"],
+              },
+              {
+                model: statusPegawai,
+                as: "statusPegawai",
+                attributes: ["status", "id"],
+              },
+              {
+                model: daftarUnitKerja,
+                as: "daftarUnitKerja",
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: personil,
+                attributes: ["id"],
+                include: [{ model: rincianBPD }],
               },
             ],
           },

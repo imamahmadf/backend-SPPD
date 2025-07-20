@@ -1,6 +1,7 @@
 const express = require("express");
 const { pegawaiControllers } = require("../controllers");
 const { authenticateUser, authorizeRole } = require("../lib/auth");
+const fileUploader = require("../middleware/uploader");
 const routers = express.Router();
 
 routers.get("/get", pegawaiControllers.getPegawai);
@@ -30,4 +31,16 @@ routers.get(
 routers.post("/post/batch", pegawaiControllers.getPegawaiBatch);
 routers.post("/personil/edit-pegawai", pegawaiControllers.editPersonil);
 routers.post("/personil/hapus/:id", pegawaiControllers.hapusPersonil);
+
+routers.post(
+  "/upload-usulan",
+  fileUploader({
+    destinationFolder: "pegawai",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "USULAN",
+  }).single("file"),
+  pegawaiControllers.uploadBerkas
+);
+routers.get("/get/usulan/:id", pegawaiControllers.getDokumen);
 module.exports = routers;

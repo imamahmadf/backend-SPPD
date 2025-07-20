@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.personil);
+      this.hasMany(models.profile);
+      this.hasMany(models.usulanPegawai);
       this.hasMany(models.kendaraan);
       this.hasMany(models.pengurusBarang);
       this.hasMany(models.mutasiKendaraan, {
@@ -80,6 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       unitKerjaId: DataTypes.INTEGER,
       statusPegawaiId: DataTypes.INTEGER,
       profesiId: DataTypes.INTEGER,
+      tanggalTMT: DataTypes.DATE,
     },
     {
       sequelize,

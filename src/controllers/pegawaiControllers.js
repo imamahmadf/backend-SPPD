@@ -16,6 +16,7 @@ const {
   profesi,
   statusPegawai,
   indukUnitKerja,
+  usulanPegawai,
 } = require("../models");
 
 const { Op, Sequelize: sequelize } = require("sequelize");
@@ -670,6 +671,44 @@ module.exports = {
         success: false,
         message: err.toString(),
       });
+    }
+  },
+  uploadBerkas: async (req, res) => {
+    const { id, pegawaiId } = req.body;
+    console.log(req.body);
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      await usulanPegawai.create({
+        dokumen: `/pegawai/${req.file.filename}`, // Nama asli
+        status: 0,
+        pegawaiId,
+      });
+
+      return res.status(200).json({
+        message: "File template berhasil diunggah",
+      });
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  getDokumen: async (req, res) => {
+    const pegawaiId = req.params.id;
+
+    try {
+      const result = await usulanPegawai.findOne({ where: { pegawaiId } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
 };
