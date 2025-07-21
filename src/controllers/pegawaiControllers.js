@@ -711,4 +711,57 @@ module.exports = {
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
+  getUsulan: async (req, res) => {
+    try {
+      const result = await usulanPegawai.findAll({
+        include: [
+          {
+            model: pegawai,
+            attributes: [
+              "id",
+              "nama",
+              "pendidikan",
+              "nip",
+              "jabatan",
+              "tanggalTMT",
+            ],
+            include: [
+              {
+                model: daftarTingkatan,
+                as: "daftarTingkatan",
+              },
+              { model: daftarGolongan, as: "daftarGolongan" },
+              { model: daftarPangkat, as: "daftarPangkat" },
+              {
+                model: profesi,
+                as: "profesi",
+                attributes: ["nama", "id"],
+              },
+              {
+                model: statusPegawai,
+                as: "statusPegawai",
+                attributes: ["status", "id"],
+              },
+              {
+                model: daftarUnitKerja,
+                as: "daftarUnitKerja",
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: personil,
+                attributes: ["id"],
+                include: [{ model: rincianBPD }],
+              },
+            ],
+          },
+        ],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
 };
