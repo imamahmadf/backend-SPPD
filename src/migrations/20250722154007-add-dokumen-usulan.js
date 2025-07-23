@@ -3,58 +3,58 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("UsulanPegawais", "formulirUsulan", {
+    await queryInterface.addColumn("usulanPegawais", "formulirUsulan", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "skCpns", {
+    await queryInterface.addColumn("usulanPegawais", "skCpns", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "skPns", {
+    await queryInterface.addColumn("usulanPegawais", "skPns", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "PAK", {
+    await queryInterface.addColumn("usulanPegawais", "PAK", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "skJafung", {
+    await queryInterface.addColumn("usulanPegawais", "skJafung", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "skp", {
+    await queryInterface.addColumn("usulanPegawais", "skp", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "skMutasi", {
+    await queryInterface.addColumn("usulanPegawais", "skMutasi", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "STR", {
+    await queryInterface.addColumn("usulanPegawais", "STR", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "suratCuti", {
+    await queryInterface.addColumn("usulanPegawais", "suratCuti", {
       type: Sequelize.STRING,
       allowNull: true,
     });
-    await queryInterface.addColumn("UsulanPegawais", "gelar", {
+    await queryInterface.addColumn("usulanPegawais", "gelar", {
       type: Sequelize.STRING,
       allowNull: true,
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("UsulanPegawais", "formulirUsulan");
-    await queryInterface.removeColumn("UsulanPegawais", "skCpns");
-    await queryInterface.removeColumn("UsulanPegawais", "skPns");
-    await queryInterface.removeColumn("UsulanPegawais", "PAK");
-    await queryInterface.removeColumn("UsulanPegawais", "skJafung");
-    await queryInterface.removeColumn("UsulanPegawais", "skp");
-    await queryInterface.removeColumn("UsulanPegawais", "skMutasi");
-    await queryInterface.removeColumn("UsulanPegawais", "STR");
-    await queryInterface.removeColumn("UsulanPegawais", "suratCuti");
-    await queryInterface.removeColumn("UsulanPegawais", "gelar");
+    await queryInterface.removeColumn("usulanPegawais", "formulirUsulan");
+    await queryInterface.removeColumn("usulanPegawais", "skCpns");
+    await queryInterface.removeColumn("usulanPegawais", "skPns");
+    await queryInterface.removeColumn("usulanPegawais", "PAK");
+    await queryInterface.removeColumn("usulanPegawais", "skJafung");
+    await queryInterface.removeColumn("usulanPegawais", "skp");
+    await queryInterface.removeColumn("usulanPegawais", "skMutasi");
+    await queryInterface.removeColumn("usulanPegawais", "STR");
+    await queryInterface.removeColumn("usulanPegawais", "suratCuti");
+    await queryInterface.removeColumn("usulanPegawais", "gelar");
   },
 };
