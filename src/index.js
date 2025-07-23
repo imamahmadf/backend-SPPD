@@ -26,6 +26,7 @@ const {
   sijakaRouter,
   notifikasiRouter,
   kendaraanRouter,
+  usulanPegawaiRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -96,6 +97,7 @@ app.use("/api/sijaka", sijakaRouter);
 app.use("/api/rekap", rekapRouter);
 app.use("/api/notifikasi", notifikasiRouter);
 app.use("/api/kendaraan", kendaraanRouter);
+app.use("/api/usulan", usulanPegawaiRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);

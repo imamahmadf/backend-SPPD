@@ -24,7 +24,8 @@ module.exports = {
     const transaction = await sequelize.transaction();
     console.log(req.body);
     try {
-      const { nama, namaPengguna, password, role, unitKerjaId } = req.body;
+      const { nama, namaPengguna, password, role, unitKerjaId, pegawaiId } =
+        req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const existingUser = await user.findOne({ where: { namaPengguna } });
@@ -46,6 +47,7 @@ module.exports = {
           nama,
           userId: newUser.id,
           unitKerjaId,
+          pegawaiId,
         },
         { transaction }
       );
