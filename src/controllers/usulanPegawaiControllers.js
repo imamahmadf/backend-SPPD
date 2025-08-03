@@ -13,6 +13,8 @@ const {
 } = require("../models");
 const fs = require("fs");
 const { Op } = require("sequelize");
+const path = require("path");
+const { UsulanPegawai } = require("../models");
 
 module.exports = {
   postNaikGOlongan: async (req, res) => {
@@ -54,6 +56,50 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+
+  updateUsulan: async (req, res) => {
+    try {
+      const { id } = req.body;
+      console.log(id, "cek id");
+      const field = Object.keys(req.body).find(
+        (key) => key !== "id" && key !== "pegawaiId"
+      );
+      const file = req.files.find((f) => f.fieldname === field);
+
+      if (!file)
+        return res.status(400).json({ message: "File tidak ditemukan" });
+
+      const usulan = await usulanPegawai.findByPk(id);
+      if (!usulan) {
+        fs.unlinkSync(file.path);
+        return res.status(404).json({ message: "Data tidak ditemukan" });
+      }
+
+      // Hapus file lama jika ada
+      if (usulan[field]) {
+        const oldPath = path.join(
+          __dirname,
+          "../public/pegawai",
+          usulan[field]
+        );
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      }
+
+      usulan[field] = file.filename;
+      await usulan.save();
+
+      res.json({
+        message: "Dokumen berhasil diupdate",
+        dokumen: file.filename,
+        field,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Terjadi kesalahan", error: error.message });
+    }
+  },
+
   getDetailusulan: async (req, res) => {
     try {
       const id = req.params.id;

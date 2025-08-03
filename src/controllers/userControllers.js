@@ -14,6 +14,7 @@ const {
   statusPegawai,
   rincianBPD,
   personil,
+  usulanPegawai,
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -208,6 +209,7 @@ module.exports = {
                 attributes: ["id"],
                 include: [{ model: rincianBPD }],
               },
+              { model: usulanPegawai },
             ],
           },
         ],
