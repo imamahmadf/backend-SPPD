@@ -10,6 +10,7 @@ const {
   personil,
   rincianBPD,
   jenisPerjalanan,
+  sequelize,
   rill,
   tempat,
   dalamKota,
@@ -19,7 +20,7 @@ const {
   usulanPegawai,
 } = require("../models");
 
-const { Op, Sequelize: sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const ExcelJS = require("exceljs");
 module.exports = {
   getPegawaiStatistik: async (req, res) => {
@@ -386,24 +387,71 @@ module.exports = {
       statusPegawaiId,
       profesiId,
       pendidikan,
+      tanggalTMT,
     } = req.body;
     console.log(req.body);
+    const transaction = await sequelize.transaction();
+    const nipBaru = nip.replace(/\s+/g, "");
     try {
-      const result = await pegawai.create({
-        nama,
-        jabatan,
-        nip,
-        golonganId,
-        tingkatanId,
-        pangkatId,
-        unitKerjaId,
-        statusPegawaiId,
-        profesiId,
-        pendidikan,
-      });
+      const result = await pegawai.create(
+        {
+          nama,
+          jabatan,
+          nip,
+          golonganId,
+          tingkatanId,
+          pangkatId,
+          unitKerjaId,
+          statusPegawaiId,
+          profesiId,
+          pendidikan,
+          tanggalTMT,
+        },
+        { transaction }
+      );
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const existingUser = await user.findOne({ where: { nama } });
+      if (existingUser) {
+        return res.status(400).json({ message: "Email sudah digunakan" });
+      }
 
+      if (
+        statusPegawaiId === 1 ||
+        statusPegawaiId === 2 ||
+        statusPegawaiId === 3
+      ) {
+        const newUser = await user.create(
+          {
+            nama,
+            namaPengguna: nipBaru,
+            password: hashedPassword,
+          },
+          { transaction }
+        );
+
+        const newProfile = await profile.create(
+          {
+            nama,
+            userId: newUser.id,
+            unitKerjaId,
+            pegawaiId: result.id,
+          },
+          { transaction }
+        );
+
+        const newUserRole = await userRole.create(
+          {
+            userId: newUser.id,
+            roleId: 9,
+          },
+          { transaction }
+        );
+      }
+
+      await transaction.commit();
       return res.status(200).json({ result });
     } catch (err) {
+      await transaction.rollback();
       return res.status(500).json({
         message: err.toString(),
         code: 500,

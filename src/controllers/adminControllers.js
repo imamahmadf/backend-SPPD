@@ -320,7 +320,7 @@ module.exports = {
     const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const offset = limit * page;
     console.log(unitKerjaId, "INI UNIT KERJA");
-    const whereConditionPegawai = { statusId: [2, 3, 4] };
+    const whereConditionPegawai = { statusId: [2, 4] };
     const whereCondition = {};
     const whereSumberDana = {};
     if (unitKerjaId) {

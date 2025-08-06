@@ -6,10 +6,10 @@ const client = new Client({
   puppeteer: { headless: true, args: ["--no-sandbox"] },
 });
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-  console.log("📲 Scan QR code untuk login WhatsApp");
-});
+// client.on("qr", (qr) => {
+//   qrcode.generate(qr, { small: true });
+//   console.log("📲 Scan QR code untuk login WhatsApp");
+// });
 
 client.on("ready", () => {
   console.log("✅ WhatsApp client siap!");

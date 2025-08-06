@@ -55,6 +55,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "asalUnitKerjaId",
         as: "unitKerjaAsal",
       });
+      this.hasMany(models.stokMasuk, {
+        foreignKey: "unitKerjaId",
+      });
     }
   }
   daftarUnitKerja.init(

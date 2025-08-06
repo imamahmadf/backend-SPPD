@@ -14,10 +14,10 @@ const {
 const fs = require("fs");
 const { Op } = require("sequelize");
 const path = require("path");
-const { UsulanPegawai } = require("../models");
 
 module.exports = {
   postNaikGOlongan: async (req, res) => {
+    const { pegawaiId } = req.body;
     try {
       // req.files adalah array
       // Contoh: [{ fieldname: 'formulir_usulan', filename: 'UNDANGAN_xxx.pdf', ... }, ...]
@@ -26,21 +26,22 @@ module.exports = {
 
       files.forEach((file) => {
         // Simpan path file sesuai fieldname
-        filePaths[file.fieldname] = `/bukti/${file.filename}`;
+        filePaths[file.fieldname] = `/pegawai/${file.filename}`;
       });
 
       // Mapping nama field dari frontend ke field DB
       const dataToSave = {
-        pegawaiId: 1,
-        formulirUsulan: filePaths.formulir_usulan,
-        skCpns: filePaths["sk_cpns"],
-        skPns: filePaths["sk_pns"],
-        PAK: filePaths["pak"],
-        skJafung: filePaths["sk_jafung_pertama"],
-        skp: filePaths["skp_2tahun"],
-        skMutasi: filePaths["sk_mutasi"],
-        STR: filePaths["str_sip"],
-        suratCuti: filePaths["surat_cuti"],
+        pegawaiId,
+        formulirUsulan: filePaths["formulirUsulan"],
+        skCpns: filePaths["skCpns"],
+        skPns: filePaths["skPns"],
+        PAK: filePaths["PAK"],
+        skJafung: filePaths["skJafung"],
+        skp: filePaths["skp"],
+        skMutasi: filePaths["skMutasi"],
+        STR: filePaths["STR"],
+        suratCuti: filePaths["suratCuti"],
+        status: 0,
         // tambahkan field lain jika ada
       };
       console.log(filePaths, "CEK FILE");
@@ -57,48 +58,48 @@ module.exports = {
     }
   },
 
-  updateUsulan: async (req, res) => {
-    try {
-      const { id } = req.body;
-      console.log(id, "cek id");
-      const field = Object.keys(req.body).find(
-        (key) => key !== "id" && key !== "pegawaiId"
-      );
-      const file = req.files.find((f) => f.fieldname === field);
+  // updateUsulan: async (req, res) => {
+  //   try {
+  //     const { id } = req.body;
+  //     console.log(id, "cek id");
+  //     const field = Object.keys(req.body).find(
+  //       (key) => key !== "id" && key !== "pegawaiId"
+  //     );
+  //     const file = req.files.find((f) => f.fieldname === field);
 
-      if (!file)
-        return res.status(400).json({ message: "File tidak ditemukan" });
+  //     if (!file)
+  //       return res.status(400).json({ message: "File tidak ditemukan" });
 
-      const usulan = await usulanPegawai.findByPk(id);
-      if (!usulan) {
-        fs.unlinkSync(file.path);
-        return res.status(404).json({ message: "Data tidak ditemukan" });
-      }
+  //     const usulan = await usulanPegawai.findByPk(id);
+  //     if (!usulan) {
+  //       fs.unlinkSync(file.path);
+  //       return res.status(404).json({ message: "Data tidak ditemukan" });
+  //     }
 
-      // Hapus file lama jika ada
-      if (usulan[field]) {
-        const oldPath = path.join(
-          __dirname,
-          "../public/pegawai",
-          usulan[field]
-        );
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-      }
+  //     // Hapus file lama jika ada
+  //     if (usulan[field]) {
+  //       const oldPath = path.join(
+  //         __dirname,
+  //         "../public/pegawai",
+  //         usulan[field]
+  //       );
+  //       if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+  //     }
 
-      usulan[field] = file.filename;
-      await usulan.save();
+  //     usulan[field] = file.filename;
+  //     await usulan.save();
 
-      res.json({
-        message: "Dokumen berhasil diupdate",
-        dokumen: file.filename,
-        field,
-      });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Terjadi kesalahan", error: error.message });
-    }
-  },
+  //     res.json({
+  //       message: "Dokumen berhasil diupdate",
+  //       dokumen: file.filename,
+  //       field,
+  //     });
+  //   } catch (error) {
+  //     res
+  //       .status(500)
+  //       .json({ message: "Terjadi kesalahan", error: error.message });
+  //   }
+  // },
 
   getDetailusulan: async (req, res) => {
     try {
@@ -143,9 +144,15 @@ module.exports = {
     }
   },
   updateStatus: async (req, res) => {
-    const { id, catatan } = req.body;
-    const status = catatan ? 2 : 1;
+    const { id, catatan, statusId } = req.body;
+    let status = catatan ? 2 : 1;
+
+    if (statusId === 0) {
+      status = statusId;
+    }
+
     //2 ditolak, 1 diterima
+    console.log(statusId);
     try {
       const result = await usulanPegawai.update(
         { catatan, status },
@@ -157,6 +164,45 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  updateUsulan: async (req, res) => {
+    try {
+      const { id, field_name, nama_file_lama } = req.body;
+      console.log(field_name);
+      // Validasi file
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: "Harap unggah file" });
+      }
+
+      const uploadedFile = req.files[0];
+
+      // Hapus file lama jika ada
+      if (nama_file_lama) {
+        const fullPath = path.join(__dirname, `../public${nama_file_lama}`);
+        fs.unlink(fullPath, (err) => {
+          if (err) {
+            console.error("Gagal menghapus file lama:", err);
+          }
+        });
+      }
+
+      // Path file baru
+      const filePath = `/pegawai/${uploadedFile.filename}`;
+
+      // Update field dinamis berdasarkan field_name
+      await usulanPegawai.update({ [field_name]: filePath }, { where: { id } });
+
+      res.json({
+        message: "Dokumen berhasil diupdate",
+        path: filePath,
+      });
+    } catch (error) {
+      console.error("Error saat update usulan pegawai:", error);
+      res.status(500).json({
+        message: "Terjadi kesalahan saat upload dokumen",
+        error: error.message,
+      });
     }
   },
 };

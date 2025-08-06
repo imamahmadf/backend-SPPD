@@ -36,3 +36,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   return usulanPegawai;
 };
+
+// 0:diajukan
+// 1 :ditolak
+// 2:diterima

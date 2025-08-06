@@ -18,6 +18,7 @@ const rekapRouter = require("./rekapRouter");
 const notifikasiRouter = require("./notifikasiRouter");
 const kendaraanRouter = require("./kendaraanRouter");
 const usulanPegawaiRouter = require("./usulanPegawaiRouter");
+const persediaanRouter = require("./persediaanRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -39,4 +40,5 @@ module.exports = {
   notifikasiRouter,
   kendaraanRouter,
   usulanPegawaiRouter,
+  persediaanRouter,
 };

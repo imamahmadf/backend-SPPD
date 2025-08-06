@@ -23,7 +23,7 @@ const fs = require("fs");
 const path = require("path");
 const Docxtemplater = require("docxtemplater");
 const { Op } = require("sequelize");
-
+const ExcelJS = require("exceljs");
 // Fungsi helper untuk mengubah format tanggal dari DD-MM-YYYY ke YYYY-MM-DD
 const convertDateFormat = (dateString) => {
   if (!dateString) return null;
@@ -164,12 +164,33 @@ module.exports = {
     const pegawaiId = parseInt(req.query.pegawaiId);
     const nomor = parseInt(req.query.nomor) || "";
     const whereCondition = { nomor: { [Op.like]: "%" + nomor + "%" } };
+    const currentYear = new Date().getFullYear();
+
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
 
     if (unitKerjaId) {
       whereCondition.unitKerjaId = unitKerjaId;
     }
     if (pegawaiId) {
       whereCondition.pegawaiId = pegawaiId;
+    }
+
+    // Jika startDate dan endDate ada, tambahkan kondisi between untuk tgl_pkb
+    if (startDate && endDate) {
+      whereCondition.tgl_pkb = {
+        [Op.between]: [new Date(startDate), new Date(endDate)],
+      };
+    } else if (startDate) {
+      // Jika hanya startDate diberikan, cari data dari startDate ke depan
+      whereCondition.tgl_pkb = {
+        [Op.gte]: new Date(startDate),
+      };
+    } else if (endDate) {
+      // Jika hanya endDate diberikan, cari data sampai endDate
+      whereCondition.tgl_pkb = {
+        [Op.lte]: new Date(endDate),
+      };
     }
     try {
       // 1. Ambil data kendaraan dari DB lokal
@@ -189,7 +210,24 @@ module.exports = {
             as: "kendaraanUK",
           },
         ],
-        order: [["id", "ASC"]],
+        order: [
+          // Urutkan berdasarkan CASE WHEN agar data tgl_pkb tahun ini paling atas
+          [
+            sequelize.literal(
+              `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN 0 ELSE 1 END`
+            ),
+            "ASC",
+          ],
+          // Dalam data tahun ini urut berdasarkan tgl_pkb ascending
+          [
+            sequelize.literal(
+              `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN tgl_pkb ELSE NULL END`
+            ),
+            "ASC",
+          ],
+          // Data selain tahun ini urut berdasarkan id ascending
+          ["id", "ASC"],
+        ],
         attributes: [
           "id",
           "nomor",
@@ -207,6 +245,8 @@ module.exports = {
           "tg_stnk",
           "total",
           "foto",
+          "merek",
+          "warna",
         ],
       });
 
@@ -367,6 +407,8 @@ module.exports = {
           "tg_stnk",
           "total",
           "foto",
+          "merek",
+          "warna",
         ],
       });
       return res.status(200).json({ result });
@@ -561,6 +603,8 @@ module.exports = {
         jenisKendaraanId,
         statusKendaraanId,
         kondisiId,
+        warna,
+        merek,
       } = req.body;
       const id = req.params.id;
       console.log(req.body);
@@ -575,6 +619,8 @@ module.exports = {
           statusKendaraanId,
           kondisiId,
           noKontak,
+          warna,
+          merek,
         },
         { where: { id } }
       );
@@ -624,6 +670,104 @@ module.exports = {
       return res.status(200).json({ result });
     } catch (err) {
       if (transaction) await transaction.rollback();
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  getDownloadKendaraan: async (req, res) => {
+    try {
+      const result = await kendaraan.findAll({
+        include: [
+          { model: jenisKendaraan },
+          { model: statusKendaraan },
+          { model: kondisi },
+          { model: pegawai },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja"],
+            foreignKey: "unitKerjaId",
+            as: "kendaraanUK",
+          },
+        ],
+
+        attributes: [
+          "id",
+          "nomor",
+          "seri",
+          "noKontak",
+          "unitKerjaId",
+          "pegawaiId",
+
+          "noRangka",
+          "noMesin",
+          "kondisiId",
+          "statusKendaraanId",
+          "jenisKendaraanId",
+          "tgl_pkb",
+          "tg_stnk",
+          "total",
+          "foto",
+          "merek",
+          "warna",
+        ],
+      });
+
+      // Generate Excel
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("Kendaraan Dinas");
+
+      // Header
+      worksheet.columns = [
+        { header: "No", key: "no", width: 5 },
+        { header: "No. Plat", key: "plat", width: 30 },
+        { header: "Jenis Kendaraan", key: "jenis", width: 20 },
+        { header: "Merek", key: "merek", width: 25 },
+        { header: "Warna", key: "warna", width: 25 },
+        { header: "Tanggal STNK", key: "stnk", width: 25 },
+        { header: "Tanggal BPKB", key: "bpkb", width: 25 },
+        { header: "Unit Kerja", key: "unit", width: 20 },
+        { header: "Nama Pemilik", key: "nama", width: 20 },
+        { header: "status", key: "status", width: 25 },
+        { header: "kondisi", key: "kondisi", width: 25 },
+        { header: "No. Kontak", key: "kontak", width: 25 },
+      ];
+
+      // Data rows
+      result.forEach((item, index) => {
+        worksheet.addRow({
+          no: index + 1,
+          plat: item?.nama,
+          jenis: `KT ${item?.nomor} ${item?.seri}`,
+          merek: item?.merek || "-",
+          warna: item?.warna || "-",
+          stnk: item?.tgl_pkb || "-",
+          bpkb: item?.tg_stnk || "-",
+          unit: item?.kendaraanUK?.unitKerja || "-",
+          nama: item?.pegawai?.nama,
+          status: item?.statusKendaraan?.status || "-",
+          kondisi: item?.kondisi?.nama || "-",
+          kontak: item?.noKontak || "-",
+        });
+      });
+
+      // Set response headers
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=data-pegawai.xlsx"
+      );
+
+      // Send Excel file
+      await workbook.xlsx.write(res);
+      res.end();
+    } catch (err) {
+      console.error(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,

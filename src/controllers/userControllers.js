@@ -19,7 +19,7 @@ const {
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { blacklistedTokens } = require("../lib/auth");
-
+const { Op } = require("sequelize");
 module.exports = {
   register: async (req, res) => {
     const transaction = await sequelize.transaction();
@@ -246,8 +246,18 @@ module.exports = {
   },
 
   getAllUser: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = limit * page;
+    const search = req.query.search_query || "";
+    const whereCondition = {
+      nama: { [Op.like]: "%" + search + "%" },
+    };
     try {
       const result = await user.findAll({
+        where: whereCondition,
+        offset,
+        limit,
         attributes: ["id", "nama", "namaPengguna"],
         include: [
           {
@@ -268,7 +278,16 @@ module.exports = {
         ],
       });
 
-      return res.status(200).json({ result });
+      const totalRows = await user.count({
+        where: whereCondition,
+        offset,
+        limit,
+      });
+      const totalPage = Math.ceil(totalRows / limit);
+
+      return res
+        .status(200)
+        .json({ result, page, limit, totalRows, totalPage });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });

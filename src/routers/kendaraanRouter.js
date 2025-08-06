@@ -28,5 +28,9 @@ routers.post(
 routers.post("/edit/:id", kendaraanControllers.editKendaraan);
 
 routers.post("/post/mutasi", kendaraanControllers.mutasi);
+routers.get(
+  "/get/download",
 
+  kendaraanControllers.getDownloadKendaraan
+);
 module.exports = routers;

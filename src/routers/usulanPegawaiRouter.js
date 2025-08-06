@@ -10,12 +10,7 @@ routers.post(
     fileType: "application/pdf",
     prefix: "USULAN",
   }).any(),
-  //   (req, res, next) => {
-  //     // Debug: cek file dan body
-  //     console.log("FILES:", req.files);
-  //     console.log("BODY:", req.body);
-  //     next();
-  //   },
+
   usulanPegawaiControllers.postNaikGOlongan
 );
 routers.get("/get/detail/:id", usulanPegawaiControllers.getDetailusulan);
@@ -27,12 +22,17 @@ routers.post(
     fileType: "application/pdf",
     prefix: "USULAN",
   }).any(),
-  //   (req, res, next) => {
-  //     // Debug: cek file dan body
-  //     console.log("FILES:", req.files);
-  //     console.log("BODY:", req.body);
-  //     next();
-  //   },
+
+  usulanPegawaiControllers.updateUsulan
+);
+
+routers.post(
+  "/update/usulan-pegawai",
+  fileUploader({
+    destinationFolder: "pegawai",
+    fileType: "application/pdf",
+    prefix: "USULAN",
+  }).any(), // .any() → req.files, bukan req.file
   usulanPegawaiControllers.updateUsulan
 );
 
