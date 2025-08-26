@@ -70,7 +70,7 @@ module.exports = {
         subKegiatan,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
-      console.log(req.body, "KODE KLASIFIKASI");
+      console.log(req.body.pegawai, "KODE KLASIFIKASI");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -152,7 +152,12 @@ module.exports = {
 
       // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
       const nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-        .replace("NOMOR", nomorLoket.toString())
+        .replace(
+          "NOMOR",
+          indukUnitKerjaFE.indukUnitKerja.id == 1
+            ? "     "
+            : nomorLoket.toString()
+        )
         .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
         .replace("KODE", kode)
         .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
@@ -503,6 +508,11 @@ module.exports = {
       const resultKlasifikasi = await klasifikasi.findAll({
         attributes: ["id", "namaKlasifikasi", "kode"],
       });
+
+      const resultUnitKerja = await daftarUnitKerja.findAll({
+        where: { indukUnitKerjaId },
+        attributes: ["id", "kode"],
+      });
       return res.status(200).json({
         resultDaftarSubKegiatan,
         resultTtdSuratTugas,
@@ -516,6 +526,7 @@ module.exports = {
         resultKlasifikasi,
         resultSumberDana,
         resultPelayananKesehatan,
+        resultUnitKerja,
       });
     } catch (err) {
       console.error("Error:", err);

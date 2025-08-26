@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.belongsTo(models.persediaan);
       this.hasMany(models.stokKeluar);
+      this.belongsTo(models.laporanPersediaan);
+      this.belongsTo(models.sumberDana);
+      this.belongsTo(models.suratPesanan);
     }
   }
   stokMasuk.init(
@@ -25,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       keterangan: DataTypes.STRING,
       tanggal: DataTypes.DATE,
       spesifikasi: DataTypes.STRING,
+      laporanPersediaanId: DataTypes.INTEGER,
+      sumberDanaId: DataTypes.INTEGER,
+      suratPesananId: DataTypes.INTEGER,
+      nomorPesanan: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -10,12 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.persediaan);
+      this.belongsTo(models.rinObPersediaan);
     }
   }
   tipePersediaan.init(
     {
       kodeRekening: DataTypes.STRING,
       nama: DataTypes.STRING,
+      rinObPersediaanId: DataTypes.INTEGER,
     },
     {
       sequelize,

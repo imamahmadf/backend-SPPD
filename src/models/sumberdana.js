@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.indukUKSumberDana);
       this.hasMany(models.sumberDanaJenisPerjalanan);
+      this.hasMany(models.stokMasuk);
     }
   }
   sumberDana.init(
