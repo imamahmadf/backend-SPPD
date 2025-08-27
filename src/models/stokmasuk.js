@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.laporanPersediaan);
       this.belongsTo(models.sumberDana);
       this.belongsTo(models.suratPesanan);
+      this.belongsTo(models.satuanPersediaan);
     }
   }
   stokMasuk.init(
@@ -32,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       sumberDanaId: DataTypes.INTEGER,
       suratPesananId: DataTypes.INTEGER,
       nomorPesanan: DataTypes.INTEGER,
+      satuanPersediaanId: DataTypes.INTEGER,
     },
     {
       sequelize,

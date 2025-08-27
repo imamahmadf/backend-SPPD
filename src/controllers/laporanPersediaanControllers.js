@@ -9,6 +9,7 @@ const {
   suratPesanan,
   indukUnitKerja,
   daftarUnitKerja,
+  satuanPersediaan,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -128,6 +129,7 @@ module.exports = {
               },
               { model: sumberDana, attributes: ["id", "sumber"] },
               { model: suratPesanan, attributes: ["id", "nomor"] },
+              { model: satuanPersediaan },
             ],
             where: { unitKerjaId },
           },
@@ -155,10 +157,13 @@ module.exports = {
           },
         ],
       });
+
+      const resultSatuan = await satuanPersediaan.findAll({});
       return res.status(200).json({
         result,
         resultSumberDana,
         resultSuratPesanan,
+        resultSatuan,
       });
     } catch (err) {
       console.error(err);

@@ -221,6 +221,7 @@ module.exports = {
       nomorPesanan,
       suratPesananId,
       sumberDanaId,
+      satuanPersediaanId,
     } = req.body;
     console.log(req.body);
     try {
@@ -236,6 +237,7 @@ module.exports = {
         nomorPesanan,
         sumberDanaId,
         suratPesananId,
+        satuanPersediaanId,
       });
 
       return res.status(200).json({
