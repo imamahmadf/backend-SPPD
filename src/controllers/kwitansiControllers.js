@@ -277,7 +277,7 @@ module.exports = {
     }
   },
   cetakKwitansi: async (req, res) => {
-    console.log(req.body.rincianBPD, "DRI DEPAN");
+    // console.log(req.body.rincianBPD, "DRI DEPAN");
     const {
       id,
       nomorSPD,
@@ -304,6 +304,7 @@ module.exports = {
       tahun,
       templateId,
     } = req.body;
+    console.log(req.body.templateId);
 
     const formatTanggal = (tanggal) => {
       return new Date(tanggal).toLocaleDateString("id-ID", {
@@ -394,7 +395,7 @@ module.exports = {
         nilai: formatRupiah(item.nilai),
         no: index + 1,
       })); // Tambahkan nomor urut
-    console.log(Rill, "ini DATA RILLLLLLLLLLL");
+    // console.log(Rill, "ini DATA RILLLLLLLLLLL");
     // Hitung totalRill dari nilai Rill
     const totalRill = formatRupiah(
       Rill.reduce(

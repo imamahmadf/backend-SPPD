@@ -21,6 +21,7 @@ const usulanPegawaiControllers = require("./usulanPegawaiControllers");
 const persediaanControllers = require("./persediaanControllers");
 const laporanPersediaanControllers = require("./laporanPersediaanControllers");
 const rekapAsetControllers = require("./RekapAsetControllers");
+const suratPesananControllers = require("./suratPesananControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -45,4 +46,5 @@ module.exports = {
   persediaanControllers,
   laporanPersediaanControllers,
   rekapAsetControllers,
+  suratPesananControllers,
 };

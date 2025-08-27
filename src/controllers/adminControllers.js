@@ -25,6 +25,10 @@ const {
   indukUnitKerja,
   ttdSuratTugas,
   ttdNotaDinas,
+  PPTK,
+  KPA,
+  pelayananKesehatan,
+  templateKeuangan,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -46,6 +50,7 @@ module.exports = {
           "pic",
           "dasar",
           "undangan",
+          "jenisId",
         ],
         include: [
           {
@@ -107,6 +112,32 @@ module.exports = {
               },
             ],
           },
+
+          { model: pelayananKesehatan },
+          {
+            model: PPTK,
+            attributes: ["id", "jabatan"],
+            paranoid: false, // ✅ tambahkan ini
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_PPTK",
+              },
+            ],
+          },
+          {
+            model: KPA,
+            attributes: ["id", "jabatan"],
+            paranoid: false, // ✅ tambahkan ini
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_KPA",
+              },
+            ],
+          },
           {
             model: tempat,
             attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
@@ -137,8 +168,13 @@ module.exports = {
           // },
         ],
       });
-      return res.status(200).json({ result });
+
+      const template = await templateKeuangan.findAll({
+        attributes: ["id", "nama"],
+      });
+      return res.status(200).json({ result, template });
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         message: err.toString(),
         code: 500,
