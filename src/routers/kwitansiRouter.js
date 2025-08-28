@@ -24,6 +24,7 @@ routers.post(
 );
 routers.get("/get/rampung/:id", kwitansiControllers.getRampung);
 routers.post("/post/cetak-kwitansi", kwitansiControllers.cetakKwitansi);
+routers.post("/post/cetak-kwitansi-pdf", kwitansiControllers.cetakKwitansiPDF);
 routers.post(
   "/post/kwitansi-otomatis",
   kwitansiControllers.cetakKwitansiOtomatis

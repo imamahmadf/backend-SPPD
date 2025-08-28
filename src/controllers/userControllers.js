@@ -248,10 +248,11 @@ module.exports = {
   getAllUser: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
+    const namaPengguna = req.query.namaPengguna;
     const offset = limit * page;
     const search = req.query.search_query || "";
     const whereCondition = {
-      nama: { [Op.like]: "%" + search + "%" },
+      nama: { [Op.like]: "%" + namaPengguna + "%" },
     };
     try {
       const result = await user.findAll({
