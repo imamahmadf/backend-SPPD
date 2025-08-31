@@ -34,5 +34,6 @@ routers.post("/update/rincian-bpd", kwitansiControllers.updateBPD);
 routers.post("/verifikasi/terima", kwitansiControllers.terimaVerifikasi);
 routers.post("/verifikasi/tolak", kwitansiControllers.tolakVerifikasi);
 routers.post("/post/pengajuan/:id", kwitansiControllers.pengajuan);
+routers.post("/update/kwitansi-global", kwitansiControllers.addKwitansiGlobal);
 
 module.exports = routers;

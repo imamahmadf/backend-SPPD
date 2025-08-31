@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "golonganId",
         as: "daftarGolongan",
       });
+
+      // Relasi dengan riwayat pegawai
+      this.hasMany(models.riwayatPegawai, {
+        foreignKey: "golonganId",
+        as: "riwayatPegawaiGolongan",
+      });
     }
   }
   daftarGolongan.init(

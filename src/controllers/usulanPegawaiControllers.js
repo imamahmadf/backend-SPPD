@@ -9,6 +9,9 @@ const {
   dalamKota,
   profesi,
   statusPegawai,
+  laporanUsulanPegawai,
+  sequelize,
+  riwayatPegawai,
   usulanPegawai, // tambahkan import model
 } = require("../models");
 const fs = require("fs");
@@ -58,49 +61,6 @@ module.exports = {
     }
   },
 
-  // updateUsulan: async (req, res) => {
-  //   try {
-  //     const { id } = req.body;
-  //     console.log(id, "cek id");
-  //     const field = Object.keys(req.body).find(
-  //       (key) => key !== "id" && key !== "pegawaiId"
-  //     );
-  //     const file = req.files.find((f) => f.fieldname === field);
-
-  //     if (!file)
-  //       return res.status(400).json({ message: "File tidak ditemukan" });
-
-  //     const usulan = await usulanPegawai.findByPk(id);
-  //     if (!usulan) {
-  //       fs.unlinkSync(file.path);
-  //       return res.status(404).json({ message: "Data tidak ditemukan" });
-  //     }
-
-  //     // Hapus file lama jika ada
-  //     if (usulan[field]) {
-  //       const oldPath = path.join(
-  //         __dirname,
-  //         "../public/pegawai",
-  //         usulan[field]
-  //       );
-  //       if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-  //     }
-
-  //     usulan[field] = file.filename;
-  //     await usulan.save();
-
-  //     res.json({
-  //       message: "Dokumen berhasil diupdate",
-  //       dokumen: file.filename,
-  //       field,
-  //     });
-  //   } catch (error) {
-  //     res
-  //       .status(500)
-  //       .json({ message: "Terjadi kesalahan", error: error.message });
-  //   }
-  // },
-
   getDetailusulan: async (req, res) => {
     try {
       const id = req.params.id;
@@ -144,18 +104,20 @@ module.exports = {
     }
   },
   updateStatus: async (req, res) => {
-    const { id, catatan, statusId } = req.body;
-    let status = catatan ? 2 : 1;
-
-    if (statusId === 0) {
-      status = statusId;
-    }
+    const { id, catatan, status } = req.body;
 
     //2 ditolak, 1 diterima
-    console.log(statusId);
+    console.log(status, "ini statusnya");
+
+    const generateRandomCode = () => {
+      const random = Math.random().toString(36).substring(2, 6); // random 4 karakter
+      const time = Date.now().toString(36).slice(-4); // ambil 4 karakter terakhir dari timestamp
+      return (random + time).toUpperCase(); // total 8 karakter
+    };
+    const kode = generateRandomCode();
     try {
       const result = await usulanPegawai.update(
-        { catatan, status },
+        { catatan, status, nomorUsulan: status === 1 ? kode : null },
         { where: { id } }
       );
       return res.status(200).json({ result });
@@ -203,6 +165,183 @@ module.exports = {
         message: "Terjadi kesalahan saat upload dokumen",
         error: error.message,
       });
+    }
+  },
+
+  getAllLaporanUsulanPegawai: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = limit * page;
+    try {
+      const result = await laporanUsulanPegawai.findAll({
+        limit,
+
+        offset,
+      });
+      const totalRows = await laporanUsulanPegawai.count({
+        limit,
+        offset,
+      });
+      const totalPage = Math.ceil(totalRows / limit);
+      return res.status(200).json({
+        success: true,
+        result,
+        page,
+        limit,
+        totalRows,
+        totalPage,
+      });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  getOneLaporanUsulanPegawai: async (req, res) => {
+    try {
+      const result = await laporanUsulanPegawai.findAll({
+        where: { status: "Buka" },
+        limit: 1,
+        order: [["createdAt", "DESC"]],
+      });
+
+      return res.status(200).json({
+        result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  postLaporanUsulanPegawai: async (req, res) => {
+    const { tanggalAwal, tanggalAkhir } = req.body;
+    try {
+      const result = await laporanUsulanPegawai.create({
+        tanggalAwal,
+        tanggalAkhir,
+        status: "Buka",
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  updateLaporanUsulanPegawai: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await laporanUsulanPegawai.update(
+        {
+          status: "Tutup",
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  updateLink: async (req, res) => {
+    const {
+      linkSertifikat,
+      id,
+      pangkatId,
+      golonganId,
+      pegawaiId,
+      tanggalTMT,
+      profesiLamaId,
+      unitKerjaLamaId,
+    } = req.body;
+    const transaction = await sequelize.transaction();
+
+    try {
+      // 1. Update link sertifikat di usulanPegawai
+      await usulanPegawai.update(
+        { linkSertifikat },
+        { where: { id }, transaction }
+      );
+
+      // 2. Update data pegawai
+      await pegawai.update(
+        { pangkatId, golonganId, tanggalTMT },
+        { where: { id: pegawaiId }, transaction }
+      );
+
+      await riwayatPegawai.create(
+        {
+          pegawaiId,
+          unitKerjaLamaId,
+          golonganId: parseInt(golonganId - 1),
+          profesiLamaId,
+          pangkatId: parseInt(pangkatId - 1),
+        },
+        transaction
+      );
+
+      // 3. Cari data usulanPegawai
+      const usulan = await usulanPegawai.findByPk(id);
+      if (!usulan) {
+        return res.status(404).json({ message: "Data usulan tidak ditemukan" });
+      }
+
+      // Daftar field file
+      const fileFields = [
+        "formulirUsulan",
+        "skCpns",
+        "skPns",
+        "PAK",
+        "skJafung",
+        "skp",
+        "skMutasi",
+        "STR",
+        "suratCuti",
+        "gelar",
+      ];
+
+      // 4. Hapus file-file lama
+      for (const field of fileFields) {
+        const filePath = usulan[field];
+        if (filePath) {
+          const fullPath = path.join(__dirname, `../public${filePath}`);
+          try {
+            if (fs.existsSync(fullPath)) {
+              fs.unlinkSync(fullPath);
+              console.log(`File ${filePath} berhasil dihapus`);
+            }
+          } catch (err) {
+            console.error(`Gagal hapus file ${filePath}:`, err.message);
+          }
+        }
+      }
+
+      // 5. Set semua kolom file jadi null
+      const updateObj = {};
+      fileFields.forEach((field) => (updateObj[field] = null));
+      await usulan.update(updateObj);
+      await transaction.commit();
+
+      return res.status(200).json({
+        success: true,
+        message:
+          "Data pegawai berhasil diupdate, semua file usulan dihapus dan field diset null",
+        pegawaiId,
+        usulanId: id,
+      });
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error updateLinkAndClearFiles:", err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat update & hapus file" });
     }
   },
 };

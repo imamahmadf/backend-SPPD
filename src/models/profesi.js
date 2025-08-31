@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "profesiId",
         as: "profesi",
       });
+
+      // Relasi dengan riwayat pegawai (profesi lama)
+      this.hasMany(models.riwayatPegawai, {
+        foreignKey: "profesiLamaId",
+        as: "riwayatPegawaiProfesiLama",
+      });
     }
   }
   profesi.init(
