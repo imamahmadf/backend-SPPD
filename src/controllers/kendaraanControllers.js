@@ -739,8 +739,8 @@ module.exports = {
       result.forEach((item, index) => {
         worksheet.addRow({
           no: index + 1,
-          plat: item?.nama,
-          jenis: `KT ${item?.nomor} ${item?.seri}`,
+          jenis: item.jenisKendaraan.jenis,
+          plat: `KT ${item?.nomor} ${item?.seri}`,
           merek: item?.merek || "-",
           warna: item?.warna || "-",
           stnk: item?.tgl_pkb || "-",

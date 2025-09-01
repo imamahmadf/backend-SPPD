@@ -233,20 +233,35 @@ module.exports = {
     }
   },
   updateLaporanUsulanPegawai: async (req, res) => {
+    const transaction = await sequelize.transaction();
     const { id } = req.params;
+
     try {
+      // update status laporanUsulanPegawai
       const result = await laporanUsulanPegawai.update(
-        {
-          status: "Tutup",
-        },
-        { where: { id } }
+        { status: "Tutup" },
+        { where: { id }, transaction } // transaction harus di sini
       );
+
+      // hapus semua data usulanPegawai
+      await usulanPegawai.destroy({
+        where: {}, // kosong artinya hapus semua
+        truncate: true, // reset auto increment juga kalau perlu
+        transaction,
+      });
+
+      // commit transaksi
+      await transaction.commit();
+
       return res.status(200).json({ result });
     } catch (err) {
+      await transaction.rollback(); // rollback kalau error
       console.error(err);
       return res
         .status(500)
-        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+        .json({
+          message: "Terjadi kesalahan saat mengupdate dan menghapus data",
+        });
     }
   },
 
@@ -264,32 +279,10 @@ module.exports = {
     const transaction = await sequelize.transaction();
 
     try {
-      // 1. Update link sertifikat di usulanPegawai
-      await usulanPegawai.update(
-        { linkSertifikat },
-        { where: { id }, transaction }
-      );
-
-      // 2. Update data pegawai
-      await pegawai.update(
-        { pangkatId, golonganId, tanggalTMT },
-        { where: { id: pegawaiId }, transaction }
-      );
-
-      await riwayatPegawai.create(
-        {
-          pegawaiId,
-          unitKerjaLamaId,
-          golonganId: parseInt(golonganId - 1),
-          profesiLamaId,
-          pangkatId: parseInt(pangkatId - 1),
-        },
-        transaction
-      );
-
-      // 3. Cari data usulanPegawai
-      const usulan = await usulanPegawai.findByPk(id);
+      // 1. Cari data usulanPegawai terlebih dahulu
+      const usulan = await usulanPegawai.findByPk(id, { transaction });
       if (!usulan) {
+        await transaction.rollback();
         return res.status(404).json({ message: "Data usulan tidak ditemukan" });
       }
 
@@ -307,7 +300,7 @@ module.exports = {
         "gelar",
       ];
 
-      // 4. Hapus file-file lama
+      // 2. Hapus file-file lama terlebih dahulu
       for (const field of fileFields) {
         const filePath = usulan[field];
         if (filePath) {
@@ -319,14 +312,40 @@ module.exports = {
             }
           } catch (err) {
             console.error(`Gagal hapus file ${filePath}:`, err.message);
+            // Continue with other operations even if file deletion fails
           }
         }
       }
 
-      // 5. Set semua kolom file jadi null
-      const updateObj = {};
+      // 3. Update link sertifikat dan set semua kolom file jadi null
+      const updateObj = { linkSertifikat };
       fileFields.forEach((field) => (updateObj[field] = null));
-      await usulan.update(updateObj);
+
+      await usulanPegawai.update(updateObj, { where: { id }, transaction });
+
+      // 4. Update data pegawai
+      await pegawai.update(
+        {
+          pangkatId: parseInt(pangkatId),
+          golonganId: parseInt(golonganId),
+          tanggalTMT,
+        },
+        { where: { id: pegawaiId }, transaction }
+      );
+
+      // 5. Create riwayat pegawai dengan nilai yang benar
+      await riwayatPegawai.create(
+        {
+          pegawaiId,
+          unitKerjaLamaId,
+          golonganId: parseInt(golonganId) - 1,
+          profesiLamaId,
+          pangkatId: parseInt(pangkatId) - 1,
+        },
+        { transaction } // Fixed: proper transaction parameter
+      );
+
+      // 6. Commit transaction setelah semua operasi berhasil
       await transaction.commit();
 
       return res.status(200).json({

@@ -18,6 +18,7 @@ const {
   statusPegawai,
   indukUnitKerja,
   usulanPegawai,
+  riwayatPegawai,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -311,6 +312,24 @@ module.exports = {
             model: daftarUnitKerja,
             as: "daftarUnitKerja",
             attributes: ["id", "unitKerja"],
+          },
+          {
+            model: riwayatPegawai,
+            include: [
+              { model: daftarGolongan, as: "golongan" },
+              { model: daftarPangkat, as: "pangkat" },
+              {
+                model: profesi,
+                as: "profesiLama",
+                attributes: ["nama", "id"],
+              },
+
+              {
+                model: daftarUnitKerja,
+                as: "unitKerjaLama",
+                attributes: ["id", "unitKerja"],
+              },
+            ],
           },
         ],
       });
