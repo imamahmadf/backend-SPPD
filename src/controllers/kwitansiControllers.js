@@ -35,7 +35,8 @@ const fs = require("fs");
 const path = require("path");
 const Docxtemplater = require("docxtemplater");
 const { exec } = require("child_process");
-
+const QRCode = require("qrcode");
+const ImageModule = require("docxtemplater-image-module-free");
 module.exports = {
   postRampung: async (req, res) => {
     const { personilId, item, qty, nilai, satuan, jenisId } = req.body;
@@ -431,13 +432,42 @@ module.exports = {
       const content = fs.readFileSync(templatePath, "binary");
 
       // Load file ke PizZip
+      // Generate QR Code (contoh: link validasi surat)
+      const qrDataUrl = await QRCode.toDataURL(
+        `https://pena.dinkes.paserkab.go.id/validasi/${id}`
+      );
+
+      // Konversi base64 ke buffer
+      function base64DataURLToArrayBuffer(dataURL) {
+        const base64Regex = /^data:image\/(png|jpg|jpeg);base64,/;
+        if (!base64Regex.test(dataURL)) {
+          throw new Error("Data URL bukan base64 image yang valid");
+        }
+        const stringBase64 = dataURL.replace(base64Regex, "");
+        return Buffer.from(stringBase64, "base64");
+      }
+
+      // Load file ke PizZip
       const zip = new PizZip(content);
 
-      // Inisialisasi Docxtemplater
+      // Setup image module
+      const imageOpts = {
+        getImage: function (tagValue) {
+          return base64DataURLToArrayBuffer(tagValue);
+        },
+        getSize: function () {
+          return [100, 100]; // ukuran QR Code (px)
+        },
+      };
+      const imageModule = new ImageModule(imageOpts);
+
+      // Inisialisasi Docxtemplater dengan imageModule
       const doc = new Docxtemplater(zip, {
         paragraphLoop: true,
         linebreaks: true,
+        modules: [imageModule],
       });
+      console.log("QR Code Length:", qrDataUrl.length);
 
       // Masukkan data ke dalam template
       doc.render({
@@ -468,7 +498,7 @@ module.exports = {
         tanggalPengajuan: formatTanggal(tanggalPengajuan),
         PPTKNama,
         PPTKNip,
-
+        qrCode: qrDataUrl,
         kodeRekening,
         total,
         terbilang,
@@ -678,7 +708,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-
+      console.log(qrDataUrl, "INI QRCODEEE");
       doc.render({
         bendaharaNama: dataBendahara.pegawai_bendahara.nama,
         bendaharaNip: dataBendahara.pegawai_bendahara.nip,
@@ -714,6 +744,7 @@ module.exports = {
         subKegiatan,
         jenisPerjalanan,
         Rill,
+        qrCode: qrDataUrl,
         tahun,
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
