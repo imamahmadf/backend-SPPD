@@ -71,7 +71,7 @@ module.exports = {
         subKegiatan,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
-      console.log(req.body.pegawai, "KODE KLASIFIKASI");
+      console.log(req.body.isNotaDinas, "TESTTT");
       const calculateDaysDifference = (startDate, endDate) => {
         const start = new Date(startDate);
         const end = new Date(endDate);
@@ -126,59 +126,63 @@ module.exports = {
         ];
         return months[date.getMonth()];
       };
-      console.log(dalamKota, perjalananKota);
+      // console.log(dalamKota, perjalananKota);
+      let nomorBaru;
+      if (isNotaDinas === 0 || isNotaDinas === 1) {
+        // Ambil satu data nomor surat berdasarkan id = 2
+        const dbNoSurat = await daftarNomorSurat.findOne({
+          where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
 
-      // Ambil satu data nomor surat berdasarkan id = 2
-      const dbNoSurat = await daftarNomorSurat.findOne({
-        where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
-        include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
+          transaction, // Letakkan dalam objek konfigurasi yang sama
+        });
 
-        transaction, // Letakkan dalam objek konfigurasi yang sama
-      });
+        // Pastikan dbNoSurat ditemukan sebelum digunakan
+        if (!dbNoSurat) {
+          throw new Error("Data nomor surat tidak ditemukan.");
+        }
 
-      // Pastikan dbNoSurat ditemukan sebelum digunakan
-      if (!dbNoSurat) {
-        throw new Error("Data nomor surat tidak ditemukan.");
+        // Update nomor loket
+        const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
+
+        const kode =
+          indukUnitKerjaFE.indukUnitKerja.kodeInduk === indukUnitKerjaFE.kode
+            ? indukUnitKerjaFE.kode
+            : indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+              "/" +
+              indukUnitKerjaFE.kode;
+
+        // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
+        nomorBaru = dbNoSurat.jenisSurat.nomorSurat
+          .replace(
+            "NOMOR",
+            indukUnitKerjaFE.indukUnitKerja.id == 1
+              ? "     "
+              : nomorLoket.toString()
+          )
+          .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
+          .replace("KODE", kode)
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
+
+        const resultSuratKeluar = await suratKeluar.create(
+          {
+            nomor: nomorBaru,
+            Perihal: jenis.jenis,
+            tanggalSurat: tanggalPengajuan,
+            tujuan: dataTtdSurTug.value.jabatan,
+            indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
+          },
+          transaction
+        );
+
+        // Update nomor loket ke database
+        await daftarNomorSurat.update(
+          { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
+          { where: { id: dbNoSurat.id }, transaction }
+        );
+      } else if (isNotaDinas === 2) {
+        nomorBaru = null;
       }
-
-      // Update nomor loket
-      const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
-
-      const kode =
-        indukUnitKerjaFE.indukUnitKerja.kodeInduk === indukUnitKerjaFE.kode
-          ? indukUnitKerjaFE.kode
-          : indukUnitKerjaFE.indukUnitKerja.kodeInduk +
-            "/" +
-            indukUnitKerjaFE.kode;
-
-      // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
-      const nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-        .replace(
-          "NOMOR",
-          indukUnitKerjaFE.indukUnitKerja.id == 1
-            ? "     "
-            : nomorLoket.toString()
-        )
-        .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
-        .replace("KODE", kode)
-        .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
-
-      const resultSuratKeluar = await suratKeluar.create(
-        {
-          nomor: nomorBaru,
-          Perihal: jenis.jenis,
-          tanggalSurat: tanggalPengajuan,
-          tujuan: dataTtdSurTug.value.jabatan,
-          indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
-        },
-        transaction
-      );
-
-      // Update nomor loket ke database
-      await daftarNomorSurat.update(
-        { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-        { where: { id: dbNoSurat.id }, transaction }
-      );
 
       // Ubah format tanggalPengajuan
       const formattedTanggalPengajuan = new Date(
@@ -195,7 +199,7 @@ module.exports = {
         {
           untuk,
           noNotaDinas: nomorBaru,
-          nomorSuratKeluarId: resultSuratKeluar.id,
+          nomorSuratKeluarId: isNotaDinas === 2 ? null : resultSuratKeluar.id,
           asal,
           tanggalPengajuan,
           bendaharaId: dataBendaharaId,
@@ -312,7 +316,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(dataKota, dalamKota, jenis);
+      // console.log(dataKota, dalamKota, jenis);
       doc.render({
         dataPegawai,
         tanggalPengajuan: formattedTanggalPengajuan,
@@ -392,7 +396,7 @@ module.exports = {
   },
   getSeedPerjalanan: async (req, res) => {
     const { indukUnitKerjaId, unitKerjaId } = req.query;
-    console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
+    // console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
 
     try {
       const resultSumberDana = await sumberDana.findAll({
@@ -442,7 +446,7 @@ module.exports = {
         ],
       });
 
-      console.log("Data yang diambil:", resultTtdSuratTugas);
+      // console.log("Data yang diambil:", resultTtdSuratTugas);
 
       const resultPelayananKesehatan = await pelayananKesehatan.findAll({});
 
@@ -546,7 +550,7 @@ module.exports = {
     // const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
     const time = "ASC";
     const offset = limit * page;
-    console.log(unitKerjaId, "INI UNIT KERJA");
+    // console.log(unitKerjaId, "INI UNIT KERJA");
     const whereConditionTempat = {};
 
     if (tanggalBerangkat) {
@@ -752,7 +756,7 @@ module.exports = {
         indukUnitKerjaFE,
         ttdSurtTugKode,
       } = req.body;
-      console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
+      // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -881,7 +885,7 @@ module.exports = {
           )
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
-        console.log(dbNoSurTug.id, "NOMOR SURAT");
+        // console.log(dbNoSurTug.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
@@ -904,7 +908,7 @@ module.exports = {
           });
           let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
 
-          console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+          // console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
 
           const codeNoSPD =
             ttdSurtTugKode === indukUnitKerjaFE.kode
@@ -1022,7 +1026,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(nomorBaru);
+      // console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
         jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
@@ -1576,7 +1580,7 @@ module.exports = {
         indukUnitKerjaFE,
         ttdSurtTugKode,
       } = req.body;
-      console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
+      // console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
 
       const getRomanMonth = (date) => {
         const months = [
@@ -1704,7 +1708,7 @@ module.exports = {
 
         let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
 
-        console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+        // console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
 
         const codeNoSPD =
           ttdSurtTugKode === indukUnitKerjaFE.kode
@@ -1765,7 +1769,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(nomorBaru);
+      // console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
         // tempat1: jenis.id === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
@@ -2020,7 +2024,7 @@ module.exports = {
     }
   },
   cetakNotaDinas: async (req, res) => {
-    console.log(req.body);
+    console.log(req.body.isNotaDinas, "CEK NOTA DINAS");
     const transaction = await sequelize.transaction();
     try {
       const {
@@ -2100,7 +2104,7 @@ module.exports = {
         ];
         return months[date.getMonth()];
       };
-      console.log(dalamKota, perjalananKota);
+      // console.log(dalamKota, perjalananKota);
 
       // Ambil satu data nomor surat berdasarkan id = 2
       const dbNoSurat = await daftarNomorSurat.findOne({
@@ -2208,7 +2212,7 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(dataKota, dalamKota, jenis);
+      // console.log(dataKota, dalamKota, jenis);
       doc.render({
         dataPegawai,
         tanggalPengajuan: formattedTanggalPengajuan,
@@ -2285,7 +2289,7 @@ module.exports = {
     try {
       const { untuk, subKegiatanId } = req.body;
       const id = req.params.id;
-      console.log(req.body);
+      // console.log(req.body);
       const result = await perjalanan.update(
         {
           untuk,
