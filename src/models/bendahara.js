@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.sumberDana, {
         foreignKey: "sumberDanaId",
       });
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "bendaharaId",
+      });
     }
   }
   bendahara.init(

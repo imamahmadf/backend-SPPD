@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "pegawaiId",
         as: "pegawai_KPA",
       });
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "KPAId",
+      });
       // define association here
     }
   }

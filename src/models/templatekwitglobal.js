@@ -1,29 +1,27 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class jenisPerjalanan extends Model {
+  class templateKwitGlobal extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.perjalanan);
+      // define association here
+
       this.hasMany(models.kwitGlobal);
-      this.belongsTo(models.tipePerjalanan);
-      // this.hasMany(models.jenisTipePerjalanan);
-      this.hasMany(models.sumberDanaJenisPerjalanan);
     }
   }
-  jenisPerjalanan.init(
+  templateKwitGlobal.init(
     {
-      jenis: DataTypes.STRING,
-      kodeRekening: DataTypes.STRING,
+      nama: DataTypes.STRING,
+      dokumen: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: "jenisPerjalanan",
+      modelName: "templateKwitGlobal",
     }
   );
-  return jenisPerjalanan;
+  return templateKwitGlobal;
 };

@@ -1,0 +1,16 @@
+const express = require("express");
+const { kwitGlobalControllers } = require("../controllers");
+
+const routers = express.Router();
+
+routers.get("/get", kwitGlobalControllers.getKwitGlobal);
+routers.get("/get/all", kwitGlobalControllers.getAllKwitGlobal);
+routers.post("/post", kwitGlobalControllers.postKwitGlobal);
+routers.get("/get/detail/:id", kwitGlobalControllers.getPerjalananKwitGlobal);
+routers.get("/get/all-perjalanan/:id", kwitGlobalControllers.getAllPerjalanan);
+routers.post("/post/add-perjalanan", kwitGlobalControllers.addPerjalanan);
+routers.post("/post/cetak", kwitGlobalControllers.cetakKwitansi);
+routers.post("/post/ajukan/:id", kwitGlobalControllers.ajukan);
+routers.post("/post/verifikasi/:id", kwitGlobalControllers.verifikasi);
+
+module.exports = routers;

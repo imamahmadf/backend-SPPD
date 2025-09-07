@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
       });
 
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "unitKerjaId",
+      });
+
       this.belongsTo(models.profile, {
         foreignKey: "unitKerjaId",
         as: "unitKerja_profile",

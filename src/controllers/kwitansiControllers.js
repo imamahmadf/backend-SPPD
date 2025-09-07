@@ -29,12 +29,12 @@ const {
 
   sumberDana,
 } = require("../models");
-
 const { Op, where } = require("sequelize");
 const PizZip = require("pizzip");
 const fs = require("fs");
 const path = require("path");
 const Docxtemplater = require("docxtemplater");
+const { exec } = require("child_process");
 
 module.exports = {
   postRampung: async (req, res) => {
@@ -526,99 +526,286 @@ module.exports = {
       });
     }
   },
+
   cetakKwitansiPDF: async (req, res) => {
-    cetakKwitansi: async (req, res) => {
-      try {
-        const {
-          pegawaiNama,
-          pegawaiNip,
-          pegawaiJabatan,
-          PPTKNama,
-          PPTKNip,
-          KPANama,
-          KPANip,
-          KPAJabatan,
-          untuk,
-          rincianBPD,
-          kodeRekening,
-          indukUnitKerja,
-          tanggalPengajuan,
-          totalDurasi,
-          tempat,
-          jenis,
-          jenisPerjalanan,
-          dataBendahara,
-          subKegiatan,
-          tahun,
-          templateId,
-        } = req.body;
+    // console.log(req.body.rincianBPD, "DRI DEPAN");
+    const {
+      id,
+      nomorSPD,
+      nomorST,
+      pegawaiNama,
+      pegawaiNip,
+      pegawaiJabatan,
+      PPTKNama,
+      KPANama,
+      KPANip,
+      PPTKNip,
+      untuk,
+      rincianBPD,
+      kodeRekening,
+      indukUnitKerja,
+      tanggalPengajuan,
+      totalDurasi,
+      tempat,
+      jenis,
+      jenisPerjalanan,
+      dataBendahara,
+      subKegiatan,
+      KPAJabatan,
+      tahun,
+      templateId,
+    } = req.body;
 
-        // cari template word dari DB
-        const resultTemplate = await templateKeuangan.findOne({
-          where: { id: templateId },
-          attributes: ["id", "template"],
-        });
+    const formatTanggal = (tanggal) =>
+      new Date(tanggal).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
 
-        if (!resultTemplate) {
-          return res.status(404).json({ message: "Template tidak ditemukan" });
+    const formatRupiah = (angka) =>
+      new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(angka);
+
+    function formatTerbilang(angka) {
+      const satuan = [
+        "",
+        "Satu",
+        "Dua",
+        "Tiga",
+        "Empat",
+        "Lima",
+        "Enam",
+        "Tujuh",
+        "Delapan",
+        "Sembilan",
+        "Sepuluh",
+        "Sebelas",
+      ];
+
+      if (angka < 12) return satuan[angka];
+      else if (angka < 20) return formatTerbilang(angka - 10) + " Belas";
+      else if (angka < 100)
+        return (
+          formatTerbilang(Math.floor(angka / 10)) +
+          " Puluh " +
+          formatTerbilang(angka % 10)
+        );
+      else if (angka < 200) return "Seratus " + formatTerbilang(angka - 100);
+      else if (angka < 1000)
+        return (
+          formatTerbilang(Math.floor(angka / 100)) +
+          " Ratus " +
+          formatTerbilang(angka % 100)
+        );
+      else if (angka < 2000) return "Seribu " + formatTerbilang(angka - 1000);
+      else if (angka < 1000000)
+        return (
+          formatTerbilang(Math.floor(angka / 1000)) +
+          " Ribu " +
+          formatTerbilang(angka % 1000)
+        );
+      else if (angka < 1000000000)
+        return (
+          formatTerbilang(Math.floor(angka / 1000000)) +
+          " Juta " +
+          formatTerbilang(angka % 1000000)
+        );
+      else if (angka < 1000000000000)
+        return (
+          formatTerbilang(Math.floor(angka / 1000000000)) +
+          " Milyar " +
+          formatTerbilang(angka % 1000000000)
+        );
+    }
+
+    const BPD = rincianBPD.map((item, index) => ({
+      no: index + 1,
+      jenis: item.jenisRincianBPD.jenis,
+      satuan: item.satuan,
+      item: item.item,
+      qty: item.qty,
+      harga: formatRupiah(item.nilai || 0),
+      jumlah: formatRupiah(item.qty * item.nilai || 0),
+    }));
+
+    const Rill = rincianBPD
+      .filter((item) => item.jenisId === 5)
+      .flatMap((item) => item.rills)
+      .map((item, index) => ({
+        ...item,
+        nilai: formatRupiah(item.nilai),
+        no: index + 1,
+      }));
+
+    const totalRill = formatRupiah(
+      Rill.reduce(
+        (sum, item) =>
+          sum +
+          parseFloat(item.nilai.replace(/[^0-9,-]+/g, "").replace(",", ".")),
+        0
+      )
+    );
+
+    const total = formatRupiah(
+      rincianBPD.reduce((sum, item) => sum + (item.qty * item.nilai || 0), 0)
+    );
+
+    const terbilang =
+      formatTerbilang(
+        rincianBPD.reduce((sum, item) => sum + (item.qty * item.nilai || 0), 0)
+      ) + " Rupiah";
+
+    try {
+      const resultTemplate = await templateKeuangan.findOne({
+        where: { id: templateId },
+        attributes: ["id", "template"],
+      });
+
+      const templatePath = path.join(
+        __dirname,
+        "../public",
+        resultTemplate.template
+      );
+
+      const content = fs.readFileSync(templatePath, "binary");
+      const zip = new PizZip(content);
+
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+
+      doc.render({
+        bendaharaNama: dataBendahara.pegawai_bendahara.nama,
+        bendaharaNip: dataBendahara.pegawai_bendahara.nip,
+        bendaharaJabatan: dataBendahara.jabatan,
+        untukPembayaran: dataBendahara.sumberDana.untukPembayaran || "",
+        kalimat1: dataBendahara.sumberDana.kalimat1 || "",
+        kalimat2: dataBendahara.sumberDana.kalimat2 || "",
+        KPAJabatan,
+        indukUnitKerja,
+        nomorSurat: totalDurasi > 7 ? nomorSPD : nomorST,
+        surat: totalDurasi > 7 ? "SPD" : "ND",
+        suratRill:
+          totalDurasi > 7
+            ? "Surat Perjalanan Dinas (SPD) "
+            : "Surat Nota Dinas (ND)",
+        untuk,
+        tanggalBerangkat: "",
+        tujuan: "",
+        jumlah: "",
+        totalRill,
+        pegawaiNama,
+        pegawaiNip,
+        pegawaiJabatan,
+        KPANama,
+        KPANip,
+        tanggalPengajuan: formatTanggal(tanggalPengajuan),
+        PPTKNama,
+        PPTKNip,
+        kodeRekening,
+        total,
+        terbilang,
+        BPD,
+        subKegiatan,
+        jenisPerjalanan,
+        Rill,
+        tahun,
+        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempatSpd2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota.nama
+            : "",
+        tempatSpd3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "",
+      });
+
+      // === Simpan dulu ke DOCX ===
+      const buffer = doc.getZip().generate({ type: "nodebuffer" });
+      const outputDocx = path.join(
+        __dirname,
+        "../public/output",
+        `SPPD_${Date.now()}.docx`
+      );
+      fs.writeFileSync(outputDocx, buffer);
+
+      // === Konversi DOCX -> PDF ===
+      const outputPdf = outputDocx.replace(".docx", ".pdf");
+
+      // Konversi DOCX ke PDF menggunakan LibreOffice
+      const isWindows = process.platform === "win32";
+      let convertCommand;
+
+      if (isWindows) {
+        // Coba beberapa kemungkinan path LibreOffice di Windows
+        const possiblePaths = [
+          '"C:\\Program Files\\LibreOffice\\program\\soffice.exe"',
+          '"C:\\Program Files (x86)\\LibreOffice\\program\\soffice.exe"',
+          "soffice",
+        ];
+
+        convertCommand = `${
+          possiblePaths[0]
+        } --headless --convert-to pdf "${outputDocx}" --outdir "${path.dirname(
+          outputDocx
+        )}"`;
+      } else {
+        // Untuk Linux/Mac
+        convertCommand = `soffice --headless --convert-to pdf "${outputDocx}" --outdir "${path.dirname(
+          outputDocx
+        )}"`;
+      }
+
+      exec(convertCommand, (err) => {
+        if (err) {
+          console.error("Konversi PDF gagal:", err);
+          // Fallback: kirim file DOCX jika konversi PDF gagal
+          console.log("Mengirim file DOCX sebagai fallback...");
+          res.download(outputDocx, "kwitansi.docx", (err) => {
+            if (err) {
+              console.error("Error mengirim file:", err);
+              res.status(500).send("Error mengirim file");
+            }
+            // Hapus file sementara setelah dikirim
+            fs.unlinkSync(outputDocx);
+          });
+          return;
         }
 
-        const templatePath = path.join(
-          __dirname,
-          "../public",
-          resultTemplate.template
-        );
-
-        // load template docx
-        const content = fs.readFileSync(templatePath, "binary");
-        const zip = new PizZip(content);
-        const doc = new Docxtemplater(zip, {
-          paragraphLoop: true,
-          linebreaks: true,
+        // Konversi berhasil, kirim PDF
+        res.download(outputPdf, "kwitansi.pdf", (err) => {
+          if (err) {
+            console.error("Error mengirim file:", err);
+            res.status(500).send("Error mengirim file");
+          }
+          // Hapus file sementara setelah dikirim
+          fs.unlinkSync(outputDocx);
+          fs.unlinkSync(outputPdf);
         });
-
-        // render data ke docx
-        doc.render({
-          pegawaiNama,
-          pegawaiNip,
-          pegawaiJabatan,
-          KPANama,
-          KPANip,
-          PPTKNama,
-          PPTKNip,
-          KPAJabatan,
-          indukUnitKerja,
-          untuk,
-          kodeRekening,
-          tanggalPengajuan,
-          totalDurasi,
-          jenisPerjalanan,
-          subKegiatan,
-          tahun,
-          bendaharaNama: dataBendahara?.pegawai_bendahara?.nama,
-          bendaharaNip: dataBendahara?.pegawai_bendahara?.nip,
-          bendaharaJabatan: dataBendahara?.jabatan,
-        });
-
-        // hasil docx ke buffer
-        const bufferDocx = doc.getZip().generate({ type: "nodebuffer" });
-
-        // convert docx -> pdf
-        const pdfBuffer = await libreConvert(bufferDocx, ".pdf", undefined);
-
-        // kirim langsung PDF ke frontend
-        res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", "inline; filename=kwitansi.pdf");
-        res.send(pdfBuffer);
-      } catch (err) {
-        console.error("Error cetak kwitansi:", err);
-        return res.status(500).json({
-          message: "Gagal membuat PDF",
-          error: err.toString(),
-        });
-      }
-    };
+      });
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
   },
+
   cetakKwitansiOtomatis: async (req, res) => {
     const transaction = await sequelize.transaction();
     const {

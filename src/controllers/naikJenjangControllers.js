@@ -11,17 +11,99 @@ const {
   statusPegawai,
   laporanUsulanPegawai,
   sequelize,
-
   riwayatPegawai,
-  usulanPegawai,
-  usulanNaikJenjang,
+  indukUnitKerja,
+  user,
+  userRole,
+  role,
+  profile,
+  usulanNaikJenjang, // ubah dari usulanPegawai ke usulanNaikJenjang
 } = require("../models");
 const fs = require("fs");
 const { Op } = require("sequelize");
 const path = require("path");
 
 module.exports = {
-  postNaikGOlongan: async (req, res) => {
+  getProfile: async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const result = await profile.findOne({
+        attributes: ["id", "nama"],
+        where: { userId },
+        include: [
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitkerja", "kode"],
+            as: "unitKerja_profile",
+            include: [
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "indukUnitKerja", "kodeInduk"],
+              },
+            ],
+          },
+          {
+            model: user,
+            attributes: ["id", "namaPengguna"],
+            include: [
+              {
+                model: userRole,
+                attributes: ["id"],
+                include: [{ model: role, attributes: ["nama"] }],
+              },
+            ],
+          },
+          {
+            model: pegawai,
+            attributes: [
+              "id",
+              "nama",
+              "pendidikan",
+              "nip",
+              "jabatan",
+              "tanggalTMT",
+            ],
+            include: [
+              {
+                model: daftarTingkatan,
+                as: "daftarTingkatan",
+              },
+              { model: daftarGolongan, as: "daftarGolongan" },
+              { model: daftarPangkat, as: "daftarPangkat" },
+              {
+                model: profesi,
+                as: "profesi",
+                attributes: ["nama", "id"],
+              },
+              {
+                model: statusPegawai,
+                as: "statusPegawai",
+                attributes: ["status", "id"],
+              },
+              {
+                model: daftarUnitKerja,
+                as: "daftarUnitKerja",
+                attributes: ["id", "unitKerja"],
+              },
+
+              {
+                model: usulanNaikJenjang,
+                as: "usulanNaikJenjangs", // Tambahkan alias yang sesuai dengan relasi di model pegawai
+              },
+            ],
+          },
+        ],
+      });
+      return res
+        .status(200)
+        .json({ result, message: "Data profile berhasil diambiccl" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postNaikJenjang: async (req, res) => {
     const { pegawaiId } = req.body;
     try {
       // req.files adalah array
@@ -34,24 +116,25 @@ module.exports = {
         filePaths[file.fieldname] = `/pegawai/${file.filename}`;
       });
 
-      // Mapping nama field dari frontend ke field DB
+      // Mapping nama field dari frontend ke field DB sesuai model usulanNaikJenjang
       const dataToSave = {
         pegawaiId,
-        formulirUsulan: filePaths["formulirUsulan"],
-        skCpns: filePaths["skCpns"],
-        skPns: filePaths["skPns"],
-        PAK: filePaths["PAK"],
-        skJafung: filePaths["skJafung"],
-        skp: filePaths["skp"],
-        skMutasi: filePaths["skMutasi"],
+        formulir: filePaths["formulir"],
+        ukom: filePaths["ukom"],
+        SKPangkat: filePaths["SKPangkat"],
+        SKMutasi: filePaths["SKMutasi"],
+        SKJafung: filePaths["SKJafung"],
+        SKP: filePaths["SKP"],
         STR: filePaths["STR"],
-        suratCuti: filePaths["suratCuti"],
-        status: 0,
+        SIP: filePaths["SIP"],
+        rekom: filePaths["rekom"],
+        petaJabatan: filePaths["petaJabatan"],
+        status: "diusulkan", // ubah dari 0 ke "diusulkan"
         // tambahkan field lain jika ada
       };
       console.log(filePaths, "CEK FILE");
       // Simpan ke database
-      const result = await usulanPegawai.create(dataToSave);
+      const result = await usulanNaikJenjang.create(dataToSave);
 
       res.status(200).json({
         message: "File berhasil diupload dan path disimpan di database",
@@ -67,11 +150,12 @@ module.exports = {
     try {
       const id = req.params.id;
 
-      const result = await usulanPegawai.findOne({
+      const result = await usulanNaikJenjang.findOne({
         where: { pegawaiId: id },
         include: [
           {
             model: pegawai,
+            as: "pegawai",
             include: [
               {
                 model: daftarTingkatan,
@@ -108,8 +192,8 @@ module.exports = {
   updateStatus: async (req, res) => {
     const { id, catatan, status } = req.body;
 
-    //2 ditolak, 1 diterima
-    console.log(status, "ini statusnya");
+    // "ditolak" atau "diterima"
+    console.log(req.body, "ini statusnya");
 
     const generateRandomCode = () => {
       const random = Math.random().toString(36).substring(2, 6); // random 4 karakter
@@ -118,8 +202,8 @@ module.exports = {
     };
     const kode = generateRandomCode();
     try {
-      const result = await usulanPegawai.update(
-        { catatan, status, nomorUsulan: status === 1 ? kode : null },
+      const result = await usulanNaikJenjang.update(
+        { catatan, status, nomorUsulan: status === "diterima" ? kode : null },
         { where: { id } }
       );
       return res.status(200).json({ result });
@@ -155,7 +239,10 @@ module.exports = {
       const filePath = `/pegawai/${uploadedFile.filename}`;
 
       // Update field dinamis berdasarkan field_name
-      await usulanPegawai.update({ [field_name]: filePath }, { where: { id } });
+      await usulanNaikJenjang.update(
+        { [field_name]: filePath },
+        { where: { id } }
+      );
 
       res.json({
         message: "Dokumen berhasil diupdate",
@@ -245,17 +332,13 @@ module.exports = {
         { where: { id }, transaction } // transaction harus di sini
       );
 
-      // hapus semua data usulanPegawai
-      await usulanPegawai.destroy({
-        where: {}, // kosong artinya hapus semua
-        truncate: true, // reset auto increment juga kalau perlu
-        transaction,
-      });
+      // hapus semua data usulanNaikJenjang
       await usulanNaikJenjang.destroy({
         where: {}, // kosong artinya hapus semua
         truncate: true, // reset auto increment juga kalau perlu
         transaction,
       });
+
       // commit transaksi
       await transaction.commit();
 
@@ -283,25 +366,25 @@ module.exports = {
     const transaction = await sequelize.transaction();
 
     try {
-      // 1. Cari data usulanPegawai terlebih dahulu
-      const usulan = await usulanPegawai.findByPk(id, { transaction });
+      // 1. Cari data usulanNaikJenjang terlebih dahulu
+      const usulan = await usulanNaikJenjang.findByPk(id, { transaction });
       if (!usulan) {
         await transaction.rollback();
         return res.status(404).json({ message: "Data usulan tidak ditemukan" });
       }
 
-      // Daftar field file
+      // Daftar field file sesuai model usulanNaikJenjang
       const fileFields = [
-        "formulirUsulan",
-        "skCpns",
-        "skPns",
-        "PAK",
-        "skJafung",
-        "skp",
-        "skMutasi",
+        "formulir",
+        "ukom",
+        "SKPangkat",
+        "SKMutasi",
+        "SKJafung",
+        "SKP",
         "STR",
-        "suratCuti",
-        "gelar",
+        "SIP",
+        "rekom",
+        "petaJabatan",
       ];
 
       // 2. Hapus file-file lama terlebih dahulu
@@ -325,7 +408,7 @@ module.exports = {
       const updateObj = { linkSertifikat };
       fileFields.forEach((field) => (updateObj[field] = null));
 
-      await usulanPegawai.update(updateObj, { where: { id }, transaction });
+      await usulanNaikJenjang.update(updateObj, { where: { id }, transaction });
 
       // 4. Update data pegawai
       await pegawai.update(
@@ -365,6 +448,102 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat update & hapus file" });
+    }
+  },
+
+  getUsulan: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const golonganId = parseInt(req.query.golonganId);
+    const pangkatId = parseInt(req.query.pangkatId);
+    const search = req.query.search_query || "";
+    const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const offset = limit * page;
+    console.log(req.query, "CEK INI");
+    const whereCondition = {
+      nama: { [Op.like]: "%" + search + "%" },
+    };
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+    if (pangkatId) {
+      whereCondition.pangkatId = pangkatId;
+    }
+    if (golonganId) {
+      whereCondition.golonganId = golonganId;
+    }
+
+    try {
+      const result = await usulanNaikJenjang.findAll({
+        offset,
+        limit,
+        attributes: ["id", "nomorUsulan", "catatan"],
+        include: [
+          {
+            model: pegawai,
+            as: "pegawai",
+            attributes: [
+              "id",
+              "nama",
+              "pendidikan",
+              "nip",
+              "jabatan",
+              "tanggalTMT",
+            ],
+            where: whereCondition,
+            order: [["nama", "ASC"]],
+            include: [
+              {
+                model: daftarGolongan,
+                attributes: ["golongan", "id"],
+                as: "daftarGolongan",
+              },
+              {
+                model: daftarPangkat,
+                attributes: ["pangkat", "id"],
+                as: "daftarPangkat",
+              },
+              {
+                model: profesi,
+                as: "profesi",
+                attributes: ["nama", "id"],
+              },
+
+              {
+                model: daftarUnitKerja,
+                as: "daftarUnitKerja",
+                attributes: ["id", "unitKerja"],
+              },
+            ],
+          },
+        ],
+      });
+
+      const totalRows = await usulanNaikJenjang.count({
+        offset,
+        limit,
+
+        include: [
+          {
+            model: pegawai,
+            as: "pegawai",
+            attributes: ["id"],
+            where: whereCondition,
+          },
+        ],
+      });
+      const totalPage = Math.ceil(totalRows / limit);
+
+      return res
+        .status(200)
+        .json({ result, page, limit, totalRows, totalPage });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
 };

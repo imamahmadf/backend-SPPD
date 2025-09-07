@@ -9,6 +9,7 @@ const {
   perjalanan,
   role,
   profile,
+  templateKwitGlobal,
 } = require("../models");
 const fs = require("fs");
 module.exports = {
@@ -17,7 +18,9 @@ module.exports = {
       const result = await templateKeuangan.findAll({
         attributes: ["id", "nama", "template"],
       });
-      return res.status(200).json({ result });
+
+      const resultGlobal = await templateKwitGlobal.findAll({});
+      return res.status(200).json({ result, resultGlobal });
     } catch (err) {
       console.error(err);
       return res
@@ -40,6 +43,27 @@ module.exports = {
     try {
       const result = await templateAset.findAll({});
       return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  addTemplateKeuanganGlobal: async (req, res) => {
+    const { nama } = req.body;
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filePath = `/template-keuangan/${req.file.filename}`;
+      await templateKwitGlobal.create({
+        dokumen: filePath,
+        nama,
+      });
+      return res.status(200).json({ message: "template berhasil diupload" });
     } catch (err) {
       console.error(err);
       return res
@@ -322,6 +346,29 @@ module.exports = {
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
+
+  deleteTempateGlobal: async (req, res) => {
+    const id = req.params.id;
+    const filename = req.body.fileName;
+    try {
+      const result = await templateKwitGlobal.destroy({ where: { id } });
+
+      const path = `${__dirname}/../public${filename}`;
+      fs.unlink(path, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
   uploadUndangan: async (req, res) => {
     const id = parseInt(req.body.id);
     console.log(req.body);

@@ -35,6 +35,7 @@ const {
   rill,
   rincianBPD,
   sumberDanaJenisPerjalanan,
+  kwitGlobal,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -1024,8 +1025,6 @@ module.exports = {
       console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
-        // tempat1: jenis.id === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
-        // tempat2: tempat[1]?.tempat || "",
         jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
@@ -1285,6 +1284,7 @@ module.exports = {
           "tanggalPengajuan",
           "noSuratTugas",
           "undangan",
+          "kwitGlobalId",
         ],
         include: [
           {

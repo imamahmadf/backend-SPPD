@@ -13,6 +13,18 @@ router.post(
   }).single("file"),
   templateControllers.addTemplateKeuangan
 );
+
+router.post(
+  "/upload-keuangan-global",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-KEUANGAN-GLOBAL",
+  }).single("file"),
+  templateControllers.addTemplateKeuanganGlobal
+);
+
 router.post(
   "/upload",
   fileUploader({
@@ -66,5 +78,9 @@ router.get("/download-undangan", templateControllers.downloadUndangan);
 router.post(
   "/delete/template-keuangan/:id",
   templateControllers.deleteTempateKeuangan
+);
+router.post(
+  "/delete/template-keuangan-global/:id",
+  templateControllers.deleteTempateGlobal
 );
 module.exports = router;

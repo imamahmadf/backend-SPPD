@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.riwayatPegawai);
       this.hasMany(models.profile);
       this.hasMany(models.usulanPegawai);
+      this.hasMany(models.usulanNaikJenjang, {
+        foreignKey: "pegawaiId",
+        as: "usulanNaikJenjangs",
+      });
       this.hasMany(models.kendaraan);
       this.hasMany(models.pengurusBarang);
       this.hasMany(models.mutasiKendaraan, {
@@ -67,6 +71,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.bendahara, {
         foreignKey: "pegawaiId",
         as: "pegawai_bendahara",
+      });
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "pegawaiId",
       });
     }
   }

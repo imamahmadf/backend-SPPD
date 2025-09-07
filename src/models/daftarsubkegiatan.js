@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.anggaran, {
         foreignKey: "subKegiatanId",
       });
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "subKegiatanId",
+      });
     }
   }
   daftarSubKegiatan.init(
