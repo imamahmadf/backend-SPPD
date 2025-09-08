@@ -25,6 +25,7 @@ const suratPesananRouter = require("./suratPesananRouter");
 const bangunanRouter = require("./bangunanRouter");
 const naikJenjangRouter = require("./naikJenjangRouter");
 const kwitGlobalRouter = require("./kwitGlobalRouter");
+const verifikasiRouter = require("./verifikasiRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -53,4 +54,5 @@ module.exports = {
   bangunanRouter,
   naikJenjangRouter,
   kwitGlobalRouter,
+  verifikasiRouter,
 };

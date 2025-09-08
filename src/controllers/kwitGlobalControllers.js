@@ -18,12 +18,24 @@ const {
   rill,
   tempat,
   dalamKota,
+  PPTK,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
 const path = require("path");
 const Docxtemplater = require("docxtemplater");
 const { Op } = require("sequelize");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const QRCode = require("qrcode");
+const ImageModule = require("docxtemplater-image-module-free");
+let sizeOf;
+try {
+  sizeOf = require("image-size");
+} catch (_) {
+  sizeOf = null;
+}
+const { env } = require("../config");
 module.exports = {
   cetakKwitansi: async (req, res) => {
     const {
@@ -37,6 +49,7 @@ module.exports = {
       jenisPerjalananFE,
       totalFE,
       indukUnitKerjaFE,
+      verifikasi,
     } = req.body;
 
     const formatRupiah = (angka) =>
@@ -105,10 +118,34 @@ module.exports = {
     try {
       const terbilang = formatTerbilang(totalFE) + "Rupiah";
 
+      // Jika verifikasi null/undefined, ambil dari DB; jika masih null, generate dan simpan
+      let verifikasiCode = verifikasi;
+
+      if (!verifikasiCode) {
+        const randomCode = (
+          Date.now().toString(36) + Math.random().toString(36).substring(2, 8)
+        ).toUpperCase();
+        await kwitGlobal.update(
+          { verifikasi: randomCode },
+          { where: { id: kwitansiGlobalId } }
+        );
+        verifikasiCode = randomCode;
+      }
+
       const resultTemplate = await templateKwitGlobal.findOne({
         where: { id: templateId },
         attributes: ["id", "dokumen"],
       });
+
+      // Load file ke PizZip
+      // Generate QR Code (contoh: link validasi surat)
+      const isProduction = env.NODE_ENV === "production";
+      const baseUrl = isProduction
+        ? env.APP_BASE_URL_PROD || "https://pena.dinkes.paserkab.go.id"
+        : env.APP_BASE_URL_DEV || "http://localhost:5173";
+      const qrDataUrl = await QRCode.toDataURL(
+        `${baseUrl}/validasi/${verifikasiCode}`
+      );
       // Path file template
       const templatePath = path.join(
         __dirname,
@@ -118,15 +155,76 @@ module.exports = {
 
       // Baca file template
       const content = fs.readFileSync(templatePath, "binary");
+      function base64DataURLToArrayBuffer(dataURL) {
+        const base64Regex = /^data:image\/(png|jpg|jpeg);base64,/;
+        if (!base64Regex.test(dataURL)) {
+          throw new Error("Data URL bukan base64 image yang valid");
+        }
+        const stringBase64 = dataURL.replace(base64Regex, "");
+        return Buffer.from(stringBase64, "base64");
+      }
 
+      const imageOpts = {
+        getImage: function (tagValue) {
+          if (Buffer.isBuffer(tagValue)) return tagValue;
+          if (
+            typeof tagValue === "string" &&
+            tagValue.startsWith("data:image/")
+          ) {
+            return base64DataURLToArrayBuffer(tagValue);
+          }
+          return tagValue;
+        },
+        getSize: function (img, tagValue, tagName) {
+          if (tagName === "foto") {
+            try {
+              const pageWidthPx = 600; // lebar efektif A4 di Word
+              const margin = 40; // total margin kiri + kanan (px)
+              const targetWidthPx = pageWidthPx - margin;
+
+              let buffer = null;
+              if (Buffer.isBuffer(tagValue)) buffer = tagValue;
+              else if (
+                typeof tagValue === "string" &&
+                tagValue.startsWith("data:image/")
+              ) {
+                const base64 = tagValue.split(",")[1];
+                buffer = Buffer.from(base64, "base64");
+              }
+
+              if (buffer && sizeOf) {
+                const dim = sizeOf(buffer);
+                if (dim?.width && dim?.height) {
+                  const ratio = targetWidthPx / dim.width;
+                  const newWidth = targetWidthPx;
+                  const newHeight = Math.round(dim.height * ratio);
+
+                  return [newWidth, newHeight];
+                }
+              }
+
+              // fallback
+              return [pageWidthPx - margin, 800];
+            } catch (_) {
+              return [560, 800]; // fallback dengan margin
+            }
+          }
+
+          // default untuk gambar lain (mis. qrCode)
+          return [100, 100];
+        },
+      };
+      const imageModule = new ImageModule(imageOpts);
       // Load file ke PizZip
       const zip = new PizZip(content);
 
-      // Inisialisasi Docxtemplater
+      // Inisialisasi Docxtemplater dengan imageModule
       const doc = new Docxtemplater(zip, {
         paragraphLoop: true,
         linebreaks: true,
+        modules: [imageModule],
       });
+      console.log("QR Code Length:", qrDataUrl.length);
 
       doc.render({
         bendaharaNama: bendaharaFE.pegawai_bendahara.nama,
@@ -136,7 +234,7 @@ module.exports = {
         data,
         KPAJabatan: KPAFE.jabatan,
         indukUnitKerja: indukUnitKerjaFE,
-
+        qrCode: qrDataUrl,
         tanggalBerangkat: "",
         tujuan: "",
         jumlah: "",
@@ -223,6 +321,20 @@ module.exports = {
               },
             ],
           },
+
+          {
+            model: PPTK,
+            as: "PPTK",
+            attributes: ["id", "jabatan"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_PPTK",
+              },
+            ],
+          },
+
           {
             model: bendahara,
             as: "bendahara",
@@ -273,6 +385,11 @@ module.exports = {
       });
       const resultTemplate = await templateKwitGlobal.findAll({});
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
+      const resultPPTK = await PPTK.findAll({
+        where: {
+          unitKerjaId,
+        },
+      });
       return res.status(200).json({
         result,
         resultKPA,
@@ -280,6 +397,7 @@ module.exports = {
         resultJenisPerjalanan,
         resultTemplate,
         resultDaftarSubKegiatan,
+        resultPPTK,
         page,
         limit,
         totalRows,

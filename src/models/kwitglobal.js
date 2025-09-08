@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "KPAId",
         as: "KPA",
       });
+      this.belongsTo(models.PPTK, {
+        foreignKey: "PPTKId",
+        as: "PPTK",
+      });
       this.belongsTo(models.bendahara, {
         foreignKey: "bendaharaId",
         as: "bendahara",
@@ -49,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       unitKerjaId: DataTypes.INTEGER,
       subKegiatanId: DataTypes.INTEGER,
       status: DataTypes.ENUM("dibuat", "diajukan", "ditolak", "diterima"),
+      verifikasi: DataTypes.STRING,
     },
     {
       sequelize,

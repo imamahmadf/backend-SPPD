@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "pegawaiId",
         as: "pegawai_PPTK",
       });
+
+      this.hasMany(models.kwitGlobal, {
+        foreignKey: "PPTKId",
+      });
     }
   }
   PPTK.init(
