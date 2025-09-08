@@ -37,6 +37,12 @@ const Docxtemplater = require("docxtemplater");
 const { exec } = require("child_process");
 const QRCode = require("qrcode");
 const ImageModule = require("docxtemplater-image-module-free");
+let sizeOf;
+try {
+  sizeOf = require("image-size");
+} catch (_) {
+  sizeOf = null;
+}
 module.exports = {
   postRampung: async (req, res) => {
     const { personilId, item, qty, nilai, satuan, jenisId } = req.body;
@@ -304,6 +310,7 @@ module.exports = {
       KPAJabatan,
       tahun,
       templateId,
+      foto,
     } = req.body;
     console.log(req.body.templateId);
 
@@ -437,6 +444,58 @@ module.exports = {
         `https://pena.dinkes.paserkab.go.id/validasi/${id}`
       );
 
+      // Siapkan foto pegawai dari nama file di database (opsional)
+      let fotoPegawaiDataUrl = null;
+      try {
+        if (foto) {
+          // Tentukan path file foto di server
+          // Jika 'foto' sudah berupa path relatif dari public (mis. "/pegawai/xxx.jpg")
+          // maka gabungkan ke folder public. Jika hanya nama file, fallback ke folder pegawai.
+          const normalizedFoto = typeof foto === "string" ? foto.trim() : "";
+          const isPath =
+            normalizedFoto.startsWith("/") || normalizedFoto.startsWith("\\");
+          const fotoPath = isPath
+            ? path.join(
+                __dirname,
+                "../public",
+                normalizedFoto.replace(/[\\/]+/g, "/")
+              )
+            : path.join(__dirname, "../public/bukti", normalizedFoto);
+
+          console.log("[FOTO] input:", normalizedFoto);
+          console.log("[FOTO] try path:", fotoPath);
+
+          let finalFotoPath = fotoPath;
+          if (!fs.existsSync(finalFotoPath)) {
+            const altPath = path.join(
+              __dirname,
+              "../public/pegawai",
+              normalizedFoto
+            );
+            console.log("[FOTO] fallback path:", altPath);
+            if (fs.existsSync(altPath)) finalFotoPath = altPath;
+          }
+
+          if (fs.existsSync(finalFotoPath)) {
+            const ext = path.extname(fotoPath).toLowerCase();
+            const mime =
+              ext === ".png"
+                ? "image/png"
+                : ext === ".jpg" || ext === ".jpeg"
+                ? "image/jpeg"
+                : "image/jpeg";
+            const fileBuf = fs.readFileSync(finalFotoPath);
+            const base64 = fileBuf.toString("base64");
+            fotoPegawaiDataUrl = `data:${mime};base64,${base64}`;
+            console.log("[FOTO] loaded size:", fileBuf.length, " mime:", mime);
+          } else {
+            console.log("[FOTO] not found on disk");
+          }
+        }
+      } catch (_) {
+        // Abaikan jika foto tidak tersedia
+      }
+
       // Konversi base64 ke buffer
       function base64DataURLToArrayBuffer(dataURL) {
         const base64Regex = /^data:image\/(png|jpg|jpeg);base64,/;
@@ -453,10 +512,52 @@ module.exports = {
       // Setup image module
       const imageOpts = {
         getImage: function (tagValue) {
-          return base64DataURLToArrayBuffer(tagValue);
+          if (Buffer.isBuffer(tagValue)) return tagValue;
+          if (
+            typeof tagValue === "string" &&
+            tagValue.startsWith("data:image/")
+          ) {
+            return base64DataURLToArrayBuffer(tagValue);
+          }
+          return tagValue;
         },
-        getSize: function () {
-          return [100, 100]; // ukuran QR Code (px)
+        getSize: function (img, tagValue, tagName) {
+          if (tagName === "foto") {
+            try {
+              const pageWidthPx = 600; // lebar efektif A4 di Word
+              const margin = 40; // total margin kiri + kanan (px)
+              const targetWidthPx = pageWidthPx - margin;
+
+              let buffer = null;
+              if (Buffer.isBuffer(tagValue)) buffer = tagValue;
+              else if (
+                typeof tagValue === "string" &&
+                tagValue.startsWith("data:image/")
+              ) {
+                const base64 = tagValue.split(",")[1];
+                buffer = Buffer.from(base64, "base64");
+              }
+
+              if (buffer && sizeOf) {
+                const dim = sizeOf(buffer);
+                if (dim?.width && dim?.height) {
+                  const ratio = targetWidthPx / dim.width;
+                  const newWidth = targetWidthPx;
+                  const newHeight = Math.round(dim.height * ratio);
+
+                  return [newWidth, newHeight];
+                }
+              }
+
+              // fallback
+              return [pageWidthPx - margin, 800];
+            } catch (_) {
+              return [560, 800]; // fallback dengan margin
+            }
+          }
+
+          // default untuk gambar lain (mis. qrCode)
+          return [100, 100];
         },
       };
       const imageModule = new ImageModule(imageOpts);
@@ -499,6 +600,8 @@ module.exports = {
         PPTKNama,
         PPTKNip,
         qrCode: qrDataUrl,
+        // Gambar foto pegawai untuk placeholder teks {%foto}
+        foto: fotoPegawaiDataUrl,
         kodeRekening,
         total,
         terbilang,

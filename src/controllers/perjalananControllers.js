@@ -261,8 +261,22 @@ module.exports = {
         await tempat.bulkCreate(dataDalamKota, { transaction });
       }
       // console.log(dataDalamKota);
-      // Path file template
 
+      // Jika isNotaDinas === 2, tidak perlu membuat dokumen Word
+      if (isNotaDinas === 2) {
+        await transaction.commit();
+        return res.status(200).json({
+          success: true,
+          message: "Data perjalanan berhasil disimpan tanpa dokumen Word",
+          data: {
+            perjalananId: dbPerjalanan.id,
+            noNotaDinas: nomorBaru,
+            isNotaDinas: isNotaDinas,
+          },
+        });
+      }
+
+      // Path file template
       const template = await indukUnitKerja.findOne({
         where: { id: indukUnitKerjaFE.indukUnitKerja.id },
         attributes: ["id", "templateNotaDinas", "telaahan"],
