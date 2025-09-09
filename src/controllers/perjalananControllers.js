@@ -128,8 +128,10 @@ module.exports = {
       };
       // console.log(dalamKota, perjalananKota);
       let nomorBaru;
+      let resultSuratKeluar;
       if (isNotaDinas === 0 || isNotaDinas === 1) {
         // Ambil satu data nomor surat berdasarkan id = 2
+        console.log("MASUK SINIIIIIII!!!!!!!!!!");
         const dbNoSurat = await daftarNomorSurat.findOne({
           where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
           include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
@@ -164,7 +166,7 @@ module.exports = {
           .replace("KODE", kode)
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
 
-        const resultSuratKeluar = await suratKeluar.create(
+        resultSuratKeluar = await suratKeluar.create(
           {
             nomor: nomorBaru,
             Perihal: jenis.jenis,
@@ -316,7 +318,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        isNotaDinas ? template.templateNotaDinas : template.telaahan
+        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan
       );
 
       // Baca file template
