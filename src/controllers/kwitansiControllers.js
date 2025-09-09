@@ -36,6 +36,7 @@ const path = require("path");
 const Docxtemplater = require("docxtemplater");
 const { exec } = require("child_process");
 const QRCode = require("qrcode");
+const { generateQrWithLogo } = require("../lib/qrcodeWithLogo");
 const ImageModule = require("docxtemplater-image-module-free");
 let sizeOf;
 try {
@@ -438,10 +439,14 @@ module.exports = {
       // Baca file template
       const content = fs.readFileSync(templatePath, "binary");
 
-      // Load file ke PizZip
-      // Generate QR Code (contoh: link validasi surat)
-      const qrDataUrl = await QRCode.toDataURL(
-        `https://pena.dinkes.paserkab.go.id/validasi/${id}`
+      // Generate QR Code dengan logo tengah
+      const logoPath = path.join(
+        __dirname,
+        "../public/template-keuangan/penaLogo.png"
+      );
+      const qrDataUrl = await generateQrWithLogo(
+        `https://pena.dinkes.paserkab.go.id/validasi/${id}`,
+        { sizePx: 500, logoPath, logoScale: 0.22 }
       );
 
       // Siapkan foto pegawai dari nama file di database (opsional)

@@ -28,6 +28,7 @@ const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const QRCode = require("qrcode");
+const { generateQrWithLogo } = require("../lib/qrcodeWithLogo");
 const ImageModule = require("docxtemplater-image-module-free");
 let sizeOf;
 try {
@@ -143,8 +144,13 @@ module.exports = {
       const baseUrl = isProduction
         ? env.APP_BASE_URL_PROD || "https://pena.dinkes.paserkab.go.id"
         : env.APP_BASE_URL_DEV || "http://localhost:5173";
-      const qrDataUrl = await QRCode.toDataURL(
-        `${baseUrl}/validasi/${verifikasiCode}`
+      const logoPath = path.join(
+        __dirname,
+        "../public/template-keuangan/penaLogo.png"
+      );
+      const qrDataUrl = await generateQrWithLogo(
+        `${baseUrl}/validasi/${verifikasiCode}`,
+        { sizePx: 500, logoPath, logoScale: 0.22 }
       );
       // Path file template
       const templatePath = path.join(

@@ -29,6 +29,7 @@
     "qrcode-terminal": "^0.12.0",
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2",
+    "sharp": "^0.34.3",
     "socket.io": "^4.8.1",
     "whatsapp-web.js": "^1.27.0"
   },
