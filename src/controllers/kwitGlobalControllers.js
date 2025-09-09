@@ -50,6 +50,7 @@ module.exports = {
       jenisPerjalananFE,
       totalFE,
       indukUnitKerjaFE,
+      PPTKFE,
       verifikasi,
     } = req.body;
 
@@ -251,8 +252,9 @@ module.exports = {
         KPANama: KPAFE.pegawai_KPA.nama,
         KPANip: KPAFE.pegawai_KPA.nip,
 
-        PPTKNama: "",
-        PPTKNip: "",
+        PPTKNama: PPTKFE.pegawai_PPTK.nama,
+        PPTKNip: PPTKFE.pegawai_PPTK.nip,
+        PPTKJabatan: PPTKFE.jabatan,
 
         kodeRekening: subKegiatan.kodeRekening + jenisPerjalananFE.kodeRekening,
         total: formatRupiah(totalFE),
@@ -392,9 +394,15 @@ module.exports = {
       const resultTemplate = await templateKwitGlobal.findAll({});
       const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
       const resultPPTK = await PPTK.findAll({
-        where: {
-          unitKerjaId,
-        },
+        where: { unitKerjaId },
+        attributes: ["id"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_PPTK",
+          },
+        ],
       });
       return res.status(200).json({
         result,
@@ -426,6 +434,7 @@ module.exports = {
       jenisPerjalananId,
       unitKerjaId,
       subKegiatanId,
+      PPTKId,
     } = req.body;
 
     try {
@@ -437,6 +446,7 @@ module.exports = {
         jenisPerjalananId,
         unitKerjaId,
         subKegiatanId,
+        PPTKId,
         status: "dibuat",
       });
       return res.status(200).json({ result });
@@ -473,6 +483,19 @@ module.exports = {
                 model: pegawai,
                 attributes: ["id", "nama", "nip"],
                 as: "pegawai_KPA",
+              },
+            ],
+          },
+
+          {
+            model: PPTK,
+            as: "PPTK",
+            attributes: ["id", "jabatan"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_PPTK",
               },
             ],
           },
