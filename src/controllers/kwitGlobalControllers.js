@@ -142,15 +142,16 @@ module.exports = {
       // Load file ke PizZip
       // Generate QR Code (contoh: link validasi surat)
       const isProduction = env.NODE_ENV === "production";
-      const baseUrl = isProduction
-        ? env.APP_BASE_URL_PROD || "https://pena.dinkes.paserkab.go.id"
-        : env.APP_BASE_URL_DEV || "http://localhost:5173";
+      // const baseUrl = isProduction
+      //   ? env.APP_BASE_URL_PROD || "https://pena.dinkes.paserkab.go.id"
+      //   : env.APP_BASE_URL_DEV || "http://localhost:5173";
+      const baseUrl = "https://pena.dinkes.paserkab.go.id";
       const logoPath = path.join(
         __dirname,
         "../public/template-keuangan/penaLogo.png"
       );
       const qrDataUrl = await generateQrWithLogo(
-        `${baseUrl}/validasi/${verifikasiCode}`,
+        `${baseUrl}/verifikasi/${verifikasiCode}`,
         { sizePx: 500, logoPath, logoScale: 0.22 }
       );
       // Path file template
