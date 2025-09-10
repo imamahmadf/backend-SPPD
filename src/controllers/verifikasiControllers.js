@@ -19,6 +19,7 @@ const {
   tempat,
   dalamKota,
   PPTK,
+  daftarUnitKerja,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -35,6 +36,13 @@ module.exports = {
             attributes: ["id", "subKegiatan", "kodeRekening"],
             as: "subKegiatan",
           },
+
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja"],
+            as: "unitKerja",
+          },
+
           { model: pegawai, attributes: ["id", "nama", "nip"], as: "pegawai" },
           {
             model: jenisPerjalanan,
