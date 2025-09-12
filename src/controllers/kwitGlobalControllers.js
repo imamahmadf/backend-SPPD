@@ -264,7 +264,7 @@ module.exports = {
         subKegiatan: subKegiatan.subKegiatan,
         jenisPerjalanan: jenisPerjalananFE.jenis,
 
-        // tahun,
+        tahun: "2025",
       });
       // Simpan hasil dokumen ke buffer
       const buffer = doc.getZip().generate({ type: "nodebuffer" });

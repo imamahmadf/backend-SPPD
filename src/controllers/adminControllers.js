@@ -29,6 +29,7 @@ const {
   KPA,
   pelayananKesehatan,
   templateKeuangan,
+  anggaran,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -161,6 +162,9 @@ module.exports = {
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
+            include: [
+              { model: anggaran, include: [{ model: tipePerjalanan }] },
+            ],
           },
           // {
           //   model: ttdSuratTugas,
