@@ -63,6 +63,18 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaId",
       });
 
+      this.hasMany(models.subKegPer, {
+        foreignKey: "unitKerjaId",
+      });
+
+      this.hasMany(models.kegiatan, {
+        foreignKey: "unitKerjaId",
+      });
+
+      this.hasMany(models.program, {
+        foreignKey: "unitKerjaId",
+      });
+
       // Relasi dengan riwayat pegawai (unit kerja lama)
       this.hasMany(models.riwayatPegawai, {
         foreignKey: "unitKerjaLamaId",

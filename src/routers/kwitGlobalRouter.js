@@ -12,5 +12,10 @@ routers.post("/post/add-perjalanan", kwitGlobalControllers.addPerjalanan);
 routers.post("/post/cetak", kwitGlobalControllers.cetakKwitansi);
 routers.post("/post/ajukan/:id", kwitGlobalControllers.ajukan);
 routers.post("/post/verifikasi/:id", kwitGlobalControllers.verifikasi);
+routers.post("/post/hapus-perjalanan", kwitGlobalControllers.hapusPerjalanan);
+routers.post(
+  "/post/update-subkegiatan",
+  kwitGlobalControllers.updateSubKegiatan
+);
 
 module.exports = routers;

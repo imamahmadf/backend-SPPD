@@ -26,6 +26,7 @@ const bangunanControllers = require("./bangunanControllers");
 const naikJenjangControllers = require("./naikJenjangControllers");
 const kwitGlobalControllers = require("./kwitGlobalControllers");
 const verifikasiControllers = require("./verifikasiControllers");
+const perencanaanControllers = require("./perencanaanControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -55,4 +56,5 @@ module.exports = {
   naikJenjangControllers,
   kwitGlobalControllers,
   verifikasiControllers,
+  perencanaanControllers,
 };

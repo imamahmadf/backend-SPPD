@@ -19,6 +19,7 @@ const {
   tempat,
   dalamKota,
   PPTK,
+  daftarUnitKerja,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -356,6 +357,7 @@ module.exports = {
             ],
             attributes: ["id", "jabatan"],
           },
+          { model: perjalanan, attributes: ["id"] },
         ],
       });
 
@@ -467,7 +469,7 @@ module.exports = {
         include: [
           {
             model: daftarSubKegiatan,
-            attributes: ["id", "subKegiatan", "kodeRekening"],
+            attributes: ["id", "subKegiatan", "kodeRekening", "unitKerjaId"],
             as: "subKegiatan",
           },
           { model: pegawai, attributes: ["id", "nama", "nip"], as: "pegawai" },
@@ -554,7 +556,14 @@ module.exports = {
         ],
       });
 
-      return res.status(200).json({ result });
+      const resultSubKegiatan = await daftarSubKegiatan.findAll({
+        where: { unitKerjaId: result[0].subKegiatan.unitKerjaId },
+        attributes: ["id", "subKegiatan", "kodeRekening", "unitKerjaId"],
+      });
+      console.log(result[0].subKegiatan.unitKerjaId, "ini result perjalanan");
+      return res
+        .status(200)
+        .json({ result, msg: "berhasil", resultSubKegiatan });
     } catch (err) {
       console.log(err);
       return res.status(500).json({
@@ -709,6 +718,24 @@ module.exports = {
     }
   },
 
+  updateSubKegiatan: async (req, res) => {
+    const { id, subKegiatanId } = req.body;
+    try {
+      const result = await kwitGlobal.update(
+        {
+          subKegiatanId,
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
   verifikasi: async (req, res) => {
     const id = req.params.id;
     try {
@@ -717,6 +744,33 @@ module.exports = {
           status: "diterima",
         },
         { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  hapusPerjalanan: async (req, res) => {
+    const { perjalananIds } = req.body;
+    console.log(perjalananIds, "ini perjalanan ids");
+    try {
+      if (!Array.isArray(perjalananIds) || perjalananIds.length === 0) {
+        return res.status(400).json({
+          message: "perjalananIds harus berupa array dan tidak kosong",
+          code: 400,
+        });
+      }
+      const result = await perjalanan.update(
+        { kwitGlobalId: null },
+        {
+          where: {
+            id: { [Op.in]: perjalananIds },
+          },
+        }
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -744,6 +798,11 @@ module.exports = {
             model: daftarSubKegiatan,
             attributes: ["id", "subKegiatan"],
             as: "subKegiatan",
+          },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja"],
+            as: "unitKerja",
           },
           { model: pegawai, attributes: ["id", "nama"], as: "pegawai" },
           { model: jenisPerjalanan, attributes: ["id", "jenis"] },
