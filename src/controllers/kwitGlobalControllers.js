@@ -563,12 +563,10 @@ module.exports = {
 
       const resultSubKegiatan = await daftarSubKegiatan.findAll({
         where: { unitKerjaId: result[0].subKegiatan.unitKerjaId },
-        attributes: ["id", "subKegiatan", "kodeRekening", "unitKerjaId"],
+        // attributes: ["id", "subKegiatan", "kodeRekening", "unitKerjaId"],
       });
       console.log(result[0].subKegiatan.unitKerjaId, "ini result perjalanan");
-      return res
-        .status(200)
-        .json({ result, msg: "berhasil", resultSubKegiatan });
+      return res.status(200).json({ result, resultSubKegiatan });
     } catch (err) {
       console.log(err);
       return res.status(500).json({
