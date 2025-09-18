@@ -11,6 +11,8 @@ routers.get("/get/all-perjalanan/:id", kwitGlobalControllers.getAllPerjalanan);
 routers.post("/post/add-perjalanan", kwitGlobalControllers.addPerjalanan);
 routers.post("/post/cetak", kwitGlobalControllers.cetakKwitansi);
 routers.post("/post/ajukan/:id", kwitGlobalControllers.ajukan);
+
+routers.post("/post/tolak/:id", kwitGlobalControllers.tolak);
 routers.post("/post/verifikasi/:id", kwitGlobalControllers.verifikasi);
 routers.post("/post/hapus-perjalanan", kwitGlobalControllers.hapusPerjalanan);
 routers.post(

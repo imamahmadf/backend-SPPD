@@ -20,6 +20,7 @@ const {
   dalamKota,
   PPTK,
   daftarUnitKerja,
+  sequelize,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -478,6 +479,10 @@ module.exports = {
             attributes: ["id", "jenis", "kodeRekening"],
           },
           {
+            model: templateKwitGlobal,
+            attributes: ["id", "nama"],
+          },
+          {
             model: KPA,
             as: "KPA",
             attributes: ["id", "jabatan"],
@@ -718,6 +723,24 @@ module.exports = {
     }
   },
 
+  tolak: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const result = await kwitGlobal.update(
+        {
+          status: "ditolak",
+        },
+        { where: { id } }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
   updateSubKegiatan: async (req, res) => {
     const { id, subKegiatanId } = req.body;
     try {
@@ -793,6 +816,20 @@ module.exports = {
         limit,
 
         offset,
+        where: {
+          status: {
+            [Op.in]: ["diajukan", "diterima"],
+          },
+        },
+        order: [
+          [
+            sequelize.literal(
+              "CASE WHEN status = 'diajukan' THEN 0 WHEN status = 'diterima' THEN 1 ELSE 2 END"
+            ),
+            "ASC",
+          ],
+          ["createdAt", "DESC"], // opsional: urutkan terbaru di dalam status
+        ],
         include: [
           {
             model: daftarSubKegiatan,
@@ -840,6 +877,11 @@ module.exports = {
         limit,
 
         offset,
+        where: {
+          status: {
+            [Op.in]: ["diajukan", "diterima"],
+          },
+        },
       });
       const totalPage = Math.ceil(totalRows / limit);
 
