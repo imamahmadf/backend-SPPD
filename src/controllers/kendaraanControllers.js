@@ -247,6 +247,8 @@ module.exports = {
           "foto",
           "merek",
           "warna",
+          "nilaiPerolehan",
+          "tanggalPerolehan",
         ],
       });
 
@@ -605,6 +607,10 @@ module.exports = {
         kondisiId,
         warna,
         merek,
+        tanggalPerolehan,
+        nilaiPerolehan,
+        nibar,
+        link,
       } = req.body;
       const id = req.params.id;
       console.log(req.body);
@@ -621,6 +627,10 @@ module.exports = {
           noKontak,
           warna,
           merek,
+          tanggalPerolehan,
+          nilaiPerolehan,
+          nibar,
+          link,
         },
         { where: { id } }
       );
@@ -712,6 +722,7 @@ module.exports = {
           "foto",
           "merek",
           "warna",
+          "link",
         ],
       });
 

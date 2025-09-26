@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
       foto: DataTypes.STRING,
       warna: DataTypes.STRING,
       merek: DataTypes.STRING,
+      tanggalPerolehan: DataTypes.DATE,
+      nilaiPerolehan: DataTypes.BIGINT,
+      nibar: DataTypes.TEXT,
+      link: DataTypes.TEXT,
     },
     {
       sequelize,
