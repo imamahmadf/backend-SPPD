@@ -1341,7 +1341,7 @@ module.exports = {
           },
           {
             model: tempat,
-            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang", "id"],
             include: [
               {
                 model: dalamKota,
@@ -2315,6 +2315,41 @@ module.exports = {
       );
 
       return res.status(200).json({ result });
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  editTujuan: async (req, res) => {
+    const { tempatId, tanggalBerangkat, tanggalPulang, dalamKotaId, tujuan } =
+      req.body;
+    try {
+      console.log(req.body, req.params, "CEK DATA");
+
+      if (tujuan) {
+        await tempat.update(
+          {
+            tanggalBerangkat,
+            tanggalPulang,
+            tempat: tujuan,
+          },
+          { where: { id: tempatId } }
+        );
+      } else {
+        await tempat.update(
+          {
+            tanggalBerangkat,
+            tanggalPulang,
+            dalamKotaId,
+          },
+          { where: { id: tempatId } }
+        );
+      }
+
+      return res.status(200).json({ result: "berhasil" });
     } catch (err) {
       console.error("Error:", err);
       return res.status(500).json({

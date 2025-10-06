@@ -36,6 +36,7 @@ const {
   kwitGlobalRouter,
   verifikasiRouter,
   perencanaanRouter,
+  capaianRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -116,6 +117,7 @@ app.use("/api/naik-jenjang", naikJenjangRouter);
 app.use("/api/kwitansi-global", kwitGlobalRouter);
 app.use("/api/verifikasi", verifikasiRouter);
 app.use("/api/perencanaan", perencanaanRouter);
+app.use("/api/capaian", capaianRouter);
 
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);

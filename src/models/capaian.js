@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       bulan: DataTypes.INTEGER,
       anggaran: DataTypes.BIGINT,
       targetId: DataTypes.INTEGER,
+      bukti: DataTypes.TEXT,
+      status: DataTypes.ENUM("pengajuan", "diterima", "ditolak"),
     },
     {
       sequelize,

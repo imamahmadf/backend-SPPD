@@ -19,10 +19,15 @@ const {
   indukUnitKerja,
   usulanPegawai,
   riwayatPegawai,
+  user,
+  profile,
+  userRole,
 } = require("../models");
 
 const { Op } = require("sequelize");
 const ExcelJS = require("exceljs");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 module.exports = {
   getPegawaiStatistik: async (req, res) => {
     try {
@@ -411,6 +416,7 @@ module.exports = {
     console.log(req.body);
     const transaction = await sequelize.transaction();
     const nipBaru = nip.replace(/\s+/g, "");
+    const password = "paserkab";
     try {
       const result = await pegawai.create(
         {
@@ -470,6 +476,7 @@ module.exports = {
       await transaction.commit();
       return res.status(200).json({ result });
     } catch (err) {
+      console.log(err);
       await transaction.rollback();
       return res.status(500).json({
         message: err.toString(),

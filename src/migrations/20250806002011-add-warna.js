@@ -17,5 +17,6 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     // Menghapus kolom kedua
     await queryInterface.removeColumn("kendaraans", "warna");
+    await queryInterface.removeColumn("kendaraans", "merek");
   },
 };
