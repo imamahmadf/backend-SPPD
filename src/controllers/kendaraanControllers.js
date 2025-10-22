@@ -15,6 +15,7 @@ const {
   suratKeluar,
   mutasiKendaraan,
   user,
+  kendaraanDinas,
 } = require("../models");
 const { scrapeData } = require("../services/scraper");
 const { sendMessage } = require("../services/waServices");
@@ -385,6 +386,12 @@ module.exports = {
           { model: kondisi },
           { model: pegawai },
           {
+            model: kendaraanDinas,
+            attributes: ["id", "status", "keterangan"],
+            limit: 1,
+            order: [["id", "DESC"]],
+          },
+          {
             model: daftarUnitKerja,
             attributes: ["id", "unitKerja", "indukUnitKerjaId"],
             where: { indukUnitKerjaId: id },
@@ -723,6 +730,8 @@ module.exports = {
           "merek",
           "warna",
           "link",
+          "tanggalPerolehan",
+          "nibar",
         ],
       });
 
@@ -743,6 +752,10 @@ module.exports = {
         { header: "Nama Pemilik", key: "nama", width: 20 },
         { header: "status", key: "status", width: 25 },
         { header: "kondisi", key: "kondisi", width: 25 },
+        { header: "tanggal Perolehan", key: "tanggalPerolehan", width: 25 },
+        { header: "link", key: "link", width: 25 },
+        { header: "nibar", key: "nibar", width: 25 },
+
         { header: "No. Kontak", key: "kontak", width: 25 },
       ];
 
@@ -761,6 +774,9 @@ module.exports = {
           status: item?.statusKendaraan?.status || "-",
           kondisi: item?.kondisi?.nama || "-",
           kontak: item?.noKontak || "-",
+          nibar: item?.nibar || "-",
+          link: item?.link || "-",
+          tanggalPerolehan: item?.tanggalPerolehan || "-",
         });
       });
 
