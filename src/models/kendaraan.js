@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.statusKendaraan);
       this.hasMany(models.suratPengantar);
       this.hasMany(models.mutasiKendaraan);
+      this.hasMany(models.kendaraanDinas);
     }
   }
   kendaraan.init(

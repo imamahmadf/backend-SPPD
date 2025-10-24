@@ -28,6 +28,7 @@ const kwitGlobalControllers = require("./kwitGlobalControllers");
 const verifikasiControllers = require("./verifikasiControllers");
 const perencanaanControllers = require("./perencanaanControllers");
 const capaianControllers = require("./capaianControllers");
+const kendaraanDinasControllers = require("./kendaraanDinasControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -59,4 +60,5 @@ module.exports = {
   verifikasiControllers,
   perencanaanControllers,
   capaianControllers,
+  kendaraanDinasControllers,
 };

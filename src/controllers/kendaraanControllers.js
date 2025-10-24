@@ -16,6 +16,9 @@ const {
   mutasiKendaraan,
   user,
   kendaraanDinas,
+  perjalanan,
+  tempat,
+  dalamKota,
 } = require("../models");
 const { scrapeData } = require("../services/scraper");
 const { sendMessage } = require("../services/waServices");
@@ -389,7 +392,31 @@ module.exports = {
             model: kendaraanDinas,
             attributes: ["id", "status", "keterangan"],
             limit: 1,
-            order: [["id", "DESC"]],
+            where: { status: "dipinjam" },
+            include: [
+              {
+                model: perjalanan,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: tempat,
+                    attributes: [
+                      "id",
+                      "tempat",
+                      "tanggalPulang",
+                      "tanggalBerangkat",
+                    ],
+                    include: [
+                      {
+                        model: dalamKota,
+                        as: "dalamKota",
+                        attributes: ["id", "nama"],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
           {
             model: daftarUnitKerja,

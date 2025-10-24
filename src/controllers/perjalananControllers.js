@@ -36,6 +36,8 @@ const {
   rincianBPD,
   sumberDanaJenisPerjalanan,
   kwitGlobal,
+  kendaraanDinas,
+  kendaraan,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -70,6 +72,8 @@ module.exports = {
         dataBendaharaId,
         subKegiatan,
       } = req.body;
+
+      console.log(req.body);
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isNotaDinas, "TESTTT");
       const calculateDaysDifference = (startDate, endDate) => {
@@ -410,6 +414,202 @@ module.exports = {
       res.status(500).send("Terjadi kesalahan dalam pembuatan dokumen");
     }
   },
+
+  postPerjalananKendaraan: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        pegawai,
+        tanggalPengajuan,
+        kodeRekeningFE,
+        sumber,
+        untuk,
+        dataTtdSurTug,
+        dataTtdNotaDinas,
+        ttdNotDis,
+        asal,
+        perjalananKota,
+        subKegiatanId,
+        jenis,
+        dalamKota,
+        indukUnitKerjaFE,
+        PPTKId,
+        KPAId,
+        dasar,
+        kodeKlasifikasi,
+        isSrikandi,
+        isNotaDinas,
+        dataBendaharaId,
+        subKegiatan,
+      } = req.body;
+
+      console.log(req.body);
+      const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
+      console.log(req.body.isNotaDinas, "TESTTT");
+
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      // console.log(dalamKota, perjalananKota);
+      let nomorBaru;
+      let resultSuratKeluar;
+      if (isNotaDinas === 0 || isNotaDinas === 1) {
+        // Ambil satu data nomor surat berdasarkan id = 2
+        console.log("MASUK SINIIIIIII!!!!!!!!!!");
+        const dbNoSurat = await daftarNomorSurat.findOne({
+          where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
+
+          transaction, // Letakkan dalam objek konfigurasi yang sama
+        });
+
+        // Pastikan dbNoSurat ditemukan sebelum digunakan
+        if (!dbNoSurat) {
+          throw new Error("Data nomor surat tidak ditemukan.");
+        }
+
+        // Update nomor loket
+        const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
+
+        const kode =
+          indukUnitKerjaFE.indukUnitKerja.kodeInduk === indukUnitKerjaFE.kode
+            ? indukUnitKerjaFE.kode
+            : indukUnitKerjaFE.indukUnitKerja.kodeInduk +
+              "/" +
+              indukUnitKerjaFE.kode;
+
+        // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
+        nomorBaru = dbNoSurat.jenisSurat.nomorSurat
+          .replace(
+            "NOMOR",
+            indukUnitKerjaFE.indukUnitKerja.id == 1
+              ? "     "
+              : nomorLoket.toString()
+          )
+          .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
+          .replace("KODE", kode)
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
+
+        resultSuratKeluar = await suratKeluar.create(
+          {
+            nomor: nomorBaru,
+            Perihal: jenis.jenis,
+            tanggalSurat: tanggalPengajuan,
+            tujuan: dataTtdSurTug.value.jabatan,
+            indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
+          },
+          transaction
+        );
+
+        // Update nomor loket ke database
+        await daftarNomorSurat.update(
+          { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
+          { where: { id: dbNoSurat.id }, transaction }
+        );
+      } else if (isNotaDinas === 2) {
+        nomorBaru = null;
+      }
+
+      // console.log(resultSuratKeluar.id, "CEKDISINI");
+      // Simpan data perjalanan
+      const dbPerjalanan = await perjalanan.create(
+        {
+          untuk,
+          noNotaDinas: nomorBaru,
+          nomorSuratKeluarId: isNotaDinas === 2 ? null : resultSuratKeluar.id,
+          asal,
+          tanggalPengajuan,
+          bendaharaId: dataBendaharaId,
+          subKegiatanId,
+          ttdNotaDinasId: dataTtdNotaDinas.value.id,
+          ttdSuratTugasId: dataTtdSurTug.value.id,
+          jenisId: jenis.id,
+          KPAId,
+          dasar,
+          PPTKId,
+          pelayananKesehatanId,
+          tipeSrikandi: isSrikandi,
+          isNotaDinas,
+        },
+        { transaction }
+      );
+
+      var dataPegawai = pegawai.map((item, index) => ({
+        nama: item.value.nama,
+        nip: item.value.nip,
+        jumlahPersonil: "",
+        index: index + 1,
+      }));
+
+      dataPegawai[0].jumlahPersonil = "Jumlah Personil";
+
+      // Buat data personil
+      const dataPersonil = pegawai.map((item) => ({
+        perjalananId: dbPerjalanan.id,
+        pegawaiId: parseInt(item.value.id),
+        status: 1,
+      }));
+
+      await personil.bulkCreate(dataPersonil, { transaction });
+      let dataKota = []; // Inisialisasi dataKota sebagai array kosong
+      let dataDalamKota = [];
+      if (jenis.tipePerjalananId === 2) {
+        // Buat data kota tujuan
+        dataKota = perjalananKota.map((item) => ({
+          perjalananId: dbPerjalanan.id,
+          tempat: item.kota,
+          tanggalBerangkat: item.tanggalBerangkat,
+          tanggalPulang: item.tanggalPulang,
+          dalamKotaId: 1,
+        }));
+
+        await tempat.bulkCreate(dataKota, { transaction });
+      } else if (jenis.tipePerjalananId === 1) {
+        dataDalamKota = dalamKota.map((item) =>
+          // console.log(item),
+          ({
+            perjalananId: dbPerjalanan.id,
+            tempat: "dalam kota",
+            dalamKotaId: item.dataDalamKota.id,
+            tanggalBerangkat: item.tanggalBerangkat,
+            tanggalPulang: item.tanggalPulang,
+          })
+        );
+        await tempat.bulkCreate(dataDalamKota, { transaction });
+      }
+      // console.log(dataDalamKota);
+
+      await transaction.commit();
+      return res.status(200).json({
+        success: true,
+        message: "Data perjalanan berhasil disimpan tanpa dokumen Word",
+        data: {
+          perjalananId: dbPerjalanan.id,
+          noNotaDinas: nomorBaru,
+          isNotaDinas: isNotaDinas,
+        },
+      });
+    } catch (error) {
+      await transaction.rollback();
+      console.error("Error generating SPPD:", error);
+      res.status(500).send("Terjadi kesalahan dalam pembuatan dokumen");
+    }
+  },
+
   getSeedPerjalanan: async (req, res) => {
     const { indukUnitKerjaId, unitKerjaId } = req.query;
     // console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
@@ -557,6 +757,182 @@ module.exports = {
       });
     }
   },
+
+  getSeedPerjalananKendaraan: async (req, res) => {
+    const { indukUnitKerjaId, unitKerjaId } = req.query;
+    // console.log(indukUnitKerjaId, unitKerjaId, "INI ID UNIT KERJA");
+
+    try {
+      const resultSumberDana = await sumberDana.findAll({
+        attributes: ["id", "sumber"],
+        include: [
+          {
+            model: bendahara,
+            required: true,
+            attributes: ["id", "jabatan"],
+            where: { indukUnitKerjaId },
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama"],
+                as: "pegawai_bendahara",
+              },
+            ],
+          },
+        ],
+      });
+      const resultDaftarSubKegiatan = await daftarSubKegiatan.findAll({
+        attributes: ["id", "subKegiatan", "kodeRekening"],
+        include: [
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja", "kode", "asal", "indukUnitKerjaId"],
+            include: [
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "indukUnitKerja", "kodeInduk"],
+              },
+            ],
+            where: {
+              indukUnitKerjaId,
+            },
+          },
+        ],
+      });
+      const resultJenisPerjalanan = await jenisPerjalanan.findAll({
+        include: [{ model: tipePerjalanan }],
+      });
+      const resultTtdSuratTugas = await ttdSuratTugas.findAll({
+        where: {
+          [Op.or]: [{ indukUnitKerjaId }, { indukUnitKerjaId: 1 }],
+        },
+        order: [["indukUnitKerjaId", "DESC"]],
+        attributes: ["id", "jabatan", "indukUnitKerjaId"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai",
+          },
+          {
+            model: indukUnitKerja,
+            attributes: ["id", "kodeInduk", "indukUnitKerja"],
+            as: "indukUnitKerja_ttdSuratTugas",
+          },
+        ],
+      });
+
+      // console.log("Data yang diambil:", resultTtdSuratTugas);
+
+      const resultPelayananKesehatan = await pelayananKesehatan.findAll({});
+
+      const resultTtdNotaDinas = await ttdNotaDinas.findAll({
+        // where: { unitKerjaId },
+        attributes: ["id", "jabatan"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_notaDinas",
+            include: [
+              {
+                model: daftarTingkatan,
+                as: "daftarTingkatan",
+              },
+              { model: daftarGolongan, as: "daftarGolongan" },
+              { model: daftarPangkat, as: "daftarPangkat" },
+              {
+                model: daftarUnitKerja,
+                as: "daftarUnitKerja",
+                attributes: ["id", "indukUnitKerjaId"],
+                where: {
+                  indukUnitKerjaId,
+                },
+              },
+            ],
+          },
+        ],
+      });
+
+      const resultPPTK = await PPTK.findAll({
+        attributes: ["id", "jabatan"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_PPTK",
+          },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja", "kode", "asal", "indukUnitKerjaId"],
+            where: {
+              indukUnitKerjaId,
+            },
+          },
+        ],
+      });
+      const resultDaftarNomorSurat = await daftarNomorSurat.findAll({
+        include: [{ model: jenisSurat, as: "jenisSurat" }],
+        where: { indukUnitKerjaId },
+      });
+      const resultJenisTempat = await jenisTempat.findAll({
+        attributes: ["id", "jenis", "koderekening"],
+      });
+      const resultDalamKota = await dalamKota.findAll({
+        attributes: ["id", "nama", "durasi"],
+        where: {
+          indukUnitKerjaId,
+        },
+      });
+      const resultKPA = await KPA.findAll({
+        attributes: ["id"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_KPA",
+          },
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja", "kode", "asal", "indukUnitKerjaId"],
+            where: {
+              indukUnitKerjaId,
+            },
+          },
+        ],
+      });
+      const resultKlasifikasi = await klasifikasi.findAll({
+        attributes: ["id", "namaKlasifikasi", "kode"],
+      });
+
+      const resultUnitKerja = await daftarUnitKerja.findAll({
+        where: { indukUnitKerjaId },
+        attributes: ["id", "kode"],
+      });
+      return res.status(200).json({
+        resultDaftarSubKegiatan,
+        resultTtdSuratTugas,
+        resultDaftarNomorSurat,
+        resultJenisTempat,
+        resultJenisPerjalanan,
+        resultDalamKota,
+        resultTtdNotaDinas,
+        resultPPTK,
+        resultKPA,
+        resultKlasifikasi,
+        resultSumberDana,
+        resultPelayananKesehatan,
+        resultUnitKerja,
+      });
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
   getAllPerjalanan: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 15;
@@ -683,7 +1059,8 @@ module.exports = {
             model: ttdNotaDinas,
             attributes: ["id", "unitKerjaId", "pegawaiId", "jabatan"],
             where: { unitKerjaId }, // ✅ Filter data berdasarkan unit kerja yang diminta
-            required: true, // ✅ Pastikan hanya ambil yang punya relasi
+            required: true,
+            // ✅ Pastikan hanya ambil yang punya relasi
             paranoid: false, // ✅ tambahkan ini
             include: [
               {
@@ -1291,6 +1668,193 @@ module.exports = {
       });
     }
   },
+
+  postSuratTugasKendaraan: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        asal,
+        kode,
+        personilFE,
+        ttdSurTug,
+        id,
+        tanggalPengajuan,
+        tempat,
+        untuk,
+        ttdSurTugJabatan,
+        ttdSurTugNama,
+        ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
+        ttdSurTugUnitKerja,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
+        KPAJabatan,
+        noNotaDinas,
+        noSuratTugas,
+        jenis,
+        unitKerja,
+        dasar,
+        indukUnitKerjaFE,
+        ttdSurtTugKode,
+      } = req.body;
+      // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
+      const totalDurasi = tempat.reduce(
+        (total, temp) => total + temp.dalamKota.durasi,
+        0
+      );
+
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+
+      // Path file template
+      // Ambil satu data nomor surat berdasarkan id = 1
+      var nomorBaru = noSuratTugas;
+      let noSpd;
+
+      if (!noSuratTugas) {
+        // MENGABIL NOMOR SURAT TUGAS /////////////
+        const dbNoSurTug = await daftarNomorSurat.findOne({
+          where: { indukUnitKerjaId: ttdSurTugUnitKerja },
+          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 1 } }],
+
+          transaction,
+        });
+
+        // Pastikan dbNoSurat ditemukan sebelum digunakan
+        if (!dbNoSurTug) {
+          throw new Error("Data nomor surat tidak ditemukan.");
+        }
+
+        const nomorLoket = parseInt(dbNoSurTug.nomorLoket) + 1;
+        const codeNoST =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+        nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
+          .replace(
+            "NOMOR",
+            indukUnitKerjaFE.indukUnitKerja.id == 1
+              ? "         "
+              : nomorLoket.toString()
+          )
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
+          .replace("KODE", codeNoST);
+        // console.log(dbNoSurTug.id, "NOMOR SURAT");
+        // Update nomor loket ke database
+        await daftarNomorSurat.update(
+          { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
+          { where: { id: dbNoSurTug.id }, transaction }
+        );
+
+        // Update data perjalanan
+        await perjalanan.update(
+          { noSuratTugas: nomorBaru },
+          { where: { id }, transaction }
+        );
+        //MENGAMBIL NOMOR SPD ///////////
+
+        if (totalDurasi > 7) {
+          const dbNoSPD = await daftarNomorSurat.findOne({
+            where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+            include: [
+              { model: jenisSurat, as: "jenisSurat", where: { id: 3 } },
+            ],
+          });
+          let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
+
+          // console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+
+          const codeNoSPD =
+            ttdSurtTugKode === indukUnitKerjaFE.kode
+              ? ttdSurtTugKode
+              : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+          noSpd = personilFE.map((item, index) => ({
+            nomorSPD: dbNoSPD.jenisSurat.nomorSurat
+              .replace(
+                "NOMOR",
+                (indukUnitKerjaFE.indukUnitKerja.id == 1
+                  ? "         "
+                  : nomorAwalSPD + index + 1
+                ).toString()
+              )
+              .replace("KODE", codeNoSPD)
+              .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
+          }));
+          await daftarNomorSurat.update(
+            { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
+            { where: { id: dbNoSPD.id }, transaction }
+          );
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: noSpd[index].nomorSPD,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
+        } else {
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: null,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
+        }
+
+        const codeSurTug =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+        /////////////////////////////////////////
+      } else {
+        noSpd = personilFE.map((item, index) => ({
+          nomorSPD: item.nomorSPD,
+        }));
+      }
+
+      await transaction.commit();
+      return res.status(200).json({
+        success: true,
+        message: "Data perjalanan berhasil disimpan tanpa dokumen Word",
+      });
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
   getDetailPerjalanan: async (req, res) => {
     const { id } = req.params;
     try {
@@ -2350,6 +2914,204 @@ module.exports = {
       }
 
       return res.status(200).json({ result: "berhasil" });
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  getAllPerjalananKendaraan: async (req, res) => {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 15;
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId);
+    const tanggalBerangkat = req.query.tanggalBerangkat;
+    const tanggalPulang = req.query.tanggalPulang;
+    // const time = req.query.time?.toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const time = "ASC";
+    const offset = limit * page;
+    console.log(indukUnitKerjaId, "INI INDUK UNIT KERJA");
+    const whereConditionTempat = {};
+
+    if (tanggalBerangkat) {
+      whereConditionTempat.tanggalBerangkat = {
+        [Op.gte]: new Date(tanggalBerangkat),
+      };
+    }
+
+    if (tanggalPulang) {
+      whereConditionTempat.tanggalPulang = {
+        [Op.lte]: new Date(tanggalPulang),
+      };
+    }
+    try {
+      const { count, rows } = await perjalanan.findAndCountAll({
+        offset,
+        limit,
+        order: [
+          ["id", "DESC"],
+          [{ model: personil }, "id", "ASC"],
+        ],
+        attributes: [
+          "id",
+          "untuk",
+          "asal",
+          "dasar",
+          "noNotaDinas",
+          "tanggalPengajuan",
+          "noSuratTugas",
+          "isNotaDinas",
+        ],
+        include: [
+          {
+            model: personil,
+            include: [
+              {
+                model: pegawai,
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                  { model: profesi, as: "profesi" },
+                ],
+              },
+              { model: status },
+            ],
+          },
+          {
+            model: kendaraanDinas,
+            attributes: ["id"],
+            include: [
+              {
+                model: kendaraan,
+                attributes: ["id", "nomor", "seri", "merek"],
+              },
+            ],
+          },
+          {
+            model: tempat,
+            where: whereConditionTempat,
+            attributes: ["tempat", "tanggalBerangkat", "tanggalPulang"],
+            include: [
+              {
+                model: dalamKota,
+                as: "dalamKota",
+                attributes: ["id", "nama", "durasi"],
+              },
+            ],
+          },
+          {
+            model: suratKeluar,
+            attributes: ["id", "nomor"],
+          },
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "kodeRekening", "subKegiatan"],
+          },
+          {
+            model: ttdSuratTugas,
+            attributes: ["id", "jabatan", "indukUnitKerjaId"],
+            paranoid: false, // ✅ tambahkan ini
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              {
+                model: indukUnitKerja,
+                attributes: ["id", "kodeInduk"],
+                as: "indukUnitKerja_ttdSuratTugas",
+                // include: [
+                //   {
+                //     model: daftarUnitKerja,
+                //     attributes: ["id", "kode"],
+                //   },
+                // ],
+              },
+            ],
+          },
+          {
+            model: KPA,
+            attributes: ["id", "jabatan"],
+            paranoid: false,
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_KPA",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+            ],
+          },
+          {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId", "pegawaiId", "jabatan"],
+            required: true,
+            // ✅ Pastikan hanya ambil yang punya relasi
+            paranoid: false, // ✅ tambahkan ini
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+                as: "pegawai_notaDinas",
+                include: [
+                  { model: daftarPangkat, as: "daftarPangkat" },
+                  { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: daftarTingkatan, as: "daftarTingkatan" },
+                ],
+              },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "indukUnitKerjaId"],
+                as: "unitKerja_notaDinas",
+                required: true,
+                where: indukUnitKerjaId ? { indukUnitKerjaId } : undefined, // ✅ Filter data berdasarkan unit kerja yang diminta
+                include: [
+                  {
+                    model: indukUnitKerja,
+                    attributes: ["id", "kodeInduk"],
+                    required: true,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            model: jenisPerjalanan,
+            attributes: ["id", "jenis", "kodeRekening"],
+            include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
+          },
+        ],
+      });
+
+      const filteredResult = rows.filter((item) => {
+        const hasProfesiId1 = item.personils.some(
+          (p) => p.pegawai?.profesi?.id === 1
+        );
+
+        // Kembalikan true jika TIDAK memiliki profesi.id == 1
+        return !hasProfesiId1;
+      });
+
+      return res.status(200).json({
+        result: filteredResult,
+        page,
+        limit,
+        totalRows: count,
+        totalPage: Math.ceil(count / limit),
+      });
     } catch (err) {
       console.error("Error:", err);
       return res.status(500).json({
