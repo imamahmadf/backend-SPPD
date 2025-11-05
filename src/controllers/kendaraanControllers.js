@@ -782,7 +782,8 @@ module.exports = {
         { header: "tanggal Perolehan", key: "tanggalPerolehan", width: 25 },
         { header: "link", key: "link", width: 25 },
         { header: "nibar", key: "nibar", width: 25 },
-
+        { header: "noRangka", key: "noRangka", width: 25 },
+        { header: "noMesin", key: "noMesin", width: 25 },
         { header: "No. Kontak", key: "kontak", width: 25 },
       ];
 
@@ -802,6 +803,8 @@ module.exports = {
           kondisi: item?.kondisi?.nama || "-",
           kontak: item?.noKontak || "-",
           nibar: item?.nibar || "-",
+          noRangka: item?.noRangka || "-",
+          noMesin: item?.noMesin || "-",
           link: item?.link || "-",
           tanggalPerolehan: item?.tanggalPerolehan || "-",
         });
