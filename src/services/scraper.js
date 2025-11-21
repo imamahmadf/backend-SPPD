@@ -13,11 +13,12 @@ async function scrapeData(params) {
       throw new Error(errorInfo.message);
     }
 
-    // Normalisasi seri plat: kirim sesuai input form (tanpa menambah tanda minus)
+    // Normalisasi seri plat: kirim sesuai input form
+    // Jika seri === "E", ubah menjadi "E-" karena website simpator minimal 2 karakter
     const rawSeri = String(params.seri || "")
       .toUpperCase()
       .trim();
-    const adjustedSeri = rawSeri;
+    const adjustedSeri = rawSeri === "E" ? "E-" : rawSeri;
 
     const payload = {
       kt: String(params.kt || "KT")

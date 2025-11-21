@@ -97,6 +97,7 @@ module.exports = {
             tipePerjalananId: a.tipePerjalananId,
             anggaran: a.nilai,
             totalRealisasi: 0,
+            id: a.id,
           };
         });
 
@@ -153,7 +154,7 @@ module.exports = {
   editSubKegiatan: async (req, res) => {
     const { subKegiatan, kodeRekening, anggaran } = req.body;
     const id = req.params.id;
-    console.log(req.body);
+    console.log(req.body, "bukan ini");
     try {
       const result = await daftarSubKegiatan.update(
         {
@@ -189,7 +190,7 @@ module.exports = {
   },
 
   postAnggaran: async (req, res) => {
-    console.log(req.body);
+    console.log(req.body, "bukan ini");
     const { nilai, tahun, tipePerjalananId, subKegiatanId } = req.body;
     console.log("Tahun dikirim ke DB:", new Date(`${tahun}-01`));
 
@@ -200,6 +201,24 @@ module.exports = {
         tipePerjalananId,
         subKegiatanId,
       });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editAnggaran: async (req, res) => {
+    console.log(req.body, "cek data ya");
+    const { nilai, id } = req.body;
+
+    try {
+      const result = await anggaran.update(
+        {
+          nilai,
+        },
+        { where: { id } }
+      );
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);

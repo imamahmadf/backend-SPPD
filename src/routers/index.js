@@ -29,6 +29,7 @@ const verifikasiRouter = require("./verifikasiRouter");
 const perencanaanRouter = require("./perencanaanRouter");
 const capaianRouter = require("./capaianRouter");
 const kendaraanDinasRouter = require("./kendaraanDinasRouter");
+const barjasRouter = require("./barjasRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -61,4 +62,5 @@ module.exports = {
   perencanaanRouter,
   capaianRouter,
   kendaraanDinasRouter,
+  barjasRouter,
 };

@@ -73,7 +73,7 @@ module.exports = {
         subKegiatan,
       } = req.body;
 
-      console.log(req.body);
+      console.log(req.body.dasar);
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isNotaDinas, "TESTTT");
       const calculateDaysDifference = (startDate, endDate) => {
@@ -1148,8 +1148,10 @@ module.exports = {
         dasar,
         indukUnitKerjaFE,
         ttdSurtTugKode,
+        isNotaDinas,
       } = req.body;
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
+      console.log(isNotaDinas, dasar, "ini is nota dinas");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0

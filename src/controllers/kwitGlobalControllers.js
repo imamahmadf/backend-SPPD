@@ -312,6 +312,7 @@ module.exports = {
         limit,
         where: { unitKerjaId },
         offset,
+        order: [["id", "DESC"]],
         include: [
           {
             model: daftarSubKegiatan,
