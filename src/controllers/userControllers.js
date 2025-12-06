@@ -15,6 +15,8 @@ const {
   rincianBPD,
   personil,
   usulanPegawai,
+  pejabatVerifikator,
+  indikatorPejabat,
 } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -209,7 +211,6 @@ module.exports = {
                 attributes: ["id"],
                 include: [{ model: rincianBPD }],
               },
-              { model: usulanPegawai },
             ],
           },
         ],
@@ -347,6 +348,68 @@ module.exports = {
 
       return res.status(200).json({
         result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+  changePassword: async (req, res) => {
+    try {
+      const { passwordLama, passwordBaru } = req.body;
+      const userId = req.user.id; // Dari JWT token yang sudah di-authenticate
+
+      // Validasi input
+      if (!passwordLama || !passwordBaru) {
+        return res.status(400).json({
+          message: "Password lama dan password baru harus diisi",
+        });
+      }
+
+      // Validasi panjang password baru
+      if (passwordBaru.length < 6) {
+        return res.status(400).json({
+          message: "Password baru minimal 6 karakter",
+        });
+      }
+
+      // Cari user berdasarkan ID
+      const resultUser = await user.findOne({
+        where: { id: userId },
+      });
+
+      if (!resultUser) {
+        return res.status(404).json({
+          message: "User tidak ditemukan",
+        });
+      }
+
+      // Verifikasi password lama
+      const isPasswordValid = await bcrypt.compare(
+        passwordLama,
+        resultUser.password
+      );
+
+      if (!isPasswordValid) {
+        return res.status(401).json({
+          message: "Password lama tidak sesuai",
+        });
+      }
+
+      // Hash password baru
+      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
+
+      // Update password di database
+      await user.update(
+        { password: hashedPassword },
+        { where: { id: userId } }
+      );
+
+      return res.status(200).json({
+        message: "Password berhasil diubah",
       });
     } catch (err) {
       console.error(err);

@@ -17,6 +17,7 @@ router.get("/check-auth", authenticateUser, (req, res) => {
   res.json({ isAuthenticated: true, user: req.user });
 });
 router.get("/profile/:id", userControllers.getProfile);
+router.post("/change-password", authenticateUser, userControllers.changePassword);
 
 // Admin-only routes (harus login DAN role admin)
 router.get(
