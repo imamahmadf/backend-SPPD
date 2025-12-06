@@ -30,6 +30,7 @@ const perencanaanControllers = require("./perencanaanControllers");
 const capaianControllers = require("./capaianControllers");
 const kendaraanDinasControllers = require("./kendaraanDinasControllers");
 const barjasControllers = require("./barjasControllers");
+const PJPLControllers = require("./PJPLControllers");
 module.exports = {
   perjalananControllers,
   pegawaiControllers,
@@ -63,4 +64,5 @@ module.exports = {
   capaianControllers,
   kendaraanDinasControllers,
   barjasControllers,
+  PJPLControllers,
 };

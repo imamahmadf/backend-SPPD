@@ -15,4 +15,6 @@ routers.get(
   adminControllers.getAllPerjalananKeuangan
 );
 routers.post("/delete/surat-keluar/:id", adminControllers.deleteSuratKeluar);
+
+routers.get("/search/unit-kerja", adminControllers.searchUnitKerja);
 module.exports = routers;

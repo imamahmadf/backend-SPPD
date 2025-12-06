@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.kontrakPJPL);
+      this.hasMany(models.pejabatVerifikator);
       this.hasMany(models.personil);
       this.hasMany(models.riwayatPegawai);
       this.hasMany(models.profile);

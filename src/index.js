@@ -39,6 +39,7 @@ const {
   capaianRouter,
   kendaraanDinasRouter,
   barjasRouter,
+  PJPLRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -59,6 +60,9 @@ const io = socketIo(server, {
 
 // SIMPAN io ke dalam app supaya bisa dipakai di controller
 app.set("socketio", io);
+
+// SIMPAN io secara global untuk bisa diakses dari model hooks (opsional)
+global.socketIO = io;
 
 // LOGIC SOCKET
 io.on("connection", (socket) => {
@@ -122,6 +126,7 @@ app.use("/api/perencanaan", perencanaanRouter);
 app.use("/api/capaian", capaianRouter);
 app.use("/api/kendaraan-dinas", kendaraanDinasRouter);
 app.use("/api/barjas", barjasRouter);
+app.use("/api/PJPL", PJPLRouter);
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });

@@ -30,6 +30,7 @@ const perencanaanRouter = require("./perencanaanRouter");
 const capaianRouter = require("./capaianRouter");
 const kendaraanDinasRouter = require("./kendaraanDinasRouter");
 const barjasRouter = require("./barjasRouter");
+const PJPLRouter = require("./PJPLRouter");
 module.exports = {
   perjalananRouter,
   pegawaiRouter,
@@ -63,4 +64,5 @@ module.exports = {
   capaianRouter,
   kendaraanDinasRouter,
   barjasRouter,
+  PJPLRouter,
 };

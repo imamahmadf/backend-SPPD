@@ -29,6 +29,7 @@ const {
 
   sumberDana,
 } = require("../models");
+const { emitNotifikasiPersonil } = require("./notifikasiControllers");
 const { Op, where } = require("sequelize");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -1069,12 +1070,32 @@ module.exports = {
   terimaVerifikasi: async (req, res) => {
     const personilId = req.body.personilId;
     try {
+      // Cek statusId sebelum update untuk mengetahui apakah berubah dari 2
+      const personilData = await personil.findOne({
+        where: { id: personilId },
+      });
+      const wasStatusId2 = personilData?.statusId === 2;
+
       const result = await personil.update(
         {
           statusId: 3,
         },
         { where: { id: personilId } }
       );
+
+      // Emit notifikasi jika statusId berubah dari 2
+      if (wasStatusId2) {
+        try {
+          const io = req.app.get("socketio");
+          await emitNotifikasiPersonil(io);
+        } catch (notifErr) {
+          console.error(
+            "⚠️ Error emit notifikasi (tidak menghentikan response):",
+            notifErr
+          );
+        }
+      }
+
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
@@ -1089,6 +1110,12 @@ module.exports = {
     const catatan = req.body.catatan;
 
     try {
+      // Cek statusId sebelum update untuk mengetahui apakah berubah dari 2
+      const personilData = await personil.findOne({
+        where: { id: personilId },
+      });
+      const wasStatusId2 = personilData?.statusId === 2;
+
       const result = await personil.update(
         {
           statusId: 4,
@@ -1096,6 +1123,20 @@ module.exports = {
         },
         { where: { id: personilId } }
       );
+
+      // Emit notifikasi jika statusId berubah dari 2
+      if (wasStatusId2) {
+        try {
+          const io = req.app.get("socketio");
+          await emitNotifikasiPersonil(io);
+        } catch (notifErr) {
+          console.error(
+            "⚠️ Error emit notifikasi (tidak menghentikan response):",
+            notifErr
+          );
+        }
+      }
+
       return res.status(200).json({ result });
     } catch (err) {
       console.error(err);
@@ -1122,6 +1163,18 @@ module.exports = {
       );
 
       await transaction.commit();
+
+      // Emit notifikasi realtime setelah update berhasil
+      try {
+        const io = req.app.get("socketio");
+        await emitNotifikasiPersonil(io);
+      } catch (notifErr) {
+        console.error(
+          "⚠️ Error emit notifikasi (tidak menghentikan response):",
+          notifErr
+        );
+      }
+
       return res.status(200).json({ result });
     } catch (err) {
       await transaction.rollback();
@@ -1143,6 +1196,24 @@ module.exports = {
           )
         )
       );
+
+      // Cek apakah ada perubahan statusId menjadi 2 atau dari 2
+      const hasStatusIdChange = personils.some(
+        (p) => p.statusId === 2 || p.statusId !== undefined
+      );
+
+      // Emit notifikasi jika ada perubahan yang mungkin mempengaruhi count
+      if (hasStatusIdChange) {
+        try {
+          const io = req.app.get("socketio");
+          await emitNotifikasiPersonil(io);
+        } catch (notifErr) {
+          console.error(
+            "⚠️ Error emit notifikasi (tidak menghentikan response):",
+            notifErr
+          );
+        }
+      }
 
       return res.status(200).json({ message: "Update berhasil", result });
     } catch (err) {

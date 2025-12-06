@@ -524,6 +524,27 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+
+  searchUnitKerja: async (req, res) => {
+    try {
+      const { q } = req.query;
+
+      const result = await daftarUnitKerja.findAll({
+        where: {
+          unitKerja: {
+            [Op.like]: `%${q}%`, // Import Op dari Sequelize
+          },
+        },
+        attributes: ["id", "unitKerja"],
+        limit: 10,
+        order: [["unitKerja", "ASC"]],
+      });
+
+      res.status(200).json({ result });
+    } catch (err) {
+      res.status(500).json({ message: err.toString(), code: 500 });
+    }
+  },
 };
 
 //cek aja

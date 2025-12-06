@@ -27,6 +27,28 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "personil",
+      hooks: {
+        // Hook setelah update untuk emit notifikasi jika statusId berubah
+        afterUpdate: async (personilInstance, options) => {
+          // Cek apakah statusId berubah menjadi 2 atau dari 2
+          const wasStatusId2 = personilInstance._previousDataValues?.statusId === 2;
+          const isStatusId2 = personilInstance.statusId === 2;
+          
+          if (wasStatusId2 !== isStatusId2) {
+            // Ada perubahan yang mempengaruhi count statusId=2
+            try {
+              // Coba akses io dari global atau dari helper
+              if (global.socketIO) {
+                const { emitNotifikasiPersonil } = require("../controllers/notifikasiControllers");
+                await emitNotifikasiPersonil(global.socketIO);
+              }
+            } catch (err) {
+              // Jangan gagalkan update jika notifikasi gagal
+              console.error("⚠️ Error emit notifikasi dari hook:", err.message);
+            }
+          }
+        },
+      },
     }
   );
   return personil;
