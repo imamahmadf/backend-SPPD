@@ -1124,17 +1124,16 @@ module.exports = {
         { where: { id: personilId } }
       );
 
-      // Emit notifikasi jika statusId berubah dari 2
-      if (wasStatusId2) {
-        try {
-          const io = req.app.get("socketio");
-          await emitNotifikasiPersonil(io);
-        } catch (notifErr) {
-          console.error(
-            "⚠️ Error emit notifikasi (tidak menghentikan response):",
-            notifErr
-          );
-        }
+      // Emit notifikasi karena statusId berubah menjadi 4 (kwitansi ditolak)
+      // Perubahan ini mempengaruhi count statusId=2 (berkurang) dan statusId=4 (bertambah)
+      try {
+        const io = req.app.get("socketio");
+        await emitNotifikasiPersonil(io);
+      } catch (notifErr) {
+        console.error(
+          "⚠️ Error emit notifikasi (tidak menghentikan response):",
+          notifErr
+        );
       }
 
       return res.status(200).json({ result });
@@ -1197,12 +1196,13 @@ module.exports = {
         )
       );
 
-      // Cek apakah ada perubahan statusId menjadi 2 atau dari 2
+      // Cek apakah ada perubahan statusId menjadi 2 (pengajuan) atau 4 (ditolak)
       const hasStatusIdChange = personils.some(
-        (p) => p.statusId === 2 || p.statusId !== undefined
+        (p) => p.statusId === 2 || p.statusId === 4 || p.statusId !== undefined
       );
 
       // Emit notifikasi jika ada perubahan yang mungkin mempengaruhi count
+      // Hook di model juga akan menangani ini, tapi ini untuk memastikan
       if (hasStatusIdChange) {
         try {
           const io = req.app.get("socketio");

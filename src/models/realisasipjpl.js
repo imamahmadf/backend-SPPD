@@ -9,12 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.kinerjaPJPL, {
+        foreignKey: "kinerjaPJPLId",
+        as: "kinerjaPJPL",
+      });
+      this.hasMany(models.hasilKerjaPJPL, {
+        foreignKey: "realisasiPJPLId",
+        as: "hasilKerjaPJPLs",
+      });
     }
   }
   realisasiPJPL.init(
     {
       tanggalAwal: DataTypes.DATE,
       tanggalAkhir: DataTypes.DATE,
+      status: DataTypes.ENUM("diajukan", "ditolak", "diterima"),
       kinerjaPJPLId: DataTypes.INTEGER,
     },
     {

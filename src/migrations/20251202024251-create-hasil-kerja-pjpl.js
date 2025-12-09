@@ -15,13 +15,13 @@ module.exports = {
       nilai: {
         type: Sequelize.INTEGER,
       },
+      status: {
+        type: Sequelize.ENUM("diajukan", "ditolak", "diterima"),
+      },
       realisasiPJPLId: { type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-      status: {
-        type: Sequelize.ENUM("diajukan", "ditolak", "diterima"),
       },
       updatedAt: {
         allowNull: false,

@@ -17,6 +17,7 @@ const {
 } = require("../models");
 
 const { Op } = require("sequelize");
+const ExcelJS = require("exceljs");
 
 module.exports = {
   postSP: async (req, res) => {
@@ -379,6 +380,164 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getDownloadBarjas: async (req, res) => {
+    try {
+      // Ambil semua dokumen barjas dengan relasi yang diperlukan
+      const result = await dokumenBarjas.findAll({
+        include: [
+          {
+            model: jenisDokumenBarjas,
+            attributes: ["id", "jenis"],
+          },
+          {
+            model: SP,
+            attributes: ["id", "nomor", "tanggal"],
+            include: [
+              {
+                model: rekanan,
+                attributes: ["id", "nama"],
+              },
+              {
+                model: akunBelanja,
+                attributes: ["id", "akun", "kode"],
+                include: [
+                  {
+                    model: jenisBelanja,
+                    attributes: ["id", "jenis"],
+                  },
+                ],
+              },
+              {
+                model: subKegPer,
+                attributes: ["id", "nama"],
+                include: [
+                  {
+                    model: daftarUnitKerja,
+                    attributes: ["id", "unitKerja"],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            model: itemDokumenBarjas,
+            attributes: ["id", "jumlah", "barjasId"],
+            include: [
+              {
+                model: barjas,
+                attributes: ["id", "nama", "harga"],
+              },
+            ],
+          },
+        ],
+        order: [["id", "ASC"]],
+      });
+
+      // Generate Excel
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("Rekapan Barjas");
+
+      // Header
+      worksheet.columns = [
+        { header: "No", key: "no", width: 5 },
+        { header: "Nomor Dokumen Barjas", key: "nomorDokumen", width: 30 },
+        { header: "Jenis Dokumen Barjas", key: "jenisDokumen", width: 25 },
+        { header: "Nomor SP", key: "nomorSP", width: 30 },
+        { header: "Tanggal SP", key: "tanggalSP", width: 20 },
+        { header: "Subkegiatan", key: "subkegiatan", width: 30 },
+        { header: "Jenis Belanja", key: "jenisBelanja", width: 20 },
+        { header: "Akun Belanja", key: "akunBelanja", width: 20 },
+        { header: "Unit Kerja", key: "unitKerja", width: 30 },
+        { header: "Nama Rekanan", key: "namaRekanan", width: 30 },
+        { header: "Total Jumlah", key: "totalJumlah", width: 15 },
+        { header: "Total Harga", key: "totalHarga", width: 20 },
+      ];
+
+      // Data rows - setiap item dokumen barjas menjadi satu baris
+      let rowIndex = 0;
+      result.forEach((dokumen) => {
+        const nomorDokumen = dokumen?.nomor || "-";
+        const jenisDokumen = dokumen?.jenisDokumenBarjas?.jenis || "-";
+        const nomorSP = dokumen?.SP?.nomor || "-";
+        const tanggalSP = dokumen?.SP?.tanggal
+          ? new Date(dokumen.SP.tanggal).toLocaleDateString("id-ID")
+          : "-";
+        const subkegiatan = dokumen?.SP?.subKegPer?.nama || "-";
+        const jenisBelanja =
+          dokumen?.SP?.akunBelanja?.jenisBelanja?.jenis || "-";
+        const akunBelanja = dokumen?.SP?.akunBelanja?.akun || "-";
+        const unitKerja =
+          dokumen?.SP?.subKegPer?.daftarUnitKerja?.unitKerja || "-";
+        const namaRekanan = dokumen?.SP?.rekanan?.nama || "-";
+
+        // Jika ada item dokumen barjas, buat baris untuk setiap item
+        if (
+          dokumen?.itemDokumenBarjas &&
+          dokumen.itemDokumenBarjas.length > 0
+        ) {
+          dokumen.itemDokumenBarjas.forEach((item) => {
+            const jumlah = item?.jumlah || 0;
+            const harga = item?.barjas?.harga || 0;
+            const totalHarga = jumlah * harga;
+
+            worksheet.addRow({
+              no: rowIndex + 1,
+              nomorDokumen,
+              jenisDokumen,
+              nomorSP,
+              tanggalSP,
+              subkegiatan,
+              jenisBelanja,
+              akunBelanja,
+              unitKerja,
+              namaRekanan,
+              totalJumlah: jumlah,
+              totalHarga: totalHarga,
+            });
+            rowIndex++;
+          });
+        } else {
+          // Jika tidak ada item, tetap buat baris dengan data dokumen
+          worksheet.addRow({
+            no: rowIndex + 1,
+            nomorDokumen,
+            jenisDokumen,
+            nomorSP,
+            tanggalSP,
+            subkegiatan,
+            jenisBelanja,
+            akunBelanja,
+            unitKerja,
+            namaRekanan,
+            totalJumlah: 0,
+            totalHarga: 0,
+          });
+          rowIndex++;
+        }
+      });
+
+      // Set response headers
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=rekapan-barjas.xlsx"
+      );
+
+      // Send Excel file
+      await workbook.xlsx.write(res);
+      res.end();
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

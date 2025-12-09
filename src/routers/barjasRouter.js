@@ -14,4 +14,5 @@ routers.get("/get/rekanan/search", barjasControllers.searchRekanan);
 routers.get("/get/seed-detail", barjasControllers.getDetilSeed);
 routers.post("/post/tambah-dokumen", barjasControllers.postDokumenBarjas);
 routers.post("/post/rekanan", barjasControllers.postRekanan);
+routers.get("/get/download", barjasControllers.getDownloadBarjas);
 module.exports = routers;
