@@ -545,6 +545,200 @@ module.exports = {
       res.status(500).json({ message: err.toString(), code: 500 });
     }
   },
+
+  getDashboardKeuangan: async (req, res) => {
+    try {
+      const result = await daftarUnitKerja.findAll({
+        attributes: ["id", "unitKerja"],
+        include: [
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "kodeRekening", "subKegiatan"],
+            include: [
+              {
+                model: perjalanan,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: personil,
+                    attributes: ["id", "statusId"],
+                    include: [{ model: rincianBPD, attributes: ["nilai"] }],
+                  },
+                  {
+                    model: jenisPerjalanan,
+                    attributes: ["id", "tipePerjalananId"],
+                    include: [
+                      { model: tipePerjalanan, attributes: ["id", "tipe"] },
+                    ],
+                  },
+                  {
+                    model: tempat,
+                    attributes: [
+                      "id",
+                      "tempat",
+                      "tanggalBerangkat",
+                      "tanggalPulang",
+                    ],
+                  },
+                ],
+              },
+              {
+                model: anggaran,
+                attributes: ["id", "nilai", "tahun", "tipePerjalananId"],
+                include: [
+                  { model: tipePerjalanan, attributes: ["id", "tipe"] },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+
+      // Menghitung total personil per sub kegiatan dan per unit kerja berdasarkan statusId
+      const resultWithTotal = result.map((unitKerja) => {
+        // Counter untuk unit kerja
+        const uniquePersonilUnitKerja = new Set();
+        const statusCountUnitKerja = {
+          1: new Set(),
+          2: new Set(),
+          3: new Set(),
+          4: new Set(),
+        };
+
+        const subKegiatans =
+          unitKerja.daftarSubKegiatans?.map((subKegiatan) => {
+            // Counter untuk sub kegiatan
+            const uniquePersonilSubKegiatan = new Set();
+            const statusCountSubKegiatan = {
+              1: new Set(),
+              2: new Set(),
+              3: new Set(),
+              4: new Set(),
+            };
+
+            // Mengelompokkan anggaran berdasarkan tahun dan tipePerjalananId
+            const groupedAnggaran = {};
+            subKegiatan.anggarans?.forEach((a) => {
+              const tahun = new Date(a.tahun).getFullYear();
+              const key = `${tahun}-${a.tipePerjalananId}`;
+              groupedAnggaran[key] = {
+                tahun,
+                tipePerjalananId: a.tipePerjalananId,
+                tipePerjalanan: a.tipePerjalanan?.tipe || null,
+                anggaran: a.nilai,
+                totalRealisasi: 0,
+                id: a.id,
+              };
+            });
+
+            // Mengumpulkan tempat tujuan dari semua perjalanan
+            const tempatTujuan = new Set();
+            const tipePerjalananList = new Set();
+
+            const perjalanans =
+              subKegiatan.perjalanans?.map((perjalanan) => {
+                const totalPersonilPerjalanan =
+                  perjalanan.personils?.length || 0;
+
+                // Counter untuk perjalanan berdasarkan statusId
+                const statusCountPerjalanan = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+                // Mengumpulkan tempat tujuan
+                perjalanan.tempats?.forEach((tempat) => {
+                  if (tempat.tempat) {
+                    tempatTujuan.add(tempat.tempat);
+                  }
+                });
+
+                // Mengumpulkan tipe perjalanan
+                const tipeId = perjalanan.jenisPerjalanan?.tipePerjalananId;
+                const tipeNama =
+                  perjalanan.jenisPerjalanan?.tipePerjalanan?.tipe;
+                if (tipeId && tipeNama) {
+                  tipePerjalananList.add(tipeNama);
+                }
+
+                // Menghitung personil unik per perjalanan berdasarkan statusId
+                perjalanan.personils?.forEach((personil) => {
+                  if (personil.id) {
+                    uniquePersonilSubKegiatan.add(personil.id);
+                    uniquePersonilUnitKerja.add(personil.id);
+
+                    // Menghitung berdasarkan statusId
+                    const statusId = personil.statusId;
+                    if (
+                      statusId === 1 ||
+                      statusId === 2 ||
+                      statusId === 3 ||
+                      statusId === 4
+                    ) {
+                      statusCountPerjalanan[statusId]++;
+                      statusCountSubKegiatan[statusId].add(personil.id);
+                      statusCountUnitKerja[statusId].add(personil.id);
+                    }
+
+                    // Menghitung realisasi anggaran
+                    if (statusId !== null && tipeId) {
+                      const tanggalBerangkat =
+                        perjalanan.tempats?.[0]?.tanggalBerangkat;
+                      const tahunBerangkat = tanggalBerangkat
+                        ? new Date(tanggalBerangkat).getFullYear()
+                        : null;
+
+                      if (tahunBerangkat) {
+                        const key = `${tahunBerangkat}-${tipeId}`;
+                        if (groupedAnggaran[key]) {
+                          personil.rincianBPDs?.forEach((rincian) => {
+                            groupedAnggaran[key].totalRealisasi +=
+                              rincian.nilai || 0;
+                          });
+                        }
+                      }
+                    }
+                  }
+                });
+
+                return {
+                  ...perjalanan.toJSON(),
+                  totalPersonilPerjalanan,
+                  totalPersonilStatus1: statusCountPerjalanan[1],
+                  totalPersonilStatus2: statusCountPerjalanan[2],
+                  totalPersonilStatus3: statusCountPerjalanan[3],
+                  totalPersonilStatus4: statusCountPerjalanan[4],
+                };
+              }) || [];
+
+            return {
+              ...subKegiatan.toJSON(),
+              perjalanans,
+              totalPersonilSubKegiatan: uniquePersonilSubKegiatan.size,
+              totalPersonilStatus1: statusCountSubKegiatan[1].size,
+              totalPersonilStatus2: statusCountSubKegiatan[2].size,
+              totalPersonilStatus3: statusCountSubKegiatan[3].size,
+              totalPersonilStatus4: statusCountSubKegiatan[4].size,
+              tempatTujuan: Array.from(tempatTujuan),
+              tipePerjalanan: Array.from(tipePerjalananList),
+              anggaranByTipe: Object.values(groupedAnggaran),
+            };
+          }) || [];
+
+        return {
+          ...unitKerja.toJSON(),
+          daftarSubKegiatans: subKegiatans,
+          totalPersonilUnitKerja: uniquePersonilUnitKerja.size,
+          totalPersonilStatus1: statusCountUnitKerja[1].size,
+          totalPersonilStatus2: statusCountUnitKerja[2].size,
+          totalPersonilStatus3: statusCountUnitKerja[3].size,
+          totalPersonilStatus4: statusCountUnitKerja[4].size,
+        };
+      });
+
+      res.status(200).json({ result: resultWithTotal });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: err.toString(), code: 500 });
+    }
+  },
 };
 
 //cek aja

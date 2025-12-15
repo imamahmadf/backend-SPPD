@@ -31,6 +31,7 @@ routers.get(
 routers.post("/post/batch", pegawaiControllers.getPegawaiBatch);
 routers.post("/personil/edit-pegawai", pegawaiControllers.editPersonil);
 routers.post("/personil/hapus/:id", pegawaiControllers.hapusPersonil);
+routers.post("/personil/tambah", pegawaiControllers.tambahPersonil);
 
 routers.post(
   "/upload-usulan",

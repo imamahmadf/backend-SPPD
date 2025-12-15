@@ -22,6 +22,8 @@ const {
   user,
   profile,
   userRole,
+  daftarNomorSurat,
+  jenisSurat,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -740,6 +742,76 @@ module.exports = {
       const result = await personil.destroy({ where: { id } });
       return res.status(200).json({ success: true, data: result });
     } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: err.toString(),
+      });
+    }
+  },
+
+  tambahPersonil: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    const getRomanMonth = (date) => {
+      const months = [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+        "X",
+        "XI",
+        "XII",
+      ];
+      return months[date.getMonth()];
+    };
+
+    try {
+      const {
+        perjalananId,
+        pegawaiId,
+        indukUnitKerjaId,
+        kode,
+        tanggalPengajuan,
+      } = req.body;
+      let noSpd;
+
+      const dbNoSPD = await daftarNomorSurat.findOne({
+        where: { indukUnitKerjaId },
+        include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 3 } }],
+        transaction,
+      });
+
+      if (!dbNoSPD) {
+        throw new Error("Data nomor surat tidak ditemukan.");
+      }
+
+      let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
+      noSpd = dbNoSPD.jenisSurat.nomorSurat
+        .replace("NOMOR", (nomorAwalSPD + 1).toString())
+        .replace("KODE", kode)
+        .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
+
+      await daftarNomorSurat.update(
+        { nomorLoket: nomorAwalSPD + 1 }, // Hanya objek yang berisi field yang ingin diperbarui
+        { where: { id: dbNoSPD.id }, transaction }
+      );
+
+      await personil.create({
+        pegawaiId,
+        statusId: 1,
+        perjalananId,
+        nomorSPD: noSpd,
+      });
+
+      await transaction.commit();
+      return res.status(200).json({ success: true });
+    } catch (err) {
+      await transaction.rollback();
       console.error(err);
       return res.status(500).json({
         success: false,

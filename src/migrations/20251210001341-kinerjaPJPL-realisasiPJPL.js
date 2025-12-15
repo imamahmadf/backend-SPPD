@@ -1,11 +1,11 @@
 "use strict";
 
-const constraintName = "fk-realisasiPJPL-kinerjaPJPL";
+const constraintName = "fk-kinerjaPJPL-realisasiPJPL";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addConstraint("realisasiPJPLs", {
-      fields: ["kinerjaPJPLId"],
+    await queryInterface.addConstraint("kinerjaPJPLs", {
+      fields: ["realisasiPJPLId"],
       type: "foreign key",
       name: constraintName,
       references: {
@@ -19,6 +19,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeConstraint("realisasiPJPLs", constraintName);
+    await queryInterface.removeConstraint("kinerjaPJPLs", constraintName);
   },
 };

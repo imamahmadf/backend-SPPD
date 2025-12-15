@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "indikatorPejabatId",
         as: "indikatorPejabat",
       });
-      this.hasMany(models.realisasiPJPL, {
+      this.belongsToMany(models.realisasiPJPL, {
+        through: "realisasiKinerjaPJPLs",
         foreignKey: "kinerjaPJPLId",
         as: "realisasiPJPLs",
       });
@@ -30,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       indikator: DataTypes.TEXT,
       target: DataTypes.INTEGER,
       status: DataTypes.ENUM("diajukan", "ditolak", "diterima"),
+      satuan: DataTypes.STRING,
     },
     {
       sequelize,

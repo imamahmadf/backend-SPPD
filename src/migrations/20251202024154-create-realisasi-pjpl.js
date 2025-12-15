@@ -18,11 +18,7 @@ module.exports = {
       status: {
         type: Sequelize.ENUM("diajukan", "ditolak", "diterima"),
       },
-      kinerjaPJPLId: { type: Sequelize.INTEGER },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,

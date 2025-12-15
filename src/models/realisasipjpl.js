@@ -9,9 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.kinerjaPJPL, {
-        foreignKey: "kinerjaPJPLId",
-        as: "kinerjaPJPL",
+      this.belongsToMany(models.kinerjaPJPL, {
+        through: "realisasiKinerjaPJPLs",
+        foreignKey: "realisasiPJPLId",
+        as: "kinerjaPJPLs",
       });
       this.hasMany(models.hasilKerjaPJPL, {
         foreignKey: "realisasiPJPLId",
@@ -24,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       tanggalAwal: DataTypes.DATE,
       tanggalAkhir: DataTypes.DATE,
       status: DataTypes.ENUM("diajukan", "ditolak", "diterima"),
-      kinerjaPJPLId: DataTypes.INTEGER,
     },
     {
       sequelize,

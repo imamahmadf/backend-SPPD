@@ -33,15 +33,14 @@ routers.delete(
   "/delete/realisasi-pjpl/:id",
   PJPLControllers.deleteRealisasiPJPL
 );
-
-// ========== HASIL KERJA PJPL ROUTES ==========
 routers.post("/post/hasil-kerja-pjpl", PJPLControllers.postHasilKerjaPJPL);
-routers.get("/get/hasil-kerja-pjpl", PJPLControllers.getHasilKerjaPJPL);
-routers.get("/get/hasil-kerja-pjpl/:id", PJPLControllers.getHasilKerjaPJPLById);
-routers.put("/put/hasil-kerja-pjpl/:id", PJPLControllers.updateHasilKerjaPJPL);
-routers.delete(
-  "/delete/hasil-kerja-pjpl/:id",
-  PJPLControllers.deleteHasilKerjaPJPL
+routers.get(
+  "/get/laporan-kinerja-pjpl/:id",
+  PJPLControllers.getLaporanKinerjaPJPL
 );
 
+routers.post(
+  "/update/hasil-kerja-pjpl/:id",
+  PJPLControllers.updateStatusLaporanPJPL
+);
 module.exports = routers;

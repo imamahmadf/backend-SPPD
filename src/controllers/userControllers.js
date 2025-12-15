@@ -146,11 +146,12 @@ module.exports = {
 
   // Contoh endpoint yang dilindungi
   getProfile: async (req, res) => {
-    const userId = req.params.id;
+    const id = req.params.id;
+
     try {
       const result = await profile.findOne({
         attributes: ["id", "nama"],
-        where: { userId },
+        where: { id },
         include: [
           {
             model: daftarUnitKerja,

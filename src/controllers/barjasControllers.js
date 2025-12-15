@@ -28,6 +28,7 @@ module.exports = {
       subKegPerId,
       indukUnitKerjaId,
       nomorSPId,
+      unitKerjaId,
     } = req.body;
     const transaction = await sequelize.transaction();
 
@@ -68,6 +69,7 @@ module.exports = {
           akunBelanjaId,
           subKegPerId,
           nomorSPId,
+          unitKerjaId,
         },
         { transaction }
       );
@@ -146,6 +148,9 @@ module.exports = {
           },
         ],
       });
+      // const resultUnitKerja = await daftarUnitKerja.findAll({
+      //   attributes: ["id", "unitKerja"],
+      // });
       return res.status(200).json({ resultNomorSP, resultAkunBelanja });
     } catch (err) {
       console.log(err);
@@ -250,11 +255,18 @@ module.exports = {
     const limit = parseInt(req.query.limit) || 50;
     const offset = limit * page;
     const unitKerjaId = parseInt(req.query.unitKerjaId);
-
+    const subKegPerId = parseInt(req.query.subKegPerId);
     const nomor = parseInt(req.query.nomor) || "";
     const whereCondition = { nomor: { [Op.like]: "%" + nomor + "%" } };
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+    if (subKegPerId) {
+      whereCondition.subKegPerId = subKegPerId;
+    }
     try {
       const result = await SP.findAll(
         {

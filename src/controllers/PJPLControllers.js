@@ -16,38 +16,13 @@ const {
   kontrakPJPL,
   kinerjaPJPL,
   realisasiPJPL,
+  realisasiKinerjaPJPL,
   hasilKerjaPJPL,
 } = require("../models");
 
 const { Op } = require("sequelize");
 
 module.exports = {
-  // tes: async (req, res) => {
-  //   try {
-  //     const resultUser = await user.findOne({
-  //       where: { email: "tes@mail.com" },
-  //       include: [
-  //         { model: userRole, include: [{ model: role, attributes: ["nama"] }] },
-  //         {
-  //           model: profile,
-  //           attributes: ["id", "nama", "profilePic"],
-  //           include: [
-  //             {
-  //               model: daftarUnitKerja,
-  //               attributes: ["id"],
-  //               as: "unitKerja-profile",
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     });
-  //     return res.status(200).json({ resultUser });
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json({ error: err.message });
-  //   }
-  // },
-
   getPejabatVerifikator: async (req, res) => {
     try {
       const result = await pejabatVerifikator.findAll({
@@ -104,26 +79,6 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
-  // getIndikatorPejabat: async (req, res) => {
-  //   const id = req.params.id;
-  //   console.log("ID PEH+GAWAI", id);
-  //   try {
-  //     const result = await indikatorPejabat.findAll({
-  //       include: [
-  //         {
-  //           model: pejabatVerifikator,
-  //           attributes: ["id"],
-  //           require: true,
-  //           where: { pegawaiId: id },
-  //         },
-  //       ],
-  //     });
-  //     return res.status(200).json({ result });
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json({ error: err.message });
-  //   }
-  // },
 
   getIndikatorPejabat: async (req, res) => {
     const id = req.params.id;
@@ -260,6 +215,7 @@ module.exports = {
             include: [
               {
                 model: indikatorPejabat,
+                as: "indikatorPejabat",
                 attributes: ["id"],
                 include: [
                   {
@@ -288,16 +244,22 @@ module.exports = {
 
   // ========== KINERJA PJPL CONTROLLERS ==========
   postKinerjaPJPL: async (req, res) => {
-    const { kontrakPJPLId, indikatorPejabatId, indikator, target, status } =
-      req.body;
+    const {
+      kontrakPJPLId,
+      indikatorPejabatId,
+      rencanaHasilKerja,
+      target,
+      satuan,
+    } = req.body;
 
     try {
       const result = await kinerjaPJPL.create({
         kontrakPJPLId,
         indikatorPejabatId,
-        indikator,
+        indikator: rencanaHasilKerja,
         target,
-        status: status || "diajukan",
+        status: "diajukan",
+        satuan,
       });
 
       return res.status(200).json({ result });
@@ -321,6 +283,7 @@ module.exports = {
         include: [
           {
             model: kontrakPJPL,
+            as: "kontrakPJPL",
             attributes: ["id", "tanggalAwal", "tanggalAkhir"],
             include: [
               {
@@ -331,6 +294,7 @@ module.exports = {
           },
           {
             model: indikatorPejabat,
+            as: "indikatorPejabat",
             attributes: ["id", "indikator"],
             include: [
               {
@@ -365,6 +329,7 @@ module.exports = {
         include: [
           {
             model: kontrakPJPL,
+            as: "kontrakPJPL",
             attributes: ["id", "tanggalAwal", "tanggalAkhir"],
             include: [
               {
@@ -375,6 +340,7 @@ module.exports = {
           },
           {
             model: indikatorPejabat,
+            as: "indikatorPejabat",
             attributes: ["id", "indikator"],
             include: [
               {
@@ -442,10 +408,12 @@ module.exports = {
         include: [
           {
             model: kontrakPJPL,
+            as: "kontrakPJPL",
             attributes: ["id", "tanggalAwal", "tanggalAkhir"],
           },
           {
             model: indikatorPejabat,
+            as: "indikatorPejabat",
             attributes: ["id", "indikator"],
           },
         ],
@@ -481,6 +449,23 @@ module.exports = {
     const { tanggalAwal, tanggalAkhir, kinerjaPJPLId, status } = req.body;
 
     try {
+      // Validasi input
+      if (!tanggalAwal || !tanggalAkhir) {
+        return res.status(400).json({
+          error: "Tanggal awal dan tanggal akhir harus diisi",
+        });
+      }
+
+      if (
+        !kinerjaPJPLId ||
+        !Array.isArray(kinerjaPJPLId) ||
+        kinerjaPJPLId.length === 0
+      ) {
+        return res.status(400).json({
+          error: "kinerjaPJPLId harus berupa array dan tidak boleh kosong",
+        });
+      }
+
       // Validasi tanggal
       if (new Date(tanggalAwal) > new Date(tanggalAkhir)) {
         return res.status(400).json({
@@ -488,11 +473,32 @@ module.exports = {
         });
       }
 
+      // 1. Buat data di realisasiPJPL terlebih dahulu
       const result = await realisasiPJPL.create({
         tanggalAwal,
         tanggalAkhir,
-        kinerjaPJPLId,
         status: status || "diajukan",
+      });
+
+      // 2. Hubungkan kinerjaPJPL dengan realisasiPJPL menggunakan relasi many-to-many
+      // Menggunakan kinerjaPJPLId dari frontend untuk menentukan data mana yang dihubungkan
+      const kinerjaPJPLRecords = await kinerjaPJPL.findAll({
+        where: { id: kinerjaPJPLId },
+      });
+
+      if (kinerjaPJPLRecords.length > 0) {
+        await result.setKinerjaPJPLs(kinerjaPJPLRecords);
+      }
+
+      // Reload untuk mendapatkan data lengkap dengan relasi
+      await result.reload({
+        include: [
+          {
+            model: kinerjaPJPL,
+            as: "kinerjaPJPLs",
+            attributes: ["id", "indikator", "target", "status"],
+          },
+        ],
       });
 
       return res.status(200).json({ result });
@@ -503,33 +509,41 @@ module.exports = {
   },
 
   getRealisasiPJPL: async (req, res) => {
-    const { kinerjaPJPLId } = req.query;
+    const { kontrakPJPLId } = req.query;
 
     try {
       const where = {};
-      if (kinerjaPJPLId) {
-        where.kinerjaPJPLId = kinerjaPJPLId;
+
+      // Setup include untuk kinerjaPJPL
+      const kinerjaInclude = {
+        model: kinerjaPJPL,
+        as: "kinerjaPJPLs",
+        attributes: ["id", "indikator", "target", "status"],
+        include: [
+          {
+            model: kontrakPJPL,
+            as: "kontrakPJPL",
+            attributes: ["id", "tanggalAwal", "tanggalAkhir"],
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip", "jabatan"],
+              },
+            ],
+          },
+        ],
+      };
+
+      // Jika kontrakPJPLId diberikan, tambahkan where clause di kontrakPJPL
+      if (kontrakPJPLId) {
+        kinerjaInclude.include[0].where = { id: kontrakPJPLId };
+        kinerjaInclude.required = true; // INNER JOIN untuk memastikan hanya data dengan kontrakPJPL yang sesuai
       }
 
       const result = await realisasiPJPL.findAll({
         where,
         include: [
-          {
-            model: kinerjaPJPL,
-            attributes: ["id", "indikator", "target", "status"],
-            include: [
-              {
-                model: kontrakPJPL,
-                attributes: ["id", "tanggalAwal", "tanggalAkhir"],
-                include: [
-                  {
-                    model: pegawai,
-                    attributes: ["id", "nama", "nip", "jabatan"],
-                  },
-                ],
-              },
-            ],
-          },
+          kinerjaInclude,
           {
             model: hasilKerjaPJPL,
             as: "hasilKerjaPJPLs",
@@ -555,10 +569,25 @@ module.exports = {
         include: [
           {
             model: kinerjaPJPL,
-            attributes: ["id", "indikator", "target", "status"],
+            as: "kinerjaPJPLs",
+            attributes: ["id", "indikator", "target", "status", "satuan"],
+            through: {
+              attributes: [
+                "id",
+                "kinerjaPJPLId",
+                "realisasiPJPLId",
+                "hasil",
+                "nilai",
+                "status",
+                "buktiDukung",
+                "createdAt",
+                "updatedAt",
+              ],
+            },
             include: [
               {
                 model: kontrakPJPL,
+                as: "kontrakPJPL",
                 attributes: ["id", "tanggalAwal", "tanggalAkhir"],
                 include: [
                   {
@@ -569,6 +598,7 @@ module.exports = {
               },
               {
                 model: indikatorPejabat,
+                as: "indikatorPejabat",
                 attributes: ["id", "indikator"],
               },
             ],
@@ -665,17 +695,56 @@ module.exports = {
     }
   },
 
-  // ========== HASIL KERJA PJPL CONTROLLERS ==========
   postHasilKerjaPJPL: async (req, res) => {
-    const { hasil, nilai, realisasiPJPLId, status } = req.body;
-
+    const { realisasiKinerjaPJPLId, capaian, buktiDukung, status } = req.body;
+    console.log(req.body);
     try {
-      const result = await hasilKerjaPJPL.create({
-        hasil,
-        nilai,
-        realisasiPJPLId,
-        status: status || "diajukan",
-      });
+      // Validasi input
+      if (!realisasiKinerjaPJPLId) {
+        return res.status(400).json({
+          error: "realisasiKinerjaPJPLId harus diisi",
+        });
+      }
+
+      // Cek apakah data ada
+      const existingData = await realisasiKinerjaPJPL.findByPk(
+        realisasiKinerjaPJPLId
+      );
+
+      if (!existingData) {
+        return res.status(404).json({
+          error: "Realisasi Kinerja PJPL tidak ditemukan",
+        });
+      }
+
+      // Update data
+      await realisasiKinerjaPJPL.update(
+        {
+          hasil: capaian,
+          buktiDukung,
+          status,
+        },
+        { where: { id: realisasiKinerjaPJPLId } }
+      );
+
+      // Ambil data yang sudah diupdate
+      const result = await realisasiKinerjaPJPL.findByPk(
+        realisasiKinerjaPJPLId,
+        {
+          include: [
+            {
+              model: kinerjaPJPL,
+              as: "kinerjaPJPL",
+              attributes: ["id", "indikator", "target", "status"],
+            },
+            {
+              model: realisasiPJPL,
+              as: "realisasiPJPL",
+              attributes: ["id", "tanggalAwal", "tanggalAkhir", "status"],
+            },
+          ],
+        }
+      );
 
       return res.status(200).json({ result });
     } catch (err) {
@@ -684,43 +753,53 @@ module.exports = {
     }
   },
 
-  getHasilKerjaPJPL: async (req, res) => {
-    const { realisasiPJPLId } = req.query;
+  getLaporanKinerjaPJPL: async (req, res) => {
+    const { id } = req.params; // pegawaiId
 
     try {
-      const where = {};
-      if (realisasiPJPLId) {
-        where.realisasiPJPLId = realisasiPJPLId;
-      }
-
-      const result = await hasilKerjaPJPL.findAll({
-        where,
+      const result = await realisasiKinerjaPJPL.findAll({
+        attributes: [
+          "id",
+          "kinerjaPJPLId",
+          "realisasiPJPLId",
+          "hasil",
+          "nilai",
+          "status",
+          "buktiDukung",
+          "createdAt",
+          "updatedAt",
+        ],
+        required: true,
         include: [
           {
-            model: realisasiPJPL,
-            as: "realisasiPJPL",
-            attributes: ["id", "tanggalAwal", "tanggalAkhir", "status"],
+            model: kinerjaPJPL,
+            as: "kinerjaPJPL",
+            attributes: ["id", "indikator", "target", "status"],
+            required: true,
             include: [
               {
-                model: kinerjaPJPL,
-                attributes: ["id", "indikator", "target", "status"],
+                model: kontrakPJPL,
+                as: "kontrakPJPL",
+                attributes: ["id", "tanggalAwal", "tanggalAkhir"],
+                required: true,
+              },
+              {
+                model: indikatorPejabat,
+                as: "indikatorPejabat",
+                attributes: ["id", "indikator"],
+                required: true,
                 include: [
                   {
-                    model: kontrakPJPL,
-                    attributes: ["id", "tanggalAwal", "tanggalAkhir"],
-                    include: [
-                      {
-                        model: pegawai,
-                        attributes: ["id", "nama", "nip", "jabatan"],
-                      },
-                    ],
+                    model: pejabatVerifikator,
+                    attributes: ["id", "pegawaiId", "unitKerjaId"],
+                    where: { pegawaiId: id },
+                    required: true,
                   },
                 ],
               },
             ],
           },
         ],
-        order: [["createdAt", "DESC"]],
       });
 
       return res.status(200).json({ result });
@@ -730,114 +809,44 @@ module.exports = {
     }
   },
 
-  getHasilKerjaPJPLById: async (req, res) => {
-    const { id } = req.params;
-
-    try {
-      const result = await hasilKerjaPJPL.findOne({
-        where: { id },
-        include: [
-          {
-            model: realisasiPJPL,
-            as: "realisasiPJPL",
-            attributes: ["id", "tanggalAwal", "tanggalAkhir", "status"],
-            include: [
-              {
-                model: kinerjaPJPL,
-                attributes: ["id", "indikator", "target", "status"],
-                include: [
-                  {
-                    model: kontrakPJPL,
-                    attributes: ["id", "tanggalAwal", "tanggalAkhir"],
-                    include: [
-                      {
-                        model: pegawai,
-                        attributes: ["id", "nama", "nip", "jabatan"],
-                      },
-                    ],
-                  },
-                  {
-                    model: indikatorPejabat,
-                    attributes: ["id", "indikator"],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+  updateStatusLaporanPJPL: async (req, res) => {
+    const { id } = req.params; // id realisasiKinerjaPJPL
+    const { status, nilai } = req.body;
+    console.log("CEKK", req.body, id);
+    const allowedStatus = ["diajukan", "ditolak", "diterima"];
+    if (!status || !allowedStatus.includes(status)) {
+      return res.status(400).json({
+        error: "Status harus diisi dan bernilai diajukan/ditolak/diterima",
       });
-
-      if (!result) {
-        return res
-          .status(404)
-          .json({ error: "Hasil kerja PJPL tidak ditemukan" });
-      }
-
-      return res.status(200).json({ result });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: err.message });
     }
-  },
-
-  updateHasilKerjaPJPL: async (req, res) => {
-    const { id } = req.params;
-    const { hasil, nilai, status } = req.body;
 
     try {
-      const hasilKerja = await hasilKerjaPJPL.findByPk(id);
-      if (!hasilKerja) {
+      const [updated] = await realisasiKinerjaPJPL.update(
+        { status, nilai },
+        { where: { id } }
+      );
+
+      if (updated === 0) {
         return res
           .status(404)
-          .json({ error: "Hasil kerja PJPL tidak ditemukan" });
+          .json({ error: "Realisasi Kinerja PJPL tidak ditemukan" });
       }
 
-      const updateData = {};
-      if (hasil !== undefined) updateData.hasil = hasil;
-      if (nilai !== undefined) updateData.nilai = nilai;
-      if (status !== undefined) updateData.status = status;
-
-      await hasilKerja.update(updateData);
-
-      const result = await hasilKerjaPJPL.findByPk(id, {
-        include: [
-          {
-            model: realisasiPJPL,
-            as: "realisasiPJPL",
-            attributes: ["id", "tanggalAwal", "tanggalAkhir", "status"],
-            include: [
-              {
-                model: kinerjaPJPL,
-                attributes: ["id", "indikator", "target"],
-              },
-            ],
-          },
+      const result = await realisasiKinerjaPJPL.findByPk(id, {
+        attributes: [
+          "id",
+          "kinerjaPJPLId",
+          "realisasiPJPLId",
+          "hasil",
+          "nilai",
+          "status",
+          "buktiDukung",
+          "createdAt",
+          "updatedAt",
         ],
       });
 
       return res.status(200).json({ result });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ error: err.message });
-    }
-  },
-
-  deleteHasilKerjaPJPL: async (req, res) => {
-    const { id } = req.params;
-
-    try {
-      const hasilKerja = await hasilKerjaPJPL.findByPk(id);
-      if (!hasilKerja) {
-        return res
-          .status(404)
-          .json({ error: "Hasil kerja PJPL tidak ditemukan" });
-      }
-
-      await hasilKerja.destroy();
-
-      return res
-        .status(200)
-        .json({ message: "Hasil kerja PJPL berhasil dihapus" });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
