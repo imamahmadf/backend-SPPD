@@ -25,4 +25,8 @@ routers.post("/post/jenis-belanja", barjasControllers.postJenisBelanja);
 routers.get("/get/pengaturan", barjasControllers.getPengaturan);
 
 routers.post("/delete/barjas", barjasControllers.deleteBarjas);
+
+routers.get("/get/nomor-sp/:id", barjasControllers.getNomorSP);
+routers.post("/post/nomor-sp", barjasControllers.postNomorSP);
+routers.post("/edit/nomor-sp", barjasControllers.editNomorSP);
 module.exports = routers;

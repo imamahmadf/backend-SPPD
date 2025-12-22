@@ -32,16 +32,16 @@ module.exports = {
       nomorSPManual,
     } = req.body;
     const transaction = await sequelize.transaction();
-
+    console.log(req.body);
     try {
       let nomorSuratBaru;
 
       if (!nomorSPManual) {
-        // 1️⃣ Ambil nomor terakhir
+        // 1️⃣ Ambil nomor terakhir dengan lock untuk menghindari race condition
         const nomorAwal = await nomorSP.findOne({
-          where: { indukUnitKerjaId },
+          where: { id: nomorSPId },
           transaction,
-          lock: transaction.LOCK.UPDATE, // penting untuk menghindari race condition
+          lock: true, // lock row untuk menghindari race condition
         });
 
         if (!nomorAwal) {
@@ -50,14 +50,16 @@ module.exports = {
           );
         }
 
-        // 2️⃣ Update nomor berikutnya
+        // 2️⃣ Hitung nomor baru
+        const nomorTerbaru = nomorAwal.nomorLoket + 1;
+
+        // 3️⃣ Update nomor berikutnya
         await nomorSP.update(
-          { nomorLoket: nomorAwal.nomorLoket + 1 },
+          { nomorLoket: nomorTerbaru },
           { where: { id: nomorAwal.id }, transaction }
         );
-        // 3️⃣ Ambil nilai terbaru setelah update (gunakan nomorLoket yang sudah di-update)
-        const nomorTerbaru = nomorAwal.nomorLoket;
 
+        // 4️⃣ Format nomor surat dengan nomor terbaru
         nomorSuratBaru = nomorAwal.nomorSurat
           .replace("NOMOR", nomorTerbaru)
           .replace("TAHUN", new Date(tanggal).getFullYear());
@@ -690,6 +692,52 @@ module.exports = {
     console.log(req.body);
     try {
       const result = await barjas.destroy({ where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  getNomorSP: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const result = await nomorSP.findAll({ where: { indukUnitKerjaId: id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postNomorSP: async (req, res) => {
+    const { indukUnitKerjaId, nomorSurat } = req.body;
+
+    try {
+      const result = await nomorSP.create({
+        indukUnitKerjaId,
+        nomorSurat,
+        nomorLoket: 0,
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editNomorSP: async (req, res) => {
+    const { id, nomorSurat, nomorLoket } = req.body;
+
+    try {
+      const result = await nomorSP.update(
+        {
+          nomorSurat,
+          nomorLoket,
+        },
+        { where: { id } }
+      );
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);
