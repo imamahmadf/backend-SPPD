@@ -423,4 +423,16 @@ module.exports = {
       res.status(500).json({ error: err.message });
     }
   },
+
+  postSubKegPer: async (req, res) => {
+    const { nama, kode, unitKerjaId } = req.body;
+    console.log(req.body);
+    try {
+      const result = await subKegPer.create({ nama, kode, unitKerjaId });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
 };

@@ -15,4 +15,14 @@ routers.get("/get/seed-detail", barjasControllers.getDetilSeed);
 routers.post("/post/tambah-dokumen", barjasControllers.postDokumenBarjas);
 routers.post("/post/rekanan", barjasControllers.postRekanan);
 routers.get("/get/download", barjasControllers.getDownloadBarjas);
+routers.get("/get/jenis-dokumen/:id", barjasControllers.getJenisDokumen);
+routers.post("/post/jenis-dokumen", barjasControllers.postJenisDokumen);
+routers.post("/edit/jenis-dokumen", barjasControllers.editJenisDokumen);
+
+routers.post("/post/jenis-barjas", barjasControllers.postJenisBarjas);
+routers.post("/post/akun-belanja", barjasControllers.postAkunBelanja);
+routers.post("/post/jenis-belanja", barjasControllers.postJenisBelanja);
+routers.get("/get/pengaturan", barjasControllers.getPengaturan);
+
+routers.post("/delete/barjas", barjasControllers.deleteBarjas);
 module.exports = routers;

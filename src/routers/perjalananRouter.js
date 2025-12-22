@@ -11,6 +11,7 @@ routers.post(
 );
 
 routers.post("/post/surat-tugas", perjalananControllers.postSuratTugas);
+routers.post("/post/surat-perjalanan-dinas", perjalananControllers.postSPD);
 routers.post(
   "/post/surat-tugas-kendaraan",
   perjalananControllers.postSuratTugasKendaraan

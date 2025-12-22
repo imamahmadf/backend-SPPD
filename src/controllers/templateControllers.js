@@ -150,6 +150,15 @@ module.exports = {
             where: { id },
           }
         );
+      } else if (jenis == 5) {
+        await indukUnitKerja.update(
+          {
+            templateSPD: filePath, // Nama asli
+          },
+          {
+            where: { id },
+          }
+        );
       }
 
       return res.status(200).json({

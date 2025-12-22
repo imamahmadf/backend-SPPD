@@ -7,4 +7,6 @@ routers.get("/get", rekapControllers.getPerjalanan);
 routers.get("/get/sppd", rekapControllers.getSPPD);
 routers.post("/post/sppd", rekapControllers.postSPPD);
 
+routers.get("/get/perjalanan/download", rekapControllers.getRekap);
+
 module.exports = routers;

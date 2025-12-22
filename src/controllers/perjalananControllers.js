@@ -1444,6 +1444,356 @@ module.exports = {
             ? tempat[2]?.dalamKota.nama
             : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
+        tanggalBerangkat: formattedTanggalBerangkat,
+        tanggalPulang: formattedTanggalPulang,
+        tanggalBerangkat1: tempat[0]?.tanggalBerangkat,
+        tanggalPulang1: tempat[0]?.tanggalPulang,
+        asal,
+        kode,
+        dasar: dasar ? dasar : noNotaDinas,
+        noSuratTugas: nomorBaru,
+        ttdSurTug,
+        id,
+        tanggalPengajuan: formattedTanggalPengajuan,
+        tempat,
+        untuk,
+        ttdSurTugJabatan,
+        ttdSurTugNama,
+        ttdSurTugNip,
+        ttdSurTugPangkat,
+        ttdSurTugGolongan,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
+        KPAJabatan,
+        dataPegawai,
+      });
+
+      // Simpan hasil dokumen ke buffer
+      const buffer = doc.getZip().generate({ type: "nodebuffer" });
+
+      // Buat path untuk menyimpan file hasil
+      const outputFileName = `SPPD_${Date.now()}.docx`;
+      const outputPath = path.join(
+        __dirname,
+        "../public/output",
+        outputFileName
+      );
+
+      // Simpan file hasil ke server
+      fs.writeFileSync(outputPath, buffer);
+
+      // Kirim file sebagai respons
+      res.download(outputPath, outputFileName, (err) => {
+        if (err) {
+          console.error("Error sending file:", err);
+          res.status(500).send("Error generating file");
+        }
+        // Hapus file setelah dikirim
+        fs.unlinkSync(outputPath);
+      });
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  postSPD: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const {
+        asal,
+        kode,
+        personilFE,
+        ttdSurTug,
+        id,
+        tanggalPengajuan,
+        tempat,
+        untuk,
+
+        ttdSurTugUnitKerja,
+        KPANama,
+        KPANip,
+        KPAPangkat,
+        KPAGolongan,
+        KPAJabatan,
+        noNotaDinas,
+        noSuratTugas,
+        jenis,
+        unitKerja,
+        dasar,
+        indukUnitKerjaFE,
+        ttdSurtTugKode,
+        isNotaDinas,
+      } = req.body;
+      // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
+      console.log(isNotaDinas, dasar, "ini is nota dinas");
+      const totalDurasi = tempat.reduce(
+        (total, temp) => total + temp.dalamKota.durasi,
+        0
+      );
+
+      const getRomanMonth = (date) => {
+        const months = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+        ];
+        return months[date.getMonth()];
+      };
+      function terbilang(angka) {
+        const satuan = [
+          "",
+          "Satu",
+          "Dua",
+          "Tiga",
+          "Empat",
+          "Lima",
+          "Enam",
+          "Tujuh",
+          "Delapan",
+          "Sembilan",
+          "Sepuluh",
+          "Sebelas",
+        ];
+
+        if (angka < 12) {
+          return satuan[angka];
+        } else if (angka < 20) {
+          return terbilang(angka - 10) + " Belas";
+        } else if (angka < 100) {
+          return (
+            terbilang(Math.floor(angka / 10)) +
+            " Puluh " +
+            terbilang(angka % 10)
+          );
+        } else if (angka < 200) {
+          return "Seratus " + terbilang(angka - 100);
+        }
+      }
+      // ////////////////////TERBILANG///////////////////////
+      const calculateDaysDifference = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+        const difference = Math.abs(end - start);
+        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
+      };
+
+      const daysDifference = calculateDaysDifference(
+        tempat[0].tanggalBerangkat,
+        tempat[tempat.length - 1].tanggalPulang
+      );
+
+      const formatTanggal = (tanggal) => {
+        return new Date(tanggal).toLocaleDateString("id-ID", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        });
+      };
+      const formattedTanggalBerangkat = new Date(
+        tempat[0].tanggalBerangkat
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+
+      const formattedTanggalPulang = new Date(
+        tempat[tempat.length - 1].tanggalPulang
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      const formattedTanggalPengajuan = new Date(
+        tanggalPengajuan
+      ).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      // Path file template
+      // Ambil satu data nomor surat berdasarkan id = 1
+      var nomorBaru = noSuratTugas;
+      let noSpd;
+
+      if (!noSuratTugas) {
+        // MENGABIL NOMOR SURAT TUGAS /////////////
+        const dbNoSurTug = await daftarNomorSurat.findOne({
+          where: { indukUnitKerjaId: ttdSurTugUnitKerja },
+          include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 1 } }],
+
+          transaction,
+        });
+
+        // Pastikan dbNoSurat ditemukan sebelum digunakan
+        if (!dbNoSurTug) {
+          throw new Error("Data nomor surat tidak ditemukan.");
+        }
+
+        const nomorLoket = parseInt(dbNoSurTug.nomorLoket) + 1;
+        const codeNoST =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+        nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
+          .replace(
+            "NOMOR",
+            indukUnitKerjaFE.indukUnitKerja.id == 1
+              ? "         "
+              : nomorLoket.toString()
+          )
+          .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
+          .replace("KODE", codeNoST);
+        // console.log(dbNoSurTug.id, "NOMOR SURAT");
+        // Update nomor loket ke database
+        await daftarNomorSurat.update(
+          { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
+          { where: { id: dbNoSurTug.id }, transaction }
+        );
+
+        // Update data perjalanan
+        await perjalanan.update(
+          { noSuratTugas: nomorBaru },
+          { where: { id }, transaction }
+        );
+        //MENGAMBIL NOMOR SPD ///////////
+
+        if (totalDurasi > 7) {
+          const dbNoSPD = await daftarNomorSurat.findOne({
+            where: { indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id },
+            include: [
+              { model: jenisSurat, as: "jenisSurat", where: { id: 3 } },
+            ],
+          });
+          let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
+
+          // console.log(dbNoSPD.jenisSurat.nomorSurat, "TES");
+
+          const codeNoSPD =
+            ttdSurtTugKode === indukUnitKerjaFE.kode
+              ? ttdSurtTugKode
+              : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+          noSpd = personilFE.map((item, index) => ({
+            nomorSPD: dbNoSPD.jenisSurat.nomorSurat
+              .replace(
+                "NOMOR",
+                (indukUnitKerjaFE.indukUnitKerja.id == 1
+                  ? "         "
+                  : nomorAwalSPD + index + 1
+                ).toString()
+              )
+              .replace("KODE", codeNoSPD)
+              .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
+          }));
+          await daftarNomorSurat.update(
+            { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
+            { where: { id: dbNoSPD.id }, transaction }
+          );
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: noSpd[index].nomorSPD,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
+        } else {
+          for (const [index, item] of personilFE.entries()) {
+            await personil.update(
+              {
+                nomorSPD: null,
+                statusId: 1,
+              },
+              {
+                where: { id: item.id }, // Pastikan ada kriteria unik
+              }
+            );
+          }
+        }
+
+        const codeSurTug =
+          ttdSurtTugKode === indukUnitKerjaFE.kode
+            ? ttdSurtTugKode
+            : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
+
+        /////////////////////////////////////////
+      } else {
+        noSpd = personilFE.map((item, index) => ({
+          nomorSPD: item.nomorSPD,
+        }));
+      }
+
+      const template = await indukUnitKerja.findOne(
+        {
+          where: { id: indukUnitKerjaFE.indukUnitKerja.id },
+          attributes: ["id", "templateSPD"],
+        },
+        { transaction }
+      );
+
+      const templatePath = path.join(
+        __dirname,
+        "../public",
+
+        template.templateSPD
+      );
+
+      // Baca file template
+      const content = fs.readFileSync(templatePath, "binary");
+
+      // Load file ke PizZip
+      const zip = new PizZip(content);
+
+      // Inisialisasi Docxtemplater dengan opsi terbaru
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+      });
+      // console.log(nomorBaru);
+      // Masukkan data ke dalam template
+      doc.render({
+        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
+        tempatSpd2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
+        tempatSpd3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota.nama
+            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+
         tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempat2: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempat3: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
@@ -1545,17 +1895,13 @@ module.exports = {
         tanggalPengajuan: formattedTanggalPengajuan,
         tempat,
         untuk,
-        ttdSurTugJabatan,
-        ttdSurTugNama,
-        ttdSurTugNip,
-        ttdSurTugPangkat,
-        ttdSurTugGolongan,
+
         KPANama,
         KPANip,
         KPAPangkat,
         KPAGolongan,
         KPAJabatan,
-        dataPegawai,
+
         pegawai1Nama: personilFE[0]?.pegawai?.nama,
         pegawai2Nama: personilFE[1]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",
         pegawai3Nama: personilFE[2]?.pegawai?.nama || "TIDAK ADA PEGAWAI !",

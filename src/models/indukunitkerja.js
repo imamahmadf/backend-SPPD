@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       templateNotaDinas: DataTypes.STRING,
       templateSuratTugasSingkat: DataTypes.STRING,
       telaahan: DataTypes.STRING,
+      templateSPD: DataTypes.STRING,
     },
     {
       sequelize,

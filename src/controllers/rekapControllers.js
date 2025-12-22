@@ -15,6 +15,7 @@ const {
 } = require("../models");
 
 const { Op } = require("sequelize");
+const ExcelJS = require("exceljs");
 
 module.exports = {
   getPerjalanan: async (req, res) => {
@@ -370,6 +371,198 @@ module.exports = {
       await transaction.rollback();
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getRekap: async (req, res) => {
+    // Helper function to format date in Indonesian format
+    const formatTanggalIndonesia = (date) => {
+      if (!date) return "-";
+      const d = new Date(date);
+      const months = [
+        "januari",
+        "februari",
+        "maret",
+        "april",
+        "mei",
+        "juni",
+        "juli",
+        "agustus",
+        "september",
+        "oktober",
+        "november",
+        "desember",
+      ];
+      const day = String(d.getDate()).padStart(2, "0");
+      const month = months[d.getMonth()];
+      const year = d.getFullYear();
+      return `${day} ${month} ${year}`;
+    };
+
+    const unitKerjaId = parseInt(req.query.unitKerjaId);
+    const subKegiatanId = parseInt(req.query.subKegiatanId);
+
+    const pegawaiId = parseInt(req.query.pegawaiId);
+    const tanggalBerangkat = req.query.tanggalBerangkat;
+    const tanggalPulang = req.query.tanggalPulang;
+
+    const whereCondition = {};
+    const whereConditionSubKegiatan = {};
+    const whereConditionPegawaiId = {};
+
+    if (pegawaiId) {
+      whereConditionPegawaiId.pegawaiId = pegawaiId;
+    }
+
+    if (unitKerjaId) {
+      whereCondition.unitKerjaId = unitKerjaId;
+    }
+
+    const whereConditionTempat = {};
+
+    if (tanggalBerangkat) {
+      whereConditionTempat.tanggalBerangkat = {
+        [Op.gte]: new Date(tanggalBerangkat),
+      };
+    }
+
+    if (tanggalPulang) {
+      whereConditionTempat.tanggalPulang = {
+        [Op.lte]: new Date(tanggalPulang),
+      };
+    }
+
+    if (subKegiatanId) {
+      whereConditionSubKegiatan.subKegiatanId = subKegiatanId;
+    }
+
+    try {
+      const result = await perjalanan.findAll({
+        subQuery: false,
+        where: whereConditionSubKegiatan,
+        include: [
+          {
+            model: personil,
+            attributes: ["id", "nomorSPD"],
+            include: [{ model: pegawai, attributes: ["nama", "nip"] }],
+            where: whereConditionPegawaiId,
+          },
+          {
+            model: ttdNotaDinas,
+            attributes: ["id", "unitKerjaId"],
+            where: whereCondition,
+          },
+          {
+            model: tempat,
+            where: whereConditionTempat, // <- Filter terapkan di sini
+            attributes: ["id", "tanggalBerangkat", "tanggalPulang", "tempat"],
+            include: [
+              { model: dalamKota, attributes: ["id", "nama"], as: "dalamKota" },
+            ],
+          },
+          {
+            model: jenisPerjalanan,
+            attributes: ["id"],
+            include: [{ model: tipePerjalanan, attributes: ["id", "tipe"] }],
+          },
+          {
+            model: daftarSubKegiatan,
+            attributes: ["id", "subKegiatan"],
+          },
+        ],
+        attributes: ["id", "noNotaDinas", "noSuratTugas"],
+      });
+
+      // Generate Excel
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("Rekap Perjalanan");
+
+      // Header
+      worksheet.columns = [
+        { header: "No", key: "no", width: 5 },
+        { header: "No. Surat Tugas", key: "surtug", width: 35 },
+        { header: "No. SPD", key: "spd", width: 35 },
+        { header: "Tanggal Berangkat", key: "tanggalBerangkat", width: 21 },
+        { header: "Tanggal Pulang", key: "tanggalPulang", width: 21 },
+        { header: "Nama Pegawai", key: "namaPegawai", width: 35 },
+        { header: "Sub Kegiatan", key: "subKegiatan", width: 35 },
+        { header: "Tujuan", key: "tujuan", width: 25 },
+      ];
+
+      // Data rows - flatten personils and tempats to create one row per combination
+      let rowIndex = 0;
+      result.forEach((perjalananItem) => {
+        const personils = perjalananItem.personils || [];
+        const tempats = perjalananItem.tempats || [];
+        const subKegiatan =
+          perjalananItem.daftarSubKegiatan?.subKegiatan || "-";
+
+        // If there are personils and tempats, create rows for each combination
+        if (personils.length > 0 && tempats.length > 0) {
+          personils.forEach((personilItem) => {
+            tempats.forEach((tempatItem) => {
+              rowIndex++;
+              const tanggalBerangkat = formatTanggalIndonesia(
+                tempatItem.tanggalBerangkat
+              );
+              const tanggalPulang = formatTanggalIndonesia(
+                tempatItem.tanggalPulang
+              );
+
+              let tujuan = tempatItem.tempat || "-";
+              if (tempatItem.dalamKota && tempatItem.dalamKota.nama) {
+                tujuan = tempatItem.dalamKota.nama;
+              }
+
+              worksheet.addRow({
+                no: rowIndex,
+                surtug: perjalananItem?.noSuratTugas || "-",
+                spd: personilItem?.nomorSPD || "-",
+                tanggalBerangkat: tanggalBerangkat,
+                tanggalPulang: tanggalPulang,
+                namaPegawai: personilItem?.pegawai?.nama || "-",
+                subKegiatan: subKegiatan,
+                tujuan: tujuan,
+              });
+            });
+          });
+        } else if (personils.length > 0) {
+          // If only personils exist, create rows with empty tempat data
+          personils.forEach((personilItem) => {
+            rowIndex++;
+            worksheet.addRow({
+              no: rowIndex,
+              surtug: perjalananItem?.noSuratTugas || "-",
+              spd: personilItem?.nomorSPD || "-",
+              tanggalBerangkat: "-",
+              tanggalPulang: "-",
+              namaPegawai: personilItem?.pegawai?.nama || "-",
+              subKegiatan: subKegiatan,
+              tujuan: "-",
+            });
+          });
+        }
+      });
+
+      // Set response headers
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=rekap-perjalanan.xlsx"
+      );
+
+      // Send Excel file
+      await workbook.xlsx.write(res);
+      res.end();
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
 };

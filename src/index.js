@@ -41,6 +41,7 @@ const {
   barjasRouter,
   PJPLRouter,
   atasanPJPLRouter,
+  perencanaanAdminRouter,
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -129,6 +130,7 @@ app.use("/api/kendaraan-dinas", kendaraanDinasRouter);
 app.use("/api/barjas", barjasRouter);
 app.use("/api/PJPL", PJPLRouter);
 app.use("/api/atasan-PJPL", atasanPJPLRouter);
+app.use("/api/perencanaan-admin", perencanaanAdminRouter);
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });

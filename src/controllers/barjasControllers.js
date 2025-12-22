@@ -29,41 +29,44 @@ module.exports = {
       indukUnitKerjaId,
       nomorSPId,
       unitKerjaId,
+      nomorSPManual,
     } = req.body;
     const transaction = await sequelize.transaction();
 
     try {
-      // 1️⃣ Ambil nomor terakhir
-      const nomorAwal = await nomorSP.findOne({
-        where: { indukUnitKerjaId },
-        transaction,
-        lock: transaction.LOCK.UPDATE, // penting untuk menghindari race condition
-      });
-
-      if (!nomorAwal) {
-        throw new Error(
-          "Nomor loket belum diinisialisasi untuk unit kerja ini"
-        );
-      }
-
-      // 2️⃣ Update nomor berikutnya
-      await nomorSP.update(
-        { nomorLoket: nomorAwal.nomorLoket + 1 },
-        { where: { id: nomorAwal.id }, transaction }
-      );
-
-      // 3️⃣ Ambil nilai terbaru setelah update (gunakan nomorLoket yang sudah di-update)
-      const nomorTerbaru = nomorAwal.nomorLoket;
       let nomorSuratBaru;
 
-      nomorSuratBaru = nomorAwal.nomorSurat
-        .replace("NOMOR", nomorTerbaru)
-        .replace("TAHUN", new Date(tanggal).getFullYear());
+      if (!nomorSPManual) {
+        // 1️⃣ Ambil nomor terakhir
+        const nomorAwal = await nomorSP.findOne({
+          where: { indukUnitKerjaId },
+          transaction,
+          lock: transaction.LOCK.UPDATE, // penting untuk menghindari race condition
+        });
+
+        if (!nomorAwal) {
+          throw new Error(
+            "Nomor loket belum diinisialisasi untuk unit kerja ini"
+          );
+        }
+
+        // 2️⃣ Update nomor berikutnya
+        await nomorSP.update(
+          { nomorLoket: nomorAwal.nomorLoket + 1 },
+          { where: { id: nomorAwal.id }, transaction }
+        );
+        // 3️⃣ Ambil nilai terbaru setelah update (gunakan nomorLoket yang sudah di-update)
+        const nomorTerbaru = nomorAwal.nomorLoket;
+
+        nomorSuratBaru = nomorAwal.nomorSurat
+          .replace("NOMOR", nomorTerbaru)
+          .replace("TAHUN", new Date(tanggal).getFullYear());
+      }
 
       // 4️⃣ Buat entri SP baru
       const result = await SP.create(
         {
-          nomor: nomorSuratBaru,
+          nomor: nomorSPManual ? nomorSPManual : nomorSuratBaru,
           tanggal,
           rekananId,
           akunBelanjaId,
@@ -550,6 +553,147 @@ module.exports = {
         message: err.toString(),
         code: 500,
       });
+    }
+  },
+
+  postAkunBelanja: async (req, res) => {
+    const { akun, kode } = req.body;
+    try {
+      const result = await akunBelanja.create({ akun, kode });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  getJenisDokumen: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await jenisDokumenBarjas.findAll({
+        where: { indukUnitKerjaId: id },
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postJenisDokumen: async (req, res) => {
+    const { jenis, indukUnitKerjaId, nomorSurat } = req.body;
+    try {
+      const result = await jenisDokumenBarjas.create({
+        jenis,
+        nomorSurat,
+        nomorLoket: 0,
+        indukUnitKerjaId,
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editJenisDokumen: async (req, res) => {
+    const { jenis, indukUnitKerjaId, nomorSurat, id, nomorLoket } = req.body;
+    try {
+      const result = await jenisDokumenBarjas.update(
+        {
+          jenis,
+          indukUnitKerjaId,
+          nomorSurat,
+
+          nomorLoket,
+        },
+        { where: { id } }
+      );
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postJenisBarjas: async (req, res) => {
+    const { jenis } = req.body;
+    try {
+      const result = await jenisBarjas.create({ jenis });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postAkunBelanja: async (req, res) => {
+    const { akun, jenisBelanjaId } = req.body;
+    try {
+      const result = await akunBelanja.create({ akun, jenisBelanjaId });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postJenisBelanja: async (req, res) => {
+    const { jenis } = req.query;
+    try {
+      const result = await jenisBelanja.create({ jenis });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  getPengaturan: async (req, res) => {
+    try {
+      const resultJenisBarjas = await jenisBarjas.findAll();
+      const resultAkunBelanja = await akunBelanja.findAll({
+        include: [{ model: jenisBelanja }],
+      });
+      const resultJenisBelanja = await jenisBelanja.findAll();
+
+      return res
+        .status(200)
+        .json({ resultJenisBarjas, resultAkunBelanja, resultJenisBelanja });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editNomorSP: async (req, res) => {
+    const { nomorSurat, id } = req.body;
+    try {
+      const result = await nomorSP.update({ nomorSurat }, { where: { id } });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  deleteBarjas: async (req, res) => {
+    const { id } = req.body;
+    console.log(req.body);
+    try {
+      const result = await barjas.destroy({ where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
     }
   },
 };
