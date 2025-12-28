@@ -14,6 +14,10 @@ const {
   daftarUnitKerja,
   sequelize,
   itemDokumenBarjas,
+  kendaraan,
+  bangunan,
+  persediaan,
+  stokMasuk,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -116,6 +120,7 @@ module.exports = {
           { model: barjas, include: [{ model: jenisBarjas }] },
           {
             model: subKegPer,
+            paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
             include: [
               { model: daftarUnitKerja, attributes: ["id", "unitKerja"] },
             ],
@@ -265,6 +270,7 @@ module.exports = {
     const whereCondition = { nomor: { [Op.like]: "%" + nomor + "%" } };
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId);
 
     if (unitKerjaId) {
       whereCondition.unitKerjaId = unitKerjaId;
@@ -272,6 +278,26 @@ module.exports = {
     if (subKegPerId) {
       whereCondition.subKegPerId = subKegPerId;
     }
+
+    // Siapkan include untuk subKegPer dengan filter indukUnitKerjaId
+    const subKegPerInclude = {
+      model: subKegPer,
+      attributes: ["id", "nama"],
+      paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+      include: [
+        {
+          model: daftarUnitKerja,
+          attributes: ["id", "unitKerja"],
+        },
+      ],
+    };
+
+    // Jika indukUnitKerjaId ada, tambahkan filter
+    if (indukUnitKerjaId) {
+      subKegPerInclude.include[0].where = { indukUnitKerjaId };
+      subKegPerInclude.required = true;
+    }
+
     try {
       const result = await SP.findAll(
         {
@@ -292,19 +318,29 @@ module.exports = {
               attributes: ["id", "jumlah", "harga"],
             },
             // { model: nomorSP },
-            {
-              model: subKegPer,
-              attributes: ["id", "nama"],
-              include: [
-                { model: daftarUnitKerja, attributes: ["id", "unitKerja"] },
-              ],
-            },
+            subKegPerInclude,
           ],
         }
         // { where: { id } }
       );
       const totalRows = await SP.count({
         where: whereCondition,
+        include: indukUnitKerjaId
+          ? [
+              {
+                model: subKegPer,
+                required: true,
+                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+                include: [
+                  {
+                    model: daftarUnitKerja,
+                    where: { indukUnitKerjaId },
+                    required: true,
+                  },
+                ],
+              },
+            ]
+          : [],
       });
       const totalPage = Math.ceil(totalRows / limit);
       // 2. Ambil semua ID unik dari pegawaiId dan PJId
@@ -334,10 +370,11 @@ module.exports = {
         },
         attributes: ["id", "nama", "unitKerjaId"],
         required: true,
+        paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
         include: [
           {
             model: daftarUnitKerja,
-            attributes: ["id"],
+            attributes: ["id", "unitKerja"],
             required: true,
             where: { indukUnitKerjaId },
           },
@@ -430,6 +467,7 @@ module.exports = {
               {
                 model: subKegPer,
                 attributes: ["id", "nama"],
+                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
                 include: [
                   {
                     model: daftarUnitKerja,
@@ -700,7 +738,7 @@ module.exports = {
   },
 
   getNomorSP: async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.query;
 
     try {
       const result = await nomorSP.findAll({ where: { indukUnitKerjaId: id } });
@@ -742,6 +780,278 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getDashboardAset: async (req, res) => {
+    try {
+      const { indukUnitKerjaId } = req.query;
+
+      // Siapkan where condition untuk filter indukUnitKerja jika ada
+      const whereConditionBarjas = {};
+      const whereConditionKendaraan = {};
+      const whereConditionBangunan = {};
+      const whereConditionPersediaan = {};
+
+      // Filter berdasarkan indukUnitKerjaId jika ada
+      let barjasInclude = [];
+      let kendaraanInclude = [];
+
+      if (indukUnitKerjaId) {
+        whereConditionBangunan.indukUnitKerjaId = parseInt(indukUnitKerjaId);
+
+        // Untuk barjas, filter melalui subKegPer -> daftarUnitKerja
+        barjasInclude = [
+          {
+            model: subKegPer,
+            required: true,
+            paranoid: true,
+            attributes: ["id", "nama", "kode", "kegiatanId", "unitKerjaId"],
+            include: [
+              {
+                model: daftarUnitKerja,
+                where: { indukUnitKerjaId: parseInt(indukUnitKerjaId) },
+                required: true,
+                attributes: [
+                  "id",
+                  "unitKerja",
+                  "kode",
+                  "asal",
+                  "indukUnitKerjaId",
+                ],
+              },
+            ],
+          },
+        ];
+
+        // Untuk kendaraan, filter melalui daftarUnitKerja
+        kendaraanInclude = [
+          {
+            model: daftarUnitKerja,
+            as: "kendaraanUK",
+            where: { indukUnitKerjaId: parseInt(indukUnitKerjaId) },
+            required: true,
+            attributes: ["id", "unitKerja", "kode", "asal", "indukUnitKerjaId"],
+          },
+        ];
+      }
+
+      // 1. Statistik Barjas (Barang dan Jasa)
+      // Include jenisBelanja untuk membedakan barang dan jasa
+      // Gabungkan include untuk jenisBelanja dengan filter indukUnitKerjaId
+      const spIncludeBase = [
+        {
+          model: akunBelanja,
+          required: true,
+          include: [
+            {
+              model: jenisBelanja,
+              required: true,
+              attributes: ["id", "jenis"],
+            },
+          ],
+          attributes: ["id", "akun", "kode", "jenisBelanjaId"],
+        },
+      ];
+
+      // Jika ada filter indukUnitKerjaId, tambahkan include subKegPer
+      const spIncludeWithFilter =
+        barjasInclude.length > 0
+          ? [...spIncludeBase, ...barjasInclude]
+          : spIncludeBase;
+
+      const totalSP = await SP.count({
+        where: whereConditionBarjas,
+        include: spIncludeWithFilter,
+      });
+
+      const totalBarjas = await barjas.count({
+        include: [
+          {
+            model: SP,
+            required: true,
+            include: spIncludeWithFilter,
+          },
+        ],
+      });
+
+      // Hitung total nilai barjas dengan include jenisBelanja
+      const barjasData = await barjas.findAll({
+        attributes: [
+          "harga",
+          "jumlah",
+          [sequelize.literal("harga * jumlah"), "totalNilai"],
+        ],
+        include: [
+          {
+            model: SP,
+            required: true,
+            include: spIncludeWithFilter,
+          },
+        ],
+      });
+
+      // Pisahkan barjas berdasarkan jenis belanja (barang vs jasa)
+      let totalNilaiBarjasBarang = 0;
+      let totalNilaiBarjasJasa = 0;
+      let totalBarjasBarang = 0; // Jumlah item barjas jenis barang
+      let totalBarjasJasa = 0; // Jumlah item barjas jenis jasa
+
+      barjasData.forEach((item) => {
+        const nilai = (item.harga || 0) * (item.jumlah || 0);
+        const jenisBelanja =
+          item?.SP?.akunBelanja?.jenisBelanja?.jenis?.toLowerCase() || "";
+
+        if (jenisBelanja === "barang") {
+          totalNilaiBarjasBarang += nilai;
+          totalBarjasBarang += 1; // Hitung jumlah item, bukan jumlah unit
+        } else if (jenisBelanja === "jasa") {
+          totalNilaiBarjasJasa += nilai;
+          totalBarjasJasa += 1; // Hitung jumlah item, bukan jumlah unit
+        }
+      });
+
+      // 2. Statistik Kendaraan
+      const totalKendaraan = await kendaraan.count({
+        where: whereConditionKendaraan,
+        include: kendaraanInclude,
+      });
+
+      // Hitung total nilai kendaraan (nilaiPerolehan)
+      const kendaraanData = await kendaraan.findAll({
+        attributes: ["nilaiPerolehan"],
+        where: whereConditionKendaraan,
+        include: kendaraanInclude,
+      });
+
+      const totalNilaiKendaraan = kendaraanData.reduce((sum, item) => {
+        return sum + (parseInt(item.nilaiPerolehan) || 0);
+      }, 0);
+
+      // 3. Statistik Bangunan
+      const totalBangunan = await bangunan.count({
+        where: whereConditionBangunan,
+      });
+
+      // 4. Statistik Persediaan
+      // Filter persediaan melalui stokMasuk -> daftarUnitKerja
+      let stokMasukInclude = [];
+      if (indukUnitKerjaId) {
+        stokMasukInclude = [
+          {
+            model: daftarUnitKerja,
+            where: { indukUnitKerjaId: parseInt(indukUnitKerjaId) },
+            required: true,
+            attributes: ["id", "unitKerja", "kode", "asal", "indukUnitKerjaId"],
+          },
+        ];
+      }
+
+      // Hitung total stok masuk untuk persediaan
+      const stokMasukData = await stokMasuk.findAll({
+        attributes: [
+          "jumlah",
+          "hargaSatuan",
+          "persediaanId",
+          [sequelize.literal("jumlah * hargaSatuan"), "totalNilai"],
+        ],
+        include: [
+          {
+            model: persediaan,
+            required: true,
+            where: whereConditionPersediaan,
+          },
+          ...stokMasukInclude,
+        ],
+      });
+
+      const totalNilaiPersediaan = stokMasukData.reduce((sum, item) => {
+        const total =
+          (parseFloat(item.hargaSatuan) || 0) * (parseInt(item.jumlah) || 0);
+        return sum + total;
+      }, 0);
+
+      // Hitung jumlah unik persediaan dari stokMasuk
+      const persediaanUnikIds = [
+        ...new Set(stokMasukData.map((item) => item.persediaanId)),
+      ];
+      const totalPersediaan = persediaanUnikIds.length;
+
+      // Total stok masuk entries
+      const totalStokMasuk = stokMasukData.length;
+
+      // 5. Kategorisasi nilai aset
+      // Belanja Modal = kendaraan + bangunan + barjas (jenis = "barang")
+      const totalNilaiBelanjaModal =
+        totalNilaiKendaraan + totalNilaiBarjasBarang;
+
+      // Belanja Jasa = barjas (jenis = "jasa")
+      const totalNilaiBelanjaJasa = totalNilaiBarjasJasa;
+
+      // Persediaan = persediaan
+      const totalNilaiPersediaanValue = totalNilaiPersediaan;
+
+      // Total nilai semua aset
+      const totalNilaiAset =
+        totalNilaiBelanjaModal +
+        totalNilaiBelanjaJasa +
+        totalNilaiPersediaanValue;
+
+      // 6. Ringkasan per kategori
+      const ringkasan = {
+        belanjaModal: {
+          kendaraan: {
+            total: totalKendaraan,
+            totalNilai: totalNilaiKendaraan,
+          },
+          bangunan: {
+            total: totalBangunan,
+            totalNilai: 0, // Bangunan tidak memiliki nilai perolehan di model
+          },
+          barjasBarang: {
+            total: totalBarjasBarang,
+            totalNilai: totalNilaiBarjasBarang,
+          },
+          totalNilai: totalNilaiBelanjaModal,
+        },
+        belanjaJasa: {
+          barjasJasa: {
+            total: totalBarjasJasa,
+            totalNilai: totalNilaiBelanjaJasa,
+          },
+          totalNilai: totalNilaiBelanjaJasa,
+        },
+        persediaan: {
+          total: totalPersediaan,
+          totalStokMasuk: totalStokMasuk,
+          totalNilai: totalNilaiPersediaanValue,
+        },
+        ringkasanBarjas: {
+          totalSP,
+          totalBarjas,
+          totalBarjasBarang,
+          totalBarjasJasa,
+          totalNilaiBarang: totalNilaiBarjasBarang,
+          totalNilaiJasa: totalNilaiBarjasJasa,
+        },
+        total: {
+          totalAset:
+            totalBarjas + totalKendaraan + totalBangunan + totalPersediaan,
+          totalNilai: totalNilaiAset,
+        },
+      };
+
+      return res.status(200).json({
+        success: true,
+        data: ringkasan,
+      });
+    } catch (err) {
+      console.error("Error getDashboardAset:", err);
+      return res.status(500).json({
+        success: false,
+        message: "Gagal mengambil data dashboard aset",
+        error: err.message,
+      });
     }
   },
 };

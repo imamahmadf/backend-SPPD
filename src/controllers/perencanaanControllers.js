@@ -25,22 +25,258 @@ const { Op } = require("sequelize");
 module.exports = {
   getAllProgram: async (req, res) => {
     try {
+      const { search, searchType, unitKerja } = req.query;
+      const searchQuery = search?.trim() || "";
+      const searchTypeValue = searchType || "semua";
+      const unitKerjaFilter =
+        unitKerja && unitKerja !== "semua" ? unitKerja.trim() : null;
+
+      // Build where condition untuk program
+      const programWhere = {};
+      if (
+        searchQuery &&
+        (searchTypeValue === "semua" || searchTypeValue === "program")
+      ) {
+        programWhere[Op.or] = [
+          { nama: { [Op.like]: `%${searchQuery}%` } },
+          { kode: { [Op.like]: `%${searchQuery}%` } },
+        ];
+      }
+
+      // Build include untuk kegiatan
+      const kegiatanInclude = {
+        model: kegiatan,
+        paranoid: true,
+        required: false,
+      };
+
+      // Build where condition untuk kegiatan
+      if (
+        searchQuery &&
+        (searchTypeValue === "semua" || searchTypeValue === "kegiatan")
+      ) {
+        kegiatanInclude.where = {
+          [Op.or]: [
+            { nama: { [Op.like]: `%${searchQuery}%` } },
+            { kode: { [Op.like]: `%${searchQuery}%` } },
+          ],
+        };
+        kegiatanInclude.required = false;
+      }
+
+      // Build include untuk subKegPer
+      const subKegPerInclude = {
+        model: subKegPer,
+        paranoid: true,
+        required: false,
+      };
+
+      // Build where condition untuk subKegPer
+      if (
+        searchQuery &&
+        (searchTypeValue === "semua" || searchTypeValue === "subKegiatan")
+      ) {
+        subKegPerInclude.where = {
+          [Op.or]: [
+            { nama: { [Op.like]: `%${searchQuery}%` } },
+            { kode: { [Op.like]: `%${searchQuery}%` } },
+          ],
+        };
+        subKegPerInclude.required = false;
+      }
+
+      // Build include untuk daftarUnitKerja
+      const unitKerjaInclude = {
+        model: daftarUnitKerja,
+        attributes: ["id", "unitKerja"],
+        required: false,
+      };
+
+      // Filter berdasarkan unit kerja
+      if (unitKerjaFilter) {
+        unitKerjaInclude.where = {
+          unitKerja: unitKerjaFilter,
+        };
+        unitKerjaInclude.required = true;
+        subKegPerInclude.required = true;
+        kegiatanInclude.required = true;
+      }
+
+      subKegPerInclude.include = [unitKerjaInclude];
+      kegiatanInclude.include = [subKegPerInclude];
+
+      // Jika ada search di kegiatan atau subKegiatan, kita perlu memastikan program tetap ditampilkan
+      // tapi hanya jika memiliki kegiatan/subKegiatan yang match
+      if (
+        searchQuery &&
+        (searchTypeValue === "kegiatan" || searchTypeValue === "subKegiatan")
+      ) {
+        kegiatanInclude.required = true;
+        if (searchTypeValue === "subKegiatan") {
+          subKegPerInclude.required = true;
+        }
+      }
+
+      const includeArray = [kegiatanInclude];
+
+      // Jika hanya search di program, tidak perlu required
+      if (searchQuery && searchTypeValue === "program" && !unitKerjaFilter) {
+        includeArray[0].required = false;
+      }
+
       const result = await program.findAll({
+        where: Object.keys(programWhere).length > 0 ? programWhere : undefined,
+        paranoid: true,
+        include: includeArray,
+      });
+
+      // Filter hasil di JavaScript untuk menghapus kegiatan/subKegiatan yang tidak match
+      // karena Sequelize akan tetap mengembalikan parent meskipun child tidak match jika required: false
+      const filteredResult = result
+        .map((prog) => {
+          const progData = prog.toJSON();
+          if (progData.kegiatans) {
+            progData.kegiatans = progData.kegiatans
+              .map((keg) => {
+                if (keg.subKegPers) {
+                  // Filter subKegiatan berdasarkan unit kerja dan search
+                  keg.subKegPers = keg.subKegPers.filter((sub) => {
+                    // Filter unit kerja
+                    if (
+                      unitKerjaFilter &&
+                      (!sub.daftarUnitKerja ||
+                        sub.daftarUnitKerja.unitKerja !== unitKerjaFilter)
+                    ) {
+                      return false;
+                    }
+                    // Filter search di subKegiatan (jika searchType adalah subKegiatan atau semua)
+                    if (
+                      searchQuery &&
+                      (searchTypeValue === "subKegiatan" ||
+                        searchTypeValue === "semua")
+                    ) {
+                      const matches =
+                        sub.nama
+                          ?.toLowerCase()
+                          .includes(searchQuery.toLowerCase()) ||
+                        sub.kode
+                          ?.toLowerCase()
+                          .includes(searchQuery.toLowerCase());
+                      if (!matches) return false;
+                    }
+                    return true;
+                  });
+                  // Hapus subKegiatan yang tidak memiliki unit kerja jika filter unitKerja aktif
+                  if (unitKerjaFilter) {
+                    keg.subKegPers = keg.subKegPers.filter(
+                      (sub) => sub.daftarUnitKerja
+                    );
+                  }
+                }
+                // Filter kegiatan berdasarkan search (jika searchType adalah kegiatan atau semua)
+                if (
+                  searchQuery &&
+                  (searchTypeValue === "kegiatan" ||
+                    searchTypeValue === "semua")
+                ) {
+                  const matches =
+                    keg.nama
+                      ?.toLowerCase()
+                      .includes(searchQuery.toLowerCase()) ||
+                    keg.kode?.toLowerCase().includes(searchQuery.toLowerCase());
+                  // Jika searchType adalah "semua", tetap tampilkan kegiatan jika ada subKegiatan yang match
+                  if (!matches && searchTypeValue === "semua") {
+                    // Cek apakah ada subKegiatan yang match
+                    if (keg.subKegPers && keg.subKegPers.length > 0) {
+                      // Ada subKegiatan yang match, jadi tetap tampilkan
+                    } else {
+                      return null;
+                    }
+                  } else if (!matches) {
+                    return null;
+                  }
+                }
+                // Hapus kegiatan yang tidak memiliki subKegiatan jika filter aktif
+                if (
+                  unitKerjaFilter &&
+                  (!keg.subKegPers || keg.subKegPers.length === 0)
+                ) {
+                  return null;
+                }
+                return keg;
+              })
+              .filter((keg) => keg !== null);
+          }
+          // Hapus program yang tidak memiliki kegiatan jika filter aktif
+          if (
+            unitKerjaFilter &&
+            (!progData.kegiatans || progData.kegiatans.length === 0)
+          ) {
+            return null;
+          }
+          // Jika search di kegiatan atau subKegiatan, pastikan ada kegiatan/subKegiatan yang match
+          if (
+            searchQuery &&
+            (searchTypeValue === "kegiatan" ||
+              searchTypeValue === "subKegiatan")
+          ) {
+            if (!progData.kegiatans || progData.kegiatans.length === 0) {
+              return null;
+            }
+          }
+          // Jika searchType adalah "semua", pastikan program hanya ditampilkan jika ada match di salah satu level
+          // (program level sudah di-filter di where condition, jadi jika sampai sini berarti program match)
+          // Tapi perlu pastikan ada kegiatan atau subKegiatan yang match jika ada search query
+          if (searchQuery && searchTypeValue === "semua") {
+            // Program sudah match (karena ada di result), tapi perlu pastikan ada kegiatan atau subKegiatan yang match
+            if (!progData.kegiatans || progData.kegiatans.length === 0) {
+              // Tidak ada kegiatan, tapi program sudah match, jadi tetap tampilkan
+              return progData;
+            }
+          }
+          return progData;
+        })
+        .filter((prog) => prog !== null);
+
+      return res.status(200).json({ result: filteredResult });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+  getUnitKerja: async (req, res) => {
+    try {
+      // Ambil semua unit kerja yang ada di subKegPer
+      const result = await subKegPer.findAll({
+        paranoid: true,
+        attributes: ["unitKerjaId"],
         include: [
           {
-            model: kegiatan,
-            include: [
-              {
-                model: subKegPer,
-                include: [
-                  { model: daftarUnitKerja, attributes: ["id", "unitKerja"] },
-                ],
-              },
-            ],
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja"],
+            required: true,
           },
         ],
       });
-      return res.status(200).json({ result });
+
+      // Extract unique unit kerja menggunakan Map
+      const unitKerjaMap = new Map();
+
+      result.forEach((subKeg) => {
+        const unitKerjaData = subKeg.toJSON().daftarUnitKerja;
+        if (unitKerjaData && !unitKerjaMap.has(unitKerjaData.id)) {
+          unitKerjaMap.set(unitKerjaData.id, unitKerjaData);
+        }
+      });
+
+      // Convert Map ke Array dan sort berdasarkan nama unit kerja
+      const uniqueUnitKerja = Array.from(unitKerjaMap.values()).sort((a, b) => {
+        if (a.unitKerja < b.unitKerja) return -1;
+        if (a.unitKerja > b.unitKerja) return 1;
+        return 0;
+      });
+
+      return res.status(200).json({ result: uniqueUnitKerja });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
@@ -64,6 +300,7 @@ module.exports = {
           {
             model: subKegPer,
             required: true,
+            paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
             include: [
               {
                 model: daftarUnitKerja,
@@ -101,6 +338,7 @@ module.exports = {
           {
             model: program,
             required: true,
+            paranoid: true, // Hanya ambil program yang belum di-soft delete
             include: [
               {
                 model: daftarUnitKerja,
@@ -138,6 +376,7 @@ module.exports = {
           {
             model: kegiatan,
             required: true,
+            paranoid: true, // Hanya ambil kegiatan yang belum di-soft delete
             include: [
               {
                 model: daftarUnitKerja,
@@ -189,6 +428,7 @@ module.exports = {
     try {
       const result = await subKegPer.findOne({
         where: { id },
+        paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
         include: [
           {
             model: indikator,
@@ -232,6 +472,7 @@ module.exports = {
     try {
       const result = await kegiatan.findOne({
         where: { id },
+        paranoid: true, // Hanya ambil kegiatan yang belum di-soft delete
         include: [
           {
             model: indikator,
@@ -269,6 +510,7 @@ module.exports = {
     try {
       const result = await program.findOne({
         where: { id },
+        paranoid: true, // Hanya ambil program yang belum di-soft delete
         include: [
           {
             model: indikator,

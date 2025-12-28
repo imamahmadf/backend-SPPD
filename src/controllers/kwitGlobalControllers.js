@@ -741,11 +741,12 @@ module.exports = {
   },
 
   updateSubKegiatan: async (req, res) => {
-    const { id, subKegiatanId } = req.body;
+    const { id, subKegiatanId, jenisPerjalananId } = req.body;
     try {
       const result = await kwitGlobal.update(
         {
           subKegiatanId,
+          jenisPerjalananId,
         },
         { where: { id } }
       );
@@ -894,6 +895,33 @@ module.exports = {
       });
     } catch (err) {
       console.log(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  updateKwitGlobal: async (req, res) => {
+    const { id, pegawaiId, KPAId, bendaharaId, templateKwitGlobalId } =
+      req.body;
+
+    try {
+      const result = await kwitGlobal.update(
+        {
+          pegawaiId,
+          KPAId,
+          bendaharaId,
+          templateKwitGlobalId,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+      return res.status(200).json({ result });
+    } catch (err) {
       return res.status(500).json({
         message: err.toString(),
         code: 500,

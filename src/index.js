@@ -130,7 +130,7 @@ app.use("/api/kendaraan-dinas", kendaraanDinasRouter);
 app.use("/api/barjas", barjasRouter);
 app.use("/api/PJPL", PJPLRouter);
 app.use("/api/atasan-PJPL", atasanPJPLRouter);
-app.use("/api/perencanaan-admin", perencanaanAdminRouter);
+app.use("/api/admin-perencanaan", perencanaanAdminRouter);
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });

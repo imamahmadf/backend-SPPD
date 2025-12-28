@@ -4,6 +4,7 @@ const { perencanaanControllers } = require("../controllers");
 const routers = express.Router();
 
 routers.get("/get", perencanaanControllers.getAllProgram);
+routers.get("/get/unit-kerja", perencanaanControllers.getUnitKerja);
 routers.get("/get/indikator/:id", perencanaanControllers.getAllIndikator);
 routers.get(
   "/get/detail-sub-kegiatan/:id",

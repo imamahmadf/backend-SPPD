@@ -26,7 +26,9 @@ routers.get("/get/pengaturan", barjasControllers.getPengaturan);
 
 routers.post("/delete/barjas", barjasControllers.deleteBarjas);
 
-routers.get("/get/nomor-sp/:id", barjasControllers.getNomorSP);
+routers.get("/get/nomor-sp", barjasControllers.getNomorSP);
 routers.post("/post/nomor-sp", barjasControllers.postNomorSP);
 routers.post("/edit/nomor-sp", barjasControllers.editNomorSP);
+
+routers.get("/get/dashboard", barjasControllers.getDashboardAset);
 module.exports = routers;

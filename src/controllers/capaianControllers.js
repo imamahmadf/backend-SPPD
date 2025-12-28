@@ -96,7 +96,12 @@ module.exports = {
             model: indikator,
             required: true,
             include: [
-              { model: subKegPer, where: { unitKerjaId: id }, required: true },
+              {
+                model: subKegPer,
+                where: { unitKerjaId: id },
+                required: true,
+                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+              },
             ],
           },
         ],

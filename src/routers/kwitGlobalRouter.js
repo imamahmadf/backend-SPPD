@@ -19,5 +19,5 @@ routers.post(
   "/post/update-subkegiatan",
   kwitGlobalControllers.updateSubKegiatan
 );
-
+routers.post("/update", kwitGlobalControllers.updateKwitGlobal);
 module.exports = routers;
