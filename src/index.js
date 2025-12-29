@@ -50,14 +50,29 @@ const app = express();
 // BUAT HTTP SERVER UNTUK SOCKET.IO
 const server = http.createServer(app);
 
-// INISIALISASI SOCKET.IO
+// KONFIGURASI CORS UNTUK SOCKET.IO
+const allowedOrigins = process.env.WHITELISTED_DOMAIN
+  ? process.env.WHITELISTED_DOMAIN.split(",").map((origin) => origin.trim())
+  : "*";
+
+// INISIALISASI SOCKET.IO DENGAN KONFIGURASI PRODUCTION
 const io = socketIo(server, {
   cors: {
-    origin: process.env.WHITELISTED_DOMAIN
-      ? process.env.WHITELISTED_DOMAIN.split(",")
-      : "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
+    credentials: true,
   },
+  // Transport fallback: coba websocket dulu, jika gagal pakai polling
+  transports: ["websocket", "polling"],
+  // Allow upgrade dari polling ke websocket
+  allowUpgrades: true,
+  // Timeout untuk connection
+  pingTimeout: 60000,
+  pingInterval: 25000,
+  // Handle proxy/load balancer di production
+  // Jika menggunakan reverse proxy (nginx, cloudflare, dll)
+  // Set ini ke true untuk trust proxy headers
+  allowEIO3: true,
 });
 
 // SIMPAN io ke dalam app supaya bisa dipakai di controller
@@ -138,6 +153,18 @@ app.get("/api", (req, res) => {
 app.get("/api/greetings", (req, res, next) => {
   res.status(200).json({
     message: "Hello, guys !",
+  });
+});
+
+// Endpoint untuk mendapatkan konfigurasi Socket.IO (untuk frontend)
+app.get("/api/socket-config", (req, res) => {
+  const protocol = req.protocol; // http atau https
+  const host = req.get("host"); // domain atau IP
+  const socketUrl = `${protocol}://${host}`;
+
+  res.status(200).json({
+    socketUrl: socketUrl,
+    message: "Gunakan URL ini untuk koneksi Socket.IO di frontend",
   });
 });
 
