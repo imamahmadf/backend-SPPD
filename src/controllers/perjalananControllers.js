@@ -38,11 +38,20 @@ const {
   kwitGlobal,
   kendaraanDinas,
   kendaraan,
+  fotoPerjalanan,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
 const path = require("path");
 const Docxtemplater = require("docxtemplater");
+const {
+  getRomanMonth,
+  terbilang,
+  calculateDaysDifference,
+  formatTanggal,
+  formatTanggalPengajuan,
+  formatJumlahHari,
+} = require("../lib/perjalananHelpers");
 
 module.exports = {
   postNotaDinas: async (req, res) => {
@@ -76,60 +85,6 @@ module.exports = {
       console.log(req.body.dasar);
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isNotaDinas, "TESTTT");
-      const calculateDaysDifference = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const difference = Math.abs(end - start);
-        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
-      };
-      function terbilang(angka) {
-        const satuan = [
-          "",
-          "Satu",
-          "Dua",
-          "Tiga",
-          "Empat",
-          "Lima",
-          "Enam",
-          "Tujuh",
-          "Delapan",
-          "Sembilan",
-          "Sepuluh",
-          "Sebelas",
-        ];
-
-        if (angka < 12) {
-          return satuan[angka];
-        } else if (angka < 20) {
-          return terbilang(angka - 10) + " Belas";
-        } else if (angka < 100) {
-          return (
-            terbilang(Math.floor(angka / 10)) +
-            " Puluh " +
-            terbilang(angka % 10)
-          );
-        } else if (angka < 200) {
-          return "Seratus " + terbilang(angka - 100);
-        }
-      }
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
       // console.log(dalamKota, perjalananKota);
       let nomorBaru;
       let resultSuratKeluar;
@@ -160,12 +115,7 @@ module.exports = {
 
         // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-          .replace(
-            "NOMOR",
-            indukUnitKerjaFE.indukUnitKerja.id == 1
-              ? "     "
-              : nomorLoket.toString()
-          )
+          .replace("NOMOR", nomorLoket.toString())
           .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
           .replace("KODE", kode)
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
@@ -191,13 +141,8 @@ module.exports = {
       }
 
       // Ubah format tanggalPengajuan
-      const formattedTanggalPengajuan = new Date(
-        tanggalPengajuan
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      const formattedTanggalPengajuan =
+        formatTanggalPengajuan(tanggalPengajuan);
 
       // console.log(resultSuratKeluar.id, "CEKDISINI");
       // Simpan data perjalanan
@@ -303,21 +248,8 @@ module.exports = {
         tanggalBerangkatFE,
         tanggalPulangFE
       );
-      const formattedTanggalBerangkat = new Date(
-        tanggalBerangkatFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      const formattedTanggalPulang = new Date(
-        tanggalPulangFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      const formattedTanggalBerangkat = formatTanggal(tanggalBerangkatFE);
+      const formattedTanggalPulang = formatTanggal(tanggalPulangFE);
 
       const templatePath = path.join(
         __dirname,
@@ -378,7 +310,7 @@ module.exports = {
         jenis: jenis.jenis,
         tanggalBerangkat: formattedTanggalBerangkat,
         tanggalPulang: formattedTanggalPulang,
-        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        jumlahHari: formatJumlahHari(daysDifference),
       });
 
       // Simpan hasil dokumen ke buffer
@@ -446,24 +378,6 @@ module.exports = {
       console.log(req.body);
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isNotaDinas, "TESTTT");
-
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
       // console.log(dalamKota, perjalananKota);
       let nomorBaru;
       let resultSuratKeluar;
@@ -494,12 +408,7 @@ module.exports = {
 
         // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-          .replace(
-            "NOMOR",
-            indukUnitKerjaFE.indukUnitKerja.id == 1
-              ? "     "
-              : nomorLoket.toString()
-          )
+          .replace("NOMOR", nomorLoket.toString())
           .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
           .replace("KODE", kode)
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
@@ -1157,96 +1066,19 @@ module.exports = {
         0
       );
 
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
-      function terbilang(angka) {
-        const satuan = [
-          "",
-          "Satu",
-          "Dua",
-          "Tiga",
-          "Empat",
-          "Lima",
-          "Enam",
-          "Tujuh",
-          "Delapan",
-          "Sembilan",
-          "Sepuluh",
-          "Sebelas",
-        ];
-
-        if (angka < 12) {
-          return satuan[angka];
-        } else if (angka < 20) {
-          return terbilang(angka - 10) + " Belas";
-        } else if (angka < 100) {
-          return (
-            terbilang(Math.floor(angka / 10)) +
-            " Puluh " +
-            terbilang(angka % 10)
-          );
-        } else if (angka < 200) {
-          return "Seratus " + terbilang(angka - 100);
-        }
-      }
-      // ////////////////////TERBILANG///////////////////////
-      const calculateDaysDifference = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const difference = Math.abs(end - start);
-        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
-      };
-
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
         tempat[tempat.length - 1].tanggalPulang
       );
 
-      const formatTanggal = (tanggal) => {
-        return new Date(tanggal).toLocaleDateString("id-ID", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        });
-      };
-      const formattedTanggalBerangkat = new Date(
+      const formattedTanggalBerangkat = formatTanggal(
         tempat[0].tanggalBerangkat
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      const formattedTanggalPulang = new Date(
+      );
+      const formattedTanggalPulang = formatTanggal(
         tempat[tempat.length - 1].tanggalPulang
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-      const formattedTanggalPengajuan = new Date(
-        tanggalPengajuan
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      );
+      const formattedTanggalPengajuan =
+        formatTanggalPengajuan(tanggalPengajuan);
       // Path file template
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
@@ -1272,12 +1104,7 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace(
-            "NOMOR",
-            indukUnitKerjaFE.indukUnitKerja.id == 1
-              ? "         "
-              : nomorLoket.toString()
-          )
+          .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         // console.log(dbNoSurTug.id, "NOMOR SURAT");
@@ -1312,13 +1139,7 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace(
-                "NOMOR",
-                (indukUnitKerjaFE.indukUnitKerja.id == 1
-                  ? "         "
-                  : nomorAwalSPD + index + 1
-                ).toString()
-              )
+              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
@@ -1424,7 +1245,7 @@ module.exports = {
       // console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
-        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        jumlahHari: formatJumlahHari(daysDifference),
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
           tempat.length === 1
@@ -1539,96 +1360,19 @@ module.exports = {
         0
       );
 
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
-      function terbilang(angka) {
-        const satuan = [
-          "",
-          "Satu",
-          "Dua",
-          "Tiga",
-          "Empat",
-          "Lima",
-          "Enam",
-          "Tujuh",
-          "Delapan",
-          "Sembilan",
-          "Sepuluh",
-          "Sebelas",
-        ];
-
-        if (angka < 12) {
-          return satuan[angka];
-        } else if (angka < 20) {
-          return terbilang(angka - 10) + " Belas";
-        } else if (angka < 100) {
-          return (
-            terbilang(Math.floor(angka / 10)) +
-            " Puluh " +
-            terbilang(angka % 10)
-          );
-        } else if (angka < 200) {
-          return "Seratus " + terbilang(angka - 100);
-        }
-      }
-      // ////////////////////TERBILANG///////////////////////
-      const calculateDaysDifference = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const difference = Math.abs(end - start);
-        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
-      };
-
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
         tempat[tempat.length - 1].tanggalPulang
       );
 
-      const formatTanggal = (tanggal) => {
-        return new Date(tanggal).toLocaleDateString("id-ID", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        });
-      };
-      const formattedTanggalBerangkat = new Date(
+      const formattedTanggalBerangkat = formatTanggal(
         tempat[0].tanggalBerangkat
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      const formattedTanggalPulang = new Date(
+      );
+      const formattedTanggalPulang = formatTanggal(
         tempat[tempat.length - 1].tanggalPulang
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-      const formattedTanggalPengajuan = new Date(
-        tanggalPengajuan
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      );
+      const formattedTanggalPengajuan =
+        formatTanggalPengajuan(tanggalPengajuan);
       // Path file template
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
@@ -1654,12 +1398,7 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace(
-            "NOMOR",
-            indukUnitKerjaFE.indukUnitKerja.id == 1
-              ? "         "
-              : nomorLoket.toString()
-          )
+          .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         // console.log(dbNoSurTug.id, "NOMOR SURAT");
@@ -1694,13 +1433,7 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace(
-                "NOMOR",
-                (indukUnitKerjaFE.indukUnitKerja.id == 1
-                  ? "         "
-                  : nomorAwalSPD + index + 1
-                ).toString()
-              )
+              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
@@ -1774,7 +1507,7 @@ module.exports = {
       // console.log(nomorBaru);
       // Masukkan data ke dalam template
       doc.render({
-        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        jumlahHari: formatJumlahHari(daysDifference),
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
           tempat.length === 1
@@ -2054,24 +1787,6 @@ module.exports = {
         0
       );
 
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
-
       // Path file template
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
@@ -2097,12 +1812,7 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace(
-            "NOMOR",
-            indukUnitKerjaFE.indukUnitKerja.id == 1
-              ? "         "
-              : nomorLoket.toString()
-          )
+          .replace("NOMOR", nomorLoket.toString())
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         // console.log(dbNoSurTug.id, "NOMOR SURAT");
@@ -2137,13 +1847,7 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace(
-                "NOMOR",
-                (indukUnitKerjaFE.indukUnitKerja.id == 1
-                  ? "         "
-                  : nomorAwalSPD + index + 1
-                ).toString()
-              )
+              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
@@ -2279,6 +1983,10 @@ module.exports = {
             model: bendahara,
             attributes: ["id"],
             include: [{ model: sumberDana }],
+          },
+          {
+            model: fotoPerjalanan,
+            attributes: ["foto", "id"],
           },
           // {
           //   model: ttdSuratTugas,
@@ -2510,96 +2218,19 @@ module.exports = {
       } = req.body;
       // console.log(ttdSurtTugKode, indukUnitKerjaFE.kode, "TTD SURAT TUGASSS");
 
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
-      function terbilang(angka) {
-        const satuan = [
-          "",
-          "Satu",
-          "Dua",
-          "Tiga",
-          "Empat",
-          "Lima",
-          "Enam",
-          "Tujuh",
-          "Delapan",
-          "Sembilan",
-          "Sepuluh",
-          "Sebelas",
-        ];
-
-        if (angka < 12) {
-          return satuan[angka];
-        } else if (angka < 20) {
-          return terbilang(angka - 10) + " Belas";
-        } else if (angka < 100) {
-          return (
-            terbilang(Math.floor(angka / 10)) +
-            " Puluh " +
-            terbilang(angka % 10)
-          );
-        } else if (angka < 200) {
-          return "Seratus " + terbilang(angka - 100);
-        }
-      }
-      // ////////////////////TERBILANG///////////////////////
-      const calculateDaysDifference = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const difference = Math.abs(end - start);
-        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
-      };
-
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
         tempat[tempat.length - 1].tanggalPulang
       );
 
-      const formatTanggal = (tanggal) => {
-        return new Date(tanggal).toLocaleDateString("id-ID", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        });
-      };
-      const formattedTanggalBerangkat = new Date(
+      const formattedTanggalBerangkat = formatTanggal(
         tempat[0].tanggalBerangkat
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      const formattedTanggalPulang = new Date(
+      );
+      const formattedTanggalPulang = formatTanggal(
         tempat[tempat.length - 1].tanggalPulang
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-      const formattedTanggalPengajuan = new Date(
-        tanggalPengajuan
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      );
+      const formattedTanggalPengajuan =
+        formatTanggalPengajuan(tanggalPengajuan);
       // Path file template
       // Ambil satu data nomor surat berdasarkan id = 1
       var nomorBaru = noSuratTugas;
@@ -2702,7 +2333,7 @@ module.exports = {
       doc.render({
         // tempat1: jenis.id === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         // tempat2: tempat[1]?.tempat || "",
-        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        jumlahHari: formatJumlahHari(daysDifference),
         tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempatSpd2:
           tempat.length === 1
@@ -2977,61 +2608,6 @@ module.exports = {
         noNotDis,
       } = req.body;
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
-
-      const calculateDaysDifference = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const millisecondsPerDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const difference = Math.abs(end - start);
-        return Math.round(difference / millisecondsPerDay) + 1; // Adding 1 to include both start and end dates
-      };
-      function terbilang(angka) {
-        const satuan = [
-          "",
-          "Satu",
-          "Dua",
-          "Tiga",
-          "Empat",
-          "Lima",
-          "Enam",
-          "Tujuh",
-          "Delapan",
-          "Sembilan",
-          "Sepuluh",
-          "Sebelas",
-        ];
-
-        if (angka < 12) {
-          return satuan[angka];
-        } else if (angka < 20) {
-          return terbilang(angka - 10) + " Belas";
-        } else if (angka < 100) {
-          return (
-            terbilang(Math.floor(angka / 10)) +
-            " Puluh " +
-            terbilang(angka % 10)
-          );
-        } else if (angka < 200) {
-          return "Seratus " + terbilang(angka - 100);
-        }
-      }
-      const getRomanMonth = (date) => {
-        const months = [
-          "I",
-          "II",
-          "III",
-          "IV",
-          "V",
-          "VI",
-          "VII",
-          "VIII",
-          "IX",
-          "X",
-          "XI",
-          "XII",
-        ];
-        return months[date.getMonth()];
-      };
       // console.log(dalamKota, perjalananKota);
 
       // Ambil satu data nomor surat berdasarkan id = 2
@@ -3048,13 +2624,8 @@ module.exports = {
       }
 
       // Ubah format tanggalPengajuan
-      const formattedTanggalPengajuan = new Date(
-        tanggalPengajuan
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      const formattedTanggalPengajuan =
+        formatTanggalPengajuan(tanggalPengajuan);
 
       // console.log(resultSuratKeluar.id, "CEKDISINI");
 
@@ -3107,21 +2678,8 @@ module.exports = {
         tanggalBerangkatFE,
         tanggalPulangFE
       );
-      const formattedTanggalBerangkat = new Date(
-        tanggalBerangkatFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      const formattedTanggalPulang = new Date(
-        tanggalPulangFE
-      ).toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
+      const formattedTanggalBerangkat = formatTanggal(tanggalBerangkatFE);
+      const formattedTanggalPulang = formatTanggal(tanggalPulangFE);
 
       const templatePath = path.join(
         __dirname,
@@ -3178,7 +2736,7 @@ module.exports = {
         jenis: jenisPerjalanan,
         tanggalBerangkat: formattedTanggalBerangkat,
         tanggalPulang: formattedTanggalPulang,
-        jumlahHari: `${daysDifference} (${terbilang(daysDifference)}) hari`,
+        jumlahHari: formatJumlahHari(daysDifference),
       });
 
       // Simpan hasil dokumen ke buffer

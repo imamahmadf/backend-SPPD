@@ -31,6 +31,7 @@ const fs = require("fs");
 const fileUploader = ({
   destinationFolder = "uploads",
   fileTypes = [],
+  fileType = null, // Support untuk fileType sebagai string (backward compatibility)
   prefix = "",
 } = {}) => {
   const uploadPath = path.join(__dirname, `../public/${destinationFolder}`);
@@ -52,6 +53,36 @@ const fileUploader = ({
   });
 
   const fileFilter = (req, file, cb) => {
+    // Jika fileType diberikan sebagai string
+    if (fileType && typeof fileType === "string") {
+      // Jika fileType tidak mengandung "/", berarti itu prefix (misal: "image")
+      // Jika fileType mengandung "/", berarti itu full mimetype (misal: "application/pdf")
+      if (fileType.includes("/")) {
+        // Full mimetype - bandingkan langsung
+        if (file.mimetype !== fileType) {
+          return cb(
+            new Error(
+              `Invalid file type: ${file.mimetype}. Expected ${fileType}`
+            ),
+            false
+          );
+        }
+      } else {
+        // Prefix - bandingkan dengan prefix mimetype
+        const fileMimeTypePrefix = file.mimetype.split("/")[0];
+        if (fileMimeTypePrefix !== fileType) {
+          return cb(
+            new Error(
+              `Invalid file type: ${file.mimetype}. Expected ${fileType}/*`
+            ),
+            false
+          );
+        }
+      }
+      return cb(null, true);
+    }
+
+    // Jika fileTypes diberikan sebagai array
     if (fileTypes.length === 0 || fileTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {

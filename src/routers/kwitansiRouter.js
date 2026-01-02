@@ -19,7 +19,7 @@ routers.post(
     destinationFolder: "bukti",
     fileType: "image",
     prefix: "BUKTI-PERJALANAN",
-  }).single("pic"),
+  }).any(), // Menggunakan .any() untuk menerima semua field (files dan form data)
   kwitansiControllers.postBuktiKegiatan
 );
 routers.get("/get/rampung/:id", kwitansiControllers.getRampung);

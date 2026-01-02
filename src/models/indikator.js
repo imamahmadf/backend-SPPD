@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
 
       this.belongsTo(models.kegiatan);
       this.belongsTo(models.program);
+      this.belongsTo(models.daftarUnitKerja, {
+        foreignKey: "unitKerjaId",
+      });
+      this.belongsTo(models.pegawai, {
+        foreignKey: "pegawaiId",
+      });
     }
   }
   indikator.init(
@@ -24,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       subKegPerId: DataTypes.INTEGER,
       kegiatanId: DataTypes.INTEGER,
       programId: DataTypes.INTEGER,
+      unitKerjaId: DataTypes.INTEGER,
+      pegawaiId: DataTypes.INTEGER,
     },
     {
       sequelize,

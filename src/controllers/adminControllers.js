@@ -30,6 +30,7 @@ const {
   pelayananKesehatan,
   templateKeuangan,
   anggaran,
+  fotoPerjalanan,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -155,6 +156,11 @@ module.exports = {
                 ],
               },
             ],
+          },
+          {
+            model: fotoPerjalanan,
+            attributes: ["id", "foto", "perjalananId", "tanggal"],
+            required: false, // Left join agar perjalanan tetap muncul meski tidak ada foto
           },
           {
             model: jenisPerjalanan,

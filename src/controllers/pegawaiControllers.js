@@ -593,7 +593,14 @@ module.exports = {
             [Op.like]: `%${q}%`, // Import Op dari Sequelize
           },
         },
-        attributes: ["id", "nama", "nip", "statusPegawaiId"],
+        attributes: [
+          "id",
+          "nama",
+          "nip",
+          "statusPegawaiId",
+          "nik",
+          "unitKerjaId",
+        ],
         limit: 10,
         order: [["nama", "ASC"]],
       });

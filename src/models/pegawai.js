@@ -83,6 +83,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       nama: DataTypes.STRING,
       nip: DataTypes.STRING,
+      nik: DataTypes.STRING,
       pendidikan: DataTypes.STRING,
       tingkatanId: DataTypes.INTEGER,
       pangkatId: DataTypes.INTEGER,

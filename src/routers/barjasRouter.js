@@ -31,4 +31,5 @@ routers.post("/post/nomor-sp", barjasControllers.postNomorSP);
 routers.post("/edit/nomor-sp", barjasControllers.editNomorSP);
 
 routers.get("/get/dashboard", barjasControllers.getDashboardAset);
+routers.post("/delete/sp", barjasControllers.deleteSP);
 module.exports = routers;

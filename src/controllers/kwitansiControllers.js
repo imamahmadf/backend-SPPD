@@ -26,7 +26,7 @@ const {
   sequelize,
   pelayananKesehatan,
   uangHarian,
-
+  fotoPerjalanan,
   sumberDana,
 } = require("../models");
 const { emitNotifikasiPersonil } = require("./notifikasiControllers");
@@ -76,28 +76,95 @@ module.exports = {
     }
   },
   postBuktiKegiatan: async (req, res) => {
-    const id = parseInt(req.body.id);
-    console.log(req.body);
-    console.log(id, "ECEKKKKKKK");
-    try {
-      const filePath = "bukti";
-      let pic = null;
-      if (req.file) {
-        const { filename } = req.file;
-        pic = `/${filePath}/${filename}`;
-      }
-      const result = await perjalanan.update(
-        {
-          pic,
-        },
-        { where: { id } }
-      );
+    const perjalananId = parseInt(req.body.perjalananId);
+    const tanggal = req.body.tanggal ? new Date(req.body.tanggal) : new Date();
 
-      return res.status(200).json({ result });
+    console.log("Body:", req.body);
+    console.log("Files:", req.files);
+    console.log("PerjalananId:", perjalananId);
+    console.log("Tanggal:", tanggal);
+
+    try {
+      // Validasi perjalananId
+      if (!perjalananId || isNaN(perjalananId)) {
+        return res.status(400).json({
+          message: "perjalananId is required and must be a valid number",
+          code: 400,
+        });
+      }
+
+      // Verifikasi perjalanan ada (hanya mengambil id untuk menghindari masalah kolom)
+      const perjalananExists = await perjalanan.findOne({
+        where: { id: perjalananId },
+        attributes: ["id"],
+      });
+
+      if (!perjalananExists) {
+        return res.status(404).json({
+          message: `Perjalanan dengan ID ${perjalananId} tidak ditemukan`,
+          code: 404,
+        });
+      }
+
+      // Filter hanya file yang memiliki mimetype image
+      const imageFiles = req.files
+        ? req.files.filter(
+            (file) => file.mimetype && file.mimetype.startsWith("image/")
+          )
+        : [];
+
+      if (imageFiles.length === 0) {
+        return res.status(400).json({
+          message: "No image files uploaded",
+          code: 400,
+        });
+      }
+
+      const filePath = "bukti";
+      const results = [];
+
+      // Loop setiap file dan simpan ke tabel fotoPerjalanan
+      for (const file of imageFiles) {
+        const foto = `/${filePath}/${file.filename}`;
+
+        console.log("Creating fotoPerjalanan with:", {
+          foto,
+          perjalananId,
+          tanggal,
+        });
+
+        try {
+          const result = await fotoPerjalanan.create({
+            foto,
+            perjalananId,
+            tanggal,
+          });
+
+          console.log("FotoPerjalanan created successfully:", result.toJSON());
+          results.push(result);
+        } catch (createError) {
+          console.error("Error creating fotoPerjalanan:", createError);
+          console.error("Error details:", {
+            name: createError.name,
+            message: createError.message,
+            errors: createError.errors,
+          });
+          throw createError;
+        }
+      }
+
+      return res.status(200).json({
+        message: "Foto berhasil disimpan",
+        data: results,
+        count: results.length,
+      });
     } catch (err) {
+      console.error("Error in postBuktiKegiatan:", err);
+      console.error("Error stack:", err.stack);
       return res.status(500).json({
-        message: err.toString(),
+        message: err.message || err.toString(),
         code: 500,
+        error: err.name,
       });
     }
   },
@@ -181,6 +248,11 @@ module.exports = {
                     ],
                   },
                 ],
+              },
+              {
+                model: fotoPerjalanan,
+                attributes: ["id", "foto", "perjalananId", "tanggal"],
+                required: false, // Left join agar perjalanan tetap muncul meski tidak ada foto
               },
               { model: jenisPerjalanan },
               { model: pelayananKesehatan },
@@ -450,14 +522,69 @@ module.exports = {
         { sizePx: 500, logoPath, logoScale: 0.22 }
       );
 
-      // Siapkan foto pegawai dari nama file di database (opsional)
-      let fotoPegawaiDataUrl = null;
+      // Siapkan array foto dari fotoPerjalanan untuk loop di template
+      // Template Word harus menggunakan: {#foto}{%foto}{/foto}
+      let fotoArray = [];
       try {
-        if (foto) {
-          // Tentukan path file foto di server
-          // Jika 'foto' sudah berupa path relatif dari public (mis. "/pegawai/xxx.jpg")
-          // maka gabungkan ke folder public. Jika hanya nama file, fallback ke folder pegawai.
-          const normalizedFoto = typeof foto === "string" ? foto.trim() : "";
+        if (foto && Array.isArray(foto) && foto.length > 0) {
+          // Konversi semua foto dalam array menjadi data URL
+          for (const fotoItem of foto) {
+            const fotoPath = fotoItem?.foto || fotoItem;
+
+            // Tentukan path file foto di server
+            const normalizedFoto =
+              typeof fotoPath === "string" ? fotoPath.trim() : "";
+            if (!normalizedFoto) continue;
+
+            const isPath =
+              normalizedFoto.startsWith("/") || normalizedFoto.startsWith("\\");
+            const fullFotoPath = isPath
+              ? path.join(
+                  __dirname,
+                  "../public",
+                  normalizedFoto.replace(/[\\/]+/g, "/")
+                )
+              : path.join(__dirname, "../public/bukti", normalizedFoto);
+
+            console.log("[FOTO] processing:", normalizedFoto);
+            console.log("[FOTO] try path:", fullFotoPath);
+
+            let finalFotoPath = fullFotoPath;
+            if (!fs.existsSync(finalFotoPath)) {
+              const altPath = path.join(
+                __dirname,
+                "../public/pegawai",
+                normalizedFoto
+              );
+              console.log("[FOTO] fallback path:", altPath);
+              if (fs.existsSync(altPath)) finalFotoPath = altPath;
+            }
+
+            if (fs.existsSync(finalFotoPath)) {
+              const ext = path.extname(finalFotoPath).toLowerCase();
+              const mime =
+                ext === ".png"
+                  ? "image/png"
+                  : ext === ".jpg" || ext === ".jpeg"
+                  ? "image/jpeg"
+                  : "image/jpeg";
+              const fileBuf = fs.readFileSync(finalFotoPath);
+              const base64 = fileBuf.toString("base64");
+              const fotoDataUrl = `data:${mime};base64,${base64}`;
+              fotoArray.push(fotoDataUrl);
+              console.log(
+                "[FOTO] loaded:",
+                normalizedFoto,
+                "size:",
+                fileBuf.length
+              );
+            } else {
+              console.log("[FOTO] not found:", normalizedFoto);
+            }
+          }
+        } else if (foto && typeof foto === "string") {
+          // Backward compatibility: jika foto masih string (untuk kasus lama)
+          const normalizedFoto = foto.trim();
           const isPath =
             normalizedFoto.startsWith("/") || normalizedFoto.startsWith("\\");
           const fotoPath = isPath
@@ -468,7 +595,7 @@ module.exports = {
               )
             : path.join(__dirname, "../public/bukti", normalizedFoto);
 
-          console.log("[FOTO] input:", normalizedFoto);
+          console.log("[FOTO] input (string):", normalizedFoto);
           console.log("[FOTO] try path:", fotoPath);
 
           let finalFotoPath = fotoPath;
@@ -492,18 +619,30 @@ module.exports = {
                 : "image/jpeg";
             const fileBuf = fs.readFileSync(finalFotoPath);
             const base64 = fileBuf.toString("base64");
-            fotoPegawaiDataUrl = `data:${mime};base64,${base64}`;
+            fotoArray.push(`data:${mime};base64,${base64}`);
             console.log("[FOTO] loaded size:", fileBuf.length, " mime:", mime);
           } else {
             console.log("[FOTO] not found on disk");
           }
         }
-      } catch (_) {
+
+        // Filter array untuk memastikan hanya berisi string data URL yang valid
+        fotoArray = fotoArray.filter(
+          (foto) =>
+            foto && typeof foto === "string" && foto.startsWith("data:image/")
+        );
+
+        console.log("[FOTO] total loaded:", fotoArray.length);
+      } catch (err) {
         // Abaikan jika foto tidak tersedia
+        console.error("[FOTO] error:", err);
       }
 
       // Konversi base64 ke buffer
       function base64DataURLToArrayBuffer(dataURL) {
+        if (!dataURL || typeof dataURL !== "string") {
+          return null;
+        }
         const base64Regex = /^data:image\/(png|jpg|jpeg);base64,/;
         if (!base64Regex.test(dataURL)) {
           throw new Error("Data URL bukan base64 image yang valid");
@@ -518,52 +657,95 @@ module.exports = {
       // Setup image module
       const imageOpts = {
         getImage: function (tagValue) {
-          if (Buffer.isBuffer(tagValue)) return tagValue;
-          if (
-            typeof tagValue === "string" &&
-            tagValue.startsWith("data:image/")
-          ) {
-            return base64DataURLToArrayBuffer(tagValue);
+          // ImageModule akan memanggil ini untuk setiap item dalam loop
+          // tagValue akan berupa string base64 data URL (bukan array)
+          try {
+            if (!tagValue) {
+              console.error("[FOTO] getImage: tagValue is null/undefined");
+              // Return empty buffer instead of null to avoid ImageModule error
+              return Buffer.alloc(0);
+            }
+
+            if (Buffer.isBuffer(tagValue)) {
+              return tagValue;
+            }
+
+            if (typeof tagValue !== "string") {
+              console.error(
+                "[FOTO] getImage: tagValue is not string, type:",
+                typeof tagValue
+              );
+              return Buffer.alloc(0);
+            }
+
+            if (tagValue.startsWith("data:image/")) {
+              try {
+                const buffer = base64DataURLToArrayBuffer(tagValue);
+                if (!buffer || buffer.length === 0) {
+                  console.error("[FOTO] getImage: buffer is empty");
+                  return Buffer.alloc(0);
+                }
+                return buffer;
+              } catch (err) {
+                console.error("[FOTO] getImage error:", err);
+                return Buffer.alloc(0);
+              }
+            }
+
+            console.error(
+              "[FOTO] getImage: tagValue does not start with data:image/"
+            );
+            return Buffer.alloc(0);
+          } catch (err) {
+            console.error("[FOTO] getImage unexpected error:", err);
+            return Buffer.alloc(0);
           }
-          return tagValue;
         },
         getSize: function (img, tagValue, tagName) {
-          if (tagName === "foto") {
-            try {
-              const pageWidthPx = 600; // lebar efektif A4 di Word
-              const margin = 40; // total margin kiri + kanan (px)
-              const targetWidthPx = pageWidthPx - margin;
-
+          // ImageModule akan memanggil ini untuk setiap item dalam loop
+          // tagValue akan berupa string base64 data URL (bukan array)
+          try {
+            // Untuk foto, kembalikan ukuran asli (tidak diubah)
+            if (tagName && (tagName.startsWith("foto") || tagName === "foto")) {
               let buffer = null;
-              if (Buffer.isBuffer(tagValue)) buffer = tagValue;
-              else if (
+
+              if (Buffer.isBuffer(tagValue)) {
+                buffer = tagValue;
+              } else if (
+                tagValue &&
                 typeof tagValue === "string" &&
                 tagValue.startsWith("data:image/")
               ) {
-                const base64 = tagValue.split(",")[1];
-                buffer = Buffer.from(base64, "base64");
-              }
-
-              if (buffer && sizeOf) {
-                const dim = sizeOf(buffer);
-                if (dim?.width && dim?.height) {
-                  const ratio = targetWidthPx / dim.width;
-                  const newWidth = targetWidthPx;
-                  const newHeight = Math.round(dim.height * ratio);
-
-                  return [newWidth, newHeight];
+                try {
+                  buffer = base64DataURLToArrayBuffer(tagValue);
+                } catch (err) {
+                  console.error("[FOTO] getSize buffer error:", err);
                 }
               }
 
-              // fallback
-              return [pageWidthPx - margin, 800];
-            } catch (_) {
-              return [560, 800]; // fallback dengan margin
-            }
-          }
+              // Kembalikan ukuran asli foto
+              if (buffer && buffer.length > 0 && sizeOf) {
+                try {
+                  const dim = sizeOf(buffer);
+                  if (dim?.width && dim?.height) {
+                    // Kembalikan ukuran asli tanpa perubahan
+                    return [dim.width, dim.height];
+                  }
+                } catch (err) {
+                  console.error("[FOTO] getSize sizeOf error:", err);
+                }
+              }
 
-          // default untuk gambar lain (mis. qrCode)
-          return [100, 100];
+              // fallback jika tidak bisa membaca ukuran
+              return [600, 800];
+            }
+
+            // default untuk gambar lain (mis. qrCode)
+            return [100, 100];
+          } catch (err) {
+            console.error("[FOTO] getSize error:", err);
+            return [600, 800]; // fallback
+          }
         },
       };
       const imageModule = new ImageModule(imageOpts);
@@ -575,9 +757,10 @@ module.exports = {
         modules: [imageModule],
       });
       console.log("QR Code Length:", qrDataUrl.length);
+      console.log("[FOTO] Sending to template:", fotoArray.length, "photos");
 
-      // Masukkan data ke dalam template
-      doc.render({
+      // Siapkan data untuk template
+      const templateData = {
         bendaharaNama: dataBendahara.pegawai_bendahara.nama,
         bendaharaNip: dataBendahara.pegawai_bendahara.nip,
         bendaharaJabatan: dataBendahara.jabatan,
@@ -606,9 +789,6 @@ module.exports = {
         PPTKNama,
         PPTKNip,
         qrCode: qrDataUrl,
-        // Gambar foto pegawai untuk placeholder teks {%foto}
-        foto: fotoPegawaiDataUrl,
-        kodeRekening,
         total,
         terbilang,
         BPD,
@@ -634,7 +814,35 @@ module.exports = {
             : tempat.length === 3 && jenis !== 1
             ? tempat[2]?.dalamKota.nama
             : "", // Nilai default jika tidak ada kondisi yang terpenuhi
-      });
+      };
+
+      // CATATAN: docxtemplater-image-module-free memiliki bug dengan loop array,
+      // jadi loop {#foto}{%foto}{/foto} tidak bekerja dengan baik
+      //
+      // SOLUSI: Kirim foto sebagai property terpisah (foto1, foto2, dll)
+      // Template Word perlu menggunakan: {%foto1}, {%foto2}, {%foto3}, dst (tanpa loop)
+      // Setiap placeholder harus di baris/paragraf terpisah di Word
+      if (fotoArray.length > 0) {
+        // Kirim setiap foto sebagai property terpisah (foto1, foto2, dll)
+        fotoArray.forEach((foto, index) => {
+          templateData[`foto${index + 1}`] = foto;
+        });
+
+        // Juga kirim foto pertama sebagai 'foto' untuk backward compatibility
+        // (jika template hanya menggunakan {%foto} tanpa angka)
+        templateData.foto = fotoArray[0];
+
+        console.log(
+          "[FOTO] Sending",
+          fotoArray.length,
+          "photos as foto1, foto2, foto3, etc. (and 'foto' for first photo)"
+        );
+      } else {
+        console.log("[FOTO] No photos to send");
+      }
+
+      // Masukkan data ke dalam template
+      doc.render(templateData);
 
       // Simpan hasil dokumen ke buffer
       const buffer = doc.getZip().generate({ type: "nodebuffer" });

@@ -33,7 +33,21 @@ module.exports = {
 
       const existingUser = await user.findOne({ where: { namaPengguna } });
       if (existingUser) {
-        return res.status(400).json({ message: "Email sudah digunakan" });
+        await transaction.rollback();
+        return res
+          .status(400)
+          .json({ message: "Nama pengguna sudah digunakan" });
+      }
+
+      // Validasi pegawaiId tidak boleh duplikat
+      if (pegawaiId) {
+        const existingProfile = await profile.findOne({ where: { pegawaiId } });
+        if (existingProfile) {
+          await transaction.rollback();
+          return res
+            .status(400)
+            .json({ message: "Pegawai ID sudah digunakan" });
+        }
       }
 
       const newUser = await user.create(
@@ -68,6 +82,22 @@ module.exports = {
     } catch (err) {
       await transaction.rollback();
       console.log(err);
+      // Handle unique constraint error
+      if (
+        err.name === "SequelizeUniqueConstraintError" ||
+        err.name === "SequelizeValidationError"
+      ) {
+        if (err.errors && err.errors.some((e) => e.path === "namaPengguna")) {
+          return res
+            .status(400)
+            .json({ message: "Nama pengguna sudah digunakan" });
+        }
+        if (err.errors && err.errors.some((e) => e.path === "pegawaiId")) {
+          return res
+            .status(400)
+            .json({ message: "Pegawai ID sudah digunakan" });
+        }
+      }
       res.status(500).json({ error: err.message });
     }
   },
