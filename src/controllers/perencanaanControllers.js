@@ -18,6 +18,7 @@ const {
   capaian,
   namaTarget,
   targetTriwulan,
+  pegawai,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -296,105 +297,48 @@ module.exports = {
     }
     try {
       const result = await indikator.findAll({
+        where: {
+          unitKerjaId: id,
+        },
         include: [
+          {
+            model: daftarUnitKerja,
+            attributes: ["id", "unitKerja"],
+          },
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip"],
+          },
+          {
+            model: satuanIndikator,
+            attributes: ["id", "satuan"],
+          },
           {
             model: subKegPer,
-            required: true,
-            paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
-            include: [
-              {
-                model: daftarUnitKerja,
-                attributes: ["id", "unitKerja"],
-                where: { id },
-                required: true,
-              },
-            ],
+            paranoid: true,
+            attributes: ["id", "kode", "nama"],
           },
-          {
-            model: target,
-
-            include: [
-              {
-                model: tahunAnggaran,
-                // where: whereCondition,
-
-                include: [{ model: jenisAnggaran }],
-              },
-              {
-                model: targetTriwulan,
-                attributes: ["id", "nilai"],
-                include: [{ model: namaTarget, attributes: ["nama", "id"] }],
-              },
-            ],
-          },
-          // { model: kegiatan },
-          // { model: program },
-          { model: satuanIndikator },
-        ],
-      });
-
-      const resultProgram = await indikator.findAll({
-        include: [
-          {
-            model: program,
-            required: true,
-            paranoid: true, // Hanya ambil program yang belum di-soft delete
-            include: [
-              {
-                model: daftarUnitKerja,
-                attributes: ["id", "unitKerja"],
-                where: { id },
-                required: true,
-              },
-            ],
-          },
-          {
-            model: target,
-
-            include: [
-              {
-                model: tahunAnggaran,
-                // where: whereCondition,
-
-                include: [{ model: jenisAnggaran }],
-              },
-              {
-                model: targetTriwulan,
-                attributes: ["id", "nilai"],
-                include: [{ model: namaTarget, attributes: ["nama", "id"] }],
-              },
-            ],
-          },
-          // { model: kegiatan },
-          // { model: program },
-          { model: satuanIndikator },
-        ],
-      });
-
-      const resultKegiatan = await indikator.findAll({
-        include: [
           {
             model: kegiatan,
-            required: true,
-            paranoid: true, // Hanya ambil kegiatan yang belum di-soft delete
-            include: [
-              {
-                model: daftarUnitKerja,
-                attributes: ["id", "unitKerja"],
-                where: { id },
-                required: true,
-              },
-            ],
+            paranoid: true,
+            attributes: ["id", "kode", "nama"],
+          },
+          {
+            model: program,
+            paranoid: true,
+            attributes: ["id", "kode", "nama"],
           },
           {
             model: target,
-
             include: [
               {
                 model: tahunAnggaran,
                 // where: whereCondition,
-
                 include: [{ model: jenisAnggaran }],
+              },
+              {
+                model: capaian,
+                attributes: ["id", "nilai", "bulan", "anggaran"],
               },
               {
                 model: targetTriwulan,
@@ -403,18 +347,14 @@ module.exports = {
               },
             ],
           },
-          // { model: kegiatan },
-          // { model: program },
-          { model: satuanIndikator },
         ],
       });
+
       const resultJenisAnggaran = await jenisAnggaran.findAll({});
       const resultNamaTarget = await namaTarget.findAll({});
       return res.status(200).json({
         result,
         resultJenisAnggaran,
-        resultProgram,
-        resultKegiatan,
         resultNamaTarget,
       });
     } catch (err) {
@@ -453,7 +393,18 @@ module.exports = {
                   },
                 ],
               },
-              { model: satuanIndikator },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
             ],
           },
         ],
@@ -488,10 +439,27 @@ module.exports = {
                     include: [{ model: jenisAnggaran }],
                   },
                   { model: capaian },
-                  { model: targetTriwulan },
+                  {
+                    model: targetTriwulan,
+                    attributes: ["id", "nilai"],
+                    include: [
+                      { model: namaTarget, attributes: ["nama", "id"] },
+                    ],
+                  },
                 ],
               },
-              { model: satuanIndikator },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
             ],
           },
         ],
@@ -535,7 +503,18 @@ module.exports = {
                   },
                 ],
               },
-              { model: satuanIndikator },
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
             ],
           },
         ],

@@ -95,12 +95,14 @@ module.exports = {
           {
             model: indikator,
             required: true,
+            where: { unitKerjaId: id },
             include: [
+              { model: program },
+              { model: kegiatan },
+              { model: subKegPer },
               {
-                model: subKegPer,
-                where: { unitKerjaId: id },
-                required: true,
-                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
               },
             ],
           },
@@ -118,6 +120,22 @@ module.exports = {
     console.log(id, req.body);
     try {
       const result = await capaian.update({ status }, { where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  editCapaian: async (req, res) => {
+    const { id } = req.params;
+    const { nilai, bulan, anggaran, bukti } = req.body;
+    console.log(id, req.body);
+    try {
+      const result = await capaian.update(
+        { nilai, bulan, anggaran, bukti },
+        { where: { id } }
+      );
       return res.status(200).json({ result });
     } catch (err) {
       console.log(err);

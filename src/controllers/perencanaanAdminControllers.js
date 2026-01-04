@@ -11,6 +11,7 @@ const {
   jenisAnggaran,
   targetTriwulan,
   namaTarget,
+  pegawai,
   sequelize,
 } = require("../models");
 
@@ -38,7 +39,23 @@ module.exports = {
               },
             ],
           },
-          { model: indikator },
+          {
+            model: indikator,
+            include: [
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
+            ],
+          },
         ],
       });
       return res.status(200).json({ result });
@@ -67,7 +84,23 @@ module.exports = {
             model: program,
             paranoid: true, // Hanya ambil program yang belum di-soft delete
           },
-          { model: indikator },
+          {
+            model: indikator,
+            include: [
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
+            ],
+          },
         ],
       });
       return res.status(200).json({ result });
@@ -98,7 +131,23 @@ module.exports = {
               },
             ],
           },
-          { model: indikator },
+          {
+            model: indikator,
+            include: [
+              {
+                model: daftarUnitKerja,
+                attributes: ["id", "unitKerja"],
+              },
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+              },
+              {
+                model: satuanIndikator,
+                attributes: ["id", "satuan"],
+              },
+            ],
+          },
         ],
       });
       return res.status(200).json({ result });
@@ -238,6 +287,8 @@ module.exports = {
       satuanIndikatorId,
       kegiatanId,
       programId,
+      unitKerjaId,
+      pegawaiId,
     } = req.body;
     try {
       const result = await indikator.create({
@@ -246,6 +297,8 @@ module.exports = {
         satuanIndikatorId,
         kegiatanId,
         programId,
+        unitKerjaId,
+        pegawaiId,
       });
       return res.status(200).json({ result });
     } catch (err) {
