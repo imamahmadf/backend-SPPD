@@ -253,7 +253,7 @@ module.exports = {
           // ["updatedAt", `${time}`],
           ["nama", `${alfabet}`],
         ],
-        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
+        attributes: ["id", "nama", "nip", "jabatan", "pendidikan", "nik"],
         include: [
           {
             model: daftarTingkatan,

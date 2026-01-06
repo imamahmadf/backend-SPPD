@@ -279,6 +279,7 @@ module.exports = {
           "templateNotaDinas",
           "templateSuratTugasSingkat",
           "telaahan",
+          "templateSPD",
         ],
         where: { id },
       });
