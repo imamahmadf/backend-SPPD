@@ -18,4 +18,8 @@ routers.post("/delete/surat-keluar/:id", adminControllers.deleteSuratKeluar);
 
 routers.get("/search/unit-kerja", adminControllers.searchUnitKerja);
 routers.get("/get/dashboard", adminControllers.getDashboardKeuangan);
+routers.post(
+  "/delete/perjalanan-by-unitkerja/:unitKerjaId",
+  adminControllers.deletePerjalananByUnitKerjaId
+);
 module.exports = routers;

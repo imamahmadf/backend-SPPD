@@ -34,6 +34,8 @@ const {
 } = require("../models");
 
 const { Op } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   detailPerjalanan: async (req, res) => {
@@ -220,6 +222,12 @@ module.exports = {
             model: perjalanan,
             attributes: ["id", "isNotaDinas", "tanggalPengajuan"],
           },
+          {
+            model: pegawai,
+            as: "pegawai",
+            attributes: ["id", "nama", "nip"],
+            required: false,
+          },
         ],
         group: ["suratKeluar.id"],
       });
@@ -251,8 +259,21 @@ module.exports = {
       perihal,
       tanggalSurat,
       indukUnitKerja,
+      nomorSurat,
+      pegawaiId,
     } = req.body;
     console.log(req.body);
+
+    // Validasi input
+    if (!indukUnitKerja || !indukUnitKerja.id) {
+      return res.status(400).json({ message: "Induk unit kerja tidak valid" });
+    }
+    if (!tujuan || !perihal || !tanggalSurat) {
+      return res.status(400).json({
+        message:
+          "Data tidak lengkap: tujuan, perihal, dan tanggalSurat wajib diisi",
+      });
+    }
 
     const transaction = await sequelize.transaction();
     try {
@@ -273,34 +294,74 @@ module.exports = {
         ];
         return months[date.getMonth()];
       };
+
+      let finalNomorSurat = nomorSurat; // Default menggunakan nomorSurat jika ada
+
+      // Ambil data nomor surat dan update nomorLoket (selalu berjalan)
       const dbNoSurat = await daftarNomorSurat.findOne({
         where: { indukUnitKerjaId: indukUnitKerja.id },
         include: [{ model: jenisSurat, as: "jenisSurat", where: { id: 2 } }],
         transaction,
       });
+
+      if (!dbNoSurat) {
+        await transaction.rollback();
+        return res.status(404).json({
+          message:
+            "Data nomor surat tidak ditemukan untuk induk unit kerja ini",
+        });
+      }
+
+      // Update nomorLoket selalu berjalan (increment)
       const nomorLoket = parseInt(dbNoSurat.nomorLoket) + 1;
-      const kode =
-        indukUnitKerja.kodeInduk === unitKerja.kode
-          ? indukUnitKerja.kodeInduk
-          : indukUnitKerja.kodeInduk + "/" + unitKerja.kode;
       console.log("NOMOR LOKET", nomorLoket);
-      const nomor = dbNoSurat.jenisSurat.nomorSurat
-        .replace("NOMOR", nomorLoket.toString())
-        .replace("KLASIFIKASI", dataKodeKlasifikasi)
-        .replace("KODE", kode)
-        .replace("BULAN", getRomanMonth(new Date(tanggalSurat)));
+
       await daftarNomorSurat.update(
-        { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
+        { nomorLoket },
         { where: { id: dbNoSurat.id }, transaction }
       );
 
+      // Jika nomorSurat null, generate nomor surat otomatis
+      if (nomorSurat == null) {
+        // Validasi data yang diperlukan untuk generate nomor surat
+        if (!unitKerja || !unitKerja.kode) {
+          await transaction.rollback();
+          return res.status(400).json({ message: "Unit kerja tidak valid" });
+        }
+        if (!dataKodeKlasifikasi) {
+          await transaction.rollback();
+          return res
+            .status(400)
+            .json({ message: "Kode klasifikasi tidak valid" });
+        }
+
+        if (!dbNoSurat.jenisSurat || !dbNoSurat.jenisSurat.nomorSurat) {
+          await transaction.rollback();
+          return res.status(404).json({
+            message: "Template nomor surat tidak ditemukan",
+          });
+        }
+
+        const kode =
+          indukUnitKerja.kodeInduk === unitKerja.kode
+            ? indukUnitKerja.kodeInduk
+            : indukUnitKerja.kodeInduk + "/" + unitKerja.kode;
+
+        finalNomorSurat = dbNoSurat.jenisSurat.nomorSurat
+          .replace("NOMOR", nomorLoket.toString())
+          .replace("KLASIFIKASI", dataKodeKlasifikasi)
+          .replace("KODE", kode)
+          .replace("BULAN", getRomanMonth(new Date(tanggalSurat)));
+      }
+
       const result = await suratKeluar.create(
         {
-          nomor,
+          nomor: finalNomorSurat,
           indukUnitKerjaId: indukUnitKerja.id,
           tujuan,
           perihal,
           tanggalSurat,
+          pegawaiId,
         },
         transaction
       );
@@ -743,6 +804,173 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: err.toString(), code: 500 });
+    }
+  },
+
+  deletePerjalananByUnitKerjaId: async (req, res) => {
+    const unitKerjaId = parseInt(
+      req.params.unitKerjaId || req.query.unitKerjaId
+    );
+    const tahun = req.body.tahun ? parseInt(req.body.tahun) : null;
+
+    if (!unitKerjaId || isNaN(unitKerjaId)) {
+      return res.status(400).json({
+        message: "unitKerjaId is required and must be a valid number",
+        code: 400,
+      });
+    }
+
+    if (!tahun || isNaN(tahun) || tahun < 2000 || tahun > 2100) {
+      return res.status(400).json({
+        message:
+          "tahun is required in request body and must be a valid year (2000-2100)",
+        code: 400,
+      });
+    }
+
+    const transaction = await sequelize.transaction();
+    let deletedPerjalananCount = 0;
+    let deletedFotoCount = 0;
+    let deletedUndanganCount = 0;
+    const deletedFilePaths = [];
+
+    try {
+      // 1. Cari semua ttdNotaDinas berdasarkan unitKerjaId
+      const notaDinasList = await ttdNotaDinas.findAll({
+        where: { unitKerjaId },
+        attributes: ["id"],
+        paranoid: false, // Include soft-deleted records if needed
+        transaction,
+      });
+
+      if (notaDinasList.length === 0) {
+        await transaction.rollback();
+        return res.status(404).json({
+          message: `Tidak ada data ttdNotaDinas dengan unitKerjaId ${unitKerjaId}`,
+          code: 404,
+        });
+      }
+
+      const notaDinasIds = notaDinasList.map((item) => item.id);
+
+      // 2. Buat filter berdasarkan tahun pada tanggalPengajuan
+      const awalTahun = new Date(tahun, 0, 1); // 1 Januari tahun tersebut
+      const akhirTahun = new Date(tahun + 1, 0, 1); // 1 Januari tahun berikutnya
+
+      // 3. Cari semua perjalanan yang terkait dengan ttdNotaDinas tersebut dan sesuai tahun
+      const perjalananList = await perjalanan.findAll({
+        where: {
+          ttdNotaDinasId: {
+            [Op.in]: notaDinasIds,
+          },
+          tanggalPengajuan: {
+            [Op.gte]: awalTahun,
+            [Op.lt]: akhirTahun,
+          },
+        },
+        include: [
+          {
+            model: fotoPerjalanan,
+            attributes: ["id", "foto"],
+            required: false, // Left join untuk mendapatkan foto jika ada
+          },
+        ],
+        attributes: ["id", "undangan"],
+        transaction,
+      });
+
+      if (perjalananList.length === 0) {
+        await transaction.rollback();
+        return res.status(404).json({
+          message: `Tidak ada data perjalanan dengan unitKerjaId ${unitKerjaId} pada tahun ${tahun}`,
+          code: 404,
+        });
+      }
+
+      // 4. Hapus file foto dan file undangan
+      for (const perjalananItem of perjalananList) {
+        // Hapus file undangan jika ada
+        if (perjalananItem.undangan) {
+          const undanganPath = path.join(
+            __dirname,
+            "../public",
+            perjalananItem.undangan
+          );
+          try {
+            if (fs.existsSync(undanganPath)) {
+              fs.unlinkSync(undanganPath);
+              deletedUndanganCount++;
+              deletedFilePaths.push(perjalananItem.undangan);
+              console.log(`File undangan dihapus: ${perjalananItem.undangan}`);
+            }
+          } catch (fileError) {
+            console.error(
+              `Gagal menghapus file undangan ${perjalananItem.undangan}:`,
+              fileError.message
+            );
+          }
+        }
+
+        // Hapus file foto perjalanan jika ada
+        if (
+          perjalananItem.fotoPerjalanans &&
+          perjalananItem.fotoPerjalanans.length > 0
+        ) {
+          for (const fotoItem of perjalananItem.fotoPerjalanans) {
+            if (fotoItem.foto) {
+              const fotoPath = path.join(__dirname, "../public", fotoItem.foto);
+              try {
+                if (fs.existsSync(fotoPath)) {
+                  fs.unlinkSync(fotoPath);
+                  deletedFotoCount++;
+                  deletedFilePaths.push(fotoItem.foto);
+                  console.log(`File foto dihapus: ${fotoItem.foto}`);
+                }
+              } catch (fileError) {
+                console.error(
+                  `Gagal menghapus file foto ${fotoItem.foto}:`,
+                  fileError.message
+                );
+              }
+            }
+          }
+        }
+      }
+
+      // 5. Hapus data perjalanan dari database (cascade akan menghapus fotoPerjalanan juga)
+      deletedPerjalananCount = await perjalanan.destroy({
+        where: {
+          ttdNotaDinasId: {
+            [Op.in]: notaDinasIds,
+          },
+          tanggalPengajuan: {
+            [Op.gte]: awalTahun,
+            [Op.lt]: akhirTahun,
+          },
+        },
+        transaction,
+      });
+
+      await transaction.commit();
+
+      return res.status(200).json({
+        message: `Berhasil menghapus data perjalanan berdasarkan unitKerjaId dan tahun ${tahun}`,
+        deletedPerjalananCount,
+        deletedFotoCount,
+        deletedUndanganCount,
+        totalDeletedFiles: deletedFotoCount + deletedUndanganCount,
+        deletedFilePaths,
+        unitKerjaId,
+        tahun,
+      });
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error in deletePerjalananByUnitKerjaId:", err);
+      return res.status(500).json({
+        message: "Terjadi kesalahan saat menghapus data perjalanan",
+        error: err.message,
+        code: 500,
+      });
     }
   },
 };

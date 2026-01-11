@@ -40,6 +40,9 @@ module.exports = {
           "statusPegawaiId",
           [sequelize.fn("COUNT", sequelize.col("pegawai.id")), "jumlah"],
         ],
+        where: {
+          statusPegawaiId: { [Op.in]: [1, 2, 3, 4] },
+        },
         group: ["unitKerjaId", "profesiId", "statusPegawaiId"],
         include: [
           {
@@ -405,6 +408,7 @@ module.exports = {
     const {
       nama,
       nip,
+      nik,
       jabatan,
       pangkatId,
       golonganId,
@@ -418,6 +422,7 @@ module.exports = {
     console.log(req.body);
     const transaction = await sequelize.transaction();
     const nipBaru = nip.replace(/\s+/g, "");
+    const nikBaru = nik.replace(/\s+/g, "");
     const password = "paserkab";
     try {
       const result = await pegawai.create(
@@ -425,6 +430,7 @@ module.exports = {
           nama,
           jabatan,
           nip,
+          nik,
           golonganId,
           tingkatanId,
           pangkatId,
@@ -445,12 +451,13 @@ module.exports = {
       if (
         statusPegawaiId === 1 ||
         statusPegawaiId === 2 ||
-        statusPegawaiId === 3
+        statusPegawaiId === 3 ||
+        statusPegawaiId === 4
       ) {
         const newUser = await user.create(
           {
             nama,
-            namaPengguna: nipBaru,
+            namaPengguna: statusPegawaiId === 4 ? nikBaru : nipBaru,
             password: hashedPassword,
           },
           { transaction }

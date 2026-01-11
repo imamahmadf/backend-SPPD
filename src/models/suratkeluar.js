@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.perjalanan, {
         foreignKey: "nomorSuratKeluarId",
       });
+      this.belongsTo(models.pegawai, {
+        foreignKey: "pegawaiId",
+        as: "pegawai",
+      });
     }
   }
   suratKeluar.init(
@@ -21,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       tujuan: DataTypes.STRING,
       tanggalSurat: DataTypes.DATE,
       indukUnitKerjaId: DataTypes.INTEGER,
+      pegawaiId: DataTypes.INTEGER,
     },
     {
       sequelize,

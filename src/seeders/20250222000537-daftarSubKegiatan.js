@@ -159,7 +159,7 @@ const daftarSubKegiatans = [
   {
     id: 20,
     subKegiatan:
-      "Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan, Pajak dan Perizinan Kendaraan Dinas Operasional atau Lapangan",
+      "Penyediaan Jasa Pemeliharaan, Biaya Pemeliharaan, Pajak dan Perizinan Kendaraan Dinas Operasional atau Lapangan xxx",
     unitKerjaId: 3,
     kodeRekening: "1.02.01.2.09.02",
     createdAt: currentDate,
@@ -167,7 +167,7 @@ const daftarSubKegiatans = [
   },
   {
     id: 21,
-    subKegiatan: "Pemeliharaan Peralatan dan Mesin Lainnya",
+    subKegiatan: "Pemeliharaan Peralatan dan Mesin Lainnya xxx",
     unitKerjaId: 3,
     kodeRekening: "1.02.01.2.09.06",
     createdAt: currentDate,
