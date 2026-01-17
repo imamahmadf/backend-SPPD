@@ -6,6 +6,7 @@ const routers = express.Router();
 
 routers.get("/get/detail-perjalanan/:id", adminControllers.detailPerjalanan);
 routers.get("/get/surat-keluar", adminControllers.getSuratKeluar);
+routers.get("/get/surat-keluar/download", adminControllers.downloadSuratKeluar);
 routers.post("/post/surat-keluar", adminControllers.postSuratKeluar);
 routers.get("/get/induk-unit-kerja", adminControllers.getIndukUnitKerja);
 routers.get("/get/sumber-dana", adminControllers.getSumberDana);

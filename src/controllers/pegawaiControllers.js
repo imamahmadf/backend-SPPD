@@ -300,7 +300,7 @@ module.exports = {
     try {
       const result = await pegawai.findOne({
         where: { id },
-        attributes: ["id", "nama", "nip", "jabatan", "pendidikan"],
+        attributes: ["id", "nama", "nip", "nik", "jabatan", "pendidikan"],
         include: [
           {
             model: daftarTingkatan,
@@ -388,6 +388,7 @@ module.exports = {
           nama: dataPegawai.nama,
           jabatan: dataPegawai.jabatan,
           nip: dataPegawai.nip,
+          nik: dataPegawai.nik,
           golonganId: dataPegawai.daftarGolongan.id,
           tingkatanId: dataPegawai.daftarTingkatan.id,
           pangkatId: dataPegawai.daftarPangkat.id,

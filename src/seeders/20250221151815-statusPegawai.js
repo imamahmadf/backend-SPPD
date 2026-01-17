@@ -12,7 +12,19 @@ const statusPegawais = [
   { id: 3, status: "P3K", createdAt: currentDate, updatedAt: currentDate },
   {
     id: 4,
-    status: "PTT",
+    status: "P3K Paruh Waktu",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 5,
+    status: "PJPL",
+    createdAt: currentDate,
+    updatedAt: currentDate,
+  },
+  {
+    id: 6,
+    status: "Non Pegawai",
     createdAt: currentDate,
     updatedAt: currentDate,
   },

@@ -9,7 +9,7 @@ const jenisSurats = [
   },
   {
     id: 2,
-    jenis: "Nota Dinas",
+    jenis: "Nota Dinas/Telaahan Staff",
     nomorSurat: "KLASIFIKASI/NOMOR/KODE/BULAN/2025",
     createdAt: currentDate,
     updatedAt: currentDate,

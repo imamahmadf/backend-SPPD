@@ -36,6 +36,7 @@ const {
 const { Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+const ExcelJS = require("exceljs");
 
 module.exports = {
   detailPerjalanan: async (req, res) => {
@@ -249,6 +250,231 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+  downloadSuratKeluar: async (req, res) => {
+    // Helper function to format date in Indonesian format
+    const formatTanggalIndonesia = (date) => {
+      if (!date) return "-";
+      const d = new Date(date);
+      const months = [
+        "januari",
+        "februari",
+        "maret",
+        "april",
+        "mei",
+        "juni",
+        "juli",
+        "agustus",
+        "september",
+        "oktober",
+        "november",
+        "desember",
+      ];
+      const day = String(d.getDate()).padStart(2, "0");
+      const month = months[d.getMonth()];
+      const year = d.getFullYear();
+      return `${day} ${month} ${year}`;
+    };
+
+    const indukUnitKerjaId = req.query.indukUnitKerjaId;
+    const tanggalBerangkat = req.query.tanggalBerangkat;
+    const tanggalPulang = req.query.tanggalPulang;
+
+    const whereConditionSuratKeluar = {};
+    const whereConditionTempat = {};
+
+    if (indukUnitKerjaId) {
+      whereConditionSuratKeluar.indukUnitKerjaId = indukUnitKerjaId;
+    }
+
+    // Filter tanggal berangkat
+    if (tanggalBerangkat) {
+      whereConditionTempat.tanggalBerangkat = {
+        [Op.gte]: new Date(tanggalBerangkat),
+      };
+    }
+
+    // Filter tanggal pulang
+    if (tanggalPulang) {
+      whereConditionTempat.tanggalPulang = {
+        [Op.lte]: new Date(tanggalPulang),
+      };
+    }
+
+    try {
+      const result = await suratKeluar.findAll({
+        order: [["createdAt", "DESC"]],
+        attributes: [
+          "id",
+          "nomor",
+          "perihal",
+          "tujuan",
+          "tanggalSurat",
+          "createdAt",
+        ],
+        where: whereConditionSuratKeluar,
+        include: [
+          {
+            model: perjalanan,
+            attributes: ["id", "isNotaDinas", "tanggalPengajuan"],
+            include: [
+              {
+                model: tempat,
+                ...(Object.keys(whereConditionTempat).length > 0 && {
+                  where: whereConditionTempat,
+                }),
+                attributes: [
+                  "id",
+                  "tempat",
+                  "tanggalBerangkat",
+                  "tanggalPulang",
+                ],
+                include: [
+                  {
+                    model: dalamKota,
+                    as: "dalamKota",
+                    attributes: ["id", "nama"],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            model: pegawai,
+            as: "pegawai",
+            attributes: ["id", "nama", "nip"],
+            required: false,
+          },
+        ],
+        distinct: true,
+      });
+
+      // Generate Excel
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet("Rekap Surat Keluar");
+
+      // Header
+      worksheet.columns = [
+        { header: "No", key: "no", width: 5 },
+        { header: "Nomor Surat", key: "nomor", width: 35 },
+        { header: "Perihal", key: "perihal", width: 40 },
+        { header: "Tujuan", key: "tujuan", width: 30 },
+        { header: "Tanggal Surat", key: "tanggalSurat", width: 20 },
+        { header: "Tanggal Pengajuan", key: "tanggalPengajuan", width: 20 },
+        { header: "Tanggal Berangkat", key: "tanggalBerangkat", width: 20 },
+        { header: "Tanggal Pulang", key: "tanggalPulang", width: 20 },
+        { header: "Tempat Tujuan", key: "tempatTujuan", width: 30 },
+        { header: "Nama Pegawai", key: "namaPegawai", width: 30 },
+        { header: "NIP", key: "nip", width: 20 },
+        { header: "Is Nota Dinas", key: "isNotaDinas", width: 15 },
+      ];
+
+      // Data rows
+      let rowIndex = 0;
+      result.forEach((suratKeluarItem) => {
+        const perjalanans = suratKeluarItem.perjalanans || [];
+        const tanggalSurat = formatTanggalIndonesia(
+          suratKeluarItem.tanggalSurat
+        );
+        const namaPegawai = suratKeluarItem.pegawai?.nama || "-";
+        const nip = suratKeluarItem.pegawai?.nip || "-";
+
+        if (perjalanans.length > 0) {
+          perjalanans.forEach((perjalananItem) => {
+            const tempats = perjalananItem.tempats || [];
+            const tanggalPengajuan = formatTanggalIndonesia(
+              perjalananItem.tanggalPengajuan
+            );
+
+            if (tempats.length > 0) {
+              tempats.forEach((tempatItem) => {
+                rowIndex++;
+                const tanggalBerangkat = formatTanggalIndonesia(
+                  tempatItem.tanggalBerangkat
+                );
+                const tanggalPulang = formatTanggalIndonesia(
+                  tempatItem.tanggalPulang
+                );
+
+                let tempatTujuan = tempatItem.tempat || "-";
+                if (tempatItem.dalamKota && tempatItem.dalamKota.nama) {
+                  tempatTujuan = tempatItem.dalamKota.nama;
+                }
+
+                worksheet.addRow({
+                  no: rowIndex,
+                  nomor: suratKeluarItem?.nomor || "-",
+                  perihal: suratKeluarItem?.perihal || "-",
+                  tujuan: suratKeluarItem?.tujuan || "-",
+                  tanggalSurat: tanggalSurat,
+                  tanggalPengajuan: tanggalPengajuan,
+                  tanggalBerangkat: tanggalBerangkat,
+                  tanggalPulang: tanggalPulang,
+                  tempatTujuan: tempatTujuan,
+                  namaPegawai: namaPegawai,
+                  nip: nip,
+                  isNotaDinas: perjalananItem?.isNotaDinas ? "Ya" : "Tidak",
+                });
+              });
+            } else {
+              // Jika tidak ada tempat, tetap buat row dengan data surat keluar
+              rowIndex++;
+              worksheet.addRow({
+                no: rowIndex,
+                nomor: suratKeluarItem?.nomor || "-",
+                perihal: suratKeluarItem?.perihal || "-",
+                tujuan: suratKeluarItem?.tujuan || "-",
+                tanggalSurat: tanggalSurat,
+                tanggalPengajuan: tanggalPengajuan,
+                tanggalBerangkat: "-",
+                tanggalPulang: "-",
+                tempatTujuan: "-",
+                namaPegawai: namaPegawai,
+                nip: nip,
+                isNotaDinas: perjalananItem?.isNotaDinas ? "Ya" : "Tidak",
+              });
+            }
+          });
+        } else {
+          // Jika tidak ada perjalanan, tetap buat row dengan data surat keluar saja
+          rowIndex++;
+          worksheet.addRow({
+            no: rowIndex,
+            nomor: suratKeluarItem?.nomor || "-",
+            perihal: suratKeluarItem?.perihal || "-",
+            tujuan: suratKeluarItem?.tujuan || "-",
+            tanggalSurat: tanggalSurat,
+            tanggalPengajuan: "-",
+            tanggalBerangkat: "-",
+            tanggalPulang: "-",
+            tempatTujuan: "-",
+            namaPegawai: namaPegawai,
+            nip: nip,
+            isNotaDinas: "-",
+          });
+        }
+      });
+
+      // Set response headers
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=data-surat-keluar.xlsx"
+      );
+
+      // Send Excel file
+      await workbook.xlsx.write(res);
+      res.end();
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
     }
   },
   postSuratKeluar: async (req, res) => {

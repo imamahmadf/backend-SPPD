@@ -359,8 +359,48 @@ module.exports = {
             ],
             attributes: ["id", "jabatan"],
           },
-          { model: perjalanan, attributes: ["id"] },
+          {
+            model: perjalanan,
+            attributes: ["id"],
+            include: [
+              {
+                model: personil,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: rincianBPD,
+                    attributes: ["id", "qty", "nilai"],
+                  },
+                ],
+              },
+            ],
+          },
         ],
+      });
+
+      // Menghitung total dari rincianBPD untuk setiap kwitGlobal
+      const resultWithTotal = result.map((kwit) => {
+        let total = 0;
+
+        // Loop melalui semua perjalanan
+        kwit.perjalanans?.forEach((perjalanan) => {
+          // Loop melalui semua personil
+          perjalanan.personils?.forEach((personil) => {
+            // Loop melalui semua rincianBPD dan hitung total
+            personil.rincianBPDs?.forEach((rincian) => {
+              total += (rincian.qty || 0) * (rincian.nilai || 0);
+            });
+          });
+        });
+
+        // Tambahkan field total ke data kwitGlobal
+        const kwitData = kwit.toJSON();
+        kwitData.total = total;
+
+        // Hapus perjalanans dari response untuk mengurangi ukuran data
+        delete kwitData.perjalanans;
+
+        return kwitData;
       });
 
       const totalRows = await kwitGlobal.count({
@@ -410,7 +450,7 @@ module.exports = {
         ],
       });
       return res.status(200).json({
-        result,
+        result: resultWithTotal,
         resultKPA,
         resultBendahara,
         resultJenisPerjalanan,
@@ -804,6 +844,24 @@ module.exports = {
     }
   },
 
+  hapusKwitansi: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const result = await kwitGlobal.destroy({
+        where: {
+          id,
+        },
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
   getAllKwitGlobal: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
@@ -870,7 +928,48 @@ module.exports = {
             ],
             attributes: ["id", "jabatan"],
           },
+          {
+            model: perjalanan,
+            attributes: ["id"],
+            include: [
+              {
+                model: personil,
+                attributes: ["id"],
+                include: [
+                  {
+                    model: rincianBPD,
+                    attributes: ["id", "qty", "nilai"],
+                  },
+                ],
+              },
+            ],
+          },
         ],
+      });
+
+      // Menghitung total dari rincianBPD untuk setiap kwitGlobal
+      const resultWithTotal = result.map((kwit) => {
+        let total = 0;
+
+        // Loop melalui semua perjalanan
+        kwit.perjalanans?.forEach((perjalanan) => {
+          // Loop melalui semua personil
+          perjalanan.personils?.forEach((personil) => {
+            // Loop melalui semua rincianBPD dan hitung total
+            personil.rincianBPDs?.forEach((rincian) => {
+              total += (rincian.qty || 0) * (rincian.nilai || 0);
+            });
+          });
+        });
+
+        // Tambahkan field total ke data kwitGlobal
+        const kwitData = kwit.toJSON();
+        kwitData.total = total;
+
+        // Hapus perjalanans dari response untuk mengurangi ukuran data
+        delete kwitData.perjalanans;
+
+        return kwitData;
       });
 
       const totalRows = await kwitGlobal.count({
@@ -886,7 +985,7 @@ module.exports = {
       const totalPage = Math.ceil(totalRows / limit);
 
       return res.status(200).json({
-        result,
+        result: resultWithTotal,
 
         page,
         limit,

@@ -173,7 +173,7 @@ module.exports = {
     }
   },
   uploadTemplateKadis: async (req, res) => {
-    const { id, nomorSurat } = req.body;
+    const { id, nomorSurat, jenis } = req.body;
     console.log(req.body);
 
     try {
@@ -190,27 +190,45 @@ module.exports = {
             return;
           }
         });
+      }
 
-        const filePath = `/template/${req.file.filename}`;
+      const filePath = `/template/${req.file.filename}`;
 
-        await kadis.update(
-          {
-            template: filePath, // Nama asli
-            nomorSurat,
-          },
-          {
-            where: { id },
-          }
-        );
-      } else {
-        await kadis.create({
-          template: `/template/${req.file.filename}`, // Nama asli
-          nomorSurat,
+      if (id) {
+        // Update existing record
+        const updateData = { nomorSurat };
+
+        if (jenis == 1) {
+          updateData.template = filePath;
+        } else if (jenis == 2) {
+          updateData.templateSPD = filePath;
+        } else {
+          // Default to template if jenis is not specified or unknown
+          updateData.template = filePath;
+        }
+
+        await kadis.update(updateData, {
+          where: { id },
         });
+      } else {
+        // Create new record
+        const createData = { nomorSurat };
+
+        if (jenis == 1) {
+          createData.template = filePath;
+        } else if (jenis == 2) {
+          createData.templateSPD = filePath;
+        } else {
+          // Default to template if jenis is not specified or unknown
+          createData.template = filePath;
+        }
+
+        await kadis.create(createData);
       }
 
       return res.status(200).json({
         message: "File template berhasil diunggah",
+        filePath,
       });
     } catch (error) {
       console.error(error);

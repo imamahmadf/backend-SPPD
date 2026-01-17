@@ -450,4 +450,51 @@ module.exports = {
       });
     }
   },
+  updatePassword: async (req, res) => {
+    try {
+      const { passwordBaru } = req.body;
+      const { id } = req.params;
+
+      // Validasi input
+      if (!passwordBaru) {
+        return res.status(400).json({
+          message: "Password baru harus diisi",
+        });
+      }
+
+      // Validasi panjang password baru
+      if (passwordBaru.length < 6) {
+        return res.status(400).json({
+          message: "Password baru minimal 6 karakter",
+        });
+      }
+
+      // Cari user berdasarkan ID
+      const resultUser = await user.findOne({
+        where: { id },
+      });
+
+      if (!resultUser) {
+        return res.status(404).json({
+          message: "User tidak ditemukan",
+        });
+      }
+
+      // Hash password baru
+      const hashedPassword = await bcrypt.hash(passwordBaru, 10);
+
+      // Update password di database
+      await user.update({ password: hashedPassword }, { where: { id } });
+
+      return res.status(200).json({
+        message: "Password berhasil diubah",
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
 };

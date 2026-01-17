@@ -9,7 +9,7 @@ const jenisTempats = [
   },
   {
     id: 2,
-    jenis: "Perjalanan DInas Biasa",
+    jenis: "Perjalanan Dinas Biasa",
     kodeRekening: "0003",
     createdAt: currentDate,
     updatedAt: currentDate,
