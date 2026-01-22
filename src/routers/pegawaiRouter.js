@@ -45,4 +45,6 @@ routers.post(
 );
 routers.get("/get/usulan/:id", pegawaiControllers.getDokumen);
 routers.get("/get/usulan", pegawaiControllers.getUsulan);
+
+routers.post("/post/mutasi", pegawaiControllers.mutasiPegawai);
 module.exports = routers;

@@ -123,12 +123,12 @@ module.exports = {
   },
 
   getPJPLPegawai: async (req, res) => {
-    const indukUnitKerjaId = req.body.id;
+    const unitKerjaId = req.query.unitKerjaId;
     const pegawaiWhere = { statusPegawaiId: 4 };
-    const unitKerjaWhere = {};
 
-    if (indukUnitKerjaId) {
-      unitKerjaWhere.indukUnitKerjaId = indukUnitKerjaId;
+    // Filter berdasarkan unitKerjaId jika diberikan
+    if (unitKerjaId) {
+      pegawaiWhere.unitKerjaId = unitKerjaId;
     }
 
     const daftarUnitKerjaInclude = {
@@ -136,10 +136,6 @@ module.exports = {
       as: "daftarUnitKerja",
       attributes: ["id", "unitKerja", "indukUnitKerjaId"],
     };
-
-    if (Object.keys(unitKerjaWhere).length > 0) {
-      daftarUnitKerjaInclude.where = unitKerjaWhere;
-    }
 
     try {
       const result = await pegawai.findAll({

@@ -865,20 +865,80 @@ module.exports = {
   getAllKwitGlobal: async (req, res) => {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 50;
+    const unitKerjaId = req.query.unitKerjaId
+      ? parseInt(req.query.unitKerjaId)
+      : null;
+    const indukUnitKerjaId = req.query.indukUnitKerjaId
+      ? parseInt(req.query.indukUnitKerjaId)
+      : null;
+    const sumberDanaId = req.query.sumberDanaId
+      ? parseInt(req.query.sumberDanaId)
+      : null;
+    const jenisPerjalananId = req.query.jenisPerjalananId
+      ? parseInt(req.query.jenisPerjalananId)
+      : null;
+    const filterUnitKerjaId = req.query.filterUnitKerjaId
+      ? parseInt(req.query.filterUnitKerjaId)
+      : null;
+    const filterStatus = req.query.status || null;
+    const filterTanggalAwal = req.query.tanggalAwal || null;
+    const filterTanggalAkhir = req.query.tanggalAkhir || null;
 
     const offset = limit * page;
 
     console.log(req.query, "ini dri frontend");
     try {
+      // Build where clause for main query
+      const whereClause = {};
+
+      // Status filter: use filterStatus if provided, otherwise default to ["diajukan", "diterima"]
+      if (filterStatus) {
+        whereClause.status = filterStatus;
+      } else {
+        whereClause.status = {
+          [Op.in]: ["diajukan", "diterima"],
+        };
+      }
+
+      // Unit Kerja filter
+      if (unitKerjaId) {
+        whereClause.unitKerjaId = unitKerjaId;
+      } else if (filterUnitKerjaId) {
+        whereClause.unitKerjaId = filterUnitKerjaId;
+      }
+
+      // Jenis Perjalanan filter
+      if (jenisPerjalananId) {
+        whereClause.jenisPerjalananId = jenisPerjalananId;
+      }
+
+      // Tanggal filter
+      if (filterTanggalAwal || filterTanggalAkhir) {
+        whereClause.createdAt = {};
+        if (filterTanggalAwal) {
+          whereClause.createdAt[Op.gte] = new Date(filterTanggalAwal);
+        }
+        if (filterTanggalAkhir) {
+          // Set waktu ke akhir hari (23:59:59)
+          const akhirHari = new Date(filterTanggalAkhir);
+          akhirHari.setHours(23, 59, 59, 999);
+          whereClause.createdAt[Op.lte] = akhirHari;
+        }
+      }
+
+      // Build bendahara filter for include
+      const bendaharaFilter = {};
+      if (sumberDanaId) {
+        bendaharaFilter.sumberDanaId = sumberDanaId;
+      }
+      if (indukUnitKerjaId) {
+        bendaharaFilter.indukUnitKerjaId = indukUnitKerjaId;
+      }
+
       const result = await kwitGlobal.findAll({
         limit,
-
         offset,
-        where: {
-          status: {
-            [Op.in]: ["diajukan", "diterima"],
-          },
-        },
+        where: whereClause,
         order: [
           [
             sequelize.literal(
@@ -886,7 +946,7 @@ module.exports = {
             ),
             "ASC",
           ],
-          ["createdAt", "DESC"], // opsional: urutkan terbaru di dalam status
+          ["createdAt", "DESC"],
         ],
         include: [
           {
@@ -916,6 +976,11 @@ module.exports = {
           {
             model: bendahara,
             as: "bendahara",
+            where:
+              Object.keys(bendaharaFilter).length > 0
+                ? bendaharaFilter
+                : undefined,
+            required: Object.keys(bendaharaFilter).length > 0 ? true : false,
             include: [
               {
                 model: pegawai,
@@ -926,7 +991,14 @@ module.exports = {
                 model: sumberDana,
               },
             ],
-            attributes: ["id", "jabatan"],
+            // Include semua kolom yang diperlukan untuk join ke related models
+            attributes: [
+              "id",
+              "jabatan",
+              "sumberDanaId",
+              "indukUnitKerjaId",
+              "pegawaiId",
+            ],
           },
           {
             model: perjalanan,
@@ -972,21 +1044,70 @@ module.exports = {
         return kwitData;
       });
 
-      const totalRows = await kwitGlobal.count({
-        limit,
+      // Count query dengan where yang sama
+      const countWhereClause = { ...whereClause };
 
-        offset,
-        where: {
-          status: {
-            [Op.in]: ["diajukan", "diterima"],
-          },
-        },
+      const totalRows = await kwitGlobal.count({
+        where: countWhereClause,
+        include: [
+          ...(Object.keys(bendaharaFilter).length > 0
+            ? [
+                {
+                  model: bendahara,
+                  as: "bendahara",
+                  where: bendaharaFilter,
+                  required: true,
+                },
+              ]
+            : []),
+        ],
+        distinct: true,
       });
       const totalPage = Math.ceil(totalRows / limit);
 
+      // Get additional data for dropdowns
+      // Use unitKerjaId if available, otherwise use filterUnitKerjaId
+      const finalUnitKerjaId = unitKerjaId || filterUnitKerjaId;
+
+      const resultKPA = await KPA.findAll({
+        where: finalUnitKerjaId ? { unitKerjaId: finalUnitKerjaId } : {},
+        attributes: ["id"],
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama", "nip", "jabatan"],
+            as: "pegawai_KPA",
+          },
+        ],
+      });
+
+      const resultBendahara = await bendahara.findAll({
+        where: indukUnitKerjaId ? { indukUnitKerjaId } : {},
+        include: [
+          {
+            model: pegawai,
+            attributes: ["id", "nama"],
+            as: "pegawai_bendahara",
+          },
+        ],
+      });
+
+      const resultJenisPerjalanan = await jenisPerjalanan.findAll({});
+
+      const resultTemplate = await templateKwitGlobal.findAll({});
+
+      const resultDaftarSubKegiatan = await daftarSubKegiatan.findAll({
+        attributes: ["id", "subKegiatan", "kodeRekening"],
+        where: finalUnitKerjaId ? { unitKerjaId: finalUnitKerjaId } : {},
+      });
+
       return res.status(200).json({
         result: resultWithTotal,
-
+        resultKPA,
+        resultBendahara,
+        resultJenisPerjalanan,
+        resultTemplate,
+        resultDaftarSubKegiatan,
         page,
         limit,
         totalRows,

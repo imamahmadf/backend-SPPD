@@ -28,6 +28,7 @@ const {
   uangHarian,
   fotoPerjalanan,
   sumberDana,
+  profile,
 } = require("../models");
 const { emitNotifikasiPersonil } = require("./notifikasiControllers");
 const { Op, where } = require("sequelize");
@@ -202,6 +203,7 @@ module.exports = {
             include: [
               { model: daftarPangkat, as: "daftarPangkat" },
               { model: daftarGolongan, as: "daftarGolongan" },
+              { model: profile },
             ],
           },
           {
@@ -386,7 +388,7 @@ module.exports = {
       templateId,
       foto,
     } = req.body;
-    console.log(req.body.templateId);
+    console.log(req.body.kodeRekening, "cek kode");
 
     const formatTanggal = (tanggal) => {
       return new Date(tanggal).toLocaleDateString("id-ID", {
@@ -768,7 +770,7 @@ module.exports = {
         kalimat1: dataBendahara.sumberDana.kalimat1 || "",
         kalimat2: dataBendahara.sumberDana.kalimat2 || "",
         KPAJabatan,
-        indukUnitKerja,
+        indukUnitKerja,kodeRekening,
         nomorSurat: totalDurasi > 7 ? nomorSPD : nomorST,
         surat: totalDurasi > 7 ? "SPD" : "ND",
         suratRill:
@@ -1231,6 +1233,137 @@ module.exports = {
 
       await transaction.commit();
       return res.status(200).json({ massage: "BPD berhasil ditambahkan" });
+    } catch (err) {
+      await transaction.rollback();
+      console.error("Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+  cetakKwitansiOtomatisBulk: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    const {
+      id,
+      totalDurasi,
+      personils,
+      tempatNama,
+      asal,
+      pelayananKesehatan,
+    } = req.body;
+
+    // Validasi input
+    if (!personils || !Array.isArray(personils) || personils.length === 0) {
+      await transaction.rollback();
+      return res.status(400).json({
+        message: "personils harus berupa array dan tidak boleh kosong",
+        code: 400,
+      });
+    }
+
+    console.log(req.body, "BULK KUITANSI OTOMATIS");
+
+    try {
+      const results = [];
+
+      // Loop untuk setiap personil
+      for (const personilData of personils) {
+        const {
+          personilId,
+          uangHarian,
+          uangTransport,
+          // Jika ada tempatNama atau asal spesifik per personil, gunakan yang ini
+          tempatNamaPersonil = tempatNama,
+          asalPersonil = asal,
+        } = personilData;
+
+        // Validasi data personil
+        if (!personilId || !uangHarian || !uangTransport) {
+          throw new Error(
+            `Data personil tidak lengkap untuk personilId: ${personilId}`
+          );
+        }
+
+        // Hitung uang transport berdasarkan pelayanan kesehatan
+        const BEUangtransport =
+          pelayananKesehatan.id === 1
+            ? uangTransport
+            : pelayananKesehatan.uangTransport;
+
+        // Buat rincian BPD untuk pengeluaran rill
+        const rillBPD = await rincianBPD.create(
+          {
+            personilId,
+            item: "Pengeluaran Rill",
+            nilai: BEUangtransport,
+            jenisId: 5,
+            qty: 1,
+            satuan: "-",
+          },
+          { transaction }
+        );
+
+        // Buat rill transport berdasarkan jenis pelayanan kesehatan
+        if (pelayananKesehatan.id === 1) {
+          await rill.create(
+            {
+              rincianBPDId: rillBPD.id,
+              item: `transport ${asalPersonil} ke ${tempatNamaPersonil} (PP)`,
+              nilai: BEUangtransport,
+            },
+            { transaction }
+          );
+        } else {
+          await rill.create(
+            {
+              rincianBPDId: rillBPD.id,
+              item: `transport pelayanan kesehatan (PP)`,
+              nilai: BEUangtransport,
+            },
+            { transaction }
+          );
+        }
+
+        // Buat uang harian jika durasi > 7 dan pelayanan kesehatan id === 1
+        if (totalDurasi > 7 && pelayananKesehatan.id === 1) {
+          await rincianBPD.create(
+            {
+              personilId,
+              item: "Uang harian",
+              nilai: uangHarian,
+              jenisId: 1,
+              qty: 1,
+              satuan: "OH",
+            },
+            { transaction }
+          );
+        }
+
+        // Update total personil
+        await personil.update(
+          {
+            total: uangHarian + BEUangtransport,
+          },
+          {
+            where: { id: personilId },
+            transaction,
+          }
+        );
+
+        results.push({
+          personilId,
+          success: true,
+        });
+      }
+
+      await transaction.commit();
+      return res.status(200).json({
+        message: `BPD berhasil ditambahkan untuk ${results.length} personil`,
+        data: results,
+        totalPersonil: results.length,
+      });
     } catch (err) {
       await transaction.rollback();
       console.error("Error:", err);

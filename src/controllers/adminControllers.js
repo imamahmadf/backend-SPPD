@@ -31,6 +31,7 @@ const {
   templateKeuangan,
   anggaran,
   fotoPerjalanan,
+  profile,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -66,6 +67,7 @@ module.exports = {
                 include: [
                   { model: daftarPangkat, as: "daftarPangkat" },
                   { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: profile },
                 ],
               },
               {

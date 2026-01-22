@@ -17,6 +17,7 @@ routers.get(
 );
 routers.get("/get/detail-program/:id", perencanaanControllers.getDetailProgram);
 routers.post("/post/target", perencanaanControllers.postTarget);
+routers.post("/update/target", perencanaanControllers.updateTarget);
 routers.post("/post/capaian", perencanaanControllers.postCapaian);
 routers.post(
   "/post/anggaran-perubahan",

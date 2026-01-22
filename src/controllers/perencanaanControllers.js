@@ -528,18 +528,37 @@ module.exports = {
   },
 
   postTarget: async (req, res) => {
-    // console.log(req.body, "cek");
+    console.log(req.body, "cek");
     const { indikatorId, targets, tahun, anggaran, jenisAnggaranId } = req.body;
 
-    // Validasi input
+    // Validasi input sesuai dengan frontend
     if (
       !indikatorId ||
       !targets ||
       !Array.isArray(targets) ||
-      targets.length === 0
+      targets.length === 0 ||
+      !tahun ||
+      !anggaran ||
+      !jenisAnggaranId
     ) {
       return res.status(400).json({
-        error: "indikatorId dan targets array harus disediakan",
+        error:
+          "Semua field wajib diisi (indikatorId, targets, tahun, anggaran, jenisAnggaranId)",
+      });
+    }
+
+    // Validasi setiap target harus memiliki namaTargetId dan nilai
+    const hasInvalidTarget = targets.some(
+      (targetItem) =>
+        !targetItem.namaTargetId ||
+        targetItem.nilai === null ||
+        targetItem.nilai === undefined ||
+        targetItem.nilai === ""
+    );
+
+    if (hasInvalidTarget) {
+      return res.status(400).json({
+        error: "Semua target harus memiliki namaTargetId dan nilai",
       });
     }
 
@@ -548,19 +567,6 @@ module.exports = {
       const transaction = await sequelize.transaction();
 
       try {
-        // const cekTahun = await tahunAnggaran.findOne(
-        //   {
-        //     where: { tahun, jenisAnggaranId: 1 },
-        //   },
-        //   { transaction }
-        // );
-        // console.log(cekTahun);
-        // if (cekTahun) {
-        //   return res.status(400).json({
-        //     error: "anggaran sudah ada",
-        //   });
-        // }
-
         // Buat target utama
         const result = await target.create(
           {
@@ -571,8 +577,8 @@ module.exports = {
 
         // Siapkan data untuk bulk insert targetTriwulan
         const targetTriwulanData = targets.map((targetItem) => ({
-          nilai: targetItem.nilai,
-          namaTargetId: targetItem.namaTargetId,
+          nilai: parseInt(targetItem.nilai) || 0,
+          namaTargetId: parseInt(targetItem.namaTargetId),
           targetId: result.id,
         }));
 
@@ -587,9 +593,9 @@ module.exports = {
         // Buat tahunAnggaran
         const resultAnggaran = await tahunAnggaran.create(
           {
-            tahun,
-            anggaran,
-            jenisAnggaranId,
+            tahun: parseInt(tahun),
+            anggaran: parseInt(anggaran),
+            jenisAnggaranId: parseInt(jenisAnggaranId),
             targetId: result.id,
           },
           { transaction }
@@ -614,6 +620,155 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  updateTarget: async (req, res) => {
+    console.log(req.body, "cek update");
+    const { targetId, targets, tahun, anggaran } = req.body;
+
+    // Validasi input sesuai dengan frontend
+    if (
+      !targetId ||
+      !targets ||
+      !Array.isArray(targets) ||
+      targets.length === 0
+    ) {
+      return res.status(400).json({
+        error: "targetId dan targets array harus disediakan",
+      });
+    }
+
+    // Validasi tahun dan anggaran
+    const parsedTahun = parseInt(tahun);
+    const parsedAnggaran = parseInt(anggaran);
+
+    if (
+      !tahun ||
+      !parsedTahun ||
+      isNaN(parsedTahun) ||
+      parsedTahun <= 0 ||
+      !anggaran ||
+      !parsedAnggaran ||
+      isNaN(parsedAnggaran) ||
+      parsedAnggaran <= 0
+    ) {
+      return res.status(400).json({
+        error:
+          "Semua field wajib diisi dengan nilai yang valid (tahun dan anggaran harus lebih dari 0)",
+      });
+    }
+
+    // Validasi setiap target harus memiliki namaTargetId dan nilai
+    const hasInvalidTarget = targets.some(
+      (targetItem) =>
+        !targetItem.namaTargetId ||
+        targetItem.nilai === null ||
+        targetItem.nilai === undefined ||
+        targetItem.nilai === "" ||
+        isNaN(parseInt(targetItem.nilai)) ||
+        parseInt(targetItem.nilai) < 0
+    );
+
+    if (hasInvalidTarget) {
+      return res.status(400).json({
+        error:
+          "Semua target harus memiliki namaTargetId dan nilai yang valid (nilai harus >= 0)",
+      });
+    }
+
+    try {
+      // Mulai transaksi untuk memastikan konsistensi data
+      const transaction = await sequelize.transaction();
+
+      try {
+        // Cek apakah target ada
+        const existingTarget = await target.findByPk(targetId, {
+          transaction,
+        });
+
+        if (!existingTarget) {
+          await transaction.rollback();
+          return res.status(404).json({
+            error: "Target tidak ditemukan",
+          });
+        }
+
+        // Hapus semua targetTriwulan lama untuk target ini
+        await targetTriwulan.destroy({
+          where: { targetId: targetId },
+          transaction,
+        });
+
+        // Siapkan data untuk bulk insert targetTriwulan baru
+        const targetTriwulanData = targets.map((targetItem) => ({
+          nilai: parseInt(targetItem.nilai),
+          namaTargetId: parseInt(targetItem.namaTargetId),
+          targetId: targetId,
+        }));
+
+        // Bulk insert targetTriwulan baru
+        const resultTriwulan = await targetTriwulan.bulkCreate(
+          targetTriwulanData,
+          {
+            transaction,
+          }
+        );
+
+        // Cari tahunAnggaran yang sudah ada untuk target ini dengan tahun yang sama dan jenisAnggaranId: 1
+        let tahunAnggaranResult;
+        const existingTahunAnggaran = await tahunAnggaran.findOne({
+          where: {
+            targetId: targetId,
+            tahun: parsedTahun,
+            jenisAnggaranId: 1,
+          },
+          transaction,
+        });
+
+        if (existingTahunAnggaran) {
+          // Update tahunAnggaran yang sudah ada
+          tahunAnggaranResult = await existingTahunAnggaran.update(
+            {
+              anggaran: parsedAnggaran,
+            },
+            { transaction }
+          );
+        } else {
+          // Buat tahunAnggaran baru dengan jenisAnggaranId: 1 (anggaran murni)
+          tahunAnggaranResult = await tahunAnggaran.create(
+            {
+              tahun: parsedTahun,
+              anggaran: parsedAnggaran,
+              jenisAnggaranId: 1,
+              targetId: targetId,
+            },
+            { transaction }
+          );
+        }
+
+        // Commit transaksi
+        await transaction.commit();
+
+        return res.status(200).json({
+          message: "Target berhasil diperbarui",
+          result: {
+            target: existingTarget,
+            targetTriwulan: resultTriwulan,
+            tahunAnggaran: tahunAnggaranResult,
+          },
+        });
+      } catch (error) {
+        // Rollback transaksi jika ada error
+        await transaction.rollback();
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: err.message || "Gagal memperbarui target",
+        message: err.message || "Gagal memperbarui target",
+      });
     }
   },
 

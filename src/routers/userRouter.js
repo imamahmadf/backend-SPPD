@@ -1,6 +1,7 @@
 const express = require("express");
 const { userControllers } = require("../controllers");
 const { authenticateUser, authorizeRole } = require("../lib/auth");
+const fileUploader = require("../middleware/uploader");
 
 const router = express.Router();
 
@@ -23,6 +24,16 @@ router.post(
   userControllers.changePassword
 );
 router.post("/update-password/:id", userControllers.updatePassword);
+router.post(
+  "/profile/photo",
+  authenticateUser,
+  fileUploader({
+    destinationFolder: "profile",
+    fileType: "image",
+    prefix: "PROFILE",
+  }).single("photo"),
+  userControllers.uploadProfilePhoto
+);
 
 // Admin-only routes (harus login DAN role admin)
 router.get(

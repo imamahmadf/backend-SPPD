@@ -425,6 +425,16 @@ module.exports = {
     const nipBaru = nip.replace(/\s+/g, "");
     const nikBaru = nik.replace(/\s+/g, "");
     const password = "paserkab";
+
+    // Validasi tanggalTMT: jika kosong atau tidak valid, set ke null
+    let validatedTanggalTMT = null;
+    if (tanggalTMT && tanggalTMT.trim() !== "") {
+      const dateObj = new Date(tanggalTMT);
+      if (!isNaN(dateObj.getTime())) {
+        validatedTanggalTMT = dateObj;
+      }
+    }
+
     try {
       const result = await pegawai.create(
         {
@@ -439,7 +449,7 @@ module.exports = {
           statusPegawaiId,
           profesiId,
           pendidikan,
-          tanggalTMT,
+          tanggalTMT: validatedTanggalTMT,
         },
         { transaction }
       );
@@ -453,12 +463,13 @@ module.exports = {
         statusPegawaiId === 1 ||
         statusPegawaiId === 2 ||
         statusPegawaiId === 3 ||
-        statusPegawaiId === 4
+        statusPegawaiId === 4 ||
+        statusPegawaiId === 5
       ) {
         const newUser = await user.create(
           {
             nama,
-            namaPengguna: statusPegawaiId === 4 ? nikBaru : nipBaru,
+            namaPengguna: statusPegawaiId === 5 ? nikBaru : nipBaru,
             password: hashedPassword,
           },
           { transaction }
@@ -923,6 +934,32 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  mutasiPegawai: async (req, res) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const { pegawaiId, unitKerjaId, unitKerjaIdLama } = req.body;
+      const result = await pegawai.update(
+        { unitKerjaId },
+        { where: { id: pegawaiId }, transaction }
+      );
+
+      const resultProfil = await profile.update(
+        { unitKerjaId },
+        { where: { pegawaiId }, transaction }
+      );
+
+      await transaction.commit();
+      return res.status(200).json({ success: true, data: result });
+    } catch (err) {
+      console.error(err);
+      await transaction.rollback();
+      return res.status(500).json({
+        success: false,
+        message: err.toString(),
+      });
     }
   },
 };

@@ -39,6 +39,7 @@ const {
   kendaraanDinas,
   kendaraan,
   fotoPerjalanan,
+  profile,uangHarian
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -82,7 +83,7 @@ module.exports = {
         subKegiatan,
       } = req.body;
 
-      console.log(req.body.dasar);
+      console.log(req.body);
       const pelayananKesehatanId = req.body.pelayananKesehatanId || 1;
       console.log(req.body.isNotaDinas, "TESTTT");
       // console.log(dalamKota, perjalananKota);
@@ -881,7 +882,7 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
-          "isNotaDinas",
+          "isNotaDinas","tipeSrikandi"
         ],
         include: [
           {
@@ -1057,7 +1058,7 @@ module.exports = {
         dasar,
         indukUnitKerjaFE,
         ttdSurtTugKode,
-        isNotaDinas,
+        isNotaDinas,tipeSrikandi
       } = req.body;
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
       console.log(isNotaDinas, dasar, "ini is nota dinas");
@@ -1288,7 +1289,7 @@ module.exports = {
         KPAPangkat,
         KPAGolongan,
         KPAJabatan,
-        dataPegawai,
+        dataPegawai,   ttd: tipeSrikandi ? "${ttd_pengirim}" : "",
       });
 
       // Simpan hasil dokumen ke buffer
@@ -1931,6 +1932,7 @@ module.exports = {
                 include: [
                   { model: daftarPangkat, as: "daftarPangkat" },
                   { model: daftarGolongan, as: "daftarGolongan" },
+                  { model: profile },
                 ],
               },
               {
@@ -1974,7 +1976,7 @@ module.exports = {
           },
           {
             model: jenisPerjalanan,
-          },
+          },            { model: pelayananKesehatan },
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
@@ -1993,8 +1995,8 @@ module.exports = {
           //   attributes: ["nama", "id", "nip", "jabatan"],
           // },
         ],
-      });
-      return res.status(200).json({ result });
+      });     const resultUangHarian = await uangHarian.findAll();
+      return res.status(200).json({ result,resultUangHarian });
     } catch (err) {
       console.log(err);
       return res.status(500).json({
@@ -2583,7 +2585,7 @@ module.exports = {
     }
   },
   cetakNotaDinas: async (req, res) => {
-    console.log(req.body.isNotaDinas, "CEK NOTA DINAS");
+    console.log(req.body, "CEK NOTA DINAS");
     const transaction = await sequelize.transaction();
     try {
       const {
@@ -2601,7 +2603,7 @@ module.exports = {
         jenis,
         dalamKota,
 
-        isSrikandi,
+        isSrikandi,isNotaDinas,
         jenisPerjalanan,
         indukUnitKerjaId,
         tempat,
@@ -2665,7 +2667,7 @@ module.exports = {
       const template = await indukUnitKerja.findOne(
         {
           where: { id: indukUnitKerjaId },
-          attributes: ["id", "templateNotaDinas"],
+          attributes: ["id", "templateNotaDinas", "telaahan"],
         },
         { transaction }
       );
@@ -2684,7 +2686,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        template.templateNotaDinas
+        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan
       );
 
       // Baca file template

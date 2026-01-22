@@ -29,6 +29,10 @@ routers.post(
   "/post/kwitansi-otomatis",
   kwitansiControllers.cetakKwitansiOtomatis
 );
+routers.post(
+  "/post/kwitansi-otomatis-bulk",
+  kwitansiControllers.cetakKwitansiOtomatisBulk
+);
 routers.post("/delete/rincian-bpd", kwitansiControllers.deleteBPD);
 routers.post("/update/rincian-bpd", kwitansiControllers.updateBPD);
 routers.post("/verifikasi/terima", kwitansiControllers.terimaVerifikasi);

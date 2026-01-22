@@ -22,6 +22,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { blacklistedTokens } = require("../lib/auth");
 const { Op } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 module.exports = {
   register: async (req, res) => {
     const transaction = await sequelize.transaction();
@@ -180,7 +182,7 @@ module.exports = {
 
     try {
       const result = await profile.findOne({
-        attributes: ["id", "nama"],
+        attributes: ["id", "nama", "profilePic"],
         where: { id },
         include: [
           {
@@ -494,6 +496,113 @@ module.exports = {
       return res.status(500).json({
         message: err.toString(),
         code: 500,
+      });
+    }
+  },
+  uploadProfilePhoto: async (req, res) => {
+    try {
+      const userId = req.user?.id; // Dari JWT token yang sudah di-authenticate
+
+      // Validasi user sudah login
+      if (!userId) {
+        return res.status(401).json({
+          message: "Unauthorized - User tidak terautentikasi",
+        });
+      }
+
+      // Validasi file sudah diupload
+      if (!req.file) {
+        return res.status(400).json({
+          message: "Silakan pilih foto terlebih dahulu",
+        });
+      }
+
+      // Cari profile berdasarkan userId
+      const userProfile = await profile.findOne({
+        where: { userId },
+      });
+
+      if (!userProfile) {
+        // Hapus file yang baru diupload jika profile tidak ditemukan
+        const newFilePath = path.join(
+          __dirname,
+          "../public/profile",
+          req.file.filename
+        );
+        if (fs.existsSync(newFilePath)) {
+          fs.unlinkSync(newFilePath);
+        }
+        return res.status(404).json({
+          message: "Profile tidak ditemukan",
+        });
+      }
+
+      // Ambil nama file lama dari body atau dari database
+      const oldImgName = req.body.old_img || userProfile.profilePic;
+
+      // Hapus file foto lama jika ada
+      if (oldImgName) {
+        // Normalisasi path - bisa berupa "/profile/filename.jpg" atau "filename.jpg"
+        const normalizedOldImg = oldImgName.trim();
+        const isPath =
+          normalizedOldImg.startsWith("/") || normalizedOldImg.startsWith("\\");
+
+        const oldFilePath = isPath
+          ? path.join(
+              __dirname,
+              "../public",
+              normalizedOldImg.replace(/[\\/]+/g, "/")
+            )
+          : path.join(__dirname, "../public/profile", normalizedOldImg);
+
+        // Hapus file lama jika ada
+        if (fs.existsSync(oldFilePath)) {
+          fs.unlink(oldFilePath, (err) => {
+            if (err) {
+              console.error("Gagal menghapus file foto lama:", err);
+              // Tidak throw error, karena file baru sudah terupload
+            } else {
+              console.log("File foto lama berhasil dihapus:", oldFilePath);
+            }
+          });
+        }
+      }
+
+      // Simpan path file baru
+      const newPhotoPath = `/profile/${req.file.filename}`;
+
+      // Update profilePic di database
+      await profile.update({ profilePic: newPhotoPath }, { where: { userId } });
+
+      return res.status(200).json({
+        message: "Foto profil berhasil diubah",
+        photo: newPhotoPath,
+      });
+    } catch (err) {
+      console.error("Error saat upload foto profile:", err);
+
+      // Hapus file yang baru diupload jika terjadi error
+      if (req.file) {
+        const newFilePath = path.join(
+          __dirname,
+          "../public/profile",
+          req.file.filename
+        );
+        if (fs.existsSync(newFilePath)) {
+          fs.unlink(newFilePath, (unlinkErr) => {
+            if (unlinkErr) {
+              console.error(
+                "Gagal menghapus file yang baru diupload:",
+                unlinkErr
+              );
+            }
+          });
+        }
+      }
+
+      return res.status(500).json({
+        message: "Gagal mengubah foto profil. Silakan coba lagi.",
+        error: err.message,
       });
     }
   },
