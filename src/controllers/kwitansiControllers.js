@@ -1024,11 +1024,21 @@ module.exports = {
       const content = fs.readFileSync(templatePath, "binary");
       const zip = new PizZip(content);
 
+      // Generate QR Code dengan logo tengah
+      const logoPath = path.join(
+        __dirname,
+        "../public/template-keuangan/penaLogo.png"
+      );
+      const qrDataUrl = await generateQrWithLogo(
+        `https://pena.dinkes.paserkab.go.id/validasi/${id}`,
+        { sizePx: 500, logoPath, logoScale: 0.22 }
+      );
+
       const doc = new Docxtemplater(zip, {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(qrDataUrl, "INI QRCODEEE");
+      console.log(qrDataUrl ? "QR Code generated" : "No QR Code", "INI QRCODEEE");
       doc.render({
         bendaharaNama: dataBendahara.pegawai_bendahara.nama,
         bendaharaNip: dataBendahara.pegawai_bendahara.nip,

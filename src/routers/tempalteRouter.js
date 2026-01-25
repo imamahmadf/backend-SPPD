@@ -84,6 +84,40 @@ router.post(
   templateControllers.deleteTempateGlobal
 );
 
+// ==================== Edit Template Keuangan Routes ====================
+router.post(
+  "/edit-keuangan/:id",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-KEUANGAN",
+  }).single("file"),
+  templateControllers.editTemplateKeuangan
+);
+
+router.post(
+  "/edit-keuangan-global/:id",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-KEUANGAN-GLOBAL",
+  }).single("file"),
+  templateControllers.editTemplateKeuanganGlobal
+);
+
+router.post(
+  "/edit-all-kwitansi/:id",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-ALL-KWITANSI",
+  }).single("file"),
+  templateControllers.updateTemplateAllKwitansi
+);
+
 // ==================== Template All Kwitansi Routes ====================
 router.get("/get-all-kwitansi", templateControllers.getTemplateAllKwitansi);
 

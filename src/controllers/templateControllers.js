@@ -398,6 +398,76 @@ module.exports = {
     }
   },
 
+  // ==================== Edit Template Keuangan ====================
+  editTemplateKeuangan: async (req, res) => {
+    const id = req.params.id;
+    const { nama } = req.body;
+    try {
+      const existingTemplate = await templateKeuangan.findByPk(id);
+      if (!existingTemplate) {
+        return res.status(404).json({ message: "Template tidak ditemukan" });
+      }
+
+      const updateData = { nama };
+
+      if (req.file) {
+        // Hapus file lama jika ada
+        if (existingTemplate.template) {
+          const oldPath = `${__dirname}/../public${existingTemplate.template}`;
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+            }
+          });
+        }
+        updateData.template = `/template-keuangan/${req.file.filename}`;
+      }
+
+      await templateKeuangan.update(updateData, { where: { id } });
+      return res.status(200).json({ message: "Template berhasil diupdate" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengupdate template" });
+    }
+  },
+
+  // ==================== Edit Template Keuangan Global ====================
+  editTemplateKeuanganGlobal: async (req, res) => {
+    const id = req.params.id;
+    const { nama } = req.body;
+    try {
+      const existingTemplate = await templateKwitGlobal.findByPk(id);
+      if (!existingTemplate) {
+        return res.status(404).json({ message: "Template tidak ditemukan" });
+      }
+
+      const updateData = { nama };
+
+      if (req.file) {
+        // Hapus file lama jika ada
+        if (existingTemplate.dokumen) {
+          const oldPath = `${__dirname}/../public${existingTemplate.dokumen}`;
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+            }
+          });
+        }
+        updateData.dokumen = `/template-keuangan/${req.file.filename}`;
+      }
+
+      await templateKwitGlobal.update(updateData, { where: { id } });
+      return res.status(200).json({ message: "Template berhasil diupdate" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengupdate template" });
+    }
+  },
+
   uploadUndangan: async (req, res) => {
     const id = parseInt(req.body.id);
     console.log(req.body);
