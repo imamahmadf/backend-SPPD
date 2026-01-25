@@ -44,6 +44,7 @@ const {
   perencanaanAdminRouter,
   satuanIndikatorRouter,
   indikatorRouter,
+  templateBPDRouter
 } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
@@ -150,6 +151,8 @@ app.use("/api/atasan-PJPL", atasanPJPLRouter);
 app.use("/api/admin-perencanaan", perencanaanAdminRouter);
 app.use("/api/satuan-indikator", satuanIndikatorRouter);
 app.use("/api/indikator", indikatorRouter);
+app.use("/api/templateBPD", templateBPDRouter);
+
 app.get("/api", (req, res) => {
   res.send(`Hello, this is my API`);
 });

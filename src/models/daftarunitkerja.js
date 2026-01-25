@@ -90,6 +90,9 @@ module.exports = (sequelize, DataTypes) => {
         as: "riwayatPegawaiUnitKerjaLama",
       });
       this.hasMany(models.pejabatVerifikator);
+      this.hasMany(models.templateBPD, {
+        foreignKey: "unitKerjaId",
+      });
     }
   }
   daftarUnitKerja.init(

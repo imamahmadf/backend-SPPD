@@ -12,6 +12,7 @@ const {
   tempat,
   jenisTempat,
   templateKeuangan,
+  templateAllKwitansi,
   PPTK,
   rill,
   daftarUnitKerja,
@@ -1565,4 +1566,485 @@ module.exports = {
       });
     }
   },
+
+  // Cetak kwitansi bulk untuk semua personil sekaligus (single document dengan loop)
+  cetakKwitansiBulk: async (req, res) => {
+    const {
+      perjalananId,
+      nomorST,
+      untuk,
+      PPTKNama,
+      PPTKNip,
+      KPANama,
+      KPANip,
+      KPAJabatan,
+      foto,
+      templateId,
+      subKegiatan,
+      kodeRekening,
+      tanggalPengajuan,
+      jenis,
+      tempat,
+      jenisPerjalanan,
+      dataBendahara,
+      tahun,
+      indukUnitKerja,
+      personils, // Array of personil data
+    } = req.body;
+
+    // Validasi input
+    if (!personils || !Array.isArray(personils) || personils.length === 0) {
+      return res.status(400).json({
+        message: "personils harus berupa array dan tidak boleh kosong",
+        code: 400,
+      });
+    }
+
+    console.log("[BULK] Mencetak kwitansi untuk", personils.length, "personil");
+
+    // Helper functions
+    const formatTanggal = (tanggal) => {
+      return new Date(tanggal).toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+    };
+
+    const formatRupiah = (angka) =>
+      new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(angka);
+
+    function formatTerbilang(angka) {
+      const satuan = [
+        "",
+        "Satu",
+        "Dua",
+        "Tiga",
+        "Empat",
+        "Lima",
+        "Enam",
+        "Tujuh",
+        "Delapan",
+        "Sembilan",
+        "Sepuluh",
+        "Sebelas",
+      ];
+
+      if (angka < 12) {
+        return satuan[angka];
+      } else if (angka < 20) {
+        return formatTerbilang(angka - 10) + " Belas";
+      } else if (angka < 100) {
+        return (
+          formatTerbilang(Math.floor(angka / 10)) +
+          " Puluh " +
+          formatTerbilang(angka % 10)
+        );
+      } else if (angka < 200) {
+        return "Seratus " + formatTerbilang(angka - 100);
+      } else if (angka < 1000) {
+        return (
+          formatTerbilang(Math.floor(angka / 100)) +
+          " Ratus " +
+          formatTerbilang(angka % 100)
+        );
+      } else if (angka < 2000) {
+        return "Seribu " + formatTerbilang(angka - 1000);
+      } else if (angka < 1000000) {
+        return (
+          formatTerbilang(Math.floor(angka / 1000)) +
+          " Ribu " +
+          formatTerbilang(angka % 1000)
+        );
+      } else if (angka < 1000000000) {
+        return (
+          formatTerbilang(Math.floor(angka / 1000000)) +
+          " Juta " +
+          formatTerbilang(angka % 1000000)
+        );
+      } else if (angka < 1000000000000) {
+        return (
+          formatTerbilang(Math.floor(angka / 1000000000)) +
+          " Milyar " +
+          formatTerbilang(angka % 1000000000)
+        );
+      }
+    }
+
+    // Konversi base64 ke buffer
+    function base64DataURLToArrayBuffer(dataURL) {
+      if (!dataURL || typeof dataURL !== "string") {
+        return null;
+      }
+      const base64Regex = /^data:image\/(png|jpg|jpeg);base64,/;
+      if (!base64Regex.test(dataURL)) {
+        throw new Error("Data URL bukan base64 image yang valid");
+      }
+      const stringBase64 = dataURL.replace(base64Regex, "");
+      return Buffer.from(stringBase64, "base64");
+    }
+
+    try {
+      // Ambil template dari templateAllKwitansi
+      const resultTemplate = await templateAllKwitansi.findOne({
+        where: { id: templateId },
+        attributes: ["id", "nama", "template"],
+      });
+
+      if (!resultTemplate) {
+        return res.status(404).json({
+          message: "Template tidak ditemukan",
+          code: 404,
+        });
+      }
+
+      const templatePath = path.join(
+        __dirname,
+        "../public",
+        resultTemplate.template
+      );
+      const templateContent = fs.readFileSync(templatePath, "binary");
+
+      // Siapkan foto array (sama untuk semua personil)
+      let fotoArray = [];
+      try {
+        if (foto && Array.isArray(foto) && foto.length > 0) {
+          for (const fotoItem of foto) {
+            const fotoPath = fotoItem?.foto || fotoItem;
+            const normalizedFoto =
+              typeof fotoPath === "string" ? fotoPath.trim() : "";
+            if (!normalizedFoto) continue;
+
+            const isPath =
+              normalizedFoto.startsWith("/") || normalizedFoto.startsWith("\\");
+            const fullFotoPath = isPath
+              ? path.join(
+                  __dirname,
+                  "../public",
+                  normalizedFoto.replace(/[\\/]+/g, "/")
+                )
+              : path.join(__dirname, "../public/bukti", normalizedFoto);
+
+            let finalFotoPath = fullFotoPath;
+            if (!fs.existsSync(finalFotoPath)) {
+              const altPath = path.join(
+                __dirname,
+                "../public/pegawai",
+                normalizedFoto
+              );
+              if (fs.existsSync(altPath)) finalFotoPath = altPath;
+            }
+
+            if (fs.existsSync(finalFotoPath)) {
+              const ext = path.extname(finalFotoPath).toLowerCase();
+              const mime =
+                ext === ".png"
+                  ? "image/png"
+                  : ext === ".jpg" || ext === ".jpeg"
+                  ? "image/jpeg"
+                  : "image/jpeg";
+              const fileBuf = fs.readFileSync(finalFotoPath);
+              const base64 = fileBuf.toString("base64");
+              fotoArray.push(`data:${mime};base64,${base64}`);
+            }
+          }
+        }
+        fotoArray = fotoArray.filter(
+          (f) => f && typeof f === "string" && f.startsWith("data:image/")
+        );
+      } catch (err) {
+        console.error("[BULK FOTO] error:", err);
+      }
+
+      // Logo path untuk QR Code
+      const logoPath = path.join(
+        __dirname,
+        "../public/template-keuangan/penaLogo.png"
+      );
+
+      // Hitung total durasi dari tempat (sama untuk semua personil)
+      let totalDurasi = 0;
+      if (tempat && tempat.length > 0) {
+        tempat.forEach((t) => {
+          if (t.tanggalBerangkat && t.tanggalPulang) {
+            const berangkat = new Date(t.tanggalBerangkat);
+            const pulang = new Date(t.tanggalPulang);
+            const diffTime = Math.abs(pulang - berangkat);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            totalDurasi += diffDays;
+          }
+        });
+      }
+
+      // Object untuk menyimpan data bernomor (1-5)
+      const numberedData = {};
+
+      // Proses data untuk setiap personil (maksimal 5)
+      const maxPersonils = Math.min(personils.length, 5);
+      let processedCount = 0;
+
+      for (let i = 0; i < personils.length && processedCount < 5; i++) {
+        const personilItem = personils[i];
+        const {
+          personilId,
+          pegawaiNama,
+          pegawaiNip,
+          pegawaiJabatan,
+          nomorSPD,
+          rincianBPD,
+        } = personilItem;
+
+        // Skip jika tidak ada rincianBPD
+        if (!rincianBPD || rincianBPD.length === 0) {
+          console.log(`[BULK] Skip personil ${personilId}: tidak ada rincianBPD`);
+          continue;
+        }
+
+        // Nomor urut personil (1-5)
+        const num = processedCount + 1;
+
+        // Process BPD data
+        const BPD = rincianBPD.map((item, index) => ({
+          no: index + 1,
+          jenis: item.jenisRincianBPD?.jenis || "",
+          satuan: item.satuan,
+          item: item.item,
+          qty: item.qty,
+          harga: formatRupiah(item.nilai || 0),
+          jumlah: formatRupiah(item.qty * item.nilai || 0),
+        }));
+
+        const Rill = rincianBPD
+          .filter((item) => item.jenisId === 5)
+          .flatMap((item) => item.rills || [])
+          .map((item, index) => ({
+            ...item,
+            nilai: formatRupiah(item.nilai),
+            no: index + 1,
+          }));
+
+        const totalRillValue = Rill.reduce(
+          (sum, item) =>
+            sum +
+            parseFloat(item.nilai.replace(/[^0-9,-]+/g, "").replace(",", ".")),
+          0
+        );
+        const totalRill = formatRupiah(totalRillValue);
+
+        const totalValue = rincianBPD.reduce(
+          (sum, item) => sum + (item.qty * item.nilai || 0),
+          0
+        );
+        const total = formatRupiah(totalValue);
+
+        const terbilang = formatTerbilang(totalValue) + " Rupiah";
+
+        // Generate QR Code untuk personil ini
+        const qrDataUrl = await generateQrWithLogo(
+          `https://pena.dinkes.paserkab.go.id/validasi/${personilId}`,
+          { sizePx: 500, logoPath, logoScale: 0.22 }
+        );
+
+        // Simpan data dengan suffix nomor (1-5)
+        numberedData[`personilId${num}`] = personilId;
+        numberedData[`pegawaiNama${num}`] = pegawaiNama || "";
+        numberedData[`pegawaiNip${num}`] = pegawaiNip || "";
+        numberedData[`pegawaiJabatan${num}`] = pegawaiJabatan || "";
+        numberedData[`nomorSurat${num}`] = totalDurasi > 7 ? nomorSPD : nomorST;
+        numberedData[`surat${num}`] = totalDurasi > 7 ? "SPD" : "ND";
+        numberedData[`suratRill${num}`] =
+          totalDurasi > 7
+            ? "Surat Perjalanan Dinas (SPD) "
+            : "Surat Nota Dinas (ND)";
+        numberedData[`qrCode${num}`] = qrDataUrl;
+        numberedData[`total${num}`] = total;
+        numberedData[`totalRill${num}`] = totalRill;
+        numberedData[`terbilang${num}`] = terbilang;
+        numberedData[`BPD${num}`] = BPD;
+        numberedData[`Rill${num}`] = Rill;
+
+        processedCount++;
+        console.log(`[BULK] Prepared data for personil ${num}: ${pegawaiNama}`);
+      }
+
+      if (processedCount === 0) {
+        return res.status(400).json({
+          message: "Tidak ada kwitansi yang dapat digenerate",
+          code: 400,
+        });
+      }
+
+      // Isi placeholder kosong untuk personil yang tidak ada (sampai 5)
+      for (let num = processedCount + 1; num <= 5; num++) {
+        numberedData[`personilId${num}`] = "";
+        numberedData[`pegawaiNama${num}`] = "";
+        numberedData[`pegawaiNip${num}`] = "";
+        numberedData[`pegawaiJabatan${num}`] = "";
+        numberedData[`nomorSurat${num}`] = "";
+        numberedData[`surat${num}`] = "";
+        numberedData[`suratRill${num}`] = "";
+        numberedData[`qrCode${num}`] = "";
+        numberedData[`total${num}`] = "";
+        numberedData[`totalRill${num}`] = "";
+        numberedData[`terbilang${num}`] = "";
+        numberedData[`BPD${num}`] = [];
+        numberedData[`Rill${num}`] = [];
+      }
+
+      // Setup image module
+      const imageOpts = {
+        getImage: function (tagValue) {
+          try {
+            if (!tagValue) return Buffer.alloc(0);
+            if (Buffer.isBuffer(tagValue)) return tagValue;
+            if (typeof tagValue !== "string") return Buffer.alloc(0);
+            if (tagValue.startsWith("data:image/")) {
+              const buffer = base64DataURLToArrayBuffer(tagValue);
+              return buffer || Buffer.alloc(0);
+            }
+            return Buffer.alloc(0);
+          } catch (err) {
+            return Buffer.alloc(0);
+          }
+        },
+        getSize: function (img, tagValue, tagName) {
+          try {
+            if (tagName && (tagName.startsWith("foto") || tagName === "foto")) {
+              let buffer = null;
+              if (Buffer.isBuffer(tagValue)) {
+                buffer = tagValue;
+              } else if (
+                tagValue &&
+                typeof tagValue === "string" &&
+                tagValue.startsWith("data:image/")
+              ) {
+                buffer = base64DataURLToArrayBuffer(tagValue);
+              }
+              if (buffer && buffer.length > 0 && sizeOf) {
+                try {
+                  const dim = sizeOf(buffer);
+                  if (dim?.width && dim?.height) {
+                    return [dim.width, dim.height];
+                  }
+                } catch (err) {}
+              }
+              return [600, 800];
+            }
+            return [100, 100];
+          } catch (err) {
+            return [600, 800];
+          }
+        },
+      };
+      const imageModule = new ImageModule(imageOpts);
+
+      // Load template
+      const zip = new PizZip(templateContent);
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+        modules: [imageModule],
+      });
+
+      // Siapkan data template global + data personil bernomor
+      const templateData = {
+        // Data global (sama untuk semua personil)
+        bendaharaNama: dataBendahara?.pegawai_bendahara?.nama || "",
+        bendaharaNip: dataBendahara?.pegawai_bendahara?.nip || "",
+        bendaharaJabatan: dataBendahara?.jabatan || "",
+        untukPembayaran: dataBendahara?.sumberDana?.untukPembayaran || "",
+        kalimat1: dataBendahara?.sumberDana?.kalimat1 || "",
+        kalimat2: dataBendahara?.sumberDana?.kalimat2 || "",
+        KPAJabatan,
+        KPANama,
+        KPANip,
+        PPTKNama,
+        PPTKNip,
+        indukUnitKerja,
+        kodeRekening,
+        untuk,
+        tanggalPengajuan: formatTanggal(tanggalPengajuan),
+        subKegiatan,
+        jenisPerjalanan,
+        tahun,
+        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota?.nama,
+        tempatSpd2:
+          tempat.length === 1
+            ? ""
+            : tempat.length > 1 && jenis === 1
+            ? tempat[1]?.tempat
+            : tempat.length > 1 && jenis !== 1
+            ? tempat[1]?.dalamKota?.nama
+            : "",
+        tempatSpd3:
+          tempat.length === 1
+            ? ""
+            : tempat.length === 3 && jenis === 1
+            ? tempat[2]?.tempat
+            : tempat.length === 3 && jenis !== 1
+            ? tempat[2]?.dalamKota?.nama
+            : "",
+        // Jumlah personil yang diproses
+        jumlahPersonil: processedCount,
+        // Data personil bernomor (1-5)
+        // pegawaiNama1, pegawaiNama2, ..., pegawaiNama5
+        // BPD1, BPD2, ..., BPD5
+        // total1, total2, ..., total5
+        // terbilang1, terbilang2, ..., terbilang5
+        // dll
+        ...numberedData,
+      };
+
+      // Tambahkan foto global
+      if (fotoArray.length > 0) {
+        fotoArray.forEach((f, index) => {
+          templateData[`foto${index + 1}`] = f;
+        });
+        templateData.foto = fotoArray[0];
+      }
+
+      // Render dokumen
+      doc.render(templateData);
+
+      // Generate buffer
+      const buffer = doc.getZip().generate({ type: "nodebuffer" });
+
+      // Buat folder output jika belum ada
+      const outputDir = path.join(__dirname, "../public/output");
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+
+      // Simpan file
+      const outputFileName = `Kwitansi_Semua_Personil_${perjalananId}_${Date.now()}.docx`;
+      const outputPath = path.join(outputDir, outputFileName);
+      fs.writeFileSync(outputPath, buffer);
+
+      console.log(`[BULK] Generated single document: ${outputFileName}`);
+
+      // Kirim file
+      res.download(outputPath, outputFileName, (err) => {
+        if (err) {
+          console.error("Error sending file:", err);
+          res.status(500).send("Error generating file");
+        }
+        // Hapus file setelah dikirim
+        try {
+          fs.unlinkSync(outputPath);
+        } catch (e) {}
+      });
+    } catch (err) {
+      console.error("[BULK] Error:", err);
+      return res.status(500).json({
+        message: err.toString(),
+        code: 500,
+      });
+    }
+  },
+
+
 };

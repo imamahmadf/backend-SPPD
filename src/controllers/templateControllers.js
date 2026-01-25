@@ -10,6 +10,7 @@ const {
   role,
   profile,
   templateKwitGlobal,
+  templateAllKwitansi,
 } = require("../models");
 const fs = require("fs");
 module.exports = {
@@ -437,6 +438,100 @@ module.exports = {
       return res
         .status(500)
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  // ==================== Template All Kwitansi ====================
+  getTemplateAllKwitansi: async (req, res) => {
+    try {
+      const result = await templateAllKwitansi.findAll({
+        attributes: ["id", "nama", "template"],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengambil data template" });
+    }
+  },
+
+  addTemplateAllKwitansi: async (req, res) => {
+    const { nama } = req.body;
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: "Harap unggah file .docx" });
+      }
+
+      const filePath = `/template-keuangan/${req.file.filename}`;
+      await templateAllKwitansi.create({
+        template: filePath,
+        nama,
+      });
+      return res.status(200).json({ message: "Template berhasil diupload" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengunggah file" });
+    }
+  },
+
+  updateTemplateAllKwitansi: async (req, res) => {
+    const id = req.params.id;
+    const { nama } = req.body;
+    try {
+      const existingTemplate = await templateAllKwitansi.findByPk(id);
+      if (!existingTemplate) {
+        return res.status(404).json({ message: "Template tidak ditemukan" });
+      }
+
+      const updateData = { nama };
+
+      if (req.file) {
+        // Hapus file lama jika ada
+        if (existingTemplate.template) {
+          const oldPath = `${__dirname}/../public${existingTemplate.template}`;
+          fs.unlink(oldPath, (err) => {
+            if (err) {
+              console.error(err);
+            }
+          });
+        }
+        updateData.template = `/template-keuangan/${req.file.filename}`;
+      }
+
+      await templateAllKwitansi.update(updateData, { where: { id } });
+      return res.status(200).json({ message: "Template berhasil diupdate" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat mengupdate template" });
+    }
+  },
+
+  deleteTemplateAllKwitansi: async (req, res) => {
+    const id = req.params.id;
+    const filename = req.body.fileName;
+    try {
+      const result = await templateAllKwitansi.destroy({ where: { id } });
+
+      if (filename) {
+        const path = `${__dirname}/../public${filename}`;
+        fs.unlink(path, (err) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+        });
+      }
+      return res.status(200).json({ result, message: "Template berhasil dihapus" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat menghapus template" });
     }
   },
 };

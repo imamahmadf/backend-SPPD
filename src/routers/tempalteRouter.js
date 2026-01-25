@@ -83,4 +83,35 @@ router.post(
   "/delete/template-keuangan-global/:id",
   templateControllers.deleteTempateGlobal
 );
+
+// ==================== Template All Kwitansi Routes ====================
+router.get("/get-all-kwitansi", templateControllers.getTemplateAllKwitansi);
+
+router.post(
+  "/upload-all-kwitansi",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-ALL-KWITANSI",
+  }).single("file"),
+  templateControllers.addTemplateAllKwitansi
+);
+
+router.post(
+  "/update-all-kwitansi/:id",
+  fileUploader({
+    destinationFolder: "template-keuangan",
+    fileType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    prefix: "TEMPLATE-ALL-KWITANSI",
+  }).single("file"),
+  templateControllers.updateTemplateAllKwitansi
+);
+
+router.post(
+  "/delete/template-all-kwitansi/:id",
+  templateControllers.deleteTemplateAllKwitansi
+);
+
 module.exports = router;

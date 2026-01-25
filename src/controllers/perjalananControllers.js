@@ -1921,7 +1921,7 @@ module.exports = {
           "tanggalPengajuan",
           "noSuratTugas",
           "undangan",
-          "kwitGlobalId",
+          "kwitGlobalId","isNotaDinas"
         ],
         include: [
           {
@@ -1982,13 +1982,62 @@ module.exports = {
             attributes: ["id", "kodeRekening", "subKegiatan"],
           },
           {
+            model: PPTK,
+            attributes: ["id", "jabatan"],
+            paranoid: false,
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_PPTK",
+              },
+            ],
+          },
+          {
+            model: KPA,
+            attributes: ["id", "jabatan"],
+            paranoid: false,
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_KPA",
+              },
+            ],
+          },
+          {
             model: bendahara,
-            attributes: ["id"],
-            include: [{ model: sumberDana }],
+            attributes: ["id", "jabatan"],
+            paranoid: false,
+            include: [
+              {
+                model: pegawai,
+                attributes: ["id", "nama", "nip"],
+                as: "pegawai_bendahara",
+              },
+              {
+                model: sumberDana,
+                attributes: [
+                  "id",
+                  "sumber",
+                  "untukPembayaran",
+                  "kalimat1",
+                  "kalimat2",
+                ],
+              },
+            ],
           },
           {
             model: fotoPerjalanan,
             attributes: ["foto", "id"],
+          },
+          {
+            model: kendaraanDinas,include:[{model:kendaraan,attributes:["id","seri","nomor","merek","foto"]}]
+            
+          },
+          {
+            model: kwitGlobal,
+            
           },
           // {
           //   model: ttdSuratTugas,
