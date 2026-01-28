@@ -1338,7 +1338,6 @@ module.exports = {
         tanggalPengajuan,
         tempat,
         untuk,
-
         ttdSurTugUnitKerja,
         KPANama,
         KPANip,
@@ -1353,9 +1352,27 @@ module.exports = {
         indukUnitKerjaFE,
         ttdSurtTugKode,
         isNotaDinas,
+        jenisKendaraan,
       } = req.body;
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
-      console.log(personilFE, "cek");
+      console.log(jenisKendaraan, "cek");
+      
+      // Konversi jenisKendaraan dari array angka menjadi string
+      let jenisKendaraanString = "";
+      if (Array.isArray(jenisKendaraan) && jenisKendaraan.length > 0) {
+        const jenisKendaraanArray = [];
+        if (jenisKendaraan.includes(1)) {
+          jenisKendaraanArray.push("darat");
+        }
+        if (jenisKendaraan.includes(2)) {
+          jenisKendaraanArray.push("laut");
+        }
+        if (jenisKendaraan.includes(3)) {
+          jenisKendaraanArray.push("udara");
+        }
+        jenisKendaraanString = "kendaraan " + jenisKendaraanArray.join(", ");
+      }
+      
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
         0
@@ -1629,7 +1646,7 @@ module.exports = {
         tanggalPengajuan: formattedTanggalPengajuan,
         tempat,
         untuk,
-
+        jenisKendaraan: jenisKendaraanString,
         KPANama,
         KPANip,
         KPAPangkat,
