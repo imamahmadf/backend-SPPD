@@ -131,7 +131,7 @@ module.exports = {
         ).toUpperCase();
         await kwitGlobal.update(
           { verifikasi: randomCode },
-          { where: { id: kwitansiGlobalId } }
+          { where: { id: kwitansiGlobalId } },
         );
         verifikasiCode = randomCode;
       }
@@ -150,17 +150,17 @@ module.exports = {
       const baseUrl = "https://pena.dinkes.paserkab.go.id";
       const logoPath = path.join(
         __dirname,
-        "../public/template-keuangan/penaLogo.png"
+        "../public/template-keuangan/penaLogo.png",
       );
       const qrDataUrl = await generateQrWithLogo(
         `${baseUrl}/verifikasi/${verifikasiCode}`,
-        { sizePx: 500, logoPath, logoScale: 0.22 }
+        { sizePx: 500, logoPath, logoScale: 0.22 },
       );
       // Path file template
       const templatePath = path.join(
         __dirname,
         "../public",
-        resultTemplate.dokumen
+        resultTemplate.dokumen,
       );
 
       // Baca file template
@@ -276,7 +276,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
 
       // Simpan file hasil ke server
@@ -727,7 +727,7 @@ module.exports = {
           where: {
             id: selectedIds,
           },
-        }
+        },
       );
 
       return res.status(200).json({
@@ -751,7 +751,7 @@ module.exports = {
         {
           status: "diajukan",
         },
-        { where: { id } }
+        { where: { id } },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -769,7 +769,7 @@ module.exports = {
         {
           status: "ditolak",
         },
-        { where: { id } }
+        { where: { id } },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -788,7 +788,7 @@ module.exports = {
           subKegiatanId,
           jenisPerjalananId,
         },
-        { where: { id } }
+        { where: { id } },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -806,7 +806,7 @@ module.exports = {
         {
           status: "diterima",
         },
-        { where: { id } }
+        { where: { id } },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -833,7 +833,7 @@ module.exports = {
           where: {
             id: { [Op.in]: perjalananIds },
           },
-        }
+        },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -848,6 +848,11 @@ module.exports = {
     const { id } = req.params;
 
     try {
+      await perjalanan.update(
+        { kwitGlobalId: null },
+        { where: { kwitGlobalId: id } },
+      );
+
       const result = await kwitGlobal.destroy({
         where: {
           id,
@@ -942,7 +947,7 @@ module.exports = {
         order: [
           [
             sequelize.literal(
-              "CASE WHEN status = 'diajukan' THEN 0 WHEN status = 'diterima' THEN 1 ELSE 2 END"
+              "CASE WHEN status = 'diajukan' THEN 0 WHEN status = 'diterima' THEN 1 ELSE 2 END",
             ),
             "ASC",
           ],
@@ -1138,7 +1143,7 @@ module.exports = {
           where: {
             id,
           },
-        }
+        },
       );
       return res.status(200).json({ result });
     } catch (err) {

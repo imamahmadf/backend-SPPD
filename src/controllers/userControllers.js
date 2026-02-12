@@ -58,7 +58,7 @@ module.exports = {
           namaPengguna,
           password: hashedPassword,
         },
-        { transaction }
+        { transaction },
       );
 
       const newProfile = await profile.create(
@@ -68,7 +68,7 @@ module.exports = {
           unitKerjaId,
           pegawaiId,
         },
-        { transaction }
+        { transaction },
       );
 
       const newUserRole = await userRole.create(
@@ -76,7 +76,7 @@ module.exports = {
           userId: newUser.id,
           roleId: role,
         },
-        { transaction }
+        { transaction },
       );
 
       await transaction.commit();
@@ -122,7 +122,12 @@ module.exports = {
                 include: [
                   {
                     model: indukUnitKerja,
-                    attributes: ["id", "kodeInduk", "indukUnitKerja"],
+                    attributes: [
+                      "id",
+                      "kodeInduk",
+                      "indukUnitKerja",
+                      "penomoran","keuangan"
+                    ],
                   },
                 ],
               },
@@ -137,7 +142,7 @@ module.exports = {
 
       const isPasswordValid = await bcrypt.compare(
         password,
-        resultUser.password
+        resultUser.password,
       );
       if (!isPasswordValid) {
         return res.status(401).json({ message: "Email atau password salah" });
@@ -146,7 +151,7 @@ module.exports = {
       const token = jwt.sign(
         { id: resultUser.id, role: resultUser.role },
         process.env.JWT_SECRET || "SECRET_KEY",
-        { expiresIn: "12h" }
+        { expiresIn: "12h" },
       );
 
       res.json({
@@ -423,7 +428,7 @@ module.exports = {
       // Verifikasi password lama
       const isPasswordValid = await bcrypt.compare(
         passwordLama,
-        resultUser.password
+        resultUser.password,
       );
 
       if (!isPasswordValid) {
@@ -438,7 +443,7 @@ module.exports = {
       // Update password di database
       await user.update(
         { password: hashedPassword },
-        { where: { id: userId } }
+        { where: { id: userId } },
       );
 
       return res.status(200).json({
@@ -527,7 +532,7 @@ module.exports = {
         const newFilePath = path.join(
           __dirname,
           "../public/profile",
-          req.file.filename
+          req.file.filename,
         );
         if (fs.existsSync(newFilePath)) {
           fs.unlinkSync(newFilePath);
@@ -551,7 +556,7 @@ module.exports = {
           ? path.join(
               __dirname,
               "../public",
-              normalizedOldImg.replace(/[\\/]+/g, "/")
+              normalizedOldImg.replace(/[\\/]+/g, "/"),
             )
           : path.join(__dirname, "../public/profile", normalizedOldImg);
 
@@ -586,14 +591,14 @@ module.exports = {
         const newFilePath = path.join(
           __dirname,
           "../public/profile",
-          req.file.filename
+          req.file.filename,
         );
         if (fs.existsSync(newFilePath)) {
           fs.unlink(newFilePath, (unlinkErr) => {
             if (unlinkErr) {
               console.error(
                 "Gagal menghapus file yang baru diupload:",
-                unlinkErr
+                unlinkErr,
               );
             }
           });

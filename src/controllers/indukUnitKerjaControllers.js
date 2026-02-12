@@ -191,7 +191,7 @@ module.exports = {
         { jabatan },
         {
           where: { id },
-        }
+        },
       );
       return res.status(200).json({ result });
     } catch (err) {
@@ -209,21 +209,21 @@ module.exports = {
           { jabatan },
           {
             where: { id },
-          }
+          },
         );
       } else if (type === "PPTK") {
         await PPTK.update(
           { jabatan },
           {
             where: { id },
-          }
+          },
         );
       } else if (type === "KPA") {
         await KPA.update(
           { jabatan },
           {
             where: { id },
-          }
+          },
         );
       }
       return res.status(200).json({ message: "Data diupdate" });
@@ -288,7 +288,7 @@ module.exports = {
   getDaftarIndukUnitKerja: async (req, res) => {
     try {
       const result = await indukUnitKerja.findAll({
-        attributes: ["id", "kodeInduk", "indukUnitKerja"],
+        attributes: ["id", "kodeInduk", "indukUnitKerja", "penomoran","keuangan"],
         include: [
           { model: indukUKSumberDana, include: [{ model: sumberDana }] },
         ],
@@ -311,7 +311,7 @@ module.exports = {
           kodeInduk,
           indukUnitKerja: FEIndukUnitKerja,
         },
-        { transaction }
+        { transaction },
       );
 
       const sumberDanaItems = sumberDanaId.map((item) => ({
@@ -327,7 +327,7 @@ module.exports = {
           kode: kodeInduk,
           indukUnitKerjaId: result.id,
         },
-        { transaction }
+        { transaction },
       );
       await transaction.commit();
       return res.status(200).json({ result });
@@ -366,7 +366,7 @@ module.exports = {
     try {
       const result = await daftarUnitKerja.update(
         { unitKerja, kode, asal },
-        { where: { id } }
+        { where: { id } },
       );
 
       return res.status(200).json({ result });
@@ -384,10 +384,53 @@ module.exports = {
     try {
       const result = await indukUnitKerja.update(
         { indukUnitKerja: indukUnitKerjaFE, kodeInduk },
-        { where: { id } }
+        { where: { id } },
       );
 
       return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  updatePenomoran: async (req, res) => {
+    const id = req.params.id;
+    let { penomoran } = req.body;
+    console.log(req.body);
+    // Normalisasi: true → nonaktif, false → aktif
+
+    try {
+      const [affectedCount] = await indukUnitKerja.update(
+        { penomoran },
+        { where: { id } },
+      );
+
+      return res.status(200).json({
+        result: affectedCount,
+        message: `Penomoran diubah menjadi ${penomoran}`,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  updateKeuangan: async (req, res) => {
+    const id = req.params.id;
+    let { keuangan } = req.body;
+    console.log(req.body,"CEKKKK");
+
+    try {
+      const [affectedCount] = await indukUnitKerja.update(
+        { keuangan },
+        { where: { id } },
+      );
+
+      return res.status(200).json({
+        result: affectedCount,
+        message: `Keuangan diubah menjadi ${keuangan}`,
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });

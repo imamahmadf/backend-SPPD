@@ -22,11 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       uangTransport: DataTypes.INTEGER,
       durasi: DataTypes.INTEGER,
       indukUnitKerjaId: DataTypes.INTEGER,
+      status: DataTypes.ENUM("aktif", "nonaktif"),
     },
     {
       sequelize,
       modelName: "dalamKota",
-    }
+    },
   );
   return dalamKota;
 };

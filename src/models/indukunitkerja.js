@@ -45,11 +45,13 @@ module.exports = (sequelize, DataTypes) => {
       templateSuratTugasSingkat: DataTypes.STRING,
       telaahan: DataTypes.STRING,
       templateSPD: DataTypes.STRING,
+      penomoran: DataTypes.ENUM("aktif", "nonaktif"),
+      keuangan: DataTypes.ENUM("aktif", "nonaktif"),
     },
     {
       sequelize,
       modelName: "indukUnitKerja",
-    }
+    },
   );
   return indukUnitKerja;
 };

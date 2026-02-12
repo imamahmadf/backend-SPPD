@@ -247,6 +247,7 @@ module.exports = {
                       "uangTransport",
                       "nama",
                       "durasi",
+                      "status",
                       "indukUnitKerjaId",
                     ],
                   },
@@ -771,7 +772,8 @@ module.exports = {
         kalimat1: dataBendahara.sumberDana.kalimat1 || "",
         kalimat2: dataBendahara.sumberDana.kalimat2 || "",
         KPAJabatan,
-        indukUnitKerja,kodeRekening,
+        indukUnitKerja,
+        kodeRekening,
         nomorSurat: totalDurasi > 7 ? nomorSPD : nomorST,
         surat: totalDurasi > 7 ? "SPD" : "ND",
         suratRill:
@@ -1038,7 +1040,10 @@ module.exports = {
         paragraphLoop: true,
         linebreaks: true,
       });
-      console.log(qrDataUrl ? "QR Code generated" : "No QR Code", "INI QRCODEEE");
+      console.log(
+        qrDataUrl ? "QR Code generated" : "No QR Code",
+        "INI QRCODEEE"
+      );
       doc.render({
         bendaharaNama: dataBendahara.pegawai_bendahara.nama,
         bendaharaNip: dataBendahara.pegawai_bendahara.nip,
@@ -1256,14 +1261,8 @@ module.exports = {
 
   cetakKwitansiOtomatisBulk: async (req, res) => {
     const transaction = await sequelize.transaction();
-    const {
-      id,
-      totalDurasi,
-      personils,
-      tempatNama,
-      asal,
-      pelayananKesehatan,
-    } = req.body;
+    const { id, totalDurasi, personils, tempatNama, asal, pelayananKesehatan } =
+      req.body;
 
     // Validasi input
     if (!personils || !Array.isArray(personils) || personils.length === 0) {
@@ -1810,7 +1809,9 @@ module.exports = {
 
         // Skip jika tidak ada rincianBPD
         if (!rincianBPD || rincianBPD.length === 0) {
-          console.log(`[BULK] Skip personil ${personilId}: tidak ada rincianBPD`);
+          console.log(
+            `[BULK] Skip personil ${personilId}: tidak ada rincianBPD`
+          );
           continue;
         }
 
@@ -1981,7 +1982,8 @@ module.exports = {
         subKegiatan,
         jenisPerjalanan,
         tahun,
-        tempatSpd1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota?.nama,
+        tempatSpd1:
+          jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota?.nama,
         tempatSpd2:
           tempat.length === 1
             ? ""
@@ -2055,6 +2057,4 @@ module.exports = {
       });
     }
   },
-
-
 };

@@ -6,26 +6,26 @@ const routers = express.Router();
 routers.get("/get/:id", indukUnitKerjaControllers.getIndukUnitKerja);
 routers.get(
   "/get/detail/:id",
-  indukUnitKerjaControllers.getDetailIndukUnitKerja
+  indukUnitKerjaControllers.getDetailIndukUnitKerja,
 );
 routers.post(
   "/delete/ttd-surat-tugas/:id",
-  indukUnitKerjaControllers.deleteTtdSuratTugas
+  indukUnitKerjaControllers.deleteTtdSuratTugas,
 );
 routers.post(
   "/delete/tanda-tangan",
-  indukUnitKerjaControllers.deleteTandaTangan
+  indukUnitKerjaControllers.deleteTandaTangan,
 );
 
 routers.post(
   "/update/ttd-surat-tugas",
-  indukUnitKerjaControllers.updateTtdSuratTugas
+  indukUnitKerjaControllers.updateTtdSuratTugas,
 );
 routers.post("/edit/unit-kerja/:id", indukUnitKerjaControllers.editUnitKerja);
 routers.post("/edit/:id", indukUnitKerjaControllers.editIndukUnitKerja);
 routers.post(
   "/update/tanda-tangan",
-  indukUnitKerjaControllers.updateTandaTangan
+  indukUnitKerjaControllers.updateTandaTangan,
 );
 
 routers.post("/post/tanda-tangan", indukUnitKerjaControllers.postTandaTangan);
@@ -33,9 +33,11 @@ routers.post("/post/tanda-tangan", indukUnitKerjaControllers.postTandaTangan);
 routers.post("/post/unit-kerja", indukUnitKerjaControllers.postUnitKerja);
 routers.post(
   "/post/ttd-surat-tugas",
-  indukUnitKerjaControllers.postTtdSuratTugas
+  indukUnitKerjaControllers.postTtdSuratTugas,
 );
 
 routers.get("/get", indukUnitKerjaControllers.getDaftarIndukUnitKerja);
 routers.post("/post", indukUnitKerjaControllers.postIndukUnitKerja);
+routers.post("/penomoran/:id", indukUnitKerjaControllers.updatePenomoran);
+routers.post("/keuangan/:id", indukUnitKerjaControllers.updateKeuangan);
 module.exports = routers;

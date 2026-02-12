@@ -80,7 +80,7 @@ module.exports = {
     }
   },
   addTujuan: async (req, res) => {
-    const { nama, durasi, uangTransport, indukUnitKerjaId } = req.body;
+    const { nama, durasi, uangTransport, indukUnitKerjaId, status } = req.body;
     console.log(req.body);
     try {
       const result = await dalamKota.create({
@@ -88,6 +88,7 @@ module.exports = {
         durasi,
         uangTransport,
         indukUnitKerjaId,
+        status,
       });
       return res.status(200).json({ result });
     } catch (err) {

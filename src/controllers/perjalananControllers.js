@@ -39,7 +39,8 @@ const {
   kendaraanDinas,
   kendaraan,
   fotoPerjalanan,
-  profile,uangHarian
+  profile,
+  uangHarian,
 } = require("../models");
 const PizZip = require("pizzip");
 const fs = require("fs");
@@ -81,6 +82,7 @@ module.exports = {
         isNotaDinas,
         dataBendaharaId,
         subKegiatan,
+        penomoran,
       } = req.body;
 
       console.log(req.body);
@@ -116,7 +118,10 @@ module.exports = {
 
         // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-          .replace("NOMOR", nomorLoket.toString())
+          .replace(
+            "NOMOR",
+            penomoran === "nonaktif" ? "        " : nomorLoket.toString(),
+          )
           .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
           .replace("KODE", kode)
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
@@ -129,13 +134,13 @@ module.exports = {
             tujuan: dataTtdSurTug.value.jabatan,
             indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
           },
-          transaction
+          transaction,
         );
 
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurat.id }, transaction }
+          { where: { id: dbNoSurat.id }, transaction },
         );
       } else if (isNotaDinas === 2) {
         nomorBaru = null;
@@ -166,7 +171,7 @@ module.exports = {
           tipeSrikandi: isSrikandi,
           isNotaDinas,
         },
-        { transaction }
+        { transaction },
       );
 
       var dataPegawai = pegawai.map((item, index) => ({
@@ -208,7 +213,7 @@ module.exports = {
             dalamKotaId: item.dataDalamKota.id,
             tanggalBerangkat: item.tanggalBerangkat,
             tanggalPulang: item.tanggalPulang,
-          })
+          }),
         );
         await tempat.bulkCreate(dataDalamKota, { transaction });
       }
@@ -247,7 +252,7 @@ module.exports = {
 
       const daysDifference = calculateDaysDifference(
         tanggalBerangkatFE,
-        tanggalPulangFE
+        tanggalPulangFE,
       );
       const formattedTanggalBerangkat = formatTanggal(tanggalBerangkatFE);
       const formattedTanggalPulang = formatTanggal(tanggalPulangFE);
@@ -255,7 +260,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan
+        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan,
       );
 
       // Baca file template
@@ -285,16 +290,16 @@ module.exports = {
               ? ""
               : dalamKota[1]?.dataDalamKota.nama
             : dataKota.length === 1
-            ? ""
-            : dataKota[1]?.tempat,
+              ? ""
+              : dataKota[1]?.tempat,
         tempat3:
           jenis.id === 2
             ? dalamKota.length === 1
               ? ""
               : dalamKota[2]?.dataDalamKota.nama
             : dataKota.length === 1
-            ? ""
-            : dataKota[2]?.tempat,
+              ? ""
+              : dataKota[2]?.tempat,
 
         kode: kodeRekeningFE,
         subKegiatan,
@@ -322,7 +327,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
       await transaction.commit();
       // Simpan file hasil ke server
@@ -331,11 +336,11 @@ module.exports = {
       // Kirim file sebagai respons
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename=${outputFileName}`
+        `attachment; filename=${outputFileName}`,
       );
       res.setHeader(
         "Content-Type",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       );
 
       res.send(buffer);
@@ -374,6 +379,7 @@ module.exports = {
         isNotaDinas,
         dataBendaharaId,
         subKegiatan,
+        penomoran,
       } = req.body;
 
       console.log(req.body);
@@ -409,7 +415,10 @@ module.exports = {
 
         // Buat nomor baru dengan mengganti "NOMOR" dengan nomorLoket
         nomorBaru = dbNoSurat.jenisSurat.nomorSurat
-          .replace("NOMOR", nomorLoket.toString())
+          .replace(
+            "NOMOR",
+            penomoran === "nonaktif" ? "        " : nomorLoket.toString(),
+          )
           .replace("KLASIFIKASI", kodeKlasifikasi.value.kode)
           .replace("KODE", kode)
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)));
@@ -422,13 +431,13 @@ module.exports = {
             tujuan: dataTtdSurTug.value.jabatan,
             indukUnitKerjaId: indukUnitKerjaFE.indukUnitKerja.id,
           },
-          transaction
+          transaction,
         );
 
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurat.id }, transaction }
+          { where: { id: dbNoSurat.id }, transaction },
         );
       } else if (isNotaDinas === 2) {
         nomorBaru = null;
@@ -455,7 +464,7 @@ module.exports = {
           tipeSrikandi: isSrikandi,
           isNotaDinas,
         },
-        { transaction }
+        { transaction },
       );
 
       var dataPegawai = pegawai.map((item, index) => ({
@@ -497,7 +506,7 @@ module.exports = {
             dalamKotaId: item.dataDalamKota.id,
             tanggalBerangkat: item.tanggalBerangkat,
             tanggalPulang: item.tanggalPulang,
-          })
+          }),
         );
         await tempat.bulkCreate(dataDalamKota, { transaction });
       }
@@ -619,12 +628,12 @@ module.exports = {
       const resultJenisTempat = await jenisTempat.findAll({
         attributes: ["id", "jenis", "koderekening"],
       });
-      const resultDalamKota = await dalamKota.findAll({
-        attributes: ["id", "nama", "durasi"],
-        where: {
-          indukUnitKerjaId,
-        },
-      });
+      // const resultDalamKota = await dalamKota.findAll({
+      //   attributes: ["id", "nama", "durasi"],
+      //   where: {
+      //     indukUnitKerjaId,
+      //   },
+      // });
       const resultKPA = await KPA.findAll({
         where: { unitKerjaId },
         attributes: ["id"],
@@ -650,7 +659,7 @@ module.exports = {
         resultDaftarNomorSurat,
         resultJenisTempat,
         resultJenisPerjalanan,
-        resultDalamKota,
+        // resultDalamKota,
         resultTtdNotaDinas,
         resultPPTK,
         resultKPA,
@@ -882,7 +891,8 @@ module.exports = {
           "noNotaDinas",
           "tanggalPengajuan",
           "noSuratTugas",
-          "isNotaDinas","tipeSrikandi"
+          "isNotaDinas",
+          "tipeSrikandi",
         ],
         include: [
           {
@@ -1006,7 +1016,7 @@ module.exports = {
 
       const filteredResult = rows.filter((item) => {
         const hasProfesiId1 = item.personils.some(
-          (p) => p.pegawai?.profesi?.id === 1
+          (p) => p.pegawai?.profesi?.id === 1,
         );
 
         // Kembalikan true jika TIDAK memiliki profesi.id == 1
@@ -1058,25 +1068,27 @@ module.exports = {
         dasar,
         indukUnitKerjaFE,
         ttdSurtTugKode,
-        isNotaDinas,tipeSrikandi
+        isNotaDinas,
+        tipeSrikandi,
+        penomoran,
       } = req.body;
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
       console.log(isNotaDinas, dasar, "ini is nota dinas");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
-        0
+        0,
       );
 
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
 
       const formattedTanggalBerangkat = formatTanggal(
-        tempat[0].tanggalBerangkat
+        tempat[0].tanggalBerangkat,
       );
       const formattedTanggalPulang = formatTanggal(
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
       const formattedTanggalPengajuan =
         formatTanggalPengajuan(tanggalPengajuan);
@@ -1105,20 +1117,23 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace("NOMOR", nomorLoket.toString())
+          .replace(
+            "NOMOR",
+            penomoran === "nonaktif" ? "        " : nomorLoket.toString(),
+          )
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         // console.log(dbNoSurTug.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurTug.id }, transaction }
+          { where: { id: dbNoSurTug.id }, transaction },
         );
 
         // Update data perjalanan
         await perjalanan.update(
           { noSuratTugas: nomorBaru },
-          { where: { id }, transaction }
+          { where: { id }, transaction },
         );
         //MENGAMBIL NOMOR SPD ///////////
 
@@ -1140,13 +1155,18 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+              .replace(
+                "NOMOR",
+                penomoran === "nonaktif"
+                  ? "      "
+                  : (nomorAwalSPD + index + 1).toString(),
+              )
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
           await daftarNomorSurat.update(
             { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
-            { where: { id: dbNoSPD.id }, transaction }
+            { where: { id: dbNoSPD.id }, transaction },
           );
           for (const [index, item] of personilFE.entries()) {
             await personil.update(
@@ -1156,7 +1176,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         } else {
@@ -1168,7 +1188,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         }
@@ -1221,7 +1241,7 @@ module.exports = {
           where: { id: indukUnitKerjaFE.indukUnitKerja.id },
           attributes: ["id", "templateSuratTugas", "templateSuratTugasSingkat"],
         },
-        { transaction }
+        { transaction },
       );
 
       const templatePath = path.join(
@@ -1229,7 +1249,7 @@ module.exports = {
         "../public",
         tempat.reduce((total, temp) => total + temp.dalamKota.durasi, 0) > 7
           ? template.templateSuratTugas
-          : template.templateSuratTugasSingkat
+          : template.templateSuratTugasSingkat,
       );
 
       // Baca file template
@@ -1252,19 +1272,19 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length > 1 && jenis === 1
-            ? tempat[1]?.tempat
-            : tempat.length > 1 && jenis !== 1
-            ? tempat[1]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[1]?.tempat
+              : tempat.length > 1 && jenis !== 1
+                ? tempat[1]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tempatSpd3:
           tempat.length === 1
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tanggalBerangkat: formattedTanggalBerangkat,
         tanggalPulang: formattedTanggalPulang,
@@ -1289,7 +1309,8 @@ module.exports = {
         KPAPangkat,
         KPAGolongan,
         KPAJabatan,
-        dataPegawai,   ttd: tipeSrikandi ? "${ttd_pengirim}" : "",
+        dataPegawai,
+        ttd: tipeSrikandi ? "${ttd_pengirim}" : "",
       });
 
       // Simpan hasil dokumen ke buffer
@@ -1300,7 +1321,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
 
       // Simpan file hasil ke server
@@ -1353,10 +1374,11 @@ module.exports = {
         ttdSurtTugKode,
         isNotaDinas,
         jenisKendaraan,
+        penomoran,
       } = req.body;
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
-      console.log(jenisKendaraan, "cek");
-      
+      console.log(penomoran, "cek");
+
       // Konversi jenisKendaraan dari array angka menjadi string
       let jenisKendaraanString = "";
       if (Array.isArray(jenisKendaraan) && jenisKendaraan.length > 0) {
@@ -1372,22 +1394,22 @@ module.exports = {
         }
         jenisKendaraanString = "kendaraan " + jenisKendaraanArray.join(", ");
       }
-      
+
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
-        0
+        0,
       );
 
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
 
       const formattedTanggalBerangkat = formatTanggal(
-        tempat[0].tanggalBerangkat
+        tempat[0].tanggalBerangkat,
       );
       const formattedTanggalPulang = formatTanggal(
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
       const formattedTanggalPengajuan =
         formatTanggalPengajuan(tanggalPengajuan);
@@ -1416,20 +1438,23 @@ module.exports = {
             ? ttdSurtTugKode
             : ttdSurtTugKode + "/" + indukUnitKerjaFE.kode;
         nomorBaru = dbNoSurTug.jenisSurat.nomorSurat
-          .replace("NOMOR", nomorLoket.toString())
+          .replace(
+            "NOMOR",
+            penomoran === "nonaktif" ? "    " : nomorLoket.toString(),
+          )
           .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan)))
           .replace("KODE", codeNoST);
         // console.log(dbNoSurTug.id, "NOMOR SURAT");
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurTug.id }, transaction }
+          { where: { id: dbNoSurTug.id }, transaction },
         );
 
         // Update data perjalanan
         await perjalanan.update(
           { noSuratTugas: nomorBaru },
-          { where: { id }, transaction }
+          { where: { id }, transaction },
         );
         //MENGAMBIL NOMOR SPD ///////////
 
@@ -1451,13 +1476,18 @@ module.exports = {
 
           noSpd = personilFE.map((item, index) => ({
             nomorSPD: dbNoSPD.jenisSurat.nomorSurat
-              .replace("NOMOR", (nomorAwalSPD + index + 1).toString())
+              .replace(
+                "NOMOR",
+                penomoran === "nonaktif"
+                  ? "      "
+                  : (nomorAwalSPD + index + 1).toString(),
+              )
               .replace("KODE", codeNoSPD)
               .replace("BULAN", getRomanMonth(new Date(tanggalPengajuan))),
           }));
           await daftarNomorSurat.update(
             { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
-            { where: { id: dbNoSPD.id }, transaction }
+            { where: { id: dbNoSPD.id }, transaction },
           );
           for (const [index, item] of personilFE.entries()) {
             await personil.update(
@@ -1467,7 +1497,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         } else {
@@ -1479,7 +1509,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         }
@@ -1501,14 +1531,14 @@ module.exports = {
           where: { id: indukUnitKerjaFE.indukUnitKerja.id },
           attributes: ["id", "templateSPD"],
         },
-        { transaction }
+        { transaction },
       );
 
       const templatePath = path.join(
         __dirname,
         "../public",
 
-        template.templateSPD
+        template.templateSPD,
       );
 
       // Baca file template
@@ -1531,19 +1561,19 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length > 1 && jenis === 1
-            ? tempat[1]?.tempat
-            : tempat.length > 1 && jenis !== 1
-            ? tempat[1]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[1]?.tempat
+              : tempat.length > 1 && jenis !== 1
+                ? tempat[1]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tempatSpd3:
           tempat.length === 1
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempat2: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
@@ -1574,32 +1604,32 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : tempat.length === 2 && jenis === 1
-            ? "Tana Paser"
-            : tempat.length === 2 && jenis !== 1
-            ? ""
-            : "Tana Paser",
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : tempat.length === 2 && jenis === 1
+                  ? "Tana Paser"
+                  : tempat.length === 2 && jenis !== 1
+                    ? ""
+                    : "Tana Paser",
 
         tempat8:
           tempat.length === 1 || tempat.length === 2
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Default value if none of the conditions match
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Default value if none of the conditions match
 
         tempat9:
           tempat.length === 1 || tempat.length === 2
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Default value if none of the conditions match
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Default value if none of the conditions match
 
         tempat10: tempat.length === 3 ? "Tana Paser" : "",
 
@@ -1616,22 +1646,22 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? formatTanggal(tempat[1]?.tanggalPulang)
-            : formatTanggal(tempat[2]?.tanggalBerangkat),
+              ? formatTanggal(tempat[1]?.tanggalPulang)
+              : formatTanggal(tempat[2]?.tanggalBerangkat),
 
         tanggal6:
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? ""
-            : formatTanggal(tempat[2]?.tanggalBerangkat),
+              ? ""
+              : formatTanggal(tempat[2]?.tanggalBerangkat),
 
         tanggal7:
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? ""
-            : formatTanggal(tempat[2]?.tanggalPulang),
+              ? ""
+              : formatTanggal(tempat[2]?.tanggalPulang),
 
         tanggalBerangkat: formattedTanggalBerangkat,
         tanggalPulang: formattedTanggalPulang,
@@ -1742,7 +1772,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
 
       // Simpan file hasil ke server
@@ -1802,7 +1832,7 @@ module.exports = {
       // console.log(indukUnitKerjaFE.indukUnitKerja.id, "TTD SURAT TUGASSS");
       const totalDurasi = tempat.reduce(
         (total, temp) => total + temp.dalamKota.durasi,
-        0
+        0,
       );
 
       // Path file template
@@ -1837,13 +1867,13 @@ module.exports = {
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSurTug.id }, transaction }
+          { where: { id: dbNoSurTug.id }, transaction },
         );
 
         // Update data perjalanan
         await perjalanan.update(
           { noSuratTugas: nomorBaru },
-          { where: { id }, transaction }
+          { where: { id }, transaction },
         );
         //MENGAMBIL NOMOR SPD ///////////
 
@@ -1871,7 +1901,7 @@ module.exports = {
           }));
           await daftarNomorSurat.update(
             { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
-            { where: { id: dbNoSPD.id }, transaction }
+            { where: { id: dbNoSPD.id }, transaction },
           );
           for (const [index, item] of personilFE.entries()) {
             await personil.update(
@@ -1881,7 +1911,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         } else {
@@ -1893,7 +1923,7 @@ module.exports = {
               },
               {
                 where: { id: item.id }, // Pastikan ada kriteria unik
-              }
+              },
             );
           }
         }
@@ -1938,7 +1968,8 @@ module.exports = {
           "tanggalPengajuan",
           "noSuratTugas",
           "undangan",
-          "kwitGlobalId","isNotaDinas"
+          "kwitGlobalId",
+          "isNotaDinas",
         ],
         include: [
           {
@@ -1993,7 +2024,8 @@ module.exports = {
           },
           {
             model: jenisPerjalanan,
-          },            { model: pelayananKesehatan },
+          },
+          { model: pelayananKesehatan },
           {
             model: daftarSubKegiatan,
             attributes: ["id", "kodeRekening", "subKegiatan"],
@@ -2049,20 +2081,25 @@ module.exports = {
             attributes: ["foto", "id"],
           },
           {
-            model: kendaraanDinas,include:[{model:kendaraan,attributes:["id","seri","nomor","merek","foto"]}]
-            
+            model: kendaraanDinas,
+            include: [
+              {
+                model: kendaraan,
+                attributes: ["id", "seri", "nomor", "merek", "foto"],
+              },
+            ],
           },
           {
             model: kwitGlobal,
-            
           },
           // {
           //   model: ttdSuratTugas,
           //   attributes: ["nama", "id", "nip", "jabatan"],
           // },
         ],
-      });     const resultUangHarian = await uangHarian.findAll();
-      return res.status(200).json({ result,resultUangHarian });
+      });
+      const resultUangHarian = await uangHarian.findAll();
+      return res.status(200).json({ result, resultUangHarian });
     } catch (err) {
       console.log(err);
       return res.status(500).json({
@@ -2288,14 +2325,14 @@ module.exports = {
 
       const daysDifference = calculateDaysDifference(
         tempat[0].tanggalBerangkat,
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
 
       const formattedTanggalBerangkat = formatTanggal(
-        tempat[0].tanggalBerangkat
+        tempat[0].tanggalBerangkat,
       );
       const formattedTanggalPulang = formatTanggal(
-        tempat[tempat.length - 1].tanggalPulang
+        tempat[tempat.length - 1].tanggalPulang,
       );
       const formattedTanggalPengajuan =
         formatTanggalPengajuan(tanggalPengajuan);
@@ -2324,13 +2361,13 @@ module.exports = {
 
         nomorBaru = dbNoSurTug.nomorSurat.replace(
           "BULAN",
-          getRomanMonth(new Date(tanggalPengajuan))
+          getRomanMonth(new Date(tanggalPengajuan)),
         );
 
         // Update data perjalanan
         await perjalanan.update(
           { noSuratTugas: nomorBaru },
-          { where: { id }, transaction }
+          { where: { id }, transaction },
         );
 
         let nomorAwalSPD = parseInt(dbNoSPD.nomorLoket);
@@ -2352,7 +2389,7 @@ module.exports = {
         // Update nomor loket ke database
         await daftarNomorSurat.update(
           { nomorLoket: nomorAwalSPD + noSpd.length }, // Hanya objek yang berisi field yang ingin diperbarui
-          { where: { id: dbNoSPD.id }, transaction }
+          { where: { id: dbNoSPD.id }, transaction },
         );
         /////////////////////////////////////////////////////
 
@@ -2369,7 +2406,7 @@ module.exports = {
             },
             {
               where: { id: item.id }, // Pastikan ada kriteria unik
-            }
+            },
           );
         }
         /////////////////////////////////////////
@@ -2382,7 +2419,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        dbNoSurTug.template
+        dbNoSurTug.template,
       );
 
       // Baca file template
@@ -2407,19 +2444,19 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length > 1 && jenis === 1
-            ? tempat[1]?.tempat
-            : tempat.length > 1 && jenis !== 1
-            ? tempat[1]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[1]?.tempat
+              : tempat.length > 1 && jenis !== 1
+                ? tempat[1]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tempatSpd3:
           tempat.length === 1
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Nilai default jika tidak ada kondisi yang terpenuhi
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Nilai default jika tidak ada kondisi yang terpenuhi
 
         tempat1: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
         tempat2: jenis === 1 ? tempat[0]?.tempat : tempat[0]?.dalamKota.nama,
@@ -2450,32 +2487,32 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : tempat.length === 2 && jenis === 1
-            ? "Tana Paser"
-            : tempat.length === 2 && jenis !== 1
-            ? ""
-            : "Tana Paser",
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : tempat.length === 2 && jenis === 1
+                  ? "Tana Paser"
+                  : tempat.length === 2 && jenis !== 1
+                    ? ""
+                    : "Tana Paser",
 
         tempat8:
           tempat.length === 1 || tempat.length === 2
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Default value if none of the conditions match
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Default value if none of the conditions match
 
         tempat9:
           tempat.length === 1 || tempat.length === 2
             ? ""
             : tempat.length === 3 && jenis === 1
-            ? tempat[2]?.tempat
-            : tempat.length === 3 && jenis !== 1
-            ? tempat[2]?.dalamKota.nama
-            : "", // Default value if none of the conditions match
+              ? tempat[2]?.tempat
+              : tempat.length === 3 && jenis !== 1
+                ? tempat[2]?.dalamKota.nama
+                : "", // Default value if none of the conditions match
 
         tempat10: tempat.length === 3 ? "Tana Paser" : "",
 
@@ -2492,22 +2529,22 @@ module.exports = {
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? formatTanggal(tempat[1]?.tanggalPulang)
-            : formatTanggal(tempat[2]?.tanggalBerangkat),
+              ? formatTanggal(tempat[1]?.tanggalPulang)
+              : formatTanggal(tempat[2]?.tanggalBerangkat),
 
         tanggal6:
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? ""
-            : formatTanggal(tempat[2]?.tanggalBerangkat),
+              ? ""
+              : formatTanggal(tempat[2]?.tanggalBerangkat),
 
         tanggal7:
           tempat.length === 1
             ? ""
             : tempat.length === 2
-            ? ""
-            : formatTanggal(tempat[2]?.tanggalPulang),
+              ? ""
+              : formatTanggal(tempat[2]?.tanggalPulang),
 
         tanggalBerangkat: formattedTanggalBerangkat,
         tanggalPulang: formattedTanggalPulang,
@@ -2615,7 +2652,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
 
       // Simpan file hasil ke server
@@ -2669,7 +2706,8 @@ module.exports = {
         jenis,
         dalamKota,
 
-        isSrikandi,isNotaDinas,
+        isSrikandi,
+        isNotaDinas,
         jenisPerjalanan,
         indukUnitKerjaId,
         tempat,
@@ -2724,7 +2762,7 @@ module.exports = {
             dalamKotaId: item.dataDalamKota.id,
             tanggalBerangkat: item.tanggalBerangkat,
             tanggalPulang: item.tanggalPulang,
-          })
+          }),
         );
       }
       // console.log(dataDalamKota);
@@ -2735,7 +2773,7 @@ module.exports = {
           where: { id: indukUnitKerjaId },
           attributes: ["id", "templateNotaDinas", "telaahan"],
         },
-        { transaction }
+        { transaction },
       );
 
       const tanggalBerangkatFE = tempat[0].tanggalBerangkat;
@@ -2744,7 +2782,7 @@ module.exports = {
 
       const daysDifference = calculateDaysDifference(
         tanggalBerangkatFE,
-        tanggalPulangFE
+        tanggalPulangFE,
       );
       const formattedTanggalBerangkat = formatTanggal(tanggalBerangkatFE);
       const formattedTanggalPulang = formatTanggal(tanggalPulangFE);
@@ -2752,7 +2790,7 @@ module.exports = {
       const templatePath = path.join(
         __dirname,
         "../public",
-        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan
+        isNotaDinas == 1 ? template.templateNotaDinas : template.telaahan,
       );
 
       // Baca file template
@@ -2779,16 +2817,16 @@ module.exports = {
               ? ""
               : tempat[1]?.dalamKota.nama
             : tempat.length === 1
-            ? ""
-            : tempat[1]?.tempat,
+              ? ""
+              : tempat[1]?.tempat,
         tempat3:
           jenis === 2
             ? tempat.length === 1
               ? ""
               : tempat[2]?.dalamKota.nama
             : tempat.length === 1
-            ? ""
-            : tempat[2]?.tempat,
+              ? ""
+              : tempat[2]?.tempat,
 
         kode: kodeRekeningFE,
         noNotDis,
@@ -2815,7 +2853,7 @@ module.exports = {
       const outputPath = path.join(
         __dirname,
         "../public/output",
-        outputFileName
+        outputFileName,
       );
 
       // Simpan file hasil ke server
@@ -2849,7 +2887,7 @@ module.exports = {
           untuk,
           subKegiatanId,
         },
-        { where: { id } }
+        { where: { id } },
       );
 
       return res.status(200).json({ result });
@@ -2874,7 +2912,7 @@ module.exports = {
             tanggalPulang,
             tempat: tujuan,
           },
-          { where: { id: tempatId } }
+          { where: { id: tempatId } },
         );
       } else {
         await tempat.update(
@@ -2883,7 +2921,7 @@ module.exports = {
             tanggalPulang,
             dalamKotaId,
           },
-          { where: { id: tempatId } }
+          { where: { id: tempatId } },
         );
       }
 
@@ -3072,7 +3110,7 @@ module.exports = {
 
       const filteredResult = rows.filter((item) => {
         const hasProfesiId1 = item.personils.some(
-          (p) => p.pegawai?.profesi?.id === 1
+          (p) => p.pegawai?.profesi?.id === 1,
         );
 
         // Kembalikan true jika TIDAK memiliki profesi.id == 1
@@ -3091,6 +3129,97 @@ module.exports = {
       return res.status(500).json({
         message: err.toString(),
         code: 500,
+      });
+    }
+  },
+
+  editNomorSurat: async (req, res) => {
+    const id = req.params.id;
+    const perjalananId = parseInt(id, 10);
+    const { noSuratTugas, noNotaDinas, personilNomorSPD } = req.body;
+
+    if (Number.isNaN(perjalananId)) {
+      return res.status(400).json({ message: "ID perjalanan tidak valid" });
+    }
+
+    try {
+      const dataPerjalanan = await perjalanan.findByPk(perjalananId, {
+        attributes: ["id"],
+      });
+      if (!dataPerjalanan) {
+        return res.status(404).json({
+          message: "Data perjalanan tidak ditemukan",
+        });
+      }
+
+      const updatePerjalanan = {};
+      if (noSuratTugas !== undefined)
+        updatePerjalanan.noSuratTugas = noSuratTugas;
+      if (noNotaDinas !== undefined) updatePerjalanan.noNotaDinas = noNotaDinas;
+
+      if (Object.keys(updatePerjalanan).length > 0) {
+        await perjalanan.update(updatePerjalanan, {
+          where: { id: perjalananId },
+        });
+      }
+
+      if (
+        personilNomorSPD &&
+        Array.isArray(personilNomorSPD) &&
+        personilNomorSPD.length > 0
+      ) {
+        const listPersonil = await personil.findAll({
+          where: { perjalananId },
+          order: [["id", "ASC"]],
+          attributes: ["id"],
+        });
+
+        for (let i = 0; i < personilNomorSPD.length; i++) {
+          const item = personilNomorSPD[i];
+          const nilaiNomorSPD =
+            typeof item === "string"
+              ? item
+              : item &&
+                (item.nomorSPD !== undefined ? item.nomorSPD : item.nomorSpd);
+          const personilId =
+            typeof item === "object" && item != null
+              ? item.id != null
+                ? item.id
+                : item.personilId
+              : null;
+
+          if (personilId != null && nilaiNomorSPD !== undefined) {
+            await personil.update(
+              { nomorSPD: String(nilaiNomorSPD) },
+              { where: { id: parseInt(personilId, 10), perjalananId } },
+            );
+          } else if (nilaiNomorSPD !== undefined && listPersonil[i]) {
+            await personil.update(
+              { nomorSPD: String(nilaiNomorSPD) },
+              { where: { id: listPersonil[i].id, perjalananId } },
+            );
+          }
+        }
+      }
+
+      const result = await perjalanan.findByPk(perjalananId, {
+        attributes: ["id", "noSuratTugas", "noNotaDinas"],
+        include: [
+          {
+            model: personil,
+            attributes: ["id", "nomorSPD"],
+          },
+        ],
+      });
+
+      return res.status(200).json({
+        message: "Nomor surat berhasil diperbarui",
+        data: result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        message: "Terjadi kesalahan saat mengedit nomor surat",
       });
     }
   },
