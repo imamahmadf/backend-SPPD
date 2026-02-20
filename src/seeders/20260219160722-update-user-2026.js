@@ -1,6 +1,7 @@
 "use strict";
 
 const currentDate = new Date();
+const bcrypt = require("bcryptjs");
 
 const users = [
   {
@@ -8,7 +9,7 @@ const users = [
     updatedAt: currentDate,
     id: 2,
     namaPengguna: "198407262002121001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amri Yulihardi, S.Stp, M.Si",
   },
   {
@@ -16,7 +17,7 @@ const users = [
     updatedAt: currentDate,
     id: 3,
     namaPengguna: "197104171997032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alfrienti Linggi Kalalembang, Skm, M.Kes",
   },
   {
@@ -24,7 +25,7 @@ const users = [
     updatedAt: currentDate,
     id: 4,
     namaPengguna: "197512122002122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Ainun Jariyah",
   },
   {
@@ -32,7 +33,7 @@ const users = [
     updatedAt: currentDate,
     id: 5,
     namaPengguna: "197604102005022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sulistiyo Rini, S.Si.Apt",
   },
   {
@@ -40,7 +41,7 @@ const users = [
     updatedAt: currentDate,
     id: 6,
     namaPengguna: "197210151993031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anang Jarkani, Skm",
   },
   {
@@ -48,7 +49,7 @@ const users = [
     updatedAt: currentDate,
     id: 7,
     namaPengguna: "198309292005022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Thoibah, S.Gz, M.Kes.",
   },
   {
@@ -56,7 +57,7 @@ const users = [
     updatedAt: currentDate,
     id: 8,
     namaPengguna: "198112012003122005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marliana, S.St.,M.Kes",
   },
   {
@@ -64,7 +65,7 @@ const users = [
     updatedAt: currentDate,
     id: 9,
     namaPengguna: "198503312014031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Adhisetya Dwi Saputra",
   },
   {
@@ -72,7 +73,7 @@ const users = [
     updatedAt: currentDate,
     id: 10,
     namaPengguna: "197109181991021001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Subhan, A.Md.Kep",
   },
   {
@@ -80,7 +81,7 @@ const users = [
     updatedAt: currentDate,
     id: 11,
     namaPengguna: "197108181992032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Juminah, S.Tr.Keb.",
   },
   {
@@ -88,7 +89,7 @@ const users = [
     updatedAt: currentDate,
     id: 12,
     namaPengguna: "196906081991021004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suparno, A.Md.Kep",
   },
   {
@@ -96,7 +97,7 @@ const users = [
     updatedAt: currentDate,
     id: 13,
     namaPengguna: "197207051993031010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumain, Skm",
   },
   {
@@ -104,7 +105,7 @@ const users = [
     updatedAt: currentDate,
     id: 14,
     namaPengguna: "197403191994031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sujarwo, A.Md.Kep",
   },
   {
@@ -112,7 +113,7 @@ const users = [
     updatedAt: currentDate,
     id: 15,
     namaPengguna: "196911091994022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Budi Pratiwi, S.Sos.",
   },
   {
@@ -120,7 +121,7 @@ const users = [
     updatedAt: currentDate,
     id: 16,
     namaPengguna: "197011131992032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yanti Hartati, A.Md.Gizi",
   },
   {
@@ -128,7 +129,7 @@ const users = [
     updatedAt: currentDate,
     id: 17,
     namaPengguna: "196905051995032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "I'timariah, Skm",
   },
   {
@@ -136,7 +137,7 @@ const users = [
     updatedAt: currentDate,
     id: 18,
     namaPengguna: "197506122000121004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Hasanudin, S.Sos",
   },
   {
@@ -144,7 +145,7 @@ const users = [
     updatedAt: currentDate,
     id: 19,
     namaPengguna: "198303092009031006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra Darmawan, S.Far.A.Pt",
   },
   {
@@ -152,7 +153,7 @@ const users = [
     updatedAt: currentDate,
     id: 20,
     namaPengguna: "197602242000121001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hendrik Latif, Skm,M.A.P",
   },
   {
@@ -160,7 +161,7 @@ const users = [
     updatedAt: currentDate,
     id: 21,
     namaPengguna: "197307221994021003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dian Mahanata, Skm",
   },
   {
@@ -168,7 +169,7 @@ const users = [
     updatedAt: currentDate,
     id: 22,
     namaPengguna: "197610072005022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Esti Muflichah, Skm",
   },
   {
@@ -176,7 +177,7 @@ const users = [
     updatedAt: currentDate,
     id: 23,
     namaPengguna: "197406011997032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Juniarsih, S.K.M.",
   },
   {
@@ -184,7 +185,7 @@ const users = [
     updatedAt: currentDate,
     id: 24,
     namaPengguna: "198311152009032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Novita Sari, S.Farm., A.Pt",
   },
   {
@@ -192,7 +193,7 @@ const users = [
     updatedAt: currentDate,
     id: 25,
     namaPengguna: "197911032006042028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurhidayah, A. Md. Gizi., S.K.M.",
   },
   {
@@ -200,7 +201,7 @@ const users = [
     updatedAt: currentDate,
     id: 26,
     namaPengguna: "197407251996031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Slamet Ariyanto, S.Tr.Kep., Ns.",
   },
   {
@@ -208,7 +209,7 @@ const users = [
     updatedAt: currentDate,
     id: 27,
     namaPengguna: "198508122009032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Himmatul Ulya, A.Md.Keb",
   },
   {
@@ -216,7 +217,7 @@ const users = [
     updatedAt: currentDate,
     id: 28,
     namaPengguna: "197911142005022006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yusita Indrayanti, S.K.M",
   },
   {
@@ -224,7 +225,7 @@ const users = [
     updatedAt: currentDate,
     id: 29,
     namaPengguna: "198107012005021003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Karnadi, S.K.M.",
   },
   {
@@ -232,7 +233,7 @@ const users = [
     updatedAt: currentDate,
     id: 30,
     namaPengguna: "197905062006042025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriani Astuti, A.Md.Keb",
   },
   {
@@ -240,7 +241,7 @@ const users = [
     updatedAt: currentDate,
     id: 31,
     namaPengguna: "198707262009032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lia Nuraini, S.Tr.Keb",
   },
   {
@@ -248,7 +249,7 @@ const users = [
     updatedAt: currentDate,
     id: 32,
     namaPengguna: "198809152010012012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. EMILIA SURIANTI, SST",
   },
   {
@@ -256,7 +257,7 @@ const users = [
     updatedAt: currentDate,
     id: 33,
     namaPengguna: "199306162019032022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Mey Mey Sangianti, S.Farm",
   },
   {
@@ -264,7 +265,7 @@ const users = [
     updatedAt: currentDate,
     id: 34,
     namaPengguna: "198512302008041001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wujang Bayu Pratugas, S.Kep.Ners",
   },
   {
@@ -272,7 +273,7 @@ const users = [
     updatedAt: currentDate,
     id: 35,
     namaPengguna: "198007112009032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ni Made Yuliawati, S.K.M.",
   },
   {
@@ -280,7 +281,7 @@ const users = [
     updatedAt: currentDate,
     id: 36,
     namaPengguna: "198908282011012004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Halimah, Amg",
   },
   {
@@ -288,7 +289,7 @@ const users = [
     updatedAt: currentDate,
     id: 37,
     namaPengguna: "198909102011012004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Endang Saraswati, Amg",
   },
   {
@@ -296,7 +297,7 @@ const users = [
     updatedAt: currentDate,
     id: 38,
     namaPengguna: "198811292010012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Fa`Ikah, A.Md.Ak",
   },
   {
@@ -304,7 +305,7 @@ const users = [
     updatedAt: currentDate,
     id: 39,
     namaPengguna: "198802112010012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rika Pebriani, A.Md.Keb",
   },
   {
@@ -312,7 +313,7 @@ const users = [
     updatedAt: currentDate,
     id: 40,
     namaPengguna: "198811052011012004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ananda Unaizah, Am.Kg",
   },
   {
@@ -320,7 +321,7 @@ const users = [
     updatedAt: currentDate,
     id: 41,
     namaPengguna: "198910112011012005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rabiatul Adawiyah, Amkl",
   },
   {
@@ -328,7 +329,7 @@ const users = [
     updatedAt: currentDate,
     id: 42,
     namaPengguna: "198306022010012026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Juita Melda, S.Kep, Ns",
   },
   {
@@ -336,7 +337,7 @@ const users = [
     updatedAt: currentDate,
     id: 43,
     namaPengguna: "198804132010012010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heriani, A.Md.Keb",
   },
   {
@@ -344,7 +345,7 @@ const users = [
     updatedAt: currentDate,
     id: 44,
     namaPengguna: "198511112009032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Yuliyatin, S.Km",
   },
   {
@@ -352,7 +353,7 @@ const users = [
     updatedAt: currentDate,
     id: 45,
     namaPengguna: "197101012002121017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arifin",
   },
   {
@@ -360,7 +361,7 @@ const users = [
     updatedAt: currentDate,
     id: 46,
     namaPengguna: "198707172009032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Halimatussa'diyah, A.Md.Far",
   },
   {
@@ -368,7 +369,7 @@ const users = [
     updatedAt: currentDate,
     id: 47,
     namaPengguna: "199206172019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Najemawati, S.E.",
   },
   {
@@ -376,7 +377,7 @@ const users = [
     updatedAt: currentDate,
     id: 48,
     namaPengguna: "199008162019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tiyanpri Bayu Laksmono, Skm",
   },
   {
@@ -384,7 +385,7 @@ const users = [
     updatedAt: currentDate,
     id: 49,
     namaPengguna: "198907172019031017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fauzan Saleh, Skm",
   },
   {
@@ -392,7 +393,7 @@ const users = [
     updatedAt: currentDate,
     id: 50,
     namaPengguna: "199103082022032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Evi Sulfiana, S.K.M",
   },
   {
@@ -400,7 +401,7 @@ const users = [
     updatedAt: currentDate,
     id: 51,
     namaPengguna: "199811142022032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sofiya Maulida, S.Farm",
   },
   {
@@ -408,7 +409,7 @@ const users = [
     updatedAt: currentDate,
     id: 52,
     namaPengguna: "197905122007011011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Darmansyah",
   },
   {
@@ -416,7 +417,7 @@ const users = [
     updatedAt: currentDate,
     id: 53,
     namaPengguna: "197005172009062002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harini",
   },
   {
@@ -424,7 +425,7 @@ const users = [
     updatedAt: currentDate,
     id: 54,
     namaPengguna: "199209112019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Taftian, A.Md.Kep.",
   },
   {
@@ -432,7 +433,7 @@ const users = [
     updatedAt: currentDate,
     id: 55,
     namaPengguna: "198704182019031010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Misbachul Irpany, A.Md.Kep.",
   },
   {
@@ -440,7 +441,7 @@ const users = [
     updatedAt: currentDate,
     id: 56,
     namaPengguna: "199412162019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Junaidi, A.Md.Kg.",
   },
   {
@@ -448,7 +449,7 @@ const users = [
     updatedAt: currentDate,
     id: 57,
     namaPengguna: "197005032006041010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ardiansyah",
   },
   {
@@ -456,7 +457,7 @@ const users = [
     updatedAt: currentDate,
     id: 58,
     namaPengguna: "197908012012122003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Farida",
   },
   {
@@ -464,7 +465,7 @@ const users = [
     updatedAt: currentDate,
     id: 59,
     namaPengguna: "199404012022032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Setya Nor Rahmi, A.Md.Kep",
   },
   {
@@ -472,7 +473,7 @@ const users = [
     updatedAt: currentDate,
     id: 60,
     namaPengguna: "199808082022031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fahrurrasyuf Rizky Al Fitroch, A.Md",
   },
   {
@@ -480,7 +481,7 @@ const users = [
     updatedAt: currentDate,
     id: 61,
     namaPengguna: "199203042025212008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Coriana, A.Md.Kep",
   },
   {
@@ -488,7 +489,7 @@ const users = [
     updatedAt: currentDate,
     id: 62,
     namaPengguna: "199311252025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Fatimah, A.Md.Keb",
   },
   {
@@ -496,7 +497,7 @@ const users = [
     updatedAt: currentDate,
     id: 63,
     namaPengguna: "198209152025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Srirahayu",
   },
   {
@@ -504,7 +505,7 @@ const users = [
     updatedAt: currentDate,
     id: 64,
     namaPengguna: "199511092025212041",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ade Riska Setyawati",
   },
   {
@@ -512,7 +513,7 @@ const users = [
     updatedAt: currentDate,
     id: 65,
     namaPengguna: "199610192025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuyun Nora Normania",
   },
   {
@@ -520,7 +521,7 @@ const users = [
     updatedAt: currentDate,
     id: 66,
     namaPengguna: "199701052025211003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harbiansyah",
   },
   {
@@ -528,7 +529,7 @@ const users = [
     updatedAt: currentDate,
     id: 67,
     namaPengguna: "200008072025211002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Rizaldy Soeardi",
   },
   {
@@ -536,7 +537,7 @@ const users = [
     updatedAt: currentDate,
     id: 68,
     namaPengguna: "198806292025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mini Harti, Se",
   },
   {
@@ -544,7 +545,7 @@ const users = [
     updatedAt: currentDate,
     id: 69,
     namaPengguna: "198007222025211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Budi Andriani, S.Pi",
   },
   {
@@ -552,7 +553,7 @@ const users = [
     updatedAt: currentDate,
     id: 70,
     namaPengguna: "198611122025211026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ismail, Skm",
   },
   {
@@ -560,7 +561,7 @@ const users = [
     updatedAt: currentDate,
     id: 71,
     namaPengguna: "198802112025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lenny Suhartini Erman, Se",
   },
   {
@@ -568,7 +569,7 @@ const users = [
     updatedAt: currentDate,
     id: 72,
     namaPengguna: "198911032025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norhalimah, Skm",
   },
   {
@@ -576,7 +577,7 @@ const users = [
     updatedAt: currentDate,
     id: 73,
     namaPengguna: "199207142025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Masdalena, S. Pd",
   },
   {
@@ -584,7 +585,7 @@ const users = [
     updatedAt: currentDate,
     id: 74,
     namaPengguna: "198804142025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risna Aprianti, S.Kep., Ners",
   },
   {
@@ -592,7 +593,7 @@ const users = [
     updatedAt: currentDate,
     id: 75,
     namaPengguna: "198406012025211026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adi Suriya Winnata, S.P.",
   },
   {
@@ -600,7 +601,7 @@ const users = [
     updatedAt: currentDate,
     id: 76,
     namaPengguna: "199311022025212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizky Widyanti, S.Si.T",
   },
   {
@@ -608,7 +609,7 @@ const users = [
     updatedAt: currentDate,
     id: 77,
     namaPengguna: "6401036809990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anis Alimah Shalihah, S.I.Kom",
   },
   {
@@ -616,7 +617,7 @@ const users = [
     updatedAt: currentDate,
     id: 78,
     namaPengguna: "199405252025212167",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anis Karmila ",
   },
   {
@@ -624,7 +625,7 @@ const users = [
     updatedAt: currentDate,
     id: 79,
     namaPengguna: "6401046507010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anisah Khofifah, S.Km",
   },
   {
@@ -632,7 +633,7 @@ const users = [
     updatedAt: currentDate,
     id: 80,
     namaPengguna: "6401047008990003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aulia Rahmah, S.Psi.",
   },
   {
@@ -640,7 +641,7 @@ const users = [
     updatedAt: currentDate,
     id: 81,
     namaPengguna: "198408082025211089",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Badaruddin",
   },
   {
@@ -648,7 +649,7 @@ const users = [
     updatedAt: currentDate,
     id: 82,
     namaPengguna: "6401042806000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bayu Caesar Putratama Trestanto, S.Kom",
   },
   {
@@ -656,7 +657,7 @@ const users = [
     updatedAt: currentDate,
     id: 83,
     namaPengguna: "6401046807010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elfi Fikrah Nurfaizah, Skm",
   },
   {
@@ -664,7 +665,7 @@ const users = [
     updatedAt: currentDate,
     id: 84,
     namaPengguna: "6401036611030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Emi Safitri",
   },
   {
@@ -672,7 +673,7 @@ const users = [
     updatedAt: currentDate,
     id: 85,
     namaPengguna: "6401040710960000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erwin Rizkiawan, S.Kom",
   },
   {
@@ -680,7 +681,7 @@ const users = [
     updatedAt: currentDate,
     id: 86,
     namaPengguna: "199402212025211046",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Febrian Ramadhan",
   },
   {
@@ -688,7 +689,7 @@ const users = [
     updatedAt: currentDate,
     id: 87,
     namaPengguna: "6401042209000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fikri Putra Pratama, S.Kom",
   },
   {
@@ -696,7 +697,7 @@ const users = [
     updatedAt: currentDate,
     id: 88,
     namaPengguna: "6401045812910004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Karmila Nur Pradana, A.Md.Keb",
   },
   {
@@ -704,7 +705,7 @@ const users = [
     updatedAt: currentDate,
     id: 89,
     namaPengguna: "6401045811000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Laila Rahmawati, S.K.M",
   },
   {
@@ -712,7 +713,7 @@ const users = [
     updatedAt: currentDate,
     id: 90,
     namaPengguna: "6401046307970000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Melisa Yulianti, A.Md.Keb",
   },
   {
@@ -720,7 +721,7 @@ const users = [
     updatedAt: currentDate,
     id: 91,
     namaPengguna: "6401052503000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Dimas Rakha Arkananta, S.Kes., Ftr",
   },
   {
@@ -728,7 +729,7 @@ const users = [
     updatedAt: currentDate,
     id: 92,
     namaPengguna: "6401042310830001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Yudha Perwira Noor, S.Pd",
   },
   {
@@ -736,7 +737,7 @@ const users = [
     updatedAt: currentDate,
     id: 93,
     namaPengguna: "6401047006000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Annisa Romilda Rahmah,S.T",
   },
   {
@@ -744,7 +745,7 @@ const users = [
     updatedAt: currentDate,
     id: 94,
     namaPengguna: "6401044507990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahmawati Aulia, S.T",
   },
   {
@@ -752,7 +753,7 @@ const users = [
     updatedAt: currentDate,
     id: 95,
     namaPengguna: "6371035905980004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winda Monica, Skm",
   },
   {
@@ -760,7 +761,7 @@ const users = [
     updatedAt: currentDate,
     id: 96,
     namaPengguna: "7371106806990010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winda Purnamasari, A.Md.Kep",
   },
   {
@@ -768,7 +769,7 @@ const users = [
     updatedAt: currentDate,
     id: 97,
     namaPengguna: "6401044410940003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yana, SKM",
   },
   {
@@ -776,7 +777,7 @@ const users = [
     updatedAt: currentDate,
     id: 98,
     namaPengguna: "6472066806920000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuni Risma Dewi, A.Md.Kep",
   },
   {
@@ -784,7 +785,7 @@ const users = [
     updatedAt: currentDate,
     id: 99,
     namaPengguna: "6401030104000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yusril Ihza Mahendra, A.Md.Kep",
   },
   {
@@ -792,7 +793,7 @@ const users = [
     updatedAt: currentDate,
     id: 100,
     namaPengguna: "198004052009031006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Surya Taufik Rakhman",
   },
   {
@@ -800,7 +801,7 @@ const users = [
     updatedAt: currentDate,
     id: 101,
     namaPengguna: "196707251990022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elva Rosa, Se",
   },
   {
@@ -808,7 +809,7 @@ const users = [
     updatedAt: currentDate,
     id: 102,
     namaPengguna: "198202242010012021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sukarti, A.Md.Kep",
   },
   {
@@ -816,7 +817,7 @@ const users = [
     updatedAt: currentDate,
     id: 103,
     namaPengguna: "198410062010012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kristina, Se.",
   },
   {
@@ -824,7 +825,7 @@ const users = [
     updatedAt: currentDate,
     id: 104,
     namaPengguna: "198201132010011016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Taufik Dhana Wiratna, S.K.M.",
   },
   {
@@ -832,7 +833,7 @@ const users = [
     updatedAt: currentDate,
     id: 105,
     namaPengguna: "198307142010011028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suripto, A.Md.Ak.",
   },
   {
@@ -840,7 +841,7 @@ const users = [
     updatedAt: currentDate,
     id: 106,
     namaPengguna: "198705142011012006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Mutmainnah, A.Md.Kep",
   },
   {
@@ -848,7 +849,7 @@ const users = [
     updatedAt: currentDate,
     id: 107,
     namaPengguna: "198512232010011010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Asbudian Nur Adi Setiawan, A.Md",
   },
   {
@@ -856,7 +857,7 @@ const users = [
     updatedAt: currentDate,
     id: 108,
     namaPengguna: "197803182010011020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hermawan, A.Md.Kep",
   },
   {
@@ -864,7 +865,7 @@ const users = [
     updatedAt: currentDate,
     id: 109,
     namaPengguna: "197704112007012019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlina",
   },
   {
@@ -872,7 +873,7 @@ const users = [
     updatedAt: currentDate,
     id: 110,
     namaPengguna: "198905302019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra Permana, A.Md.",
   },
   {
@@ -880,7 +881,7 @@ const users = [
     updatedAt: currentDate,
     id: 111,
     namaPengguna: "199405012025212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Rizka Meyliana, Amd. Ak",
   },
   {
@@ -888,7 +889,7 @@ const users = [
     updatedAt: currentDate,
     id: 112,
     namaPengguna: "199305242025212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Neri Yanti Noviani, A.Md.Kes",
   },
   {
@@ -896,7 +897,7 @@ const users = [
     updatedAt: currentDate,
     id: 113,
     namaPengguna: "199212022025211015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dimas Apriansyah",
   },
   {
@@ -904,7 +905,7 @@ const users = [
     updatedAt: currentDate,
     id: 114,
     namaPengguna: "199701162025211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Taufiq",
   },
   {
@@ -912,7 +913,7 @@ const users = [
     updatedAt: currentDate,
     id: 115,
     namaPengguna: "199505202024212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Rizqi Amaliah, S.Tr.Ak",
   },
   {
@@ -920,7 +921,7 @@ const users = [
     updatedAt: currentDate,
     id: 116,
     namaPengguna: "198808302025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sartika Ibrahim, S.Si",
   },
   {
@@ -928,7 +929,7 @@ const users = [
     updatedAt: currentDate,
     id: 117,
     namaPengguna: "6401042901010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Ihza Al Mu'taman, S.Pd",
   },
   {
@@ -936,7 +937,7 @@ const users = [
     updatedAt: currentDate,
     id: 118,
     namaPengguna: "6401040808000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Akhmad Rida'an, S.Tr.Kes",
   },
   {
@@ -944,7 +945,7 @@ const users = [
     updatedAt: currentDate,
     id: 119,
     namaPengguna: "6401047112000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amilia Uswatun Hasanah",
   },
   {
@@ -952,7 +953,7 @@ const users = [
     updatedAt: currentDate,
     id: 120,
     namaPengguna: "6402021202930000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bagus Febrian Pratama, Amte",
   },
   {
@@ -960,7 +961,7 @@ const users = [
     updatedAt: currentDate,
     id: 121,
     namaPengguna: "6401041905010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Candra Aditya Ahdanur Putra, S.Si",
   },
   {
@@ -968,7 +969,7 @@ const users = [
     updatedAt: currentDate,
     id: 122,
     namaPengguna: "199706062025211042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Deden Ismail Sadikin",
   },
   {
@@ -976,7 +977,7 @@ const users = [
     updatedAt: currentDate,
     id: 123,
     namaPengguna: "6401044304000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Nur Anisawati, S. Si",
   },
   {
@@ -984,7 +985,7 @@ const users = [
     updatedAt: currentDate,
     id: 124,
     namaPengguna: "6401041708980000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gusti A. Agus Sidiekh Perdana, S.Kom",
   },
   {
@@ -992,7 +993,7 @@ const users = [
     updatedAt: currentDate,
     id: 125,
     namaPengguna: "199309222025211038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasbi, Skm",
   },
   {
@@ -1000,7 +1001,7 @@ const users = [
     updatedAt: currentDate,
     id: 126,
     namaPengguna: "6401040103890000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hudarul Akbar, S.T.",
   },
   {
@@ -1008,7 +1009,7 @@ const users = [
     updatedAt: currentDate,
     id: 127,
     namaPengguna: "197307202025211029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Rushan",
   },
   {
@@ -1016,7 +1017,7 @@ const users = [
     updatedAt: currentDate,
     id: 128,
     namaPengguna: "6401045112990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maisyarah, S.Tr.Kes",
   },
   {
@@ -1024,7 +1025,7 @@ const users = [
     updatedAt: currentDate,
     id: 129,
     namaPengguna: "197306172025211035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mohd.Sabran",
   },
   {
@@ -1032,7 +1033,7 @@ const users = [
     updatedAt: currentDate,
     id: 130,
     namaPengguna: "6372060505960000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Afrizal Tegar Nurhuda, S.Si",
   },
   {
@@ -1040,7 +1041,7 @@ const users = [
     updatedAt: currentDate,
     id: 131,
     namaPengguna: "6401042912040000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Deryanto Saputra",
   },
   {
@@ -1048,7 +1049,7 @@ const users = [
     updatedAt: currentDate,
     id: 132,
     namaPengguna: "6401046612830000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nani Karlina, S.Si",
   },
   {
@@ -1056,7 +1057,7 @@ const users = [
     updatedAt: currentDate,
     id: 133,
     namaPengguna: "6401045207010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Normilawati, A.Md.Ak",
   },
   {
@@ -1064,7 +1065,7 @@ const users = [
     updatedAt: currentDate,
     id: 134,
     namaPengguna: "6401045504030000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Fadhilah, A.Md.Kes",
   },
   {
@@ -1072,7 +1073,7 @@ const users = [
     updatedAt: currentDate,
     id: 135,
     namaPengguna: "7312015302990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurlia.S.Si",
   },
   {
@@ -1080,7 +1081,7 @@ const users = [
     updatedAt: currentDate,
     id: 136,
     namaPengguna: "6401047004000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Hidayah, A.Md.Rmik",
   },
   {
@@ -1088,7 +1089,7 @@ const users = [
     updatedAt: currentDate,
     id: 137,
     namaPengguna: "6401044904990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Indah Lestari Im, S.S",
   },
   {
@@ -1096,7 +1097,7 @@ const users = [
     updatedAt: currentDate,
     id: 138,
     namaPengguna: "6401045502020000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rika Rahmah, S.Tr.Kes",
   },
   {
@@ -1104,7 +1105,7 @@ const users = [
     updatedAt: currentDate,
     id: 139,
     namaPengguna: "6401041907990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riyan Rizky Pratu Wijaya, Skm",
   },
   {
@@ -1112,7 +1113,7 @@ const users = [
     updatedAt: currentDate,
     id: 140,
     namaPengguna: "199507192025212058",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizka Wulandari, Amd. Anakes",
   },
   {
@@ -1120,7 +1121,7 @@ const users = [
     updatedAt: currentDate,
     id: 141,
     namaPengguna: "6401045109010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rosidah, A.Md.Ak",
   },
   {
@@ -1128,7 +1129,7 @@ const users = [
     updatedAt: currentDate,
     id: 142,
     namaPengguna: "6409022809990000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Satrio Maihendra Putra S.Tr.Tem",
   },
   {
@@ -1136,7 +1137,7 @@ const users = [
     updatedAt: currentDate,
     id: 143,
     namaPengguna: "3314117008830000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sawiji Purwanti, Spd",
   },
   {
@@ -1144,7 +1145,7 @@ const users = [
     updatedAt: currentDate,
     id: 144,
     namaPengguna: "3302176302000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syifa Nurandini, S.I.Kom",
   },
   {
@@ -1152,7 +1153,7 @@ const users = [
     updatedAt: currentDate,
     id: 145,
     namaPengguna: "6401046502920000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Trie Lidya Ningrum , Se",
   },
   {
@@ -1160,7 +1161,7 @@ const users = [
     updatedAt: currentDate,
     id: 146,
     namaPengguna: "197807032005022006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yayillatul Rochmah, S.Si, Apt",
   },
   {
@@ -1168,7 +1169,7 @@ const users = [
     updatedAt: currentDate,
     id: 147,
     namaPengguna: "198008302002122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina Rahmawati, S.A.P.",
   },
   {
@@ -1176,7 +1177,7 @@ const users = [
     updatedAt: currentDate,
     id: 148,
     namaPengguna: "197307232002122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Indah Sari, S.Sos",
   },
   {
@@ -1184,7 +1185,7 @@ const users = [
     updatedAt: currentDate,
     id: 149,
     namaPengguna: "198207172009032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmiyah, A.Md.Far",
   },
   {
@@ -1192,7 +1193,7 @@ const users = [
     updatedAt: currentDate,
     id: 150,
     namaPengguna: "198711162010011007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Nasaruddin, Amf",
   },
   {
@@ -1200,7 +1201,7 @@ const users = [
     updatedAt: currentDate,
     id: 151,
     namaPengguna: "196902221991022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Minarni Cahyani",
   },
   {
@@ -1208,7 +1209,7 @@ const users = [
     updatedAt: currentDate,
     id: 152,
     namaPengguna: "197104261993032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Menuk Mulyati",
   },
   {
@@ -1216,7 +1217,7 @@ const users = [
     updatedAt: currentDate,
     id: 153,
     namaPengguna: "198612262009031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Farhan Noor, A.Md.Kep",
   },
   {
@@ -1224,7 +1225,7 @@ const users = [
     updatedAt: currentDate,
     id: 154,
     namaPengguna: "197609132007011010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Zainudin",
   },
   {
@@ -1232,7 +1233,7 @@ const users = [
     updatedAt: currentDate,
     id: 155,
     namaPengguna: "197802052007012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Hayani, Se",
   },
   {
@@ -1240,7 +1241,7 @@ const users = [
     updatedAt: currentDate,
     id: 156,
     namaPengguna: "199008302019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anditha Risamigina, A.Md. Farm.",
   },
   {
@@ -1248,7 +1249,7 @@ const users = [
     updatedAt: currentDate,
     id: 157,
     namaPengguna: "199603302019032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulida Rahmi, A.Md. Farm.",
   },
   {
@@ -1256,7 +1257,7 @@ const users = [
     updatedAt: currentDate,
     id: 158,
     namaPengguna: "199406122024212047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Tiara Laksmitha Purwandini, S.Farm",
   },
   {
@@ -1264,7 +1265,7 @@ const users = [
     updatedAt: currentDate,
     id: 159,
     namaPengguna: "199507042025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Sari Astuti, S.Farm., Apt.",
   },
   {
@@ -1272,7 +1273,7 @@ const users = [
     updatedAt: currentDate,
     id: 160,
     namaPengguna: "198203202024212008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Evi Hadiah, A.Md.Farm",
   },
   {
@@ -1280,7 +1281,7 @@ const users = [
     updatedAt: currentDate,
     id: 161,
     namaPengguna: "199510012025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nasran",
   },
   {
@@ -1288,7 +1289,7 @@ const users = [
     updatedAt: currentDate,
     id: 162,
     namaPengguna: "199006092025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Isna Silviana, S.P.",
   },
   {
@@ -1296,7 +1297,7 @@ const users = [
     updatedAt: currentDate,
     id: 163,
     namaPengguna: "199411212025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurlita Adillah, S,Farm",
   },
   {
@@ -1304,7 +1305,7 @@ const users = [
     updatedAt: currentDate,
     id: 164,
     namaPengguna: "200003052025211023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdullah Syafi'i",
   },
   {
@@ -1312,7 +1313,7 @@ const users = [
     updatedAt: currentDate,
     id: 165,
     namaPengguna: "6401042410040005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fahrial Dede Ramdani",
   },
   {
@@ -1320,7 +1321,7 @@ const users = [
     updatedAt: currentDate,
     id: 166,
     namaPengguna: "6401042505010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Farras Rafi'i Khoirullah, S.Pd",
   },
   {
@@ -1328,7 +1329,7 @@ const users = [
     updatedAt: currentDate,
     id: 167,
     namaPengguna: "6401042809970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Imam Ahmad Fahrurazi, B.Eng, M.Eng",
   },
   {
@@ -1336,7 +1337,7 @@ const users = [
     updatedAt: currentDate,
     id: 168,
     namaPengguna: "6401030812790001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muchranysah",
   },
   {
@@ -1344,7 +1345,7 @@ const users = [
     updatedAt: currentDate,
     id: 169,
     namaPengguna: "199303302025211036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Fajar Subekti, Se",
   },
   {
@@ -1352,7 +1353,7 @@ const users = [
     updatedAt: currentDate,
     id: 170,
     namaPengguna: "6401041405960004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Rayan Suryadeni, S.I.P",
   },
   {
@@ -1360,7 +1361,7 @@ const users = [
     updatedAt: currentDate,
     id: 171,
     namaPengguna: "6401032007930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahyudi",
   },
   {
@@ -1368,7 +1369,7 @@ const users = [
     updatedAt: currentDate,
     id: 172,
     namaPengguna: "197605122006042017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Mahira",
   },
   {
@@ -1376,7 +1377,7 @@ const users = [
     updatedAt: currentDate,
     id: 173,
     namaPengguna: "198005012010012021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kusrini, S.Far.Apt",
   },
   {
@@ -1384,7 +1385,7 @@ const users = [
     updatedAt: currentDate,
     id: 174,
     namaPengguna: "198401312014112001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Rini Savitri Wulandari",
   },
   {
@@ -1392,7 +1393,7 @@ const users = [
     updatedAt: currentDate,
     id: 175,
     namaPengguna: "196909021989122001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurhidayah, A.Md.Keb",
   },
   {
@@ -1400,7 +1401,7 @@ const users = [
     updatedAt: currentDate,
     id: 176,
     namaPengguna: "196908061991022003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rachmaningsih Soekrino, A.Md.Kep",
   },
   {
@@ -1408,7 +1409,7 @@ const users = [
     updatedAt: currentDate,
     id: 177,
     namaPengguna: "197006261991032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Euis Farida, A.Md.Keb",
   },
   {
@@ -1416,7 +1417,7 @@ const users = [
     updatedAt: currentDate,
     id: 178,
     namaPengguna: "197305191996032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Purwanti, A.Md.Kes.",
   },
   {
@@ -1424,7 +1425,7 @@ const users = [
     updatedAt: currentDate,
     id: 179,
     namaPengguna: "198408052014032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Dwi Ratnawati",
   },
   {
@@ -1432,7 +1433,7 @@ const users = [
     updatedAt: currentDate,
     id: 180,
     namaPengguna: "198006022005022004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Wulandari, A.Md.Keb",
   },
   {
@@ -1440,7 +1441,7 @@ const users = [
     updatedAt: currentDate,
     id: 181,
     namaPengguna: "198212252005022011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aspihani, A.Md.Kep, Skm",
   },
   {
@@ -1448,7 +1449,7 @@ const users = [
     updatedAt: currentDate,
     id: 182,
     namaPengguna: "198209202006042029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Julfah Nur Hikmah, A.Md.Keb",
   },
   {
@@ -1456,7 +1457,7 @@ const users = [
     updatedAt: currentDate,
     id: 183,
     namaPengguna: "198310082006042013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Octa Rinawaty, A.Md.Kep.",
   },
   {
@@ -1464,7 +1465,7 @@ const users = [
     updatedAt: currentDate,
     id: 184,
     namaPengguna: "198207112006042011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuli Hartanti, A.Md.Keb",
   },
   {
@@ -1472,7 +1473,7 @@ const users = [
     updatedAt: currentDate,
     id: 185,
     namaPengguna: "197901222006042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Surianti, Skm",
   },
   {
@@ -1480,7 +1481,7 @@ const users = [
     updatedAt: currentDate,
     id: 186,
     namaPengguna: "198410272009032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Seruni Manggarani, A.Md",
   },
   {
@@ -1488,7 +1489,7 @@ const users = [
     updatedAt: currentDate,
     id: 187,
     namaPengguna: "198612292009032007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Azdaniah, S.Tr.Kep",
   },
   {
@@ -1496,7 +1497,7 @@ const users = [
     updatedAt: currentDate,
     id: 188,
     namaPengguna: "197410102002122012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adawiyah, A.Md.Keb",
   },
   {
@@ -1504,7 +1505,7 @@ const users = [
     updatedAt: currentDate,
     id: 189,
     namaPengguna: "197708122003122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rachel Dua Lembang, A.Md.Keb",
   },
   {
@@ -1512,7 +1513,7 @@ const users = [
     updatedAt: currentDate,
     id: 190,
     namaPengguna: "198601192008042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ina Anria Jayanti, A.Md.Keb.",
   },
   {
@@ -1520,7 +1521,7 @@ const users = [
     updatedAt: currentDate,
     id: 191,
     namaPengguna: "197406012003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Rinelda Bandhaso, S.Tr.Keb.",
   },
   {
@@ -1528,7 +1529,7 @@ const users = [
     updatedAt: currentDate,
     id: 192,
     namaPengguna: "198611152010011009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hendra Lesmana Prawiranegara, A.Md.Kep",
   },
   {
@@ -1536,7 +1537,7 @@ const users = [
     updatedAt: currentDate,
     id: 193,
     namaPengguna: "198610292010012012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amelia Safitri, A.Md.Kep.",
   },
   {
@@ -1544,7 +1545,7 @@ const users = [
     updatedAt: currentDate,
     id: 194,
     namaPengguna: "198312292011012002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlida Nurul M, A.Md.Kl",
   },
   {
@@ -1552,7 +1553,7 @@ const users = [
     updatedAt: currentDate,
     id: 195,
     namaPengguna: "198401172011012003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Erlinawaty, A.Md.Far",
   },
   {
@@ -1560,7 +1561,7 @@ const users = [
     updatedAt: currentDate,
     id: 196,
     namaPengguna: "198703042010012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Laila, A.Md. Keb.",
   },
   {
@@ -1568,7 +1569,7 @@ const users = [
     updatedAt: currentDate,
     id: 197,
     namaPengguna: "198805252010012013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Handayani, A.Md.Keb",
   },
   {
@@ -1576,7 +1577,7 @@ const users = [
     updatedAt: currentDate,
     id: 198,
     namaPengguna: "197706122006042026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Sri Dharmayanti, , S.Tr.Keb.",
   },
   {
@@ -1584,7 +1585,7 @@ const users = [
     updatedAt: currentDate,
     id: 199,
     namaPengguna: "198701072008042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Nidi Elis Safitri, S.S.T.",
   },
   {
@@ -1592,7 +1593,7 @@ const users = [
     updatedAt: currentDate,
     id: 200,
     namaPengguna: "198702202010012021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Hanisah, A.Md.Keb.",
   },
   {
@@ -1600,7 +1601,7 @@ const users = [
     updatedAt: currentDate,
     id: 201,
     namaPengguna: "199011222022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nurul Hawiyyah",
   },
   {
@@ -1608,7 +1609,7 @@ const users = [
     updatedAt: currentDate,
     id: 202,
     namaPengguna: "199410212019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adelisa Marlinda Saputri, S.Ftr.",
   },
   {
@@ -1616,7 +1617,7 @@ const users = [
     updatedAt: currentDate,
     id: 203,
     namaPengguna: "199206102014031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gt. Muhammad Azlansyah, S.Tr.Kes",
   },
   {
@@ -1624,7 +1625,7 @@ const users = [
     updatedAt: currentDate,
     id: 204,
     namaPengguna: "198905082014032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Isnaniah, A.Md.Kl",
   },
   {
@@ -1632,7 +1633,7 @@ const users = [
     updatedAt: currentDate,
     id: 205,
     namaPengguna: "198807182014032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yana Yulianti, A.Md.Ak",
   },
   {
@@ -1640,7 +1641,7 @@ const users = [
     updatedAt: currentDate,
     id: 206,
     namaPengguna: "199009142019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nutia  Cahayani, A.Md. Keb.",
   },
   {
@@ -1648,7 +1649,7 @@ const users = [
     updatedAt: currentDate,
     id: 207,
     namaPengguna: "199210212019032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tari Kemuning Sari, A.Md.Kep.",
   },
   {
@@ -1656,7 +1657,7 @@ const users = [
     updatedAt: currentDate,
     id: 208,
     namaPengguna: "199407132019032026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anita Yulia Rachman, A.Md. Farm.",
   },
   {
@@ -1664,7 +1665,7 @@ const users = [
     updatedAt: currentDate,
     id: 209,
     namaPengguna: "199005192019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Mei Firmawati, A.Md.",
   },
   {
@@ -1672,7 +1673,7 @@ const users = [
     updatedAt: currentDate,
     id: 210,
     namaPengguna: "199010092019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Adli Rosadi, A.Md.Ak.",
   },
   {
@@ -1680,7 +1681,7 @@ const users = [
     updatedAt: currentDate,
     id: 211,
     namaPengguna: "199104062020122020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erni Ramadhaniati, A.Md.Kep",
   },
   {
@@ -1688,7 +1689,7 @@ const users = [
     updatedAt: currentDate,
     id: 212,
     namaPengguna: "199204232022032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Khusnul Khatimah, A.Md.Kep",
   },
   {
@@ -1696,7 +1697,7 @@ const users = [
     updatedAt: currentDate,
     id: 213,
     namaPengguna: "199509022022032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nikmatul Ulfah, A.Md.Keb",
   },
   {
@@ -1704,7 +1705,7 @@ const users = [
     updatedAt: currentDate,
     id: 214,
     namaPengguna: "199510112022032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elly Gunawiarsih, A.Md.Gz",
   },
   {
@@ -1712,7 +1713,7 @@ const users = [
     updatedAt: currentDate,
     id: 215,
     namaPengguna: "198305092024211007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rachmat Shaleh",
   },
   {
@@ -1720,7 +1721,7 @@ const users = [
     updatedAt: currentDate,
     id: 216,
     namaPengguna: "199401012025212047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Siti Norjannah, S.Kep",
   },
   {
@@ -1728,7 +1729,7 @@ const users = [
     updatedAt: currentDate,
     id: 217,
     namaPengguna: "199406242025211022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Ali Husni, S.Tr.Kep",
   },
   {
@@ -1736,7 +1737,7 @@ const users = [
     updatedAt: currentDate,
     id: 218,
     namaPengguna: "199103222023212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Shella Bunga Ramadhani",
   },
   {
@@ -1744,7 +1745,7 @@ const users = [
     updatedAt: currentDate,
     id: 219,
     namaPengguna: "198805312023212002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suhaida, A.Md. Kep",
   },
   {
@@ -1752,7 +1753,7 @@ const users = [
     updatedAt: currentDate,
     id: 220,
     namaPengguna: "198905232024212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Satriani, Amk",
   },
   {
@@ -1760,7 +1761,7 @@ const users = [
     updatedAt: currentDate,
     id: 221,
     namaPengguna: "198706092024212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmawati, A.Md.Keb",
   },
   {
@@ -1768,7 +1769,7 @@ const users = [
     updatedAt: currentDate,
     id: 222,
     namaPengguna: "199201232024212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitri Sri Wahyuni, A.Md.Keb",
   },
   {
@@ -1776,7 +1777,7 @@ const users = [
     updatedAt: currentDate,
     id: 223,
     namaPengguna: "199008282024212052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Nurainah, A.Md.Kep",
   },
   {
@@ -1784,7 +1785,7 @@ const users = [
     updatedAt: currentDate,
     id: 224,
     namaPengguna: "199202262024211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Rizki Rahmadani, A.Md.Kep",
   },
   {
@@ -1792,7 +1793,7 @@ const users = [
     updatedAt: currentDate,
     id: 225,
     namaPengguna: "199509282024211008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adi Nugroho Septianto, A.Md.Farm",
   },
   {
@@ -1800,7 +1801,7 @@ const users = [
     updatedAt: currentDate,
     id: 226,
     namaPengguna: "199503282024212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kristikurniawan, A.Md.Keb",
   },
   {
@@ -1808,7 +1809,7 @@ const users = [
     updatedAt: currentDate,
     id: 227,
     namaPengguna: "198902152025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Hadijah, A.Md.Keb",
   },
   {
@@ -1816,7 +1817,7 @@ const users = [
     updatedAt: currentDate,
     id: 228,
     namaPengguna: "199006242025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariam Sulpah, A.Md.Keb",
   },
   {
@@ -1824,7 +1825,7 @@ const users = [
     updatedAt: currentDate,
     id: 229,
     namaPengguna: "199007072025212035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Fauziah, A.Md.Keb",
   },
   {
@@ -1832,7 +1833,7 @@ const users = [
     updatedAt: currentDate,
     id: 230,
     namaPengguna: "199009032025212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariza Septriawaty, A.Md.Keb",
   },
   {
@@ -1840,7 +1841,7 @@ const users = [
     updatedAt: currentDate,
     id: 231,
     namaPengguna: "199309272025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suci Nurul Hidayani, A.Md.Keb",
   },
   {
@@ -1848,7 +1849,7 @@ const users = [
     updatedAt: currentDate,
     id: 232,
     namaPengguna: "199302242025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noer Renita Riany Rahmawati, A.Md.Keb",
   },
   {
@@ -1856,7 +1857,7 @@ const users = [
     updatedAt: currentDate,
     id: 233,
     namaPengguna: "199403232025212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariana Saputri, Amd.Keb",
   },
   {
@@ -1864,7 +1865,7 @@ const users = [
     updatedAt: currentDate,
     id: 234,
     namaPengguna: "199408082025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Ainah, A.Md.Keb",
   },
   {
@@ -1872,7 +1873,7 @@ const users = [
     updatedAt: currentDate,
     id: 235,
     namaPengguna: "197905112025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heny Hendrawati.B",
   },
   {
@@ -1880,7 +1881,7 @@ const users = [
     updatedAt: currentDate,
     id: 236,
     namaPengguna: "200008152025211003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Nabillah",
   },
   {
@@ -1888,7 +1889,7 @@ const users = [
     updatedAt: currentDate,
     id: 237,
     namaPengguna: "198305192024211004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hamdi, Skm",
   },
   {
@@ -1896,7 +1897,7 @@ const users = [
     updatedAt: currentDate,
     id: 238,
     namaPengguna: "199210312025212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amilda Purnama Sari, Skm",
   },
   {
@@ -1904,7 +1905,7 @@ const users = [
     updatedAt: currentDate,
     id: 239,
     namaPengguna: "198911052025211029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ikra, S.E",
   },
   {
@@ -1912,7 +1913,7 @@ const users = [
     updatedAt: currentDate,
     id: 240,
     namaPengguna: "6401034808010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erni Nur Hidayah, S.Tr.Rmik",
   },
   {
@@ -1920,7 +1921,7 @@ const users = [
     updatedAt: currentDate,
     id: 241,
     namaPengguna: "199012032025211037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hendri Budiyanto",
   },
   {
@@ -1928,7 +1929,7 @@ const users = [
     updatedAt: currentDate,
     id: 242,
     namaPengguna: "199909092025211041",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jodin",
   },
   {
@@ -1936,7 +1937,7 @@ const users = [
     updatedAt: currentDate,
     id: 243,
     namaPengguna: "6401042306020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mohammad Rizali Rahman",
   },
   {
@@ -1944,7 +1945,7 @@ const users = [
     updatedAt: currentDate,
     id: 244,
     namaPengguna: "6401066111980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nela Ikraami Muthmainnah, Skm",
   },
   {
@@ -1952,7 +1953,7 @@ const users = [
     updatedAt: currentDate,
     id: 245,
     namaPengguna: "199602232025211047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Rahmat Anshori S.E",
   },
   {
@@ -1960,7 +1961,7 @@ const users = [
     updatedAt: currentDate,
     id: 246,
     namaPengguna: "3275010904930025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ftr.Nurhadi, S.Ft",
   },
   {
@@ -1968,7 +1969,7 @@ const users = [
     updatedAt: currentDate,
     id: 247,
     namaPengguna: "6401045908940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Putri Diah Kusumawardani",
   },
   {
@@ -1976,7 +1977,7 @@ const users = [
     updatedAt: currentDate,
     id: 248,
     namaPengguna: "6401045505950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rabiatul Adawiyah,S.Tr.Gz",
   },
   {
@@ -1984,7 +1985,7 @@ const users = [
     updatedAt: currentDate,
     id: 249,
     namaPengguna: "6401035905930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Renyawati, A.Md.Keb",
   },
   {
@@ -1992,7 +1993,7 @@ const users = [
     updatedAt: currentDate,
     id: 250,
     namaPengguna: "6401040906880003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Riky Adi Putra S. Farm",
   },
   {
@@ -2000,7 +2001,7 @@ const users = [
     updatedAt: currentDate,
     id: 251,
     namaPengguna: "6401064601970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Soleha, S.Tr.Keb.,Bdn",
   },
   {
@@ -2008,7 +2009,7 @@ const users = [
     updatedAt: currentDate,
     id: 252,
     namaPengguna: "6401045009000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sonna Ayu Seftivani, S. Kes., Ftr",
   },
   {
@@ -2016,7 +2017,7 @@ const users = [
     updatedAt: currentDate,
     id: 253,
     namaPengguna: "6401044406990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Syifa Sabila Hananda",
   },
   {
@@ -2024,7 +2025,7 @@ const users = [
     updatedAt: currentDate,
     id: 254,
     namaPengguna: "6308105406940002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Yulianti",
   },
   {
@@ -2032,7 +2033,7 @@ const users = [
     updatedAt: currentDate,
     id: 255,
     namaPengguna: "198303152014112001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Riska Ulfah",
   },
   {
@@ -2040,7 +2041,7 @@ const users = [
     updatedAt: currentDate,
     id: 256,
     namaPengguna: "197703022003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Faulina Hartati, S.Tr.Kep.Ns.",
   },
   {
@@ -2048,7 +2049,7 @@ const users = [
     updatedAt: currentDate,
     id: 257,
     namaPengguna: "197912042006042009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurhaeba, A.Md.Keb",
   },
   {
@@ -2056,7 +2057,7 @@ const users = [
     updatedAt: currentDate,
     id: 258,
     namaPengguna: "198503042009032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rachmayana, S.Farm.Apt",
   },
   {
@@ -2064,7 +2065,7 @@ const users = [
     updatedAt: currentDate,
     id: 259,
     namaPengguna: "197903242006042021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hariani D, S.Tr.Kep.Ns.",
   },
   {
@@ -2072,7 +2073,7 @@ const users = [
     updatedAt: currentDate,
     id: 260,
     namaPengguna: "198304272006042011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Apridiana Rahmawati, , S.Tr.Keb.",
   },
   {
@@ -2080,7 +2081,7 @@ const users = [
     updatedAt: currentDate,
     id: 261,
     namaPengguna: "198609182008042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Riskawati, S.Tr.Keb",
   },
   {
@@ -2088,7 +2089,7 @@ const users = [
     updatedAt: currentDate,
     id: 262,
     namaPengguna: "197502222005012009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fatimah, S.Si.T",
   },
   {
@@ -2096,7 +2097,7 @@ const users = [
     updatedAt: currentDate,
     id: 263,
     namaPengguna: "198203082006042014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ina Prihatina Widiyasworo, A.Md.Keb",
   },
   {
@@ -2104,7 +2105,7 @@ const users = [
     updatedAt: currentDate,
     id: 264,
     namaPengguna: "198307302006042015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Rosnani, A.Md.Keb",
   },
   {
@@ -2112,7 +2113,7 @@ const users = [
     updatedAt: currentDate,
     id: 265,
     namaPengguna: "198508172008042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novi Amri Gusman, A.Md.Keb",
   },
   {
@@ -2120,7 +2121,7 @@ const users = [
     updatedAt: currentDate,
     id: 266,
     namaPengguna: "198307202005022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Bayu Fitria Maharani, S.Tr.Keb.",
   },
   {
@@ -2128,7 +2129,7 @@ const users = [
     updatedAt: currentDate,
     id: 267,
     namaPengguna: "198307072006042016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Salmawati, S.Tr.Keb.",
   },
   {
@@ -2136,7 +2137,7 @@ const users = [
     updatedAt: currentDate,
     id: 268,
     namaPengguna: "197405142002122008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nina Yuzak, A.Md.Keb.",
   },
   {
@@ -2144,7 +2145,7 @@ const users = [
     updatedAt: currentDate,
     id: 269,
     namaPengguna: "198802152009031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Aidi Rahman, S.Tr.Kep.",
   },
   {
@@ -2152,7 +2153,7 @@ const users = [
     updatedAt: currentDate,
     id: 270,
     namaPengguna: "198806102010012016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norida Hasanah, A.Md.Kep",
   },
   {
@@ -2160,7 +2161,7 @@ const users = [
     updatedAt: currentDate,
     id: 271,
     namaPengguna: "199606032019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Shientiya Nur Rosyidah, S. Farm",
   },
   {
@@ -2168,7 +2169,7 @@ const users = [
     updatedAt: currentDate,
     id: 272,
     namaPengguna: "198901142019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Renny Mardayati",
   },
   {
@@ -2176,7 +2177,7 @@ const users = [
     updatedAt: currentDate,
     id: 273,
     namaPengguna: "198807192010012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Erlyanti, S.Tr.Keb.",
   },
   {
@@ -2184,7 +2185,7 @@ const users = [
     updatedAt: currentDate,
     id: 274,
     namaPengguna: "198811012010012012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Besse Marwah, A.Md.Keb.",
   },
   {
@@ -2192,7 +2193,7 @@ const users = [
     updatedAt: currentDate,
     id: 275,
     namaPengguna: "198602012010012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marlena, A.Md.Keb",
   },
   {
@@ -2200,7 +2201,7 @@ const users = [
     updatedAt: currentDate,
     id: 276,
     namaPengguna: "198801162010012015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasvita Januarisna, S.Tr.Keb.",
   },
   {
@@ -2208,7 +2209,7 @@ const users = [
     updatedAt: currentDate,
     id: 277,
     namaPengguna: "198608082010012025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Halmiah, A.Md.Ak.",
   },
   {
@@ -2216,7 +2217,7 @@ const users = [
     updatedAt: currentDate,
     id: 278,
     namaPengguna: "197911192009032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ernawaty Damanik, A.Md.Keb,Skm",
   },
   {
@@ -2224,7 +2225,7 @@ const users = [
     updatedAt: currentDate,
     id: 279,
     namaPengguna: "197906172006042013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Patimah, A.Md.Keb",
   },
   {
@@ -2232,7 +2233,7 @@ const users = [
     updatedAt: currentDate,
     id: 280,
     namaPengguna: "198007282005022005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suratmini, A.Md.Keb.",
   },
   {
@@ -2240,7 +2241,7 @@ const users = [
     updatedAt: currentDate,
     id: 281,
     namaPengguna: "197805122006041033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asriadi, Ns., S.Kep",
   },
   {
@@ -2248,7 +2249,7 @@ const users = [
     updatedAt: currentDate,
     id: 282,
     namaPengguna: "197710252005021004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdul Malik, A.Md.Kep",
   },
   {
@@ -2256,7 +2257,7 @@ const users = [
     updatedAt: currentDate,
     id: 283,
     namaPengguna: "198807052011012008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elita Fajar Rini, A.Md.Kes",
   },
   {
@@ -2264,7 +2265,7 @@ const users = [
     updatedAt: currentDate,
     id: 284,
     namaPengguna: "199604162019032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erliza Rahmina, A.Md. Farm.",
   },
   {
@@ -2272,7 +2273,7 @@ const users = [
     updatedAt: currentDate,
     id: 285,
     namaPengguna: "199709062019032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sylvania Heni Puspa Lestari, A.Md.Rmik",
   },
   {
@@ -2280,7 +2281,7 @@ const users = [
     updatedAt: currentDate,
     id: 286,
     namaPengguna: "198606252019031010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Budiyono, A.Md.Kep.",
   },
   {
@@ -2288,7 +2289,7 @@ const users = [
     updatedAt: currentDate,
     id: 287,
     namaPengguna: "199110122019032023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ratih Noer Eliza, A.Md. Keb.",
   },
   {
@@ -2296,7 +2297,7 @@ const users = [
     updatedAt: currentDate,
     id: 288,
     namaPengguna: "199407172019032024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miftakhul Khasanah, A.Md.Kl.",
   },
   {
@@ -2304,7 +2305,7 @@ const users = [
     updatedAt: currentDate,
     id: 289,
     namaPengguna: "199605252019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mei Dedy Purwanto, A.Md.Gz",
   },
   {
@@ -2312,7 +2313,7 @@ const users = [
     updatedAt: currentDate,
     id: 290,
     namaPengguna: "199304122019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahmi Pratiwi, A.Md.Kg.",
   },
   {
@@ -2320,7 +2321,7 @@ const users = [
     updatedAt: currentDate,
     id: 291,
     namaPengguna: "197711052010011015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariyansyah",
   },
   {
@@ -2328,7 +2329,7 @@ const users = [
     updatedAt: currentDate,
     id: 292,
     namaPengguna: "198609112025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fausiah Usman, S.Farm ,Apt.",
   },
   {
@@ -2336,7 +2337,7 @@ const users = [
     updatedAt: currentDate,
     id: 293,
     namaPengguna: "199403082024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Ratna Sari, A.Md.Kep",
   },
   {
@@ -2344,7 +2345,7 @@ const users = [
     updatedAt: currentDate,
     id: 294,
     namaPengguna: "198910152024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elly Hidayati, Amd. Keb",
   },
   {
@@ -2352,7 +2353,7 @@ const users = [
     updatedAt: currentDate,
     id: 295,
     namaPengguna: "199002092024212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Mastuti, A.Md.Kep",
   },
   {
@@ -2360,7 +2361,7 @@ const users = [
     updatedAt: currentDate,
     id: 296,
     namaPengguna: "199007222024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Yamin Syam, A.Md.Kep",
   },
   {
@@ -2368,7 +2369,7 @@ const users = [
     updatedAt: currentDate,
     id: 297,
     namaPengguna: "199208292024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miftahur Rahmah, Amd.Keb",
   },
   {
@@ -2376,7 +2377,7 @@ const users = [
     updatedAt: currentDate,
     id: 298,
     namaPengguna: "199202042024212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riska Ramdaniyah, A.Md.Far",
   },
   {
@@ -2384,7 +2385,7 @@ const users = [
     updatedAt: currentDate,
     id: 299,
     namaPengguna: "199510152024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fenny Rahman, A.Md. Keb",
   },
   {
@@ -2392,7 +2393,7 @@ const users = [
     updatedAt: currentDate,
     id: 300,
     namaPengguna: "199510042024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nora Silvia, A.Md.Kep",
   },
   {
@@ -2400,7 +2401,7 @@ const users = [
     updatedAt: currentDate,
     id: 301,
     namaPengguna: "199603262024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nuraisyah, A.Md.Keb",
   },
   {
@@ -2408,7 +2409,7 @@ const users = [
     updatedAt: currentDate,
     id: 302,
     namaPengguna: "198904252025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apriyanti Ningrum, A.Md.Keb",
   },
   {
@@ -2416,7 +2417,7 @@ const users = [
     updatedAt: currentDate,
     id: 303,
     namaPengguna: "199101162025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmaul Husnah, A.Md Keb",
   },
   {
@@ -2424,7 +2425,7 @@ const users = [
     updatedAt: currentDate,
     id: 304,
     namaPengguna: "198904042025212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sweetty Anggraini S, A.Md.Keb",
   },
   {
@@ -2432,7 +2433,7 @@ const users = [
     updatedAt: currentDate,
     id: 305,
     namaPengguna: "198911012025212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hedi Ihdini, A.Md.Keb",
   },
   {
@@ -2440,7 +2441,7 @@ const users = [
     updatedAt: currentDate,
     id: 306,
     namaPengguna: "199004052025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tika Anggraini, A.Md.Keb",
   },
   {
@@ -2448,7 +2449,7 @@ const users = [
     updatedAt: currentDate,
     id: 307,
     namaPengguna: "199205112025212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Mahbubah, A.Md. Kep",
   },
   {
@@ -2456,7 +2457,7 @@ const users = [
     updatedAt: currentDate,
     id: 308,
     namaPengguna: "199108292025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Istiqomah, A.Md.Kep",
   },
   {
@@ -2464,7 +2465,7 @@ const users = [
     updatedAt: currentDate,
     id: 309,
     namaPengguna: "199207312025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rara Putri Manti, A.Md.Keb",
   },
   {
@@ -2472,7 +2473,7 @@ const users = [
     updatedAt: currentDate,
     id: 310,
     namaPengguna: "199405162025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Hanimah, A.Md.Kep",
   },
   {
@@ -2480,7 +2481,7 @@ const users = [
     updatedAt: currentDate,
     id: 311,
     namaPengguna: "199411302025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rani Chairunnisa, Amd.Keb",
   },
   {
@@ -2488,7 +2489,7 @@ const users = [
     updatedAt: currentDate,
     id: 312,
     namaPengguna: "199508192025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sitti Hajar, A,Md. Kep",
   },
   {
@@ -2496,7 +2497,7 @@ const users = [
     updatedAt: currentDate,
     id: 313,
     namaPengguna: "199701312023212003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dina Afdalia, S.Tr.A.K",
   },
   {
@@ -2504,7 +2505,7 @@ const users = [
     updatedAt: currentDate,
     id: 314,
     namaPengguna: "198807032025212006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Isnaniah, Skm",
   },
   {
@@ -2512,7 +2513,7 @@ const users = [
     updatedAt: currentDate,
     id: 315,
     namaPengguna: "198912252025211017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhamad Patrayansyah, S.E",
   },
   {
@@ -2520,7 +2521,7 @@ const users = [
     updatedAt: currentDate,
     id: 316,
     namaPengguna: "198708042025212047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina Elyana, S.K.M",
   },
   {
@@ -2528,7 +2529,7 @@ const users = [
     updatedAt: currentDate,
     id: 317,
     namaPengguna: "6401081312900003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bahrani",
   },
   {
@@ -2536,7 +2537,7 @@ const users = [
     updatedAt: currentDate,
     id: 318,
     namaPengguna: "6401046904970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Dewi Rahayu",
   },
   {
@@ -2544,7 +2545,7 @@ const users = [
     updatedAt: currentDate,
     id: 319,
     namaPengguna: "6401045411020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dhiya Aufa Nabila",
   },
   {
@@ -2552,7 +2553,7 @@ const users = [
     updatedAt: currentDate,
     id: 320,
     namaPengguna: "6401045309000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Diva Havilah Alzena, A.Md.Keb",
   },
   {
@@ -2560,7 +2561,7 @@ const users = [
     updatedAt: currentDate,
     id: 321,
     namaPengguna: "6401045405970004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Halisna Wati, A.Md.Kep",
   },
   {
@@ -2568,7 +2569,7 @@ const users = [
     updatedAt: currentDate,
     id: 322,
     namaPengguna: "3518115601860004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Noermayanti, A,Md.Keb",
   },
   {
@@ -2576,7 +2577,7 @@ const users = [
     updatedAt: currentDate,
     id: 323,
     namaPengguna: "6401031009020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra",
   },
   {
@@ -2584,7 +2585,7 @@ const users = [
     updatedAt: currentDate,
     id: 324,
     namaPengguna: "199006152025211067",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jahrani A.Md.Kep",
   },
   {
@@ -2592,7 +2593,7 @@ const users = [
     updatedAt: currentDate,
     id: 325,
     namaPengguna: "6401044510880003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Leni Indrawati, A.Md.Tg",
   },
   {
@@ -2600,7 +2601,7 @@ const users = [
     updatedAt: currentDate,
     id: 326,
     namaPengguna: "6401046112900002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lia Pakkung, A.Md.Keb",
   },
   {
@@ -2608,7 +2609,7 @@ const users = [
     updatedAt: currentDate,
     id: 327,
     namaPengguna: "6401042809030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Nur Alfi Alfajar Septiyadi",
   },
   {
@@ -2616,7 +2617,7 @@ const users = [
     updatedAt: currentDate,
     id: 328,
     namaPengguna: "6401064707980000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Marselina Ayu Hege, S.K.M",
   },
   {
@@ -2624,7 +2625,7 @@ const users = [
     updatedAt: currentDate,
     id: 329,
     namaPengguna: "6472056410900005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns.Maulidah Afdaliyah.,S.Kep",
   },
   {
@@ -2632,7 +2633,7 @@ const users = [
     updatedAt: currentDate,
     id: 330,
     namaPengguna: "6401041312960007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Muhammad Deni Rahman",
   },
   {
@@ -2640,7 +2641,7 @@ const users = [
     updatedAt: currentDate,
     id: 331,
     namaPengguna: "199802032025211035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Fauzan Alwi, Se",
   },
   {
@@ -2648,7 +2649,7 @@ const users = [
     updatedAt: currentDate,
     id: 332,
     namaPengguna: "6401045802010004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Musdalifah",
   },
   {
@@ -2656,7 +2657,7 @@ const users = [
     updatedAt: currentDate,
     id: 333,
     namaPengguna: "6401044407050003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mutiara Arsyah ",
   },
   {
@@ -2664,7 +2665,7 @@ const users = [
     updatedAt: currentDate,
     id: 334,
     namaPengguna: "6401074808050001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aisyah",
   },
   {
@@ -2672,7 +2673,7 @@ const users = [
     updatedAt: currentDate,
     id: 335,
     namaPengguna: "6401045809880004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Baya, A.Md.Keb",
   },
   {
@@ -2680,7 +2681,7 @@ const users = [
     updatedAt: currentDate,
     id: 336,
     namaPengguna: "6402147009960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Padila, A. Md. Keb",
   },
   {
@@ -2688,7 +2689,7 @@ const users = [
     updatedAt: currentDate,
     id: 337,
     namaPengguna: "6401046804000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Raissa Kamelia, S.Tr.Gz",
   },
   {
@@ -2696,7 +2697,7 @@ const users = [
     updatedAt: currentDate,
     id: 338,
     namaPengguna: "6401044306020003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Salsabilah Ardini Lutfianidah, S.Tr.Gz",
   },
   {
@@ -2704,7 +2705,7 @@ const users = [
     updatedAt: currentDate,
     id: 339,
     namaPengguna: "6401046301030002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Shofiyah Darma Sholihah",
   },
   {
@@ -2712,7 +2713,7 @@ const users = [
     updatedAt: currentDate,
     id: 340,
     namaPengguna: "6401044106970004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Bintang Regita, A.Md.Kep",
   },
   {
@@ -2720,7 +2721,7 @@ const users = [
     updatedAt: currentDate,
     id: 341,
     namaPengguna: "6401066111000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tamy Nofitri, A.Md.Keb",
   },
   {
@@ -2728,7 +2729,7 @@ const users = [
     updatedAt: currentDate,
     id: 342,
     namaPengguna: "6401055405950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tia Kurnia Sari, A.Md.Ft",
   },
   {
@@ -2736,7 +2737,7 @@ const users = [
     updatedAt: currentDate,
     id: 343,
     namaPengguna: "6304155206960000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Vetinia Tri Setiya Ningrum",
   },
   {
@@ -2744,7 +2745,7 @@ const users = [
     updatedAt: currentDate,
     id: 344,
     namaPengguna: "5202086807000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulia Hidayani,A.Md.Kes",
   },
   {
@@ -2752,7 +2753,7 @@ const users = [
     updatedAt: currentDate,
     id: 345,
     namaPengguna: "197802272006042023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nely Verawati",
   },
   {
@@ -2760,7 +2761,7 @@ const users = [
     updatedAt: currentDate,
     id: 346,
     namaPengguna: "196801041989022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Puji Astuti",
   },
   {
@@ -2768,7 +2769,7 @@ const users = [
     updatedAt: currentDate,
     id: 347,
     namaPengguna: "196806121995032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mursidah, A.Md.Kep",
   },
   {
@@ -2776,7 +2777,7 @@ const users = [
     updatedAt: currentDate,
     id: 348,
     namaPengguna: "198101222014032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Anugerahwati Azis",
   },
   {
@@ -2784,7 +2785,7 @@ const users = [
     updatedAt: currentDate,
     id: 349,
     namaPengguna: "197712302005021006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supriyanto, A.Md.Kep",
   },
   {
@@ -2792,7 +2793,7 @@ const users = [
     updatedAt: currentDate,
     id: 350,
     namaPengguna: "197811152005022003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rasmi Bolong, S.St",
   },
   {
@@ -2800,7 +2801,7 @@ const users = [
     updatedAt: currentDate,
     id: 351,
     namaPengguna: "198503122009032017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ismarwanti, A.Md",
   },
   {
@@ -2808,7 +2809,7 @@ const users = [
     updatedAt: currentDate,
     id: 352,
     namaPengguna: "198108202005021004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Akhmad Riduan, S.Tr.Kes",
   },
   {
@@ -2816,7 +2817,7 @@ const users = [
     updatedAt: currentDate,
     id: 353,
     namaPengguna: "198404252006042010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Dewi Kasanah, S.St",
   },
   {
@@ -2824,7 +2825,7 @@ const users = [
     updatedAt: currentDate,
     id: 354,
     namaPengguna: "197108151996031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agus Supianda",
   },
   {
@@ -2832,7 +2833,7 @@ const users = [
     updatedAt: currentDate,
     id: 355,
     namaPengguna: "197407282002122005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuli Rusdianingsih, A.Md.Keb",
   },
   {
@@ -2840,7 +2841,7 @@ const users = [
     updatedAt: currentDate,
     id: 356,
     namaPengguna: "199103182019032018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Dewi Ayu Puspitasari",
   },
   {
@@ -2848,7 +2849,7 @@ const users = [
     updatedAt: currentDate,
     id: 357,
     namaPengguna: "198907162011012005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarwanti, Amg",
   },
   {
@@ -2856,7 +2857,7 @@ const users = [
     updatedAt: currentDate,
     id: 358,
     namaPengguna: "199202292019032019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Laila Musdayanti, S. Farm., Apt.",
   },
   {
@@ -2864,7 +2865,7 @@ const users = [
     updatedAt: currentDate,
     id: 359,
     namaPengguna: "199105242019031010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Taufik  Eko Prabowo",
   },
   {
@@ -2872,7 +2873,7 @@ const users = [
     updatedAt: currentDate,
     id: 360,
     namaPengguna: "196903041994032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Netty Rawati Saragih, A.Md.Gz",
   },
   {
@@ -2880,7 +2881,7 @@ const users = [
     updatedAt: currentDate,
     id: 361,
     namaPengguna: "199308252022031013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Fahmi Azhari Saharuddin",
   },
   {
@@ -2888,7 +2889,7 @@ const users = [
     updatedAt: currentDate,
     id: 362,
     namaPengguna: "197407062007011021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heron Anwar",
   },
   {
@@ -2896,7 +2897,7 @@ const users = [
     updatedAt: currentDate,
     id: 363,
     namaPengguna: "199001062017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisca Winny Susriani, A.Md.Keb",
   },
   {
@@ -2904,7 +2905,7 @@ const users = [
     updatedAt: currentDate,
     id: 364,
     namaPengguna: "199006222017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marlina Yuni Hidayah, A.Md.Keb",
   },
   {
@@ -2912,7 +2913,7 @@ const users = [
     updatedAt: currentDate,
     id: 365,
     namaPengguna: "199201232019032021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yeni Wanda Sari, A.Md.Kep.",
   },
   {
@@ -2920,7 +2921,7 @@ const users = [
     updatedAt: currentDate,
     id: 366,
     namaPengguna: "199302082019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Enny Eryana Dewi, A.Md. Far.",
   },
   {
@@ -2928,7 +2929,7 @@ const users = [
     updatedAt: currentDate,
     id: 367,
     namaPengguna: "199010122019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aisiyah Tri Annisa Putri, A.Md",
   },
   {
@@ -2936,7 +2937,7 @@ const users = [
     updatedAt: currentDate,
     id: 368,
     namaPengguna: "198602172020122008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susylarty, A.Md.Kep",
   },
   {
@@ -2944,7 +2945,7 @@ const users = [
     updatedAt: currentDate,
     id: 369,
     namaPengguna: "199308212023212008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Siti Salamah",
   },
   {
@@ -2952,7 +2953,7 @@ const users = [
     updatedAt: currentDate,
     id: 370,
     namaPengguna: "199110042023212007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ulpa Puspita, A.Md.Kep",
   },
   {
@@ -2960,7 +2961,7 @@ const users = [
     updatedAt: currentDate,
     id: 371,
     namaPengguna: "198903012024211008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wantri Jonny Purba",
   },
   {
@@ -2968,7 +2969,7 @@ const users = [
     updatedAt: currentDate,
     id: 372,
     namaPengguna: "199011172024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhlisa Alpiani, A.Md.Keb",
   },
   {
@@ -2976,7 +2977,7 @@ const users = [
     updatedAt: currentDate,
     id: 373,
     namaPengguna: "199101042024212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Natalia Putri Wulandari, A.Md.Keb",
   },
   {
@@ -2984,7 +2985,7 @@ const users = [
     updatedAt: currentDate,
     id: 374,
     namaPengguna: "198807132024211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marzawan, A.Md.Kep",
   },
   {
@@ -2992,7 +2993,7 @@ const users = [
     updatedAt: currentDate,
     id: 375,
     namaPengguna: "199010232024211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aksad, A.Md.Kep",
   },
   {
@@ -3000,7 +3001,7 @@ const users = [
     updatedAt: currentDate,
     id: 376,
     namaPengguna: "199210092024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumrawati, A.Md.Ak",
   },
   {
@@ -3008,7 +3009,7 @@ const users = [
     updatedAt: currentDate,
     id: 377,
     namaPengguna: "199311092024212041",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Berlita Arianti, A.Md.Keb",
   },
   {
@@ -3016,7 +3017,7 @@ const users = [
     updatedAt: currentDate,
     id: 378,
     namaPengguna: "198904092025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apnila Ramadaniar, Amd.Keb",
   },
   {
@@ -3024,7 +3025,7 @@ const users = [
     updatedAt: currentDate,
     id: 379,
     namaPengguna: "198905192025212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Patnawati, A.Md.Keb",
   },
   {
@@ -3032,7 +3033,7 @@ const users = [
     updatedAt: currentDate,
     id: 380,
     namaPengguna: "199001302025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlinawati Amir, A.Md.Keb",
   },
   {
@@ -3040,7 +3041,7 @@ const users = [
     updatedAt: currentDate,
     id: 381,
     namaPengguna: "199002112025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nengsih Pantasari Boru Manalu, A. Md. Keb",
   },
   {
@@ -3048,7 +3049,7 @@ const users = [
     updatedAt: currentDate,
     id: 382,
     namaPengguna: "199102102025211027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aditya Yogi Perdana, A.Md,Kep",
   },
   {
@@ -3056,7 +3057,7 @@ const users = [
     updatedAt: currentDate,
     id: 383,
     namaPengguna: "199412062025212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desintya Eka Putri, A.Md,Keb",
   },
   {
@@ -3064,7 +3065,7 @@ const users = [
     updatedAt: currentDate,
     id: 384,
     namaPengguna: "199611162025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Reni Nur Hidayati, Amd.Keb",
   },
   {
@@ -3072,7 +3073,7 @@ const users = [
     updatedAt: currentDate,
     id: 385,
     namaPengguna: "198806142025212013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Puji Dyahastuti",
   },
   {
@@ -3080,7 +3081,7 @@ const users = [
     updatedAt: currentDate,
     id: 386,
     namaPengguna: "199205102025211021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Misbahul Hasan",
   },
   {
@@ -3088,7 +3089,7 @@ const users = [
     updatedAt: currentDate,
     id: 387,
     namaPengguna: "6303061901980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdi Ramadhan, A.Md.T",
   },
   {
@@ -3096,7 +3097,7 @@ const users = [
     updatedAt: currentDate,
     id: 388,
     namaPengguna: "199105312025212039",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Afrian Zayanti, A.Md. Keb",
   },
   {
@@ -3104,7 +3105,7 @@ const users = [
     updatedAt: currentDate,
     id: 389,
     namaPengguna: "199810012025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anggreini Sapitriyaningsih, A. Md. Keb",
   },
   {
@@ -3112,7 +3113,7 @@ const users = [
     updatedAt: currentDate,
     id: 390,
     namaPengguna: "6401036106010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dhea Sandrina Noor, SE",
   },
   {
@@ -3120,7 +3121,7 @@ const users = [
     updatedAt: currentDate,
     id: 391,
     namaPengguna: "6401046005980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dina Urwatul Wutsqa, S.Ftr.,Ftr",
   },
   {
@@ -3128,7 +3129,7 @@ const users = [
     updatedAt: currentDate,
     id: 392,
     namaPengguna: "6401037006900001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dita Rahmawati, A.Md.Keb",
   },
   {
@@ -3136,7 +3137,7 @@ const users = [
     updatedAt: currentDate,
     id: 393,
     namaPengguna: "197103172025211015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eko Hari purwanto",
   },
   {
@@ -3144,7 +3145,7 @@ const users = [
     updatedAt: currentDate,
     id: 394,
     namaPengguna: "6401046106980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Firda Rahmasari, SE",
   },
   {
@@ -3152,7 +3153,7 @@ const users = [
     updatedAt: currentDate,
     id: 395,
     namaPengguna: "640104112010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Firda Rosanti",
   },
   {
@@ -3160,7 +3161,7 @@ const users = [
     updatedAt: currentDate,
     id: 396,
     namaPengguna: "9111055606920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ima Sawitri, A.Md.Keb",
   },
   {
@@ -3168,7 +3169,7 @@ const users = [
     updatedAt: currentDate,
     id: 397,
     namaPengguna: "6472055906920004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kristaliana Rahayuningtyas, A.Md.Keb",
   },
   {
@@ -3176,7 +3177,7 @@ const users = [
     updatedAt: currentDate,
     id: 398,
     namaPengguna: "6401055504950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mirna Ardina, S.Tr.Keb ",
   },
   {
@@ -3184,7 +3185,7 @@ const users = [
     updatedAt: currentDate,
     id: 399,
     namaPengguna: "6401042705980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Naufaldhi Unggul Pratama",
   },
   {
@@ -3192,7 +3193,7 @@ const users = [
     updatedAt: currentDate,
     id: 400,
     namaPengguna: "6401045003890006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurmiyati",
   },
   {
@@ -3200,7 +3201,7 @@ const users = [
     updatedAt: currentDate,
     id: 401,
     namaPengguna: "6401032306000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ruby Handoko S.KM",
   },
   {
@@ -3208,7 +3209,7 @@ const users = [
     updatedAt: currentDate,
     id: 402,
     namaPengguna: "6401040508980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syarif Fadillah, S.IP",
   },
   {
@@ -3216,7 +3217,7 @@ const users = [
     updatedAt: currentDate,
     id: 403,
     namaPengguna: "6401045807010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuliana Putri Arliandawati, A.Md.Kes",
   },
   {
@@ -3224,7 +3225,7 @@ const users = [
     updatedAt: currentDate,
     id: 404,
     namaPengguna: "197504252006041018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Vieel Sidhatut Thoharoni Syaltout, M.A.P.",
   },
   {
@@ -3232,7 +3233,7 @@ const users = [
     updatedAt: currentDate,
     id: 405,
     namaPengguna: "197510132010011009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Andi Adnan",
   },
   {
@@ -3240,7 +3241,7 @@ const users = [
     updatedAt: currentDate,
     id: 406,
     namaPengguna: "197405141993032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Sri Hastuti, , S.St",
   },
   {
@@ -3248,7 +3249,7 @@ const users = [
     updatedAt: currentDate,
     id: 407,
     namaPengguna: "196810271989112003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Shally Kurniati, , S.Tr.Keb",
   },
   {
@@ -3256,7 +3257,7 @@ const users = [
     updatedAt: currentDate,
     id: 408,
     namaPengguna: "196902281988031001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Achmad, A.Md.Kep",
   },
   {
@@ -3264,7 +3265,7 @@ const users = [
     updatedAt: currentDate,
     id: 409,
     namaPengguna: "197306261995032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Mulyani, A.Md.Kep",
   },
   {
@@ -3272,7 +3273,7 @@ const users = [
     updatedAt: currentDate,
     id: 410,
     namaPengguna: "197109271991022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ida Nursanti, A.Md.Keb",
   },
   {
@@ -3280,7 +3281,7 @@ const users = [
     updatedAt: currentDate,
     id: 411,
     namaPengguna: "197211161993031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Purnomo, A.Md.Kep.",
   },
   {
@@ -3288,7 +3289,7 @@ const users = [
     updatedAt: currentDate,
     id: 412,
     namaPengguna: "197201081994031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Ifansyah, A.Md.Kep",
   },
   {
@@ -3296,7 +3297,7 @@ const users = [
     updatedAt: currentDate,
     id: 413,
     namaPengguna: "197408051994032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wiwin Suciati",
   },
   {
@@ -3304,7 +3305,7 @@ const users = [
     updatedAt: currentDate,
     id: 414,
     namaPengguna: "196902121990032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erny Evriaty, A.Md.Gizi, Skm",
   },
   {
@@ -3312,7 +3313,7 @@ const users = [
     updatedAt: currentDate,
     id: 415,
     namaPengguna: "197507011995032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eko Yuliati, A.Md.Kg",
   },
   {
@@ -3320,7 +3321,7 @@ const users = [
     updatedAt: currentDate,
     id: 416,
     namaPengguna: "198101272006042021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ratih Cahyani, Skm",
   },
   {
@@ -3328,7 +3329,7 @@ const users = [
     updatedAt: currentDate,
     id: 417,
     namaPengguna: "197308031995031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Augus Indra Sakti,  A.Md.Kes., Se",
   },
   {
@@ -3336,7 +3337,7 @@ const users = [
     updatedAt: currentDate,
     id: 418,
     namaPengguna: "198402222009031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Udin Archam, S.Farm, Apt",
   },
   {
@@ -3344,7 +3345,7 @@ const users = [
     updatedAt: currentDate,
     id: 419,
     namaPengguna: "197802102006042032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasni Basri, Skm",
   },
   {
@@ -3352,7 +3353,7 @@ const users = [
     updatedAt: currentDate,
     id: 420,
     namaPengguna: "197704052008042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tutut Siswanti, A.Md.Kep",
   },
   {
@@ -3360,7 +3361,7 @@ const users = [
     updatedAt: currentDate,
     id: 421,
     namaPengguna: "197508172003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arbiana, S.Keb.",
   },
   {
@@ -3368,7 +3369,7 @@ const users = [
     updatedAt: currentDate,
     id: 422,
     namaPengguna: "197409102003122007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syahmirat, A.Md.Keb",
   },
   {
@@ -3376,7 +3377,7 @@ const users = [
     updatedAt: currentDate,
     id: 423,
     namaPengguna: "198608252009032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusmiati, A.Md.Keb",
   },
   {
@@ -3384,7 +3385,7 @@ const users = [
     updatedAt: currentDate,
     id: 424,
     namaPengguna: "198801062010012017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Efa Izin, A.Md.Keb",
   },
   {
@@ -3392,7 +3393,7 @@ const users = [
     updatedAt: currentDate,
     id: 425,
     namaPengguna: "198111302003122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marwah, A.Md.Kep",
   },
   {
@@ -3400,7 +3401,7 @@ const users = [
     updatedAt: currentDate,
     id: 426,
     namaPengguna: "198201252009032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heni Puspitasari, Am.Kg",
   },
   {
@@ -3408,7 +3409,7 @@ const users = [
     updatedAt: currentDate,
     id: 427,
     namaPengguna: "198311212010012023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muslimiyah, A.Md.Kep",
   },
   {
@@ -3416,7 +3417,7 @@ const users = [
     updatedAt: currentDate,
     id: 428,
     namaPengguna: "198701022010012022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Isbiyati, A.Md.Keb",
   },
   {
@@ -3424,7 +3425,7 @@ const users = [
     updatedAt: currentDate,
     id: 429,
     namaPengguna: "198810042010012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Milkawati, A.Md.Keb",
   },
   {
@@ -3432,7 +3433,7 @@ const users = [
     updatedAt: currentDate,
     id: 430,
     namaPengguna: "198608182010012033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Khusnul Khotimah, A.Md.Keb",
   },
   {
@@ -3440,7 +3441,7 @@ const users = [
     updatedAt: currentDate,
     id: 431,
     namaPengguna: "197804092003122011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Armanisah, S.Tr.Keb, Bd.",
   },
   {
@@ -3448,7 +3449,7 @@ const users = [
     updatedAt: currentDate,
     id: 432,
     namaPengguna: "199009142019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Jofan Viradella Santoso Putri",
   },
   {
@@ -3456,7 +3457,7 @@ const users = [
     updatedAt: currentDate,
     id: 433,
     namaPengguna: "198008042006042027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn,, . Syamsiah, , S.Tr.Keb",
   },
   {
@@ -3464,7 +3465,7 @@ const users = [
     updatedAt: currentDate,
     id: 434,
     namaPengguna: "199602182019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Intan Syafitri Arifin, S.Tr.Ft.",
   },
   {
@@ -3472,7 +3473,7 @@ const users = [
     updatedAt: currentDate,
     id: 435,
     namaPengguna: "199004052019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizka Cahya Purnama, S.Kep., Ns.",
   },
   {
@@ -3480,7 +3481,7 @@ const users = [
     updatedAt: currentDate,
     id: 436,
     namaPengguna: "198007112007012010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Marlina",
   },
   {
@@ -3488,7 +3489,7 @@ const users = [
     updatedAt: currentDate,
     id: 437,
     namaPengguna: "199210152017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Siti Nurkhasanah, S.Tr.Keb.",
   },
   {
@@ -3496,7 +3497,7 @@ const users = [
     updatedAt: currentDate,
     id: 438,
     namaPengguna: "199112202017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Entika Yuliani, S.Tr.Keb",
   },
   {
@@ -3504,7 +3505,7 @@ const users = [
     updatedAt: currentDate,
     id: 439,
     namaPengguna: "199206252019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mutia Rismi, A.Md.Kep.",
   },
   {
@@ -3512,7 +3513,7 @@ const users = [
     updatedAt: currentDate,
     id: 440,
     namaPengguna: "199604302019032017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ella Triyani, A.Md. Keb.",
   },
   {
@@ -3520,7 +3521,7 @@ const users = [
     updatedAt: currentDate,
     id: 441,
     namaPengguna: "199011212019032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lia Mulyani, A.Md.Kep.",
   },
   {
@@ -3528,7 +3529,7 @@ const users = [
     updatedAt: currentDate,
     id: 442,
     namaPengguna: "199408212019032022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Deasy Debora Lumbangaol, A.Md.Rmik.",
   },
   {
@@ -3536,7 +3537,7 @@ const users = [
     updatedAt: currentDate,
     id: 443,
     namaPengguna: "199309232022032015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mulia Ulfah Hafsari, A.Md.Farm",
   },
   {
@@ -3544,7 +3545,7 @@ const users = [
     updatedAt: currentDate,
     id: 444,
     namaPengguna: "199303132025211024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hendra Rumba Setya. As, S.Farm, Apt",
   },
   {
@@ -3552,7 +3553,7 @@ const users = [
     updatedAt: currentDate,
     id: 445,
     namaPengguna: "198411012023212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Fitriawati, A.Md. Kep",
   },
   {
@@ -3560,7 +3561,7 @@ const users = [
     updatedAt: currentDate,
     id: 446,
     namaPengguna: "198910012024212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tansis Mawari Oksatica, A.Md.Kep",
   },
   {
@@ -3568,7 +3569,7 @@ const users = [
     updatedAt: currentDate,
     id: 447,
     namaPengguna: "199012132024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marfuatus Solikhah, Amd.Keb",
   },
   {
@@ -3576,7 +3577,7 @@ const users = [
     updatedAt: currentDate,
     id: 448,
     namaPengguna: "199002122024212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Luluk Nita Sari, A. Md. Keb",
   },
   {
@@ -3584,7 +3585,7 @@ const users = [
     updatedAt: currentDate,
     id: 449,
     namaPengguna: "199009042024212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Wulandari, A.Md.Keb",
   },
   {
@@ -3592,7 +3593,7 @@ const users = [
     updatedAt: currentDate,
     id: 450,
     namaPengguna: "199009112024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hernasari Simamora, A.Md.Keb",
   },
   {
@@ -3600,7 +3601,7 @@ const users = [
     updatedAt: currentDate,
     id: 451,
     namaPengguna: "198910192024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Christiani Toding Bua, A.Md.Keb",
   },
   {
@@ -3608,7 +3609,7 @@ const users = [
     updatedAt: currentDate,
     id: 452,
     namaPengguna: "199501122024212042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chrisanti Papulung, A.Md.Ak",
   },
   {
@@ -3616,7 +3617,7 @@ const users = [
     updatedAt: currentDate,
     id: 453,
     namaPengguna: "199110152025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yunita Rusfiani, A. Md. Keb",
   },
   {
@@ -3624,7 +3625,7 @@ const users = [
     updatedAt: currentDate,
     id: 454,
     namaPengguna: "198905232025211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amir Rimba Wanto, A.Md.Kep",
   },
   {
@@ -3632,7 +3633,7 @@ const users = [
     updatedAt: currentDate,
     id: 455,
     namaPengguna: "199103232025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ratna Wijayanti, A.Md.Kep",
   },
   {
@@ -3640,7 +3641,7 @@ const users = [
     updatedAt: currentDate,
     id: 456,
     namaPengguna: "199304242025212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widya Miyarti, Amd.Ak",
   },
   {
@@ -3648,7 +3649,7 @@ const users = [
     updatedAt: currentDate,
     id: 457,
     namaPengguna: "199006092025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Triana, A.Md.Keb",
   },
   {
@@ -3656,7 +3657,7 @@ const users = [
     updatedAt: currentDate,
     id: 458,
     namaPengguna: "199504102025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Salehana",
   },
   {
@@ -3664,7 +3665,7 @@ const users = [
     updatedAt: currentDate,
     id: 459,
     namaPengguna: "199604132025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahmawati, S.Tr.Gz",
   },
   {
@@ -3672,7 +3673,7 @@ const users = [
     updatedAt: currentDate,
     id: 460,
     namaPengguna: "199208232025212010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Annisah, S.E",
   },
   {
@@ -3680,7 +3681,7 @@ const users = [
     updatedAt: currentDate,
     id: 461,
     namaPengguna: "6401056602990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Albis’i Fatinzaki Tsuroyya",
   },
   {
@@ -3688,7 +3689,7 @@ const users = [
     updatedAt: currentDate,
     id: 462,
     namaPengguna: "6401055506010005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Maulida, A.Md.Rmik",
   },
   {
@@ -3696,7 +3697,7 @@ const users = [
     updatedAt: currentDate,
     id: 463,
     namaPengguna: "6401054301940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dian Novita Sari, S.K.M",
   },
   {
@@ -3704,7 +3705,7 @@ const users = [
     updatedAt: currentDate,
     id: 464,
     namaPengguna: "197805232025211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hendro Sulistiyo, St",
   },
   {
@@ -3712,7 +3713,7 @@ const users = [
     updatedAt: currentDate,
     id: 465,
     namaPengguna: "6401050906850001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heri Mulyono",
   },
   {
@@ -3720,7 +3721,7 @@ const users = [
     updatedAt: currentDate,
     id: 466,
     namaPengguna: "198805152025212064",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Juliyanti, A.Md.Keb",
   },
   {
@@ -3728,7 +3729,7 @@ const users = [
     updatedAt: currentDate,
     id: 467,
     namaPengguna: "6401056012910002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lili Sumiarti Amd,Keb",
   },
   {
@@ -3736,7 +3737,7 @@ const users = [
     updatedAt: currentDate,
     id: 468,
     namaPengguna: "199106222025212054",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisha Dwi Ayu Pangastuti,A.Md.Kep",
   },
   {
@@ -3744,7 +3745,7 @@ const users = [
     updatedAt: currentDate,
     id: 469,
     namaPengguna: "199212312025212193",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ramaindah, A.Md.Keb",
   },
   {
@@ -3752,7 +3753,7 @@ const users = [
     updatedAt: currentDate,
     id: 470,
     namaPengguna: "6401056710930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tazkiah, A.Md.Kep",
   },
   {
@@ -3760,7 +3761,7 @@ const users = [
     updatedAt: currentDate,
     id: 471,
     namaPengguna: "6303076106010006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tazkiah, A.Md.Kep",
   },
   {
@@ -3768,7 +3769,7 @@ const users = [
     updatedAt: currentDate,
     id: 472,
     namaPengguna: "6407035709000000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Veni Alvionita.A.Md.Kep",
   },
   {
@@ -3776,7 +3777,7 @@ const users = [
     updatedAt: currentDate,
     id: 473,
     namaPengguna: "196701162010011003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Fauzi Karni",
   },
   {
@@ -3784,7 +3785,7 @@ const users = [
     updatedAt: currentDate,
     id: 474,
     namaPengguna: "196808071989022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlina Ak., A.Md.Keb",
   },
   {
@@ -3792,7 +3793,7 @@ const users = [
     updatedAt: currentDate,
     id: 475,
     namaPengguna: "197611122006042023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ramla, A.Md.Kep",
   },
   {
@@ -3800,7 +3801,7 @@ const users = [
     updatedAt: currentDate,
     id: 476,
     namaPengguna: "198306112009032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Suharti, A.Md.Kep",
   },
   {
@@ -3808,7 +3809,7 @@ const users = [
     updatedAt: currentDate,
     id: 477,
     namaPengguna: "198410192009032007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heni Janilah, A.Md.Gizi",
   },
   {
@@ -3816,7 +3817,7 @@ const users = [
     updatedAt: currentDate,
     id: 478,
     namaPengguna: "198610012009032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Norhidayati, A.Md.Gizi",
   },
   {
@@ -3824,7 +3825,7 @@ const users = [
     updatedAt: currentDate,
     id: 479,
     namaPengguna: "198912292019031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Sujud Abdillah, S. Farm",
   },
   {
@@ -3832,7 +3833,7 @@ const users = [
     updatedAt: currentDate,
     id: 480,
     namaPengguna: "198406162010012028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norvia Dian Nita, A.Md.Far",
   },
   {
@@ -3840,7 +3841,7 @@ const users = [
     updatedAt: currentDate,
     id: 481,
     namaPengguna: "197601062006041018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Setiyono, A.Md.Kep",
   },
   {
@@ -3848,7 +3849,7 @@ const users = [
     updatedAt: currentDate,
     id: 482,
     namaPengguna: "197803202006042034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hayatunnisa, A.Md.Kep.",
   },
   {
@@ -3856,7 +3857,7 @@ const users = [
     updatedAt: currentDate,
     id: 483,
     namaPengguna: "199407272022032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rinda Dyah Puspita",
   },
   {
@@ -3864,7 +3865,7 @@ const users = [
     updatedAt: currentDate,
     id: 484,
     namaPengguna: "198807042017052004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sitti Alang, A.Md.Keb",
   },
   {
@@ -3872,7 +3873,7 @@ const users = [
     updatedAt: currentDate,
     id: 485,
     namaPengguna: "199012112017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dessy Ariyani, A.Md.Keb",
   },
   {
@@ -3880,7 +3881,7 @@ const users = [
     updatedAt: currentDate,
     id: 486,
     namaPengguna: "199409112019032022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Intan Khalidaziah, S.Tr.Kes",
   },
   {
@@ -3888,7 +3889,7 @@ const users = [
     updatedAt: currentDate,
     id: 487,
     namaPengguna: "198609252019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chintya Laily Alfiani, A.Md.Kep.",
   },
   {
@@ -3896,7 +3897,7 @@ const users = [
     updatedAt: currentDate,
     id: 488,
     namaPengguna: "199312162025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Syaifurrahman, S.Kep.,Ns",
   },
   {
@@ -3904,7 +3905,7 @@ const users = [
     updatedAt: currentDate,
     id: 489,
     namaPengguna: "199108122023212007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dini Agus Arianti, A.Md. Kep",
   },
   {
@@ -3912,7 +3913,7 @@ const users = [
     updatedAt: currentDate,
     id: 490,
     namaPengguna: "198908152024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arinah, A.Md.Keb",
   },
   {
@@ -3920,7 +3921,7 @@ const users = [
     updatedAt: currentDate,
     id: 491,
     namaPengguna: "199010152024212035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miftahul Jannah, A.Md.Keb",
   },
   {
@@ -3928,7 +3929,7 @@ const users = [
     updatedAt: currentDate,
     id: 492,
     namaPengguna: "199103212024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risti Marliani, A.Md.Keb.",
   },
   {
@@ -3936,7 +3937,7 @@ const users = [
     updatedAt: currentDate,
     id: 493,
     namaPengguna: "199105032024212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siska Wulandari, A.Md.Kep",
   },
   {
@@ -3944,7 +3945,7 @@ const users = [
     updatedAt: currentDate,
     id: 494,
     namaPengguna: "199504272024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wana Apriana Satta, A.Md.Kep",
   },
   {
@@ -3952,7 +3953,7 @@ const users = [
     updatedAt: currentDate,
     id: 495,
     namaPengguna: "199605052024212053",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Duwi Nuryanti, A.Md.Ak",
   },
   {
@@ -3960,7 +3961,7 @@ const users = [
     updatedAt: currentDate,
     id: 496,
     namaPengguna: "199910092024212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ikka Suzhan Dryati, A.Md.Keb",
   },
   {
@@ -3968,7 +3969,7 @@ const users = [
     updatedAt: currentDate,
     id: 497,
     namaPengguna: "198808042025211030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahman, A.Md.Kep",
   },
   {
@@ -3976,7 +3977,7 @@ const users = [
     updatedAt: currentDate,
     id: 498,
     namaPengguna: "199004022025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hamsina, A.Md.Keb",
   },
   {
@@ -3984,7 +3985,7 @@ const users = [
     updatedAt: currentDate,
     id: 499,
     namaPengguna: "199106062025212035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Titin Indriany, A.Md.Keb",
   },
   {
@@ -3992,7 +3993,7 @@ const users = [
     updatedAt: currentDate,
     id: 500,
     namaPengguna: "198911062025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Hayani",
   },
   {
@@ -4000,7 +4001,7 @@ const users = [
     updatedAt: currentDate,
     id: 501,
     namaPengguna: "198911262025211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdul Rasid",
   },
   {
@@ -4008,7 +4009,7 @@ const users = [
     updatedAt: currentDate,
     id: 502,
     namaPengguna: "199403032025211025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Saprudin",
   },
   {
@@ -4016,7 +4017,7 @@ const users = [
     updatedAt: currentDate,
     id: 503,
     namaPengguna: "199704222025211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Akbar Pratama",
   },
   {
@@ -4024,7 +4025,7 @@ const users = [
     updatedAt: currentDate,
     id: 504,
     namaPengguna: "199403162025212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Cinthya Ayu Mutiara, S.Tr.Keb",
   },
   {
@@ -4032,7 +4033,7 @@ const users = [
     updatedAt: currentDate,
     id: 505,
     namaPengguna: "199603282025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yayuk Retno Purwaningsih, S.Tr.Keb",
   },
   {
@@ -4040,7 +4041,7 @@ const users = [
     updatedAt: currentDate,
     id: 506,
     namaPengguna: "6401054802980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina Harmiyanti, S.Km",
   },
   {
@@ -4048,7 +4049,7 @@ const users = [
     updatedAt: currentDate,
     id: 507,
     namaPengguna: "6401046602980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Almunadya Nur Jannati",
   },
   {
@@ -4056,7 +4057,7 @@ const users = [
     updatedAt: currentDate,
     id: 508,
     namaPengguna: "7309084106910001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Darmawati, A.Md.Kep",
   },
   {
@@ -4064,7 +4065,7 @@ const users = [
     updatedAt: currentDate,
     id: 509,
     namaPengguna: "6401056410970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Diah Oktaviani, S.Kep.,Ners",
   },
   {
@@ -4072,7 +4073,7 @@ const users = [
     updatedAt: currentDate,
     id: 510,
     namaPengguna: "6401045606970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dinda Mahardika Putri, S.Psi",
   },
   {
@@ -4080,7 +4081,7 @@ const users = [
     updatedAt: currentDate,
     id: 511,
     namaPengguna: "6401046911000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indri Dwi Pramana, A.Md.Rmik",
   },
   {
@@ -4088,7 +4089,7 @@ const users = [
     updatedAt: currentDate,
     id: 512,
     namaPengguna: "6401046304980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Linda Aprilia, S.Kes.,Ftr",
   },
   {
@@ -4096,7 +4097,7 @@ const users = [
     updatedAt: currentDate,
     id: 513,
     namaPengguna: "7318376307990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lista Julita, A.Md.Keb",
   },
   {
@@ -4104,7 +4105,7 @@ const users = [
     updatedAt: currentDate,
     id: 514,
     namaPengguna: "6310090307980004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muammar, Skm",
   },
   {
@@ -4112,7 +4113,7 @@ const users = [
     updatedAt: currentDate,
     id: 515,
     namaPengguna: "6401020706990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mustajam, A.Md.Kep",
   },
   {
@@ -4120,7 +4121,7 @@ const users = [
     updatedAt: currentDate,
     id: 516,
     namaPengguna: "6401052110870002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Pristiawan Yuniar, Se",
   },
   {
@@ -4128,7 +4129,7 @@ const users = [
     updatedAt: currentDate,
     id: 517,
     namaPengguna: "6401055004980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Putri Diah Ismayanti, S.Tr.Keb",
   },
   {
@@ -4136,7 +4137,7 @@ const users = [
     updatedAt: currentDate,
     id: 518,
     namaPengguna: "6401045310960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Umi Nur Almi Sarina, A.Md.Keb",
   },
   {
@@ -4144,7 +4145,7 @@ const users = [
     updatedAt: currentDate,
     id: 519,
     namaPengguna: "6401045105950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulia Indah Wati S.Tr.Kes",
   },
   {
@@ -4152,7 +4153,7 @@ const users = [
     updatedAt: currentDate,
     id: 520,
     namaPengguna: "198009062008042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Yuyun Pancasatria Syaputri",
   },
   {
@@ -4160,7 +4161,7 @@ const users = [
     updatedAt: currentDate,
     id: 521,
     namaPengguna: "196802241991021001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Samsul Bahri, A.Md.Kep",
   },
   {
@@ -4168,7 +4169,7 @@ const users = [
     updatedAt: currentDate,
     id: 522,
     namaPengguna: "197107231991022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Ida Harriyani, A.Md.Kep",
   },
   {
@@ -4176,7 +4177,7 @@ const users = [
     updatedAt: currentDate,
     id: 523,
     namaPengguna: "197307311993022005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ermayani Arfisa, A.Md.Keb",
   },
   {
@@ -4184,7 +4185,7 @@ const users = [
     updatedAt: currentDate,
     id: 524,
     namaPengguna: "197807022005022003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yayuk Susanti, A.Md Gizi, Skm",
   },
   {
@@ -4192,7 +4193,7 @@ const users = [
     updatedAt: currentDate,
     id: 525,
     namaPengguna: "197802042006042008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rossanasari Wijayanti, A.Md.",
   },
   {
@@ -4200,7 +4201,7 @@ const users = [
     updatedAt: currentDate,
     id: 526,
     namaPengguna: "197505021999032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Jumariah, S.Tr.Keb.",
   },
   {
@@ -4208,7 +4209,7 @@ const users = [
     updatedAt: currentDate,
     id: 527,
     namaPengguna: "197711061997032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nunuk Winarni, A.Md.Kg",
   },
   {
@@ -4216,7 +4217,7 @@ const users = [
     updatedAt: currentDate,
     id: 528,
     namaPengguna: "197811222014121001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Raden Ahmad Yusuf",
   },
   {
@@ -4224,7 +4225,7 @@ const users = [
     updatedAt: currentDate,
     id: 529,
     namaPengguna: "198002132006042014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Titi Suwarti, A.Md.Kep",
   },
   {
@@ -4232,7 +4233,7 @@ const users = [
     updatedAt: currentDate,
     id: 530,
     namaPengguna: "197601252002122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Nurhasanah, S.Tr.Keb.",
   },
   {
@@ -4240,7 +4241,7 @@ const users = [
     updatedAt: currentDate,
     id: 531,
     namaPengguna: "197409032000122001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Sri Wulan, S.Tr.Keb.",
   },
   {
@@ -4248,7 +4249,7 @@ const users = [
     updatedAt: currentDate,
     id: 532,
     namaPengguna: "197608162003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Agustina Enang, , S.Tr.Keb.",
   },
   {
@@ -4256,7 +4257,7 @@ const users = [
     updatedAt: currentDate,
     id: 533,
     namaPengguna: "198712012009032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elida Zahara, A.Md.Far",
   },
   {
@@ -4264,7 +4265,7 @@ const users = [
     updatedAt: currentDate,
     id: 534,
     namaPengguna: "198710062009032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Fadhul Azmi, , S.Tr.Keb.",
   },
   {
@@ -4272,7 +4273,7 @@ const users = [
     updatedAt: currentDate,
     id: 535,
     namaPengguna: "198205252009032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meiti Arianti, A.Md.Keb",
   },
   {
@@ -4280,7 +4281,7 @@ const users = [
     updatedAt: currentDate,
     id: 536,
     namaPengguna: "198509102009032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mardiana, A.Md.Keb",
   },
   {
@@ -4288,7 +4289,7 @@ const users = [
     updatedAt: currentDate,
     id: 537,
     namaPengguna: "198512052009032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Mugi Rahayu, A.Md.Kep.",
   },
   {
@@ -4296,7 +4297,7 @@ const users = [
     updatedAt: currentDate,
     id: 538,
     namaPengguna: "199104212019031017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Ivan Satria Kambuna Panjaitan, S. Farm",
   },
   {
@@ -4304,7 +4305,7 @@ const users = [
     updatedAt: currentDate,
     id: 539,
     namaPengguna: "198901292010012001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Ruliyah Emi Sari Dewi, A.Md.Keb., S.St.",
   },
   {
@@ -4312,7 +4313,7 @@ const users = [
     updatedAt: currentDate,
     id: 540,
     namaPengguna: "196709151987032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariana",
   },
   {
@@ -4320,7 +4321,7 @@ const users = [
     updatedAt: currentDate,
     id: 541,
     namaPengguna: "199509012022032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Corina Primanda Rahman",
   },
   {
@@ -4328,7 +4329,7 @@ const users = [
     updatedAt: currentDate,
     id: 542,
     namaPengguna: "199005122011012001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Onny Ken Fadhila, Amf",
   },
   {
@@ -4336,7 +4337,7 @@ const users = [
     updatedAt: currentDate,
     id: 543,
     namaPengguna: "198006092006042023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maisyarah, A.Md.Kep",
   },
   {
@@ -4344,7 +4345,7 @@ const users = [
     updatedAt: currentDate,
     id: 544,
     namaPengguna: "197001032007012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Halimah",
   },
   {
@@ -4352,7 +4353,7 @@ const users = [
     updatedAt: currentDate,
     id: 545,
     namaPengguna: "198908012019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sali Agustina, A.Md. Keb.",
   },
   {
@@ -4360,7 +4361,7 @@ const users = [
     updatedAt: currentDate,
     id: 546,
     namaPengguna: "199305282019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Achyani Islamiah, A.Md.Ak.",
   },
   {
@@ -4368,7 +4369,7 @@ const users = [
     updatedAt: currentDate,
     id: 547,
     namaPengguna: "199107242019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizal Fahmi Sayekti, A.Md.Kl.",
   },
   {
@@ -4376,7 +4377,7 @@ const users = [
     updatedAt: currentDate,
     id: 548,
     namaPengguna: "199001162022032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Linda Eka Wijayanti, Amk",
   },
   {
@@ -4384,7 +4385,7 @@ const users = [
     updatedAt: currentDate,
     id: 549,
     namaPengguna: "199012162023212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risnawati, A.Md. Kep",
   },
   {
@@ -4392,7 +4393,7 @@ const users = [
     updatedAt: currentDate,
     id: 550,
     namaPengguna: "199112082023212009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Restiana, A.Md. Kep",
   },
   {
@@ -4400,7 +4401,7 @@ const users = [
     updatedAt: currentDate,
     id: 551,
     namaPengguna: "199102192024212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indah Wisudawati, A.Md.Keb",
   },
   {
@@ -4408,7 +4409,7 @@ const users = [
     updatedAt: currentDate,
     id: 552,
     namaPengguna: "199103132024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Umiatul Chasanah, A.Md. Keb",
   },
   {
@@ -4416,7 +4417,7 @@ const users = [
     updatedAt: currentDate,
     id: 553,
     namaPengguna: "198710022024212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jamilah, A.Md, Keb",
   },
   {
@@ -4424,7 +4425,7 @@ const users = [
     updatedAt: currentDate,
     id: 554,
     namaPengguna: "199005042024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumahir, A.Md.Kep",
   },
   {
@@ -4432,7 +4433,7 @@ const users = [
     updatedAt: currentDate,
     id: 555,
     namaPengguna: "199412222024211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhamad Yazid Fahmi, A.Md.Ak",
   },
   {
@@ -4440,7 +4441,7 @@ const users = [
     updatedAt: currentDate,
     id: 556,
     namaPengguna: "199405202024212052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muti'ah Firdausi, A.Md.Far",
   },
   {
@@ -4448,7 +4449,7 @@ const users = [
     updatedAt: currentDate,
     id: 557,
     namaPengguna: "199605262024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nia Kurnia, A.Md. Keb",
   },
   {
@@ -4456,7 +4457,7 @@ const users = [
     updatedAt: currentDate,
     id: 558,
     namaPengguna: "198406252024212012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Verawati, Amd.Kl",
   },
   {
@@ -4464,7 +4465,7 @@ const users = [
     updatedAt: currentDate,
     id: 559,
     namaPengguna: "199008192025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sari Wulandari, A.Md.Keb",
   },
   {
@@ -4472,7 +4473,7 @@ const users = [
     updatedAt: currentDate,
     id: 560,
     namaPengguna: "198912082025212013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Masniah, A.Md.Keb",
   },
   {
@@ -4480,7 +4481,7 @@ const users = [
     updatedAt: currentDate,
     id: 561,
     namaPengguna: "199002272025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winda Kurniawati, A.Md.Keb",
   },
   {
@@ -4488,7 +4489,7 @@ const users = [
     updatedAt: currentDate,
     id: 562,
     namaPengguna: "199206042025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nita Anisa, A.Md.Keb",
   },
   {
@@ -4496,7 +4497,7 @@ const users = [
     updatedAt: currentDate,
     id: 563,
     namaPengguna: "199307052025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hujaimah, A.Md.Keb",
   },
   {
@@ -4504,7 +4505,7 @@ const users = [
     updatedAt: currentDate,
     id: 564,
     namaPengguna: "199309052025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mimin Rantika Sefriyana, A,Md.Keb",
   },
   {
@@ -4512,7 +4513,7 @@ const users = [
     updatedAt: currentDate,
     id: 565,
     namaPengguna: "199407112025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rita Widia Ningsih, Amd.Keb",
   },
   {
@@ -4520,7 +4521,7 @@ const users = [
     updatedAt: currentDate,
     id: 566,
     namaPengguna: "199504182025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suprapti, A.Md.Keb",
   },
   {
@@ -4528,7 +4529,7 @@ const users = [
     updatedAt: currentDate,
     id: 567,
     namaPengguna: "198002112025212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Masnah",
   },
   {
@@ -4536,7 +4537,7 @@ const users = [
     updatedAt: currentDate,
     id: 568,
     namaPengguna: "198110092025211011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Robiyansyah.S",
   },
   {
@@ -4544,7 +4545,7 @@ const users = [
     updatedAt: currentDate,
     id: 569,
     namaPengguna: "199110112025212010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jannatin Aliyah",
   },
   {
@@ -4552,7 +4553,7 @@ const users = [
     updatedAt: currentDate,
     id: 570,
     namaPengguna: "199508022024212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indah Permata Sari, S.K.M.",
   },
   {
@@ -4560,7 +4561,7 @@ const users = [
     updatedAt: currentDate,
     id: 571,
     namaPengguna: "6401045007000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adzna Machriana Amd.Keb",
   },
   {
@@ -4568,7 +4569,7 @@ const users = [
     updatedAt: currentDate,
     id: 572,
     namaPengguna: "6401032505020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Hawary S.Tr.Kes",
   },
   {
@@ -4576,7 +4577,7 @@ const users = [
     updatedAt: currentDate,
     id: 573,
     namaPengguna: "6401095512000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anissa Nur Jannah, S.Gz",
   },
   {
@@ -4584,7 +4585,7 @@ const users = [
     updatedAt: currentDate,
     id: 574,
     namaPengguna: "198808182025212099",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asni Salmiah ",
   },
   {
@@ -4592,7 +4593,7 @@ const users = [
     updatedAt: currentDate,
     id: 575,
     namaPengguna: "6401046212970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Destri Khusnul Khotimah",
   },
   {
@@ -4600,7 +4601,7 @@ const users = [
     updatedAt: currentDate,
     id: 576,
     namaPengguna: "6401036206930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Susilowati, A.Md.Keb ",
   },
   {
@@ -4608,7 +4609,7 @@ const users = [
     updatedAt: currentDate,
     id: 577,
     namaPengguna: "6401036306980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erisa Erliani,A.Md.Rmik",
   },
   {
@@ -4616,7 +4617,7 @@ const users = [
     updatedAt: currentDate,
     id: 578,
     namaPengguna: "6401045703980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Firda Ainul Latifah S.Kes.,Ftr",
   },
   {
@@ -4624,7 +4625,7 @@ const users = [
     updatedAt: currentDate,
     id: 579,
     namaPengguna: "6401064301000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hafipatul Fajria",
   },
   {
@@ -4632,7 +4633,7 @@ const users = [
     updatedAt: currentDate,
     id: 580,
     namaPengguna: "6401045703940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Khusnul Hatimah, A,Md.Kep",
   },
   {
@@ -4640,7 +4641,7 @@ const users = [
     updatedAt: currentDate,
     id: 581,
     namaPengguna: "6401044402990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Komang Triya Widhi Astuti, S.Kep",
   },
   {
@@ -4648,7 +4649,7 @@ const users = [
     updatedAt: currentDate,
     id: 582,
     namaPengguna: "6401034309970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Lestari Wilujeng, S.Kep",
   },
   {
@@ -4656,7 +4657,7 @@ const users = [
     updatedAt: currentDate,
     id: 583,
     namaPengguna: "199201202025212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisa Dwi Khastuti, A.Md.Keb",
   },
   {
@@ -4664,7 +4665,7 @@ const users = [
     updatedAt: currentDate,
     id: 584,
     namaPengguna: "6401065306010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Misdayanti, A.Md.Rmik",
   },
   {
@@ -4672,7 +4673,7 @@ const users = [
     updatedAt: currentDate,
     id: 585,
     namaPengguna: "19810916 202521 1 036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Yusuf",
   },
   {
@@ -4680,7 +4681,7 @@ const users = [
     updatedAt: currentDate,
     id: 586,
     namaPengguna: "6401035709000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nanda Febriana, A.Md.Kep",
   },
   {
@@ -4688,7 +4689,7 @@ const users = [
     updatedAt: currentDate,
     id: 587,
     namaPengguna: "3503025004040001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Sinta Lutfia Ningsih",
   },
   {
@@ -4696,7 +4697,7 @@ const users = [
     updatedAt: currentDate,
     id: 588,
     namaPengguna: "199204192025212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Qefi Karnaini, S.Si",
   },
   {
@@ -4704,7 +4705,7 @@ const users = [
     updatedAt: currentDate,
     id: 589,
     namaPengguna: "6401034411940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rabiatul,Skm",
   },
   {
@@ -4712,7 +4713,7 @@ const users = [
     updatedAt: currentDate,
     id: 590,
     namaPengguna: "198206122025211088",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Safaruddin",
   },
   {
@@ -4720,7 +4721,7 @@ const users = [
     updatedAt: currentDate,
     id: 591,
     namaPengguna: "196710141987032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sudarlina, A.Md.Keb",
   },
   {
@@ -4728,7 +4729,7 @@ const users = [
     updatedAt: currentDate,
     id: 592,
     namaPengguna: "197808112003122011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jarwanti, A.Md.Kep",
   },
   {
@@ -4736,7 +4737,7 @@ const users = [
     updatedAt: currentDate,
     id: 593,
     namaPengguna: "198410242010011014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Asnurathab Chairiri",
   },
   {
@@ -4744,7 +4745,7 @@ const users = [
     updatedAt: currentDate,
     id: 594,
     namaPengguna: "198308182006042013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina, A.Md.Keb",
   },
   {
@@ -4752,7 +4753,7 @@ const users = [
     updatedAt: currentDate,
     id: 595,
     namaPengguna: "198504122009032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apria Ningsih, A.Md.K.G.",
   },
   {
@@ -4760,7 +4761,7 @@ const users = [
     updatedAt: currentDate,
     id: 596,
     namaPengguna: "198305282008041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahyu Saputra, A.Md.Kep",
   },
   {
@@ -4768,7 +4769,7 @@ const users = [
     updatedAt: currentDate,
     id: 597,
     namaPengguna: "197907082005021006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Priyo Setiaji, A.Md.Kep.",
   },
   {
@@ -4776,7 +4777,7 @@ const users = [
     updatedAt: currentDate,
     id: 598,
     namaPengguna: "198701042011012003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arabiatul, Amg",
   },
   {
@@ -4784,7 +4785,7 @@ const users = [
     updatedAt: currentDate,
     id: 599,
     namaPengguna: "199104262019032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rachmalia Putri Pertiwi",
   },
   {
@@ -4792,7 +4793,7 @@ const users = [
     updatedAt: currentDate,
     id: 600,
     namaPengguna: "199111032019032017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mardiatul Ulfah, S. Farm., Apt.",
   },
   {
@@ -4800,7 +4801,7 @@ const users = [
     updatedAt: currentDate,
     id: 601,
     namaPengguna: "198303142010012009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Surtinah, Se.",
   },
   {
@@ -4808,7 +4809,7 @@ const users = [
     updatedAt: currentDate,
     id: 602,
     namaPengguna: "197512042002122003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ernawaty, A.Md.Keb",
   },
   {
@@ -4816,7 +4817,7 @@ const users = [
     updatedAt: currentDate,
     id: 603,
     namaPengguna: "198611102010012033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lili Nursanti, S.Keb.",
   },
   {
@@ -4824,7 +4825,7 @@ const users = [
     updatedAt: currentDate,
     id: 604,
     namaPengguna: "198807232010012017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Badi Aturrohmah, S.Keb.",
   },
   {
@@ -4832,7 +4833,7 @@ const users = [
     updatedAt: currentDate,
     id: 605,
     namaPengguna: "198711102010012036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Dinar Rahayu, S.Tr.Keb.",
   },
   {
@@ -4840,7 +4841,7 @@ const users = [
     updatedAt: currentDate,
     id: 606,
     namaPengguna: "198709142011012003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harniah, Amkl",
   },
   {
@@ -4848,7 +4849,7 @@ const users = [
     updatedAt: currentDate,
     id: 607,
     namaPengguna: "198004142005022003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tina Royani, A.Md.Kep",
   },
   {
@@ -4856,7 +4857,7 @@ const users = [
     updatedAt: currentDate,
     id: 608,
     namaPengguna: "199009032022032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Ainun Jariah, S.Kep.Ns",
   },
   {
@@ -4864,7 +4865,7 @@ const users = [
     updatedAt: currentDate,
     id: 609,
     namaPengguna: "197903062007012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Suliati",
   },
   {
@@ -4872,7 +4873,7 @@ const users = [
     updatedAt: currentDate,
     id: 610,
     namaPengguna: "197706152007012022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rasem",
   },
   {
@@ -4880,7 +4881,7 @@ const users = [
     updatedAt: currentDate,
     id: 611,
     namaPengguna: "199009142014031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusma Saddam Husen, A.Md.Kg",
   },
   {
@@ -4888,7 +4889,7 @@ const users = [
     updatedAt: currentDate,
     id: 612,
     namaPengguna: "199304172019032027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Leni Wulandari , A.Md. Keb.",
   },
   {
@@ -4896,7 +4897,7 @@ const users = [
     updatedAt: currentDate,
     id: 613,
     namaPengguna: "199211062019031015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novari Setiawan, A.Md.Rmik.",
   },
   {
@@ -4904,7 +4905,7 @@ const users = [
     updatedAt: currentDate,
     id: 614,
     namaPengguna: "197002202009061002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Baidillah",
   },
   {
@@ -4912,7 +4913,7 @@ const users = [
     updatedAt: currentDate,
     id: 615,
     namaPengguna: "199611212020122028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Setianingsih, A.Md.Keb.",
   },
   {
@@ -4920,7 +4921,7 @@ const users = [
     updatedAt: currentDate,
     id: 616,
     namaPengguna: "199307222022032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marina Diah Savitri, A.Md.Ak",
   },
   {
@@ -4928,7 +4929,7 @@ const users = [
     updatedAt: currentDate,
     id: 617,
     namaPengguna: "198202262023211001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supriyatna, A.Md. Kep",
   },
   {
@@ -4936,7 +4937,7 @@ const users = [
     updatedAt: currentDate,
     id: 618,
     namaPengguna: "198404112023212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rojiah, A.Md. Kep",
   },
   {
@@ -4944,7 +4945,7 @@ const users = [
     updatedAt: currentDate,
     id: 619,
     namaPengguna: "199002102024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahyuni, A.Md.Kep",
   },
   {
@@ -4952,7 +4953,7 @@ const users = [
     updatedAt: currentDate,
     id: 620,
     namaPengguna: "198808202024212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susi Nur Khasanah, A.Md.Keb",
   },
   {
@@ -4960,7 +4961,7 @@ const users = [
     updatedAt: currentDate,
     id: 621,
     namaPengguna: "199208242024212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Raudatul Jannah, A.Md.Keb",
   },
   {
@@ -4968,7 +4969,7 @@ const users = [
     updatedAt: currentDate,
     id: 622,
     namaPengguna: "199203042024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Reni Duwi Maya Sari, A.Md.Keb",
   },
   {
@@ -4976,7 +4977,7 @@ const users = [
     updatedAt: currentDate,
     id: 623,
     namaPengguna: "199305162024212039",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Indriani Sajing, Amd.Ak",
   },
   {
@@ -4984,7 +4985,7 @@ const users = [
     updatedAt: currentDate,
     id: 624,
     namaPengguna: "199302172024212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mega, A.Md.Far",
   },
   {
@@ -4992,7 +4993,7 @@ const users = [
     updatedAt: currentDate,
     id: 625,
     namaPengguna: "199409232024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulita Sari, A.Md.Kep",
   },
   {
@@ -5000,7 +5001,7 @@ const users = [
     updatedAt: currentDate,
     id: 626,
     namaPengguna: "199502242024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Partini, A.Md.Keb",
   },
   {
@@ -5008,7 +5009,7 @@ const users = [
     updatedAt: currentDate,
     id: 627,
     namaPengguna: "199508142024212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zikra, A.Md.Kep",
   },
   {
@@ -5016,7 +5017,7 @@ const users = [
     updatedAt: currentDate,
     id: 628,
     namaPengguna: "199510102024212052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Heni Oktavia, A.Md.Keb",
   },
   {
@@ -5024,7 +5025,7 @@ const users = [
     updatedAt: currentDate,
     id: 629,
     namaPengguna: "198811162025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noviana Eka Santi, A.Md.Keb",
   },
   {
@@ -5032,7 +5033,7 @@ const users = [
     updatedAt: currentDate,
     id: 630,
     namaPengguna: "198912122025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dita Purnama, A.Md. Kep.",
   },
   {
@@ -5040,7 +5041,7 @@ const users = [
     updatedAt: currentDate,
     id: 631,
     namaPengguna: "199004292025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lely Wulandari, A.Md. Kep",
   },
   {
@@ -5048,7 +5049,7 @@ const users = [
     updatedAt: currentDate,
     id: 632,
     namaPengguna: "199104042025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tika Miftahus Solihah, A.Md.Kep",
   },
   {
@@ -5056,7 +5057,7 @@ const users = [
     updatedAt: currentDate,
     id: 633,
     namaPengguna: "198511072025211020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hanapi, A.Md.Kep",
   },
   {
@@ -5064,7 +5065,7 @@ const users = [
     updatedAt: currentDate,
     id: 634,
     namaPengguna: "198609152025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurjannah, Amd.Keb",
   },
   {
@@ -5072,7 +5073,7 @@ const users = [
     updatedAt: currentDate,
     id: 635,
     namaPengguna: "198808282025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ngatiningseh, A.Md.Keb",
   },
   {
@@ -5080,7 +5081,7 @@ const users = [
     updatedAt: currentDate,
     id: 636,
     namaPengguna: "198904102025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Itsna Aryani, A.Md,Keb",
   },
   {
@@ -5088,7 +5089,7 @@ const users = [
     updatedAt: currentDate,
     id: 637,
     namaPengguna: "199101222025211009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Hariyadi, A.Md, Kep",
   },
   {
@@ -5096,7 +5097,7 @@ const users = [
     updatedAt: currentDate,
     id: 638,
     namaPengguna: "199505142025211017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra Maulana, A.Md.Kep",
   },
   {
@@ -5104,7 +5105,7 @@ const users = [
     updatedAt: currentDate,
     id: 639,
     namaPengguna: "199604222025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Pransiska Aprilia, A.Md.Kep",
   },
   {
@@ -5112,7 +5113,7 @@ const users = [
     updatedAt: currentDate,
     id: 640,
     namaPengguna: "198710052024212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulia Oktavia, S.K.M.",
   },
   {
@@ -5120,7 +5121,7 @@ const users = [
     updatedAt: currentDate,
     id: 641,
     namaPengguna: "7206056511920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Inayah Nafis Zaizafun, S.Ked",
   },
   {
@@ -5128,7 +5129,7 @@ const users = [
     updatedAt: currentDate,
     id: 642,
     namaPengguna: "197707112025211047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asfiyan Nur",
   },
   {
@@ -5136,7 +5137,7 @@ const users = [
     updatedAt: currentDate,
     id: 643,
     namaPengguna: "199002162025211120",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Candra Kumala Hastin, S.K.M",
   },
   {
@@ -5144,7 +5145,7 @@ const users = [
     updatedAt: currentDate,
     id: 644,
     namaPengguna: "6401036410990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Dwi Lestari, S.Tr.Keb",
   },
   {
@@ -5152,7 +5153,7 @@ const users = [
     updatedAt: currentDate,
     id: 645,
     namaPengguna: "199911112025212054",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eva Jayanti, A.Md.Keb",
   },
   {
@@ -5160,7 +5161,7 @@ const users = [
     updatedAt: currentDate,
     id: 646,
     namaPengguna: "6401032807930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Fatqur Rohman, S.Ked",
   },
   {
@@ -5168,7 +5169,7 @@ const users = [
     updatedAt: currentDate,
     id: 647,
     namaPengguna: "6401031002970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Feby Saiful Amin, A.Md",
   },
   {
@@ -5176,7 +5177,7 @@ const users = [
     updatedAt: currentDate,
     id: 648,
     namaPengguna: "6401056508970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Hanna Tyas Tuhu Pratiwi",
   },
   {
@@ -5184,7 +5185,7 @@ const users = [
     updatedAt: currentDate,
     id: 649,
     namaPengguna: "6401046612990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hermawati, A.Md.Keb",
   },
   {
@@ -5192,7 +5193,7 @@ const users = [
     updatedAt: currentDate,
     id: 650,
     namaPengguna: "198012172025211046",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kusmayadi",
   },
   {
@@ -5200,7 +5201,7 @@ const users = [
     updatedAt: currentDate,
     id: 651,
     namaPengguna: "6401044107000009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Rosanti, A.md.Keb",
   },
   {
@@ -5208,7 +5209,7 @@ const users = [
     updatedAt: currentDate,
     id: 652,
     namaPengguna: "6401030410940002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Selamet Harianto, S.Kep",
   },
   {
@@ -5216,7 +5217,7 @@ const users = [
     updatedAt: currentDate,
     id: 653,
     namaPengguna: "197704012025211033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supriyadi",
   },
   {
@@ -5224,7 +5225,7 @@ const users = [
     updatedAt: currentDate,
     id: 654,
     namaPengguna: "6213094809950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susilawati, A.Md.Keb",
   },
   {
@@ -5232,7 +5233,7 @@ const users = [
     updatedAt: currentDate,
     id: 655,
     namaPengguna: "6401034709990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Titin Irawati, S.Ftr",
   },
   {
@@ -5240,7 +5241,7 @@ const users = [
     updatedAt: currentDate,
     id: 656,
     namaPengguna: "198804282025211072",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuspadin, A.Md. Kep",
   },
   {
@@ -5248,7 +5249,7 @@ const users = [
     updatedAt: currentDate,
     id: 657,
     namaPengguna: "197207302009092001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Yulianti Setyorini",
   },
   {
@@ -5256,7 +5257,7 @@ const users = [
     updatedAt: currentDate,
     id: 658,
     namaPengguna: "198407022014032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Farida Fitriyah",
   },
   {
@@ -5264,7 +5265,7 @@ const users = [
     updatedAt: currentDate,
     id: 659,
     namaPengguna: "196911181993032007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Neltje Flora Mowilos, A.Md.Kes",
   },
   {
@@ -5272,7 +5273,7 @@ const users = [
     updatedAt: currentDate,
     id: 660,
     namaPengguna: "196906201989112001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hj. Rosda Hasanah, A.Md.Keb",
   },
   {
@@ -5280,7 +5281,7 @@ const users = [
     updatedAt: currentDate,
     id: 661,
     namaPengguna: "199306102019032019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riska Damayanti, S. Farm., Apt",
   },
   {
@@ -5288,7 +5289,7 @@ const users = [
     updatedAt: currentDate,
     id: 662,
     namaPengguna: "197707022003122012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Nurhayati, A.Md.Keb",
   },
   {
@@ -5296,7 +5297,7 @@ const users = [
     updatedAt: currentDate,
     id: 663,
     namaPengguna: "197612202003122005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Isna Arnani, A.Md.Keb",
   },
   {
@@ -5304,7 +5305,7 @@ const users = [
     updatedAt: currentDate,
     id: 664,
     namaPengguna: "197911062006042027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Sanopatmawati, A.Md.Keb",
   },
   {
@@ -5312,7 +5313,7 @@ const users = [
     updatedAt: currentDate,
     id: 665,
     namaPengguna: "198703192011011003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Mulyono, A.Md.Far",
   },
   {
@@ -5320,7 +5321,7 @@ const users = [
     updatedAt: currentDate,
     id: 666,
     namaPengguna: "197803252010011009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hery Suprianto, A.Md",
   },
   {
@@ -5328,7 +5329,7 @@ const users = [
     updatedAt: currentDate,
     id: 667,
     namaPengguna: "199109062019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Nurhafiah, A.Md.Kep.",
   },
   {
@@ -5336,7 +5337,7 @@ const users = [
     updatedAt: currentDate,
     id: 668,
     namaPengguna: "199205232019032017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Fauziah, A.Md.Kep.",
   },
   {
@@ -5344,7 +5345,7 @@ const users = [
     updatedAt: currentDate,
     id: 669,
     namaPengguna: "199309252019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mursidah Irawati, A.Md.Ak.",
   },
   {
@@ -5352,7 +5353,7 @@ const users = [
     updatedAt: currentDate,
     id: 670,
     namaPengguna: "198611252020122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Susanti, A.Md.Kep",
   },
   {
@@ -5360,7 +5361,7 @@ const users = [
     updatedAt: currentDate,
     id: 671,
     namaPengguna: "199203212022032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Retno Mandasari, A.Md.Kep",
   },
   {
@@ -5368,7 +5369,7 @@ const users = [
     updatedAt: currentDate,
     id: 672,
     namaPengguna: "198606162023212002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tuti Pragawati, A.Md. Kep",
   },
   {
@@ -5376,7 +5377,7 @@ const users = [
     updatedAt: currentDate,
     id: 673,
     namaPengguna: "199002182024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erlianti, A.Md.Keb",
   },
   {
@@ -5384,7 +5385,7 @@ const users = [
     updatedAt: currentDate,
     id: 674,
     namaPengguna: "199110162024212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Juliwati, A.Md.Kep",
   },
   {
@@ -5392,7 +5393,7 @@ const users = [
     updatedAt: currentDate,
     id: 675,
     namaPengguna: "199110082024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Purwanti, A.Md.Keb",
   },
   {
@@ -5400,7 +5401,7 @@ const users = [
     updatedAt: currentDate,
     id: 676,
     namaPengguna: "199212052024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Buldaini, A.Md.Kep",
   },
   {
@@ -5408,7 +5409,7 @@ const users = [
     updatedAt: currentDate,
     id: 677,
     namaPengguna: "199508232024212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Lestari. R, A.Md.Kep",
   },
   {
@@ -5416,7 +5417,7 @@ const users = [
     updatedAt: currentDate,
     id: 678,
     namaPengguna: "199612212024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zakiah Ratno Bestary, A.Md.Keb",
   },
   {
@@ -5424,7 +5425,7 @@ const users = [
     updatedAt: currentDate,
     id: 679,
     namaPengguna: "198911142025212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wana Yutiawati, A. Md.Keb",
   },
   {
@@ -5432,7 +5433,7 @@ const users = [
     updatedAt: currentDate,
     id: 680,
     namaPengguna: "199005052025212041",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Pita Suci Syah Putri, A.Md.Kep",
   },
   {
@@ -5440,7 +5441,7 @@ const users = [
     updatedAt: currentDate,
     id: 681,
     namaPengguna: "198711292025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Faridah, Amd,Kep",
   },
   {
@@ -5448,7 +5449,7 @@ const users = [
     updatedAt: currentDate,
     id: 682,
     namaPengguna: "199212252025212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Maryati, A.Md.Kep",
   },
   {
@@ -5456,7 +5457,7 @@ const users = [
     updatedAt: currentDate,
     id: 683,
     namaPengguna: "199306182025211027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Adi Winarto, A.Md.Kep",
   },
   {
@@ -5464,7 +5465,7 @@ const users = [
     updatedAt: currentDate,
     id: 684,
     namaPengguna: "199603042024212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ainun Basirah, S.K.M.",
   },
   {
@@ -5472,7 +5473,7 @@ const users = [
     updatedAt: currentDate,
     id: 685,
     namaPengguna: "199612212025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Puji Ayu Arifah Wulandari, S. Tr. Keb",
   },
   {
@@ -5480,7 +5481,7 @@ const users = [
     updatedAt: currentDate,
     id: 686,
     namaPengguna: "198805042025212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maryanti, S.Si.",
   },
   {
@@ -5488,7 +5489,7 @@ const users = [
     updatedAt: currentDate,
     id: 687,
     namaPengguna: "199203222025211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra Kurniawan, S.Kep",
   },
   {
@@ -5496,7 +5497,7 @@ const users = [
     updatedAt: currentDate,
     id: 688,
     namaPengguna: "6401046807970003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Atikah Maulidah, S.Pd",
   },
   {
@@ -5504,7 +5505,7 @@ const users = [
     updatedAt: currentDate,
     id: 689,
     namaPengguna: "6401046701020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Azizah Nur Afifah, S.Tr.Gz",
   },
   {
@@ -5512,7 +5513,7 @@ const users = [
     updatedAt: currentDate,
     id: 690,
     namaPengguna: "6401046903990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hadriani,A.Md.Farm",
   },
   {
@@ -5520,7 +5521,7 @@ const users = [
     updatedAt: currentDate,
     id: 691,
     namaPengguna: "199503132025211035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iswardhani, A.Md.Kep",
   },
   {
@@ -5528,7 +5529,7 @@ const users = [
     updatedAt: currentDate,
     id: 692,
     namaPengguna: "6401036807940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumaya, A.Md.Keb",
   },
   {
@@ -5536,7 +5537,7 @@ const users = [
     updatedAt: currentDate,
     id: 693,
     namaPengguna: "6474026406910005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Linda Wijayanti, A.Md.Keb",
   },
   {
@@ -5544,7 +5545,7 @@ const users = [
     updatedAt: currentDate,
     id: 694,
     namaPengguna: "6401034207980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Maulidah Hasyiatul Fathiyah",
   },
   {
@@ -5552,7 +5553,7 @@ const users = [
     updatedAt: currentDate,
     id: 695,
     namaPengguna: "199105232025212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maya Sari, S.E.",
   },
   {
@@ -5560,7 +5561,7 @@ const users = [
     updatedAt: currentDate,
     id: 696,
     namaPengguna: "6401032603000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Qodri, A.Md.RMIK",
   },
   {
@@ -5568,7 +5569,7 @@ const users = [
     updatedAt: currentDate,
     id: 697,
     namaPengguna: "6401034709010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nabilah Estiana Luthfi, A.Md.Keb",
   },
   {
@@ -5576,7 +5577,7 @@ const users = [
     updatedAt: currentDate,
     id: 698,
     namaPengguna: "6401046011990005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Hairin Misfie, S.Kom",
   },
   {
@@ -5584,7 +5585,7 @@ const users = [
     updatedAt: currentDate,
     id: 699,
     namaPengguna: "197809102025211048",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ponimin",
   },
   {
@@ -5592,7 +5593,7 @@ const users = [
     updatedAt: currentDate,
     id: 700,
     namaPengguna: "6401094602010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rihul Jannah Suriani, S.K.M",
   },
   {
@@ -5600,7 +5601,7 @@ const users = [
     updatedAt: currentDate,
     id: 701,
     namaPengguna: "198008082025211059",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sartono",
   },
   {
@@ -5608,7 +5609,7 @@ const users = [
     updatedAt: currentDate,
     id: 702,
     namaPengguna: "6401041904000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sigit Imam Sasmito Pasaribu, A.Md.Kep",
   },
   {
@@ -5616,7 +5617,7 @@ const users = [
     updatedAt: currentDate,
     id: 703,
     namaPengguna: "6371027101000011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Erga Nurkhaliza, A.Md.Kes ",
   },
   {
@@ -5624,7 +5625,7 @@ const users = [
     updatedAt: currentDate,
     id: 704,
     namaPengguna: "199003102025212082",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wakhid Nila Sya'adati, A.Md.Kep",
   },
   {
@@ -5632,7 +5633,7 @@ const users = [
     updatedAt: currentDate,
     id: 705,
     namaPengguna: "6401033010990003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zidan Setiawan, A.Md.Kes ",
   },
   {
@@ -5640,7 +5641,7 @@ const users = [
     updatedAt: currentDate,
     id: 706,
     namaPengguna: "196903201991021001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hamid, A.Md.Kep",
   },
   {
@@ -5648,7 +5649,7 @@ const users = [
     updatedAt: currentDate,
     id: 707,
     namaPengguna: "197412151994031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hairuddin, A.Md.Kep",
   },
   {
@@ -5656,7 +5657,7 @@ const users = [
     updatedAt: currentDate,
     id: 708,
     namaPengguna: "196808021989111001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmari, A.Md.Kep",
   },
   {
@@ -5664,7 +5665,7 @@ const users = [
     updatedAt: currentDate,
     id: 709,
     namaPengguna: "197908292006042015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriyawati, A.Md.Keb.",
   },
   {
@@ -5672,7 +5673,7 @@ const users = [
     updatedAt: currentDate,
     id: 710,
     namaPengguna: "197311142002122001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Miati, A.Md.Keb",
   },
   {
@@ -5680,7 +5681,7 @@ const users = [
     updatedAt: currentDate,
     id: 711,
     namaPengguna: "197404122002122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ida Bubun Tasik, A.Md.Keb",
   },
   {
@@ -5688,7 +5689,7 @@ const users = [
     updatedAt: currentDate,
     id: 712,
     namaPengguna: "198606112011011005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasbi Maulana, S.Gz.",
   },
   {
@@ -5696,7 +5697,7 @@ const users = [
     updatedAt: currentDate,
     id: 713,
     namaPengguna: "199412232019032022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syarifah Mifthahul Hayati, S.Farm., Apt.",
   },
   {
@@ -5704,7 +5705,7 @@ const users = [
     updatedAt: currentDate,
     id: 714,
     namaPengguna: "198805222010012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Afriastika, A.Md.Keb",
   },
   {
@@ -5712,7 +5713,7 @@ const users = [
     updatedAt: currentDate,
     id: 715,
     namaPengguna: "198707122010012022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fatmawati, A.Md.Keb",
   },
   {
@@ -5720,7 +5721,7 @@ const users = [
     updatedAt: currentDate,
     id: 716,
     namaPengguna: "198206262009031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Danang Nur Cahyo, A.Mk.G",
   },
   {
@@ -5728,7 +5729,7 @@ const users = [
     updatedAt: currentDate,
     id: 717,
     namaPengguna: "198111282007012008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Pudjiati, Se.",
   },
   {
@@ -5736,7 +5737,7 @@ const users = [
     updatedAt: currentDate,
     id: 718,
     namaPengguna: "197701122006041015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Maserur, S.Tr.Kep.",
   },
   {
@@ -5744,7 +5745,7 @@ const users = [
     updatedAt: currentDate,
     id: 719,
     namaPengguna: "199308012022031010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Muh. Azrul Azhari Djafar",
   },
   {
@@ -5752,7 +5753,7 @@ const users = [
     updatedAt: currentDate,
     id: 720,
     namaPengguna: "197605112006042016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maslianti, S.Keb.",
   },
   {
@@ -5760,7 +5761,7 @@ const users = [
     updatedAt: currentDate,
     id: 721,
     namaPengguna: "198507192009032018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Irawati, A.Md",
   },
   {
@@ -5768,7 +5769,7 @@ const users = [
     updatedAt: currentDate,
     id: 722,
     namaPengguna: "198808262017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sumartila, S. Keb.",
   },
   {
@@ -5776,7 +5777,7 @@ const users = [
     updatedAt: currentDate,
     id: 723,
     namaPengguna: "199008152017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurlinda, S.Keb.",
   },
   {
@@ -5784,7 +5785,7 @@ const users = [
     updatedAt: currentDate,
     id: 724,
     namaPengguna: "199001182019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Januarti, A.Md. Keb.",
   },
   {
@@ -5792,7 +5793,7 @@ const users = [
     updatedAt: currentDate,
     id: 725,
     namaPengguna: "199609242019032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Puji Widiastuti, A.Md.Kep.",
   },
   {
@@ -5800,7 +5801,7 @@ const users = [
     updatedAt: currentDate,
     id: 726,
     namaPengguna: "198707202019032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erni, A.Md.Kl.",
   },
   {
@@ -5808,7 +5809,7 @@ const users = [
     updatedAt: currentDate,
     id: 727,
     namaPengguna: "199903232020122002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nada Arafah Sari, Amd.Keb",
   },
   {
@@ -5816,7 +5817,7 @@ const users = [
     updatedAt: currentDate,
     id: 728,
     namaPengguna: "198602022023212001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Endang Dwi Reknani, A.Md. Kep",
   },
   {
@@ -5824,7 +5825,7 @@ const users = [
     updatedAt: currentDate,
     id: 729,
     namaPengguna: "198811212023212006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisbet. Bt Suardi , A.Md. Kep",
   },
   {
@@ -5832,7 +5833,7 @@ const users = [
     updatedAt: currentDate,
     id: 730,
     namaPengguna: "198909132024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sapta Rianti, Amd. Keb",
   },
   {
@@ -5840,7 +5841,7 @@ const users = [
     updatedAt: currentDate,
     id: 731,
     namaPengguna: "199010052024212042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Wahdaniyati, A.Md.Keb",
   },
   {
@@ -5848,7 +5849,7 @@ const users = [
     updatedAt: currentDate,
     id: 732,
     namaPengguna: "199301032024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Novita Parerungan, A.M.K",
   },
   {
@@ -5856,7 +5857,7 @@ const users = [
     updatedAt: currentDate,
     id: 733,
     namaPengguna: "199107162024211021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dian Dwi Saputra, A.Md.Kep",
   },
   {
@@ -5864,7 +5865,7 @@ const users = [
     updatedAt: currentDate,
     id: 734,
     namaPengguna: "199706092024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widiyastuti, A.Md.Keb",
   },
   {
@@ -5872,7 +5873,7 @@ const users = [
     updatedAt: currentDate,
     id: 735,
     namaPengguna: "198905112025211017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Ilmi, A.Md.Kep",
   },
   {
@@ -5880,7 +5881,7 @@ const users = [
     updatedAt: currentDate,
     id: 736,
     namaPengguna: "199008162025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Hafsyah Mubarokah, A.Md.Keb",
   },
   {
@@ -5888,7 +5889,7 @@ const users = [
     updatedAt: currentDate,
     id: 737,
     namaPengguna: "199009092025212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syafari Yunita, A.Md.Keb",
   },
   {
@@ -5896,7 +5897,7 @@ const users = [
     updatedAt: currentDate,
     id: 738,
     namaPengguna: "199011192025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Delvina Nor Dahlia, A.Md.Keb",
   },
   {
@@ -5904,7 +5905,7 @@ const users = [
     updatedAt: currentDate,
     id: 739,
     namaPengguna: "199112052025211025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ade Hermawan, A.Md.Ak",
   },
   {
@@ -5912,7 +5913,7 @@ const users = [
     updatedAt: currentDate,
     id: 740,
     namaPengguna: "199011122025211020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M.Saripandi, A.Md,Kep",
   },
   {
@@ -5920,7 +5921,7 @@ const users = [
     updatedAt: currentDate,
     id: 741,
     namaPengguna: "199107102025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indra Wahyudi, A.Md.Kep",
   },
   {
@@ -5928,7 +5929,7 @@ const users = [
     updatedAt: currentDate,
     id: 742,
     namaPengguna: "199404262025212013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Jumiati, A.Md.Keb",
   },
   {
@@ -5936,7 +5937,7 @@ const users = [
     updatedAt: currentDate,
     id: 743,
     namaPengguna: "198911222025212007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anita Setyawati",
   },
   {
@@ -5944,7 +5945,7 @@ const users = [
     updatedAt: currentDate,
     id: 744,
     namaPengguna: "199511082025211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Faruk",
   },
   {
@@ -5952,7 +5953,7 @@ const users = [
     updatedAt: currentDate,
     id: 745,
     namaPengguna: "199612142025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahidatun Khasanah",
   },
   {
@@ -5960,7 +5961,7 @@ const users = [
     updatedAt: currentDate,
     id: 746,
     namaPengguna: "199407042024211017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Akhmad Fahriza, Skm",
   },
   {
@@ -5968,7 +5969,7 @@ const users = [
     updatedAt: currentDate,
     id: 747,
     namaPengguna: "6401046208010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anggraita Nur Rahmi, SKM",
   },
   {
@@ -5976,7 +5977,7 @@ const users = [
     updatedAt: currentDate,
     id: 748,
     namaPengguna: "6401040502920002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asriansyah ",
   },
   {
@@ -5984,7 +5985,7 @@ const users = [
     updatedAt: currentDate,
     id: 749,
     namaPengguna: "6471056311960006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aulianti Rahmah, S.Ft.,Ftr",
   },
   {
@@ -5992,7 +5993,7 @@ const users = [
     updatedAt: currentDate,
     id: 750,
     namaPengguna: "199803022025212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Pridayanti, A.amd.Kep",
   },
   {
@@ -6000,7 +6001,7 @@ const users = [
     updatedAt: currentDate,
     id: 751,
     namaPengguna: "1209200404030005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Wahyu Rasidi",
   },
   {
@@ -6008,7 +6009,7 @@ const users = [
     updatedAt: currentDate,
     id: 752,
     namaPengguna: "6401045007920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ekasari,A.Md.Keb",
   },
   {
@@ -6016,7 +6017,7 @@ const users = [
     updatedAt: currentDate,
     id: 753,
     namaPengguna: "199104102025211086",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kurniadi, A.Md.Kep",
   },
   {
@@ -6024,7 +6025,7 @@ const users = [
     updatedAt: currentDate,
     id: 754,
     namaPengguna: "6401020706920002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Dalle, A.Md.Kep",
   },
   {
@@ -6032,7 +6033,7 @@ const users = [
     updatedAt: currentDate,
     id: 755,
     namaPengguna: "6401044902040001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nia Azzahra Rahmanto, A.Md.Kes",
   },
   {
@@ -6040,7 +6041,7 @@ const users = [
     updatedAt: currentDate,
     id: 756,
     namaPengguna: "6401095211920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurjanah A.Md.Keb",
   },
   {
@@ -6048,7 +6049,7 @@ const users = [
     updatedAt: currentDate,
     id: 757,
     namaPengguna: "6402066811910001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizky Novia Prahesti",
   },
   {
@@ -6056,7 +6057,7 @@ const users = [
     updatedAt: currentDate,
     id: 758,
     namaPengguna: "6401095112970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sai Atun Naziah, A.Md.Keb",
   },
   {
@@ -6064,7 +6065,7 @@ const users = [
     updatedAt: currentDate,
     id: 759,
     namaPengguna: "198604092025212042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sainah",
   },
   {
@@ -6072,7 +6073,7 @@ const users = [
     updatedAt: currentDate,
     id: 760,
     namaPengguna: "198311052025212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siswati",
   },
   {
@@ -6080,7 +6081,7 @@ const users = [
     updatedAt: currentDate,
     id: 761,
     namaPengguna: "6401035407880002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Sri Windarti,S.Farm",
   },
   {
@@ -6088,7 +6089,7 @@ const users = [
     updatedAt: currentDate,
     id: 762,
     namaPengguna: "3522136403980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zefia Lailatul Rosyida, A.Md.Keb",
   },
   {
@@ -6096,7 +6097,7 @@ const users = [
     updatedAt: currentDate,
     id: 763,
     namaPengguna: "198712222009032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Marwah, S.Kep.Ners",
   },
   {
@@ -6104,7 +6105,7 @@ const users = [
     updatedAt: currentDate,
     id: 764,
     namaPengguna: "198808162010012011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Siti Nur Ainun Jariah, S.Tr.Keb.",
   },
   {
@@ -6112,7 +6113,7 @@ const users = [
     updatedAt: currentDate,
     id: 765,
     namaPengguna: "198608072009032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Nikmawati, A.Md.Keb",
   },
   {
@@ -6120,7 +6121,7 @@ const users = [
     updatedAt: currentDate,
     id: 766,
     namaPengguna: "198612172019031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Fitrah Hidayat Guntur",
   },
   {
@@ -6128,7 +6129,7 @@ const users = [
     updatedAt: currentDate,
     id: 767,
     namaPengguna: "199610242022032015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Raudatul Amaliah",
   },
   {
@@ -6136,7 +6137,7 @@ const users = [
     updatedAt: currentDate,
     id: 768,
     namaPengguna: "196809172007012018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suryani",
   },
   {
@@ -6144,7 +6145,7 @@ const users = [
     updatedAt: currentDate,
     id: 769,
     namaPengguna: "199007192017052003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aini Nurdin, S.Keb.",
   },
   {
@@ -6152,7 +6153,7 @@ const users = [
     updatedAt: currentDate,
     id: 770,
     namaPengguna: "199208172017052003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muthmainnah, A.Md.Keb.",
   },
   {
@@ -6160,7 +6161,7 @@ const users = [
     updatedAt: currentDate,
     id: 771,
     namaPengguna: "199207302017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Nur Ainun, A.Md.Keb",
   },
   {
@@ -6168,7 +6169,7 @@ const users = [
     updatedAt: currentDate,
     id: 772,
     namaPengguna: "198407092019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siswoyowati, A.Md.Kl",
   },
   {
@@ -6176,7 +6177,7 @@ const users = [
     updatedAt: currentDate,
     id: 773,
     namaPengguna: "199108302020122019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iriana Sananta, Amd.Kep.",
   },
   {
@@ -6184,7 +6185,7 @@ const users = [
     updatedAt: currentDate,
     id: 774,
     namaPengguna: "199306052020122024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Alfian Khumairoh, A.Md.Keb",
   },
   {
@@ -6192,7 +6193,7 @@ const users = [
     updatedAt: currentDate,
     id: 775,
     namaPengguna: "198005102006041018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Yassir Arafat,  A.Md.Kep.",
   },
   {
@@ -6200,7 +6201,7 @@ const users = [
     updatedAt: currentDate,
     id: 776,
     namaPengguna: "199302102022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Ainun Jariah, A.Md.Keb",
   },
   {
@@ -6208,7 +6209,7 @@ const users = [
     updatedAt: currentDate,
     id: 777,
     namaPengguna: "198008152007012009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kamriah",
   },
   {
@@ -6216,7 +6217,7 @@ const users = [
     updatedAt: currentDate,
     id: 778,
     namaPengguna: "199105312023212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nur Raisah Ulfah",
   },
   {
@@ -6224,7 +6225,7 @@ const users = [
     updatedAt: currentDate,
     id: 779,
     namaPengguna: "198501222023212001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Hasanah, A.Md. Kep",
   },
   {
@@ -6232,7 +6233,7 @@ const users = [
     updatedAt: currentDate,
     id: 780,
     namaPengguna: "198702012023211002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sukardi, A.Md, Kep",
   },
   {
@@ -6240,7 +6241,7 @@ const users = [
     updatedAt: currentDate,
     id: 781,
     namaPengguna: "198710132024212012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Ainun Jariah, A.Md.Keb",
   },
   {
@@ -6248,7 +6249,7 @@ const users = [
     updatedAt: currentDate,
     id: 782,
     namaPengguna: "198802242024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wasliah, A.Md.Keb",
   },
   {
@@ -6256,7 +6257,7 @@ const users = [
     updatedAt: currentDate,
     id: 783,
     namaPengguna: "198903232024212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hajeria, A.Md.Keb",
   },
   {
@@ -6264,7 +6265,7 @@ const users = [
     updatedAt: currentDate,
     id: 784,
     namaPengguna: "198810282024211012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Rizal Efendi, A. Md. Kep",
   },
   {
@@ -6272,7 +6273,7 @@ const users = [
     updatedAt: currentDate,
     id: 785,
     namaPengguna: "199006172024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Halipah, A.Md.Kep",
   },
   {
@@ -6280,7 +6281,7 @@ const users = [
     updatedAt: currentDate,
     id: 786,
     namaPengguna: "199104202024211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Syahruddin, A.Md.Kep",
   },
   {
@@ -6288,7 +6289,7 @@ const users = [
     updatedAt: currentDate,
     id: 787,
     namaPengguna: "199403132024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Darma Sapitri, Amd.Ak",
   },
   {
@@ -6296,7 +6297,7 @@ const users = [
     updatedAt: currentDate,
     id: 788,
     namaPengguna: "199403212024212035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Anjani, A.Md.Keb",
   },
   {
@@ -6304,7 +6305,7 @@ const users = [
     updatedAt: currentDate,
     id: 789,
     namaPengguna: "199512132024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurjannah Ali Akbar, A.Md.Kep",
   },
   {
@@ -6312,7 +6313,7 @@ const users = [
     updatedAt: currentDate,
     id: 790,
     namaPengguna: "199005022025212039",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Irawati Anwar, A.Md.Kep",
   },
   {
@@ -6320,7 +6321,7 @@ const users = [
     updatedAt: currentDate,
     id: 791,
     namaPengguna: "198810152025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bulkis, A.Md. Kep",
   },
   {
@@ -6328,7 +6329,7 @@ const users = [
     updatedAt: currentDate,
     id: 792,
     namaPengguna: "199112232025211020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Wahyu Wardana, A.Md.Kep",
   },
   {
@@ -6336,7 +6337,7 @@ const users = [
     updatedAt: currentDate,
     id: 793,
     namaPengguna: "199311102025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lilis Mulianti, A.Md.Keb",
   },
   {
@@ -6344,7 +6345,7 @@ const users = [
     updatedAt: currentDate,
     id: 794,
     namaPengguna: "199312062025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muldiah, A.Md,Keb",
   },
   {
@@ -6352,7 +6353,7 @@ const users = [
     updatedAt: currentDate,
     id: 795,
     namaPengguna: "199703272025211008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rudiansyah, A.Md.Kep",
   },
   {
@@ -6360,7 +6361,7 @@ const users = [
     updatedAt: currentDate,
     id: 796,
     namaPengguna: "197312122025211009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arbain",
   },
   {
@@ -6368,7 +6369,7 @@ const users = [
     updatedAt: currentDate,
     id: 797,
     namaPengguna: "199204052025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiati",
   },
   {
@@ -6376,7 +6377,7 @@ const users = [
     updatedAt: currentDate,
     id: 798,
     namaPengguna: "199612232025211010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdul Aziz",
   },
   {
@@ -6384,7 +6385,7 @@ const users = [
     updatedAt: currentDate,
     id: 799,
     namaPengguna: "199804212024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Ainun Jariah, Skm",
   },
   {
@@ -6392,7 +6393,7 @@ const users = [
     updatedAt: currentDate,
     id: 800,
     namaPengguna: "198304022025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Jumrah, Skm",
   },
   {
@@ -6400,7 +6401,7 @@ const users = [
     updatedAt: currentDate,
     id: 801,
     namaPengguna: "199307122025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Rapita, S.Tr.Keb",
   },
   {
@@ -6408,7 +6409,7 @@ const users = [
     updatedAt: currentDate,
     id: 802,
     namaPengguna: "197809112025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Deki, Se",
   },
   {
@@ -6416,7 +6417,7 @@ const users = [
     updatedAt: currentDate,
     id: 803,
     namaPengguna: "6401026210030000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alviani Rahmi Putri, A.Md.Kep",
   },
   {
@@ -6424,7 +6425,7 @@ const users = [
     updatedAt: currentDate,
     id: 804,
     namaPengguna: "6401024508020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aura Ayu Atramadani, A.Md.Keb ",
   },
   {
@@ -6432,7 +6433,7 @@ const users = [
     updatedAt: currentDate,
     id: 805,
     namaPengguna: "199107182025211069",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bukhari",
   },
   {
@@ -6440,7 +6441,7 @@ const users = [
     updatedAt: currentDate,
     id: 806,
     namaPengguna: "6401044311990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Inda Purnamasari,A.Md.Kep",
   },
   {
@@ -6448,7 +6449,7 @@ const users = [
     updatedAt: currentDate,
     id: 807,
     namaPengguna: "6401025205000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiati, A.Md.RMIK",
   },
   {
@@ -6456,7 +6457,7 @@ const users = [
     updatedAt: currentDate,
     id: 808,
     namaPengguna: "199903082025212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kasmatang",
   },
   {
@@ -6464,7 +6465,7 @@ const users = [
     updatedAt: currentDate,
     id: 809,
     namaPengguna: "6401026505010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kiki Anggraeni, SE",
   },
   {
@@ -6472,7 +6473,7 @@ const users = [
     updatedAt: currentDate,
     id: 810,
     namaPengguna: "6401026406950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mardiana, A.Md.Gz",
   },
   {
@@ -6480,7 +6481,7 @@ const users = [
     updatedAt: currentDate,
     id: 811,
     namaPengguna: "199007282025211077",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Aris ",
   },
   {
@@ -6488,7 +6489,7 @@ const users = [
     updatedAt: currentDate,
     id: 812,
     namaPengguna: "7273032207930012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Muhammad Irham Nur’ iva",
   },
   {
@@ -6496,7 +6497,7 @@ const users = [
     updatedAt: currentDate,
     id: 813,
     namaPengguna: "6302115405020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Musdalipah,A.Md.Kep",
   },
   {
@@ -6504,7 +6505,7 @@ const users = [
     updatedAt: currentDate,
     id: 814,
     namaPengguna: "6401026007000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nisa Nurhafifah A.Md,Kes",
   },
   {
@@ -6512,7 +6513,7 @@ const users = [
     updatedAt: currentDate,
     id: 815,
     namaPengguna: "6401024901020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novia Ariani, A.md.,Kep",
   },
   {
@@ -6520,7 +6521,7 @@ const users = [
     updatedAt: currentDate,
     id: 816,
     namaPengguna: "6401026911000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aena Amd. Kes",
   },
   {
@@ -6528,7 +6529,7 @@ const users = [
     updatedAt: currentDate,
     id: 817,
     namaPengguna: "6401024806980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nuraena,A.Md.Keb",
   },
   {
@@ -6536,7 +6537,7 @@ const users = [
     updatedAt: currentDate,
     id: 818,
     namaPengguna: "6401024107030002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Fadillah A.Md.Kep",
   },
   {
@@ -6544,7 +6545,7 @@ const users = [
     updatedAt: currentDate,
     id: 819,
     namaPengguna: "6401026802930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahayu, S.Farm",
   },
   {
@@ -6552,7 +6553,7 @@ const users = [
     updatedAt: currentDate,
     id: 820,
     namaPengguna: "6401025910970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ramliana S.E",
   },
   {
@@ -6560,7 +6561,7 @@ const users = [
     updatedAt: currentDate,
     id: 821,
     namaPengguna: "6401026606030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Raodah Tuljannah, A.Md.Kep",
   },
   {
@@ -6568,7 +6569,7 @@ const users = [
     updatedAt: currentDate,
     id: 822,
     namaPengguna: "6401021005010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Resky Yansah Sazali, A.Md.Kep",
   },
   {
@@ -6576,7 +6577,7 @@ const users = [
     updatedAt: currentDate,
     id: 823,
     namaPengguna: "199104012025212081",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusnaini",
   },
   {
@@ -6584,7 +6585,7 @@ const users = [
     updatedAt: currentDate,
     id: 824,
     namaPengguna: "6401024209940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Ardianti Niswa A.md.Keb",
   },
   {
@@ -6592,7 +6593,7 @@ const users = [
     updatedAt: currentDate,
     id: 825,
     namaPengguna: "6401044304960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Yandini Putri Aprilidana, S.Farm",
   },
   {
@@ -6600,7 +6601,7 @@ const users = [
     updatedAt: currentDate,
     id: 826,
     namaPengguna: "6401024802990003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zulfatul Jannah",
   },
   {
@@ -6608,7 +6609,7 @@ const users = [
     updatedAt: currentDate,
     id: 827,
     namaPengguna: "198701052014122002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Sri Handaryati",
   },
   {
@@ -6616,7 +6617,7 @@ const users = [
     updatedAt: currentDate,
     id: 828,
     namaPengguna: "199101042019031015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Rio Saputra, S. Farm",
   },
   {
@@ -6624,7 +6625,7 @@ const users = [
     updatedAt: currentDate,
     id: 829,
     namaPengguna: "198504022011011003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muh. Hero Dhananjaya, Amg",
   },
   {
@@ -6632,7 +6633,7 @@ const users = [
     updatedAt: currentDate,
     id: 830,
     namaPengguna: "198607272010012034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sitti Marwah, A.Md.Keb",
   },
   {
@@ -6640,7 +6641,7 @@ const users = [
     updatedAt: currentDate,
     id: 831,
     namaPengguna: "198804052010012014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rita Risnawati, A.Md.Keb.",
   },
   {
@@ -6648,7 +6649,7 @@ const users = [
     updatedAt: currentDate,
     id: 832,
     namaPengguna: "198001292003122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Sri Mulyani, , S.Tr.Keb",
   },
   {
@@ -6656,7 +6657,7 @@ const users = [
     updatedAt: currentDate,
     id: 833,
     namaPengguna: "199312142022032015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nety Nur Rahmiah Puspitasari, S.Ked",
   },
   {
@@ -6664,7 +6665,7 @@ const users = [
     updatedAt: currentDate,
     id: 834,
     namaPengguna: "199502182022032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rini Rositah",
   },
   {
@@ -6672,7 +6673,7 @@ const users = [
     updatedAt: currentDate,
     id: 835,
     namaPengguna: "198804232014032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norjannah, Amkg",
   },
   {
@@ -6680,7 +6681,7 @@ const users = [
     updatedAt: currentDate,
     id: 836,
     namaPengguna: "199011012017052002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Haryanti, A.Md.Keb",
   },
   {
@@ -6688,7 +6689,7 @@ const users = [
     updatedAt: currentDate,
     id: 837,
     namaPengguna: "199009122017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Septiani Tri Astuti, A.Md.Keb",
   },
   {
@@ -6696,7 +6697,7 @@ const users = [
     updatedAt: currentDate,
     id: 838,
     namaPengguna: "199309082019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indah Kurnia Widiningsih, A.Md.Ak.",
   },
   {
@@ -6704,7 +6705,7 @@ const users = [
     updatedAt: currentDate,
     id: 839,
     namaPengguna: "199411102019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Akhmad Badali, A.Md.Kep.",
   },
   {
@@ -6712,7 +6713,7 @@ const users = [
     updatedAt: currentDate,
     id: 840,
     namaPengguna: "199009142019032015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur'aini Jamil , A.Md. Keb.",
   },
   {
@@ -6720,7 +6721,7 @@ const users = [
     updatedAt: currentDate,
     id: 841,
     namaPengguna: "199205262020122019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Astuti, Amd.Kep",
   },
   {
@@ -6728,7 +6729,7 @@ const users = [
     updatedAt: currentDate,
     id: 842,
     namaPengguna: "199307052020122027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suminten, A.Md.Keb",
   },
   {
@@ -6736,7 +6737,7 @@ const users = [
     updatedAt: currentDate,
     id: 843,
     namaPengguna: "199305212022032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Saidatun Nazriah, A.Md.Kep",
   },
   {
@@ -6744,7 +6745,7 @@ const users = [
     updatedAt: currentDate,
     id: 844,
     namaPengguna: "199305082022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Zulaiha, A.Md.Keb",
   },
   {
@@ -6752,7 +6753,7 @@ const users = [
     updatedAt: currentDate,
     id: 845,
     namaPengguna: "199202032025212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Saniati Ayu Purnamasari, S.Kep",
   },
   {
@@ -6760,7 +6761,7 @@ const users = [
     updatedAt: currentDate,
     id: 846,
     namaPengguna: "198306132024212009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Sarah, A.Md.Kep",
   },
   {
@@ -6768,7 +6769,7 @@ const users = [
     updatedAt: currentDate,
     id: 847,
     namaPengguna: "199012292024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitria Ulandari, A. Md. Keb",
   },
   {
@@ -6776,7 +6777,7 @@ const users = [
     updatedAt: currentDate,
     id: 848,
     namaPengguna: "199104112024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widya Rahmadayanti, A. Md. Kep",
   },
   {
@@ -6784,7 +6785,7 @@ const users = [
     updatedAt: currentDate,
     id: 849,
     namaPengguna: "199106142024211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dedi Sofyan Nur, A.Md.Kep",
   },
   {
@@ -6792,7 +6793,7 @@ const users = [
     updatedAt: currentDate,
     id: 850,
     namaPengguna: "199408112024212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dina Maulidah Rahmi, A.Md.Keb",
   },
   {
@@ -6800,7 +6801,7 @@ const users = [
     updatedAt: currentDate,
     id: 851,
     namaPengguna: "199408102024212039",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Atika Agustina, A.Md.Keb",
   },
   {
@@ -6808,7 +6809,7 @@ const users = [
     updatedAt: currentDate,
     id: 852,
     namaPengguna: "199606152024212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuni Audya, A.Md.Keb",
   },
   {
@@ -6816,7 +6817,7 @@ const users = [
     updatedAt: currentDate,
     id: 853,
     namaPengguna: "199609162024212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rosiana Kewa, A.Md.Kep",
   },
   {
@@ -6824,7 +6825,7 @@ const users = [
     updatedAt: currentDate,
     id: 854,
     namaPengguna: "199408272025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriati, A.Md.Kep",
   },
   {
@@ -6832,7 +6833,7 @@ const users = [
     updatedAt: currentDate,
     id: 855,
     namaPengguna: "198212062025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuliana, Amd. Kep",
   },
   {
@@ -6840,7 +6841,7 @@ const users = [
     updatedAt: currentDate,
     id: 856,
     namaPengguna: "198404012025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aan Kuswati, A.Md.Kep",
   },
   {
@@ -6848,7 +6849,7 @@ const users = [
     updatedAt: currentDate,
     id: 857,
     namaPengguna: "199010292025211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Azis, A. Md. Kep",
   },
   {
@@ -6856,7 +6857,7 @@ const users = [
     updatedAt: currentDate,
     id: 858,
     namaPengguna: "199410102025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jannatul Aulia, A.Md.Kep",
   },
   {
@@ -6864,7 +6865,7 @@ const users = [
     updatedAt: currentDate,
     id: 859,
     namaPengguna: "6401106311950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Armawati.,S.Kep",
   },
   {
@@ -6872,7 +6873,7 @@ const users = [
     updatedAt: currentDate,
     id: 860,
     namaPengguna: "6401011910990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmiati Nurul Hikmah, A.Md.Farm",
   },
   {
@@ -6880,7 +6881,7 @@ const users = [
     updatedAt: currentDate,
     id: 861,
     namaPengguna: "641044810960002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns.Ayu Asari.S.Kep",
   },
   {
@@ -6888,7 +6889,7 @@ const users = [
     updatedAt: currentDate,
     id: 862,
     namaPengguna: "200208252025212008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dika Indah Nuriyantri",
   },
   {
@@ -6896,7 +6897,7 @@ const users = [
     updatedAt: currentDate,
     id: 863,
     namaPengguna: "198903162025211095",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fiki Anggrianto, A.Md. Kep",
   },
   {
@@ -6904,7 +6905,7 @@ const users = [
     updatedAt: currentDate,
     id: 864,
     namaPengguna: "7317164203880003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hadriani,A.Md.Kep",
   },
   {
@@ -6912,7 +6913,7 @@ const users = [
     updatedAt: currentDate,
     id: 865,
     namaPengguna: "6401044507960003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Hafizah, S.Farm",
   },
   {
@@ -6920,7 +6921,7 @@ const users = [
     updatedAt: currentDate,
     id: 866,
     namaPengguna: "199702282025212067",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Henika sari, S. Kep",
   },
   {
@@ -6928,7 +6929,7 @@ const users = [
     updatedAt: currentDate,
     id: 867,
     namaPengguna: "6401106811990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indarmawati,SKM",
   },
   {
@@ -6936,7 +6937,7 @@ const users = [
     updatedAt: currentDate,
     id: 868,
     namaPengguna: "6401101504970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jainudin",
   },
   {
@@ -6944,7 +6945,7 @@ const users = [
     updatedAt: currentDate,
     id: 869,
     namaPengguna: "198701252025211058",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marhani",
   },
   {
@@ -6952,7 +6953,7 @@ const users = [
     updatedAt: currentDate,
     id: 870,
     namaPengguna: "6401096703990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aulia,Amd.Keb",
   },
   {
@@ -6960,7 +6961,7 @@ const users = [
     updatedAt: currentDate,
     id: 871,
     namaPengguna: "7308195109960005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Rivka Ekasari, A.Md.keb",
   },
   {
@@ -6968,7 +6969,7 @@ const users = [
     updatedAt: currentDate,
     id: 872,
     namaPengguna: "3313081805760001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Setiawan",
   },
   {
@@ -6976,7 +6977,7 @@ const users = [
     updatedAt: currentDate,
     id: 873,
     namaPengguna: "198811162025211081",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supriono, A.Md.Kep",
   },
   {
@@ -6984,7 +6985,7 @@ const users = [
     updatedAt: currentDate,
     id: 874,
     namaPengguna: "6401106302980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Winda Indriani,S.Kep",
   },
   {
@@ -6992,7 +6993,7 @@ const users = [
     updatedAt: currentDate,
     id: 875,
     namaPengguna: "6401105506860002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yunita Yulia Safitri",
   },
   {
@@ -7000,7 +7001,7 @@ const users = [
     updatedAt: currentDate,
     id: 876,
     namaPengguna: "197310071993032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Norkaya, S.St",
   },
   {
@@ -7008,7 +7009,7 @@ const users = [
     updatedAt: currentDate,
     id: 877,
     namaPengguna: "196510211987112002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lise Anita, Skm",
   },
   {
@@ -7016,7 +7017,7 @@ const users = [
     updatedAt: currentDate,
     id: 878,
     namaPengguna: "197507042006041007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: ", Dr. Putra Jaya Kusuma, M.K.M.",
   },
   {
@@ -7024,7 +7025,7 @@ const users = [
     updatedAt: currentDate,
     id: 879,
     namaPengguna: "197208241991022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Salasiah, A.Md.Keb A.Md",
   },
   {
@@ -7032,7 +7033,7 @@ const users = [
     updatedAt: currentDate,
     id: 880,
     namaPengguna: "197207071994031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fahrudin Rahman, A.Md.Kep",
   },
   {
@@ -7040,7 +7041,7 @@ const users = [
     updatedAt: currentDate,
     id: 881,
     namaPengguna: "197910012011012004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Asridar",
   },
   {
@@ -7048,7 +7049,7 @@ const users = [
     updatedAt: currentDate,
     id: 882,
     namaPengguna: "196904191992031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sofianur, A.Md.Kep",
   },
   {
@@ -7056,7 +7057,7 @@ const users = [
     updatedAt: currentDate,
     id: 883,
     namaPengguna: "198707232008042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Ema Suliyusti Pratiwi, S.Tr.Keb.",
   },
   {
@@ -7064,7 +7065,7 @@ const users = [
     updatedAt: currentDate,
     id: 884,
     namaPengguna: "198401112006041005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chandra Irawan, S.Tr.Kep., Ns.",
   },
   {
@@ -7072,7 +7073,7 @@ const users = [
     updatedAt: currentDate,
     id: 885,
     namaPengguna: "199401202019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kartika Damasanti Mamonto, S. Farm., Apt.",
   },
   {
@@ -7080,7 +7081,7 @@ const users = [
     updatedAt: currentDate,
     id: 886,
     namaPengguna: "197111241994032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rinelsi Purba, A.Md.Gz",
   },
   {
@@ -7088,7 +7089,7 @@ const users = [
     updatedAt: currentDate,
     id: 887,
     namaPengguna: "198508072010012026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norbaiyah, A.Md.Keb",
   },
   {
@@ -7096,7 +7097,7 @@ const users = [
     updatedAt: currentDate,
     id: 888,
     namaPengguna: "198812222010012004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Dasmy Anasiswaty, , S.Tr.Keb.",
   },
   {
@@ -7104,7 +7105,7 @@ const users = [
     updatedAt: currentDate,
     id: 889,
     namaPengguna: "197711272011012001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ribka Tonglo, Amkl",
   },
   {
@@ -7112,7 +7113,7 @@ const users = [
     updatedAt: currentDate,
     id: 890,
     namaPengguna: "197708082003122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Adiyanti, A.Md.Keb",
   },
   {
@@ -7120,7 +7121,7 @@ const users = [
     updatedAt: currentDate,
     id: 891,
     namaPengguna: "198102172010012014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nanik Widyaningsih, A.Md.Kep",
   },
   {
@@ -7128,7 +7129,7 @@ const users = [
     updatedAt: currentDate,
     id: 892,
     namaPengguna: "198706072010012029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yunia Tenmar Susanti, A.Md.Far.",
   },
   {
@@ -7136,7 +7137,7 @@ const users = [
     updatedAt: currentDate,
     id: 893,
     namaPengguna: "197907072007012017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriani, A.Md.Kep.",
   },
   {
@@ -7144,7 +7145,7 @@ const users = [
     updatedAt: currentDate,
     id: 894,
     namaPengguna: "199504162022031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Andrew Rozaan Fadlurrahman",
   },
   {
@@ -7152,7 +7153,7 @@ const users = [
     updatedAt: currentDate,
     id: 895,
     namaPengguna: "197908232006042020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Dewi Fitriyani, , S.Tr.Keb.",
   },
   {
@@ -7160,7 +7161,7 @@ const users = [
     updatedAt: currentDate,
     id: 896,
     namaPengguna: "197603202006041006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riduan Hadi, A.Md.Kg",
   },
   {
@@ -7168,7 +7169,7 @@ const users = [
     updatedAt: currentDate,
     id: 897,
     namaPengguna: "198803212014032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Sri Haryati, A.Md.Keb",
   },
   {
@@ -7176,7 +7177,7 @@ const users = [
     updatedAt: currentDate,
     id: 898,
     namaPengguna: "198402282005022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maisarah,  A.Md.Kes",
   },
   {
@@ -7184,7 +7185,7 @@ const users = [
     updatedAt: currentDate,
     id: 899,
     namaPengguna: "199001222017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susi Susanti, A.Md.Keb",
   },
   {
@@ -7192,7 +7193,7 @@ const users = [
     updatedAt: currentDate,
     id: 900,
     namaPengguna: "199005132017052002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Laksana Wulandari, A.Md.Keb",
   },
   {
@@ -7200,7 +7201,7 @@ const users = [
     updatedAt: currentDate,
     id: 901,
     namaPengguna: "199105192017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tati Ramelan, A.Md.Keb",
   },
   {
@@ -7208,7 +7209,7 @@ const users = [
     updatedAt: currentDate,
     id: 902,
     namaPengguna: "199002012019032019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Febriyani, A.Md. Keb.",
   },
   {
@@ -7216,7 +7217,7 @@ const users = [
     updatedAt: currentDate,
     id: 903,
     namaPengguna: "199306182019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Khairiah Hafsah, A.Md.Kg.",
   },
   {
@@ -7224,7 +7225,7 @@ const users = [
     updatedAt: currentDate,
     id: 904,
     namaPengguna: "199209292022032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Sella Purnamasari, A.Md.Keb",
   },
   {
@@ -7232,7 +7233,7 @@ const users = [
     updatedAt: currentDate,
     id: 905,
     namaPengguna: "199511052023212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Ika Fitriani, A.Md.Gz",
   },
   {
@@ -7240,7 +7241,7 @@ const users = [
     updatedAt: currentDate,
     id: 906,
     namaPengguna: "198712202024212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Ferawati, A.Md.Kep",
   },
   {
@@ -7248,7 +7249,7 @@ const users = [
     updatedAt: currentDate,
     id: 907,
     namaPengguna: "199009032024212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Hayati, Amd.Kep.",
   },
   {
@@ -7256,7 +7257,7 @@ const users = [
     updatedAt: currentDate,
     id: 908,
     namaPengguna: "199010252024212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Musdalipah, A.Md.Keb",
   },
   {
@@ -7264,7 +7265,7 @@ const users = [
     updatedAt: currentDate,
     id: 909,
     namaPengguna: "199102012024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Putri Cahyani, A.Md.Keb",
   },
   {
@@ -7272,7 +7273,7 @@ const users = [
     updatedAt: currentDate,
     id: 910,
     namaPengguna: "198804192024212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norviana, A.Md.Kep",
   },
   {
@@ -7280,7 +7281,7 @@ const users = [
     updatedAt: currentDate,
     id: 911,
     namaPengguna: "199111302024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anggun Sulastri Dewi, A.Md.Kep",
   },
   {
@@ -7288,7 +7289,7 @@ const users = [
     updatedAt: currentDate,
     id: 912,
     namaPengguna: "199311162024212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Silia Novita Ardianti, A.Md.Keb",
   },
   {
@@ -7296,7 +7297,7 @@ const users = [
     updatedAt: currentDate,
     id: 913,
     namaPengguna: "199511022024212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rima Melati Hartoyo, A.Md.Keb",
   },
   {
@@ -7304,7 +7305,7 @@ const users = [
     updatedAt: currentDate,
     id: 914,
     namaPengguna: "199706112024211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alfenorrahman, A.Md.Ak",
   },
   {
@@ -7312,7 +7313,7 @@ const users = [
     updatedAt: currentDate,
     id: 915,
     namaPengguna: "199803142024212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Luthfia Ulfah, A.Md.Keb",
   },
   {
@@ -7320,7 +7321,7 @@ const users = [
     updatedAt: currentDate,
     id: 916,
     namaPengguna: "198007172025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bertha Kondo, A.Md. Kep",
   },
   {
@@ -7328,7 +7329,7 @@ const users = [
     updatedAt: currentDate,
     id: 917,
     namaPengguna: "198309072025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Astuti, A.Md.Kep",
   },
   {
@@ -7336,7 +7337,7 @@ const users = [
     updatedAt: currentDate,
     id: 918,
     namaPengguna: "199103012025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitrohtin Hidayati, A.Md.Ak",
   },
   {
@@ -7344,7 +7345,7 @@ const users = [
     updatedAt: currentDate,
     id: 919,
     namaPengguna: "198511252025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Munirah, A.Md.Keb",
   },
   {
@@ -7352,7 +7353,7 @@ const users = [
     updatedAt: currentDate,
     id: 920,
     namaPengguna: "198601182025212007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ida Royani, Amd.Keb",
   },
   {
@@ -7360,7 +7361,7 @@ const users = [
     updatedAt: currentDate,
     id: 921,
     namaPengguna: "198902252025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariani, A.Md.Kep",
   },
   {
@@ -7368,7 +7369,7 @@ const users = [
     updatedAt: currentDate,
     id: 922,
     namaPengguna: "199307152025212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Magfirah, A.Md.Kep",
   },
   {
@@ -7376,7 +7377,7 @@ const users = [
     updatedAt: currentDate,
     id: 923,
     namaPengguna: "199409062025212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Estorina Endang, A.Md.Keb",
   },
   {
@@ -7384,7 +7385,7 @@ const users = [
     updatedAt: currentDate,
     id: 924,
     namaPengguna: "199611082025211011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Irfan Ali, Amd. Kep",
   },
   {
@@ -7392,7 +7393,7 @@ const users = [
     updatedAt: currentDate,
     id: 925,
     namaPengguna: "198612282024212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Mulya Ningrum, S.K.M",
   },
   {
@@ -7400,7 +7401,7 @@ const users = [
     updatedAt: currentDate,
     id: 926,
     namaPengguna: "199310102025212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erliana, S.Si.T",
   },
   {
@@ -7408,7 +7409,7 @@ const users = [
     updatedAt: currentDate,
     id: 927,
     namaPengguna: "199605262025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusdi Sahresa Al. Muhamad, S.E",
   },
   {
@@ -7416,7 +7417,7 @@ const users = [
     updatedAt: currentDate,
     id: 928,
     namaPengguna: "6401010512940000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns, Adi Prajaya.S.Kep",
   },
   {
@@ -7424,7 +7425,7 @@ const users = [
     updatedAt: currentDate,
     id: 929,
     namaPengguna: "6401085104950003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Ariska Putri, S.Tr.Kg",
   },
   {
@@ -7432,7 +7433,7 @@ const users = [
     updatedAt: currentDate,
     id: 930,
     namaPengguna: "6401012712870001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriadie ",
   },
   {
@@ -7440,7 +7441,7 @@ const users = [
     updatedAt: currentDate,
     id: 931,
     namaPengguna: "6472034809880008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hurriyati, AMd.KL",
   },
   {
@@ -7448,7 +7449,7 @@ const users = [
     updatedAt: currentDate,
     id: 932,
     namaPengguna: "198803102025212094",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Makiah",
   },
   {
@@ -7456,7 +7457,7 @@ const users = [
     updatedAt: currentDate,
     id: 933,
     namaPengguna: "6401074309890001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Margiasih, Amd.Kep",
   },
   {
@@ -7464,7 +7465,7 @@ const users = [
     updatedAt: currentDate,
     id: 934,
     namaPengguna: "6309054310900004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariyana, Amd. Keb",
   },
   {
@@ -7472,7 +7473,7 @@ const users = [
     updatedAt: currentDate,
     id: 935,
     namaPengguna: "6401044203000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nuriah Aini, A.Md. RMIK",
   },
   {
@@ -7480,7 +7481,7 @@ const users = [
     updatedAt: currentDate,
     id: 936,
     namaPengguna: "6409035301950004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Fajriah,A.Md.Keb",
   },
   {
@@ -7488,7 +7489,7 @@ const users = [
     updatedAt: currentDate,
     id: 937,
     namaPengguna: "197306112025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Suhrah",
   },
   {
@@ -7496,7 +7497,7 @@ const users = [
     updatedAt: currentDate,
     id: 938,
     namaPengguna: "6401015102930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Hasti, SKM",
   },
   {
@@ -7504,7 +7505,7 @@ const users = [
     updatedAt: currentDate,
     id: 939,
     namaPengguna: "199705062025211037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Toni Lestari, A.Md.Kep",
   },
   {
@@ -7512,7 +7513,7 @@ const users = [
     updatedAt: currentDate,
     id: 940,
     namaPengguna: "3517145606980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yola Arifianingtyas, A.Md. Kes",
   },
   {
@@ -7520,7 +7521,7 @@ const users = [
     updatedAt: currentDate,
     id: 941,
     namaPengguna: "197408241994031004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syarifudin,  A.Md.Kep.",
   },
   {
@@ -7528,7 +7529,7 @@ const users = [
     updatedAt: currentDate,
     id: 942,
     namaPengguna: "196909301991022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Rusmaleny, , S.Tr.Keb.",
   },
   {
@@ -7536,7 +7537,7 @@ const users = [
     updatedAt: currentDate,
     id: 943,
     namaPengguna: "197402101996032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yusfaridah, A.Md.Gizi, Skm",
   },
   {
@@ -7544,7 +7545,7 @@ const users = [
     updatedAt: currentDate,
     id: 944,
     namaPengguna: "197008151994031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ansyari Saleh, A.Md.Kep",
   },
   {
@@ -7552,7 +7553,7 @@ const users = [
     updatedAt: currentDate,
     id: 945,
     namaPengguna: "198003012014032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Erni Rahmawati",
   },
   {
@@ -7560,7 +7561,7 @@ const users = [
     updatedAt: currentDate,
     id: 946,
     namaPengguna: "197907142005021002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tedi Setiana, S.St",
   },
   {
@@ -7568,7 +7569,7 @@ const users = [
     updatedAt: currentDate,
     id: 947,
     namaPengguna: "197712092006042017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Naharia, A.Md.Kep",
   },
   {
@@ -7576,7 +7577,7 @@ const users = [
     updatedAt: currentDate,
     id: 948,
     namaPengguna: "197708052008042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mazdalina, S.St",
   },
   {
@@ -7584,7 +7585,7 @@ const users = [
     updatedAt: currentDate,
     id: 949,
     namaPengguna: "198002202009032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aneta, A.Md.Kep",
   },
   {
@@ -7592,7 +7593,7 @@ const users = [
     updatedAt: currentDate,
     id: 950,
     namaPengguna: "197712242008012012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miradiana, A.Md",
   },
   {
@@ -7600,7 +7601,7 @@ const users = [
     updatedAt: currentDate,
     id: 951,
     namaPengguna: "199208262019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarastina Megawati, S. Farm., Apt",
   },
   {
@@ -7608,7 +7609,7 @@ const users = [
     updatedAt: currentDate,
     id: 952,
     namaPengguna: "196809241991031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Fauzi",
   },
   {
@@ -7616,7 +7617,7 @@ const users = [
     updatedAt: currentDate,
     id: 953,
     namaPengguna: "199601082022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Vivi Cahyani, S.Ked",
   },
   {
@@ -7624,7 +7625,7 @@ const users = [
     updatedAt: currentDate,
     id: 954,
     namaPengguna: "198212282006042028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sapriani, A.Md.Kep.",
   },
   {
@@ -7632,7 +7633,7 @@ const users = [
     updatedAt: currentDate,
     id: 955,
     namaPengguna: "197211292006041012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rudyansyah, A.Md.Kep.",
   },
   {
@@ -7640,7 +7641,7 @@ const users = [
     updatedAt: currentDate,
     id: 956,
     namaPengguna: "198606182009042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ita Feteriah, A.Md., Farm",
   },
   {
@@ -7648,7 +7649,7 @@ const users = [
     updatedAt: currentDate,
     id: 957,
     namaPengguna: "198901022017052002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Lindawati, , S.Tr.Keb.",
   },
   {
@@ -7656,7 +7657,7 @@ const users = [
     updatedAt: currentDate,
     id: 958,
     namaPengguna: "197510292019052002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suriani, A.Md.Keb.",
   },
   {
@@ -7664,7 +7665,7 @@ const users = [
     updatedAt: currentDate,
     id: 959,
     namaPengguna: "199107152017052002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lili Kurnia Ningsih, A.Md.Keb",
   },
   {
@@ -7672,7 +7673,7 @@ const users = [
     updatedAt: currentDate,
     id: 960,
     namaPengguna: "199408112019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Eka Safitri, A.Md. Keb.",
   },
   {
@@ -7680,7 +7681,7 @@ const users = [
     updatedAt: currentDate,
     id: 961,
     namaPengguna: "199608152019031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Nawawi, A.Md.Ak.",
   },
   {
@@ -7688,7 +7689,7 @@ const users = [
     updatedAt: currentDate,
     id: 962,
     namaPengguna: "199108262020122018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maulida Rahmah, A.Md.Kep",
   },
   {
@@ -7696,7 +7697,7 @@ const users = [
     updatedAt: currentDate,
     id: 963,
     namaPengguna: "199805252022032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Relita Medy Sukma, A.Md.Keb",
   },
   {
@@ -7704,7 +7705,7 @@ const users = [
     updatedAt: currentDate,
     id: 964,
     namaPengguna: "199102192022031007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifudin, A.Md.Kg",
   },
   {
@@ -7712,7 +7713,7 @@ const users = [
     updatedAt: currentDate,
     id: 965,
     namaPengguna: "199212272025212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mayang, S.Kep.,Ns",
   },
   {
@@ -7720,7 +7721,7 @@ const users = [
     updatedAt: currentDate,
     id: 966,
     namaPengguna: "198902102023211001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Zainal Arifin Siregar, A.Md. Kep",
   },
   {
@@ -7728,7 +7729,7 @@ const users = [
     updatedAt: currentDate,
     id: 967,
     namaPengguna: "199112062023212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusmilawati, A.Md. Kep",
   },
   {
@@ -7736,7 +7737,7 @@ const users = [
     updatedAt: currentDate,
     id: 968,
     namaPengguna: "199508212023212006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meri Andani, A.Md. Gz",
   },
   {
@@ -7744,7 +7745,7 @@ const users = [
     updatedAt: currentDate,
     id: 969,
     namaPengguna: "199010052024212046",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Nurhasanah, A.Md.Keb.",
   },
   {
@@ -7752,7 +7753,7 @@ const users = [
     updatedAt: currentDate,
     id: 970,
     namaPengguna: "199107172024212042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aan Yulianawati, A.Md.Keb",
   },
   {
@@ -7760,7 +7761,7 @@ const users = [
     updatedAt: currentDate,
     id: 971,
     namaPengguna: "199104092024212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meri Faradila Sari, A.Md.Kep",
   },
   {
@@ -7768,7 +7769,7 @@ const users = [
     updatedAt: currentDate,
     id: 972,
     namaPengguna: "199210112024211026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Azharianor, A.Md.Kep",
   },
   {
@@ -7776,7 +7777,7 @@ const users = [
     updatedAt: currentDate,
     id: 973,
     namaPengguna: "199210102024212051",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nuraina Syaifaturahmi, A.Md.Keb",
   },
   {
@@ -7784,7 +7785,7 @@ const users = [
     updatedAt: currentDate,
     id: 974,
     namaPengguna: "199312122024211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desi Tri Ariawan, Amd. Kep",
   },
   {
@@ -7792,7 +7793,7 @@ const users = [
     updatedAt: currentDate,
     id: 975,
     namaPengguna: "199509152024212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina Mursidah, A.Md.Kep",
   },
   {
@@ -7800,7 +7801,7 @@ const users = [
     updatedAt: currentDate,
     id: 976,
     namaPengguna: "199804062024212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novita Sandra Pratama, A.Md,Keb",
   },
   {
@@ -7808,7 +7809,7 @@ const users = [
     updatedAt: currentDate,
     id: 977,
     namaPengguna: "198906152025212035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fatimatu Jahra, Am.Keb",
   },
   {
@@ -7816,7 +7817,7 @@ const users = [
     updatedAt: currentDate,
     id: 978,
     namaPengguna: "199106302025211017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muslim Hidayat, A.Md Kep",
   },
   {
@@ -7824,7 +7825,7 @@ const users = [
     updatedAt: currentDate,
     id: 979,
     namaPengguna: "199201282025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fatmawati, Am. Keb",
   },
   {
@@ -7832,7 +7833,7 @@ const users = [
     updatedAt: currentDate,
     id: 980,
     namaPengguna: "199208302025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lailatannoor, A.Md.Keb",
   },
   {
@@ -7840,7 +7841,7 @@ const users = [
     updatedAt: currentDate,
     id: 981,
     namaPengguna: "199001052025212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Yulianti, A.Md.Keb",
   },
   {
@@ -7848,7 +7849,7 @@ const users = [
     updatedAt: currentDate,
     id: 982,
     namaPengguna: "199202162025212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisnawati Dewi, A.Md. Keb",
   },
   {
@@ -7856,7 +7857,7 @@ const users = [
     updatedAt: currentDate,
     id: 983,
     namaPengguna: "199206062025212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meta Sari, Amd.Keb",
   },
   {
@@ -7864,7 +7865,7 @@ const users = [
     updatedAt: currentDate,
     id: 984,
     namaPengguna: "199306032025212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Thohari Munti'ah, A.Md.Keb",
   },
   {
@@ -7872,7 +7873,7 @@ const users = [
     updatedAt: currentDate,
     id: 985,
     namaPengguna: "199602232025212013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fety Dwi Fitriana",
   },
   {
@@ -7880,7 +7881,7 @@ const users = [
     updatedAt: currentDate,
     id: 986,
     namaPengguna: "199208162024212039",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Resti Agustina Rahayu, Skm",
   },
   {
@@ -7888,7 +7889,7 @@ const users = [
     updatedAt: currentDate,
     id: 987,
     namaPengguna: "199508152025211023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Edi Irwanto, S.E",
   },
   {
@@ -7896,7 +7897,7 @@ const users = [
     updatedAt: currentDate,
     id: 988,
     namaPengguna: "6401075102970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Abdina Hidayah, S.Farm",
   },
   {
@@ -7904,7 +7905,7 @@ const users = [
     updatedAt: currentDate,
     id: 989,
     namaPengguna: "6306055704900003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Afriyani, A.Md.Keb",
   },
   {
@@ -7912,7 +7913,7 @@ const users = [
     updatedAt: currentDate,
     id: 990,
     namaPengguna: "6401014304920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alfisyah.amd.Keb",
   },
   {
@@ -7920,7 +7921,7 @@ const users = [
     updatedAt: currentDate,
     id: 991,
     namaPengguna: "6401075804010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aprianti Patimatu Jahrah, A.Md.Kes",
   },
   {
@@ -7928,7 +7929,7 @@ const users = [
     updatedAt: currentDate,
     id: 992,
     namaPengguna: "6401074302990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erliani, SKM",
   },
   {
@@ -7936,7 +7937,7 @@ const users = [
     updatedAt: currentDate,
     id: 993,
     namaPengguna: "197604042025211079",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hajimi",
   },
   {
@@ -7944,7 +7945,7 @@ const users = [
     updatedAt: currentDate,
     id: 994,
     namaPengguna: "198606062025212066",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harmah,Amd.Keb",
   },
   {
@@ -7952,7 +7953,7 @@ const users = [
     updatedAt: currentDate,
     id: 995,
     namaPengguna: "6401070803000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasan Mudzakkir Mas, A.Md.AK",
   },
   {
@@ -7960,7 +7961,7 @@ const users = [
     updatedAt: currentDate,
     id: 996,
     namaPengguna: "6309076911960004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indah Novita Dewi, SKM ",
   },
   {
@@ -7968,7 +7969,7 @@ const users = [
     updatedAt: currentDate,
     id: 997,
     namaPengguna: "6401074901030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Milda Nor Syifa ",
   },
   {
@@ -7976,7 +7977,7 @@ const users = [
     updatedAt: currentDate,
     id: 998,
     namaPengguna: "198907212025212068",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mislawati",
   },
   {
@@ -7984,7 +7985,7 @@ const users = [
     updatedAt: currentDate,
     id: 999,
     namaPengguna: "6401074510970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Muftika Rani Puspadini,S.Tr.Keb",
   },
   {
@@ -7992,7 +7993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1000,
     namaPengguna: "6401071001990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Refly Sa'dillah,.S.Kep., Ns",
   },
   {
@@ -8000,7 +8001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1001,
     namaPengguna: "19830330 202521 1 060",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mustapa Kamal",
   },
   {
@@ -8008,7 +8009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1002,
     namaPengguna: "6401070406940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muzani Hamdi",
   },
   {
@@ -8016,7 +8017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1003,
     namaPengguna: "6309045011920007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nopie Savitrie, A.Md.Keb ",
   },
   {
@@ -8024,7 +8025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1004,
     namaPengguna: "199512222025212061",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Raudah, A.Md.Keb",
   },
   {
@@ -8032,7 +8033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1005,
     namaPengguna: "6309114610010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risma Hasnida Mukaramah,A.Md.Kes",
   },
   {
@@ -8040,7 +8041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1006,
     namaPengguna: "6401074501020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risma Monica",
   },
   {
@@ -8048,7 +8049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1007,
     namaPengguna: "6401074508910001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Risma Norlinda, S.Farm",
   },
   {
@@ -8056,7 +8057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1008,
     namaPengguna: "197807162025211047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rully Ferdian",
   },
   {
@@ -8064,7 +8065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1009,
     namaPengguna: "199409042025212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Selviana Putri, A.Md. Keb",
   },
   {
@@ -8072,7 +8073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1010,
     namaPengguna: "6301074107940036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sherli Aprilia, S. Si. T",
   },
   {
@@ -8080,7 +8081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1011,
     namaPengguna: "6309115705930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sivy Ankyaningrum, A.Md.Keb",
   },
   {
@@ -8088,7 +8089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1012,
     namaPengguna: "198003102025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Muryani",
   },
   {
@@ -8096,7 +8097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1013,
     namaPengguna: "6401065006950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yunia Ulandari, A.Md.Keb",
   },
   {
@@ -8104,7 +8105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1014,
     namaPengguna: "197805112005022003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Suharirin",
   },
   {
@@ -8112,7 +8113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1015,
     namaPengguna: "198603252014031001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Ferry Sumanto",
   },
   {
@@ -8120,7 +8121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1016,
     namaPengguna: "196904241989112001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aprillia Endardjanti, A.Md.Kep",
   },
   {
@@ -8128,7 +8129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1017,
     namaPengguna: "198109052005022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Septi Kurniawati, , S.Tr.Keb.",
   },
   {
@@ -8136,7 +8137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1018,
     namaPengguna: "198008122006042031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Rima Fitriani, S.Tr.Keb.",
   },
   {
@@ -8144,7 +8145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1019,
     namaPengguna: "197703122006042026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Endang Wiji Lestari, A.Md.Kep",
   },
   {
@@ -8152,7 +8153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1020,
     namaPengguna: "198611042015032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Diana Astuti",
   },
   {
@@ -8160,7 +8161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1021,
     namaPengguna: "198502162009032007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasriani Basri, A.Md.Keb",
   },
   {
@@ -8168,7 +8169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1022,
     namaPengguna: "197907172003122008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Suryanti, S.Tr.Keb.",
   },
   {
@@ -8176,7 +8177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1023,
     namaPengguna: "197611232003122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Selina, , S.Tr.Keb.",
   },
   {
@@ -8184,7 +8185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1024,
     namaPengguna: "198111102006041019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Said Sarifudin As, A.Md.Kep",
   },
   {
@@ -8192,7 +8193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1025,
     namaPengguna: "197909222009032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dedeh Juhariyah, A.Md.Keb",
   },
   {
@@ -8200,7 +8201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1026,
     namaPengguna: "197212081995032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Ekasari Tamangendar, A.Md.Kes",
   },
   {
@@ -8208,7 +8209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1027,
     namaPengguna: "198105212006042032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ani Ruswanti, A.Md.Kep",
   },
   {
@@ -8216,7 +8217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1028,
     namaPengguna: "198209292008042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ratnawati, S.St",
   },
   {
@@ -8224,7 +8225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1029,
     namaPengguna: "198506082010012028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriani, A.Md.Keb",
   },
   {
@@ -8232,7 +8233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1030,
     namaPengguna: "198708312010012018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Raudatul Jannah, A.Md.Keb",
   },
   {
@@ -8240,7 +8241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1031,
     namaPengguna: "197205292003122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Suparmi, S.Tr.Keb",
   },
   {
@@ -8248,7 +8249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1032,
     namaPengguna: "198605092010012024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahmaniah, A.Md.Ak.",
   },
   {
@@ -8256,7 +8257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1033,
     namaPengguna: "197604252006042018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kristini, A.Md.Kep",
   },
   {
@@ -8264,7 +8265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1034,
     namaPengguna: "198908252010012003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Astianingsih, A.Md.Far",
   },
   {
@@ -8272,7 +8273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1035,
     namaPengguna: "198802012010012018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Eka Santoso, A.Md.Far",
   },
   {
@@ -8280,7 +8281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1036,
     namaPengguna: "198910262011012003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Oriana Arisandi, Am.Kg",
   },
   {
@@ -8288,7 +8289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1037,
     namaPengguna: "197709282003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Awaliyah, A.Md.Keb",
   },
   {
@@ -8296,7 +8297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1038,
     namaPengguna: "197707132006042030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eti Rannu, A.Md",
   },
   {
@@ -8304,7 +8305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1039,
     namaPengguna: "199002042019031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Achmad Heriyanto, S. Farm., Apt.",
   },
   {
@@ -8312,7 +8313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1040,
     namaPengguna: "197706202003122006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eriwati, A.Md.Keb",
   },
   {
@@ -8320,7 +8321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1041,
     namaPengguna: "199306172022031006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Suhartono",
   },
   {
@@ -8328,7 +8329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1042,
     namaPengguna: "198005252006042030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasniar, A.Md.Kep",
   },
   {
@@ -8336,7 +8337,7 @@ const users = [
     updatedAt: currentDate,
     id: 1043,
     namaPengguna: "198904302011011002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chusnul Ramdhani, A.Md.Kes",
   },
   {
@@ -8344,7 +8345,7 @@ const users = [
     updatedAt: currentDate,
     id: 1044,
     namaPengguna: "198502202019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winarti, A.Md.Kep.",
   },
   {
@@ -8352,7 +8353,7 @@ const users = [
     updatedAt: currentDate,
     id: 1045,
     namaPengguna: "199412022019032021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tiara Moulita, A.Md.Ak.",
   },
   {
@@ -8360,7 +8361,7 @@ const users = [
     updatedAt: currentDate,
     id: 1046,
     namaPengguna: "199406092019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Triska Juwita, A.Md.Rmik.",
   },
   {
@@ -8368,7 +8369,7 @@ const users = [
     updatedAt: currentDate,
     id: 1047,
     namaPengguna: "198011102007011006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syahrani",
   },
   {
@@ -8376,7 +8377,7 @@ const users = [
     updatedAt: currentDate,
     id: 1048,
     namaPengguna: "199908022022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmi Akhiriah, A.Md.Gz",
   },
   {
@@ -8384,7 +8385,7 @@ const users = [
     updatedAt: currentDate,
     id: 1049,
     namaPengguna: "198709202023212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harie Pitya Anggraeny, A.Md. Kep",
   },
   {
@@ -8392,7 +8393,7 @@ const users = [
     updatedAt: currentDate,
     id: 1050,
     namaPengguna: "199405092024212044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Meilani Putri, Amd.Kep.",
   },
   {
@@ -8400,7 +8401,7 @@ const users = [
     updatedAt: currentDate,
     id: 1051,
     namaPengguna: "198902192024212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anis Hidayati, A.Md.Keb",
   },
   {
@@ -8408,7 +8409,7 @@ const users = [
     updatedAt: currentDate,
     id: 1052,
     namaPengguna: "199007212024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marliana Yuliarta, A.Md.Keb",
   },
   {
@@ -8416,7 +8417,7 @@ const users = [
     updatedAt: currentDate,
     id: 1053,
     namaPengguna: "198711112024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jawil 'Asyabiah, A.Md.Kep",
   },
   {
@@ -8424,7 +8425,7 @@ const users = [
     updatedAt: currentDate,
     id: 1054,
     namaPengguna: "199011162024211012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risal, A.Md. Kep",
   },
   {
@@ -8432,7 +8433,7 @@ const users = [
     updatedAt: currentDate,
     id: 1055,
     namaPengguna: "199104062024212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aprilia Pery Wardana, A.Md.Kep",
   },
   {
@@ -8440,7 +8441,7 @@ const users = [
     updatedAt: currentDate,
     id: 1056,
     namaPengguna: "199412262024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Misniawati, A.Md.Keb",
   },
   {
@@ -8448,7 +8449,7 @@ const users = [
     updatedAt: currentDate,
     id: 1057,
     namaPengguna: "199602042024212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Magdalena Rua, A.Md.Ak",
   },
   {
@@ -8456,7 +8457,7 @@ const users = [
     updatedAt: currentDate,
     id: 1058,
     namaPengguna: "198201062025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sulastri, A.Md Kep",
   },
   {
@@ -8464,7 +8465,7 @@ const users = [
     updatedAt: currentDate,
     id: 1059,
     namaPengguna: "198010032025211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agusalim, A.Md.Kep",
   },
   {
@@ -8472,7 +8473,7 @@ const users = [
     updatedAt: currentDate,
     id: 1060,
     namaPengguna: "198710182025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sorta Sarah Susanti Hutagaol, Amd. Kep",
   },
   {
@@ -8480,7 +8481,7 @@ const users = [
     updatedAt: currentDate,
     id: 1061,
     namaPengguna: "198609192025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Upiati, A. Md. Keb",
   },
   {
@@ -8488,7 +8489,7 @@ const users = [
     updatedAt: currentDate,
     id: 1062,
     namaPengguna: "198808282025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lena Mastikasari, A.Md.Keb",
   },
   {
@@ -8496,7 +8497,7 @@ const users = [
     updatedAt: currentDate,
     id: 1063,
     namaPengguna: "198809042025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sonya Londreta Kasauly, A.Md,Keb",
   },
   {
@@ -8504,7 +8505,7 @@ const users = [
     updatedAt: currentDate,
     id: 1064,
     namaPengguna: "198904042025212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Nurirawati, A.Md.Keb",
   },
   {
@@ -8512,7 +8513,7 @@ const users = [
     updatedAt: currentDate,
     id: 1065,
     namaPengguna: "199001162025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Ashari, A.Md.Keb",
   },
   {
@@ -8520,7 +8521,7 @@ const users = [
     updatedAt: currentDate,
     id: 1066,
     namaPengguna: "199003102025212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asti Widia Astuti, A.Md.Keb",
   },
   {
@@ -8528,7 +8529,7 @@ const users = [
     updatedAt: currentDate,
     id: 1067,
     namaPengguna: "199010302025211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aliansyah, A.Md.Kep",
   },
   {
@@ -8536,7 +8537,7 @@ const users = [
     updatedAt: currentDate,
     id: 1068,
     namaPengguna: "199101212025211027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Tarsih, A.Md.Kep",
   },
   {
@@ -8544,7 +8545,7 @@ const users = [
     updatedAt: currentDate,
     id: 1069,
     namaPengguna: "198908202025211031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Fajrin, Amd.Kep",
   },
   {
@@ -8552,7 +8553,7 @@ const users = [
     updatedAt: currentDate,
     id: 1070,
     namaPengguna: "199112252025212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Baiq Desy Erna Kencana, Amd. Kep",
   },
   {
@@ -8560,7 +8561,7 @@ const users = [
     updatedAt: currentDate,
     id: 1071,
     namaPengguna: "199312052025212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Islami Rantika Sari, A.Md.Keb",
   },
   {
@@ -8568,7 +8569,7 @@ const users = [
     updatedAt: currentDate,
     id: 1072,
     namaPengguna: "199312102025212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitri Astuti, A.Md.Ak",
   },
   {
@@ -8576,7 +8577,7 @@ const users = [
     updatedAt: currentDate,
     id: 1073,
     namaPengguna: "199507062025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Diyah Retno Dwi Yani, A.Md.Keb",
   },
   {
@@ -8584,7 +8585,7 @@ const users = [
     updatedAt: currentDate,
     id: 1074,
     namaPengguna: "198401142025212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlinda",
   },
   {
@@ -8592,7 +8593,7 @@ const users = [
     updatedAt: currentDate,
     id: 1075,
     namaPengguna: "198808012025211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suriansyah",
   },
   {
@@ -8600,7 +8601,7 @@ const users = [
     updatedAt: currentDate,
     id: 1076,
     namaPengguna: "199801022025212009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aslam",
   },
   {
@@ -8608,7 +8609,7 @@ const users = [
     updatedAt: currentDate,
     id: 1077,
     namaPengguna: "199110052025211024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dima Okta Abriyanto, S.Km",
   },
   {
@@ -8616,7 +8617,7 @@ const users = [
     updatedAt: currentDate,
     id: 1078,
     namaPengguna: "199407042025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Salmiah, S.Sit",
   },
   {
@@ -8624,7 +8625,7 @@ const users = [
     updatedAt: currentDate,
     id: 1079,
     namaPengguna: "197602272025212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Debby Febri Ardanti, S.E",
   },
   {
@@ -8632,7 +8633,7 @@ const users = [
     updatedAt: currentDate,
     id: 1080,
     namaPengguna: "198702152025212009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Safrina Samosir, S.Pd",
   },
   {
@@ -8640,7 +8641,7 @@ const users = [
     updatedAt: currentDate,
     id: 1081,
     namaPengguna: "198103062025211045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmadiyannor",
   },
   {
@@ -8648,7 +8649,7 @@ const users = [
     updatedAt: currentDate,
     id: 1082,
     namaPengguna: "6401065811010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andini Sarah Rahmayani, Skm",
   },
   {
@@ -8656,7 +8657,7 @@ const users = [
     updatedAt: currentDate,
     id: 1083,
     namaPengguna: "6401066104990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Putri Lestari",
   },
   {
@@ -8664,7 +8665,7 @@ const users = [
     updatedAt: currentDate,
     id: 1084,
     namaPengguna: "6401045502970000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr Dhia Falih Annisa",
   },
   {
@@ -8672,7 +8673,7 @@ const users = [
     updatedAt: currentDate,
     id: 1085,
     namaPengguna: "6401065911010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dyah Samsiati, S.Tr.Gz",
   },
   {
@@ -8680,7 +8681,7 @@ const users = [
     updatedAt: currentDate,
     id: 1086,
     namaPengguna: "6401065710010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erna Nur Chasanah, A.Md.Keb ",
   },
   {
@@ -8688,7 +8689,7 @@ const users = [
     updatedAt: currentDate,
     id: 1087,
     namaPengguna: "199412252025212060",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlina Sari,A.Md.Keb",
   },
   {
@@ -8696,7 +8697,7 @@ const users = [
     updatedAt: currentDate,
     id: 1088,
     namaPengguna: "199301312025212059",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Husnul Hotimah, A.Md.Keb",
   },
   {
@@ -8704,7 +8705,7 @@ const users = [
     updatedAt: currentDate,
     id: 1089,
     namaPengguna: "6401066201930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ifnurti Roura",
   },
   {
@@ -8712,7 +8713,7 @@ const users = [
     updatedAt: currentDate,
     id: 1090,
     namaPengguna: "6401061705010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Imaduddin Maulana El Has, S.Tr.Kes",
   },
   {
@@ -8720,7 +8721,7 @@ const users = [
     updatedAt: currentDate,
     id: 1091,
     namaPengguna: "6401061907010004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kamalul Huda, S.Tr.Gz",
   },
   {
@@ -8728,7 +8729,7 @@ const users = [
     updatedAt: currentDate,
     id: 1092,
     namaPengguna: "6401064208970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Khairiah, S.Farm",
   },
   {
@@ -8736,7 +8737,7 @@ const users = [
     updatedAt: currentDate,
     id: 1093,
     namaPengguna: "6401064408000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Khalimatus Sa'diah, A.Md.Kep",
   },
   {
@@ -8744,7 +8745,7 @@ const users = [
     updatedAt: currentDate,
     id: 1094,
     namaPengguna: "6401064808010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lisnawati, A.Md.Kep",
   },
   {
@@ -8752,7 +8753,7 @@ const users = [
     updatedAt: currentDate,
     id: 1095,
     namaPengguna: "198109172025212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marhamah",
   },
   {
@@ -8760,7 +8761,7 @@ const users = [
     updatedAt: currentDate,
     id: 1096,
     namaPengguna: "6401064201020006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nadiah Rosmalita A.Md.Farm.",
   },
   {
@@ -8768,7 +8769,7 @@ const users = [
     updatedAt: currentDate,
     id: 1097,
     namaPengguna: "6401056512950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norjannah, A.Md.Keb",
   },
   {
@@ -8776,7 +8777,7 @@ const users = [
     updatedAt: currentDate,
     id: 1098,
     namaPengguna: "6401065411960000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novi Listiyo",
   },
   {
@@ -8784,7 +8785,7 @@ const users = [
     updatedAt: currentDate,
     id: 1099,
     namaPengguna: "199804302025211026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Prima Yoga",
   },
   {
@@ -8792,7 +8793,7 @@ const users = [
     updatedAt: currentDate,
     id: 1100,
     namaPengguna: "6401066708990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rabiyatul Adawiyah, A.Md.Keb",
   },
   {
@@ -8800,7 +8801,7 @@ const users = [
     updatedAt: currentDate,
     id: 1101,
     namaPengguna: "6401066505930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ramona, A.Md.Keb",
   },
   {
@@ -8808,7 +8809,7 @@ const users = [
     updatedAt: currentDate,
     id: 1102,
     namaPengguna: "3275116308920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rini Nuraini,A.Md.Kep",
   },
   {
@@ -8816,7 +8817,7 @@ const users = [
     updatedAt: currentDate,
     id: 1103,
     namaPengguna: "6401064205990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Rumi Tri Hastani, S.Kep",
   },
   {
@@ -8824,7 +8825,7 @@ const users = [
     updatedAt: currentDate,
     id: 1104,
     namaPengguna: "199005162025211075",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Said Muaris Bedawi Assegaf A.Md Kep",
   },
   {
@@ -8832,7 +8833,7 @@ const users = [
     updatedAt: currentDate,
     id: 1105,
     namaPengguna: "6401066303910001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Utami A.Md.Kep",
   },
   {
@@ -8840,7 +8841,7 @@ const users = [
     updatedAt: currentDate,
     id: 1106,
     namaPengguna: "6401064712950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Tias Hutami",
   },
   {
@@ -8848,7 +8849,7 @@ const users = [
     updatedAt: currentDate,
     id: 1107,
     namaPengguna: "5204081212820002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Zainal Abidin",
   },
   {
@@ -8856,7 +8857,7 @@ const users = [
     updatedAt: currentDate,
     id: 1108,
     namaPengguna: "198107102010012018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Fransiska Santi Murni",
   },
   {
@@ -8864,7 +8865,7 @@ const users = [
     updatedAt: currentDate,
     id: 1109,
     namaPengguna: "197306131993032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Suhartini Y, S.Tr.Keb.",
   },
   {
@@ -8872,7 +8873,7 @@ const users = [
     updatedAt: currentDate,
     id: 1110,
     namaPengguna: "197302071993031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hasanuddin, A.Md.Kep.",
   },
   {
@@ -8880,7 +8881,7 @@ const users = [
     updatedAt: currentDate,
     id: 1111,
     namaPengguna: "197712282005021004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eko Purwanto, A.Md.Kep",
   },
   {
@@ -8888,7 +8889,7 @@ const users = [
     updatedAt: currentDate,
     id: 1112,
     namaPengguna: "197508251995021002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hartoyo, Skm",
   },
   {
@@ -8896,7 +8897,7 @@ const users = [
     updatedAt: currentDate,
     id: 1113,
     namaPengguna: "198201012006042048",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Theresia Anu, A.Md.Kep",
   },
   {
@@ -8904,7 +8905,7 @@ const users = [
     updatedAt: currentDate,
     id: 1114,
     namaPengguna: "198712092009032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Delphy Embarsari, S.Tr.Keb",
   },
   {
@@ -8912,7 +8913,7 @@ const users = [
     updatedAt: currentDate,
     id: 1115,
     namaPengguna: "197701172009032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Indah Handayani, A.Md.Keb",
   },
   {
@@ -8920,7 +8921,7 @@ const users = [
     updatedAt: currentDate,
     id: 1116,
     namaPengguna: "199107102019031013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Ivan Dominicus Sitohang",
   },
   {
@@ -8928,7 +8929,7 @@ const users = [
     updatedAt: currentDate,
     id: 1117,
     namaPengguna: "199309232019032029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fakhriana, S. Farm., Apt.",
   },
   {
@@ -8936,7 +8937,7 @@ const users = [
     updatedAt: currentDate,
     id: 1118,
     namaPengguna: "199206162019032026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Keke Adelia",
   },
   {
@@ -8944,7 +8945,7 @@ const users = [
     updatedAt: currentDate,
     id: 1119,
     namaPengguna: "197804042006041015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iswanto, A.Md.Kep",
   },
   {
@@ -8952,7 +8953,7 @@ const users = [
     updatedAt: currentDate,
     id: 1120,
     namaPengguna: "199006242017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., . Dewi Ariyanti, , S.Tr.Keb.",
   },
   {
@@ -8960,7 +8961,7 @@ const users = [
     updatedAt: currentDate,
     id: 1121,
     namaPengguna: "199206112019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anna Rahayu, A.Md.Kep.",
   },
   {
@@ -8968,7 +8969,7 @@ const users = [
     updatedAt: currentDate,
     id: 1122,
     namaPengguna: "198902152019032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Lestariani, A.Md. Keb.",
   },
   {
@@ -8976,7 +8977,7 @@ const users = [
     updatedAt: currentDate,
     id: 1123,
     namaPengguna: "199401242019031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Al Fajar, A.Md.Kl.",
   },
   {
@@ -8984,7 +8985,7 @@ const users = [
     updatedAt: currentDate,
     id: 1124,
     namaPengguna: "197801202011032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marhamah, A.Md.Keb",
   },
   {
@@ -8992,7 +8993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1125,
     namaPengguna: "199501292022032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhibatul Awaliyah, A.Md.Keb",
   },
   {
@@ -9000,7 +9001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1126,
     namaPengguna: "199911112022032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rani Aulia Wahyu Ningtia, A.Md.Kes",
   },
   {
@@ -9008,7 +9009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1127,
     namaPengguna: "198803072022032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sanisah, A.Md.Kep",
   },
   {
@@ -9016,7 +9017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1128,
     namaPengguna: "199401282025211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Nur Ikhsan, S.Kep.",
   },
   {
@@ -9024,7 +9025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1129,
     namaPengguna: "198711052023212008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arumyani Widya Sari, A.Md. Kep",
   },
   {
@@ -9032,7 +9033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1130,
     namaPengguna: "198910092024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suriyani, A.Md.Keb",
   },
   {
@@ -9040,7 +9041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1131,
     namaPengguna: "199001302024211010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Chuodelfa Hamid, A.Md.Kep",
   },
   {
@@ -9048,7 +9049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1132,
     namaPengguna: "198803082024211012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amrullah, A.Md.Kep",
   },
   {
@@ -9056,7 +9057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1133,
     namaPengguna: "199309162024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Helda Aeni Septiara Sari, A.Md Keb",
   },
   {
@@ -9064,7 +9065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1134,
     namaPengguna: "199411282024212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Laila Auliyah, A.Md.Keb",
   },
   {
@@ -9072,7 +9073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1135,
     namaPengguna: "199410232024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Hairil Nasir, A.Md.Kep",
   },
   {
@@ -9080,7 +9081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1136,
     namaPengguna: "199602252024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kamarul Ahda, A.Md.Ak",
   },
   {
@@ -9088,7 +9089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1137,
     namaPengguna: "199703132024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ana Mariana, A.Md.Keb",
   },
   {
@@ -9096,7 +9097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1138,
     namaPengguna: "199511122024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sariyanti, Amd.Kl",
   },
   {
@@ -9104,7 +9105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1139,
     namaPengguna: "199012242025212029",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Astuti, A.Md.Keb",
   },
   {
@@ -9112,7 +9113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1140,
     namaPengguna: "199106302025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aisyah, A.Md Keb",
   },
   {
@@ -9120,7 +9121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1141,
     namaPengguna: "199110122025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ika Ratna Sari, A.Md, Keb",
   },
   {
@@ -9128,7 +9129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1142,
     namaPengguna: "197806102025211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tego Utomo",
   },
   {
@@ -9136,7 +9137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1143,
     namaPengguna: "198304182025211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Priyono",
   },
   {
@@ -9144,7 +9145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1144,
     namaPengguna: "199209292025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarbinih Retoy",
   },
   {
@@ -9152,7 +9153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1145,
     namaPengguna: "199309242025212017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Fatimah Rahayu, Skm",
   },
   {
@@ -9160,7 +9161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1146,
     namaPengguna: "6401064107890001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Puspita Sari, A.Md.Keb",
   },
   {
@@ -9168,7 +9169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1147,
     namaPengguna: "199603162025212054",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Baidatun Nisa, S.Gz",
   },
   {
@@ -9176,7 +9177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1148,
     namaPengguna: "7602046709020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Auliya Saputri, A.Md.RMIK",
   },
   {
@@ -9184,7 +9185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1149,
     namaPengguna: "199103092025211064",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ebid",
   },
   {
@@ -9192,7 +9193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1150,
     namaPengguna: "6401066308970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Indri Almira Sustia Putri",
   },
   {
@@ -9200,7 +9201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1151,
     namaPengguna: "6401064403020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Karmila",
   },
   {
@@ -9208,7 +9209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1152,
     namaPengguna: "198809092025212147",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Letsia Faltim Asi, A.Md.Kep",
   },
   {
@@ -9216,7 +9217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1153,
     namaPengguna: "199308082025212155",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nety Komalasari,A.Md.Keb",
   },
   {
@@ -9224,7 +9225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1154,
     namaPengguna: "6401085405980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Resti Meilisa Dewi, A.Md.Kep",
   },
   {
@@ -9232,7 +9233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1155,
     namaPengguna: "6401086304970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Yanti Pusari, S. Keb. Bdn",
   },
   {
@@ -9240,7 +9241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1156,
     namaPengguna: "6401060203010000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizal Suko Cahyono",
   },
   {
@@ -9248,7 +9249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1157,
     namaPengguna: "197803212025211021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Robiliswan",
   },
   {
@@ -9256,7 +9257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1158,
     namaPengguna: "6401061607980004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Said Riduwan Assegaf,A.Md.Kes",
   },
   {
@@ -9264,7 +9265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1159,
     namaPengguna: "196710151989022005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn., , . Anjar Muhajaroh, , S.Tr.Keb.",
   },
   {
@@ -9272,7 +9273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1160,
     namaPengguna: "197201221992032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Janiwati, A.Md.Keb",
   },
   {
@@ -9280,7 +9281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1161,
     namaPengguna: "197403141993032002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Rabiah, A.Md.Keb",
   },
   {
@@ -9288,7 +9289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1162,
     namaPengguna: "197406301994031005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herniawan, Skm",
   },
   {
@@ -9296,7 +9297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1163,
     namaPengguna: "198601072014032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Sabrina Batubara",
   },
   {
@@ -9304,7 +9305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1164,
     namaPengguna: "198309122014031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Harun Zen",
   },
   {
@@ -9312,7 +9313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1165,
     namaPengguna: "198505122009032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risnawati, A.Md.Keb",
   },
   {
@@ -9320,7 +9321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1166,
     namaPengguna: "197707122003122013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hadiyanah, A.Md.Keb",
   },
   {
@@ -9328,7 +9329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1167,
     namaPengguna: "198806182010011004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alhen Firnandez, A.Md.Far",
   },
   {
@@ -9336,7 +9337,7 @@ const users = [
     updatedAt: currentDate,
     id: 1168,
     namaPengguna: "198812262011012006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Kartika, Am.Kg",
   },
   {
@@ -9344,7 +9345,7 @@ const users = [
     updatedAt: currentDate,
     id: 1169,
     namaPengguna: "199311012022032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rizki Noviyanti",
   },
   {
@@ -9352,7 +9353,7 @@ const users = [
     updatedAt: currentDate,
     id: 1170,
     namaPengguna: "199110022014032004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lia Anifah Sa'adah, A.Md.Ak",
   },
   {
@@ -9360,7 +9361,7 @@ const users = [
     updatedAt: currentDate,
     id: 1171,
     namaPengguna: "197902102009031007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mulyono, A.Md.Kep",
   },
   {
@@ -9368,7 +9369,7 @@ const users = [
     updatedAt: currentDate,
     id: 1172,
     namaPengguna: "198910172019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Said Jalaludin, A.Md.Kep.",
   },
   {
@@ -9376,7 +9377,7 @@ const users = [
     updatedAt: currentDate,
     id: 1173,
     namaPengguna: "199305072019032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ima Nurul Khotimah, A.Md.Gz",
   },
   {
@@ -9384,7 +9385,7 @@ const users = [
     updatedAt: currentDate,
     id: 1174,
     namaPengguna: "199402232019032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elisabeth Dua Nurak, A.Md. Keb.",
   },
   {
@@ -9392,7 +9393,7 @@ const users = [
     updatedAt: currentDate,
     id: 1175,
     namaPengguna: "199512312019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Annajmi, A.Md.Ak",
   },
   {
@@ -9400,7 +9401,7 @@ const users = [
     updatedAt: currentDate,
     id: 1176,
     namaPengguna: "196912312009061052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sahabuddin",
   },
   {
@@ -9408,7 +9409,7 @@ const users = [
     updatedAt: currentDate,
     id: 1177,
     namaPengguna: "198611042019032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arbayah, A.Md.Kl",
   },
   {
@@ -9416,7 +9417,7 @@ const users = [
     updatedAt: currentDate,
     id: 1178,
     namaPengguna: "198002162007012012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Petrosa Dewi Pratiwi Skolastika",
   },
   {
@@ -9424,7 +9425,7 @@ const users = [
     updatedAt: currentDate,
     id: 1179,
     namaPengguna: "198511162023212004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Theresia Nostrianty, A.Md. Kep",
   },
   {
@@ -9432,7 +9433,7 @@ const users = [
     updatedAt: currentDate,
     id: 1180,
     namaPengguna: "198806132024211008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wawan Suryawan, A.Md",
   },
   {
@@ -9440,7 +9441,7 @@ const users = [
     updatedAt: currentDate,
     id: 1181,
     namaPengguna: "199105152024212046",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Maya Sarah, Amd. Kep",
   },
   {
@@ -9448,7 +9449,7 @@ const users = [
     updatedAt: currentDate,
     id: 1182,
     namaPengguna: "199104012024211014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Taufik Widayat, Amd.Kep.",
   },
   {
@@ -9456,7 +9457,7 @@ const users = [
     updatedAt: currentDate,
     id: 1183,
     namaPengguna: "199510262024212043",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lusia Oktaviani Gelu Witin, A.Md.Keb",
   },
   {
@@ -9464,7 +9465,7 @@ const users = [
     updatedAt: currentDate,
     id: 1184,
     namaPengguna: "199609052024212032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuventa Nona Ita, A.Md.Keb",
   },
   {
@@ -9472,7 +9473,7 @@ const users = [
     updatedAt: currentDate,
     id: 1185,
     namaPengguna: "199710212024212015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gemellia Vivia Yose Sari, A.Md.Keb",
   },
   {
@@ -9480,7 +9481,7 @@ const users = [
     updatedAt: currentDate,
     id: 1186,
     namaPengguna: "198907162025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Nursiang, Amd.Kep",
   },
   {
@@ -9488,7 +9489,7 @@ const users = [
     updatedAt: currentDate,
     id: 1187,
     namaPengguna: "199011282025212006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ruri Handayani, A.Md.Kep",
   },
   {
@@ -9496,7 +9497,7 @@ const users = [
     updatedAt: currentDate,
     id: 1188,
     namaPengguna: "199203052025211009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizal Abda'u El Has",
   },
   {
@@ -9504,7 +9505,7 @@ const users = [
     updatedAt: currentDate,
     id: 1189,
     namaPengguna: "199508112024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sriani Ema Wati, S.K.M.",
   },
   {
@@ -9512,7 +9513,7 @@ const users = [
     updatedAt: currentDate,
     id: 1190,
     namaPengguna: "6401040512890003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdurrahman, A.Md.Kep",
   },
   {
@@ -9520,7 +9521,7 @@ const users = [
     updatedAt: currentDate,
     id: 1191,
     namaPengguna: "6401067010980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Mega Octavia, A.Md.Keb",
   },
   {
@@ -9528,7 +9529,7 @@ const users = [
     updatedAt: currentDate,
     id: 1192,
     namaPengguna: "6401065807930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Basirotul NIkmah, A.Md.Kep",
   },
   {
@@ -9536,7 +9537,7 @@ const users = [
     updatedAt: currentDate,
     id: 1193,
     namaPengguna: "3502185512960002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Danis Yovi Indriana, A.Md.Keb",
   },
   {
@@ -9544,7 +9545,7 @@ const users = [
     updatedAt: currentDate,
     id: 1194,
     namaPengguna: "6401062602880001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns Dedy Hermayanto Velani S.Kep",
   },
   {
@@ -9552,7 +9553,7 @@ const users = [
     updatedAt: currentDate,
     id: 1195,
     namaPengguna: "198411122025211086",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Edi Partono",
   },
   {
@@ -9560,7 +9561,7 @@ const users = [
     updatedAt: currentDate,
     id: 1196,
     namaPengguna: "6401064411980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Elsye Adelina Arianto, S.Farm",
   },
   {
@@ -9568,7 +9569,7 @@ const users = [
     updatedAt: currentDate,
     id: 1197,
     namaPengguna: "6401065710010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erni Nur Hapipah , A. Md. Keb ",
   },
   {
@@ -9576,7 +9577,7 @@ const users = [
     updatedAt: currentDate,
     id: 1198,
     namaPengguna: "3301182102940003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr.Fajar Saiful Salma",
   },
   {
@@ -9584,7 +9585,7 @@ const users = [
     updatedAt: currentDate,
     id: 1199,
     namaPengguna: "64001065009870001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kamus Yanti",
   },
   {
@@ -9592,7 +9593,7 @@ const users = [
     updatedAt: currentDate,
     id: 1200,
     namaPengguna: "1807126612950003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lutfiana Dewi Ayu suwardi, S.Tr.Keb",
   },
   {
@@ -9600,7 +9601,7 @@ const users = [
     updatedAt: currentDate,
     id: 1201,
     namaPengguna: "6401061505970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mochammad Arbian Triana, S.K.M",
   },
   {
@@ -9608,7 +9609,7 @@ const users = [
     updatedAt: currentDate,
     id: 1202,
     namaPengguna: "6401066702990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mustaghfiroh, S.Kep. Ners",
   },
   {
@@ -9616,7 +9617,7 @@ const users = [
     updatedAt: currentDate,
     id: 1203,
     namaPengguna: "6401064501000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Meliani AMd.Farm.",
   },
   {
@@ -9624,7 +9625,7 @@ const users = [
     updatedAt: currentDate,
     id: 1204,
     namaPengguna: "6401064806950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Ayu Yuliana, A.Md.Keb",
   },
   {
@@ -9632,7 +9633,7 @@ const users = [
     updatedAt: currentDate,
     id: 1205,
     namaPengguna: "6401064909940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Nur Ainatul Jannah, A.Md.Keb",
   },
   {
@@ -9640,7 +9641,7 @@ const users = [
     updatedAt: currentDate,
     id: 1206,
     namaPengguna: "6401065002030002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suastika Putri Anggraini, A.Md.Keb",
   },
   {
@@ -9648,7 +9649,7 @@ const users = [
     updatedAt: currentDate,
     id: 1207,
     namaPengguna: "6401066408950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Wahyuni Agustina, S.Kep",
   },
   {
@@ -9656,7 +9657,7 @@ const users = [
     updatedAt: currentDate,
     id: 1208,
     namaPengguna: "6401056210970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zainab, S.Tr.Gz",
   },
   {
@@ -9664,7 +9665,7 @@ const users = [
     updatedAt: currentDate,
     id: 1209,
     namaPengguna: "196807131991021001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdul Malik, A.Md.Kep",
   },
   {
@@ -9672,7 +9673,7 @@ const users = [
     updatedAt: currentDate,
     id: 1210,
     namaPengguna: "197212301998032006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muryati, S.Keb.",
   },
   {
@@ -9680,7 +9681,7 @@ const users = [
     updatedAt: currentDate,
     id: 1211,
     namaPengguna: "197208052000121002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hamdani, A.Md.Kep.",
   },
   {
@@ -9688,7 +9689,7 @@ const users = [
     updatedAt: currentDate,
     id: 1212,
     namaPengguna: "198701122014122001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nur Najmi Hidayati",
   },
   {
@@ -9696,7 +9697,7 @@ const users = [
     updatedAt: currentDate,
     id: 1213,
     namaPengguna: "197412281995032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Puji Hariani, A.Md.Kep",
   },
   {
@@ -9704,7 +9705,7 @@ const users = [
     updatedAt: currentDate,
     id: 1214,
     namaPengguna: "198007181999032003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rubbi Susana, A.Md.Kep",
   },
   {
@@ -9712,7 +9713,7 @@ const users = [
     updatedAt: currentDate,
     id: 1215,
     namaPengguna: "197207051998032010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Masja, A.Md.Kg",
   },
   {
@@ -9720,7 +9721,7 @@ const users = [
     updatedAt: currentDate,
     id: 1216,
     namaPengguna: "197306242002122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kasmirah, S.Keb.",
   },
   {
@@ -9728,7 +9729,7 @@ const users = [
     updatedAt: currentDate,
     id: 1217,
     namaPengguna: "198606152010012032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Rahmayanti, , S.St.",
   },
   {
@@ -9736,7 +9737,7 @@ const users = [
     updatedAt: currentDate,
     id: 1218,
     namaPengguna: "198812242011012001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Herlindawati, S.Gz.",
   },
   {
@@ -9744,7 +9745,7 @@ const users = [
     updatedAt: currentDate,
     id: 1219,
     namaPengguna: "198610102010012040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kurniawati, S.Keb.",
   },
   {
@@ -9752,7 +9753,7 @@ const users = [
     updatedAt: currentDate,
     id: 1220,
     namaPengguna: "199012112022032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gina Vinrensia, S.Farm., Apt.",
   },
   {
@@ -9760,7 +9761,7 @@ const users = [
     updatedAt: currentDate,
     id: 1221,
     namaPengguna: "199302222022031009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Tri Sulistiono",
   },
   {
@@ -9768,7 +9769,7 @@ const users = [
     updatedAt: currentDate,
     id: 1222,
     namaPengguna: "198805122019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Juraisah, Skm",
   },
   {
@@ -9776,7 +9777,7 @@ const users = [
     updatedAt: currentDate,
     id: 1223,
     namaPengguna: "198204222006042013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ners. Ery Murnisiah, S.Kep",
   },
   {
@@ -9784,7 +9785,7 @@ const users = [
     updatedAt: currentDate,
     id: 1224,
     namaPengguna: "199201282017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiyati, A.Md.Keb",
   },
   {
@@ -9792,7 +9793,7 @@ const users = [
     updatedAt: currentDate,
     id: 1225,
     namaPengguna: "199111032019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Isnaeni , A.Md.Kep.",
   },
   {
@@ -9800,7 +9801,7 @@ const users = [
     updatedAt: currentDate,
     id: 1226,
     namaPengguna: "199405282019032018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andriani, A.Md.Rmik.",
   },
   {
@@ -9808,7 +9809,7 @@ const users = [
     updatedAt: currentDate,
     id: 1227,
     namaPengguna: "198711142019032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lidya Ikhviana Putri, A.Md. Keb.",
   },
   {
@@ -9816,7 +9817,7 @@ const users = [
     updatedAt: currentDate,
     id: 1228,
     namaPengguna: "199204172020122020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Rahayu Ningsih, A.Md.Kep",
   },
   {
@@ -9824,7 +9825,7 @@ const users = [
     updatedAt: currentDate,
     id: 1229,
     namaPengguna: "199603062019032009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Jubaidah, A.Md.Ak.",
   },
   {
@@ -9832,7 +9833,7 @@ const users = [
     updatedAt: currentDate,
     id: 1230,
     namaPengguna: "199908202020121003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fadella Zulfa Rachmani, A.Md.Kep",
   },
   {
@@ -9840,7 +9841,7 @@ const users = [
     updatedAt: currentDate,
     id: 1231,
     namaPengguna: "199002072022031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahman Fahruddin, A.Md.Kep",
   },
   {
@@ -9848,7 +9849,7 @@ const users = [
     updatedAt: currentDate,
     id: 1232,
     namaPengguna: "199112162025212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aulia Sanjaya, S.Farm.,Apt",
   },
   {
@@ -9856,7 +9857,7 @@ const users = [
     updatedAt: currentDate,
     id: 1233,
     namaPengguna: "198610152023212005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rohani, A.Md. Kep",
   },
   {
@@ -9864,7 +9865,7 @@ const users = [
     updatedAt: currentDate,
     id: 1234,
     namaPengguna: "198804062024212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Maidah, A.Md.Keb",
   },
   {
@@ -9872,7 +9873,7 @@ const users = [
     updatedAt: currentDate,
     id: 1235,
     namaPengguna: "198909172024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Hasanah S, A.Md.Keb",
   },
   {
@@ -9880,7 +9881,7 @@ const users = [
     updatedAt: currentDate,
     id: 1236,
     namaPengguna: "199105312024212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariyati, A.Md.Keb",
   },
   {
@@ -9888,7 +9889,7 @@ const users = [
     updatedAt: currentDate,
     id: 1237,
     namaPengguna: "199111102024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Halimah, Amd.Kep",
   },
   {
@@ -9896,7 +9897,7 @@ const users = [
     updatedAt: currentDate,
     id: 1238,
     namaPengguna: "199111222024212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syaripah, A.Md Kep",
   },
   {
@@ -9904,7 +9905,7 @@ const users = [
     updatedAt: currentDate,
     id: 1239,
     namaPengguna: "199703262024212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Wahdah, A.Md.Kep",
   },
   {
@@ -9912,7 +9913,7 @@ const users = [
     updatedAt: currentDate,
     id: 1240,
     namaPengguna: "199710212024212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gemellia Vivia Yose Rini, A.Md.Keb",
   },
   {
@@ -9920,7 +9921,7 @@ const users = [
     updatedAt: currentDate,
     id: 1241,
     namaPengguna: "198707082025211019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Saprul, A.Md.Far",
   },
   {
@@ -9928,7 +9929,7 @@ const users = [
     updatedAt: currentDate,
     id: 1242,
     namaPengguna: "199010052025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hari Abri Patpullim, A.Md.Ak",
   },
   {
@@ -9936,7 +9937,7 @@ const users = [
     updatedAt: currentDate,
     id: 1243,
     namaPengguna: "198803202025211018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M Firman Aidy, A.Md.Kep",
   },
   {
@@ -9944,7 +9945,7 @@ const users = [
     updatedAt: currentDate,
     id: 1244,
     namaPengguna: "198901102025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Selvi Meliyanti, A.Md.Keb",
   },
   {
@@ -9952,7 +9953,7 @@ const users = [
     updatedAt: currentDate,
     id: 1245,
     namaPengguna: "199003032025212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurmiah, A.Md. Keb",
   },
   {
@@ -9960,7 +9961,7 @@ const users = [
     updatedAt: currentDate,
     id: 1246,
     namaPengguna: "199005122025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dwi Sukma Pryhandini, A.Md.Keb",
   },
   {
@@ -9968,7 +9969,7 @@ const users = [
     updatedAt: currentDate,
     id: 1247,
     namaPengguna: "198904122024212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yati, S.K.M",
   },
   {
@@ -9976,7 +9977,7 @@ const users = [
     updatedAt: currentDate,
     id: 1248,
     namaPengguna: "199003212025211021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Farid, Skm",
   },
   {
@@ -9984,7 +9985,7 @@ const users = [
     updatedAt: currentDate,
     id: 1249,
     namaPengguna: "6401082212010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Sidik Amrillah ",
   },
   {
@@ -9992,7 +9993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1250,
     namaPengguna: "198610282025211081",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amin Saparullah",
   },
   {
@@ -10000,7 +10001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1251,
     namaPengguna: "3501104112950013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Debby Clara Sinta, S.Kep",
   },
   {
@@ -10008,7 +10009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1252,
     namaPengguna: "199205112025212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Rositah Amd.Keb",
   },
   {
@@ -10016,7 +10017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1253,
     namaPengguna: "6401086304990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Fadhilah, S.Keb",
   },
   {
@@ -10024,7 +10025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1254,
     namaPengguna: "199905162025212088",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fajria Alhusna, A.Md.Keb",
   },
   {
@@ -10032,7 +10033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1255,
     namaPengguna: "6401060511950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ferry Rahmat Wijaya Kalimantono S. Tr. Kes",
   },
   {
@@ -10040,7 +10041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1256,
     namaPengguna: "6401066612030004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitriyani, A.Md.Kep",
   },
   {
@@ -10048,7 +10049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1257,
     namaPengguna: "198208162025212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gusmaniah",
   },
   {
@@ -10056,7 +10057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1258,
     namaPengguna: "6401067004990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiatul Khairiyah, S.Tr.Kes",
   },
   {
@@ -10064,7 +10065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1259,
     namaPengguna: "199109232025211098",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Ansar, A.Md. Kep",
   },
   {
@@ -10072,7 +10073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1260,
     namaPengguna: "197404102025211044",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maskur Hadi",
   },
   {
@@ -10080,7 +10081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1261,
     namaPengguna: "6401082603960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ftr. Muhammad Ilyasin, S.Ftr",
   },
   {
@@ -10088,7 +10089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1262,
     namaPengguna: "198811182025211058",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mukhlis",
   },
   {
@@ -10096,7 +10097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1263,
     namaPengguna: "3521135703970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mutia Rahma Sari, A.Md. Kep",
   },
   {
@@ -10104,7 +10105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1264,
     namaPengguna: "6401085705970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurkamila Satriani",
   },
   {
@@ -10112,7 +10113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1265,
     namaPengguna: "6401087003030003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurlita Aulia Sugiarti, A.Md.Kep",
   },
   {
@@ -10120,7 +10121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1266,
     namaPengguna: "199806122025212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Putri Nur Efendi, S. Keb",
   },
   {
@@ -10128,7 +10129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1267,
     namaPengguna: "6401084501970003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Rara Andini Saraswati M.K.M",
   },
   {
@@ -10136,7 +10137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1268,
     namaPengguna: "6401065301960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Riza Anggini Zanuarita Dahlan",
   },
   {
@@ -10144,7 +10145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1269,
     namaPengguna: "199211142025212110",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rohimah Oktafiani. A. Md. Keb",
   },
   {
@@ -10152,7 +10153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1270,
     namaPengguna: "198509302025211069",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sakka Abdullatif",
   },
   {
@@ -10160,7 +10161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1271,
     namaPengguna: "199909172025212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sartika Vira Sari, A.Md.Keb",
   },
   {
@@ -10168,7 +10169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1272,
     namaPengguna: "6408046303930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Tiara Dwi Sari",
   },
   {
@@ -10176,7 +10177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1273,
     namaPengguna: "6401066605010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Retno Saras Winanti, S.Tr.Kes",
   },
   {
@@ -10184,7 +10185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1274,
     namaPengguna: "199805192025212045",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widya Rohikmah,A.Md,Keb",
   },
   {
@@ -10192,7 +10193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1275,
     namaPengguna: "196912251991022001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ida Norsanti, A.Md.Kep.",
   },
   {
@@ -10200,7 +10201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1276,
     namaPengguna: "197503291994031001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mulyadi Safitri, A.Md, Kep",
   },
   {
@@ -10208,7 +10209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1277,
     namaPengguna: "196811011988011001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Hairil Meladi, A.Md.Kep",
   },
   {
@@ -10216,7 +10217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1278,
     namaPengguna: "197303071996031002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supardiyono, A.Md.Kep",
   },
   {
@@ -10224,7 +10225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1279,
     namaPengguna: "198010312006042016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Surianti, S.Tr.Kep., Ns.",
   },
   {
@@ -10232,7 +10233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1280,
     namaPengguna: "197906082006042008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nunung Yuniarsih, A.Md.Keb",
   },
   {
@@ -10240,7 +10241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1281,
     namaPengguna: "198411072006042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiyati, A.Md.Gizi",
   },
   {
@@ -10248,7 +10249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1282,
     namaPengguna: "198410082009032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustiani Manurung, A.Md.Keb",
   },
   {
@@ -10256,7 +10257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1283,
     namaPengguna: "198106012009032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nor Hasanah, Amd. Kg",
   },
   {
@@ -10264,7 +10265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1284,
     namaPengguna: "198203022011011003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Alam Syahrani, S.Gz.",
   },
   {
@@ -10272,7 +10273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1285,
     namaPengguna: "198507122010012032",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Ardiyana, A.Md.Keb",
   },
   {
@@ -10280,7 +10281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1286,
     namaPengguna: "198807272010012015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ida Fitriani, A.Md.Keb",
   },
   {
@@ -10288,7 +10289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1287,
     namaPengguna: "197611052002122004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Habibah, S.Tr.Keb.Bdn.",
   },
   {
@@ -10296,7 +10297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1288,
     namaPengguna: "197611112003122005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumiati, A.Md.Keb",
   },
   {
@@ -10304,7 +10305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1289,
     namaPengguna: "198104172006042020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Leni Juariah, A.Md.Kep",
   },
   {
@@ -10312,7 +10313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1290,
     namaPengguna: "198506102010012038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ratna Wati, A.Md.Kep",
   },
   {
@@ -10320,7 +10321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1291,
     namaPengguna: "199506152022031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Muhammad Anugrah Pratama, S.Kg",
   },
   {
@@ -10328,7 +10329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1292,
     namaPengguna: "198304302011011010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Zaenal Abidin, S.Kep.",
   },
   {
@@ -10336,7 +10337,7 @@ const users = [
     updatedAt: currentDate,
     id: 1293,
     namaPengguna: "198910102011012013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wiwin Nurhasanah, S.Kep.",
   },
   {
@@ -10344,7 +10345,7 @@ const users = [
     updatedAt: currentDate,
     id: 1294,
     namaPengguna: "199109112017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusmawati, A.Md.Keb",
   },
   {
@@ -10352,7 +10353,7 @@ const users = [
     updatedAt: currentDate,
     id: 1295,
     namaPengguna: "199603112019032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Uswatun Nisa, A.Md. Keb.",
   },
   {
@@ -10360,7 +10361,7 @@ const users = [
     updatedAt: currentDate,
     id: 1296,
     namaPengguna: "199508172019032018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Wahyuni, A.Md., Farm.",
   },
   {
@@ -10368,7 +10369,7 @@ const users = [
     updatedAt: currentDate,
     id: 1297,
     namaPengguna: "199104192020122018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Veronica Elvaria Zebua, A.Md",
   },
   {
@@ -10376,7 +10377,7 @@ const users = [
     updatedAt: currentDate,
     id: 1298,
     namaPengguna: "199009122022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Reni Anggraeni, A.Md.Kep",
   },
   {
@@ -10384,7 +10385,7 @@ const users = [
     updatedAt: currentDate,
     id: 1299,
     namaPengguna: "199005082022032008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Emiliani Riska, A.Md.Keb",
   },
   {
@@ -10392,7 +10393,7 @@ const users = [
     updatedAt: currentDate,
     id: 1300,
     namaPengguna: "198504212024211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdur Rahman, Amk",
   },
   {
@@ -10400,7 +10401,7 @@ const users = [
     updatedAt: currentDate,
     id: 1301,
     namaPengguna: "199107172024212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Kundari, A. Md. Keb",
   },
   {
@@ -10408,7 +10409,7 @@ const users = [
     updatedAt: currentDate,
     id: 1302,
     namaPengguna: "199104192024212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sulastri, A.Md.Keb",
   },
   {
@@ -10416,7 +10417,7 @@ const users = [
     updatedAt: currentDate,
     id: 1303,
     namaPengguna: "198712312024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariani, A.Md.Kep",
   },
   {
@@ -10424,7 +10425,7 @@ const users = [
     updatedAt: currentDate,
     id: 1304,
     namaPengguna: "199106282024212020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eny Sadariah, A.Md.Kep",
   },
   {
@@ -10432,7 +10433,7 @@ const users = [
     updatedAt: currentDate,
     id: 1305,
     namaPengguna: "199610052024212034",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marionisya Nur Ri'dho Mahdin, A.Md.Keb.",
   },
   {
@@ -10440,7 +10441,7 @@ const users = [
     updatedAt: currentDate,
     id: 1306,
     namaPengguna: "199607142024211008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Aupah Ta'jul Abrar, A.Md.Kep",
   },
   {
@@ -10448,7 +10449,7 @@ const users = [
     updatedAt: currentDate,
     id: 1307,
     namaPengguna: "199707272024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Puji Astuti, A.Md.Keb",
   },
   {
@@ -10456,7 +10457,7 @@ const users = [
     updatedAt: currentDate,
     id: 1308,
     namaPengguna: "198811262025212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurdiana Anton. S, Amd.Kep",
   },
   {
@@ -10464,7 +10465,7 @@ const users = [
     updatedAt: currentDate,
     id: 1309,
     namaPengguna: "198809082025212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Fatimah, A.Md.Keb",
   },
   {
@@ -10472,7 +10473,7 @@ const users = [
     updatedAt: currentDate,
     id: 1310,
     namaPengguna: "198811012025212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susanti, A.Md.Keb",
   },
   {
@@ -10480,7 +10481,7 @@ const users = [
     updatedAt: currentDate,
     id: 1311,
     namaPengguna: "198907232025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tutik Zulfana, Amd.Keb",
   },
   {
@@ -10488,7 +10489,7 @@ const users = [
     updatedAt: currentDate,
     id: 1312,
     namaPengguna: "199111122025211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "M. Sirajudin, A.Md.Kep",
   },
   {
@@ -10496,7 +10497,7 @@ const users = [
     updatedAt: currentDate,
     id: 1313,
     namaPengguna: "199207262025212028",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gustinarus Fransiska Hale, Amd. Keb",
   },
   {
@@ -10504,7 +10505,7 @@ const users = [
     updatedAt: currentDate,
     id: 1314,
     namaPengguna: "199306162025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuricke Lestari, A.Md.Keb",
   },
   {
@@ -10512,7 +10513,7 @@ const users = [
     updatedAt: currentDate,
     id: 1315,
     namaPengguna: "199705092025211012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Muhammad, A.Md.Kep",
   },
   {
@@ -10520,7 +10521,7 @@ const users = [
     updatedAt: currentDate,
     id: 1316,
     namaPengguna: "198804022024212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mardiana, S.K.M",
   },
   {
@@ -10528,7 +10529,7 @@ const users = [
     updatedAt: currentDate,
     id: 1317,
     namaPengguna: "199101242025212014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wilda Adriana Sagala, S.E",
   },
   {
@@ -10536,7 +10537,7 @@ const users = [
     updatedAt: currentDate,
     id: 1318,
     namaPengguna: "6302061406780004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Faisal",
   },
   {
@@ -10544,7 +10545,7 @@ const users = [
     updatedAt: currentDate,
     id: 1319,
     namaPengguna: "197806132025211036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aidi Hafizi",
   },
   {
@@ -10552,7 +10553,7 @@ const users = [
     updatedAt: currentDate,
     id: 1320,
     namaPengguna: "6401087012990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amelia, S.K.L",
   },
   {
@@ -10560,7 +10561,7 @@ const users = [
     updatedAt: currentDate,
     id: 1321,
     namaPengguna: "6401066807000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Annisa Aulia Rahmah,A.Md.RMIK",
   },
   {
@@ -10568,7 +10569,7 @@ const users = [
     updatedAt: currentDate,
     id: 1322,
     namaPengguna: "199612052025212058",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desy Al Israwati, A.Md.Keb",
   },
   {
@@ -10576,7 +10577,7 @@ const users = [
     updatedAt: currentDate,
     id: 1323,
     namaPengguna: "199508122025212103",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Devi Astuti,S.ST",
   },
   {
@@ -10584,7 +10585,7 @@ const users = [
     updatedAt: currentDate,
     id: 1324,
     namaPengguna: "199906302025211031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Didik Muhammad Kuncoro, A.Md.Kep",
   },
   {
@@ -10592,7 +10593,7 @@ const users = [
     updatedAt: currentDate,
     id: 1325,
     namaPengguna: "199104222025211063",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fauzan Taufikurrahman",
   },
   {
@@ -10600,7 +10601,7 @@ const users = [
     updatedAt: currentDate,
     id: 1326,
     namaPengguna: "6401031907940002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Hari Khoirur Rozikin",
   },
   {
@@ -10608,7 +10609,7 @@ const users = [
     updatedAt: currentDate,
     id: 1327,
     namaPengguna: "199409112025212062",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iik Lestari A Md.Keb ",
   },
   {
@@ -10616,7 +10617,7 @@ const users = [
     updatedAt: currentDate,
     id: 1328,
     namaPengguna: "6401086105010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lyra Virna",
   },
   {
@@ -10624,7 +10625,7 @@ const users = [
     updatedAt: currentDate,
     id: 1329,
     namaPengguna: "199903212025212052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Melly Eka Jayanti, A.Md.Kep",
   },
   {
@@ -10632,7 +10633,7 @@ const users = [
     updatedAt: currentDate,
     id: 1330,
     namaPengguna: "6401081509000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Taufiq Hidayat A.Md.Kes",
   },
   {
@@ -10640,7 +10641,7 @@ const users = [
     updatedAt: currentDate,
     id: 1331,
     namaPengguna: "6401085103890002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norgiah A.Md.Kep",
   },
   {
@@ -10648,7 +10649,7 @@ const users = [
     updatedAt: currentDate,
     id: 1332,
     namaPengguna: "6401084307010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Novita Dwi Lestari S.Kep",
   },
   {
@@ -10656,7 +10657,7 @@ const users = [
     updatedAt: currentDate,
     id: 1333,
     namaPengguna: "199904102025212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nuril Khofifah Turohmi, S.KM",
   },
   {
@@ -10664,7 +10665,7 @@ const users = [
     updatedAt: currentDate,
     id: 1334,
     namaPengguna: "6401085603000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Raihan Askiyah, S.Farm",
   },
   {
@@ -10672,7 +10673,7 @@ const users = [
     updatedAt: currentDate,
     id: 1335,
     namaPengguna: "199908262025212025",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ria Niswatin Solehah, A.Md.Keb",
   },
   {
@@ -10680,7 +10681,7 @@ const users = [
     updatedAt: currentDate,
     id: 1336,
     namaPengguna: "6401065309960001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Eva Veliana, SKM",
   },
   {
@@ -10688,7 +10689,7 @@ const users = [
     updatedAt: currentDate,
     id: 1337,
     namaPengguna: "6401082607980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Seno Ardi Wartami S.Kep",
   },
   {
@@ -10696,7 +10697,7 @@ const users = [
     updatedAt: currentDate,
     id: 1338,
     namaPengguna: "199706122025212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suci Partijah,A.Md.Keb",
   },
   {
@@ -10704,7 +10705,7 @@ const users = [
     updatedAt: currentDate,
     id: 1339,
     namaPengguna: "199612242025211022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Wahyu Dwi Sulistyo, S.Kep",
   },
   {
@@ -10712,7 +10713,7 @@ const users = [
     updatedAt: currentDate,
     id: 1340,
     namaPengguna: "6401086508020006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahyu Purnamasari, A.md. Kep",
   },
   {
@@ -10720,7 +10721,7 @@ const users = [
     updatedAt: currentDate,
     id: 1341,
     namaPengguna: "198202032015032001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Andi Emmy Marlina",
   },
   {
@@ -10728,7 +10729,7 @@ const users = [
     updatedAt: currentDate,
     id: 1342,
     namaPengguna: "197306081994031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Matnur, A.Md.Kep.",
   },
   {
@@ -10736,7 +10737,7 @@ const users = [
     updatedAt: currentDate,
     id: 1343,
     namaPengguna: "198208142005022009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tasniah, A.Md.Kep",
   },
   {
@@ -10744,7 +10745,7 @@ const users = [
     updatedAt: currentDate,
     id: 1344,
     namaPengguna: "198201052005022002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Supatmi Ningsih, A.Md.Kep.",
   },
   {
@@ -10752,7 +10753,7 @@ const users = [
     updatedAt: currentDate,
     id: 1345,
     namaPengguna: "199011042019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Novita Sonda, S. Farm",
   },
   {
@@ -10760,7 +10761,7 @@ const users = [
     updatedAt: currentDate,
     id: 1346,
     namaPengguna: "199009162019032023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rizki Rahmita Amalia",
   },
   {
@@ -10768,7 +10769,7 @@ const users = [
     updatedAt: currentDate,
     id: 1347,
     namaPengguna: "198711202011011002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sugianto, Am.Kl",
   },
   {
@@ -10776,7 +10777,7 @@ const users = [
     updatedAt: currentDate,
     id: 1348,
     namaPengguna: "197109181994032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Masjita Abas, A.Md.Kes",
   },
   {
@@ -10784,7 +10785,7 @@ const users = [
     updatedAt: currentDate,
     id: 1349,
     namaPengguna: "198303212006042017",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marchella G. Pesik, A.Md.Kes",
   },
   {
@@ -10792,7 +10793,7 @@ const users = [
     updatedAt: currentDate,
     id: 1350,
     namaPengguna: "197608132003122009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bd. Dwi Agustina, S.Tr.Keb",
   },
   {
@@ -10800,7 +10801,7 @@ const users = [
     updatedAt: currentDate,
     id: 1351,
     namaPengguna: "199305282017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Jumidsa Anshari, S.Tr.Keb",
   },
   {
@@ -10808,7 +10809,7 @@ const users = [
     updatedAt: currentDate,
     id: 1352,
     namaPengguna: "199012162017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Khaefa, A.Md.Keb",
   },
   {
@@ -10816,7 +10817,7 @@ const users = [
     updatedAt: currentDate,
     id: 1353,
     namaPengguna: "199402152019032019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Idzni Shabrina Maharani, A.Md.Ak.",
   },
   {
@@ -10824,7 +10825,7 @@ const users = [
     updatedAt: currentDate,
     id: 1354,
     namaPengguna: "198911302019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Radiana, S.Tr.Kes",
   },
   {
@@ -10832,7 +10833,7 @@ const users = [
     updatedAt: currentDate,
     id: 1355,
     namaPengguna: "199207222019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muh Mukhsin L, A.Md.Rmik",
   },
   {
@@ -10840,7 +10841,7 @@ const users = [
     updatedAt: currentDate,
     id: 1356,
     namaPengguna: "199504072019031003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Appriza Dwi Fahlevi Arman, A.Md. Farm.",
   },
   {
@@ -10848,7 +10849,7 @@ const users = [
     updatedAt: currentDate,
     id: 1357,
     namaPengguna: "199512112019032018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Firdausyah, A.Md.Gz",
   },
   {
@@ -10856,7 +10857,7 @@ const users = [
     updatedAt: currentDate,
     id: 1358,
     namaPengguna: "199806222022032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Devi Permata Sari, A.Md.Kep",
   },
   {
@@ -10864,7 +10865,7 @@ const users = [
     updatedAt: currentDate,
     id: 1359,
     namaPengguna: "199109102023211002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Welly Alfian, A.Md. Kep",
   },
   {
@@ -10872,7 +10873,7 @@ const users = [
     updatedAt: currentDate,
     id: 1360,
     namaPengguna: "199604192023212002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Hidayah, A.Md. Keb",
   },
   {
@@ -10880,7 +10881,7 @@ const users = [
     updatedAt: currentDate,
     id: 1361,
     namaPengguna: "198810072024212018",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anita, A.Md.Keb",
   },
   {
@@ -10888,7 +10889,7 @@ const users = [
     updatedAt: currentDate,
     id: 1362,
     namaPengguna: "199005122024212030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Hasmawati, Amd.Kep",
   },
   {
@@ -10896,7 +10897,7 @@ const users = [
     updatedAt: currentDate,
     id: 1363,
     namaPengguna: "199008172024212040",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eka Agustin Sinar Lina, A.Md. Keb.",
   },
   {
@@ -10904,7 +10905,7 @@ const users = [
     updatedAt: currentDate,
     id: 1364,
     namaPengguna: "198904082024212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Hidayah, A.Md.Kep",
   },
   {
@@ -10912,7 +10913,7 @@ const users = [
     updatedAt: currentDate,
     id: 1365,
     namaPengguna: "199303122024212047",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mariah Ulpah, Amd.Ak",
   },
   {
@@ -10920,7 +10921,7 @@ const users = [
     updatedAt: currentDate,
     id: 1366,
     namaPengguna: "199210042024211015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Faiz Junaidi Sasmito, A.Md.Kep",
   },
   {
@@ -10928,7 +10929,7 @@ const users = [
     updatedAt: currentDate,
     id: 1367,
     namaPengguna: "199408052024212049",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina Aryani, A.Md.Kep",
   },
   {
@@ -10936,7 +10937,7 @@ const users = [
     updatedAt: currentDate,
     id: 1368,
     namaPengguna: "199302022024212038",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Pebri Satni Lestari, Amd.Keb",
   },
   {
@@ -10944,7 +10945,7 @@ const users = [
     updatedAt: currentDate,
     id: 1369,
     namaPengguna: "199709082024212041",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Gina Audina, A.Md.Keb",
   },
   {
@@ -10952,7 +10953,7 @@ const users = [
     updatedAt: currentDate,
     id: 1370,
     namaPengguna: "198412212025211013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mahyudin, A.Md.Kep",
   },
   {
@@ -10960,7 +10961,7 @@ const users = [
     updatedAt: currentDate,
     id: 1371,
     namaPengguna: "198908152025212019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Agustina, Amd. Keb",
   },
   {
@@ -10968,7 +10969,7 @@ const users = [
     updatedAt: currentDate,
     id: 1372,
     namaPengguna: "199004102025212033",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Susi Susanti, Amd.Kep",
   },
   {
@@ -10976,7 +10977,7 @@ const users = [
     updatedAt: currentDate,
     id: 1373,
     namaPengguna: "198603192025211012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muddakir, A.Md.Kep",
   },
   {
@@ -10984,7 +10985,7 @@ const users = [
     updatedAt: currentDate,
     id: 1374,
     namaPengguna: "199111142024211016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dian Saputra, S.K.M.",
   },
   {
@@ -10992,7 +10993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1375,
     namaPengguna: "198301012025211142",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ali Badri",
   },
   {
@@ -11000,7 +11001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1376,
     namaPengguna: "6401054106950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chrisny Adhi Pratiwi, S.Si.T., Bdn",
   },
   {
@@ -11008,7 +11009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1377,
     namaPengguna: "6401054110990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ice Trisnawati,A.Md.Keb.",
   },
   {
@@ -11016,7 +11017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1378,
     namaPengguna: "199003212025211058",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jusriansyah",
   },
   {
@@ -11024,7 +11025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1379,
     namaPengguna: "199712012025212061",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Lailatul Hidayah",
   },
   {
@@ -11032,7 +11033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1380,
     namaPengguna: "6409035405000004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meiyuhdia Sugihartanty, A.Md.Keb",
   },
   {
@@ -11040,7 +11041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1381,
     namaPengguna: "6401084808000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nazmah Qurotul A'in, SKM",
   },
   {
@@ -11048,7 +11049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1382,
     namaPengguna: "6409030510870003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. NurPakihudin Muchlis, S.Kep",
   },
   {
@@ -11056,7 +11057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1383,
     namaPengguna: "6409036404010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Wulandari, A.Md.Kep",
   },
   {
@@ -11064,7 +11065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1384,
     namaPengguna: "6409035905970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Riskia Nur Hidayah",
   },
   {
@@ -11072,7 +11073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1385,
     namaPengguna: "6409032811010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riyan Rahmadan Ilham Ndoni, A.Md.Gz",
   },
   {
@@ -11080,7 +11081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1386,
     namaPengguna: "6401086112000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sabrina Fitri Nadiyah, S.Ftr.,Ftr",
   },
   {
@@ -11088,7 +11089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1387,
     namaPengguna: "6401066708910004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Safrilia Rindawati Alip, S.farm",
   },
   {
@@ -11096,7 +11097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1388,
     namaPengguna: "199804302025212054",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Jamilah, A.Md.Kep",
   },
   {
@@ -11104,7 +11105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1389,
     namaPengguna: "199910102025212042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Taniah Dwi Pramesti, A.Md.Keb",
   },
   {
@@ -11112,7 +11113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1390,
     namaPengguna: "197207042006042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Eva Yulia Yani",
   },
   {
@@ -11120,7 +11121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1391,
     namaPengguna: "196705291988011002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Saudana, A.Md.Kep",
   },
   {
@@ -11128,7 +11129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1392,
     namaPengguna: "197906072006042026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tohiroh, S.Tr.Kep, Ns.",
   },
   {
@@ -11136,7 +11137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1393,
     namaPengguna: "198111122006042023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurapni, A.Md.Kep",
   },
   {
@@ -11144,7 +11145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1394,
     namaPengguna: "198207152006041013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Surya Jaya Atmaja, S.Kep",
   },
   {
@@ -11152,7 +11153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1395,
     namaPengguna: "198503212010012031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Dewi Eka Satriani, Sp.Og",
   },
   {
@@ -11160,7 +11161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1396,
     namaPengguna: "199101312019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Prince Sianturi",
   },
   {
@@ -11168,7 +11169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1397,
     namaPengguna: "198904172019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Suci Pramadiani",
   },
   {
@@ -11176,7 +11177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1398,
     namaPengguna: "198003222007011006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dadi Ari Kurniawan, A.Md",
   },
   {
@@ -11184,7 +11185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1399,
     namaPengguna: "197312092005021001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bagong Suprianto, S.Tr.Kep., Ns.",
   },
   {
@@ -11192,7 +11193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1400,
     namaPengguna: "198806222017052001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nora Yuni Intasari, A.Md.Keb",
   },
   {
@@ -11200,7 +11201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1401,
     namaPengguna: "199005272019032014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Umi Nasihah, A.Md.Kep.",
   },
   {
@@ -11208,7 +11209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1402,
     namaPengguna: "199109152019031014",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mauluddin, A.Md.Kep.",
   },
   {
@@ -11216,7 +11217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1403,
     namaPengguna: "198601122019031006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Theodoroes Lembang Allo, A.Md. Farm.",
   },
   {
@@ -11224,7 +11225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1404,
     namaPengguna: "198610092019032011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risnawati, A.Md. Farm.",
   },
   {
@@ -11232,7 +11233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1405,
     namaPengguna: "199110292019032012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ria Hasriana, A.Md.Kep.",
   },
   {
@@ -11240,7 +11241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1406,
     namaPengguna: "199211222019032019",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novita Kusumawati H Djama, A.Md.Gz.",
   },
   {
@@ -11248,7 +11249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1407,
     namaPengguna: "199305262019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fatmawati, A.Md. Far",
   },
   {
@@ -11256,7 +11257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1408,
     namaPengguna: "199404042019032020",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mifta Ananda Prabandari, A.Md.Ak.",
   },
   {
@@ -11264,7 +11265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1409,
     namaPengguna: "199508242019032016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iness Irmayanty Br. Saragih, A.Md. Keb",
   },
   {
@@ -11272,7 +11273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1410,
     namaPengguna: "199612282019032005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Intan Setyoningrum, A.Md.Ak.",
   },
   {
@@ -11280,7 +11281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1411,
     namaPengguna: "199210162019032013",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Rahayu, A.Md. Keb.",
   },
   {
@@ -11288,7 +11289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1412,
     namaPengguna: "199306042019032027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Irnawati , A.Md.Ak.",
   },
   {
@@ -11296,7 +11297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1413,
     namaPengguna: "199105032019031008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supriyono, A.Md.Rmik.",
   },
   {
@@ -11304,7 +11305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1414,
     namaPengguna: "199210032019031011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Leovardus, A.Md.Kl.",
   },
   {
@@ -11312,7 +11313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1415,
     namaPengguna: "199303182023212011",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winda Restiani, S.Farm., Apt.",
   },
   {
@@ -11320,7 +11321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1416,
     namaPengguna: "198808082023211006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Ferry Fadly, S.Kep",
   },
   {
@@ -11328,7 +11329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1417,
     namaPengguna: "198310222023212001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Santi Widyartati, A.Md.Kep",
   },
   {
@@ -11336,7 +11337,7 @@ const users = [
     updatedAt: currentDate,
     id: 1418,
     namaPengguna: "199105192023211005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aldy Ari Minanjar, A.Md.Kep",
   },
   {
@@ -11344,7 +11345,7 @@ const users = [
     updatedAt: currentDate,
     id: 1419,
     namaPengguna: "199303172023212010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizki Tatriana, A.Md.Kep",
   },
   {
@@ -11352,7 +11353,7 @@ const users = [
     updatedAt: currentDate,
     id: 1420,
     namaPengguna: "199411042023212012",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Novi Putri Ardila, A.Md.Kep",
   },
   {
@@ -11360,7 +11361,7 @@ const users = [
     updatedAt: currentDate,
     id: 1421,
     namaPengguna: "198812262024212009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Winarni, A.Md.Kep",
   },
   {
@@ -11368,7 +11369,7 @@ const users = [
     updatedAt: currentDate,
     id: 1422,
     namaPengguna: "199211242024212024",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aulia Retno Wulandari, Amd.Kep.",
   },
   {
@@ -11376,7 +11377,7 @@ const users = [
     updatedAt: currentDate,
     id: 1423,
     namaPengguna: "199408302024212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miftahul Rahmah, A.Md.Kep",
   },
   {
@@ -11384,7 +11385,7 @@ const users = [
     updatedAt: currentDate,
     id: 1424,
     namaPengguna: "199403022024212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nopi Badiah, Amd.Keb",
   },
   {
@@ -11392,7 +11393,7 @@ const users = [
     updatedAt: currentDate,
     id: 1425,
     namaPengguna: "199403122024212036",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Ulfah, A.Md.Kep",
   },
   {
@@ -11400,7 +11401,7 @@ const users = [
     updatedAt: currentDate,
     id: 1426,
     namaPengguna: "199308232024212031",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rosadalima Aportha Batu Nge, Amd.Keb",
   },
   {
@@ -11408,7 +11409,7 @@ const users = [
     updatedAt: currentDate,
     id: 1427,
     namaPengguna: "199707062024212026",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Vita Indriani Utami Dewi, A.Md.Keb",
   },
   {
@@ -11416,7 +11417,7 @@ const users = [
     updatedAt: currentDate,
     id: 1428,
     namaPengguna: "198802122025212022",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmawati, A.Md.Keb",
   },
   {
@@ -11424,7 +11425,7 @@ const users = [
     updatedAt: currentDate,
     id: 1429,
     namaPengguna: "198910302025212021",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yenny Susanty, A.Md.Keb",
   },
   {
@@ -11432,7 +11433,7 @@ const users = [
     updatedAt: currentDate,
     id: 1430,
     namaPengguna: "199002122025212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siti Mutiah, A.Md.Keb",
   },
   {
@@ -11440,7 +11441,7 @@ const users = [
     updatedAt: currentDate,
     id: 1431,
     namaPengguna: "199005172025212023",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Wahyuni Astuti, A.Md.Keb",
   },
   {
@@ -11448,7 +11449,7 @@ const users = [
     updatedAt: currentDate,
     id: 1432,
     namaPengguna: "199108082025212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Retnani Latifah, A.Md.Keb",
   },
   {
@@ -11456,7 +11457,7 @@ const users = [
     updatedAt: currentDate,
     id: 1433,
     namaPengguna: "199210102023211006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ichsanuddin, S.Tr.Ft",
   },
   {
@@ -11464,7 +11465,7 @@ const users = [
     updatedAt: currentDate,
     id: 1434,
     namaPengguna: "199412232025212027",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desy Ulandari, S.E",
   },
   {
@@ -11472,7 +11473,7 @@ const users = [
     updatedAt: currentDate,
     id: 1435,
     namaPengguna: "6401041211950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Achmad Zaini ",
   },
   {
@@ -11480,7 +11481,7 @@ const users = [
     updatedAt: currentDate,
     id: 1436,
     namaPengguna: "6371044707900015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aisya, A.Md.Keb",
   },
   {
@@ -11488,7 +11489,7 @@ const users = [
     updatedAt: currentDate,
     id: 1437,
     namaPengguna: "6401096101050001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Amelia Ramadhan",
   },
   {
@@ -11496,7 +11497,7 @@ const users = [
     updatedAt: currentDate,
     id: 1438,
     namaPengguna: "6401045611960002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Asmiatul Hudaya, S.Tr.Gz",
   },
   {
@@ -11504,7 +11505,7 @@ const users = [
     updatedAt: currentDate,
     id: 1439,
     namaPengguna: "641045004970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Aulia Megita Raharjanti, S.Farm",
   },
   {
@@ -11512,7 +11513,7 @@ const users = [
     updatedAt: currentDate,
     id: 1440,
     namaPengguna: "6401020306990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayusriawan, A.Md.Kep",
   },
   {
@@ -11520,7 +11521,7 @@ const users = [
     updatedAt: currentDate,
     id: 1441,
     namaPengguna: "6401040604950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Bagas Priambada",
   },
   {
@@ -11528,7 +11529,7 @@ const users = [
     updatedAt: currentDate,
     id: 1442,
     namaPengguna: "6401041903980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chalvin Ruba S.T",
   },
   {
@@ -11536,7 +11537,7 @@ const users = [
     updatedAt: currentDate,
     id: 1443,
     namaPengguna: "6401092808970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Della Yulia Putra, S.farm",
   },
   {
@@ -11544,7 +11545,7 @@ const users = [
     updatedAt: currentDate,
     id: 1444,
     namaPengguna: "3504144807010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Harinda Mira Hestina, A.Md.Kes",
   },
   {
@@ -11552,7 +11553,7 @@ const users = [
     updatedAt: currentDate,
     id: 1445,
     namaPengguna: "6401045112000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Inayah Safwah, S.Tr.Gz",
   },
   {
@@ -11560,7 +11561,7 @@ const users = [
     updatedAt: currentDate,
     id: 1446,
     namaPengguna: "6401044208000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Indo Uleng, SE",
   },
   {
@@ -11568,7 +11569,7 @@ const users = [
     updatedAt: currentDate,
     id: 1447,
     namaPengguna: "3273195312870000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Kartika Kristianto",
   },
   {
@@ -11576,7 +11577,7 @@ const users = [
     updatedAt: currentDate,
     id: 1448,
     namaPengguna: "6401062606960005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Mochammad Arsyi Gandi",
   },
   {
@@ -11584,7 +11585,7 @@ const users = [
     updatedAt: currentDate,
     id: 1449,
     namaPengguna: "200004292025211030",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Fendi Kurniawan",
   },
   {
@@ -11592,7 +11593,7 @@ const users = [
     updatedAt: currentDate,
     id: 1450,
     namaPengguna: "6401040110020005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Fiqri Perdana",
   },
   {
@@ -11600,7 +11601,7 @@ const users = [
     updatedAt: currentDate,
     id: 1451,
     namaPengguna: "6401096003870001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nasrah Wati",
   },
   {
@@ -11608,7 +11609,7 @@ const users = [
     updatedAt: currentDate,
     id: 1452,
     namaPengguna: "6401034511990003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nopi Ruslinawati Putri, A.Md.Keb",
   },
   {
@@ -11616,7 +11617,7 @@ const users = [
     updatedAt: currentDate,
     id: 1453,
     namaPengguna: "198302162025212037",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurhani",
   },
   {
@@ -11624,7 +11625,7 @@ const users = [
     updatedAt: currentDate,
     id: 1454,
     namaPengguna: "1401196208020003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Fadhia Hanum",
   },
   {
@@ -11632,7 +11633,7 @@ const users = [
     updatedAt: currentDate,
     id: 1455,
     namaPengguna: "6401041109780001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sabrianto, S.Pd.I",
   },
   {
@@ -11640,7 +11641,7 @@ const users = [
     updatedAt: currentDate,
     id: 1456,
     namaPengguna: "6401094607940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sariyani,Amd.Keb",
   },
   {
@@ -11648,7 +11649,7 @@ const users = [
     updatedAt: currentDate,
     id: 1457,
     namaPengguna: "6401096104970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Siska Rahayu, SE",
   },
   {
@@ -11656,7 +11657,7 @@ const users = [
     updatedAt: currentDate,
     id: 1458,
     namaPengguna: "197303242025211035",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Supardi",
   },
   {
@@ -11664,7 +11665,7 @@ const users = [
     updatedAt: currentDate,
     id: 1459,
     namaPengguna: "6401041203980005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Syalpriansyah ",
   },
   {
@@ -11672,7 +11673,7 @@ const users = [
     updatedAt: currentDate,
     id: 1460,
     namaPengguna: "200011302025211015",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Taupik Hidayat",
   },
   {
@@ -11680,7 +11681,7 @@ const users = [
     updatedAt: currentDate,
     id: 1461,
     namaPengguna: "6401051806990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tegar Atmajaya, S.K.M",
   },
   {
@@ -11688,7 +11689,7 @@ const users = [
     updatedAt: currentDate,
     id: 1462,
     namaPengguna: "6401094511910001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yaying Dewi Yulianti, A.Md.Keb",
   },
   {
@@ -11696,7 +11697,7 @@ const users = [
     updatedAt: currentDate,
     id: 1463,
     namaPengguna: "199408162025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Linda Permata Maulidya, S.Kep",
   },
   {
@@ -11704,7 +11705,7 @@ const users = [
     updatedAt: currentDate,
     id: 1464,
     namaPengguna: "200010182025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Dewi Armayanti, S. Kep",
   },
   {
@@ -11712,7 +11713,7 @@ const users = [
     updatedAt: currentDate,
     id: 1465,
     namaPengguna: "200304302025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Tias Setianingsih, S.Kep., Ns",
   },
   {
@@ -11720,7 +11721,7 @@ const users = [
     updatedAt: currentDate,
     id: 1466,
     namaPengguna: "198909212025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Ayu Darliana, S.Farm.",
   },
   {
@@ -11728,7 +11729,7 @@ const users = [
     updatedAt: currentDate,
     id: 1467,
     namaPengguna: "199011052025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Rosantika Novinda, S.Farm",
   },
   {
@@ -11736,7 +11737,7 @@ const users = [
     updatedAt: currentDate,
     id: 1468,
     namaPengguna: "199105312025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nur Raisah Ulfah",
   },
   {
@@ -11744,7 +11745,7 @@ const users = [
     updatedAt: currentDate,
     id: 1469,
     namaPengguna: "199308212025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Siti Salamah",
   },
   {
@@ -11752,7 +11753,7 @@ const users = [
     updatedAt: currentDate,
     id: 1470,
     namaPengguna: "199204032025041003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nikki Junaedy, S.Ked",
   },
   {
@@ -11760,7 +11761,7 @@ const users = [
     updatedAt: currentDate,
     id: 1471,
     namaPengguna: "199404272025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Ahmad Wardiman, S.Ked",
   },
   {
@@ -11768,7 +11769,7 @@ const users = [
     updatedAt: currentDate,
     id: 1472,
     namaPengguna: "199511122025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Achmad Zaini",
   },
   {
@@ -11776,7 +11777,7 @@ const users = [
     updatedAt: currentDate,
     id: 1473,
     namaPengguna: "199702062025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Fitriani, S.Farm",
   },
   {
@@ -11784,7 +11785,7 @@ const users = [
     updatedAt: currentDate,
     id: 1474,
     namaPengguna: "199702162025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Ana Nur Yasin Anwar, S. Farm",
   },
   {
@@ -11792,7 +11793,7 @@ const users = [
     updatedAt: currentDate,
     id: 1475,
     namaPengguna: "199706022025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nada Iyah Hadayna",
   },
   {
@@ -11800,7 +11801,7 @@ const users = [
     updatedAt: currentDate,
     id: 1476,
     namaPengguna: "199305222025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Prastowo Tri Pambudi, S.Ked.",
   },
   {
@@ -11808,7 +11809,7 @@ const users = [
     updatedAt: currentDate,
     id: 1477,
     namaPengguna: "199403282025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Syarfina Al Munawarah",
   },
   {
@@ -11816,7 +11817,7 @@ const users = [
     updatedAt: currentDate,
     id: 1478,
     namaPengguna: "199602102025042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Nurul Iffah Auliyah, S.Kg",
   },
   {
@@ -11824,7 +11825,7 @@ const users = [
     updatedAt: currentDate,
     id: 1479,
     namaPengguna: "199701152025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Dian Nursyifa Rahmah",
   },
   {
@@ -11832,7 +11833,7 @@ const users = [
     updatedAt: currentDate,
     id: 1480,
     namaPengguna: "199702142025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Anizya Tiya Mulya",
   },
   {
@@ -11840,7 +11841,7 @@ const users = [
     updatedAt: currentDate,
     id: 1481,
     namaPengguna: "199705012025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Rika Muliyana",
   },
   {
@@ -11848,7 +11849,7 @@ const users = [
     updatedAt: currentDate,
     id: 1482,
     namaPengguna: "199706252025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Pauline Surya Kurniati",
   },
   {
@@ -11856,7 +11857,7 @@ const users = [
     updatedAt: currentDate,
     id: 1483,
     namaPengguna: "199711282025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Aryanti, S.Farm",
   },
   {
@@ -11864,7 +11865,7 @@ const users = [
     updatedAt: currentDate,
     id: 1484,
     namaPengguna: "199506292025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Isnawati, S. Farm",
   },
   {
@@ -11872,7 +11873,7 @@ const users = [
     updatedAt: currentDate,
     id: 1485,
     namaPengguna: "199605162025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Affandi Hafid, S.Ked",
   },
   {
@@ -11880,7 +11881,7 @@ const users = [
     updatedAt: currentDate,
     id: 1486,
     namaPengguna: "199704062025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Nana Nurdahlia M",
   },
   {
@@ -11888,7 +11889,7 @@ const users = [
     updatedAt: currentDate,
     id: 1487,
     namaPengguna: "199704292025041005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Muhammad Irfan Andhika Sari",
   },
   {
@@ -11896,7 +11897,7 @@ const users = [
     updatedAt: currentDate,
     id: 1488,
     namaPengguna: "199705212025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Nilam Sri Rahmawati",
   },
   {
@@ -11904,7 +11905,7 @@ const users = [
     updatedAt: currentDate,
     id: 1489,
     namaPengguna: "199802012025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Mudrika Amaliah",
   },
   {
@@ -11912,7 +11913,7 @@ const users = [
     updatedAt: currentDate,
     id: 1490,
     namaPengguna: "199807172025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Rizki Maulidhea Fakhmi, S.Ked",
   },
   {
@@ -11920,7 +11921,7 @@ const users = [
     updatedAt: currentDate,
     id: 1491,
     namaPengguna: "199701162025042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Farah Rahmah Annisa Pasha",
   },
   {
@@ -11928,7 +11929,7 @@ const users = [
     updatedAt: currentDate,
     id: 1492,
     namaPengguna: "199805232025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Larasisca Della Faradilla",
   },
   {
@@ -11936,7 +11937,7 @@ const users = [
     updatedAt: currentDate,
     id: 1493,
     namaPengguna: "199806192025042009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dr. Indah Purnama Wahdah",
   },
   {
@@ -11944,7 +11945,7 @@ const users = [
     updatedAt: currentDate,
     id: 1494,
     namaPengguna: "199809162025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Drg. Rahmahlina Titianingsih",
   },
   {
@@ -11952,7 +11953,7 @@ const users = [
     updatedAt: currentDate,
     id: 1495,
     namaPengguna: "199912282025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arisa Rizqiyah, S.Tr.Gz., Dietisien",
   },
   {
@@ -11960,7 +11961,7 @@ const users = [
     updatedAt: currentDate,
     id: 1496,
     namaPengguna: "199205052025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurmi, S.K.M.",
   },
   {
@@ -11968,7 +11969,7 @@ const users = [
     updatedAt: currentDate,
     id: 1497,
     namaPengguna: "199301172025042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Noor Hikmah, S.K.M.",
   },
   {
@@ -11976,7 +11977,7 @@ const users = [
     updatedAt: currentDate,
     id: 1498,
     namaPengguna: "199501032025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurma Liya Zunnu, S.K.M.",
   },
   {
@@ -11984,7 +11985,7 @@ const users = [
     updatedAt: currentDate,
     id: 1499,
     namaPengguna: "199503082025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ftr. Muhammad Dwi Kurniawan, S.Fis",
   },
   {
@@ -11992,7 +11993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1500,
     namaPengguna: "199601252025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rafika Astarini, S.K.M",
   },
   {
@@ -12000,7 +12001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1501,
     namaPengguna: "199611212025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Hariyati Putri, S.K.M",
   },
   {
@@ -12008,7 +12009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1502,
     namaPengguna: "199608132025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anita Sundari, S.Tr.Keb,Bdn.",
   },
   {
@@ -12016,7 +12017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1503,
     namaPengguna: "199710192025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andre Hanna Dzumarotin, S.Tr.Keb., Bdn",
   },
   {
@@ -12024,7 +12025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1504,
     namaPengguna: "199810022025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nadia Kamila, S.K.M",
   },
   {
@@ -12032,7 +12033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1505,
     namaPengguna: "199906192025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nadia Wulandari, Skm",
   },
   {
@@ -12040,7 +12041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1506,
     namaPengguna: "199909202025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Neneng Husanah, S.K.M",
   },
   {
@@ -12048,7 +12049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1507,
     namaPengguna: "199612122025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Lestari, S.K.M.",
   },
   {
@@ -12056,7 +12057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1508,
     namaPengguna: "199005102025042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Mispah, S.Tr.Keb",
   },
   {
@@ -12064,7 +12065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1509,
     namaPengguna: "199806232025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Aya Disalia, S.Ak",
   },
   {
@@ -12072,7 +12073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1510,
     namaPengguna: "200002212025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Miranti Ika Rachmawati, S. Kes, Ftr",
   },
   {
@@ -12080,7 +12081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1511,
     namaPengguna: "200003152025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Githa Hadijatul Munawwarah, S.Tr.Keb",
   },
   {
@@ -12088,7 +12089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1512,
     namaPengguna: "200012092025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Rahmawati, S.K.M.",
   },
   {
@@ -12096,7 +12097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1513,
     namaPengguna: "200012182025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Chorie Alivia Rahmadani Balbly, S.K.M",
   },
   {
@@ -12104,7 +12105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1514,
     namaPengguna: "200005202025042009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rusdiana, S.K.M",
   },
   {
@@ -12112,7 +12113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1515,
     namaPengguna: "200103152025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Badrani Abbas Al-Fajri, S.K.M",
   },
   {
@@ -12120,7 +12121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1516,
     namaPengguna: "199912202025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Desti Tri Wahyuni",
   },
   {
@@ -12128,7 +12129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1517,
     namaPengguna: "200204052025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ella Hayyu Nurul 'Aini Putri, S.K.M",
   },
   {
@@ -12136,7 +12137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1518,
     namaPengguna: "200205142025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Meycella Cintania Salzabilla, S.K.M.",
   },
   {
@@ -12144,7 +12145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1519,
     namaPengguna: "199504142025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurhalimah, S.Tr.Keb",
   },
   {
@@ -12152,7 +12153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1520,
     namaPengguna: "199611162025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rina Nur Auliya, S.Tr.Keb",
   },
   {
@@ -12160,7 +12161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1521,
     namaPengguna: "199705122025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Irmawati Hafid, S.Tr.Keb",
   },
   {
@@ -12168,7 +12169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1522,
     namaPengguna: "199709272025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sri Kuntari, S.Tr.Keb",
   },
   {
@@ -12176,7 +12177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1523,
     namaPengguna: "200112292025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Luna Yussy Puspita, S.Tr.Kes",
   },
   {
@@ -12184,7 +12185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1524,
     namaPengguna: "200004072025041002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Haris Padillah, A.Md.Kes",
   },
   {
@@ -12192,7 +12193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1525,
     namaPengguna: "198912112025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ipah, Amd.Kep",
   },
   {
@@ -12200,7 +12201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1526,
     namaPengguna: "199103172025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Laela Romdiyah, A.Md. Kep",
   },
   {
@@ -12208,7 +12209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1527,
     namaPengguna: "199303172025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizki Tatriana, A.Md.Kep.",
   },
   {
@@ -12216,7 +12217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1528,
     namaPengguna: "199305252025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ramona, A.Md.Keb",
   },
   {
@@ -12224,7 +12225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1529,
     namaPengguna: "199307032025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurmayanti, A.Md, Gz",
   },
   {
@@ -12232,7 +12233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1530,
     namaPengguna: "199512042025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desi Ulianti, A.Md.Kep",
   },
   {
@@ -12240,7 +12241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1531,
     namaPengguna: "199705172025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuni Retno Iswarini, A.Md.Kep",
   },
   {
@@ -12248,7 +12249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1532,
     namaPengguna: "199503082025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fretika Tri Manda Sari, A.Md.Gz",
   },
   {
@@ -12256,7 +12257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1533,
     namaPengguna: "199712242025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Gita, A.Md.Keb",
   },
   {
@@ -12264,7 +12265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1534,
     namaPengguna: "199805032025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Helldyana Rahmawati Jannah, A.Md.Farm",
   },
   {
@@ -12272,7 +12273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1535,
     namaPengguna: "199703042025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mona Rosalina Sir, A. Md. Kep",
   },
   {
@@ -12280,7 +12281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1536,
     namaPengguna: "199803302025042001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Umi Mamlu'ul Hikmah, A.Md. Kep",
   },
   {
@@ -12288,7 +12289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1537,
     namaPengguna: "199806292025042008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Rensiana, A.Md.Keb",
   },
   {
@@ -12296,7 +12297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1538,
     namaPengguna: "199903122025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Eva Amira Belly, A.Md,Keb",
   },
   {
@@ -12304,7 +12305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1539,
     namaPengguna: "199907272025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dewi Sartika, A.Md.Kep",
   },
   {
@@ -12312,7 +12313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1540,
     namaPengguna: "199908182025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Halisah, A.Md.Keb.",
   },
   {
@@ -12320,7 +12321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1541,
     namaPengguna: "199909062025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norsyahidatul Jannah, A.Md.Kep",
   },
   {
@@ -12328,7 +12329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1542,
     namaPengguna: "199910012025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahma Okta Viani Putri, A.Md,Keb",
   },
   {
@@ -12336,7 +12337,7 @@ const users = [
     updatedAt: currentDate,
     id: 1543,
     namaPengguna: "200001102025041004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "I Putu Sedana Yoga, A.Md.Rmik",
   },
   {
@@ -12344,7 +12345,7 @@ const users = [
     updatedAt: currentDate,
     id: 1544,
     namaPengguna: "199710122025042006",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Widiyanti, A.Md.Rmik",
   },
   {
@@ -12352,7 +12353,7 @@ const users = [
     updatedAt: currentDate,
     id: 1545,
     namaPengguna: "199912262025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Desy Rahmayanti, A.Md.Kep",
   },
   {
@@ -12360,7 +12361,7 @@ const users = [
     updatedAt: currentDate,
     id: 1546,
     namaPengguna: "200003012025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Thiani Wulandari, A.Md.Keb",
   },
   {
@@ -12368,7 +12369,7 @@ const users = [
     updatedAt: currentDate,
     id: 1547,
     namaPengguna: "200003062025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Marsiatiningsih, A.Md.Kep",
   },
   {
@@ -12376,7 +12377,7 @@ const users = [
     updatedAt: currentDate,
     id: 1548,
     namaPengguna: "200007262025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizky Yusiani Putri, A.Md.Keb",
   },
   {
@@ -12384,7 +12385,7 @@ const users = [
     updatedAt: currentDate,
     id: 1549,
     namaPengguna: "200008032025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizkiani Nur Hidayah, A.Md.Kes.",
   },
   {
@@ -12392,7 +12393,7 @@ const users = [
     updatedAt: currentDate,
     id: 1550,
     namaPengguna: "200008122025041005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Anang Rifandy Ahmad, A.Md.Kes",
   },
   {
@@ -12400,7 +12401,7 @@ const users = [
     updatedAt: currentDate,
     id: 1551,
     namaPengguna: "200009162025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dhisya Wahyudhiya Ranti, A.Md.Kes",
   },
   {
@@ -12408,7 +12409,7 @@ const users = [
     updatedAt: currentDate,
     id: 1552,
     namaPengguna: "200105252025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ayu Wandira, A.Md. Kes.",
   },
   {
@@ -12416,7 +12417,7 @@ const users = [
     updatedAt: currentDate,
     id: 1553,
     namaPengguna: "199911162025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ana Satri Dwi Pratiwi, A.Md.Kep.",
   },
   {
@@ -12424,7 +12425,7 @@ const users = [
     updatedAt: currentDate,
     id: 1554,
     namaPengguna: "199909202025041003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Khalillurrahman, A. Md. Kep",
   },
   {
@@ -12432,7 +12433,7 @@ const users = [
     updatedAt: currentDate,
     id: 1555,
     namaPengguna: "200003052025042009",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arina Hidayah, A.Md.Farm",
   },
   {
@@ -12440,7 +12441,7 @@ const users = [
     updatedAt: currentDate,
     id: 1556,
     namaPengguna: "200008182025041005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Abdulah Rozak Hamit, A.Md.Kes",
   },
   {
@@ -12448,7 +12449,7 @@ const users = [
     updatedAt: currentDate,
     id: 1557,
     namaPengguna: "200012132025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurul Istiqamah, A.Md.Gz",
   },
   {
@@ -12456,7 +12457,7 @@ const users = [
     updatedAt: currentDate,
     id: 1558,
     namaPengguna: "200102162025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Febriana Syifa Aulia, A.Md.Kes",
   },
   {
@@ -12464,7 +12465,7 @@ const users = [
     updatedAt: currentDate,
     id: 1559,
     namaPengguna: "200103032025042007",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Allisya Salma, A.Md.Keb",
   },
   {
@@ -12472,7 +12473,7 @@ const users = [
     updatedAt: currentDate,
     id: 1560,
     namaPengguna: "200111072025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nevi Andita, A.Md.Kes",
   },
   {
@@ -12480,7 +12481,7 @@ const users = [
     updatedAt: currentDate,
     id: 1561,
     namaPengguna: "200108142025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tzumas Sabiila Yazsa, A.Md.Rmik",
   },
   {
@@ -12488,7 +12489,7 @@ const users = [
     updatedAt: currentDate,
     id: 1562,
     namaPengguna: "200109232025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Della Norayissa, A.Md.Ak",
   },
   {
@@ -12496,7 +12497,7 @@ const users = [
     updatedAt: currentDate,
     id: 1563,
     namaPengguna: "200112172025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurfitriyati Uswatun Hasanah, A.Md.Kes.",
   },
   {
@@ -12504,7 +12505,7 @@ const users = [
     updatedAt: currentDate,
     id: 1564,
     namaPengguna: "200202282025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mahmuda Yanti, A.Md.Gz",
   },
   {
@@ -12512,7 +12513,7 @@ const users = [
     updatedAt: currentDate,
     id: 1565,
     namaPengguna: "200208302025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nafsul Mutmainnah, A.Md.Kes",
   },
   {
@@ -12520,7 +12521,7 @@ const users = [
     updatedAt: currentDate,
     id: 1566,
     namaPengguna: "200209202025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wilyan Sekar Dwi Handayani, A.Md.Kes",
   },
   {
@@ -12528,7 +12529,7 @@ const users = [
     updatedAt: currentDate,
     id: 1567,
     namaPengguna: "200209272025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizki Putri Pembajeng, A.Md.Farm.",
   },
   {
@@ -12536,7 +12537,7 @@ const users = [
     updatedAt: currentDate,
     id: 1568,
     namaPengguna: "200210252025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nada Sifa Sabda Nabila, A.Md.Kes",
   },
   {
@@ -12544,7 +12545,7 @@ const users = [
     updatedAt: currentDate,
     id: 1569,
     namaPengguna: "200210292025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Risma, A.Md.Farm",
   },
   {
@@ -12552,7 +12553,7 @@ const users = [
     updatedAt: currentDate,
     id: 1570,
     namaPengguna: "200207152025041003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Abdurrahman Zuhdi, A.Md.Rmik.",
   },
   {
@@ -12560,7 +12561,7 @@ const users = [
     updatedAt: currentDate,
     id: 1571,
     namaPengguna: "199002082025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elisah",
   },
   {
@@ -12568,7 +12569,7 @@ const users = [
     updatedAt: currentDate,
     id: 1572,
     namaPengguna: "199907112025042004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maulidiah Hardiana, A.Md.Kes",
   },
   {
@@ -12576,7 +12577,7 @@ const users = [
     updatedAt: currentDate,
     id: 1573,
     namaPengguna: "200002252025042005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rahmi Nur Aziza, A.Md.Kes",
   },
   {
@@ -12584,7 +12585,7 @@ const users = [
     updatedAt: currentDate,
     id: 1574,
     namaPengguna: "200012072025042003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widya Safitri, A.Md.Kes",
   },
   {
@@ -12592,7 +12593,7 @@ const users = [
     updatedAt: currentDate,
     id: 1575,
     namaPengguna: "200208052025042002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Azizatul U'lya, A.Md.Kes",
   },
   {
@@ -12600,7 +12601,7 @@ const users = [
     updatedAt: currentDate,
     id: 1576,
     namaPengguna: "199310272025212074",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "RENI PUSPITASARI",
   },
   {
@@ -12608,7 +12609,7 @@ const users = [
     updatedAt: currentDate,
     id: 1577,
     namaPengguna: "198801052025212052",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Suryani",
   },
   {
@@ -12616,7 +12617,7 @@ const users = [
     updatedAt: currentDate,
     id: 1578,
     namaPengguna: "197811212025212016",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Normalinah",
   },
   {
@@ -12624,7 +12625,7 @@ const users = [
     updatedAt: currentDate,
     id: 1579,
     namaPengguna: "19850609 2025211042",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "HERI MULYONO",
   },
   {
@@ -12632,7 +12633,7 @@ const users = [
     updatedAt: currentDate,
     id: 1580,
     namaPengguna: "198509072025211048",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ardiansyah",
   },
   {
@@ -12640,7 +12641,7 @@ const users = [
     updatedAt: currentDate,
     id: 1581,
     namaPengguna: "198909222025211000",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Jumriansyah,S.I.Kom",
   },
   {
@@ -12648,7 +12649,7 @@ const users = [
     updatedAt: currentDate,
     id: 1582,
     namaPengguna: "3174095310990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Aqualytta Setianingtyas Rivai",
   },
   {
@@ -12656,7 +12657,7 @@ const users = [
     updatedAt: currentDate,
     id: 1583,
     namaPengguna: "6401061005990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Arief Budi Prasetya, S.Kep",
   },
   {
@@ -12664,7 +12665,7 @@ const users = [
     updatedAt: currentDate,
     id: 1584,
     namaPengguna: "6401066909010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ns. Luci Sri Dewi, S.Tr.Kep",
   },
   {
@@ -12672,7 +12673,7 @@ const users = [
     updatedAt: currentDate,
     id: 1585,
     namaPengguna: "6401065202020005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Nuriyah, A.Md. Farm",
   },
   {
@@ -12680,7 +12681,7 @@ const users = [
     updatedAt: currentDate,
     id: 1586,
     namaPengguna: "6401065703970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sarifah Eka Daliana, A.Md. Farm",
   },
   {
@@ -12688,7 +12689,7 @@ const users = [
     updatedAt: currentDate,
     id: 1587,
     namaPengguna: "6401032512990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ahmad Hafif Rahmadani, S.Tr.Kes",
   },
   {
@@ -12696,7 +12697,7 @@ const users = [
     updatedAt: currentDate,
     id: 1588,
     namaPengguna: "6401031609980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Edi Kusmiransyah,S.Kep.Ns",
   },
   {
@@ -12704,7 +12705,7 @@ const users = [
     updatedAt: currentDate,
     id: 1589,
     namaPengguna: "8104035409970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ernawati, A.Md.Keb",
   },
   {
@@ -12712,7 +12713,7 @@ const users = [
     updatedAt: currentDate,
     id: 1590,
     namaPengguna: "6401050812970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Irpansyah",
   },
   {
@@ -12720,7 +12721,7 @@ const users = [
     updatedAt: currentDate,
     id: 1591,
     namaPengguna: "6401062810930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Aulia Irawan",
   },
   {
@@ -12728,7 +12729,7 @@ const users = [
     updatedAt: currentDate,
     id: 1592,
     namaPengguna: "6401042811950001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Giffari Adrian Jusuf",
   },
   {
@@ -12736,7 +12737,7 @@ const users = [
     updatedAt: currentDate,
     id: 1593,
     namaPengguna: "6401044604000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Zuliayu Arizka Pratiwi, S.Farm",
   },
   {
@@ -12744,7 +12745,7 @@ const users = [
     updatedAt: currentDate,
     id: 1594,
     namaPengguna: "6401075304010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Muliana, S.Tr.Kes",
   },
   {
@@ -12752,7 +12753,7 @@ const users = [
     updatedAt: currentDate,
     id: 1595,
     namaPengguna: "6401046211000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Apt. Vania Athaya Budianti, S.Farm",
   },
   {
@@ -12760,7 +12761,7 @@ const users = [
     updatedAt: currentDate,
     id: 1596,
     namaPengguna: "6401034104990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Sri Jatul Zannah",
   },
   {
@@ -12768,7 +12769,7 @@ const users = [
     updatedAt: currentDate,
     id: 1597,
     namaPengguna: "6401086009000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Ainul Andriani, S.Farm",
   },
   {
@@ -12776,7 +12777,7 @@ const users = [
     updatedAt: currentDate,
     id: 1598,
     namaPengguna: "6401032911990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Rainhard Duta Pradana Ruslan, S.Farm",
   },
   {
@@ -12784,7 +12785,7 @@ const users = [
     updatedAt: currentDate,
     id: 1599,
     namaPengguna: "6401076504030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Intan Puspita Sari, A.Md.Keb ",
   },
   {
@@ -12792,7 +12793,7 @@ const users = [
     updatedAt: currentDate,
     id: 1600,
     namaPengguna: "6401046512000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Rika Nurul Kholifah",
   },
   {
@@ -12800,7 +12801,7 @@ const users = [
     updatedAt: currentDate,
     id: 1601,
     namaPengguna: "6401084105000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Husnul Khatimah Said, S.Farm",
   },
   {
@@ -12808,7 +12809,7 @@ const users = [
     updatedAt: currentDate,
     id: 1602,
     namaPengguna: "6401041212990003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Rama Agni Gutawa, S.Farm",
   },
   {
@@ -12816,7 +12817,7 @@ const users = [
     updatedAt: currentDate,
     id: 1603,
     namaPengguna: "6401054710030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Elisabet Erlinda Nona Sia, Amd. Kep",
   },
   {
@@ -12824,7 +12825,7 @@ const users = [
     updatedAt: currentDate,
     id: 1604,
     namaPengguna: "6404125912030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dena Fitria Hairunisa, Amd. Kep",
   },
   {
@@ -12832,7 +12833,7 @@ const users = [
     updatedAt: currentDate,
     id: 1605,
     namaPengguna: "6401065203020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Intan Kurnia Awaliyah, S.Tr.Gz",
   },
   {
@@ -12840,7 +12841,7 @@ const users = [
     updatedAt: currentDate,
     id: 1606,
     namaPengguna: "6401056910940001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fitri Isni, Amd. Keb",
   },
   {
@@ -12848,7 +12849,7 @@ const users = [
     updatedAt: currentDate,
     id: 1607,
     namaPengguna: "6401040507000008",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Muhammad Rizky Mahfuzi, S.Farm",
   },
   {
@@ -12856,7 +12857,7 @@ const users = [
     updatedAt: currentDate,
     id: 1608,
     namaPengguna: "6401075803020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahidah, S.Gz",
   },
   {
@@ -12864,7 +12865,7 @@ const users = [
     updatedAt: currentDate,
     id: 1609,
     namaPengguna: "6401035611000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Norwahidah, S.Gz",
   },
   {
@@ -12872,7 +12873,7 @@ const users = [
     updatedAt: currentDate,
     id: 1610,
     namaPengguna: "6401045709000003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Itharotun Nuriyyah, S.Farm",
   },
   {
@@ -12880,7 +12881,7 @@ const users = [
     updatedAt: currentDate,
     id: 1611,
     namaPengguna: "7316014504970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Astri Audia",
   },
   {
@@ -12888,7 +12889,7 @@ const users = [
     updatedAt: currentDate,
     id: 1612,
     namaPengguna: "6401043603920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Syarifah Mithahul Awaliyah, S.SiT",
   },
   {
@@ -12896,7 +12897,7 @@ const users = [
     updatedAt: currentDate,
     id: 1613,
     namaPengguna: "6401046908010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Amaliyah Permata, S.Farm",
   },
   {
@@ -12904,7 +12905,7 @@ const users = [
     updatedAt: currentDate,
     id: 1614,
     namaPengguna: "3524106905970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Meita Sahara",
   },
   {
@@ -12912,7 +12913,7 @@ const users = [
     updatedAt: currentDate,
     id: 1615,
     namaPengguna: "6401056209020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Septinah, A.Md. Farm",
   },
   {
@@ -12920,7 +12921,7 @@ const users = [
     updatedAt: currentDate,
     id: 1616,
     namaPengguna: "6402062007930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr.Salaudin Al Ayubi Pratama",
   },
   {
@@ -12928,7 +12929,7 @@ const users = [
     updatedAt: currentDate,
     id: 1617,
     namaPengguna: "6401042810030004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andi Aswadi Syukur, Amd. Kes",
   },
   {
@@ -12936,7 +12937,7 @@ const users = [
     updatedAt: currentDate,
     id: 1618,
     namaPengguna: "6401044608980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bella Nurhaliza, SKM",
   },
   {
@@ -12944,7 +12945,7 @@ const users = [
     updatedAt: currentDate,
     id: 1619,
     namaPengguna: "6401044908980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rifka Ellya Afthina, SKM",
   },
   {
@@ -12952,7 +12953,7 @@ const users = [
     updatedAt: currentDate,
     id: 1620,
     namaPengguna: "6401046502980002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Humaira Irawardani, SKM",
   },
   {
@@ -12960,7 +12961,7 @@ const users = [
     updatedAt: currentDate,
     id: 1621,
     namaPengguna: "6401046101010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Faizah Abdurrahman, S.Farm",
   },
   {
@@ -12968,7 +12969,7 @@ const users = [
     updatedAt: currentDate,
     id: 1622,
     namaPengguna: "6401036809030002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nurzaswasila, Amd. Kes",
   },
   {
@@ -12976,7 +12977,7 @@ const users = [
     updatedAt: currentDate,
     id: 1623,
     namaPengguna: "3322046601020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Erika Novita Sari, Amd. Kep",
   },
   {
@@ -12984,7 +12985,7 @@ const users = [
     updatedAt: currentDate,
     id: 1624,
     namaPengguna: "6401064606010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Elok Handayani Gautama, S.Kep, Ns",
   },
   {
@@ -12992,7 +12993,7 @@ const users = [
     updatedAt: currentDate,
     id: 1625,
     namaPengguna: "6309050810000002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ibnol Hatami, Amd. Kes",
   },
   {
@@ -13000,7 +13001,7 @@ const users = [
     updatedAt: currentDate,
     id: 1626,
     namaPengguna: "6401043105930001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Yusuf, S.Kep, Ns",
   },
   {
@@ -13008,7 +13009,7 @@ const users = [
     updatedAt: currentDate,
     id: 1627,
     namaPengguna: "6401046907970001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sukma Dewi, SKM",
   },
   {
@@ -13016,7 +13017,7 @@ const users = [
     updatedAt: currentDate,
     id: 1628,
     namaPengguna: "6401055503960002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Rahmadaniah, SST",
   },
   {
@@ -13024,7 +13025,7 @@ const users = [
     updatedAt: currentDate,
     id: 1629,
     namaPengguna: "6401045708990005",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Aulya Rahma Fadilah",
   },
   {
@@ -13032,7 +13033,7 @@ const users = [
     updatedAt: currentDate,
     id: 1630,
     namaPengguna: "6372064912980004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Melisa Nur Diniah, S.Farm",
   },
   {
@@ -13040,7 +13041,7 @@ const users = [
     updatedAt: currentDate,
     id: 1631,
     namaPengguna: "6401065607020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yulia Rahmawati, A.Md.Keb ",
   },
   {
@@ -13048,7 +13049,7 @@ const users = [
     updatedAt: currentDate,
     id: 1632,
     namaPengguna: "6310096809880003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Khumaerah, Amd.Keb ",
   },
   {
@@ -13056,7 +13057,7 @@ const users = [
     updatedAt: currentDate,
     id: 1633,
     namaPengguna: "6401064812990002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Nahwa Aulia Kartika Sari",
   },
   {
@@ -13064,7 +13065,7 @@ const users = [
     updatedAt: currentDate,
     id: 1634,
     namaPengguna: "7322046805950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mikhal Pata'dungan, A.Md.Keb ",
   },
   {
@@ -13072,7 +13073,7 @@ const users = [
     updatedAt: currentDate,
     id: 1635,
     namaPengguna: "6401084111020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Daffani Alkinshi Putri, A.Md.Keb",
   },
   {
@@ -13080,7 +13081,7 @@ const users = [
     updatedAt: currentDate,
     id: 1636,
     namaPengguna: "6202066911970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Bdn. Almira Ika Pratidina, S.Keb",
   },
   {
@@ -13088,7 +13089,7 @@ const users = [
     updatedAt: currentDate,
     id: 1637,
     namaPengguna: "6401044902830003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Cory Christiani Frans M. Si",
   },
   {
@@ -13096,7 +13097,7 @@ const users = [
     updatedAt: currentDate,
     id: 1638,
     namaPengguna: "6401040505010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Latif Akhmad, Amd. Kep",
   },
   {
@@ -13104,7 +13105,7 @@ const users = [
     updatedAt: currentDate,
     id: 1639,
     namaPengguna: "6401044311000001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Yuli Rahmita, A.Md.AK",
   },
   {
@@ -13112,7 +13113,7 @@ const users = [
     updatedAt: currentDate,
     id: 1640,
     namaPengguna: "6401045901020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rizkia Hershadwiyatni, A.Md.AK",
   },
   {
@@ -13120,7 +13121,7 @@ const users = [
     updatedAt: currentDate,
     id: 1641,
     namaPengguna: "6401036411020001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ainun Fauziyyah, A.Md.Kes",
   },
   {
@@ -13128,7 +13129,7 @@ const users = [
     updatedAt: currentDate,
     id: 1642,
     namaPengguna: "6401036107950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Widiyanti, A.Md.AK",
   },
   {
@@ -13136,7 +13137,7 @@ const users = [
     updatedAt: currentDate,
     id: 1643,
     namaPengguna: "6401046411950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maya Annisa, A.Md.AK",
   },
   {
@@ -13144,7 +13145,7 @@ const users = [
     updatedAt: currentDate,
     id: 1644,
     namaPengguna: "6401056912010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Tri Widia Irianti, S.Tr.Kes",
   },
   {
@@ -13152,7 +13153,7 @@ const users = [
     updatedAt: currentDate,
     id: 1645,
     namaPengguna: "6401046102020004",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Vika Pebrianti, A.Md.Kes",
   },
   {
@@ -13160,7 +13161,7 @@ const users = [
     updatedAt: currentDate,
     id: 1646,
     namaPengguna: "6401045206970003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Maria Fransiska Angelina Nus Timba, A.Md.Kes",
   },
   {
@@ -13168,7 +13169,7 @@ const users = [
     updatedAt: currentDate,
     id: 1647,
     namaPengguna: "6401055809020003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Putri Amalia Wulandari, A.Md.Kes",
   },
   {
@@ -13176,7 +13177,7 @@ const users = [
     updatedAt: currentDate,
     id: 1648,
     namaPengguna: "6401044104030002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Sulis Setiawati, A.Md. Kep",
   },
   {
@@ -13184,7 +13185,7 @@ const users = [
     updatedAt: currentDate,
     id: 1649,
     namaPengguna: "6401044907010001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Iga Fauziyah, A.Md.RMIK",
   },
   {
@@ -13192,7 +13193,7 @@ const users = [
     updatedAt: currentDate,
     id: 1650,
     namaPengguna: "7311046703970002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Riska Adelia, S.Tr.Kes",
   },
   {
@@ -13200,7 +13201,7 @@ const users = [
     updatedAt: currentDate,
     id: 1651,
     namaPengguna: "6310085905980001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Selvina Hafifah, S.Kep, Ns",
   },
   {
@@ -13208,7 +13209,7 @@ const users = [
     updatedAt: currentDate,
     id: 1652,
     namaPengguna: "6401065305990001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "drg. Dwi Indah Amalia ",
   },
   {
@@ -13216,7 +13217,7 @@ const users = [
     updatedAt: currentDate,
     id: 1653,
     namaPengguna: "7324085109010002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Arni Badong Sanda Lopak, S.Kep, Ns",
   },
   {
@@ -13224,7 +13225,7 @@ const users = [
     updatedAt: currentDate,
     id: 1654,
     namaPengguna: "7308237101930002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Nur Fita Sari, A.Md.Keb",
   },
   {
@@ -13232,7 +13233,7 @@ const users = [
     updatedAt: currentDate,
     id: 1655,
     namaPengguna: "1222020108880010",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Budi Hutomo",
   },
   {
@@ -13240,7 +13241,7 @@ const users = [
     updatedAt: currentDate,
     id: 1656,
     namaPengguna: "6401031602030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Muhammad Hafizh Fakhri Athallah Yusran, SKM",
   },
   {
@@ -13248,7 +13249,7 @@ const users = [
     updatedAt: currentDate,
     id: 1657,
     namaPengguna: "6401046807020002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Zaida Rizqa Riznani, S.Tr.Gz",
   },
   {
@@ -13256,7 +13257,7 @@ const users = [
     updatedAt: currentDate,
     id: 1658,
     namaPengguna: "6401030609910002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Dedi Warsono, Amd.Ak",
   },
   {
@@ -13264,7 +13265,7 @@ const users = [
     updatedAt: currentDate,
     id: 1659,
     namaPengguna: "6401046906010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "apt. Mitha Indah Herlina, S.Farm",
   },
   {
@@ -13272,7 +13273,7 @@ const users = [
     updatedAt: currentDate,
     id: 1660,
     namaPengguna: "6401042911920001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Rikki Jayadi, Amd. Kep",
   },
   {
@@ -13280,7 +13281,7 @@ const users = [
     updatedAt: currentDate,
     id: 1661,
     namaPengguna: "6401051009030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Fachrial Azwarie Yudahana, SKM",
   },
   {
@@ -13288,7 +13289,7 @@ const users = [
     updatedAt: currentDate,
     id: 1662,
     namaPengguna: "6401036502040002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Andien Nuryasin Anwar, Amd. Kep",
   },
   {
@@ -13296,7 +13297,7 @@ const users = [
     updatedAt: currentDate,
     id: 1663,
     namaPengguna: "6409034602020003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Kurnia Sari, Amd. Kep",
   },
   {
@@ -13304,7 +13305,7 @@ const users = [
     updatedAt: currentDate,
     id: 1664,
     namaPengguna: "6409034101010003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Ria Irma Safitri, Amd. Keb",
   },
   {
@@ -13312,7 +13313,7 @@ const users = [
     updatedAt: currentDate,
     id: 1665,
     namaPengguna: "6401044704030001",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Wahyu Tri Safira Putri, S.Tr.Gz",
   },
   {
@@ -13320,7 +13321,7 @@ const users = [
     updatedAt: currentDate,
     id: 1666,
     namaPengguna: "6401043008980003",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "Mohammad Sair, S.Kep, Ns",
   },
   {
@@ -13328,7 +13329,7 @@ const users = [
     updatedAt: currentDate,
     id: 1667,
     namaPengguna: "6401032205950002",
-    password: "$2b$10$gtOTvRQnBz4FibTWDCWEiOgrti8BAk1bg2arHubTea2WapX0JSc1a",
+    password: bcrypt.hashSync("paserkab", 10),
     nama: "dr. Rio Mandala Putra Ruslan",
   },
 ];
