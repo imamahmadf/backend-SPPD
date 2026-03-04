@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "realisasiPJPLId",
         as: "hasilKerjaPJPLs",
       });
+      this.hasMany(models.hasilKerjaKualitatifPJPL, {
+        foreignKey: "realisasiPJPLId",
+      });
     }
   }
   realisasiPJPL.init(
@@ -29,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "realisasiPJPL",
-    }
+    },
   );
   return realisasiPJPL;
 };

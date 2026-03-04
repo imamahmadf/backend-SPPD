@@ -41,7 +41,8 @@ module.exports = {
           [sequelize.fn("COUNT", sequelize.col("pegawai.id")), "jumlah"],
         ],
         where: {
-          statusPegawaiId: { [Op.in]: [1, 2, 3, 4] },
+          // PNS=1, CPNS=2, P3K=3, P3K Paruh Waktu=4, PJLP=5
+          statusPegawaiId: { [Op.in]: [1, 2, 3, 4, 5] },
         },
         group: ["unitKerjaId", "profesiId", "statusPegawaiId"],
         include: [

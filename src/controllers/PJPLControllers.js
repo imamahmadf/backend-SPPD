@@ -18,6 +18,8 @@ const {
   realisasiPJPL,
   realisasiKinerjaPJPL,
   hasilKerjaPJPL,
+  hasilKerjaKualitatifPJPL,
+  kualitatifPJPL,
 } = require("../models");
 
 const { Op } = require("sequelize");
@@ -124,7 +126,7 @@ module.exports = {
 
   getPJPLPegawai: async (req, res) => {
     const unitKerjaId = req.query.unitKerjaId;
-    const pegawaiWhere = { statusPegawaiId: 4 };
+    const pegawaiWhere = { statusPegawaiId: 5 };
 
     // Filter berdasarkan unitKerjaId jika diberikan
     if (unitKerjaId) {
@@ -440,6 +442,58 @@ module.exports = {
     }
   },
 
+  /** POST /update/kinerja-pjpl/:id — hanya update status (disetujui → diterima, ditolak → ditolak) */
+  updateStatusKinerjaPJPL: async (req, res) => {
+    const { id } = req.params;
+    const { status: statusBaru } = req.body;
+
+    try {
+      if (!statusBaru) {
+        return res.status(400).json({
+          error: "status wajib diisi",
+        });
+      }
+
+      const statusMap = { disetujui: "diterima", ditolak: "ditolak" };
+      const statusValue =
+        statusMap[statusBaru.toLowerCase()] || statusBaru.toLowerCase();
+
+      const allowed = ["diajukan", "ditolak", "diterima"];
+      if (!allowed.includes(statusValue)) {
+        return res.status(400).json({
+          error: `status harus salah satu dari: ${allowed.join(", ")}`,
+        });
+      }
+
+      const kinerja = await kinerjaPJPL.findByPk(id);
+      if (!kinerja) {
+        return res.status(404).json({ error: "Kinerja PJPL tidak ditemukan" });
+      }
+
+      await kinerja.update({ status: statusValue });
+
+      const result = await kinerjaPJPL.findByPk(id, {
+        include: [
+          {
+            model: kontrakPJPL,
+            as: "kontrakPJPL",
+            attributes: ["id", "tanggalAwal", "tanggalAkhir"],
+          },
+          {
+            model: indikatorPejabat,
+            as: "indikatorPejabat",
+            attributes: ["id", "indikator"],
+          },
+        ],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message || "Gagal mengubah status" });
+    }
+  },
+
   // ========== REALISASI PJPL CONTROLLERS ==========
   postRealisasiPJPL: async (req, res) => {
     const { tanggalAwal, tanggalAkhir, kinerjaPJPLId, status } = req.body;
@@ -484,6 +538,19 @@ module.exports = {
 
       if (kinerjaPJPLRecords.length > 0) {
         await result.setKinerjaPJPLs(kinerjaPJPLRecords);
+      }
+
+      // 3. Buat data di hasilKerjaKualitatifPJPL untuk setiap data di kualitatifPJPL
+      const semuaKualitatifPJPL = await kualitatifPJPL.findAll();
+      if (semuaKualitatifPJPL.length > 0) {
+        await hasilKerjaKualitatifPJPL.bulkCreate(
+          semuaKualitatifPJPL.map((kual) => ({
+            tanggalAwal: result.tanggalAwal,
+            tanggalAkhir: result.tanggalAkhir,
+            kualitatifPJPLId: kual.id,
+            realisasiPJPLId: result.id,
+          }))
+        );
       }
 
       // Reload untuk mendapatkan data lengkap dengan relasi
@@ -604,6 +671,18 @@ module.exports = {
             as: "hasilKerjaPJPLs",
             attributes: ["id", "hasil", "nilai", "status", "createdAt"],
           },
+          {
+            model: hasilKerjaKualitatifPJPL,
+            as: "hasilKerjaKualitatifPJPLs",
+            attributes: ["id", "tanggalAwal", "tanggalAkhir", "nilai", "catatan", "kualitatifPJPLId", "realisasiPJPLId", "pejabatVerifikatorId"],
+            include: [
+              {
+                model: kualitatifPJPL,
+                as: "kualitatifPJPL",
+                attributes: ["id", "indikator"],
+              },
+            ],
+          },
         ],
       });
 
@@ -704,7 +783,7 @@ module.exports = {
 
       // Cek apakah data ada
       const existingData = await realisasiKinerjaPJPL.findByPk(
-        realisasiKinerjaPJPLId
+        realisasiKinerjaPJPLId,
       );
 
       if (!existingData) {
@@ -720,7 +799,7 @@ module.exports = {
           buktiDukung,
           status,
         },
-        { where: { id: realisasiKinerjaPJPLId } }
+        { where: { id: realisasiKinerjaPJPLId } },
       );
 
       // Ambil data yang sudah diupdate
@@ -739,7 +818,7 @@ module.exports = {
               attributes: ["id", "tanggalAwal", "tanggalAkhir", "status"],
             },
           ],
-        }
+        },
       );
 
       return res.status(200).json({ result });
@@ -819,7 +898,7 @@ module.exports = {
     try {
       const [updated] = await realisasiKinerjaPJPL.update(
         { status, nilai },
-        { where: { id } }
+        { where: { id } },
       );
 
       if (updated === 0) {
@@ -846,6 +925,123 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getRencanaHasilKerja: async (req, res) => {
+    const { id } = req.params; // id = pegawaiId dari table pejabatVerifikator (dikirim dari frontend)
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = limit * page;
+
+    const includeOptions = [
+      {
+        model: indikatorPejabat,
+        as: "indikatorPejabat",
+        required: true,
+        include: [
+          {
+            model: pejabatVerifikator,
+            where: { pegawaiId: id },
+            required: true,
+          },
+        ],
+      },
+      {
+        model: kontrakPJPL,
+        as: "kontrakPJPL",
+        include: [{ model: pegawai }],
+      },
+    ];
+
+    const orderOptions = [
+      [{ model: kontrakPJPL, as: "kontrakPJPL" }, "pegawaiId", "ASC"],
+      [{ model: kontrakPJPL, as: "kontrakPJPL" }, "tanggalAwal", "ASC"],
+    ];
+
+    try {
+      const result = await kinerjaPJPL.findAll({
+        include: includeOptions,
+        order: orderOptions,
+        offset,
+        limit,
+      });
+
+      const totalRows = await kinerjaPJPL.count({
+        include: includeOptions,
+      });
+      const totalPage = Math.ceil(totalRows / limit);
+
+      return res
+        .status(200)
+        .json({ result, page, limit, totalRows, totalPage });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  getIndikatorKualitatif: async (req, res) => {
+    console.log("berhasil masuk");
+
+    try {
+      const result = await kualitatifPJPL.findAll({});
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  postIndikatorKualitatif: async (req, res) => {
+    const { indikator } = req.body;
+
+    try {
+      const result = await kualitatifPJPL.create({
+        indikator,
+      });
+      return res.status(201).json({ result });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
+
+  updateHasilKerjaKualitatifPJPL: async (req, res) => {
+    const { id } = req.params;
+    const { nilai, catatan } = req.body;
+
+    const nilaiNum = nilai != null ? parseFloat(nilai) : null;
+    if (nilaiNum === null || Number.isNaN(nilaiNum) || nilaiNum < 1 || nilaiNum > 10) {
+      return res.status(400).json({
+        error: "Nilai harus angka antara 1 sampai 10.",
+      });
+    }
+
+    try {
+      const row = await hasilKerjaKualitatifPJPL.findByPk(id);
+      if (!row) {
+        return res
+          .status(404)
+          .json({ error: "Hasil kerja kualitatif PJPL tidak ditemukan" });
+      }
+
+      const updateData = {
+        nilai: Math.round(nilaiNum),
+        catatan: catatan != null && String(catatan).trim() !== "" ? String(catatan).trim() : null,
+      };
+      await row.update(updateData);
+
+      const result = await hasilKerjaKualitatifPJPL.findByPk(id, {
+        attributes: ["id", "tanggalAwal", "tanggalAkhir", "nilai", "catatan", "kualitatifPJPLId", "realisasiPJPLId", "pejabatVerifikatorId", "createdAt", "updatedAt"],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        error: err.message || "Gagal menyimpan penilaian",
+      });
     }
   },
 };

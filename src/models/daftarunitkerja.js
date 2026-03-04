@@ -89,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "unitKerjaLamaId",
         as: "riwayatPegawaiUnitKerjaLama",
       });
-      this.hasMany(models.pejabatVerifikator);
+      this.hasMany(models.pejabatVerifikator, { foreignKey: "unitKerjaId" });
       this.hasMany(models.templateBPD, {
         foreignKey: "unitKerjaId",
       });
