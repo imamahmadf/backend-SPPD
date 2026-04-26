@@ -239,6 +239,53 @@ module.exports = {
     }
   },
 
+  editDokumenBarjas: async (req, res) => {
+    const { id, tanggal } = req.body;
+
+    try {
+      if (!id) {
+        return res.status(400).json({ error: "id wajib diisi" });
+      }
+
+      const dokumen = await dokumenBarjas.findOne({ where: { id } });
+      if (!dokumen) {
+        return res.status(404).json({ error: "Dokumen tidak ditemukan" });
+      }
+
+      const tanggalBaru = tanggal ?? dokumen.tanggal;
+
+      // Jika nomor mengandung tahun 4 digit, sesuaikan dengan tahun dari tanggal baru.
+      const tahunBaru =
+        tanggalBaru && !Number.isNaN(new Date(tanggalBaru).getTime())
+          ? String(new Date(tanggalBaru).getFullYear())
+          : null;
+
+      let nomorBaru = dokumen.nomor;
+      if (tahunBaru && typeof nomorBaru === "string") {
+        // Prefer mengganti 4 digit tahun paling akhir jika ada, fallback ke digit pertama yang cocok.
+        if (/\d{4}\s*$/.test(nomorBaru)) {
+          nomorBaru = nomorBaru.replace(/\d{4}\s*$/, tahunBaru);
+        } else if (/\d{4}/.test(nomorBaru)) {
+          nomorBaru = nomorBaru.replace(/\d{4}/, tahunBaru);
+        }
+      }
+
+      await dokumenBarjas.update(
+        {
+          tanggal: tanggalBaru,
+          nomor: nomorBaru,
+        },
+        { where: { id } }
+      );
+
+      const result = await dokumenBarjas.findOne({ where: { id } });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+  },
+
   postBarjas: async (req, res) => {
     const { data } = req.body; // array of object
     try {

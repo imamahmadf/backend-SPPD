@@ -18,6 +18,7 @@ routers.get("/get/download", barjasControllers.getDownloadBarjas);
 routers.get("/get/jenis-dokumen/:id", barjasControllers.getJenisDokumen);
 routers.post("/post/jenis-dokumen", barjasControllers.postJenisDokumen);
 routers.post("/edit/jenis-dokumen", barjasControllers.editJenisDokumen);
+routers.post("/edit/dokumen", barjasControllers.editDokumenBarjas);
 
 routers.post("/post/jenis-barjas", barjasControllers.postJenisBarjas);
 routers.post("/post/akun-belanja", barjasControllers.postAkunBelanja);
