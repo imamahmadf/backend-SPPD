@@ -4,6 +4,8 @@ const { barjasControllers } = require("../controllers");
 const routers = express.Router();
 
 routers.get("/get/dokumen/:id", barjasControllers.getDokumen);
+routers.get("/get/daftar-dokumen", barjasControllers.getDaftarDokumenBarjas);
+routers.get("/get/daftar-barjas", barjasControllers.getDaftarBarjas);
 routers.get("/get", barjasControllers.getAll);
 routers.post("/post/sp", barjasControllers.postSP);
 routers.post("/post/dokumen-barjas", barjasControllers.postBarjas);
@@ -19,12 +21,14 @@ routers.get("/get/jenis-dokumen/:id", barjasControllers.getJenisDokumen);
 routers.post("/post/jenis-dokumen", barjasControllers.postJenisDokumen);
 routers.post("/edit/jenis-dokumen", barjasControllers.editJenisDokumen);
 routers.post("/edit/dokumen", barjasControllers.editDokumenBarjas);
+routers.post("/delete/dokumen", barjasControllers.deleteDokumen);
 
 routers.post("/post/jenis-barjas", barjasControllers.postJenisBarjas);
 routers.post("/post/akun-belanja", barjasControllers.postAkunBelanja);
 routers.post("/post/jenis-belanja", barjasControllers.postJenisBelanja);
 routers.get("/get/pengaturan", barjasControllers.getPengaturan);
 
+routers.post("/edit/barjas", barjasControllers.editBarjas);
 routers.post("/delete/barjas", barjasControllers.deleteBarjas);
 
 routers.get("/get/nomor-sp", barjasControllers.getNomorSP);
@@ -32,5 +36,6 @@ routers.post("/post/nomor-sp", barjasControllers.postNomorSP);
 routers.post("/edit/nomor-sp", barjasControllers.editNomorSP);
 
 routers.get("/get/dashboard", barjasControllers.getDashboardAset);
+routers.post("/edit/sp", barjasControllers.editSP);
 routers.post("/delete/sp", barjasControllers.deleteSP);
 module.exports = routers;

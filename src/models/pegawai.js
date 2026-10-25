@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "usulanNaikJenjangs",
       });
       this.hasMany(models.kendaraan);
+      this.hasMany(models.suratPengantar, {
+        foreignKey: "penandatanganId",
+        as: "suratPengantarDitandatangani",
+      });
       this.hasMany(models.pengurusBarang);
       this.hasMany(models.mutasiKendaraan, {
         foreignKey: "pegawaiId",

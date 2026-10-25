@@ -68,6 +68,8 @@ router.post(
   templateControllers.uploadUndangan
 );
 
+router.post("/edit-nomor-aset", templateControllers.editNomorTemplateAset);
+
 router.get("/get/:id", templateControllers.getTemplate);
 router.get("/get-keuangan", templateControllers.getTemplateKeuangan);
 router.get("/get-kadis", templateControllers.getTemplateKadis);

@@ -19,6 +19,8 @@ const {
   perjalanan,
   tempat,
   dalamKota,
+  daftarPangkat,
+  daftarGolongan,
 } = require("../models");
 const { scrapeData } = require("../services/scraper");
 const { sendMessage } = require("../services/waServices");
@@ -126,7 +128,29 @@ module.exports = {
             foreignKey: "unitKerjaId",
             as: "kendaraanUK",
           },
-          { model: suratPengantar, include: [{ model: user }] },
+          {
+            model: suratPengantar,
+            include: [
+              { model: user },
+              {
+                model: pegawai,
+                as: "penandatangan",
+                attributes: ["id", "nama", "nip", "jabatan"],
+                include: [
+                  {
+                    model: daftarPangkat,
+                    as: "daftarPangkat",
+                    attributes: ["pangkat"],
+                  },
+                  {
+                    model: daftarGolongan,
+                    as: "daftarGolongan",
+                    attributes: ["golongan"],
+                  },
+                ],
+              },
+            ],
+          },
           {
             model: mutasiKendaraan,
             include: [
@@ -166,36 +190,120 @@ module.exports = {
     const offset = limit * page;
     const unitKerjaId = parseInt(req.query.unitKerjaId);
     const pegawaiId = parseInt(req.query.pegawaiId);
-    const nomor = parseInt(req.query.nomor) || "";
-    const whereCondition = { nomor: { [Op.like]: "%" + nomor + "%" } };
+    const jenisId = parseInt(req.query.jenisId);
+    const statusId = parseInt(req.query.statusId);
+    const kondisiId = parseInt(req.query.kondisiId);
+    const nomor = String(req.query.nomor || "").trim();
+    const merek = String(req.query.merek || "").trim();
+    const seri = String(req.query.seri || "").trim();
+    const whereCondition = {};
     const currentYear = new Date().getFullYear();
+    const isIsoDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value || "");
 
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
+    const sortBy = String(req.query.sortBy || "pajakTahunIni");
+    const sortOrder =
+      String(req.query.sortOrder || "ASC").toUpperCase() === "DESC"
+        ? "DESC"
+        : "ASC";
 
+    if (nomor) {
+      whereCondition.nomor = { [Op.like]: `%${nomor}%` };
+    }
     if (unitKerjaId) {
       whereCondition.unitKerjaId = unitKerjaId;
     }
     if (pegawaiId) {
       whereCondition.pegawaiId = pegawaiId;
     }
+    if (jenisId) {
+      whereCondition.jenisKendaraanId = jenisId;
+    }
+    if (statusId) {
+      whereCondition.statusKendaraanId = statusId;
+    }
+    if (kondisiId) {
+      whereCondition.kondisiId = kondisiId;
+    }
+    if (merek) {
+      whereCondition.merek = { [Op.like]: `%${merek}%` };
+    }
+    if (seri) {
+      whereCondition.seri = { [Op.like]: `%${seri}%` };
+    }
 
-    // Jika startDate dan endDate ada, tambahkan kondisi between untuk tgl_pkb
-    if (startDate && endDate) {
+    // tgl_pkb disimpan sebagai teks YYYY-MM-DD
+    if (isIsoDate(startDate) && isIsoDate(endDate)) {
       whereCondition.tgl_pkb = {
-        [Op.between]: [new Date(startDate), new Date(endDate)],
+        [Op.between]: [startDate, endDate],
       };
-    } else if (startDate) {
-      // Jika hanya startDate diberikan, cari data dari startDate ke depan
+    } else if (isIsoDate(startDate)) {
       whereCondition.tgl_pkb = {
-        [Op.gte]: new Date(startDate),
+        [Op.gte]: startDate,
       };
-    } else if (endDate) {
-      // Jika hanya endDate diberikan, cari data sampai endDate
+    } else if (isIsoDate(endDate)) {
       whereCondition.tgl_pkb = {
-        [Op.lte]: new Date(endDate),
+        [Op.lte]: endDate,
       };
     }
+
+    const tanggalSql = (column) =>
+      `CASE WHEN ${column} REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}' THEN LEFT(${column}, 10) ELSE NULL END`;
+    const defaultOrder = [
+      [
+        sequelize.literal(
+          `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN 0 ELSE 1 END`
+        ),
+        "ASC",
+      ],
+      [
+        sequelize.literal(
+          `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN tgl_pkb ELSE NULL END`
+        ),
+        "ASC",
+      ],
+      ["id", "ASC"],
+    ];
+    const orderBy = {
+      pajakTahunIni: defaultOrder,
+      nomor: [
+        ["nomor", sortOrder],
+        ["seri", "ASC"],
+      ],
+      tgl_pkb: [
+        [sequelize.literal(`(${tanggalSql("tgl_pkb")}) IS NULL`), "ASC"],
+        [sequelize.literal(tanggalSql("tgl_pkb")), sortOrder],
+        ["id", "ASC"],
+      ],
+      tg_stnk: [
+        [sequelize.literal(`(${tanggalSql("tg_stnk")}) IS NULL`), "ASC"],
+        [sequelize.literal(tanggalSql("tg_stnk")), sortOrder],
+        ["id", "ASC"],
+      ],
+      total: [
+        ["total", sortOrder],
+        ["id", "ASC"],
+      ],
+      nilaiPerolehan: [
+        ["nilaiPerolehan", sortOrder],
+        ["id", "ASC"],
+      ],
+      tanggalPerolehan: [
+        ["tanggalPerolehan", sortOrder],
+        ["id", "ASC"],
+      ],
+      merek: [
+        ["merek", sortOrder],
+        ["id", "ASC"],
+      ],
+      unitKerja: [
+        [{ model: daftarUnitKerja, as: "kendaraanUK" }, "unitKerja", sortOrder],
+      ],
+      pemilik: [[{ model: pegawai }, "nama", sortOrder]],
+    };
+    const order = orderBy[sortBy] || defaultOrder;
+
     try {
       // 1. Ambil data kendaraan dari DB lokal
       const kendaraanList = await kendaraan.findAll({
@@ -214,24 +322,7 @@ module.exports = {
             as: "kendaraanUK",
           },
         ],
-        order: [
-          // Urutkan berdasarkan CASE WHEN agar data tgl_pkb tahun ini paling atas
-          [
-            sequelize.literal(
-              `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN 0 ELSE 1 END`
-            ),
-            "ASC",
-          ],
-          // Dalam data tahun ini urut berdasarkan tgl_pkb ascending
-          [
-            sequelize.literal(
-              `CASE WHEN YEAR(tgl_pkb) = ${currentYear} THEN tgl_pkb ELSE NULL END`
-            ),
-            "ASC",
-          ],
-          // Data selain tahun ini urut berdasarkan id ascending
-          ["id", "ASC"],
-        ],
+        order,
         attributes: [
           "id",
           "nomor",
@@ -357,12 +448,17 @@ module.exports = {
         );
       }
 
-      await kendaraan.upsert({
-        id,
+      const dataPembaruan = {
         tgl_pkb: convertedTglPkb,
         tg_stnk: convertedTgStnk,
         total: result.total,
-        ...(statusKendaraanId && { statusKendaraanId }),
+      };
+      if (statusKendaraanId) {
+        dataPembaruan.statusKendaraanId = statusKendaraanId;
+      }
+
+      await kendaraan.update(dataPembaruan, {
+        where: { id },
       });
 
       res.json({
@@ -376,6 +472,45 @@ module.exports = {
       res
         .status(500)
         .json({ message: "Terjadi kesalahan", error: err.message });
+    }
+  },
+  getKendaraanUntukCek: async (req, res) => {
+    try {
+      const unitKerjaId = parseInt(req.query.unitKerjaId, 10);
+      const whereCondition = {};
+      if (unitKerjaId) {
+        whereCondition.unitKerjaId = unitKerjaId;
+      }
+
+      const result = await kendaraan.findAll({
+        where: whereCondition,
+        attributes: ["id", "nomor", "seri", "unitKerjaId"],
+        include: [
+          {
+            model: daftarUnitKerja,
+            attributes: ["unitKerja"],
+            as: "kendaraanUK",
+          },
+        ],
+        order: [
+          ["unitKerjaId", "ASC"],
+          ["nomor", "ASC"],
+          ["seri", "ASC"],
+        ],
+      });
+
+      return res.status(200).json({
+        success: true,
+        total: result.length,
+        result,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: "Gagal mengambil daftar kendaraan untuk cek pajak",
+        error: err.toString(),
+      });
     }
   },
   getKendaraanIndukUnitKerja: async (req, res) => {
@@ -488,10 +623,35 @@ module.exports = {
       kendaraanId,
       jenisKendaraan,
       userId,
+      penandatanganId,
     } = req.body;
+
+    if (!penandatanganId) {
+      return res.status(400).json({ message: "Penandatangan wajib dipilih" });
+    }
 
     try {
       transaction = await sequelize.transaction();
+
+      const penandatangan = await pegawai.findOne({
+        where: { id: penandatanganId },
+        attributes: ["id", "nama", "nip", "jabatan"],
+        include: [
+          { model: daftarPangkat, as: "daftarPangkat", attributes: ["pangkat"] },
+          {
+            model: daftarGolongan,
+            as: "daftarGolongan",
+            attributes: ["golongan"],
+          },
+        ],
+        transaction,
+      });
+
+      if (!penandatangan) {
+        await transaction.rollback();
+        transaction = null;
+        return res.status(404).json({ message: "Penandatangan tidak ditemukan" });
+      }
 
       const dbNoSurat = await daftarNomorSurat.findOne({
         where: { indukUnitKerjaId: 1 },
@@ -515,8 +675,9 @@ module.exports = {
           noLoket,
           kendaraanId,
           userId,
+          penandatanganId: penandatangan.id,
         },
-        transaction
+        { transaction }
       );
 
       // Perbaiki tanggal - gunakan tanggal hari ini jika tanggal tidak valid
@@ -566,6 +727,11 @@ module.exports = {
         tanggalSurat,
         jenisKendaraan,
         plat,
+        nama: penandatangan.nama || "",
+        pangkat: penandatangan.daftarPangkat?.pangkat || "",
+        golongan: penandatangan.daftarGolongan?.golongan || "",
+        jabatan: penandatangan.jabatan || "",
+        nip: penandatangan.nip || "",
       });
 
       // Simpan hasil dokumen ke buffer

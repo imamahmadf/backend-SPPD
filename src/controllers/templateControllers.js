@@ -286,6 +286,33 @@ module.exports = {
         .json({ message: "Terjadi kesalahan saat mengunggah file" });
     }
   },
+  editNomorTemplateAset: async (req, res) => {
+    const { id, nomorSurat } = req.body;
+    const nomor = String(nomorSurat || "").trim();
+    try {
+      if (!id) {
+        return res.status(400).json({ message: "Template belum tersedia" });
+      }
+      if (!nomor) {
+        return res.status(400).json({ message: "Nomor surat wajib diisi" });
+      }
+
+      const existing = await templateAset.findByPk(id);
+      if (!existing) {
+        return res.status(404).json({ message: "Template tidak ditemukan" });
+      }
+
+      await templateAset.update({ nomorSurat: nomor }, { where: { id } });
+      return res
+        .status(200)
+        .json({ message: "Nomor surat berhasil diperbarui" });
+    } catch (err) {
+      console.error(err);
+      return res
+        .status(500)
+        .json({ message: "Terjadi kesalahan saat memperbarui nomor surat" });
+    }
+  },
   getTemplate: async (req, res) => {
     console.log(req.params.id, "template");
     const id = req.params.id;

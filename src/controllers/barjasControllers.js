@@ -240,33 +240,62 @@ module.exports = {
   },
 
   editDokumenBarjas: async (req, res) => {
-    const { id, tanggal } = req.body;
+    const { id, tanggal, nomor, jenisDokumenBarjasId, barjasData } = req.body;
+    const transaction = await sequelize.transaction();
 
     try {
       if (!id) {
+        await transaction.rollback();
         return res.status(400).json({ error: "id wajib diisi" });
       }
 
-      const dokumen = await dokumenBarjas.findOne({ where: { id } });
+      const dokumen = await dokumenBarjas.findOne({
+        where: { id },
+        transaction,
+      });
       if (!dokumen) {
+        await transaction.rollback();
         return res.status(404).json({ error: "Dokumen tidak ditemukan" });
       }
 
       const tanggalBaru = tanggal ?? dokumen.tanggal;
+      const jenisBaru =
+        jenisDokumenBarjasId ?? dokumen.jenisDokumenBarjasId;
 
-      // Jika nomor mengandung tahun 4 digit, sesuaikan dengan tahun dari tanggal baru.
-      const tahunBaru =
-        tanggalBaru && !Number.isNaN(new Date(tanggalBaru).getTime())
-          ? String(new Date(tanggalBaru).getFullYear())
-          : null;
+      if (jenisDokumenBarjasId) {
+        const jenis = await jenisDokumenBarjas.findOne({
+          where: { id: jenisDokumenBarjasId },
+          transaction,
+        });
+        if (!jenis) {
+          await transaction.rollback();
+          return res
+            .status(404)
+            .json({ error: "Jenis dokumen tidak ditemukan" });
+        }
+      }
 
-      let nomorBaru = dokumen.nomor;
-      if (tahunBaru && typeof nomorBaru === "string") {
-        // Prefer mengganti 4 digit tahun paling akhir jika ada, fallback ke digit pertama yang cocok.
-        if (/\d{4}\s*$/.test(nomorBaru)) {
-          nomorBaru = nomorBaru.replace(/\d{4}\s*$/, tahunBaru);
-        } else if (/\d{4}/.test(nomorBaru)) {
-          nomorBaru = nomorBaru.replace(/\d{4}/, tahunBaru);
+      let nomorBaru =
+        typeof nomor === "string" ? nomor.trim() : dokumen.nomor;
+
+      if (typeof nomor === "string" && !nomorBaru) {
+        await transaction.rollback();
+        return res.status(400).json({ error: "Nomor dokumen wajib diisi" });
+      }
+
+      // Jika nomor tidak dikirim, sesuaikan tahun di nomor dengan tanggal baru.
+      if (nomor === undefined || nomor === null) {
+        const tahunBaru =
+          tanggalBaru && !Number.isNaN(new Date(tanggalBaru).getTime())
+            ? String(new Date(tanggalBaru).getFullYear())
+            : null;
+
+        if (tahunBaru && typeof nomorBaru === "string") {
+          if (/\d{4}\s*$/.test(nomorBaru)) {
+            nomorBaru = nomorBaru.replace(/\d{4}\s*$/, tahunBaru);
+          } else if (/\d{4}/.test(nomorBaru)) {
+            nomorBaru = nomorBaru.replace(/\d{4}/, tahunBaru);
+          }
         }
       }
 
@@ -274,13 +303,84 @@ module.exports = {
         {
           tanggal: tanggalBaru,
           nomor: nomorBaru,
+          jenisDokumenBarjasId: jenisBaru,
         },
-        { where: { id } }
+        { where: { id }, transaction }
       );
 
-      const result = await dokumenBarjas.findOne({ where: { id } });
+      if (Array.isArray(barjasData)) {
+        await itemDokumenBarjas.destroy({
+          where: { dokumenBarjasId: id },
+          transaction,
+        });
+
+        if (barjasData.length > 0) {
+          const items = barjasData.map((item) => ({
+            dokumenBarjasId: id,
+            barjasId: item.barjasId,
+            jumlah: item.jumlah,
+          }));
+          await itemDokumenBarjas.bulkCreate(items, { transaction });
+        }
+      }
+
+      await transaction.commit();
+
+      const result = await dokumenBarjas.findOne({
+        where: { id },
+        include: [
+          { model: jenisDokumenBarjas },
+          {
+            model: itemDokumenBarjas,
+            attributes: ["id", "jumlah", "barjasId"],
+            include: [
+              {
+                model: barjas,
+                attributes: ["id", "nama", "jumlah", "harga"],
+              },
+            ],
+          },
+        ],
+      });
       return res.status(200).json({ result });
     } catch (err) {
+      await transaction.rollback();
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+  },
+
+  deleteDokumen: async (req, res) => {
+    const { id } = req.body;
+    const transaction = await sequelize.transaction();
+    try {
+      if (!id) {
+        await transaction.rollback();
+        return res.status(400).json({ message: "id wajib diisi" });
+      }
+
+      const dokumen = await dokumenBarjas.findOne({
+        where: { id },
+        transaction,
+      });
+      if (!dokumen) {
+        await transaction.rollback();
+        return res.status(404).json({ message: "Dokumen tidak ditemukan" });
+      }
+
+      await itemDokumenBarjas.destroy({
+        where: { dokumenBarjasId: id },
+        transaction,
+      });
+      await dokumenBarjas.destroy({
+        where: { id },
+        transaction,
+      });
+
+      await transaction.commit();
+      return res.status(200).json({ message: "Dokumen berhasil dihapus" });
+    } catch (err) {
+      await transaction.rollback();
       console.error(err);
       return res.status(500).json({ error: err.message });
     }
@@ -308,89 +408,132 @@ module.exports = {
   },
 
   getAll: async (req, res) => {
-    const page = parseInt(req.query.page) || 0;
-    const limit = parseInt(req.query.limit) || 50;
+    const page = Math.max(parseInt(req.query.page, 10) || 0, 0);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 100);
     const offset = limit * page;
-    const unitKerjaId = parseInt(req.query.unitKerjaId);
-    const subKegPerId = parseInt(req.query.subKegPerId);
-    const nomor = parseInt(req.query.nomor) || "";
-    const whereCondition = { nomor: { [Op.like]: "%" + nomor + "%" } };
+    const unitKerjaId = parseInt(req.query.unitKerjaId, 10);
+    const subKegPerId = parseInt(req.query.subKegPerId, 10);
+    const rekananId = parseInt(req.query.rekananId, 10);
+    const akunBelanjaId = parseInt(req.query.akunBelanjaId, 10);
+    const nomor = String(req.query.nomor || "").trim();
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
-    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId);
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId, 10);
+    const sortBy = req.query.sortBy || "tanggal";
+    const sortOrder =
+      String(req.query.sortOrder || "DESC").toUpperCase() === "ASC"
+        ? "ASC"
+        : "DESC";
+    const allowedSort = {
+      tanggal: "tanggal",
+      nomor: "nomor",
+      createdAt: "createdAt",
+    };
+    const sortField = allowedSort[sortBy] || "tanggal";
 
-    if (unitKerjaId) {
-      whereCondition.unitKerjaId = unitKerjaId;
+    const whereCondition = {};
+    if (nomor) {
+      whereCondition.nomor = { [Op.like]: `%${nomor}%` };
     }
     if (subKegPerId) {
       whereCondition.subKegPerId = subKegPerId;
     }
+    if (rekananId) {
+      whereCondition.rekananId = rekananId;
+    }
+    if (akunBelanjaId) {
+      whereCondition.akunBelanjaId = akunBelanjaId;
+    }
+    if (startDate && endDate) {
+      whereCondition.tanggal = {
+        [Op.between]: [`${startDate} 00:00:00`, `${endDate} 23:59:59`],
+      };
+    } else if (startDate) {
+      whereCondition.tanggal = { [Op.gte]: `${startDate} 00:00:00` };
+    } else if (endDate) {
+      whereCondition.tanggal = { [Op.lte]: `${endDate} 23:59:59` };
+    }
 
-    // Siapkan include untuk subKegPer dengan filter indukUnitKerjaId
+    const unitKerjaWhere = {};
+    if (indukUnitKerjaId) {
+      unitKerjaWhere.indukUnitKerjaId = indukUnitKerjaId;
+    }
+    if (unitKerjaId) {
+      unitKerjaWhere.id = unitKerjaId;
+    }
+
     const subKegPerInclude = {
       model: subKegPer,
       attributes: ["id", "nama"],
-      paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+      paranoid: true,
       include: [
         {
           model: daftarUnitKerja,
           attributes: ["id", "unitKerja"],
+          ...(Object.keys(unitKerjaWhere).length
+            ? { where: unitKerjaWhere, required: true }
+            : {}),
         },
       ],
+      required: Boolean(Object.keys(unitKerjaWhere).length),
     };
 
-    // Jika indukUnitKerjaId ada, tambahkan filter
-    if (indukUnitKerjaId) {
-      subKegPerInclude.include[0].where = { indukUnitKerjaId };
-      subKegPerInclude.required = true;
-    }
-
     try {
-      const result = await SP.findAll(
-        {
-          limit,
-          where: whereCondition,
-          offset,
-          include: [
-            {
-              model: dokumenBarjas,
-              include: [{ model: jenisDokumenBarjas }],
-              attributes: ["id"],
-            },
-            { model: rekanan },
-            { model: akunBelanja, include: [{ model: jenisBelanja }] },
-            {
-              model: barjas,
-              include: [{ model: jenisBarjas, attributes: ["id"] }],
-              attributes: ["id", "jumlah", "harga"],
-            },
-            // { model: nomorSP },
-            subKegPerInclude,
-          ],
-        }
-        // { where: { id } }
-      );
+      const order = [
+        [sortField, sortOrder],
+        ["id", "DESC"],
+      ];
+
       const totalRows = await SP.count({
         where: whereCondition,
-        include: indukUnitKerjaId
-          ? [
-              {
-                model: subKegPer,
-                required: true,
-                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
-                include: [
-                  {
-                    model: daftarUnitKerja,
-                    where: { indukUnitKerjaId },
-                    required: true,
-                  },
-                ],
-              },
-            ]
-          : [],
+        include: [subKegPerInclude],
       });
-      const totalPage = Math.ceil(totalRows / limit);
-      // 2. Ambil semua ID unik dari pegawaiId dan PJId
+      const totalPage = totalRows > 0 ? Math.ceil(totalRows / limit) : 0;
+
+      const idRows = await SP.findAll({
+        attributes: ["id"],
+        where: whereCondition,
+        include: [subKegPerInclude],
+        order,
+        limit,
+        offset,
+        subQuery: false,
+        raw: true,
+      });
+      const ids = idRows.map((row) => row.id);
+
+      const result =
+        ids.length === 0
+          ? []
+          : await SP.findAll({
+              where: { id: { [Op.in]: ids } },
+              include: [
+                {
+                  model: dokumenBarjas,
+                  include: [{ model: jenisDokumenBarjas }],
+                  attributes: ["id"],
+                },
+                { model: rekanan },
+                { model: akunBelanja, include: [{ model: jenisBelanja }] },
+                {
+                  model: barjas,
+                  include: [{ model: jenisBarjas, attributes: ["id"] }],
+                  attributes: ["id", "jumlah", "harga"],
+                },
+                {
+                  model: subKegPer,
+                  attributes: ["id", "nama"],
+                  paranoid: true,
+                  include: [
+                    {
+                      model: daftarUnitKerja,
+                      attributes: ["id", "unitKerja"],
+                    },
+                  ],
+                },
+              ],
+              order,
+            });
 
       return res.status(200).json({
         success: true,
@@ -407,26 +550,36 @@ module.exports = {
   },
   searchSubKegiatan: async (req, res) => {
     try {
-      const { q, indukUnitKerjaId } = req.query;
+      const q = String(req.query.q || "").trim();
+      const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId, 10);
+
+      const where = {};
+      if (q) {
+        where[Op.or] = [
+          { nama: { [Op.like]: `%${q}%` } },
+          { kode: { [Op.like]: `%${q}%` } },
+        ];
+      }
+
+      const unitKerjaWhere = Number.isInteger(indukUnitKerjaId)
+        ? { indukUnitKerjaId }
+        : {};
 
       const result = await subKegPer.findAll({
-        where: {
-          nama: {
-            [Op.like]: `%${q}%`, // Import Op dari Sequelize
-          },
-        },
-        attributes: ["id", "nama", "unitKerjaId"],
-        required: true,
-        paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
+        where,
+        attributes: ["id", "nama", "kode", "unitKerjaId"],
+        paranoid: true,
         include: [
           {
             model: daftarUnitKerja,
-            attributes: ["id", "unitKerja"],
-            required: true,
-            where: { indukUnitKerjaId },
+            attributes: ["id", "unitKerja", "indukUnitKerjaId"],
+            required: Boolean(Object.keys(unitKerjaWhere).length),
+            ...(Object.keys(unitKerjaWhere).length
+              ? { where: unitKerjaWhere }
+              : {}),
           },
         ],
-        limit: 10,
+        limit: 25,
         order: [["nama", "ASC"]],
       });
 
@@ -463,9 +616,15 @@ module.exports = {
       const resultJenisBarjas = await jenisBarjas.findAll({});
       const resultJenisDokumenBarjas = await jenisDokumenBarjas.findAll({});
 
-      return res
-        .status(200)
-        .json({ resultJenisBarjas, resultJenisDokumenBarjas });
+      const resultAkunBelanja = await akunBelanja.findAll({
+        include: [{ model: jenisBelanja }],
+      });
+
+      return res.status(200).json({
+        resultJenisBarjas,
+        resultJenisDokumenBarjas,
+        resultAkunBelanja,
+      });
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
@@ -485,159 +644,327 @@ module.exports = {
   },
 
   getDownloadBarjas: async (req, res) => {
+    const unitKerjaId = parseInt(req.query.unitKerjaId, 10);
+    const subKegPerId = parseInt(req.query.subKegPerId, 10);
+    const rekananId = parseInt(req.query.rekananId, 10);
+    const akunBelanjaId = parseInt(req.query.akunBelanjaId, 10);
+    const nomor = String(req.query.nomor || "").trim();
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId, 10);
+    const sortBy = req.query.sortBy || "tanggal";
+    const sortOrder =
+      String(req.query.sortOrder || "DESC").toUpperCase() === "ASC"
+        ? "ASC"
+        : "DESC";
+    const allowedSort = {
+      tanggal: "tanggal",
+      nomor: "nomor",
+      createdAt: "createdAt",
+    };
+    const sortField = allowedSort[sortBy] || "tanggal";
+
+    const whereCondition = {};
+    if (nomor) {
+      whereCondition.nomor = { [Op.like]: `%${nomor}%` };
+    }
+    if (subKegPerId) {
+      whereCondition.subKegPerId = subKegPerId;
+    }
+    if (rekananId) {
+      whereCondition.rekananId = rekananId;
+    }
+    if (akunBelanjaId) {
+      whereCondition.akunBelanjaId = akunBelanjaId;
+    }
+    if (startDate && endDate) {
+      whereCondition.tanggal = {
+        [Op.between]: [`${startDate} 00:00:00`, `${endDate} 23:59:59`],
+      };
+    } else if (startDate) {
+      whereCondition.tanggal = { [Op.gte]: `${startDate} 00:00:00` };
+    } else if (endDate) {
+      whereCondition.tanggal = { [Op.lte]: `${endDate} 23:59:59` };
+    }
+
+    const unitKerjaWhere = {};
+    if (indukUnitKerjaId) {
+      unitKerjaWhere.indukUnitKerjaId = indukUnitKerjaId;
+    }
+    if (unitKerjaId) {
+      unitKerjaWhere.id = unitKerjaId;
+    }
+
+    const subKegPerInclude = {
+      model: subKegPer,
+      attributes: ["id", "nama"],
+      paranoid: true,
+      include: [
+        {
+          model: daftarUnitKerja,
+          attributes: ["id", "unitKerja"],
+          ...(Object.keys(unitKerjaWhere).length
+            ? { where: unitKerjaWhere, required: true }
+            : {}),
+        },
+      ],
+      required: Boolean(Object.keys(unitKerjaWhere).length),
+    };
+
     try {
-      // Ambil semua dokumen barjas dengan relasi yang diperlukan
-      const result = await dokumenBarjas.findAll({
-        include: [
-          {
-            model: jenisDokumenBarjas,
-            attributes: ["id", "jenis"],
-          },
-          {
-            model: SP,
-            attributes: ["id", "nomor", "tanggal"],
-            include: [
-              {
-                model: rekanan,
-                attributes: ["id", "nama"],
-              },
-              {
-                model: akunBelanja,
-                attributes: ["id", "akun", "kode"],
-                include: [
-                  {
-                    model: jenisBelanja,
-                    attributes: ["id", "jenis"],
-                  },
-                ],
-              },
-              {
-                model: subKegPer,
-                attributes: ["id", "nama"],
-                paranoid: true, // Hanya ambil subKegPer yang belum di-soft delete
-                include: [
-                  {
-                    model: daftarUnitKerja,
-                    attributes: ["id", "unitKerja"],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            model: itemDokumenBarjas,
-            attributes: ["id", "jumlah", "barjasId"],
-            include: [
-              {
-                model: barjas,
-                attributes: ["id", "nama", "harga"],
-              },
-            ],
-          },
-        ],
-        order: [["id", "ASC"]],
-      });
-
-      // Generate Excel
-      const workbook = new ExcelJS.Workbook();
-      const worksheet = workbook.addWorksheet("Rekapan Barjas");
-
-      // Header
-      worksheet.columns = [
-        { header: "No", key: "no", width: 5 },
-        { header: "Nomor Dokumen Barjas", key: "nomorDokumen", width: 30 },
-        { header: "Jenis Dokumen Barjas", key: "jenisDokumen", width: 25 },
-        { header: "Nomor SP", key: "nomorSP", width: 30 },
-        { header: "Tanggal SP", key: "tanggalSP", width: 20 },
-        { header: "Subkegiatan", key: "subkegiatan", width: 30 },
-        { header: "Jenis Belanja", key: "jenisBelanja", width: 20 },
-        { header: "Akun Belanja", key: "akunBelanja", width: 20 },
-        { header: "Unit Kerja", key: "unitKerja", width: 30 },
-        { header: "Nama Rekanan", key: "namaRekanan", width: 30 },
-        { header: "Total Jumlah", key: "totalJumlah", width: 15 },
-        { header: "Total Harga", key: "totalHarga", width: 20 },
+      const order = [
+        [sortField, sortOrder],
+        ["id", "DESC"],
       ];
 
-      // Data rows - setiap item dokumen barjas menjadi satu baris
-      let rowIndex = 0;
-      result.forEach((dokumen) => {
-        const nomorDokumen = dokumen?.nomor || "-";
-        const jenisDokumen = dokumen?.jenisDokumenBarjas?.jenis || "-";
-        const nomorSP = dokumen?.SP?.nomor || "-";
-        const tanggalSP = dokumen?.SP?.tanggal
-          ? new Date(dokumen.SP.tanggal).toLocaleDateString("id-ID")
-          : "-";
-        const subkegiatan = dokumen?.SP?.subKegPer?.nama || "-";
-        const jenisBelanja =
-          dokumen?.SP?.akunBelanja?.jenisBelanja?.jenis || "-";
-        const akunBelanja = dokumen?.SP?.akunBelanja?.akun || "-";
-        const unitKerja =
-          dokumen?.SP?.subKegPer?.daftarUnitKerja?.unitKerja || "-";
-        const namaRekanan = dokumen?.SP?.rekanan?.nama || "-";
+      const idRows = await SP.findAll({
+        attributes: ["id"],
+        where: whereCondition,
+        include: [subKegPerInclude],
+        order,
+        subQuery: false,
+        raw: true,
+      });
+      const ids = [...new Set(idRows.map((row) => row.id))];
 
-        // Jika ada item dokumen barjas, buat baris untuk setiap item
-        if (
-          dokumen?.itemDokumenBarjas &&
-          dokumen.itemDokumenBarjas.length > 0
-        ) {
-          dokumen.itemDokumenBarjas.forEach((item) => {
-            const jumlah = item?.jumlah || 0;
-            const harga = item?.barjas?.harga || 0;
-            const totalHarga = jumlah * harga;
-
-            worksheet.addRow({
-              no: rowIndex + 1,
-              nomorDokumen,
-              jenisDokumen,
-              nomorSP,
-              tanggalSP,
-              subkegiatan,
-              jenisBelanja,
-              akunBelanja,
-              unitKerja,
-              namaRekanan,
-              totalJumlah: jumlah,
-              totalHarga: totalHarga,
+      const result =
+        ids.length === 0
+          ? []
+          : await SP.findAll({
+              where: { id: { [Op.in]: ids } },
+              include: [
+                { model: rekanan, attributes: ["id", "nama"] },
+                {
+                  model: akunBelanja,
+                  attributes: ["id", "akun", "kode"],
+                  include: [
+                    { model: jenisBelanja, attributes: ["id", "jenis"] },
+                  ],
+                },
+                {
+                  model: barjas,
+                  attributes: ["id", "nama", "jumlah", "harga"],
+                },
+                {
+                  model: subKegPer,
+                  attributes: ["id", "nama"],
+                  paranoid: true,
+                  include: [
+                    {
+                      model: daftarUnitKerja,
+                      attributes: ["id", "unitKerja"],
+                    },
+                  ],
+                },
+                {
+                  model: dokumenBarjas,
+                  attributes: [
+                    "id",
+                    "nomor",
+                    "tanggal",
+                    "jenisDokumenBarjasId",
+                  ],
+                  include: [
+                    { model: jenisDokumenBarjas, attributes: ["id", "jenis"] },
+                    {
+                      model: itemDokumenBarjas,
+                      attributes: ["id", "jumlah", "barjasId"],
+                      include: [
+                        {
+                          model: barjas,
+                          attributes: ["id", "nama", "harga"],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+              order,
             });
-            rowIndex++;
-          });
-        } else {
-          // Jika tidak ada item, tetap buat baris dengan data dokumen
-          worksheet.addRow({
-            no: rowIndex + 1,
-            nomorDokumen,
-            jenisDokumen,
-            nomorSP,
-            tanggalSP,
-            subkegiatan,
-            jenisBelanja,
-            akunBelanja,
-            unitKerja,
-            namaRekanan,
-            totalJumlah: 0,
-            totalHarga: 0,
-          });
-          rowIndex++;
-        }
+
+      const getDokumenPlain = (dokumen) =>
+        dokumen && typeof dokumen.get === "function"
+          ? dokumen.get({ plain: true })
+          : dokumen || {};
+
+      const getJenisDokumenNama = (dokumen) => {
+        const plain = getDokumenPlain(dokumen);
+        return (
+          plain?.jenisDokumenBarja?.jenis ||
+          plain?.jenisDokumenBarjas?.jenis ||
+          "Dokumen"
+        );
+      };
+
+      const jenisColumns = [];
+      const seenJenis = new Set();
+      result.forEach((sp) => {
+        const spPlain =
+          sp && typeof sp.get === "function" ? sp.get({ plain: true }) : sp;
+        (spPlain.dokumenBarjas || []).forEach((dokumen) => {
+          const nama = getJenisDokumenNama(dokumen);
+          if (!seenJenis.has(nama)) {
+            seenJenis.add(nama);
+            jenisColumns.push({
+              header: nama,
+              key: `nomorJenis_${jenisColumns.length}`,
+              width: Math.min(Math.max(nama.length + 4, 28), 48),
+              nama,
+            });
+          }
+        });
       });
 
-      // Set response headers
+      const workbook = new ExcelJS.Workbook();
+      workbook.creator = "PENA DINKES";
+      const sheetSP = workbook.addWorksheet("Daftar Surat Pesanan");
+      const sheetDokumen = workbook.addWorksheet("Rincian Dokumen");
+
+      sheetSP.columns = [
+        { header: "No", key: "no", width: 6 },
+        { header: "Nomor SP", key: "nomorSP", width: 32 },
+        ...jenisColumns.map(({ header, key, width }) => ({
+          header,
+          key,
+          width,
+        })),
+        { header: "Tanggal", key: "tanggal", width: 16 },
+        { header: "Unit Kerja", key: "unitKerja", width: 28 },
+        { header: "Sub Kegiatan", key: "subkegiatan", width: 36 },
+        { header: "Akun Belanja", key: "akunBelanja", width: 32 },
+        { header: "Jenis Belanja", key: "jenisBelanja", width: 22 },
+        { header: "Rekanan", key: "rekanan", width: 28 },
+        { header: "Jumlah Item", key: "jumlahItem", width: 14 },
+        { header: "Nominal", key: "nominal", width: 18 },
+      ];
+
+      sheetDokumen.columns = [
+        { header: "No", key: "no", width: 6 },
+        { header: "Nomor SP", key: "nomorSP", width: 32 },
+        { header: "Nomor Dokumen", key: "nomorDokumen", width: 32 },
+        { header: "Jenis Dokumen", key: "jenisDokumen", width: 24 },
+        { header: "Tanggal Dokumen", key: "tanggalDokumen", width: 16 },
+        { header: "Nama Barang/Jasa", key: "namaBarang", width: 36 },
+        { header: "Jumlah", key: "jumlah", width: 12 },
+        { header: "Harga Satuan", key: "harga", width: 16 },
+        { header: "Subtotal", key: "subtotal", width: 18 },
+      ];
+
+      const styleHeader = (sheet) => {
+        const header = sheet.getRow(1);
+        header.font = { bold: true, color: { argb: "FFFFFFFF" } };
+        header.fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FF007DE2" },
+        };
+        header.alignment = { vertical: "middle", horizontal: "center" };
+      };
+
+      result.forEach((sp, index) => {
+        const spPlain =
+          sp && typeof sp.get === "function" ? sp.get({ plain: true }) : sp;
+        const nominal = (spPlain.barjas || []).reduce(
+          (sum, item) =>
+            sum + Number(item?.harga || 0) * Number(item?.jumlah || 0),
+          0
+        );
+        const dokumenList = spPlain.dokumenBarjas || [];
+
+        const row = {
+          no: index + 1,
+          nomorSP: spPlain?.nomor || "-",
+          tanggal: spPlain?.tanggal
+            ? new Date(spPlain.tanggal).toLocaleDateString("id-ID")
+            : "-",
+          unitKerja: spPlain?.subKegPer?.daftarUnitKerja?.unitKerja || "-",
+          subkegiatan: spPlain?.subKegPer?.nama || "-",
+          akunBelanja: spPlain?.akunBelanja?.akun || "-",
+          jenisBelanja: spPlain?.akunBelanja?.jenisBelanja?.jenis || "-",
+          rekanan: spPlain?.rekanan?.nama || "-",
+          jumlahItem: spPlain?.barjas?.length || 0,
+          nominal,
+        };
+
+        jenisColumns.forEach((col) => {
+          const numbers = dokumenList
+            .filter((dokumen) => getJenisDokumenNama(dokumen) === col.nama)
+            .map((dokumen) => getDokumenPlain(dokumen)?.nomor)
+            .filter(Boolean);
+          row[col.key] = numbers.length ? numbers.join("; ") : "-";
+        });
+
+        sheetSP.addRow(row);
+      });
+
+      let dokumenNo = 1;
+      result.forEach((sp) => {
+        (sp.dokumenBarjas || []).forEach((dokumen) => {
+          const jenisDokumen =
+            dokumen?.jenisDokumenBarja?.jenis ||
+            dokumen?.jenisDokumenBarjas?.jenis ||
+            "-";
+          const items = dokumen?.itemDokumenBarjas || [];
+          if (items.length === 0) {
+            sheetDokumen.addRow({
+              no: dokumenNo++,
+              nomorSP: sp?.nomor || "-",
+              nomorDokumen: dokumen?.nomor || "-",
+              jenisDokumen,
+              tanggalDokumen: dokumen?.tanggal
+                ? new Date(dokumen.tanggal).toLocaleDateString("id-ID")
+                : "-",
+              namaBarang: "-",
+              jumlah: 0,
+              harga: 0,
+              subtotal: 0,
+            });
+            return;
+          }
+
+          items.forEach((item) => {
+            const barang = item?.barja || item?.barjas;
+            const jumlah = Number(item?.jumlah || 0);
+            const harga = Number(barang?.harga || 0);
+            sheetDokumen.addRow({
+              no: dokumenNo++,
+              nomorSP: sp?.nomor || "-",
+              nomorDokumen: dokumen?.nomor || "-",
+              jenisDokumen,
+              tanggalDokumen: dokumen?.tanggal
+                ? new Date(dokumen.tanggal).toLocaleDateString("id-ID")
+                : "-",
+              namaBarang: barang?.nama || "-",
+              jumlah,
+              harga,
+              subtotal: jumlah * harga,
+            });
+          });
+        });
+      });
+
+      styleHeader(sheetSP);
+      styleHeader(sheetDokumen);
+      sheetSP.getColumn("nominal").numFmt = "#,##0";
+      sheetDokumen.getColumn("harga").numFmt = "#,##0";
+      sheetDokumen.getColumn("subtotal").numFmt = "#,##0";
+
+      const filename = `daftar-surat-pesanan-${new Date()
+        .toISOString()
+        .slice(0, 10)}.xlsx`;
+
       res.setHeader(
         "Content-Type",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       );
-      res.setHeader(
-        "Content-Disposition",
-        "attachment; filename=rekapan-barjas.xlsx"
-      );
+      res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
 
-      // Send Excel file
       await workbook.xlsx.write(res);
       res.end();
     } catch (err) {
       console.error(err);
       return res.status(500).json({
-        message: err.toString(),
+        message: err.message || "Gagal membuat file Excel",
         code: 500,
       });
     }
@@ -652,6 +979,203 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  getDaftarDokumenBarjas: async (req, res) => {
+    const page = Math.max(parseInt(req.query.page, 10) || 0, 0);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 100);
+    const offset = limit * page;
+    const nomor = String(req.query.nomor || "").trim();
+    const nomorSP = String(req.query.nomorSP || "").trim();
+    const jenisDokumenBarjasId = parseInt(req.query.jenisDokumenBarjasId, 10);
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId, 10);
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    const sortBy = req.query.sortBy || "tanggal";
+    const sortOrder =
+      String(req.query.sortOrder || "DESC").toUpperCase() === "ASC"
+        ? "ASC"
+        : "DESC";
+    const allowedSort = {
+      tanggal: "tanggal",
+      nomor: "nomor",
+      createdAt: "createdAt",
+    };
+    const sortField = allowedSort[sortBy] || "tanggal";
+
+    const whereCondition = {};
+    if (nomor) {
+      whereCondition.nomor = { [Op.like]: `%${nomor}%` };
+    }
+    if (jenisDokumenBarjasId) {
+      whereCondition.jenisDokumenBarjasId = jenisDokumenBarjasId;
+    }
+    if (startDate && endDate) {
+      whereCondition.tanggal = {
+        [Op.between]: [`${startDate} 00:00:00`, `${endDate} 23:59:59`],
+      };
+    } else if (startDate) {
+      whereCondition.tanggal = { [Op.gte]: `${startDate} 00:00:00` };
+    } else if (endDate) {
+      whereCondition.tanggal = { [Op.lte]: `${endDate} 23:59:59` };
+    }
+
+    const jenisInclude = {
+      model: jenisDokumenBarjas,
+      attributes: ["id", "jenis"],
+      required: Boolean(indukUnitKerjaId),
+    };
+    if (indukUnitKerjaId) {
+      jenisInclude.where = { indukUnitKerjaId };
+    }
+
+    const spInclude = {
+      model: SP,
+      attributes: ["id", "nomor", "tanggal"],
+      required: Boolean(nomorSP),
+      include: [{ model: rekanan, attributes: ["id", "nama"] }],
+    };
+    if (nomorSP) {
+      spInclude.where = { nomor: { [Op.like]: `%${nomorSP}%` } };
+    }
+
+    try {
+      const { count, rows } = await dokumenBarjas.findAndCountAll({
+        where: whereCondition,
+        attributes: [
+          "id",
+          "tanggal",
+          "nomor",
+          "SPId",
+          "jenisDokumenBarjasId",
+          "createdAt",
+        ],
+        include: [
+          jenisInclude,
+          spInclude,
+          {
+            model: itemDokumenBarjas,
+            attributes: ["id", "jumlah"],
+            separate: true,
+          },
+        ],
+        distinct: true,
+        limit,
+        offset,
+        order: [
+          [sortField, sortOrder],
+          ["id", "DESC"],
+        ],
+      });
+
+      const totalRows = Array.isArray(count) ? count.length : count;
+      const totalPage = totalRows > 0 ? Math.ceil(totalRows / limit) : 0;
+
+      return res.status(200).json({
+        success: true,
+        result: rows,
+        page,
+        limit,
+        totalRows,
+        totalPage,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+  },
+
+  getDaftarBarjas: async (req, res) => {
+    const page = Math.max(parseInt(req.query.page, 10) || 0, 0);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 100);
+    const offset = limit * page;
+    const nama = String(req.query.nama || "").trim();
+    const nomorSP = String(req.query.nomorSP || "").trim();
+    const jenisBarjasId = parseInt(req.query.jenisBarjasId, 10);
+    const indukUnitKerjaId = parseInt(req.query.indukUnitKerjaId, 10);
+    const sortBy = req.query.sortBy || "createdAt";
+    const sortOrder =
+      String(req.query.sortOrder || "DESC").toUpperCase() === "ASC"
+        ? "ASC"
+        : "DESC";
+    const allowedSort = {
+      nama: "nama",
+      harga: "harga",
+      jumlah: "jumlah",
+      createdAt: "createdAt",
+    };
+    const sortField = allowedSort[sortBy] || "createdAt";
+
+    const whereCondition = {};
+    if (nama) {
+      whereCondition.nama = { [Op.like]: `%${nama}%` };
+    }
+    if (jenisBarjasId) {
+      whereCondition.jenisBarjasId = jenisBarjasId;
+    }
+
+    const batasiUnit = Boolean(indukUnitKerjaId);
+    const spInclude = {
+      model: SP,
+      attributes: ["id", "nomor", "tanggal"],
+      required: Boolean(nomorSP || batasiUnit),
+      include: [
+        { model: rekanan, attributes: ["id", "nama"] },
+        {
+          model: subKegPer,
+          attributes: ["id", "nama"],
+          paranoid: true,
+          required: batasiUnit,
+          include: [
+            {
+              model: daftarUnitKerja,
+              attributes: ["id", "unitKerja"],
+              required: batasiUnit,
+              ...(batasiUnit ? { where: { indukUnitKerjaId } } : {}),
+            },
+          ],
+        },
+      ],
+    };
+    if (nomorSP) {
+      spInclude.where = { nomor: { [Op.like]: `%${nomorSP}%` } };
+    }
+
+    try {
+      const { count, rows } = await barjas.findAndCountAll({
+        where: whereCondition,
+        attributes: ["id", "nama", "jumlah", "harga", "jenisBarjasId", "SPId"],
+        include: [
+          {
+            model: jenisBarjas,
+            attributes: ["id", "jenis"],
+          },
+          spInclude,
+        ],
+        distinct: true,
+        limit,
+        offset,
+        order: [
+          [sortField, sortOrder],
+          ["id", "DESC"],
+        ],
+      });
+
+      const totalRows = Array.isArray(count) ? count.length : count;
+      const totalPage = totalRows > 0 ? Math.ceil(totalRows / limit) : 0;
+
+      return res.status(200).json({
+        success: true,
+        result: rows,
+        page,
+        limit,
+        totalRows,
+        totalPage,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
     }
   },
 
@@ -772,6 +1296,47 @@ module.exports = {
     }
   },
 
+  editBarjas: async (req, res) => {
+    const { id, nama, jenisBarjasId, jumlah, harga } = req.body;
+    try {
+      if (!id) {
+        return res.status(400).json({ message: "id wajib diisi" });
+      }
+      if (!nama || !String(nama).trim()) {
+        return res.status(400).json({ message: "Nama wajib diisi" });
+      }
+      if (!jenisBarjasId) {
+        return res
+          .status(400)
+          .json({ message: "Jenis barang dan jasa wajib dipilih" });
+      }
+
+      const item = await barjas.findOne({ where: { id } });
+      if (!item) {
+        return res.status(404).json({ message: "Item tidak ditemukan" });
+      }
+
+      await barjas.update(
+        {
+          nama: String(nama).trim(),
+          jenisBarjasId,
+          jumlah: Number(jumlah) || 0,
+          harga: Number(harga) || 0,
+        },
+        { where: { id } }
+      );
+
+      const result = await barjas.findOne({
+        where: { id },
+        include: [{ model: jenisBarjas }],
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+  },
+
   deleteBarjas: async (req, res) => {
     const { id } = req.body;
     console.log(req.body);
@@ -781,6 +1346,83 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.status(500).json({ error: err.message });
+    }
+  },
+
+  editSP: async (req, res) => {
+    const {
+      id,
+      nomor,
+      tanggal,
+      rekananId,
+      akunBelanjaId,
+      subKegPerId,
+      unitKerjaId,
+    } = req.body;
+
+    try {
+      if (!id) {
+        return res.status(400).json({ message: "id wajib diisi" });
+      }
+      if (!nomor || !String(nomor).trim()) {
+        return res.status(400).json({ message: "Nomor surat wajib diisi" });
+      }
+      if (!tanggal) {
+        return res.status(400).json({ message: "Tanggal surat wajib diisi" });
+      }
+      if (!akunBelanjaId) {
+        return res.status(400).json({ message: "Akun belanja wajib dipilih" });
+      }
+      if (!subKegPerId) {
+        return res.status(400).json({ message: "Sub kegiatan wajib dipilih" });
+      }
+
+      const sp = await SP.findOne({ where: { id } });
+      if (!sp) {
+        return res.status(404).json({ message: "Surat pesanan tidak ditemukan" });
+      }
+
+      const subKeg = await subKegPer.findOne({
+        where: { id: subKegPerId },
+        attributes: ["id", "unitKerjaId"],
+      });
+      if (!subKeg) {
+        return res.status(400).json({ message: "Sub kegiatan tidak ditemukan" });
+      }
+
+      const unitKerjaBaru = subKeg.unitKerjaId || unitKerjaId || sp.unitKerjaId;
+
+      await SP.update(
+        {
+          nomor: String(nomor).trim(),
+          tanggal,
+          rekananId: rekananId || null,
+          akunBelanjaId,
+          subKegPerId,
+          unitKerjaId: unitKerjaBaru,
+        },
+        { where: { id } }
+      );
+
+      const result = await SP.findOne({
+        where: { id },
+        include: [
+          { model: rekanan },
+          { model: akunBelanja, include: [{ model: jenisBelanja }] },
+          {
+            model: subKegPer,
+            paranoid: true,
+            include: [
+              { model: daftarUnitKerja, attributes: ["id", "unitKerja"] },
+            ],
+          },
+        ],
+      });
+
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
     }
   },
 

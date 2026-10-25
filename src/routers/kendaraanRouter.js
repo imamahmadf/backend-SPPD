@@ -9,6 +9,7 @@ routers.get("/get", kendaraanControllers.getKendaraan);
 routers.get("/get/seed", kendaraanControllers.getSeedKendaraan);
 routers.get("/get/detail/:id", kendaraanControllers.getDetailKendaraan);
 routers.post("/cek", kendaraanControllers.cekPajak);
+routers.get("/get/untuk-cek", kendaraanControllers.getKendaraanUntukCek);
 routers.get(
   "/get/induk-unit-kerja/:id",
   kendaraanControllers.getKendaraanIndukUnitKerja
