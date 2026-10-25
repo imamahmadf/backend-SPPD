@@ -40,6 +40,7 @@ const Docxtemplater = require("docxtemplater");
 const { exec } = require("child_process");
 const QRCode = require("qrcode");
 const { generateQrWithLogo } = require("../lib/qrcodeWithLogo");
+const { convertDocxToPdf } = require("../utils/docxToPdf");
 const ImageModule = require("docxtemplater-image-module-free");
 let sizeOf;
 try {
@@ -852,6 +853,20 @@ module.exports = {
       // Simpan hasil dokumen ke buffer
       const buffer = doc.getZip().generate({ type: "nodebuffer" });
 
+      if (req.body?.pratinjau) {
+        const pdfBuffer = await convertDocxToPdf(buffer);
+        const safeName = String(pegawaiNama || "kwitansi").replace(
+          /[\\/:*?"<>|]/g,
+          "-"
+        );
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+          "Content-Disposition",
+          `inline; filename="kwitansi_${safeName}.pdf"`
+        );
+        return res.send(pdfBuffer);
+      }
+
       // Buat path untuk menyimpan file hasil
       const outputFileName = `SPPD_${Date.now()}.docx`;
       const outputPath = path.join(
@@ -1456,6 +1471,52 @@ module.exports = {
     }
   },
 
+  terimaVerifikasiSemua: async (req, res) => {
+    const perjalananId = req.body.perjalananId;
+    const transaction = await sequelize.transaction();
+    try {
+      const menunggu = await personil.findAll({
+        where: { perjalananId, statusId: 2 },
+        attributes: ["id"],
+        transaction,
+      });
+
+      if (!menunggu.length) {
+        await transaction.rollback();
+        return res.status(400).json({
+          message: "Tidak ada personil yang menunggu verifikasi",
+        });
+      }
+
+      await personil.update(
+        { statusId: 3 },
+        { where: { perjalananId, statusId: 2 }, transaction }
+      );
+      await transaction.commit();
+
+      try {
+        const io = req.app.get("socketio");
+        await emitNotifikasiPersonil(io);
+      } catch (notifErr) {
+        console.error(
+          "⚠️ Error emit notifikasi (tidak menghentikan response):",
+          notifErr
+        );
+      }
+
+      return res.status(200).json({
+        message: "Verifikasi berhasil",
+        jumlah: menunggu.length,
+      });
+    } catch (err) {
+      await transaction.rollback();
+      console.error(err);
+      return res.status(500).json({
+        message: "Terjadi kesalahan saat memverifikasi personil",
+      });
+    }
+  },
+
   tolakVerifikasi: async (req, res) => {
     const personilId = req.body.personilId;
     const catatan = req.body.catatan;
@@ -2024,6 +2085,16 @@ module.exports = {
 
       // Generate buffer
       const buffer = doc.getZip().generate({ type: "nodebuffer" });
+
+      if (req.body?.pratinjau) {
+        const pdfBuffer = await convertDocxToPdf(buffer);
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader(
+          "Content-Disposition",
+          `inline; filename="kwitansi_semua_personil_${perjalananId}.pdf"`
+        );
+        return res.send(pdfBuffer);
+      }
 
       // Buat folder output jika belum ada
       const outputDir = path.join(__dirname, "../public/output");

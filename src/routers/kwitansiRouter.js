@@ -37,6 +37,10 @@ routers.post(
 routers.post("/delete/rincian-bpd", kwitansiControllers.deleteBPD);
 routers.post("/update/rincian-bpd", kwitansiControllers.updateBPD);
 routers.post("/verifikasi/terima", kwitansiControllers.terimaVerifikasi);
+routers.post(
+  "/verifikasi/terima-semua",
+  kwitansiControllers.terimaVerifikasiSemua
+);
 routers.post("/verifikasi/tolak", kwitansiControllers.tolakVerifikasi);
 routers.post("/post/pengajuan/:id", kwitansiControllers.pengajuan);
 routers.post("/update/kwitansi-global", kwitansiControllers.addKwitansiGlobal);
